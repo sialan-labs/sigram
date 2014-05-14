@@ -86,6 +86,13 @@ void TelegramThread::getHistory(int id, int count)
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user), Q_ARG(int,count) );
 }
 
+void TelegramThread::sendMessage(int id, const QString &msg)
+{
+    const DialogClass & dialog = p->dialogs.value(id);
+    const QString & user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user), Q_ARG(QString,msg) );
+}
+
 void TelegramThread::run()
 {
     p->tg->start();

@@ -507,3 +507,39 @@ void sendCommand( char *data )
 {
     interpreter(data);
 }
+
+int dateYear( long t )
+{
+    struct tm *tm = localtime ((void *)&t);
+    return 1900 + tm->tm_year;
+}
+
+int dateMonth( long t )
+{
+    struct tm *tm = localtime ((void *)&t);
+    return tm->tm_mon + 1;
+}
+
+int dateDay( long t )
+{
+    struct tm *tm = localtime ((void *)&t);
+    return tm->tm_mday;
+}
+
+int dateHour( long t )
+{
+    struct tm *tm = localtime ((void *)&t);
+    return tm->tm_hour;
+}
+
+int dateMinute( long t )
+{
+    struct tm *tm = localtime ((void *)&t);
+    return tm->tm_min;
+}
+
+int dateSecond( long t )
+{
+    struct tm *tm = localtime ((void *)&t);
+    return tm->tm_sec;
+}

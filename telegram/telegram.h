@@ -42,7 +42,7 @@ public:
     Q_INVOKABLE qint64 dialogUserPhotoId(int id) const;
     Q_INVOKABLE TgStruncts::OnlineState dialogUserState(int id) const;
     Q_INVOKABLE QDateTime dialogUserLastTime(int id) const;
-    Q_INVOKABLE QString dialogUserTitle(int id);
+    Q_INVOKABLE QString dialogUserTitle(int id) const;
     Q_INVOKABLE QString dialogTitle( int id ) const;
 
     Q_INVOKABLE QList<qint64> messageIds() const;
@@ -57,12 +57,14 @@ public:
     Q_INVOKABLE QString messageBody( qint64 id ) const;
     Q_INVOKABLE int messageFromId( qint64 id ) const;
     Q_INVOKABLE int messageToId( qint64 id ) const;
+    Q_INVOKABLE QString messageFromName( qint64 id ) const;
 
 public slots:
     void updateContactList();
     void updateDialogList();
 
     void getHistory( int id, int count );
+    void sendMessage( int id, const QString & msg );
 
 signals:
     void contactsChanged();

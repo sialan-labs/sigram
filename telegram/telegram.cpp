@@ -154,7 +154,7 @@ QDateTime Telegram::dialogUserLastTime(int id) const
     return dialog(id).userClass.lastTime;
 }
 
-QString Telegram::dialogUserTitle(int id)
+QString Telegram::dialogUserTitle(int id) const
 {
     return dialogUserFirstName(id) + " " + dialogUserLastName(id);
 }
@@ -229,6 +229,11 @@ int Telegram::messageToId(qint64 id) const
     return message(id).to_id;
 }
 
+QString Telegram::messageFromName(qint64 id) const
+{
+    return dialogUserTitle( messageFromId(id) );
+}
+
 void Telegram::updateContactList()
 {
     p->tg_thread->contactList();
@@ -242,6 +247,11 @@ void Telegram::updateDialogList()
 void Telegram::getHistory(int id, int count)
 {
     p->tg_thread->getHistory(id,count);
+}
+
+void Telegram::sendMessage(int id, const QString &msg)
+{
+    p->tg_thread->sendMessage(id,msg);
 }
 
 Telegram::~Telegram()

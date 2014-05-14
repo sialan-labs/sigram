@@ -2,6 +2,7 @@
 #include "telegramthread.h"
 #include "telegramcore_p.h"
 #include "strcuts.h"
+#include "limits"
 
 extern "C" {
 #include "telegram_cli/tmain.h"
@@ -53,7 +54,7 @@ void TelegramCore::getHistory(const QString &user, int count)
 
 void TelegramCore::sendMessage(const QString &user, const QString &msg)
 {
-    send_command( QString("msg %1 %2").arg(user,msg) );
+    send_command( QString("msg %1 %2").arg(QString(user).replace(" ","_")).arg(msg) );
 }
 
 void TelegramCore::start()
@@ -70,6 +71,20 @@ TelegramCore::~TelegramCore()
 {
     telegram_objects.remove(this);
     delete p;
+}
+
+QDateTime convertDate(int d)
+{
+    const QDate & date = QDate(dateYear(d), dateMonth(d), dateDay(d));
+    const QTime & time = QTime(dateHour(d), dateMinute(d), dateSecond(d));
+    return QDateTime( date, time );
+}
+
+int getUnknownIdentifier()
+{
+    static int start = INT_MIN;
+    start++;
+    return start;
 }
 
 void tgStarted()
@@ -105,7 +120,7 @@ void contactList_addToBuffer( int user_id, const char *firstname, const char *la
     contact.photo_id = photo_id;
     contact.phone = phone;
     contact.state = static_cast<TgStruncts::OnlineState>(state);
-    contact.lastTime = QDateTime::fromMSecsSinceEpoch(last_time);
+    contact.lastTime = convertDate(last_time);
 
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->contactFounded( contact );
@@ -139,7 +154,7 @@ void dialogList_addToBuffer_user( int user_id, const char *firstname, const char
     user.photo_id = photo_id;
     user.phone = phone;
     user.state = static_cast<TgStruncts::OnlineState>(state);
-    user.lastTime = QDateTime::fromMSecsSinceEpoch(last_time);
+    user.lastTime = convertDate(last_time);
 
     DialogClass dialog;
     dialog.is_chat = false;
@@ -159,14 +174,14 @@ void dialogList_addToBuffer_chat( int chat_id, const char *title, int admin, lon
     chat.title = title;
     chat.photo_id = photo_id;
     chat.users_num = users_num;
-    chat.date = QDateTime::fromMSecsSinceEpoch(date);
+    chat.date = convertDate(date);
 
     for( int i=0; i<user_list_size; i++ )
     {
         ChatUserClass user;
         user.user_id = user_list[i].user_id;
         user.inviter_id = user_list[i].inviter_id;
-        user.date = QDateTime::fromMSecsSinceEpoch(user_list[i].date);
+        user.date = convertDate(user_list[i].date);
 
         chat.users << user;
     }
@@ -190,14 +205,17 @@ void incomingMsg( long long msg_id, int from_id, int to_id, int fwd_id, int fwd_
     MessageClass msg;
     msg.msg_id = msg_id;
     msg.fwd_id = fwd_id;
-    msg.fwd_date = QDateTime::fromMSecsSinceEpoch(fwd_date);
+    msg.fwd_date = convertDate(fwd_date);
     msg.out = out;
     msg.unread = unread;
-    msg.date = QDateTime::fromMSecsSinceEpoch(date);
+    msg.date = convertDate(date);
     msg.service = service;
     msg.message = QString(message);
     msg.from_id = from_id;
     msg.to_id = to_id;
+
+    if( msg.out && msg.unread )
+        msg.msg_id = getUnknownIdentifier();
 
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->incomingMsg(msg);

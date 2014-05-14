@@ -5,5 +5,6 @@
         <file>ChatView.qml</file>
         <file>Indicator.qml</file>
         <file>files/indicator.png</file>
+        <file>SendFrame.qml</file>
     </qresource>
 </RCC>

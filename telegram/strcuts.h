@@ -76,6 +76,8 @@ public:
     int service;
     QString message;
 
+    QString fromName;
+
     int from_id;
     int to_id;
 };

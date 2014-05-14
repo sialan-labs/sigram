@@ -26,6 +26,7 @@ public slots:
     void contactList();
     void dialogList();
     void getHistory(int id, int count );
+    void sendMessage( int id, const QString & msg );
 
 signals:
     void contactsChanged();

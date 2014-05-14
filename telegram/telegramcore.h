@@ -4,6 +4,7 @@
 #include <QThread>
 #include <QMap>
 #include <QDebug>
+#include <QDateTime>
 
 class MessageClass;
 class DialogClass;
