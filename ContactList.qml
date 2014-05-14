@@ -1,17 +1,38 @@
 import QtQuick 2.0
 
 Rectangle {
+    id: contact_list
     width: 100
     height: 62
 
+    property int current
+
     Connections {
         target: Telegram
-        onContactsChanged: clist.refresh()
-        onDialogsChanged: clist.refresh()
+        onContactsChanged: {
+            privates.contacts_refreshed = true
+            clist.refresh()
+        }
+        onDialogsChanged: {
+            privates.dialogs_refreshed = true
+            clist.refresh()
+        }
         onStarted: {
             Telegram.updateDialogList()
             Telegram.updateContactList()
         }
+    }
+
+    QtObject {
+        id: privates
+        property bool contacts_refreshed: false
+        property bool dialogs_refreshed: false
+    }
+
+    Indicator {
+        id: indicator
+        anchors.fill: parent
+        Component.onCompleted: start()
     }
 
     ListView {
@@ -37,7 +58,7 @@ Rectangle {
             MouseArea {
                 id: marea
                 anchors.fill: parent
-                onClicked: Telegram.getHistory( Telegram.dialogTitle(dialog_id), 100 )
+                onClicked: contact_list.current = user_id != 0? user_id : dialog_id
             }
         }
 
@@ -58,6 +79,10 @@ Rectangle {
         }
 
         function refresh() {
+            if( !privates.contacts_refreshed || !privates.dialogs_refreshed )
+                return
+
+            indicator.stop()
             model.clear()
             var contacts = Telegram.contactListUsers()
             var dialogs = Telegram.dialogListIds()

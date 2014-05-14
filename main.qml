@@ -7,9 +7,20 @@ Window {
     height: 500
 
     ContactList {
+        id: contact_list
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: 213
+    }
+
+    ChatView {
+        id: chat_view
+        anchors.left: contact_list.right
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        color: "#eeeeee"
+        current: contact_list.current
     }
 }

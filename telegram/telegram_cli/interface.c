@@ -17,6 +17,7 @@
     Copyright Vitaly Valtman 2013
 */
 
+#include "../telegramcore_p.h"
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -1454,6 +1455,9 @@ void print_message (struct message *M) {
 
   last_from_id = M->from_id;
   last_to_id = M->to_id;
+
+  incomingMsg( M->id, M->from_id.id, M->to_id.id, M->fwd_from_id.id, M->fwd_date, M->out, M->unread, M->date, M->service, M->message );
+  return;
 
   print_start ();
   if (get_peer_type (M->to_id) == PEER_USER) {

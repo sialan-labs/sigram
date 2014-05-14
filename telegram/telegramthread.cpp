@@ -14,7 +14,8 @@ public:
     QHash<int,UserClass> contacts;
     QHash<int,DialogClass> dialogs;
 
-    QHash<int, QMap<qint64,MessageClass> > messages;
+    QHash<int,QMap<qint64, qint64> > usersMessages;
+    QHash<qint64,MessageClass> messages;
 };
 
 TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
@@ -36,6 +37,7 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     connect( p->tg, SIGNAL(dialogListClear())         , SLOT(_dialogListClear())         , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(dialogFounded(DialogClass)), SLOT(_dialogFounded(DialogClass)), Qt::QueuedConnection );
     connect( p->tg, SIGNAL(dialogListFinished())      , SLOT(_dialogListFinished())      , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(incomingMsg(MessageClass)) , SLOT(_incomingMsg(MessageClass)) , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(started())                 , SIGNAL(tgStarted())              , Qt::QueuedConnection );
 
     start();
@@ -56,6 +58,16 @@ const QHash<int, DialogClass> &TelegramThread::dialogs() const
     return p->dialogs;
 }
 
+const QHash<int, QMap<qint64, qint64> > &TelegramThread::usersMessages() const
+{
+    return p->usersMessages;
+}
+
+const QHash<qint64, MessageClass> &TelegramThread::messages() const
+{
+    return p->messages;
+}
+
 void TelegramThread::contactList()
 {
     INVOKE_METHOD(Qt::QueuedConnection);
@@ -66,8 +78,11 @@ void TelegramThread::dialogList()
     INVOKE_METHOD(Qt::QueuedConnection);
 }
 
-void TelegramThread::getHistory(const QString &user, int count)
+void TelegramThread::getHistory(int id, int count)
 {
+    const DialogClass & dialog = p->dialogs.value(id);
+    const QString & user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user), Q_ARG(int,count) );
 }
 
@@ -111,8 +126,10 @@ void TelegramThread::_dialogListFinished()
 
 void TelegramThread::_incomingMsg(const MessageClass &msg)
 {
-    p->messages[msg.from_id][msg.msg_id] = msg;
-    emit incomingMsg(msg);
+    p->messages[msg.msg_id] = msg;
+    p->usersMessages[msg.from_id][msg.date.toMSecsSinceEpoch()] = msg.msg_id;
+
+    emit incomingMsg(msg.msg_id);
 }
 
 TelegramThread::~TelegramThread()

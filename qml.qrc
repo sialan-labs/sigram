@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>ContactList.qml</file>
+        <file>ChatView.qml</file>
+        <file>Indicator.qml</file>
+        <file>files/indicator.png</file>
     </qresource>
 </RCC>

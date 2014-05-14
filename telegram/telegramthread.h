@@ -19,16 +19,19 @@ public:
     const QHash<int,UserClass> & contacts() const;
     const QHash<int,DialogClass> & dialogs() const;
 
+    const QHash<int,QMap<qint64, qint64> > & usersMessages() const;
+    const QHash<qint64,MessageClass> & messages() const;
+
 public slots:
     void contactList();
     void dialogList();
-    void getHistory( const QString & user, int count );
+    void getHistory(int id, int count );
 
 signals:
     void contactsChanged();
     void dialogsChanged();
     void tgStarted();
-    void incomingMsg( const MessageClass & msg );
+    void incomingMsg( qint64 msg_id );
 
 protected:
     void run();

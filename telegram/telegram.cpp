@@ -16,9 +16,10 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     p = new TelegramPrivate;
     p->tg_thread = new TelegramThread(argc,argv);
 
-    connect( p->tg_thread, SIGNAL(contactsChanged()), SIGNAL(contactsChanged()) );
-    connect( p->tg_thread, SIGNAL(dialogsChanged()) , SIGNAL(dialogsChanged())  );
-    connect( p->tg_thread, SIGNAL(tgStarted())      , SIGNAL(started())         );
+    connect( p->tg_thread, SIGNAL(contactsChanged())  , SIGNAL(contactsChanged())   );
+    connect( p->tg_thread, SIGNAL(dialogsChanged())   , SIGNAL(dialogsChanged())    );
+    connect( p->tg_thread, SIGNAL(incomingMsg(qint64)), SIGNAL(incomingMsg(qint64)) );
+    connect( p->tg_thread, SIGNAL(tgStarted())        , SIGNAL(started())           );
 
     p->tg_thread->start();
 }
@@ -48,7 +49,7 @@ QString Telegram::contactPhone(int id) const
     return contact(id).phone;
 }
 
-qint64 Telegram::contactUid(int id) const
+int Telegram::contactUid(int id) const
 {
     return contact(id).user_id;
 }
@@ -93,14 +94,139 @@ QString Telegram::dialogChatTitle(int id) const
     return dialog(id).chatClass.title;
 }
 
+int Telegram::dialogChatAdmin(int id) const
+{
+    return dialog(id).chatClass.admin;
+}
+
+qint64 Telegram::dialogChatPhotoId(int id) const
+{
+    return dialog(id).chatClass.photo_id;
+}
+
+int Telegram::dialogChatUsersNumber(int id) const
+{
+    return dialog(id).chatClass.users_num;
+}
+
+QDateTime Telegram::dialogChatDate(int id) const
+{
+    return dialog(id).chatClass.date;
+}
+
 QString Telegram::dialogUserName(int id) const
 {
     return dialog(id).userClass.username;
 }
 
+QString Telegram::dialogUserFirstName(int id) const
+{
+    return dialog(id).userClass.firstname;
+}
+
+QString Telegram::dialogUserLastName(int id) const
+{
+    return dialog(id).userClass.lastname;
+}
+
+QString Telegram::dialogUserPhone(int id) const
+{
+    return dialog(id).userClass.phone;
+}
+
+int Telegram::dialogUserUid(int id) const
+{
+    return dialog(id).userClass.user_id;
+}
+
+qint64 Telegram::dialogUserPhotoId(int id) const
+{
+    return dialog(id).userClass.photo_id;
+}
+
+TgStruncts::OnlineState Telegram::dialogUserState(int id) const
+{
+    return dialog(id).userClass.state;
+}
+
+QDateTime Telegram::dialogUserLastTime(int id) const
+{
+    return dialog(id).userClass.lastTime;
+}
+
+QString Telegram::dialogUserTitle(int id)
+{
+    return dialogUserFirstName(id) + " " + dialogUserLastName(id);
+}
+
 QString Telegram::dialogTitle(int id) const
 {
     return dialogIsChat(id)? dialogChatTitle(id) : dialogUserName(id);
+}
+
+QList<qint64> Telegram::messageIds() const
+{
+    return p->tg_thread->messages().keys();
+}
+
+QStringList Telegram::messageIdsStringList() const
+{
+    const QList<qint64> & msgs = messageIds();
+    QStringList result;
+    foreach( qint64 id, msgs )
+        result << QString::number(id);
+
+    return result;
+}
+
+MessageClass Telegram::message(qint64 id) const
+{
+    return p->tg_thread->messages().value(id);
+}
+
+int Telegram::messageForwardId(qint64 id) const
+{
+    return message(id).fwd_id;
+}
+
+QDateTime Telegram::messageForwardDate(qint64 id) const
+{
+    return message(id).fwd_date;
+}
+
+int Telegram::messageOut(qint64 id) const
+{
+    return message(id).out;
+}
+
+int Telegram::messageUnread(qint64 id) const
+{
+    return message(id).unread;
+}
+
+QDateTime Telegram::messageDate(qint64 id) const
+{
+    return message(id).date;
+}
+
+int Telegram::messageService(qint64 id) const
+{
+    return message(id).service;
+}
+
+QString Telegram::messageBody(qint64 id) const
+{
+    return message(id).message;
+}
+
+int Telegram::messageFromId(qint64 id) const
+{
+    return message(id).from_id;
+}
+
+int Telegram::messageToId(qint64 id) const
+{
+    return message(id).to_id;
 }
 
 void Telegram::updateContactList()
@@ -113,9 +239,9 @@ void Telegram::updateDialogList()
     p->tg_thread->dialogList();
 }
 
-void Telegram::getHistory(const QString &user, int count)
+void Telegram::getHistory(int id, int count)
 {
-    p->tg_thread->getHistory(user,count);
+    p->tg_thread->getHistory(id,count);
 }
 
 Telegram::~Telegram()
