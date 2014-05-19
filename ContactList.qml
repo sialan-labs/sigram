@@ -21,6 +21,15 @@ Rectangle {
             Telegram.updateDialogList()
             Telegram.updateContactList()
         }
+        onIncomingMsg: {
+            Telegram.updateDialogListUsingTimer()
+        }
+        onUserStatusChanged: {
+            clist.refresh()
+        }
+        onMsgChanged: {
+            Telegram.updateDialogListUsingTimer()
+        }
     }
 
     QtObject {
@@ -46,19 +55,53 @@ Rectangle {
             width: clist.width
             color: marea.pressed? "#0d80ec" : "#00000000"
 
-            Text {
-                id: txt
-                text: user_id != 0 ? Telegram.contactTitle(user_id) : Telegram.dialogTitle(dialog_id)
+            property int uid: user_id
+            property bool isDialog: user_id == 0
+            property int onlineState: isDialog? Telegram.contactState(dialog_id) : Telegram.contactState(user_id)
+
+            Column {
+                id: column
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.margins: 20
-                font.pointSize: 10
+
+                Text {
+                    id: txt
+                    text: item.isDialog ? Telegram.dialogTitle(dialog_id) : Telegram.contactTitle(user_id)
+                    anchors.left: parent.left
+                    anchors.margins: 20
+                    font.pointSize: 10
+                }
+
+                Text {
+                    id: date
+                    anchors.left: parent.left
+                    anchors.margins: 20
+                    font.pointSize: 9
+                    color: "#555555"
+                    text: item.isDialog ? Telegram.dialogMsgDate(dialog_id) : " "
+                }
+            }
+
+            UnreadItem {
+                anchors.verticalCenter: item.verticalCenter
+                anchors.right: item.right
+                anchors.margins: 5
+                unread: item.isDialog? Telegram.dialogUnreadCount(dialog_id) : 0
+            }
+
+            Rectangle {
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                width: 6
+                height: width
+                radius: width/2
+                color: "#00ff00"
+                visible: item.onlineState == 1
             }
 
             MouseArea {
                 id: marea
                 anchors.fill: parent
-                onClicked: contact_list.current = user_id != 0? user_id : dialog_id
+                onClicked: contact_list.current = item.isDialog? dialog_id : user_id
             }
         }
 

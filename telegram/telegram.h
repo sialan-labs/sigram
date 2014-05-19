@@ -22,11 +22,11 @@ public:
     Q_INVOKABLE QString contactPhone(int id) const;
     Q_INVOKABLE int contactUid(int id) const;
     Q_INVOKABLE qint64 contactPhotoId(int id) const;
-    Q_INVOKABLE TgStruncts::OnlineState contactState(int id) const;
+    Q_INVOKABLE int contactState(int id) const;
     Q_INVOKABLE QDateTime contactLastTime(int id) const;
     Q_INVOKABLE QString contactTitle(int id);
 
-    Q_INVOKABLE QList<int> dialogListIds() const;
+    Q_INVOKABLE QList<int> dialogListIds();
     DialogClass dialog( int id ) const;
     Q_INVOKABLE bool dialogIsChat( int id ) const;
     Q_INVOKABLE QString dialogChatTitle( int id ) const;
@@ -40,10 +40,13 @@ public:
     Q_INVOKABLE QString dialogUserPhone(int id) const;
     Q_INVOKABLE int dialogUserUid(int id) const;
     Q_INVOKABLE qint64 dialogUserPhotoId(int id) const;
-    Q_INVOKABLE TgStruncts::OnlineState dialogUserState(int id) const;
+    Q_INVOKABLE int dialogUserState(int id) const;
     Q_INVOKABLE QDateTime dialogUserLastTime(int id) const;
     Q_INVOKABLE QString dialogUserTitle(int id) const;
     Q_INVOKABLE QString dialogTitle( int id ) const;
+    Q_INVOKABLE int dialogUnreadCount( int id ) const;
+    Q_INVOKABLE QDateTime dialogMsgDate( int id ) const;
+    Q_INVOKABLE QString dialogMsgLast( int id ) const;
 
     Q_INVOKABLE QList<qint64> messageIds() const;
     Q_INVOKABLE QStringList messageIdsStringList() const;
@@ -62,6 +65,7 @@ public:
 public slots:
     void updateContactList();
     void updateDialogList();
+    void updateDialogListUsingTimer();
 
     void getHistory( int id, int count );
     void sendMessage( int id, const QString & msg );
@@ -70,7 +74,14 @@ signals:
     void contactsChanged();
     void dialogsChanged();
     void incomingMsg( qint64 msg_id );
+    void userIsTyping( int chat_id, int user_id );
+    void userStatusChanged( int user_id, int status, const QDateTime & when );
+    void msgChanged( qint64 msg_id );
+    void msgSent( qint64 old_id, qint64 msg_id );
     void started();
+
+protected:
+    void timerEvent(QTimerEvent *e);
 
 private:
     TelegramPrivate *p;

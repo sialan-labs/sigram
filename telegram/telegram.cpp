@@ -3,23 +3,40 @@
 #include "strcuts.h"
 
 #include <QMap>
+#include <QTimerEvent>
 
 class TelegramPrivate
 {
 public:
     TelegramThread *tg_thread;
+
+    int update_dialog_timer_id;
+    bool update_dialog_again;
 };
+
+Telegram *sortDialogList_tmp_obj = 0;
+bool sortDialogList(int m1, int m2)
+{
+    return sortDialogList_tmp_obj->dialogMsgDate(m1) > sortDialogList_tmp_obj->dialogMsgDate(m2);
+}
 
 Telegram::Telegram(int argc, char **argv, QObject *parent) :
     QObject(parent)
 {
     p = new TelegramPrivate;
+    p->update_dialog_again = false;
+    p->update_dialog_timer_id = 0;
+
     p->tg_thread = new TelegramThread(argc,argv);
 
-    connect( p->tg_thread, SIGNAL(contactsChanged())  , SIGNAL(contactsChanged())   );
-    connect( p->tg_thread, SIGNAL(dialogsChanged())   , SIGNAL(dialogsChanged())    );
-    connect( p->tg_thread, SIGNAL(incomingMsg(qint64)), SIGNAL(incomingMsg(qint64)) );
-    connect( p->tg_thread, SIGNAL(tgStarted())        , SIGNAL(started())           );
+    connect( p->tg_thread, SIGNAL(contactsChanged())                   , SIGNAL(contactsChanged())                    );
+    connect( p->tg_thread, SIGNAL(dialogsChanged())                    , SIGNAL(dialogsChanged())                     );
+    connect( p->tg_thread, SIGNAL(incomingMsg(qint64))                 , SIGNAL(incomingMsg(qint64))                  );
+    connect( p->tg_thread, SIGNAL(userIsTyping(int,int))               , SIGNAL(userIsTyping(int,int))                );
+    connect( p->tg_thread, SIGNAL(userStatusChanged(int,int,QDateTime)), SIGNAL(userStatusChanged(int,int,QDateTime)) );
+    connect( p->tg_thread, SIGNAL(msgChanged(qint64))                  , SIGNAL(msgChanged(qint64))                   );
+    connect( p->tg_thread, SIGNAL(msgSent(qint64,qint64))              , SIGNAL(msgSent(qint64,qint64))               );
+    connect( p->tg_thread, SIGNAL(tgStarted())                         , SIGNAL(started())                            );
 
     p->tg_thread->start();
 }
@@ -59,7 +76,7 @@ qint64 Telegram::contactPhotoId(int id) const
     return contact(id).photo_id;
 }
 
-TgStruncts::OnlineState Telegram::contactState(int id) const
+int Telegram::contactState(int id) const
 {
     return contact(id).state;
 }
@@ -74,9 +91,14 @@ QString Telegram::contactTitle(int id)
     return contactFirstName(id) + " " + contactLastName(id);
 }
 
-QList<int> Telegram::dialogListIds() const
+QList<int> Telegram::dialogListIds()
 {
-    return p->tg_thread->dialogs().keys();
+    QList<int> res = p->tg_thread->dialogs().keys();
+
+    sortDialogList_tmp_obj = this;
+    qSort( res.begin(), res.end(), sortDialogList );
+
+    return res;
 }
 
 DialogClass Telegram::dialog(int id) const
@@ -144,7 +166,7 @@ qint64 Telegram::dialogUserPhotoId(int id) const
     return dialog(id).userClass.photo_id;
 }
 
-TgStruncts::OnlineState Telegram::dialogUserState(int id) const
+int Telegram::dialogUserState(int id) const
 {
     return dialog(id).userClass.state;
 }
@@ -162,6 +184,21 @@ QString Telegram::dialogUserTitle(int id) const
 QString Telegram::dialogTitle(int id) const
 {
     return dialogIsChat(id)? dialogChatTitle(id) : dialogUserName(id);
+}
+
+int Telegram::dialogUnreadCount(int id) const
+{
+    return dialog(id).unread;
+}
+
+QDateTime Telegram::dialogMsgDate(int id) const
+{
+    return dialog(id).msgDate;
+}
+
+QString Telegram::dialogMsgLast(int id) const
+{
+    return dialog(id).msgLast;
 }
 
 QList<qint64> Telegram::messageIds() const
@@ -244,6 +281,18 @@ void Telegram::updateDialogList()
     p->tg_thread->dialogList();
 }
 
+void Telegram::updateDialogListUsingTimer()
+{
+    if( p->update_dialog_timer_id )
+    {
+        p->update_dialog_again = true;
+        return;
+    }
+
+    p->update_dialog_again = false;
+    p->update_dialog_timer_id = startTimer(1000);
+}
+
 void Telegram::getHistory(int id, int count)
 {
     p->tg_thread->getHistory(id,count);
@@ -252,6 +301,25 @@ void Telegram::getHistory(int id, int count)
 void Telegram::sendMessage(int id, const QString &msg)
 {
     p->tg_thread->sendMessage(id,msg);
+}
+
+void Telegram::timerEvent(QTimerEvent *e)
+{
+    if( e->timerId() == p->update_dialog_timer_id )
+    {
+        updateDialogList();
+        if( p->update_dialog_again )
+        {
+            p->update_dialog_again = false;
+            return;
+        }
+
+        p->update_dialog_again = false;
+        killTimer(p->update_dialog_timer_id);
+        p->update_dialog_timer_id = 0;
+    }
+    else
+        QObject::timerEvent(e);
 }
 
 Telegram::~Telegram()

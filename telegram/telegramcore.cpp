@@ -138,7 +138,7 @@ void dialogList_clear()
         emit tg->dialogListClear();
 }
 
-void dialogList_addToBuffer_user( int user_id, const char *firstname, const char *lastname, long long photo_id, const char *username, const char *phone, int state, int last_time )
+void dialogList_addToBuffer_user( int user_id, const char *firstname, const char *lastname, long long photo_id, const char *username, const char *phone, int state, int last_time, int unread_cnt, int msg_date, const char * last_msg )
 {
     if( state > 0 )
         state = 1;
@@ -159,12 +159,15 @@ void dialogList_addToBuffer_user( int user_id, const char *firstname, const char
     DialogClass dialog;
     dialog.is_chat = false;
     dialog.userClass = user;
+    dialog.unread = unread_cnt;
+    dialog.msgLast = last_msg;
+    dialog.msgDate = convertDate(msg_date);
 
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->dialogFounded(dialog);
 }
 
-void dialogList_addToBuffer_chat( int chat_id, const char *title, int admin, long long photo_id, void *user_list_void, int user_list_size, int users_num, int date )
+void dialogList_addToBuffer_chat( int chat_id, const char *title, int admin, long long photo_id, void *user_list_void, int user_list_size, int users_num, int date, int unread_cnt, int msg_date, const char * last_msg )
 {
     chat_user *user_list = static_cast<chat_user*>(user_list_void);
 
@@ -189,6 +192,13 @@ void dialogList_addToBuffer_chat( int chat_id, const char *title, int admin, lon
     DialogClass dialog;
     dialog.is_chat = true;
     dialog.chatClass = chat;
+    dialog.unread = unread_cnt;
+    dialog.msgDate = convertDate(msg_date);
+
+    if( unread_cnt != 0 )
+        dialog.msgLast = last_msg;
+    if( qAbs(dialog.msgDate.daysTo(QDateTime::currentDateTime())) > 32 )
+        dialog.msgDate = chat.date;
 
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->dialogFounded(dialog);
@@ -198,6 +208,18 @@ void dialogList_finished()
 {
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->dialogListFinished();
+}
+
+void msgMarkedAsRead( long long msg_id, int date )
+{
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->msgMarkedAsRead(msg_id,convertDate(date));
+}
+
+void msgSent( long long msg_id, int date )
+{
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->msgSent(msg_id,convertDate(date));
 }
 
 void incomingMsg( long long msg_id, int from_id, int to_id, int fwd_id, int fwd_date, int out, int unread, int date, int service, const char *message)
@@ -219,6 +241,18 @@ void incomingMsg( long long msg_id, int from_id, int to_id, int fwd_id, int fwd_
 
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->incomingMsg(msg);
+}
+
+void userIsTyping( int chat_id, int user_id )
+{
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->userIsTyping(chat_id, user_id);
+}
+
+void userStatusChanged( int user_id, int status, int when )
+{
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->userStatusChanged(user_id, status, convertDate(when) );
 }
 
 void qthreadExec()

@@ -33,6 +33,10 @@ signals:
     void dialogsChanged();
     void tgStarted();
     void incomingMsg( qint64 msg_id );
+    void userIsTyping( int chat_id, int user_id );
+    void userStatusChanged( int user_id, int status, const QDateTime & when );
+    void msgChanged( qint64 msg_id );
+    void msgSent( qint64 old_id, qint64 msg_id );
 
 protected:
     void run();
@@ -46,7 +50,10 @@ private slots:
     void _dialogFounded( const DialogClass & dialog );
     void _dialogListFinished();
 
+    void _msgMarkedAsRead(qint64 msg_id, const QDateTime &date );
+    void _msgSent(qint64 msg_id, const QDateTime &date );
     void _incomingMsg( const MessageClass & msg );
+    void _userStatusChanged(int user_id, int status, const QDateTime &when );
 
 private:
     TelegramThreadPrivate *p;

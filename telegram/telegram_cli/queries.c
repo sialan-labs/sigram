@@ -859,7 +859,7 @@ int msg_send_on_answer (struct query *q UU) {
       print_end ();
     }
   }
-  rprintf ("Sent: id = %d\n", id);
+  msgSent( M->id, M->date );
   bl_do_set_message_sent (M);
   return 0;
 }
@@ -1133,7 +1133,6 @@ int get_dialogs_on_answer (struct query *q UU) {
       fetch_int ();
     }
   }
-  (void)dlist;
 
   assert (fetch_int () == CODE_vector);
   n = fetch_int ();
@@ -1157,11 +1156,11 @@ int get_dialogs_on_answer (struct query *q UU) {
     switch (get_peer_type (plist[i])) {
     case PEER_USER:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_user( UC->user.id.id, UC->user.first_name, UC->user.last_name, UC->user.photo_id, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when );
+      dialogList_addToBuffer_user( UC->user.id.id, UC->user.first_name, UC->user.last_name, UC->user.photo_id, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message );
       break;
     case PEER_CHAT:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_chat( UC->chat.id.id, UC->chat.title, UC->chat.admin_id, UC->chat.photo.id, UC->chat.user_list, UC->chat.user_list_size, UC->chat.users_num, UC->chat.date );
+      dialogList_addToBuffer_chat( UC->chat.id.id, UC->chat.title, UC->chat.admin_id, UC->chat.photo.id, UC->chat.user_list, UC->chat.user_list_size, UC->chat.users_num, UC->chat.date, dlist[2 * i + 1], UC->last->date, UC->last->message );
       break;
     }
   }

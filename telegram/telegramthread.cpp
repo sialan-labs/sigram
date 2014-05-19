@@ -15,6 +15,7 @@ public:
     QHash<int,DialogClass> dialogs;
 
     QHash<int,QMap<qint64, qint64> > usersMessages;
+    QHash<qint64,qint64> messageDates;
     QHash<qint64,MessageClass> messages;
 };
 
@@ -31,14 +32,18 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     p->tg = new TelegramCore(argc,argv);
 //    p->tg->moveToThread(this);
 
-    connect( p->tg, SIGNAL(contactListClear())        , SLOT(_contactListClear())        , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(contactFounded(UserClass)) , SLOT(_contactFounded(UserClass)) , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(contactListFinished())     , SLOT(_contactListFinished())     , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(dialogListClear())         , SLOT(_dialogListClear())         , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(dialogFounded(DialogClass)), SLOT(_dialogFounded(DialogClass)), Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(dialogListFinished())      , SLOT(_dialogListFinished())      , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(incomingMsg(MessageClass)) , SLOT(_incomingMsg(MessageClass)) , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(started())                 , SIGNAL(tgStarted())              , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(contactListClear())                   , SLOT(_contactListClear())                   , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(contactFounded(UserClass))            , SLOT(_contactFounded(UserClass))            , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(contactListFinished())                , SLOT(_contactListFinished())                , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(dialogListClear())                    , SLOT(_dialogListClear())                    , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(dialogFounded(DialogClass))           , SLOT(_dialogFounded(DialogClass))           , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(dialogListFinished())                 , SLOT(_dialogListFinished())                 , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(msgMarkedAsRead(qint64,QDateTime))    , SLOT(_msgMarkedAsRead(qint64,QDateTime))    , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(msgSent(qint64,QDateTime))            , SLOT(_msgSent(qint64,QDateTime))            , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(incomingMsg(MessageClass))            , SLOT(_incomingMsg(MessageClass))            , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(userStatusChanged(int,int,QDateTime)) , SLOT(_userStatusChanged(int,int,QDateTime)) , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(userIsTyping(int,int))                , SIGNAL(userIsTyping(int,int))               , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(started())                            , SIGNAL(tgStarted())                         , Qt::QueuedConnection );
 
     start();
 }
@@ -131,12 +136,53 @@ void TelegramThread::_dialogListFinished()
     emit dialogsChanged();
 }
 
+void TelegramThread::_msgMarkedAsRead(qint64 msg_id, const QDateTime &date)
+{
+    _msgSent(msg_id,date);
+    p->messages[msg_id].unread = 0;
+    emit msgChanged(msg_id);
+}
+
+void TelegramThread::_msgSent(qint64 msg_id, const QDateTime & date)
+{
+    qint64 msec = date.toMSecsSinceEpoch();
+    if( !p->messageDates.contains(msec) )
+    {
+        emit msgSent(0, msg_id);
+        return;
+    }
+
+    qint64 mid = p->messageDates.value(msec);
+    if( mid == msg_id )
+        return;
+
+    MessageClass msg = p->messages.value(mid);
+    msg.msg_id = msg_id;
+
+    p->messages[msg.msg_id] = msg;
+    p->usersMessages[msg.from_id][msg.date.toMSecsSinceEpoch()] = msg.msg_id;
+    p->messageDates[msg.date.toMSecsSinceEpoch()] = msg.msg_id;
+
+    p->messages.remove(mid);
+
+    emit msgSent(mid,msg_id);
+}
+
 void TelegramThread::_incomingMsg(const MessageClass &msg)
 {
     p->messages[msg.msg_id] = msg;
     p->usersMessages[msg.from_id][msg.date.toMSecsSinceEpoch()] = msg.msg_id;
+    p->messageDates[msg.date.toMSecsSinceEpoch()] = msg.msg_id;
 
     emit incomingMsg(msg.msg_id);
+}
+
+void TelegramThread::_userStatusChanged(int user_id, int status, const QDateTime & when)
+{
+    p->contacts[user_id].state = static_cast<TgStruncts::OnlineState>(status);
+    p->contacts[user_id].lastTime = when;
+
+    emit userStatusChanged(user_id,status,when);
 }
 
 TelegramThread::~TelegramThread()

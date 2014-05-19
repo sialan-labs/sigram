@@ -18,6 +18,7 @@
     Copyright Vitaly Valtman 2013
 */
 
+#include "../telegramcore_p.h"
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -934,34 +935,18 @@ void work_update (struct connection *c UU, long long msg_id UU) {
         int id = fetch_int ();
         struct message *M = message_get (id);
         if (M) {
+          msgMarkedAsRead( M->id, M->date );
           bl_do_set_unread (M, 0);
         }
       }
       fetch_pts ();
-      if (log_level >= 1) {
-        print_start ();
-        push_color (COLOR_YELLOW);
-        print_date (time (0));
-        printf (" %d messages marked as read\n", n);
-        pop_color ();
-        print_end ();
-      }
     }
     break;
   case CODE_update_user_typing:
     {
       peer_id_t id = MK_USER (fetch_int ());
       peer_t *U = user_chat_get (id);
-      if (log_level >= 2) {
-        print_start ();
-        push_color (COLOR_YELLOW);
-        print_date (time (0));
-        printf (" User ");
-        print_user_name (id, U);
-        printf (" is typing....\n");
-        pop_color ();
-        print_end ();
-      }
+      userIsTyping( U->id.id, id.id );
     }
     break;
   case CODE_update_chat_user_typing:
@@ -970,18 +955,7 @@ void work_update (struct connection *c UU, long long msg_id UU) {
       peer_id_t id = MK_USER (fetch_int ());
       peer_t *C = user_chat_get (chat_id);
       peer_t *U = user_chat_get (id);
-      if (log_level >= 2) {
-        print_start ();
-        push_color (COLOR_YELLOW);
-        print_date (time (0));
-        printf (" User ");
-        print_user_name (id, U);
-        printf (" is typing in chat ");
-        print_chat_name (chat_id, C);
-        printf ("....\n");
-        pop_color ();
-        print_end ();
-      }
+      userIsTyping( C->id.id, U->id.id );
     }
     break;
   case CODE_update_user_status:
@@ -991,15 +965,7 @@ void work_update (struct connection *c UU, long long msg_id UU) {
       if (U) {
         fetch_user_status (&U->user.status);
         if (log_level >= 3) {
-          print_start ();
-          push_color (COLOR_YELLOW);
-          print_date (time (0));
-          printf (" User ");
-          print_user_name (user_id, U);
-          printf (" is now ");
-          printf ("%s\n", (U->user.status.online > 0) ? "online" : "offline");
-          pop_color ();
-          print_end ();
+          userStatusChanged( U->id.id, U->user.status.online, U->user.status.when );
         }
       } else {
         struct user_status t;

@@ -22,6 +22,7 @@ public:
 public slots:
     void contactList();
     void dialogList();
+
     void getHistory( const QString & user, int count );
     void sendMessage( const QString & user, const QString & msg );
 
@@ -38,7 +39,12 @@ signals:
     void dialogFounded( const DialogClass & contact );
     void dialogListFinished();
 
+    void msgMarkedAsRead( qint64 msg_id, const QDateTime & date );
+    void msgSent( qint64 msg_id, const QDateTime & date );
+
     void incomingMsg( const MessageClass & msg );
+    void userIsTyping( int chat_id, int user_id );
+    void userStatusChanged( int user_id, int status, const QDateTime & when );
 
 private:
     void send_command( const QString & cmd );

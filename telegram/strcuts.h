@@ -61,7 +61,11 @@ class DialogClass
 public:
     ChatClass chatClass;
     UserClass userClass;
+
     bool is_chat;
+    int unread;
+    QDateTime msgDate;
+    QString msgLast;
 };
 
 class MessageClass
