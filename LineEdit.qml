@@ -4,7 +4,6 @@ import QtQuick.Controls 1.0
 TextInput {
     id: txt
     width: 100
-    height: 62
     selectionColor: "#0d80ec"
     selectedTextColor: "#ffffff"
 
