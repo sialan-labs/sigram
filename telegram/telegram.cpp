@@ -14,6 +14,9 @@ public:
 
     int update_dialog_timer_id;
     bool update_dialog_again;
+
+    QSet<int> loaded_users_info;
+    QSet<int> loaded_chats_info;
 };
 
 Telegram *sortDialogList_tmp_obj = 0;
@@ -38,6 +41,8 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     connect( p->tg_thread, SIGNAL(userStatusChanged(int,int,QDateTime)), SIGNAL(userStatusChanged(int,int,QDateTime)) );
     connect( p->tg_thread, SIGNAL(msgChanged(qint64))                  , SIGNAL(msgChanged(qint64))                   );
     connect( p->tg_thread, SIGNAL(msgSent(qint64,qint64))              , SIGNAL(msgSent(qint64,qint64))               );
+    connect( p->tg_thread, SIGNAL(userPhotoChanged(int))               , SIGNAL(userPhotoChanged(int))                );
+    connect( p->tg_thread, SIGNAL(chatPhotoChanged(int))               , SIGNAL(chatPhotoChanged(int))                );
     connect( p->tg_thread, SIGNAL(tgStarted())                         , SIGNAL(started())                            );
 
     p->tg_thread->start();
@@ -71,11 +76,6 @@ QString Telegram::contactPhone(int id) const
 int Telegram::contactUid(int id) const
 {
     return contact(id).user_id;
-}
-
-qint64 Telegram::contactPhotoId(int id) const
-{
-    return contact(id).photo_id;
 }
 
 int Telegram::contactState(int id) const
@@ -125,7 +125,7 @@ int Telegram::dialogChatAdmin(int id) const
 
 qint64 Telegram::dialogChatPhotoId(int id) const
 {
-    return dialog(id).chatClass.photo_id;
+    return dialog(id).chatClass.photoId;
 }
 
 int Telegram::dialogChatUsersNumber(int id) const
@@ -163,11 +163,6 @@ int Telegram::dialogUserUid(int id) const
     return dialog(id).userClass.user_id;
 }
 
-qint64 Telegram::dialogUserPhotoId(int id) const
-{
-    return dialog(id).userClass.photo_id;
-}
-
 int Telegram::dialogUserState(int id) const
 {
     return dialog(id).userClass.state;
@@ -201,6 +196,11 @@ QDateTime Telegram::dialogMsgDate(int id) const
 QString Telegram::dialogMsgLast(int id) const
 {
     return dialog(id).msgLast;
+}
+
+QString Telegram::getPhotoPath(int id) const
+{
+    return p->tg_thread->photos().value(id);
 }
 
 QList<qint64> Telegram::messageIds() const
@@ -329,12 +329,20 @@ void Telegram::sendMessage(int id, const QString &msg)
 
 void Telegram::loadUserInfo(int userId)
 {
+    if( p->loaded_users_info.contains(userId) )
+        return;
+
     p->tg_thread->loadUserInfo(userId);
+    p->loaded_users_info.insert(userId);
 }
 
-void Telegram::loadUserPhoto(int userId)
+void Telegram::loadChatInfo(int chatId)
 {
-    p->tg_thread->loadUserPhoto(userId);
+    if( p->loaded_chats_info.contains(chatId) )
+        return;
+
+    p->tg_thread->loadChatInfo(chatId);
+    p->loaded_chats_info.insert(chatId);
 }
 
 void Telegram::setStatusOnline(bool stt)

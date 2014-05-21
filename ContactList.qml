@@ -88,12 +88,18 @@ Rectangle {
 
             for( var i=0; i<dialogs.length; i++ ) {
                 model.append( {"user_id": 0, "dialog_id": dialogs[i], "itemMode": qsTr("Chats")} )
+                if( Telegram.dialogIsChat(dialogs[i]) )
+                    Telegram.loadChatInfo(dialogs[i])
+                else
+                    Telegram.loadUserInfo(dialogs[i])
                 var cIndex = contacts.indexOf(dialogs[i])
                 if( cIndex != -1 )
                     contacts.splice(cIndex,1)
             }
-            for( var i=0; i<contacts.length; i++ )
+            for( var i=0; i<contacts.length; i++ ) {
                 model.append( {"user_id":contacts[i], "dialog_id": 0, "itemMode": qsTr("Users")} )
+                Telegram.loadUserInfo(contacts[i])
+            }
         }
 
         Component.onCompleted: refresh()

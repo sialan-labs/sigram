@@ -24,23 +24,14 @@ Rectangle {
         anchors.margins: 4
         spacing: 4
 
-        Rectangle {
+        ContactImage {
             id: img
             anchors.top: row.top
             anchors.bottom: row.bottom
             width: height
-            radius: width/2
             smooth: true
-            border.color: "#ffffff"
-            border.width: 1
-            color: "#dddddd"
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    Telegram.loadUserPhoto(item.realId)
-                }
-            }
+            uid: item.realId
+            borderColor: "#ffffff"
         }
 
         Column {

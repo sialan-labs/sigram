@@ -15,24 +15,6 @@ namespace TgStruncts
     };
 }
 
-class UserExtraClass
-{
-public:
-    int user_id;
-    int type;
-
-    QString real_firstname;
-    QString real_lastname;
-
-    qint64 photo_volume;
-    qint64 photo_localid;
-
-    QString phone;
-
-    QDateTime lastTime;
-    TgStruncts::OnlineState state;
-};
-
 class UserClass
 {
 public:
@@ -40,10 +22,11 @@ public:
 
     int user_id;
     int type;
-    qint64 photo_id;
 
     QString firstname;
     QString lastname;
+
+    qint64 photoId;
 
     QString phone;
 
@@ -66,7 +49,8 @@ public:
 
     int chat_id;
     int type;
-    qint64 photo_id;
+
+    qint64 photoId;
 
     QString title;
 
@@ -115,6 +99,5 @@ Q_DECLARE_METATYPE( UserClass )
 Q_DECLARE_METATYPE( ChatClass )
 Q_DECLARE_METATYPE( DialogClass )
 Q_DECLARE_METATYPE( MessageClass )
-Q_DECLARE_METATYPE( UserExtraClass )
 
 #endif // STRCUTS_H

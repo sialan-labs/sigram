@@ -6,6 +6,7 @@
 
 #include <QTimer>
 #include <QMap>
+#include <QFile>
 
 class TelegramThreadPrivate
 {
@@ -13,7 +14,7 @@ public:
     TelegramCore *tg;
     QHash<int,UserClass> contacts;
     QHash<int,DialogClass> dialogs;
-    QHash<int,UserExtraClass> userExtras;
+    QHash<int,QString> photos;
 
     QHash<int,QMap<qint64, qint64> > usersMessages;
     QHash<qint64,qint64> messageDates;
@@ -29,7 +30,6 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     qRegisterMetaType<ChatClass>("ChatClass");
     qRegisterMetaType<DialogClass>("DialogClass");
     qRegisterMetaType<MessageClass>("MessageClass");
-    qRegisterMetaType<UserExtraClass>("UserExtraClass");
 
     p->tg = new TelegramCore(argc,argv);
 //    p->tg->moveToThread(this);
@@ -44,6 +44,8 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     connect( p->tg, SIGNAL(msgSent(qint64,QDateTime))            , SLOT(_msgSent(qint64,QDateTime))            , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(incomingMsg(MessageClass))            , SLOT(_incomingMsg(MessageClass))            , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(userStatusChanged(int,int,QDateTime)) , SLOT(_userStatusChanged(int,int,QDateTime)) , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(fileLoaded(qint64,int,QString))       , SLOT(_fileLoaded(qint64,int,QString))       , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(photoFound(int,qint64))               , SLOT(_photoFound(int,qint64))               , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(userIsTyping(int,int))                , SIGNAL(userIsTyping(int,int))               , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(started())                            , SIGNAL(tgStarted())                         , Qt::QueuedConnection );
 
@@ -65,9 +67,9 @@ const QHash<int, DialogClass> &TelegramThread::dialogs() const
     return p->dialogs;
 }
 
-const QHash<int, UserExtraClass> &TelegramThread::userExtras() const
+const QHash<int, QString> &TelegramThread::photos() const
 {
-    return p->userExtras;
+    return p->photos;
 }
 
 const QHash<int, QMap<qint64, qint64> > &TelegramThread::usersMessages() const
@@ -114,13 +116,19 @@ void TelegramThread::loadUserInfo(int userId)
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user.username) );
 }
 
-void TelegramThread::loadUserPhoto(int userId)
+void TelegramThread::loadChatInfo(int chatId)
 {
-    if( !p->contacts.contains(userId) )
+    if( !p->dialogs.contains(chatId) )
         return;
 
-    const UserClass & user = p->contacts.value(userId);
-    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user.username) );
+    const DialogClass & dialog = p->dialogs.value(chatId);
+    if( !dialog.is_chat )
+    {
+        loadUserInfo( chatId );
+        return;
+    }
+
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,dialog.chatClass.title) );
 }
 
 void TelegramThread::setStatusOnline(bool stt)
@@ -145,12 +153,6 @@ void TelegramThread::_contactFounded(const UserClass &contact)
 
 void TelegramThread::_contactListFinished()
 {
-    emit contactsChanged();
-}
-
-void TelegramThread::_userInfoUpdated(const UserExtraClass &extra)
-{
-    p->userExtras[extra.user_id] = extra;
     emit contactsChanged();
 }
 
@@ -219,6 +221,82 @@ void TelegramThread::_userStatusChanged(int user_id, int status, const QDateTime
     p->contacts[user_id].lastTime = when;
 
     emit userStatusChanged(user_id,status,when);
+}
+
+void TelegramThread::_photoFound(int id, qint64 volume)
+{
+    QHashIterator<int,UserClass> ci(p->contacts);
+    while( ci.hasNext() )
+    {
+        ci.next();
+        if( ci.value().user_id == id )
+        {
+            p->contacts[ci.key()].photoId = volume;
+            break;
+        }
+    }
+
+    QHashIterator<int,DialogClass> di(p->dialogs);
+    while( di.hasNext() )
+    {
+        di.next();
+        if( di.value().is_chat && di.value().chatClass.chat_id == id )
+        {
+            p->dialogs[di.key()].chatClass.photoId = volume;
+            break;
+        }
+        else
+        if( !di.value().is_chat && di.value().userClass.user_id == id )
+        {
+            p->dialogs[di.key()].userClass.photoId = volume;
+            break;
+        }
+    }
+}
+
+void TelegramThread::_fileLoaded(qint64 volume, int localId, const QString &path)
+{
+    Q_UNUSED(localId)
+    QHashIterator<int,UserClass> ci(p->contacts);
+    while( ci.hasNext() )
+    {
+        ci.next();
+        if( ci.value().photoId == volume )
+        {
+            p->photos.insert( ci.key(), path );
+            emit userPhotoChanged(ci.key());
+            break;
+        }
+    }
+
+    QHashIterator<int,DialogClass> di(p->dialogs);
+    while( di.hasNext() )
+    {
+        di.next();
+        if( di.value().is_chat && di.value().chatClass.photoId == volume )
+        {
+            p->photos.insert( di.key(), path );
+            emit chatPhotoChanged(di.key());
+            break;
+        }
+        else
+        if( !di.value().is_chat && di.value().userClass.photoId == volume )
+        {
+            p->photos.insert( di.key(), path );
+            emit userPhotoChanged(di.key());
+            break;
+        }
+    }
+}
+
+QString TelegramThread::normalizePhoto(const QString &path)
+{
+    return path;
+    QString npath = path + ".jpg";
+    QFile::remove(npath);
+    QFile::copy(path,npath);
+    return npath;
+
 }
 
 TelegramThread::~TelegramThread()

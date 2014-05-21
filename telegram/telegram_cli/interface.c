@@ -731,9 +731,6 @@ void interpreter (char *line UU) {
       printf ("Bad msg id\n");
       RET;
     }
-  } else if (IS_WORD ("load_user_photo")) {
-      GET_PEER_USER;
-      do_load_user_photo(id);
   } else if (IS_WORD ("view_photo")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {

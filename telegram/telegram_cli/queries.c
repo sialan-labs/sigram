@@ -700,7 +700,7 @@ int get_contacts_on_answer (struct query *q UU) {
   n = fetch_int ();
   for (i = 0; i < n; i++) {
     struct user *U = fetch_alloc_user ();
-    contactList_addToBuffer( U->id.id, U->id.type, U->first_name, U->last_name, U->photo_id, U->print_name, U->phone, U->status.online, U->status.when );
+    contactList_addToBuffer( U->id.id, U->id.type, U->first_name, U->last_name, U->print_name, U->phone, U->status.online, U->status.when );
   }
   contactList_finished();
   return 0;
@@ -1156,11 +1156,11 @@ int get_dialogs_on_answer (struct query *q UU) {
     switch (get_peer_type (plist[i])) {
     case PEER_USER:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_user( UC->user.id.id, UC->user.id.type, UC->user.first_name, UC->user.last_name, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message );
+      dialogList_addToBuffer_user( UC->user.id.id, UC->user.id.type, UC->user.first_name, UC->user.last_name, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message);
       break;
     case PEER_CHAT:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_chat( UC->chat.id.id, UC->chat.id.type, UC->chat.title, UC->chat.admin_id, UC->chat.photo.id, UC->chat.user_list, UC->chat.user_list_size, UC->chat.users_num, UC->chat.date, dlist[2 * i + 1], UC->last->date, UC->last->message );
+      dialogList_addToBuffer_chat( UC->chat.id.id, UC->chat.id.type, UC->chat.title, UC->chat.admin_id, UC->chat.user_list, UC->chat.user_list_size, UC->chat.users_num, UC->chat.date, dlist[2 * i + 1], UC->last->date, UC->last->message );
       break;
     }
   }
@@ -1620,26 +1620,12 @@ void do_rename_chat (peer_id_t id, char *name UU) {
 /* {{{ Chat info */
 void print_chat_info (struct chat *C) {
   peer_t *U = (void *)C;
-  print_start ();
-  push_color (COLOR_YELLOW);
-  printf ("Chat ");
-  print_chat_name (U->id, U);
-  printf (" members:\n");
-  int i;
-  for (i = 0; i < C->user_list_size; i++) {
-    printf ("\t\t");
-    print_user_name (MK_USER (C->user_list[i].user_id), user_chat_get (MK_USER (C->user_list[i].user_id)));
-    printf (" invited by ");
-    print_user_name (MK_USER (C->user_list[i].inviter_id), user_chat_get (MK_USER (C->user_list[i].inviter_id)));
-    printf (" at ");
-    print_date_full (C->user_list[i].date);
-    if (C->user_list[i].user_id == C->admin_id) {
-      printf (" admin");
-    }
-    printf ("\n");
-  }
-  pop_color ();
-  print_end ();
+  (void)U;
+  if( !C->photo.id )
+      return;
+
+  photoFound( C->id.id, C->photo.sizes->loc.volume );
+  do_load_chat_photo(C);
 }
 
 int chat_info_on_answer (struct query *q UU) {
@@ -1674,22 +1660,11 @@ void do_get_chat_info (peer_id_t id) {
 
 void print_user_info (struct user *U) {
   peer_t *C = (void *)U;
-  print_start ();
-  push_color (COLOR_YELLOW);
-  printf ("User ");
-  print_user_name (U->id, C);
-  printf (":\n");
-  printf ("\treal name: %s %s\n", U->real_first_name, U->real_last_name);
-  printf ("\tphone: %s\n", U->phone);
-  if (U->status.online > 0) {
-    printf ("\tonline\n");
-  } else {
-    printf ("\toffline (was online ");
-    print_date_full (U->status.when);
-    printf (")\n");
-  }
-  pop_color ();
-  print_end ();
+  (void)C;
+  if( !U->photo.id )
+      return;
+  photoFound( U->id.id, U->photo.sizes->loc.volume );
+  do_load_user_photo(U);
 }
 
 int user_info_on_answer (struct query *q UU) {
@@ -1728,12 +1703,18 @@ void do_get_user_info (peer_id_t id) {
 }
 /* }}} */
 
-void do_load_user_photo(peer_id_t id)
+void do_load_user_photo(void *UV)
 {
-    peer_t *UC = user_chat_get (id);
-    struct user *U = &UC->user;
+    struct user *U = UV;
     if( U )
         do_load_photo( &U->photo, 1 );
+}
+
+void do_load_chat_photo(void *CV )
+{
+    struct chat *C = CV;
+    if( C )
+        do_load_photo( &C->photo, 1 );
 }
 
 /* {{{ Get user info silently */

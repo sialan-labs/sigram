@@ -21,5 +21,7 @@
         <file>bubbles/Bubbles.qml</file>
         <file>bubbles/Circles.qml</file>
         <file>ContactListItem.qml</file>
+        <file>ContactImage.qml</file>
+        <file>files/unknown.jpg</file>
     </qresource>
 </RCC>

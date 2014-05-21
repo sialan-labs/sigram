@@ -33,15 +33,13 @@ Item {
         y: item.itemMargins
         spacing: 30
 
-        Rectangle {
+        ContactImage {
             id: img
             width: 64
             height: width
-            radius: width/2
             smooth: true
-            border.color: "#222222"
-            border.width: 1
-            color: "#aaaaaa"
+            borderColor: "#222222"
+            uid: Telegram.messageFromId(msg_id)
         }
 
         Item {

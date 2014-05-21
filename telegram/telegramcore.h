@@ -6,7 +6,6 @@
 #include <QDebug>
 #include <QDateTime>
 
-class UserExtraClass;
 class MessageClass;
 class DialogClass;
 class UserClass;
@@ -30,7 +29,7 @@ public slots:
     void setStatusOnline( bool stt );
 
     void loadUserInfo( const QString & user );
-    void loadUserPhoto( const QString & user );
+    void loadChatInfo( const QString & chat );
 
     void start();
 
@@ -45,14 +44,15 @@ signals:
     void dialogFounded( const DialogClass & contact );
     void dialogListFinished();
 
-    void userInfoUpdated( const UserExtraClass & extra );
-
     void msgMarkedAsRead( qint64 msg_id, const QDateTime & date );
     void msgSent( qint64 msg_id, const QDateTime & date );
 
     void incomingMsg( const MessageClass & msg );
     void userIsTyping( int chat_id, int user_id );
     void userStatusChanged( int user_id, int status, const QDateTime & when );
+
+    void photoFound( int id, qint64 volume );
+    void fileLoaded( qint64 volume, int localId, const QString & path );
 
 private:
     void send_command( const QString & cmd );

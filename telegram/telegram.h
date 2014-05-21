@@ -21,7 +21,6 @@ public:
     Q_INVOKABLE QString contactLastName(int id) const;
     Q_INVOKABLE QString contactPhone(int id) const;
     Q_INVOKABLE int contactUid(int id) const;
-    Q_INVOKABLE qint64 contactPhotoId(int id) const;
     Q_INVOKABLE int contactState(int id) const;
     Q_INVOKABLE QDateTime contactLastTime(int id) const;
     Q_INVOKABLE QString contactTitle(int id);
@@ -39,7 +38,6 @@ public:
     Q_INVOKABLE QString dialogUserLastName(int id) const;
     Q_INVOKABLE QString dialogUserPhone(int id) const;
     Q_INVOKABLE int dialogUserUid(int id) const;
-    Q_INVOKABLE qint64 dialogUserPhotoId(int id) const;
     Q_INVOKABLE int dialogUserState(int id) const;
     Q_INVOKABLE QDateTime dialogUserLastTime(int id) const;
     Q_INVOKABLE QString dialogUserTitle(int id) const;
@@ -47,6 +45,8 @@ public:
     Q_INVOKABLE int dialogUnreadCount( int id ) const;
     Q_INVOKABLE QDateTime dialogMsgDate( int id ) const;
     Q_INVOKABLE QString dialogMsgLast( int id ) const;
+
+    Q_INVOKABLE QString getPhotoPath( int id ) const;
 
     Q_INVOKABLE QList<qint64> messageIds() const;
     Q_INVOKABLE QStringList messageIdsStringList() const;
@@ -74,7 +74,7 @@ public slots:
     void sendMessage( int id, const QString & msg );
 
     void loadUserInfo( int userId );
-    void loadUserPhoto( int userId );
+    void loadChatInfo( int chatId );
 
     void setStatusOnline( bool stt );
 
@@ -85,6 +85,8 @@ signals:
     void userIsTyping( int chat_id, int user_id );
     void userStatusChanged( int user_id, int status, const QDateTime & when );
     void msgChanged( qint64 msg_id );
+    void userPhotoChanged( int user_id );
+    void chatPhotoChanged( int user_id );
     void msgSent( qint64 old_id, qint64 msg_id );
     void started();
 
