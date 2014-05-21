@@ -15,12 +15,31 @@ namespace TgStruncts
     };
 }
 
+class UserExtraClass
+{
+public:
+    int user_id;
+    int type;
+
+    QString real_firstname;
+    QString real_lastname;
+
+    qint64 photo_volume;
+    qint64 photo_localid;
+
+    QString phone;
+
+    QDateTime lastTime;
+    TgStruncts::OnlineState state;
+};
+
 class UserClass
 {
 public:
     QString username;
 
     int user_id;
+    int type;
     qint64 photo_id;
 
     QString firstname;
@@ -46,6 +65,7 @@ public:
     int admin;
 
     int chat_id;
+    int type;
     qint64 photo_id;
 
     QString title;
@@ -59,6 +79,11 @@ public:
 class DialogClass
 {
 public:
+    DialogClass() {
+        is_chat = false;
+        unread = true;
+    }
+
     ChatClass chatClass;
     UserClass userClass;
 
@@ -90,5 +115,6 @@ Q_DECLARE_METATYPE( UserClass )
 Q_DECLARE_METATYPE( ChatClass )
 Q_DECLARE_METATYPE( DialogClass )
 Q_DECLARE_METATYPE( MessageClass )
+Q_DECLARE_METATYPE( UserExtraClass )
 
 #endif // STRCUTS_H

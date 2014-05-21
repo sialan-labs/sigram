@@ -700,7 +700,7 @@ int get_contacts_on_answer (struct query *q UU) {
   n = fetch_int ();
   for (i = 0; i < n; i++) {
     struct user *U = fetch_alloc_user ();
-    contactList_addToBuffer( U->id.id, U->first_name, U->last_name, U->photo_id, U->print_name, U->phone, U->status.online, U->status.when );
+    contactList_addToBuffer( U->id.id, U->id.type, U->first_name, U->last_name, U->photo_id, U->print_name, U->phone, U->status.online, U->status.when );
   }
   contactList_finished();
   return 0;
@@ -1156,11 +1156,11 @@ int get_dialogs_on_answer (struct query *q UU) {
     switch (get_peer_type (plist[i])) {
     case PEER_USER:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_user( UC->user.id.id, UC->user.first_name, UC->user.last_name, UC->user.photo_id, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message );
+      dialogList_addToBuffer_user( UC->user.id.id, UC->user.id.type, UC->user.first_name, UC->user.last_name, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message );
       break;
     case PEER_CHAT:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_chat( UC->chat.id.id, UC->chat.title, UC->chat.admin_id, UC->chat.photo.id, UC->chat.user_list, UC->chat.user_list_size, UC->chat.users_num, UC->chat.date, dlist[2 * i + 1], UC->last->date, UC->last->message );
+      dialogList_addToBuffer_chat( UC->chat.id.id, UC->chat.id.type, UC->chat.title, UC->chat.admin_id, UC->chat.photo.id, UC->chat.user_list, UC->chat.user_list_size, UC->chat.users_num, UC->chat.date, dlist[2 * i + 1], UC->last->date, UC->last->message );
       break;
     }
   }
@@ -1728,6 +1728,14 @@ void do_get_user_info (peer_id_t id) {
 }
 /* }}} */
 
+void do_load_user_photo(peer_id_t id)
+{
+    peer_t *UC = user_chat_get (id);
+    struct user *U = &UC->user;
+    if( U )
+        do_load_photo( &U->photo, 1 );
+}
+
 /* {{{ Get user info silently */
 int user_list_info_silent_on_answer (struct query *q UU) {
   assert (fetch_int () == CODE_vector);
@@ -1783,7 +1791,7 @@ void end_load (struct download *D) {
   update_prompt ();
   close (D->fd);
   if (D->next == 1) {
-    logprintf ("Done: %s\n", D->name);
+    fileLoaded( D->volume, D->local_id, D->name );
   } else if (D->next == 2) {
     static char buf[PATH_MAX];
     if (tsnprintf (buf, sizeof (buf), OPEN_BIN, D->name) >= (int) sizeof (buf)) {
@@ -1920,7 +1928,9 @@ void do_load_photo_size (struct photo_size *P, int next) {
 }
 
 void do_load_photo (struct photo *photo, int next) {
-  if (!photo->sizes_num) { return; }
+  if (!photo->sizes_num)
+      return;
+
   int max = -1;
   int maxi = 0;
   int i;

@@ -6,7 +6,6 @@ Rectangle {
     height: 20
     radius: height/2
     color: "#ff1111"
-    visible: unread != 0
 
     property int unread: 0
 

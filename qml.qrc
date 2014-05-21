@@ -7,5 +7,19 @@
         <file>files/indicator.png</file>
         <file>SendFrame.qml</file>
         <file>UnreadItem.qml</file>
+        <file>ChatTitleBar.qml</file>
+        <file>MsgItem.qml</file>
+        <file>MsgPointCanvas.qml</file>
+        <file>files/sent.png</file>
+        <file>PhysicalScrollBar.qml</file>
+        <file>ScrollBar.qml</file>
+        <file>Button.qml</file>
+        <file>files/send_icon.png</file>
+        <file>files/attach.png</file>
+        <file>files/details.png</file>
+        <file>LineEdit.qml</file>
+        <file>bubbles/Bubbles.qml</file>
+        <file>bubbles/Circles.qml</file>
+        <file>ContactListItem.qml</file>
     </qresource>
 </RCC>

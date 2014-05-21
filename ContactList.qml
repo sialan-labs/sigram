@@ -4,6 +4,7 @@ Rectangle {
     id: contact_list
     width: 100
     height: 62
+    color: "#dddddd"
 
     property int current
 
@@ -49,67 +50,21 @@ Rectangle {
         anchors.fill: parent
         clip: true
         model: ListModel{}
-        delegate: Rectangle {
+        delegate: ContactListItem {
             id: item
-            height: 40
+            height: 57
             width: clist.width
-            color: marea.pressed? "#0d80ec" : "#00000000"
-
-            property int uid: user_id
-            property bool isDialog: user_id == 0
-            property int onlineState: isDialog? Telegram.contactState(dialog_id) : Telegram.contactState(user_id)
-
-            Column {
-                id: column
-                anchors.verticalCenter: parent.verticalCenter
-
-                Text {
-                    id: txt
-                    text: item.isDialog ? Telegram.dialogTitle(dialog_id) : Telegram.contactTitle(user_id)
-                    anchors.left: parent.left
-                    anchors.margins: 20
-                    font.pointSize: 10
-                }
-
-                Text {
-                    id: date
-                    anchors.left: parent.left
-                    anchors.margins: 20
-                    font.pointSize: 9
-                    color: "#555555"
-                    text: item.isDialog ? Telegram.dialogMsgDate(dialog_id) : " "
-                }
-            }
-
-            UnreadItem {
-                anchors.verticalCenter: item.verticalCenter
-                anchors.right: item.right
-                anchors.margins: 5
-                unread: item.isDialog? Telegram.dialogUnreadCount(dialog_id) : 0
-            }
-
-            Rectangle {
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                width: 6
-                height: width
-                radius: width/2
-                color: "#00ff00"
-                visible: item.onlineState == 1
-            }
-
-            MouseArea {
-                id: marea
-                anchors.fill: parent
-                onClicked: contact_list.current = item.isDialog? dialog_id : user_id
-            }
+            uid: user_id
+            realId: item.isDialog? dialog_id : user_id
+            selected: realId == contact_list.current
         }
 
         section.property: "itemMode"
         section.criteria: ViewSection.FullString
+        section.labelPositioning: ViewSection.InlineLabels
         section.delegate: Rectangle {
             id: sect
-            height: 30
+            height: 53
             width: clist.width
             color: "#dddddd"
 
@@ -117,7 +72,8 @@ Rectangle {
                 id: sect_txt
                 text: section
                 anchors.centerIn: parent
-                font.pointSize: 11
+                font.pointSize: 10
+                color: "#333333"
             }
         }
 
@@ -130,12 +86,22 @@ Rectangle {
             var contacts = Telegram.contactListUsers()
             var dialogs = Telegram.dialogListIds()
 
-            for( var i=0; i<dialogs.length; i++ )
+            for( var i=0; i<dialogs.length; i++ ) {
                 model.append( {"user_id": 0, "dialog_id": dialogs[i], "itemMode": qsTr("Chats")} )
+                var cIndex = contacts.indexOf(dialogs[i])
+                if( cIndex != -1 )
+                    contacts.splice(cIndex,1)
+            }
             for( var i=0; i<contacts.length; i++ )
                 model.append( {"user_id":contacts[i], "dialog_id": 0, "itemMode": qsTr("Users")} )
         }
 
         Component.onCompleted: refresh()
+    }
+
+    PhysicalScrollBar {
+        scrollArea: clist; height: clist.height-53; width: 8
+        anchors.right: clist.right; anchors.top: clist.top; color: "#333333"
+        anchors.topMargin: 53
     }
 }

@@ -3,8 +3,12 @@ import QtQuick.Window 2.1
 
 Window {
     visible: true
-    width: 800
-    height: 500
+    width: 1024
+    height: 600
+
+    property real physicalPlatformScale: 1
+    property real fontsScale: 1
+    property string globalFontFamily
 
     ContactList {
         id: contact_list
@@ -20,7 +24,7 @@ Window {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        color: "#eeeeee"
+        color: "#555555"
         current: contact_list.current
     }
 }

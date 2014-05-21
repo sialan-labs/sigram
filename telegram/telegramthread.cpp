@@ -13,6 +13,7 @@ public:
     TelegramCore *tg;
     QHash<int,UserClass> contacts;
     QHash<int,DialogClass> dialogs;
+    QHash<int,UserExtraClass> userExtras;
 
     QHash<int,QMap<qint64, qint64> > usersMessages;
     QHash<qint64,qint64> messageDates;
@@ -28,6 +29,7 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     qRegisterMetaType<ChatClass>("ChatClass");
     qRegisterMetaType<DialogClass>("DialogClass");
     qRegisterMetaType<MessageClass>("MessageClass");
+    qRegisterMetaType<UserExtraClass>("UserExtraClass");
 
     p->tg = new TelegramCore(argc,argv);
 //    p->tg->moveToThread(this);
@@ -61,6 +63,11 @@ const QHash<int, UserClass> &TelegramThread::contacts() const
 const QHash<int, DialogClass> &TelegramThread::dialogs() const
 {
     return p->dialogs;
+}
+
+const QHash<int, UserExtraClass> &TelegramThread::userExtras() const
+{
+    return p->userExtras;
 }
 
 const QHash<int, QMap<qint64, qint64> > &TelegramThread::usersMessages() const
@@ -98,6 +105,29 @@ void TelegramThread::sendMessage(int id, const QString &msg)
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user), Q_ARG(QString,msg) );
 }
 
+void TelegramThread::loadUserInfo(int userId)
+{
+    if( !p->contacts.contains(userId) )
+        return;
+
+    const UserClass & user = p->contacts.value(userId);
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user.username) );
+}
+
+void TelegramThread::loadUserPhoto(int userId)
+{
+    if( !p->contacts.contains(userId) )
+        return;
+
+    const UserClass & user = p->contacts.value(userId);
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user.username) );
+}
+
+void TelegramThread::setStatusOnline(bool stt)
+{
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(bool,stt));
+}
+
 void TelegramThread::run()
 {
     p->tg->start();
@@ -115,6 +145,12 @@ void TelegramThread::_contactFounded(const UserClass &contact)
 
 void TelegramThread::_contactListFinished()
 {
+    emit contactsChanged();
+}
+
+void TelegramThread::_userInfoUpdated(const UserExtraClass &extra)
+{
+    p->userExtras[extra.user_id] = extra;
     emit contactsChanged();
 }
 

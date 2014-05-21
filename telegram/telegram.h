@@ -58,9 +58,12 @@ public:
     Q_INVOKABLE QDateTime messageDate( qint64 id ) const;
     Q_INVOKABLE int messageService( qint64 id ) const;
     Q_INVOKABLE QString messageBody( qint64 id ) const;
+    Q_INVOKABLE qreal messageBodyTextWidth( qint64 id ) const;
     Q_INVOKABLE int messageFromId( qint64 id ) const;
     Q_INVOKABLE int messageToId( qint64 id ) const;
     Q_INVOKABLE QString messageFromName( qint64 id ) const;
+
+    Q_INVOKABLE QString convertDateToString( const QDateTime & date );
 
 public slots:
     void updateContactList();
@@ -69,6 +72,11 @@ public slots:
 
     void getHistory( int id, int count );
     void sendMessage( int id, const QString & msg );
+
+    void loadUserInfo( int userId );
+    void loadUserPhoto( int userId );
+
+    void setStatusOnline( bool stt );
 
 signals:
     void contactsChanged();

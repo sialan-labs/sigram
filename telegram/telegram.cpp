@@ -4,6 +4,8 @@
 
 #include <QMap>
 #include <QTimerEvent>
+#include <QFontMetricsF>
+#include <QDebug>
 
 class TelegramPrivate
 {
@@ -183,7 +185,7 @@ QString Telegram::dialogUserTitle(int id) const
 
 QString Telegram::dialogTitle(int id) const
 {
-    return dialogIsChat(id)? dialogChatTitle(id) : dialogUserName(id);
+    return dialogIsChat(id)? dialogChatTitle(id) : dialogUserFirstName(id) + " " + dialogUserLastName(id);
 }
 
 int Telegram::dialogUnreadCount(int id) const
@@ -256,6 +258,13 @@ QString Telegram::messageBody(qint64 id) const
     return message(id).message;
 }
 
+qreal Telegram::messageBodyTextWidth(qint64 id) const
+{
+    const QString & txt = messageBody(id);
+    QFontMetricsF metric = QFontMetricsF( QFont() );
+    return metric.width(txt);
+}
+
 int Telegram::messageFromId(qint64 id) const
 {
     return message(id).from_id;
@@ -269,6 +278,21 @@ int Telegram::messageToId(qint64 id) const
 QString Telegram::messageFromName(qint64 id) const
 {
     return dialogUserTitle( messageFromId(id) );
+}
+
+QString Telegram::convertDateToString(const QDateTime &date)
+{
+    const QDateTime & today = QDateTime::currentDateTime();
+    if( date.date().year() != today.date().year() )
+        return date.date().toString("yyyy MMM d");
+    else
+    if( date.date().month() != today.date().month() )
+        return date.date().toString("MMM d");
+    else
+    if( date.date().day() != today.date().day() )
+        return date.date().toString("MMM d");
+    else
+        return tr("Today") + " " + date.time().toString("hh:mm");
 }
 
 void Telegram::updateContactList()
@@ -301,6 +325,21 @@ void Telegram::getHistory(int id, int count)
 void Telegram::sendMessage(int id, const QString &msg)
 {
     p->tg_thread->sendMessage(id,msg);
+}
+
+void Telegram::loadUserInfo(int userId)
+{
+    p->tg_thread->loadUserInfo(userId);
+}
+
+void Telegram::loadUserPhoto(int userId)
+{
+    p->tg_thread->loadUserPhoto(userId);
+}
+
+void Telegram::setStatusOnline(bool stt)
+{
+    p->tg_thread->setStatusOnline(stt);
 }
 
 void Telegram::timerEvent(QTimerEvent *e)

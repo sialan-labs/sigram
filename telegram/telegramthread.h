@@ -3,6 +3,7 @@
 
 #include <QThread>
 
+class UserExtraClass;
 class MessageClass;
 class DialogClass;
 class UserClass;
@@ -18,6 +19,7 @@ public:
 
     const QHash<int,UserClass> & contacts() const;
     const QHash<int,DialogClass> & dialogs() const;
+    const QHash<int,UserExtraClass> & userExtras() const;
 
     const QHash<int,QMap<qint64, qint64> > & usersMessages() const;
     const QHash<qint64,MessageClass> & messages() const;
@@ -27,6 +29,11 @@ public slots:
     void dialogList();
     void getHistory(int id, int count );
     void sendMessage( int id, const QString & msg );
+
+    void loadUserInfo( int userId );
+    void loadUserPhoto( int userId );
+
+    void setStatusOnline( bool stt );
 
 signals:
     void contactsChanged();
@@ -45,6 +52,8 @@ private slots:
     void _contactListClear();
     void _contactFounded( const UserClass & contact );
     void _contactListFinished();
+
+    void _userInfoUpdated( const UserExtraClass & extra );
 
     void _dialogListClear();
     void _dialogFounded( const DialogClass & dialog );

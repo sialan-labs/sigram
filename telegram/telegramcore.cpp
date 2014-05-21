@@ -57,6 +57,25 @@ void TelegramCore::sendMessage(const QString &user, const QString &msg)
     send_command( QString("msg %1 %2").arg(QString(user).replace(" ","_")).arg(msg) );
 }
 
+void TelegramCore::setStatusOnline(bool stt)
+{
+    if( stt )
+        send_command("status_online");
+    else
+        send_command("status_offline");
+}
+
+void TelegramCore::loadUserInfo(const QString &user)
+{
+    send_command( QString("user_info %1").arg(QString(user).replace(" ","_")) );
+}
+
+void TelegramCore::loadUserPhoto(const QString &user)
+{
+    send_command( QString("load_user_photo %1").arg(QString(user).replace(" ","_")) );
+    send_command( QString("user_info %1").arg(QString(user).replace(" ","_")) );
+}
+
 void TelegramCore::start()
 {
     tmain(p->argc,p->argv);
@@ -93,9 +112,9 @@ void tgStarted()
         emit tg->started();
 }
 
-void callSignal()
+void qdebug( const char *m )
 {
-    qDebug() << "Hi";
+    qDebug() << m;
 }
 
 void contactList_clear()
@@ -104,7 +123,7 @@ void contactList_clear()
         emit tg->contactListClear();
 }
 
-void contactList_addToBuffer( int user_id, const char *firstname, const char *lastname, long long photo_id, const char *username, const char *phone, int state, int last_time )
+void contactList_addToBuffer( int user_id, int type, const char *firstname, const char *lastname, long long photo_id, const char *username, const char *phone, int state, int last_time )
 {
     if( state > 0 )
         state = 1;
@@ -114,6 +133,7 @@ void contactList_addToBuffer( int user_id, const char *firstname, const char *la
 
     UserClass contact;
     contact.username = username;
+    contact.type = type;
     contact.user_id = user_id;
     contact.firstname = firstname;
     contact.lastname = lastname;
@@ -138,7 +158,7 @@ void dialogList_clear()
         emit tg->dialogListClear();
 }
 
-void dialogList_addToBuffer_user( int user_id, const char *firstname, const char *lastname, long long photo_id, const char *username, const char *phone, int state, int last_time, int unread_cnt, int msg_date, const char * last_msg )
+void dialogList_addToBuffer_user( int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time, int unread_cnt, int msg_date, const char * last_msg )
 {
     if( state > 0 )
         state = 1;
@@ -149,9 +169,10 @@ void dialogList_addToBuffer_user( int user_id, const char *firstname, const char
     UserClass user;
     user.username = username;
     user.user_id = user_id;
+    user.type = type;
     user.firstname = firstname;
     user.lastname = lastname;
-    user.photo_id = photo_id;
+//    user.photo_id = photo_id;
     user.phone = phone;
     user.state = static_cast<TgStruncts::OnlineState>(state);
     user.lastTime = convertDate(last_time);
@@ -167,7 +188,7 @@ void dialogList_addToBuffer_user( int user_id, const char *firstname, const char
         emit tg->dialogFounded(dialog);
 }
 
-void dialogList_addToBuffer_chat( int chat_id, const char *title, int admin, long long photo_id, void *user_list_void, int user_list_size, int users_num, int date, int unread_cnt, int msg_date, const char * last_msg )
+void dialogList_addToBuffer_chat( int chat_id, int type, const char *title, int admin, long long photo_id, void *user_list_void, int user_list_size, int users_num, int date, int unread_cnt, int msg_date, const char * last_msg )
 {
     chat_user *user_list = static_cast<chat_user*>(user_list_void);
 
@@ -175,6 +196,7 @@ void dialogList_addToBuffer_chat( int chat_id, const char *title, int admin, lon
     chat.admin = admin;
     chat.chat_id = chat_id;
     chat.title = title;
+    chat.type = type;
     chat.photo_id = photo_id;
     chat.users_num = users_num;
     chat.date = convertDate(date);
@@ -208,6 +230,23 @@ void dialogList_finished()
 {
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->dialogListFinished();
+}
+
+void userInfosLoaded( int user_id, int type, const char *real_firstname, const char *real_lastname, const char *phone, long long photo_volume, long long photo_localid, int state, int last_time )
+{
+    UserExtraClass extra;
+    extra.user_id = user_id;
+    extra.type = type;
+    extra.real_firstname = real_firstname;
+    extra.real_lastname = real_lastname;
+    extra.phone = phone;
+    extra.photo_volume = photo_volume;
+    extra.photo_localid = photo_localid;
+    extra.state = static_cast<TgStruncts::OnlineState>(state);
+    extra.lastTime = convertDate(last_time);
+
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->userInfoUpdated(extra);
 }
 
 void msgMarkedAsRead( long long msg_id, int date )
@@ -253,6 +292,11 @@ void userStatusChanged( int user_id, int status, int when )
 {
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->userStatusChanged(user_id, status, convertDate(when) );
+}
+
+void fileLoaded( long long volume, int localId, const char *path )
+{
+    qDebug() << volume << localId << path;
 }
 
 void qthreadExec()
