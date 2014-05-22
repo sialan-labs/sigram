@@ -8,6 +8,7 @@ Item {
 
     property alias source: img.path
     property color borderColor: "#333333"
+    property bool onlineState: false
 
     property int uid
 
@@ -47,15 +48,28 @@ Item {
     }
 
     ThresholdMask {
+        id: threshold
         anchors.fill: img
         source: img
         maskSource: mask
         threshold: 0.4
-        spread: 0.2
+        spread: 0.6
+        visible: false
+    }
+
+    Desaturate {
+        anchors.fill: threshold
+        source: threshold
+        desaturation: contact_image.onlineState? 0 : 1.0
+
+        Behavior on desaturation {
+            NumberAnimation{ easing.type: Easing.OutCubic; duration: 1000 }
+        }
     }
 
     Rectangle {
         anchors.fill: parent
+        anchors.margins: -1
         radius: width/2
         smooth: true
         border.color: contact_image.borderColor

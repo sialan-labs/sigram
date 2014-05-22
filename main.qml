@@ -10,6 +10,8 @@ Window {
     property real fontsScale: 1
     property string globalFontFamily
 
+    property alias current: contact_list.current
+
     ContactList {
         id: contact_list
         anchors.left: parent.left

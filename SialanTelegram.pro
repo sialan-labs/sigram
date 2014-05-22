@@ -1,9 +1,10 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick dbus widgets
 
 SOURCES += main.cpp \
-    telegramgui.cpp
+    telegramgui.cpp \
+    notification.cpp
 
 RESOURCES += qml.qrc
 
@@ -15,4 +16,5 @@ include(deployment.pri)
 include(telegram/telegram.pri)
 
 HEADERS += \
-    telegramgui.h
+    telegramgui.h \
+    notification.h

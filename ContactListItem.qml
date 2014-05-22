@@ -32,6 +32,7 @@ Rectangle {
             smooth: true
             uid: item.realId
             borderColor: "#ffffff"
+            onlineState: item.onlineState == 1
         }
 
         Column {
@@ -63,16 +64,5 @@ Rectangle {
         anchors.margins: 5
         unread: item.isDialog? Telegram.dialogUnreadCount(dialog_id) : 0
         visible: unread != 0 && !item.selected
-    }
-
-    Rectangle {
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.rightMargin: 10
-        width: 6
-        height: width
-        radius: width/2
-        color: "#00ff00"
-        visible: item.onlineState == 1
     }
 }

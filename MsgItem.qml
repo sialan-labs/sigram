@@ -40,6 +40,7 @@ Item {
             smooth: true
             borderColor: "#222222"
             uid: Telegram.messageFromId(msg_id)
+            onlineState: true
         }
 
         Item {

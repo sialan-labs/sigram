@@ -23,5 +23,6 @@
         <file>ContactListItem.qml</file>
         <file>ContactImage.qml</file>
         <file>files/unknown.jpg</file>
+        <file>files/sys_tray.png</file>
     </qresource>
 </RCC>
