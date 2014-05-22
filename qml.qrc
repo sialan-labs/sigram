@@ -24,5 +24,8 @@
         <file>ContactImage.qml</file>
         <file>files/unknown.jpg</file>
         <file>files/sys_tray.png</file>
+        <file>ContactListTools.qml</file>
+        <file>files/unmute.png</file>
+        <file>files/mute.png</file>
     </qresource>
 </RCC>

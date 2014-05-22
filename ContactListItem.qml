@@ -15,6 +15,7 @@ Rectangle {
     MouseArea {
         id: marea
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: contact_list.current = item.isDialog? dialog_id : item.uid
     }
 
@@ -64,5 +65,15 @@ Rectangle {
         anchors.margins: 5
         unread: item.isDialog? Telegram.dialogUnreadCount(dialog_id) : 0
         visible: unread != 0 && !item.selected
+    }
+
+    ContactListTools {
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.rightMargin: 10
+        height: 22
+        width: 60
+        uid: item.realId
+        show: marea.containsMouse
     }
 }

@@ -5,7 +5,7 @@ Rectangle {
     smooth: true
     width: row.width + 20*physicalPlatformScale
     height: 30*physicalPlatformScale
-    color: press? highlightColor : normalColor
+    color: marea.pressed? highlightColor : normalColor
 
     property alias text: txt.text
     property alias icon: icn.source

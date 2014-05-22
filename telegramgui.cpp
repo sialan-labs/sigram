@@ -46,10 +46,14 @@ TelegramGui::TelegramGui(QObject *parent) :
 
 void TelegramGui::setMute(int id, bool stt)
 {
+    if( p->mutes.value(id) == stt )
+        return;
+
     p->mutes.insert(id, stt);
+    emit muted(id, stt);
 }
 
-bool TelegramGui::muted(int id) const
+bool TelegramGui::isMuted(int id) const
 {
     return p->mutes.value(id);
 }
@@ -83,7 +87,7 @@ void TelegramGui::sendNotify(quint64 msg_id)
 
     int to_id = p->tg->messageFromId(msg_id);
     int from_id = p->tg->messageFromId(msg_id);
-    if( muted(to_id) || muted(from_id) )
+    if( isMuted(to_id) || isMuted(from_id) )
         return;
 
     QString title = p->tg->messageFromName(msg_id);

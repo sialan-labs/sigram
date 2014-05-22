@@ -13,11 +13,14 @@ public:
     ~TelegramGui();
 
     Q_INVOKABLE void setMute( int id, bool stt );
-    Q_INVOKABLE bool muted( int id ) const;
+    Q_INVOKABLE bool isMuted( int id ) const;
 
 public slots:
     void start();
     void sendNotify(quint64 msg_id);
+
+signals:
+    void muted( int id, bool stt );
 
 private slots:
     void notify_action( uint id, const QString & act );
