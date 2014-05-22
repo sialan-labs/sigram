@@ -611,8 +611,8 @@ int loop (void) {
 
   set_interface_callbacks ();
 
-  do_get_difference ();
-  net_loop (0, dgot);
+//  do_get_difference ();
+//  net_loop (0, dgot);
   #ifdef USE_LUA
     lua_diff_end ();
   #endif

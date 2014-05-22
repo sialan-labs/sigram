@@ -5,6 +5,7 @@
 #include <QMap>
 #include <QTimerEvent>
 #include <QFontMetricsF>
+#include <QCoreApplication>
 #include <QDebug>
 
 class TelegramPrivate
@@ -37,6 +38,7 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     connect( p->tg_thread, SIGNAL(contactsChanged())                   , SIGNAL(contactsChanged())                    );
     connect( p->tg_thread, SIGNAL(dialogsChanged())                    , SIGNAL(dialogsChanged())                     );
     connect( p->tg_thread, SIGNAL(incomingMsg(qint64))                 , SIGNAL(incomingMsg(qint64))                  );
+    connect( p->tg_thread, SIGNAL(incomingNewMsg(qint64))              , SIGNAL(incomingNewMsg(qint64))               );
     connect( p->tg_thread, SIGNAL(userIsTyping(int,int))               , SIGNAL(userIsTyping(int,int))                );
     connect( p->tg_thread, SIGNAL(userStatusChanged(int,int,QDateTime)), SIGNAL(userStatusChanged(int,int,QDateTime)) );
     connect( p->tg_thread, SIGNAL(msgChanged(qint64))                  , SIGNAL(msgChanged(qint64))                   );
@@ -208,6 +210,38 @@ QList<qint64> Telegram::messageIds() const
     return p->tg_thread->messages().keys();
 }
 
+QStringList Telegram::messagesOf(int current) const
+{
+    QMap<qint64,QString> res;
+    bool is_chat = dialogIsChat(current);
+
+    const QHash<qint64,MessageClass> & msgs = p->tg_thread->messages();
+    QHashIterator<qint64,MessageClass> i(msgs);
+    while( i.hasNext() )
+    {
+        i.next();
+        const MessageClass & msg = i.value();
+        if( is_chat && msg.to_id != current && msg.to_id != 0 )
+            continue;
+        else
+        if( !is_chat )
+        {
+            if( msg.out && msg.to_id != current && msg.to_id != 0 )
+                continue;
+            else
+            if( !msg.out && msg.from_id != current && msg.from_id != 0 )
+                continue;
+            else
+            if( dialogIsChat(msg.to_id) || dialogIsChat(msg.from_id) )
+                continue;
+        }
+
+        res.insert( msg.date.toMSecsSinceEpoch(), QString::number(msg.msg_id) );
+    }
+
+    return res.values();
+}
+
 QStringList Telegram::messageIdsStringList() const
 {
     const QList<qint64> & msgs = messageIds();
@@ -233,7 +267,7 @@ QDateTime Telegram::messageForwardDate(qint64 id) const
     return message(id).fwd_date;
 }
 
-int Telegram::messageOut(qint64 id) const
+bool Telegram::messageOut(qint64 id) const
 {
     return message(id).out;
 }
@@ -277,7 +311,8 @@ int Telegram::messageToId(qint64 id) const
 
 QString Telegram::messageFromName(qint64 id) const
 {
-    return dialogUserTitle( messageFromId(id) );
+    const MessageClass & msg = message(id);
+    return msg.firstName + " " + msg.lastName;
 }
 
 QString Telegram::convertDateToString(const QDateTime &date)
@@ -343,6 +378,11 @@ void Telegram::loadChatInfo(int chatId)
 
     p->tg_thread->loadChatInfo(chatId);
     p->loaded_chats_info.insert(chatId);
+}
+
+void Telegram::markRead(int dId)
+{
+    p->tg_thread->markRead(dId);
 }
 
 void Telegram::setStatusOnline(bool stt)

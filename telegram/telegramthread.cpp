@@ -131,6 +131,21 @@ void TelegramThread::loadChatInfo(int chatId)
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,dialog.chatClass.title) );
 }
 
+void TelegramThread::markRead(int dId)
+{
+    if( !p->dialogs.contains(dId) )
+        return;
+
+    const DialogClass & dialog = p->dialogs.value(dId);
+    QString peer;
+    if( dialog.is_chat )
+        peer = dialog.chatClass.title;
+    else
+        peer = dialog.userClass.username;
+
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,peer) );
+}
+
 void TelegramThread::setStatusOnline(bool stt)
 {
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(bool,stt));
@@ -208,10 +223,17 @@ void TelegramThread::_msgSent(qint64 msg_id, const QDateTime & date)
 
 void TelegramThread::_incomingMsg(const MessageClass &msg)
 {
+    if( p->messages.contains(msg.msg_id) )
+    {
+        emit incomingMsg(msg.msg_id);
+        return;
+    }
+
     p->messages[msg.msg_id] = msg;
     p->usersMessages[msg.from_id][msg.date.toMSecsSinceEpoch()] = msg.msg_id;
     p->messageDates[msg.date.toMSecsSinceEpoch()] = msg.msg_id;
 
+    emit incomingNewMsg(msg.msg_id);
     emit incomingMsg(msg.msg_id);
 }
 

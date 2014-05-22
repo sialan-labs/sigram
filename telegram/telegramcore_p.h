@@ -23,7 +23,7 @@ EXTERNC void dialogList_finished();
 EXTERNC void msgMarkedAsRead( long long msg_id, int date );
 EXTERNC void msgSent( long long msg_id, int date );
 
-EXTERNC void incomingMsg( long long msg_id, int from_id, int to_id, int fwd_id, int fwd_date, int out, int unread, int date, int service, const char *message);
+EXTERNC void incomingMsg( long long msg_id, int from_id, int to_id, int fwd_id, int fwd_date, int out, int unread, int date, int service, const char *message, const char *firstname, const char *lastname);
 EXTERNC void userIsTyping( int chat_id, int user_id );
 EXTERNC void userStatusChanged( int user_id, int status, int when );
 

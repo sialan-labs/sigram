@@ -31,6 +31,8 @@ public slots:
     void loadUserInfo( const QString & user );
     void loadChatInfo( const QString & chat );
 
+    void markRead( const QString & peer );
+
     void start();
 
 signals:

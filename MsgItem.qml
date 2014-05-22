@@ -76,14 +76,12 @@ Item {
                     color: item.out? "#ffffff" : "#333333"
                 }
 
-                LineEdit {
+                Text {
                     id: txt
                     wrapMode: Text.WordWrap
                     width: msgWidth>item.width*0.6? item.width*0.6 : msgWidth
                     text: Telegram.messageBody(msg_id)
                     color: item.out? "#ffffff" : "#333333"
-                    readOnly: true
-                    selectByMouse: true
 
                     property real msgWidth: Telegram.messageBodyTextWidth(msg_id)
                 }

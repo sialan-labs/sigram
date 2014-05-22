@@ -215,6 +215,7 @@ peer_id_t next_token_peer (void) {
 
 char *get_default_prompt (void) {
   static char buf[1000];
+  return buf;
   int l = 0;
   if (in_chat_mode) {
     peer_t *U = user_chat_get (chat_mode_id);
@@ -1188,6 +1189,7 @@ void hexdump (int *in_ptr, int *in_end) {
 }
 
 void logprintf (const char *format, ...) {
+  return;
   int x = 0;
   if (!prompt_was) {
     x = 1;
@@ -1455,8 +1457,8 @@ void print_message (struct message *M) {
 
   last_from_id = M->from_id;
   last_to_id = M->to_id;
-
-  incomingMsg( M->id, M->from_id.id, M->to_id.id, M->fwd_from_id.id, M->fwd_date, M->out, M->unread, M->date, M->service, M->message );
+  peer_t *U = user_chat_get (M->from_id);
+  incomingMsg( M->id, M->from_id.id, M->to_id.id, M->fwd_from_id.id, M->fwd_date, M->out, M->unread, M->date, M->service, M->message, U->user.first_name, U->user.last_name );
   return;
 
   print_start ();

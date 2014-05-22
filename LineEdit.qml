@@ -1,11 +1,21 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.0
 
-TextInput {
+TextEdit {
     id: txt
     width: 100
     selectionColor: "#0d80ec"
     selectedTextColor: "#ffffff"
+
+    onTextChanged: if( text.trim().length == 0 ) text = text.trim()
+
+    signal accepted();
+
+    Keys.onPressed: {
+        if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
+            if( event.modifiers == Qt.NoModifier )
+                txt.accepted()
+    }
 
     Menu {
         id: menu
@@ -72,6 +82,7 @@ TextInput {
             menu.popup()
         }
     }
+
     MouseArea {
         id: marea
         anchors.fill: parent

@@ -1,10 +1,17 @@
 TEMPLATE = app
 
-QT += qml quick dbus widgets
+QT += qml quick dbus widgets sql
+
+manifest.source = database/userdata.db
+manifest.target = .
+COPYFOLDERS = manifest
+include(qmake/copyData.pri)
+copyData()
 
 SOURCES += main.cpp \
     telegramgui.cpp \
-    notification.cpp
+    notification.cpp \
+    userdata.cpp
 
 RESOURCES += qml.qrc
 
@@ -17,4 +24,11 @@ include(telegram/telegram.pri)
 
 HEADERS += \
     telegramgui.h \
-    notification.h
+    notification.h \
+    userdata.h \
+    telegram_macros.h
+
+OTHER_FILES += \
+    database/userdata.db \
+    database/userdata.mwb \
+    database/userdata.sql

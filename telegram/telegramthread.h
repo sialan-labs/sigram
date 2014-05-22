@@ -32,6 +32,8 @@ public slots:
     void loadUserInfo( int userId );
     void loadChatInfo( int chatId );
 
+    void markRead( int dId );
+
     void setStatusOnline( bool stt );
 
 signals:
@@ -39,6 +41,7 @@ signals:
     void dialogsChanged();
     void tgStarted();
     void incomingMsg( qint64 msg_id );
+    void incomingNewMsg( qint64 msg_id );
     void userIsTyping( int chat_id, int user_id );
     void userStatusChanged( int user_id, int status, const QDateTime & when );
     void userPhotoChanged( int user_id );

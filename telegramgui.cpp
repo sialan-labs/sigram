@@ -4,6 +4,8 @@
 
 #include "telegramgui.h"
 #include "notification.h"
+#include "telegram_macros.h"
+#include "userdata.h"
 #include "telegram/telegram.h"
 
 #include <QQmlApplicationEngine>
@@ -15,11 +17,17 @@
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QAction>
+#include <QPointer>
+#include <QSettings>
+#include <QDir>
+
+QPointer<QSettings> tg_settings;
 
 class TelegramGuiPrivate
 {
 public:
     Notification *notify;
+    UserData *userdata;
 
     QSystemTrayIcon *sysTray;
     QQmlApplicationEngine *engine;
@@ -39,9 +47,18 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->tg = 0;
     p->args = QGuiApplication::arguments().first().toUtf8().data();
 
+    QDir().mkpath(HOME_PATH);
+    if( !tg_settings )
+        tg_settings = new QSettings( HOME_PATH + "/telegram.conf", QSettings::IniFormat, this);
+
     p->notify = new Notification(this);
 
     connect( p->notify, SIGNAL(notifyAction(uint,QString)), SLOT(notify_action(uint,QString)) );
+}
+
+QSettings *TelegramGui::settings()
+{
+    return tg_settings;
 }
 
 void TelegramGui::setMute(int id, bool stt)
@@ -64,10 +81,12 @@ void TelegramGui::start()
         return;
 
     p->tg = new Telegram(1,&(p->args));
+    p->userdata = new UserData(this);
 
     p->engine = new QQmlApplicationEngine(this);
     p->engine->rootContext()->setContextProperty( "Telegram", p->tg );
     p->engine->rootContext()->setContextProperty( "Gui", this );
+    p->engine->rootContext()->setContextProperty( "UserData", p->userdata );
     p->engine->load(QUrl(QStringLiteral("qrc:///main.qml")));
 
     p->root = p->engine->rootObjects().first();
@@ -125,7 +144,6 @@ void TelegramGui::notify_action(uint id, const QString &act)
         break;
 
     case NOTIFY_ACT_MUTE:
-        qDebug() << current << "Mutted";
         setMute( current, true );
         break;
 

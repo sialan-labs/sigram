@@ -75,6 +75,11 @@ void TelegramCore::loadChatInfo(const QString &chat)
     send_command( QString("chat_info %1").arg(QString(chat).replace(" ","_")) );
 }
 
+void TelegramCore::markRead(const QString &peer)
+{
+    send_command( QString("mark_read %1").arg(QString(peer).replace(" ","_")) );
+}
+
 void TelegramCore::start()
 {
     tmain(p->argc,p->argv);
@@ -245,7 +250,7 @@ void msgSent( long long msg_id, int date )
         emit tg->msgSent(msg_id,convertDate(date));
 }
 
-void incomingMsg( long long msg_id, int from_id, int to_id, int fwd_id, int fwd_date, int out, int unread, int date, int service, const char *message)
+void incomingMsg( long long msg_id, int from_id, int to_id, int fwd_id, int fwd_date, int out, int unread, int date, int service, const char *message, const char *firstname, const char *lastname)
 {
     MessageClass msg;
     msg.msg_id = msg_id;
@@ -258,6 +263,8 @@ void incomingMsg( long long msg_id, int from_id, int to_id, int fwd_id, int fwd_
     msg.message = QString(message);
     msg.from_id = from_id;
     msg.to_id = to_id;
+    msg.firstName = firstname;
+    msg.lastName = lastname;
 
     if( msg.out && msg.unread )
         msg.msg_id = getUnknownIdentifier();

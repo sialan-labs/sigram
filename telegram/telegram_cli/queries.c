@@ -1038,7 +1038,7 @@ int get_history_on_answer (struct query *q UU) {
   int x = fetch_int ();
   if (x == (int)CODE_messages_messages_slice) {
     fetch_int ();
-    rprintf ("...\n");
+//    rprintf ("...\n");
   } else {
     assert (x == (int)CODE_messages_messages);
   }
@@ -1854,7 +1854,7 @@ void load_next_part (struct download *D) {
       if (D->offset >= D->size) {
         cur_downloading_bytes += D->size;
         cur_downloaded_bytes += D->offset;
-        rprintf ("Already downloaded\n");
+//        rprintf ("Already downloaded\n");
         end_load (D);
         return;
       }

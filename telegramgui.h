@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSystemTrayIcon>
 
+class QSettings;
 class TelegramGuiPrivate;
 class TelegramGui : public QObject
 {
@@ -11,6 +12,8 @@ class TelegramGui : public QObject
 public:
     TelegramGui(QObject *parent = 0);
     ~TelegramGui();
+
+    static QSettings *settings();
 
     Q_INVOKABLE void setMute( int id, bool stt );
     Q_INVOKABLE bool isMuted( int id ) const;

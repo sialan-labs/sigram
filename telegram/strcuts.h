@@ -89,7 +89,8 @@ public:
     int service;
     QString message;
 
-    QString fromName;
+    QString firstName;
+    QString lastName;
 
     int from_id;
     int to_id;
