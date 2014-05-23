@@ -12,11 +12,11 @@ EXTERNC void qdebug( const char *m );
 EXTERNC void qdebugNum( int num );
 
 EXTERNC void contactList_clear();
-EXTERNC void contactList_addToBuffer( int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time );
+EXTERNC void contactList_addToBuffer( int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time, int flags );
 EXTERNC void contactList_finished();
 
 EXTERNC void dialogList_clear();
-EXTERNC void dialogList_addToBuffer_user( int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time, int unread_cnt, int msg_date, const char * last_msg );
+EXTERNC void dialogList_addToBuffer_user( int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time, int unread_cnt, int msg_date, const char * last_msg, int flags );
 EXTERNC void dialogList_addToBuffer_chat( int chat_id, int type, const char *title, int admin, void *user_list, int user_list_size, int users_num, int date, int unread_cnt, int msg_date, const char * last_msg );
 EXTERNC void dialogList_finished();
 

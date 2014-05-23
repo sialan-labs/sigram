@@ -700,7 +700,7 @@ int get_contacts_on_answer (struct query *q UU) {
   n = fetch_int ();
   for (i = 0; i < n; i++) {
     struct user *U = fetch_alloc_user ();
-    contactList_addToBuffer( U->id.id, U->id.type, U->first_name, U->last_name, U->print_name, U->phone, U->status.online, U->status.when );
+    contactList_addToBuffer( U->id.id, U->id.type, U->first_name, U->last_name, U->print_name, U->phone, U->status.online, U->status.when, U->flags );
   }
   contactList_finished();
   return 0;
@@ -1156,7 +1156,7 @@ int get_dialogs_on_answer (struct query *q UU) {
     switch (get_peer_type (plist[i])) {
     case PEER_USER:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_user( UC->user.id.id, UC->user.id.type, UC->user.first_name, UC->user.last_name, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message);
+      dialogList_addToBuffer_user( UC->user.id.id, UC->user.id.type, UC->user.first_name, UC->user.last_name, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message, UC->user.flags);
       break;
     case PEER_CHAT:
       UC = user_chat_get (plist[i]);

@@ -132,7 +132,7 @@ void contactList_clear()
         emit tg->contactListClear();
 }
 
-void contactList_addToBuffer( int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time )
+void contactList_addToBuffer( int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time, int flags )
 {
     if( state > 0 )
         state = 1;
@@ -148,6 +148,7 @@ void contactList_addToBuffer( int user_id, int type, const char *firstname, cons
     contact.lastname = lastname;
     contact.phone = phone;
     contact.state = static_cast<TgStruncts::OnlineState>(state);
+    contact.flags = static_cast<TgStruncts::UserFlags>(flags);
     contact.lastTime = convertDate(last_time);
 
     foreach( TelegramCore *tg, telegram_objects )
@@ -166,7 +167,7 @@ void dialogList_clear()
         emit tg->dialogListClear();
 }
 
-void dialogList_addToBuffer_user(int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time, int unread_cnt, int msg_date, const char * last_msg )
+void dialogList_addToBuffer_user(int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time, int unread_cnt, int msg_date, const char * last_msg, int flags )
 {
     if( state > 0 )
         state = 1;
@@ -182,6 +183,7 @@ void dialogList_addToBuffer_user(int user_id, int type, const char *firstname, c
     user.lastname = lastname;
     user.phone = phone;
     user.state = static_cast<TgStruncts::OnlineState>(state);
+    user.flags = static_cast<TgStruncts::UserFlags>(flags);
     user.lastTime = convertDate(last_time);
 
     DialogClass dialog;

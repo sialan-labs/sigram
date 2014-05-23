@@ -27,5 +27,8 @@
         <file>ContactListTools.qml</file>
         <file>files/unmute.png</file>
         <file>files/mute.png</file>
+        <file>ChatFrame.qml</file>
+        <file>Configure.qml</file>
+        <file>About.qml</file>
     </qresource>
 </RCC>

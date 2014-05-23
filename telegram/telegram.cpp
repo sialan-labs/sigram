@@ -315,6 +315,11 @@ QString Telegram::messageFromName(qint64 id) const
     return msg.firstName + " " + msg.lastName;
 }
 
+int Telegram::me() const
+{
+    return p->tg_thread->me();
+}
+
 QString Telegram::convertDateToString(const QDateTime &date)
 {
     const QDateTime & today = QDateTime::currentDateTime();

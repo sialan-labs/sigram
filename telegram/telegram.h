@@ -64,6 +64,8 @@ public:
     Q_INVOKABLE int messageToId( qint64 id ) const;
     Q_INVOKABLE QString messageFromName( qint64 id ) const;
 
+    Q_INVOKABLE int me() const;
+
     Q_INVOKABLE QString convertDateToString( const QDateTime & date );
 
 public slots:

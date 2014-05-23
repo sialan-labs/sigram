@@ -12,6 +12,9 @@ class TelegramThreadPrivate
 {
 public:
     TelegramCore *tg;
+
+    int me;
+
     QHash<int,UserClass> contacts;
     QHash<int,DialogClass> dialogs;
     QHash<int,QString> photos;
@@ -25,6 +28,7 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     QThread(parent)
 {
     p = new TelegramThreadPrivate;
+    p->me = 0;
 
     qRegisterMetaType<UserClass>("UserClass");
     qRegisterMetaType<ChatClass>("ChatClass");
@@ -80,6 +84,11 @@ const QHash<int, QMap<qint64, qint64> > &TelegramThread::usersMessages() const
 const QHash<qint64, MessageClass> &TelegramThread::messages() const
 {
     return p->messages;
+}
+
+int TelegramThread::me() const
+{
+    return p->me;
 }
 
 void TelegramThread::contactList()
@@ -163,6 +172,9 @@ void TelegramThread::_contactListClear()
 
 void TelegramThread::_contactFounded(const UserClass &contact)
 {
+    if( contact.flags & TgStruncts::userUserSelf )
+        p->me = contact.user_id;
+
     p->contacts.insert( contact.user_id, contact );
 }
 

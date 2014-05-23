@@ -92,7 +92,7 @@ void TelegramGui::start()
     p->root = p->engine->rootObjects().first();
 
     p->sysTray = new QSystemTrayIcon( QIcon(":/files/sys_tray.png"), this );
-//    p->sysTray->show();
+    p->sysTray->show();
 
     connect( p->sysTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(systray_action(QSystemTrayIcon::ActivationReason)) );
 }
@@ -141,6 +141,7 @@ void TelegramGui::notify_action(uint id, const QString &act)
     case NOTIFY_ACT_SHOW:
         p->root->setProperty( "visible", true );
         p->root->setProperty( "current", current );
+        QMetaObject::invokeMethod( p->root, "requestActivate" );
         break;
 
     case NOTIFY_ACT_MUTE:
@@ -157,7 +158,8 @@ void TelegramGui::systray_action(QSystemTrayIcon::ActivationReason act)
     switch( static_cast<int>(act) )
     {
     case QSystemTrayIcon::Trigger:
-        p->root->setProperty( "visible", !p->root->property("visible").toBool() );
+        p->root->setProperty( "visible", true );
+        QMetaObject::invokeMethod( p->root, "requestActivate" );
         break;
 
     case QSystemTrayIcon::Context:
@@ -172,12 +174,33 @@ void TelegramGui::showContextMenu()
     menu.move( QCursor::pos() );
 
     QAction *show_act = menu.addAction( tr("Show") );
+    menu.addSeparator();
+    QAction *conf_act = menu.addAction( tr("Configure") );
+    QAction *abut_act = menu.addAction( tr("About") );
+    menu.addSeparator();
     QAction *exit_act = menu.addAction( tr("Exit") );
     QAction *res_act  = menu.exec();
 
     if( res_act == show_act )
     {
-        p->root->setProperty( "visible", !p->root->property("visible").toBool() );
+        QMetaObject::invokeMethod( p->root, "requestActivate" );
+        p->root->setProperty( "visible", true );
+    }
+    else
+    if( res_act == conf_act )
+    {
+        QMetaObject::invokeMethod( p->root, "requestActivate" );
+        p->root->setProperty( "configure", !p->root->property("configure").toBool() );
+        p->root->setProperty( "focus", true );
+        p->root->setProperty( "visible", true );
+    }
+    else
+    if( res_act == abut_act )
+    {
+        QMetaObject::invokeMethod( p->root, "requestActivate" );
+        p->root->setProperty( "about", !p->root->property("about").toBool() );
+        p->root->setProperty( "focus", true );
+        p->root->setProperty( "visible", true );
     }
     else
     if( res_act == exit_act )

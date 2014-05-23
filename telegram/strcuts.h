@@ -13,6 +13,25 @@ namespace TgStruncts
         NotOnlineYet = 0,
         Online = 1
     };
+
+    enum UserFlags {
+        userMessageEmpty = 1,
+        userDeleted = 2,
+        userForbidden = 4,
+        userHasPhoto = 8,
+        userCreated = 16,
+
+        userUserSelf = 128,
+        userUserForeign = 256,
+        userUserContact = 512,
+        userUserInContact = 1024,
+        userUserOutContact = 2048,
+
+        userChatInChat = 128,
+
+        userEncrypted = 4096,
+        userPending = 8192
+    };
 }
 
 class UserClass
@@ -32,6 +51,7 @@ public:
 
     QDateTime lastTime;
     TgStruncts::OnlineState state;
+    TgStruncts::UserFlags flags;
 };
 
 class ChatUserClass

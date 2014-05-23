@@ -23,6 +23,8 @@ public:
     const QHash<int,QMap<qint64, qint64> > & usersMessages() const;
     const QHash<qint64,MessageClass> & messages() const;
 
+    int me() const;
+
 public slots:
     void contactList();
     void dialogList();
