@@ -354,7 +354,7 @@ int process_respq_answer (struct connection *c, char *packet, int len) {
   }
   if (i == fingerprints_num) {
     logprintf ( "fatal: don't have any matching keys (%016llx expected)\n", pk_fingerprint);
-    exit (2);
+    qthreadExitRequest (2);
   }
   // create inner part (P_Q_inner_data)
   clear_packet ();
@@ -1738,7 +1738,7 @@ int rpc_execute (struct connection *c, int op, int len) {
     return 0;
   default:
     logprintf ( "fatal: cannot receive answer in state %d\n", c_state);
-    exit (2);
+    qthreadExitRequest (2);
   }
  
   return 0;
@@ -1800,13 +1800,13 @@ void on_start (void) {
   if (rsa_public_key_name) {
     if (rsa_load_public_key (rsa_public_key_name) < 0) {
       perror ("rsa_load_public_key");
-      exit (1);
+      qthreadExitRequest (1);
     }
   } else {
     if (rsa_load_public_key (TG_SERVER_PUBKEY_FILENAME) < 0
       && rsa_load_public_key ("/etc/" PROG_NAME "/server.pub") < 0) {
       perror ("rsa_load_public_key");
-      exit (1);
+      qthreadExitRequest (1);
     }
   }
   pk_fingerprint = compute_rsa_key_fingerprint (pubKey);

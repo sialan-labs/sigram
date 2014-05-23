@@ -101,7 +101,7 @@ void net_loop (int flags, int (*is_end)(void)) {
     #endif
     if (safe_quit && !queries_num) {
       printf ("All done. Exit\n");
-      exit (0);
+      qthreadExitRequest (0);
     }
     if (unknown_user_list_pos) {
       do_get_user_list_info_silent (unknown_user_list_pos, unknown_user_list);
@@ -500,7 +500,7 @@ int loop (void) {
         printf ("Telephone number (with '+' sign): ");         
         if (net_getline (&user, &size) == -1) {
           perror ("getline()");
-          exit (EXIT_FAILURE);
+          qthreadExitRequest (EXIT_FAILURE);
         }
         set_default_username (user);
       }
@@ -516,7 +516,7 @@ int loop (void) {
       while (1) {
         if (net_getline (&code, &size) == -1) {
           perror ("getline()");
-          exit (EXIT_FAILURE);
+          qthreadExitRequest (EXIT_FAILURE);
         }
         if (!strcmp (code, "call")) {
           printf ("You typed \"call\", switching to phone system.\n");
@@ -537,25 +537,25 @@ int loop (void) {
       size_t size;
       if (net_getline (&code, &size) == -1) {
         perror ("getline()");
-        exit (EXIT_FAILURE);
+        qthreadExitRequest (EXIT_FAILURE);
       }
       if (!*code || *code == 'y' || *code == 'Y') {
         printf ("Ok, starting registartion.\n");
       } else {
         printf ("Then try again\n");
-        exit (EXIT_SUCCESS);
+        qthreadExitRequest (EXIT_SUCCESS);
       }
       char *first_name;
       printf ("First name: ");
       if (net_getline (&first_name, &size) == -1) {
         perror ("getline()");
-        exit (EXIT_FAILURE);
+        qthreadExitRequest (EXIT_FAILURE);
       }
       char *last_name;
       printf ("Last name: ");
       if (net_getline (&last_name, &size) == -1) {
         perror ("getline()");
-        exit (EXIT_FAILURE);
+        qthreadExitRequest (EXIT_FAILURE);
       }
 
       int dc_num = do_get_nearest_dc ();
@@ -568,7 +568,7 @@ int loop (void) {
       while (1) {
         if (net_getline (&code, &size) == -1) {
           perror ("getline()");
-          exit (EXIT_FAILURE);
+          qthreadExitRequest (EXIT_FAILURE);
         }
         if (!strcmp (code, "call")) {
           printf ("You typed \"call\", switching to phone system.\n");

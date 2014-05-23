@@ -308,3 +308,8 @@ void qthreadExit(int code)
 {
     static_cast<TelegramThread*>(QThread::currentThread())->exit(code);
 }
+
+void qthreadExitRequest(int code)
+{
+    qDebug() << code;
+}

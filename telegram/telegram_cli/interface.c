@@ -1008,7 +1008,7 @@ void interpreter (char *line UU) {
     do_delete_msg (num);
     do_restore_msg (num);
   } else if (IS_WORD ("quit")) {
-    exit (0);
+    qthreadExitRequest (0);
   } else if (IS_WORD ("safe_quit")) {
     safe_quit = 1;
   }

@@ -15,6 +15,7 @@ public:
 
     int update_dialog_timer_id;
     bool update_dialog_again;
+    bool started;
 
     QSet<int> loaded_users_info;
     QSet<int> loaded_chats_info;
@@ -32,6 +33,7 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     p = new TelegramPrivate;
     p->update_dialog_again = false;
     p->update_dialog_timer_id = 0;
+    p->started = false;
 
     p->tg_thread = new TelegramThread(argc,argv);
 
@@ -45,7 +47,7 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     connect( p->tg_thread, SIGNAL(msgSent(qint64,qint64))              , SIGNAL(msgSent(qint64,qint64))               );
     connect( p->tg_thread, SIGNAL(userPhotoChanged(int))               , SIGNAL(userPhotoChanged(int))                );
     connect( p->tg_thread, SIGNAL(chatPhotoChanged(int))               , SIGNAL(chatPhotoChanged(int))                );
-    connect( p->tg_thread, SIGNAL(tgStarted())                         , SIGNAL(started())                            );
+    connect( p->tg_thread, SIGNAL(tgStarted())                         , SLOT(_startedChanged())                      );
 
     p->tg_thread->start();
 }
@@ -320,6 +322,11 @@ int Telegram::me() const
     return p->tg_thread->me();
 }
 
+bool Telegram::started() const
+{
+    return p->started;
+}
+
 QString Telegram::convertDateToString(const QDateTime &date)
 {
     const QDateTime & today = QDateTime::currentDateTime();
@@ -393,6 +400,12 @@ void Telegram::markRead(int dId)
 void Telegram::setStatusOnline(bool stt)
 {
     p->tg_thread->setStatusOnline(stt);
+}
+
+void Telegram::_startedChanged()
+{
+    p->started = true;
+    emit startedChanged();
 }
 
 void Telegram::timerEvent(QTimerEvent *e)

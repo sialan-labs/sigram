@@ -32,5 +32,6 @@ EXTERNC void fileLoaded( long long volume, int localId, const char *path );
 
 EXTERNC void qthreadExec();
 EXTERNC void qthreadExit(int code);
+EXTERNC void qthreadExitRequest(int code);
 
 #endif // TELEGRAM_P_H

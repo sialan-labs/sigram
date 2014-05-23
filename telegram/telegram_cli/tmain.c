@@ -191,11 +191,11 @@ char *make_full_path (char *s) {
 void check_type_sizes (void) {
   if (sizeof (int) != 4u) {
     logprintf ("sizeof (int) isn't equal 4.\n");
-    exit (1);
+    qthreadExitRequest (1);
   }
   if (sizeof (char) != 1u) {
     logprintf ("sizeof (char) isn't equal 1.\n");
-    exit (1);
+    qthreadExitRequest (1);
   }
 }
 
@@ -223,11 +223,11 @@ void running_for_first_time (void) {
     config_file_fd = open (config_filename, O_CREAT | O_RDWR, 0600);
     if (config_file_fd == -1)  {
       perror ("open[config_file]");
-      exit (EXIT_FAILURE);
+      qthreadExitRequest (EXIT_FAILURE);
     }
     if (write (config_file_fd, DEFAULT_CONFIG_CONTENTS, strlen (DEFAULT_CONFIG_CONTENTS)) <= 0) {
       perror ("write[config_file]");
-      exit (EXIT_FAILURE);
+      qthreadExitRequest (EXIT_FAILURE);
     }
     close (config_file_fd);
     /*int auth_file_fd = open (get_auth_key_filename (), O_CREAT | O_RDWR, 0600);
@@ -240,7 +240,7 @@ void running_for_first_time (void) {
     /* create downloads directory */
     /*if (mkdir (downloads_directory, 0755) !=0) {
       perror ("creating download directory");
-      exit (EXIT_FAILURE);
+      qthreadExitRequest (EXIT_FAILURE);
     }*/
   }
 }
@@ -280,7 +280,7 @@ void parse_config (void) {
   config_init (&conf);
   if (config_read_file (&conf, config_filename) != CONFIG_TRUE) {
     fprintf (stderr, "Can not read config '%s': error '%s' on the line %d\n", config_filename, config_error_text (&conf), config_error_line (&conf));
-    exit (2);
+    qthreadExitRequest (2);
   }
 
   if (!prefix) {
@@ -363,7 +363,7 @@ void usage (void) {
   printf (" -W                 wait dialog list\n");
   printf ("\n");
 
-  exit (1);
+  qthreadExitRequest (1);
 }
 
 extern char *rsa_public_key_name;
@@ -462,7 +462,7 @@ void sig_segv_handler (int signum __attribute__ ((unused))) {
     // Sad thing
   }
   print_backtrace ();
-  exit (EXIT_FAILURE);
+  qthreadExitRequest (EXIT_FAILURE);
 }
 
 void sig_abrt_handler (int signum __attribute__ ((unused))) {
@@ -471,7 +471,7 @@ void sig_abrt_handler (int signum __attribute__ ((unused))) {
     // Sad thing
   }
   print_backtrace ();
-  exit (EXIT_FAILURE);
+  qthreadExitRequest (EXIT_FAILURE);
 }
 
 int tmain (int argc, char **argv) {

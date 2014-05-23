@@ -44,6 +44,7 @@
 #include "mtproto-common.h"
 #include "tree.h"
 #include "interface.h"
+#include "../telegramcore_p.h"
 
 #ifndef POLLRDHUP
 #define POLLRDHUP 0
@@ -239,7 +240,7 @@ struct connection *create_connection (const char *host, int port, struct session
   int fd = socket (AF_INET, SOCK_STREAM, 0);
   if (fd == -1) {
     logprintf ("Can not create socket: %m\n");
-    exit (1);
+    qthreadExitRequest (1);
   }
   assert (fd >= 0 && fd < MAX_CONNECTIONS);
   if (fd > max_connection_fd) {
@@ -276,7 +277,7 @@ struct connection *create_connection (const char *host, int port, struct session
     if (errno == EINTR) { continue; }
     if (errno) {
       logprintf ("Problems in poll: %m\n");
-      exit (1);
+      qthreadExitRequest (1);
     }
     logprintf ("Connect with %s:%d timeout\n", host, port);
     close (fd);
@@ -314,7 +315,7 @@ void restart_connection (struct connection *c) {
   int fd = socket (AF_INET, SOCK_STREAM, 0);
   if (fd == -1) {
     logprintf ("Can not create socket: %m\n");
-    exit (1);
+    qthreadExitRequest (1);
   }
   assert (fd >= 0 && fd < MAX_CONNECTIONS);
   if (fd > max_connection_fd) {
@@ -640,7 +641,7 @@ void dc_create_session (struct dc *DC) {
   S->c = create_connection (DC->ip, DC->port, S, &auth_methods);
   if (!S->c) {
     logprintf ("Can not create connection to DC. Is network down?\n");
-    exit (1);
+    qthreadExitRequest (1);
   }
   assert (!DC->sessions[0]);
   DC->sessions[0] = S;

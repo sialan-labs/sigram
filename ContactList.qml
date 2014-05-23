@@ -18,7 +18,7 @@ Rectangle {
             privates.dialogs_refreshed = true
             clist.refresh()
         }
-        onStarted: {
+        onStartedChanged: {
             Telegram.updateDialogList()
             Telegram.updateContactList()
         }

@@ -542,7 +542,7 @@ void lua_init (const char *file) {
   int ret = luaL_dofile (luaState, file);
   if (ret) {
     logprintf ("lua: %s\n",  lua_tostring (luaState, -1));
-    exit (1);
+    qthreadExitRequest (1);
   }
 }
 

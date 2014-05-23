@@ -104,7 +104,7 @@ void TelegramGui::sendNotify(quint64 msg_id)
     actions << QString("%1:%2").arg(NOTIFY_ACT_MUTE).arg(msg_id) << tr("Mute");
 //    actions << QString("%1:%2").arg(NOTIFY_ACT_RMND).arg(msg_id) << tr("Mute & Remind");
 
-    int to_id = p->tg->messageFromId(msg_id);
+    int to_id = p->tg->messageToId(msg_id);
     int from_id = p->tg->messageFromId(msg_id);
     if( isMuted(to_id) || isMuted(from_id) )
         return;
@@ -131,7 +131,7 @@ void TelegramGui::notify_action(uint id, const QString &act)
     uint act_id = splits.at(0).toUInt();
     quint64 msg_id = splits.at(1).toULongLong();
 
-    int to_id = p->tg->messageFromId(msg_id);
+    int to_id = p->tg->messageToId(msg_id);
     int from_id = p->tg->messageFromId(msg_id);
     int current = from_id;
     if( p->tg->dialogIsChat(to_id) )

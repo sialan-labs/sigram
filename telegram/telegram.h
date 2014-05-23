@@ -10,6 +10,7 @@
 class TelegramPrivate;
 class Telegram : public QObject
 {
+    Q_PROPERTY(bool started READ started NOTIFY startedChanged)
     Q_OBJECT
 public:
     Telegram(int argc, char **argv, QObject *parent = 0);
@@ -65,6 +66,7 @@ public:
     Q_INVOKABLE QString messageFromName( qint64 id ) const;
 
     Q_INVOKABLE int me() const;
+    Q_INVOKABLE bool started() const;
 
     Q_INVOKABLE QString convertDateToString( const QDateTime & date );
 
@@ -94,7 +96,10 @@ signals:
     void userPhotoChanged( int user_id );
     void chatPhotoChanged( int user_id );
     void msgSent( qint64 old_id, qint64 msg_id );
-    void started();
+    void startedChanged();
+
+private slots:
+    void _startedChanged();
 
 protected:
     void timerEvent(QTimerEvent *e);

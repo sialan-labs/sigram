@@ -1845,7 +1845,7 @@ void load_next_part (struct download *D) {
     }
     if (l >= (int) sizeof (buf)) {
       logprintf ("Download filename is too long");
-      exit (1);
+      qthreadExitRequest (1);
     }
     D->name = tstrdup (buf);
     struct stat st;

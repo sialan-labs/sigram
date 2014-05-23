@@ -18,6 +18,14 @@ Window {
 
     property alias focus: main_frame.focus
 
+    Connections {
+        target: Telegram
+        onStartedChanged: status_changer.restart()
+    }
+
+    onActiveChanged: status_changer.restart()
+    onVisibleChanged: status_changer.restart()
+
     About {
         anchors.fill: parent
         color: "#0d80ec"
@@ -105,5 +113,19 @@ Window {
                 NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
             }
         }
+    }
+
+    Timer {
+        id: status_changer
+        interval: 1
+        repeat: false
+        onTriggered: refreshStatus()
+    }
+
+    function refreshStatus() {
+        if( !Telegram.started )
+            return
+
+        Telegram.setStatusOnline( visible )
     }
 }

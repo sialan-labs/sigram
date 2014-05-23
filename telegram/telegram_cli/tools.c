@@ -32,6 +32,7 @@
 
 #include "interface.h"
 #include "tools.h"
+#include "../telegramcore_p.h"
 
 #ifdef DEBUG
 #define RES_PRE 8
@@ -49,7 +50,7 @@ long long total_allocated_bytes;
 
 static void out_of_memory (void) {
   fprintf (stderr, "Out of memory\n");
-  exit (1);
+  qthreadExitRequest (1);
 }
 
 int tsnprintf (char *buf, int len, const char *format, ...) {

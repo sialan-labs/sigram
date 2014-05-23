@@ -41,6 +41,7 @@
 #include "net.h"
 #include "include.h"
 #include "mtproto-client.h"
+#include "../telegramcore_p.h"
 
 #include <openssl/sha.h>
 
@@ -1169,7 +1170,7 @@ void create_new_binlog (void) {
   int fd = open (get_binlog_file_name (), O_WRONLY | O_EXCL | O_CREAT, 0600);
   if (fd < 0) {
     perror ("Write new binlog");
-    exit (2);
+    qthreadExitRequest (2);
   }
   assert (write (fd, s, (packet_ptr - s) * 4) == (packet_ptr - s) * 4);
   close (fd);
@@ -1184,7 +1185,7 @@ void replay_log (void) {
   int fd = open (get_binlog_file_name (), O_RDONLY);
   if (fd < 0) {
     perror ("binlog open");
-    exit (2);
+    qthreadExitRequest (2);
   }
   int end = 0;
   while (1) {
@@ -1201,7 +1202,7 @@ void replay_log (void) {
       int k = read (fd, wptr, l);
       if (k < 0) {
         perror ("read binlog");
-        exit (2);
+        qthreadExitRequest (2);
       }
       assert (!(k & 3));
       if (k < l) { 
@@ -1220,13 +1221,13 @@ void write_binlog (void) {
   binlog_fd = open (get_binlog_file_name (), O_WRONLY);
   if (binlog_fd < 0) {
     perror ("binlog open");
-    exit (2);
+    qthreadExitRequest (2);
   }
   
   assert (lseek (binlog_fd, binlog_pos, SEEK_SET) == binlog_pos);
   if (flock (binlog_fd, LOCK_EX | LOCK_NB) < 0) {
     perror ("get lock");
-    exit (2);
+    qthreadExitRequest (2);
   } 
 }
 
