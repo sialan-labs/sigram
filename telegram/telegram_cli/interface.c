@@ -30,14 +30,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef READLINE_GNU
-#include <readline/readline.h>
-#include <readline/history.h>
-#else
-#include <readline/readline.h>
-#include <readline/history.h>
-#endif
-
 #include "include.h"
 #include "queries.h"
 
@@ -55,9 +47,6 @@ int msg_num_mode;
 int alert_sound;
 
 int safe_quit;
-
-int in_readline;
-int readline_active;
 
 int log_level;
 
@@ -252,16 +241,10 @@ char *complete_none (const char *text UU, int state UU) {
 
 
 void set_prompt (const char *s) {
-  rl_set_prompt (s);
+    (void)s;
 }
 
 void update_prompt (void) {
-  print_start ();
-  set_prompt (get_default_prompt ());
-  if (readline_active) {
-    rl_redisplay ();
-  }
-  print_end ();
 }
 
 char *modifiers[] = {
@@ -382,41 +365,7 @@ int commands_flags[] = {
 
 
 int get_complete_mode (void) {
-  line_ptr = rl_line_buffer;
-  int l = 0;
-  char *r = next_token (&l);
-  if (!r) { return 0; }
-  while (r && r[0] == '[' && r[l - 1] == ']') {
-    r = next_token (&l);
-    if (!r) { return 0; }
-  }
-  if (*r == '[' && !r[l]) {
-    return 6;
-  }
- 
-  if (!*line_ptr) { return 0; }
-  char **command = commands;
-  int n = 0;
-  int flags = -1;
-  while (*command) {
-    if (is_same_word (r, l, *command)) {
-      flags = commands_flags[n];
-      break;
-    }
-    n ++;
-    command ++;
-  }
-  if (flags == -1) {
-    return 7;
-  }
-  int s = 0;
-  while (1) {
-    if (!next_token (&l) || !*line_ptr) {
-      return flags ? flags & 7 : 7;
-    }
-    s ++;
-    if (s <= 4) { flags >>= 3; }
-  }
+    return 0;
 }
 
 int complete_user_list (int index, const char *text, int len, char **R) {
@@ -484,70 +433,18 @@ int complete_string_list (char **list, int index, const char *text, int len, cha
     return -1;
   }
 }
-char *command_generator (const char *text, int state) {  
-  static int len, index, mode;
-
-  if (in_chat_mode) {
+char *command_generator (const char *text, int state) {
+    (void)text;
+    (void)state;
     char *R = 0;
-    index = complete_string_list (in_chat_commands, index, text, rl_point, &R);
     return R;
-  }
- 
-  char c = 0;
-  if (!state) {
-    len = strlen (text);
-    index = -1;
-    
-    c = rl_line_buffer[rl_point];
-    rl_line_buffer[rl_point] = 0;
-    mode = get_complete_mode ();
-  } else {
-    if (index == -1) { return 0; }
-  }
-
-  if (mode == -1) { 
-    if (c) { rl_line_buffer[rl_point] = c; }
-    return 0; 
-  }
-
-  char *R = 0;
-  switch (mode & 7) {
-  case 0:
-    index = complete_string_list (commands, index, text, len, &R);
-    if (c) { rl_line_buffer[rl_point] = c; }
-    return R;
-  case 1:
-    index = complete_user_list (index, text, len, &R);    
-    if (c) { rl_line_buffer[rl_point] = c; }
-    return R;
-  case 2:
-    index = complete_user_chat_list (index, text, len, &R);
-    if (c) { rl_line_buffer[rl_point] = c; }
-    return R;
-  case 3:
-    R = rl_filename_completion_function(text,state);
-    if (c) { rl_line_buffer[rl_point] = c; }
-    return R;
-  case 4:
-    index = complete_chat_list (index, text, len, &R);
-    if (c) { rl_line_buffer[rl_point] = c; }
-    return R;
-  case 5:
-    index = complete_encr_chat_list (index, text, len, &R);
-    if (c) { rl_line_buffer[rl_point] = c; }
-    return R;
-  case 6:
-    index = complete_string_list (modifiers, index, text, len, &R);
-    if (c) { rl_line_buffer[rl_point] = c; }
-    return R;
-  default:
-    if (c) { rl_line_buffer[rl_point] = c; }
-    return 0;
-  }
 }
 
 char **complete_text (char *text, int start UU, int end UU) {
-  return (char **) rl_completion_matches (text, command_generator);
+    (void)text;
+    (void)start;
+    (void)end;
+    return 0;
 }
 
 int offline_mode;
@@ -588,30 +485,26 @@ void interpreter_chat_mode (char *line) {
 }
 
 void interpreter (char *line UU) {
-  assert (!in_readline);
-  in_readline = 1;
   if (in_chat_mode) {
     interpreter_chat_mode (line);
-    in_readline = 0;
     return;
   }
 
   line_ptr = line;
   offline_mode = 0;
   count = 1;
-  if (!line) { 
-    in_readline = 0;
+  if (!line) {
     return; 
   }
-  if (line && *line) {
-    add_history (line);
-  }
+//  if (line && *line) {
+//    add_history (line);
+//  }
 
   int l;
   char *command;
   while (1) {
     command = next_token (&l);
-    if (!command) { in_readline = 0; return; }
+    if (!command) { return; }
     if (*command == '[' && command[l - 1] == ']') {
       work_modifier (command, l);
     } else {
@@ -628,7 +521,7 @@ void interpreter (char *line UU) {
     l = ll;
     command = cs;
 #define IS_WORD(s) is_same_word (command, l, (s))
-#define RET in_readline = 0; return; 
+#define RET return;
 
   peer_id_t id;
 #define GET_PEER \
@@ -1123,10 +1016,8 @@ void interpreter (char *line UU) {
 #undef IS_WORD
 #undef RET
   update_prompt ();
-  in_readline = 0;
 }
 
-int readline_active;
 void rprintf (const char *format, ...) {
   print_start ();
   va_list ap;
@@ -1140,44 +1031,9 @@ int saved_point;
 char *saved_line;
 int prompt_was;
 void print_start (void) {
-  if (in_readline) { return; }
-  assert (!prompt_was);
-  if (readline_active) {
-    saved_point = rl_point;
-#ifdef READLINE_GNU
-    saved_line = talloc (rl_end + 1);
-    saved_line[rl_end] = 0;
-    memcpy (saved_line, rl_line_buffer, rl_end);
-
-    rl_save_prompt();
-    rl_replace_line("", 0);
-#else
-    assert (rl_end >= 0);
-    saved_line = talloc (rl_end + 1);
-    memcpy (saved_line, rl_line_buffer, rl_end + 1);
-    rl_line_buffer[0] = 0;
-    set_prompt ("");
-#endif
-    rl_redisplay();
-  }
-  prompt_was = 1;
 }
 
 void print_end (void) {
-  if (in_readline) { return; }
-  assert (prompt_was);
-  if (readline_active) {
-    set_prompt (get_default_prompt ());
-#if READLINE_GNU
-    rl_replace_line(saved_line, 0);
-#else
-    memcpy (rl_line_buffer, saved_line, rl_end + 1); // not safe, but I hope this would work. 
-#endif
-    rl_point = saved_point;
-    rl_redisplay();
-    tfree_str (saved_line);
-  }
-  prompt_was = 0;
 }
 
 void hexdump (int *in_ptr, int *in_end) {
@@ -1578,8 +1434,4 @@ void play_sound (void) {
 }
 
 void set_interface_callbacks (void) {
-  readline_active = 1;
-  rl_callback_handler_install (get_default_prompt (), interpreter);
-  rl_attempted_completion_function = (void *) complete_text;
-  rl_completion_entry_function = (void *)complete_none;
 }

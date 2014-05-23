@@ -30,13 +30,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifdef READLINE_GNU
-#include <readline/readline.h>
-#include <readline/history.h>
-#else
-#include <readline/readline.h>
-#include <readline/history.h>
-#endif
 
 #include <errno.h>
 #include <poll.h>
@@ -108,7 +101,6 @@ void net_loop (int flags, int (*is_end)(void)) {
     #endif
     if (safe_quit && !queries_num) {
       printf ("All done. Exit\n");
-      rl_callback_handler_remove ();
       exit (0);
     }
     if (unknown_user_list_pos) {
@@ -454,7 +446,6 @@ int dlgot (void) {
   return dialog_list_got;
 }
 
-int readline_active;
 int new_dc_num;
 int wait_dialog_list;
 
