@@ -811,9 +811,9 @@ void replay_log_event (void) {
       M->date = fetch_int ();
       
       int l = prefetch_strlen ();
-      M->message = talloc (l + 1);
-      memcpy (M->message, fetch_str (l), l);
-      M->message[l] = 0;
+      M->msg = talloc (l + 1);
+      memcpy (M->msg, fetch_str (l), l);
+      M->msg[l] = 0;
       M->message_len = l;
 
       if (t == PEER_ENCR_CHAT) {
@@ -858,9 +858,9 @@ void replay_log_event (void) {
       M->fwd_date = fetch_int ();
       
       int l = prefetch_strlen ();
-      M->message = talloc (l + 1);
-      memcpy (M->message, fetch_str (l), l);
-      M->message[l] = 0;
+      M->msg = talloc (l + 1);
+      memcpy (M->msg, fetch_str (l), l);
+      M->msg[l] = 0;
       M->message_len = l;
       
       M->media.type = CODE_message_media_empty;
@@ -894,9 +894,9 @@ void replay_log_event (void) {
       M->date = fetch_int ();
       
       int l = prefetch_strlen ();
-      M->message = talloc (l + 1);
-      memcpy (M->message, fetch_str (l), l);
-      M->message[l] = 0;
+      M->msg = talloc (l + 1);
+      memcpy (M->msg, fetch_str (l), l);
+      M->msg[l] = 0;
       M->message_len = l;
 
       fetch_message_media (&M->media);
@@ -930,9 +930,9 @@ void replay_log_event (void) {
       M->date = fetch_int ();
       
       int l = prefetch_strlen ();
-      M->message = talloc (l + 1);
-      memcpy (M->message, fetch_str (l), l);
-      M->message[l] = 0;
+      M->msg = talloc (l + 1);
+      memcpy (M->msg, fetch_str (l), l);
+      M->msg[l] = 0;
       M->message_len = l;
 
       fetch_message_media_encrypted (&M->media);
@@ -970,9 +970,9 @@ void replay_log_event (void) {
       M->fwd_date = fetch_int ();
       
       int l = prefetch_strlen ();
-      M->message = talloc (l + 1);
-      memcpy (M->message, fetch_str (l), l);
-      M->message[l] = 0;
+      M->msg = talloc (l + 1);
+      memcpy (M->msg, fetch_str (l), l);
+      M->msg[l] = 0;
       M->message_len = l;
 
       fetch_message_media (&M->media);

@@ -1281,7 +1281,7 @@ void print_message (struct message *M) {
   last_from_id = M->from_id;
   last_to_id = M->to_id;
   peer_t *U = user_chat_get (M->from_id);
-  incomingMsg( M->id, M->from_id.id, M->to_id.id, M->fwd_from_id.id, M->fwd_date, M->out, M->unread, M->date, M->service, M->message, U->user.first_name, U->user.last_name, M->flags, M->media.type );
+  incomingMsg( M, (struct user*)U );
   return;
 
   print_start ();
@@ -1384,8 +1384,8 @@ void print_message (struct message *M) {
     print_user_name (M->fwd_from_id, user_chat_get (M->fwd_from_id));
     printf ("] ");
   }
-  if (M->message && strlen (M->message)) {
-    printf ("%s", M->message);
+  if (M->msg && strlen (M->msg)) {
+    printf ("%s", M->msg);
   }
   if (M->media.type != CODE_message_media_empty) {
     print_media (&M->media);

@@ -26,7 +26,8 @@ HEADERS += \
     telegramgui.h \
     notification.h \
     userdata.h \
-    telegram_macros.h
+    telegram_macros.h \
+    telegram/telegram_cli/structers-only.h
 
 OTHER_FILES += \
     database/userdata.db \

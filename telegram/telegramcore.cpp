@@ -6,18 +6,13 @@
 
 extern "C" {
 #include "telegram_cli/tmain.h"
+#include "telegram_cli/structers-only.h"
 }
 
 #include <QCoreApplication>
 #include <QSet>
 #include <QDateTime>
 #include <QMimeDatabase>
-
-struct chat_user {
-  int user_id;
-  int inviter_id;
-  int date;
-};
 
 QSet<TelegramCore*> telegram_objects;
 
@@ -148,24 +143,25 @@ void contactList_clear()
         emit tg->contactListClear();
 }
 
-void contactList_addToBuffer( int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time, int flags )
+void contactList_addToBuffer( struct user *u )
 {
-    if( state > 0 )
+    int state = 0;
+    if( u->status.online > 0 )
         state = 1;
     else
-    if( state < 0 )
+    if( u->status.online < 0 )
         state = -1;
 
     UserClass contact;
-    contact.username = username;
-    contact.type = type;
-    contact.user_id = user_id;
-    contact.firstname = firstname;
-    contact.lastname = lastname;
-    contact.phone = phone;
+    contact.username = u->print_name;
+    contact.type = u->id.type;
+    contact.user_id = u->id.id;
+    contact.firstname = u->first_name;
+    contact.lastname = u->last_name;
+    contact.phone = u->phone;
     contact.state = static_cast<Enums::OnlineState>(state);
-    contact.flags = static_cast<Enums::UserFlags>(flags);
-    contact.lastTime = convertDate(last_time);
+    contact.flags = static_cast<Enums::UserFlags>(u->flags);
+    contact.lastTime = convertDate(u->status.when);
 
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->contactFounded( contact );
@@ -183,70 +179,61 @@ void dialogList_clear()
         emit tg->dialogListClear();
 }
 
-void dialogList_addToBuffer_user(int user_id, int type, const char *firstname, const char *lastname, const char *username, const char *phone, int state, int last_time, int unread_cnt, int msg_date, const char * last_msg, unsigned msg_media, int flags, int last_msg_flags )
+void dialogList_addToBuffer( peer_t *uc, int is_chat, int unread_cnt )
 {
-    if( state > 0 )
-        state = 1;
-    else
-    if( state < 0 )
-        state = -1;
-
-    UserClass user;
-    user.username = username;
-    user.user_id = user_id;
-    user.type = type;
-    user.firstname = firstname;
-    user.lastname = lastname;
-    user.phone = phone;
-    user.state = static_cast<Enums::OnlineState>(state);
-    user.flags = static_cast<Enums::UserFlags>(flags);
-    user.lastTime = convertDate(last_time);
-
     DialogClass dialog;
-    dialog.is_chat = false;
-    dialog.userClass = user;
+    dialog.is_chat = is_chat;
     dialog.unread = unread_cnt;
-    dialog.msgDate = convertDate(msg_date);
-    if( !(last_msg_flags & Enums::UserMessageEmpty) && msg_media != 0 )
-        dialog.msgLast = last_msg;
+    dialog.msgDate = convertDate(uc->last->date);
 
-    foreach( TelegramCore *tg, telegram_objects )
-        emit tg->dialogFounded(dialog);
-}
+    UserClass & user = dialog.userClass;
+    ChatClass & chat = dialog.chatClass;
 
-void dialogList_addToBuffer_chat( int chat_id, int type, const char *title, int admin, void *user_list_void, int user_list_size, int users_num, int date, int unread_cnt, int msg_date, const char * last_msg, unsigned msg_media, int flags, int last_msg_flags )
-{
-    chat_user *user_list = static_cast<chat_user*>(user_list_void);
-
-    ChatClass chat;
-    chat.admin = admin;
-    chat.chat_id = chat_id;
-    chat.title = title;
-    chat.type = type;
-    chat.users_num = users_num;
-    chat.date = convertDate(date);
-    chat.flags = flags;
-
-    for( int i=0; i<user_list_size; i++ )
+    if( is_chat )
     {
-        ChatUserClass user;
-        user.user_id = user_list[i].user_id;
-        user.inviter_id = user_list[i].inviter_id;
-        user.date = convertDate(user_list[i].date);
+        chat.admin = uc->chat.admin_id;
+        chat.chat_id = uc->chat.id.id;
+        chat.title = uc->chat.title;
+        chat.type = uc->chat.id.type;
+        chat.users_num = uc->chat.users_num;
+        chat.date = convertDate(uc->last->date);
+        chat.flags = uc->last->flags;
 
-        chat.users << user;
+        for( int i=0; i<uc->chat.user_list_size; i++ )
+        {
+            ChatUserClass user;
+            user.user_id = uc->chat.user_list[i].user_id;
+            user.inviter_id = uc->chat.user_list[i].inviter_id;
+            user.date = convertDate(uc->chat.user_list[i].date);
+
+            chat.users << user;
+        }
+
+        if( qAbs(dialog.msgDate.daysTo(QDateTime::currentDateTime())) > 32 )
+            dialog.msgDate = chat.date;
+    }
+    else
+    {
+        int state = 0;
+        if( uc->user.status.online > 0 )
+            state = 1;
+        else
+        if( uc->user.status.online < 0 )
+            state = -1;
+
+        user.username = uc->user.print_name;
+        user.user_id = uc->user.id.id;
+        user.type = uc->user.id.type;
+        user.firstname = uc->user.first_name;
+        user.lastname = uc->user.last_name;
+        user.phone = uc->user.phone;
+        user.state = static_cast<Enums::OnlineState>(state);
+        user.flags = static_cast<Enums::UserFlags>(uc->user.flags);
+        user.lastTime = convertDate(uc->user.status.when);
     }
 
-    DialogClass dialog;
-    dialog.is_chat = true;
-    dialog.chatClass = chat;
-    dialog.unread = unread_cnt;
-    dialog.msgDate = convertDate(msg_date);
-
-    if( !(last_msg_flags & Enums::UserMessageEmpty) && msg_media != 0 )
-        dialog.msgLast = last_msg;
-    if( qAbs(dialog.msgDate.daysTo(QDateTime::currentDateTime())) > 32 )
-        dialog.msgDate = chat.date;
+    if( !(uc->last->flags & Enums::UserMessageEmpty) && uc->last->media.type != 0 )
+        dialog.msgLast = uc->last->msg;
 
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->dialogFounded(dialog);
@@ -270,23 +257,23 @@ void msgSent( long long msg_id, int date )
         emit tg->msgSent(msg_id,convertDate(date));
 }
 
-void incomingMsg( long long msg_id, int from_id, int to_id, int fwd_id, int fwd_date, int out, int unread, int date, int service, const char *message, const char *firstname, const char *lastname, int flags, unsigned media)
+void incomingMsg( struct message *m, struct user *u )
 {
     MessageClass msg;
-    msg.msg_id = msg_id;
-    msg.fwd_id = fwd_id;
-    msg.fwd_date = convertDate(fwd_date);
-    msg.out = out;
-    msg.unread = unread;
-    msg.date = convertDate(date);
-    msg.service = service;
-    msg.message = QString(message);
-    msg.from_id = from_id;
-    msg.to_id = to_id;
-    msg.firstName = firstname;
-    msg.lastName = lastname;
-    msg.flags = flags;
-    msg.media = static_cast<Enums::messageType>(media);
+    msg.msg_id = m->id;
+    msg.fwd_id = m->fwd_from_id.id;
+    msg.fwd_date = convertDate(m->fwd_date);
+    msg.out = m->out;
+    msg.unread = m->unread;
+    msg.date = convertDate(m->date);
+    msg.service = m->service;
+    msg.message = QString(m->msg);
+    msg.from_id = m->from_id.id;
+    msg.to_id = m->to_id.id;
+    msg.firstName = u->first_name;
+    msg.lastName = u->last_name;
+    msg.flags = m->flags;
+    msg.media = static_cast<Enums::messageType>(m->media.type);
 
     if( msg.out && msg.flags&Enums::UserPending )
         msg.msg_id = getUnknownIdentifier();
@@ -301,10 +288,10 @@ void userIsTyping( int chat_id, int user_id )
         emit tg->userIsTyping(chat_id, user_id);
 }
 
-void userStatusChanged( int user_id, int status, int when )
+void userStatusChanged( peer_t *uc )
 {
     foreach( TelegramCore *tg, telegram_objects )
-        emit tg->userStatusChanged(user_id, status, convertDate(when) );
+        emit tg->userStatusChanged(uc->id.id, uc->user.status.online, convertDate(uc->user.status.when) );
 }
 
 void photoFound( int id, long long volume )
@@ -313,21 +300,21 @@ void photoFound( int id, long long volume )
         emit tg->photoFound(id, volume );
 }
 
-void fileLoaded( long long volume, int localId, const char *path )
+void fileLoaded( struct download *d )
 {
     foreach( TelegramCore *tg, telegram_objects )
-        emit tg->fileLoaded(volume, localId, path );
+        emit tg->fileLoaded(d->volume, d->local_id, d->name );
 }
-void fileUploading( long long fid, int user_id, const char *file, long long total, long long uploaded )
+void fileUploading( struct send_file *f, long long total, long long uploaded )
 {
     foreach( TelegramCore *tg, telegram_objects )
-        emit tg->fileUploading( fid, user_id, file, total, uploaded );
+        emit tg->fileUploading( f->id, f->to_id.id, f->file_name, total, uploaded );
 }
 
-void fileDownloading( long long fid, long long volume, int local_id, long long total, long long downloaded )
+void fileDownloading( struct download *d, long long total, long long downloaded )
 {
     foreach( TelegramCore *tg, telegram_objects )
-        emit tg->fileDownloading( fid, volume, local_id, total, downloaded );
+        emit tg->fileDownloading( d->id, d->volume, d->local_id, total, downloaded );
 }
 
 void qthreadExec()

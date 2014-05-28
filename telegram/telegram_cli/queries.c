@@ -700,7 +700,7 @@ int get_contacts_on_answer (struct query *q UU) {
   n = fetch_int ();
   for (i = 0; i < n; i++) {
     struct user *U = fetch_alloc_user ();
-    contactList_addToBuffer( U->id.id, U->id.type, U->first_name, U->last_name, U->print_name, U->phone, U->status.online, U->status.when, U->flags );
+    contactList_addToBuffer( U );
   }
   contactList_finished();
   return 0;
@@ -899,7 +899,7 @@ void do_send_encr_msg (struct message *M) {
   static int buf[4];
   secure_random (buf, 16);
   out_cstring ((void *)buf, 16);
-  out_cstring ((void *)M->message, M->message_len);
+  out_cstring ((void *)M->msg, M->message_len);
   out_int (CODE_decrypted_message_media_empty);
   encr_finish (&P->encr_chat);
   
@@ -914,7 +914,7 @@ void do_send_msg (struct message *M) {
   clear_packet ();
   out_int (CODE_messages_send_message);
   out_peer_id (M->to_id);
-  out_cstring (M->message, M->message_len);
+  out_cstring (M->msg, M->message_len);
   out_long (M->id);
   send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &msg_send_methods, M);
 }
@@ -1156,11 +1156,11 @@ int get_dialogs_on_answer (struct query *q UU) {
     switch (get_peer_type (plist[i])) {
     case PEER_USER:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_user( UC->user.id.id, UC->user.id.type, UC->user.first_name, UC->user.last_name, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message, UC->last->media.type, UC->user.flags, UC->last->flags);
+      dialogList_addToBuffer( UC, 0, dlist[2 * i + 1] );
       break;
     case PEER_CHAT:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_chat( UC->chat.id.id, UC->chat.id.type, UC->chat.title, UC->chat.admin_id, UC->chat.user_list, UC->chat.user_list_size, UC->chat.users_num, UC->chat.date, dlist[2 * i + 1], UC->last->date, UC->last->message, UC->last->media.type, UC->last->flags, UC->last->flags );
+      dialogList_addToBuffer( UC, 1, dlist[2 * i + 1] );
       break;
     }
   }
@@ -1186,24 +1186,6 @@ void do_get_dialog_list (void) {
 /* }}} */
 
 int allow_send_linux_version = 1;
-
-/* {{{ Send photo/video file */
-struct send_file {
-  int fd;
-  long long size;
-  long long offset;
-  int part_num;
-  int part_size;
-  long long id;
-  long long thumb_id;
-  peer_id_t to_id;
-  unsigned media_type;
-  char *file_name;
-  int encr;
-  unsigned char *iv;
-  unsigned char *init_iv;
-  unsigned char *key;
-};
 
 void out_peer_id (peer_id_t id) {
   peer_t *U;
@@ -1460,7 +1442,7 @@ void send_part (struct send_file *f) {
       M->from_id = MK_USER (our_id);
       M->to_id = f->to_id;
       M->unread = 1;
-      M->message = tstrdup ("");
+      M->msg = tstrdup ("");
       M->out = 1;
       M->id = r;
       M->date = time (0);
@@ -1472,7 +1454,7 @@ void send_part (struct send_file *f) {
     tfree (f, sizeof (*f));
   }
 
-  fileUploading( f->id, f->to_id.id, f->file_name, cur_uploading_bytes, cur_uploaded_bytes );
+  fileUploading( f, cur_uploading_bytes, cur_uploaded_bytes );
 }
 
 void send_file_thumb (struct send_file *f) {
@@ -1749,24 +1731,6 @@ void do_get_user_list_info_silent (int num, int *list) {
 }
 /* }}} */
 
-/* {{{ Load photo/video */
-struct download {
-  int offset;
-  int size;
-  long long volume;
-  long long secret;
-  long long access_hash;
-  int local_id;
-  int dc;
-  int next;
-  int fd;
-  char *name;
-  long long id;
-  unsigned char *iv;
-  unsigned char *key;
-  int type;
-};
-
 
 void end_load (struct download *D) {
   cur_downloading_bytes -= D->size;
@@ -1774,7 +1738,7 @@ void end_load (struct download *D) {
   update_prompt ();
   close (D->fd);
   if (D->next == 1) {
-    fileLoaded( D->volume, D->local_id, D->name );
+    fileLoaded( D );
   } else if (D->next == 2) {
     static char buf[PATH_MAX];
     if (tsnprintf (buf, sizeof (buf), OPEN_BIN, D->name) >= (int) sizeof (buf)) {
@@ -1885,7 +1849,7 @@ void load_next_part (struct download *D) {
   out_int (D->offset);
   out_int (1 << 14);
   send_query (DC_list[D->dc], packet_ptr - packet_buffer, packet_buffer, &download_methods, D);
-  fileDownloading( D->id, D->volume, D->local_id, cur_downloading_bytes, cur_downloaded_bytes );
+  fileDownloading( D, cur_downloading_bytes, cur_downloaded_bytes );
   //send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &download_methods, D);
 }
 

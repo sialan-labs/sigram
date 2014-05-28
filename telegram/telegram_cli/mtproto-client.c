@@ -965,7 +965,7 @@ void work_update (struct connection *c UU, long long msg_id UU) {
       if (U) {
         fetch_user_status (&U->user.status);
         if (log_level >= 3) {
-          userStatusChanged( U->id.id, U->user.status.online, U->user.status.when );
+          userStatusChanged( U );
         }
       } else {
         struct user_status t;
