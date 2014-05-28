@@ -13,8 +13,11 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QGuiApplication>
+#include <QClipboard>
+#include <QMimeData>
 #include <QDebug>
 #include <QHash>
+#include <QFileDialog>
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QAction>
@@ -166,6 +169,55 @@ void TelegramGui::sendNotify(quint64 msg_id)
 void TelegramGui::openFile(const QString &file)
 {
     QDesktopServices::openUrl( QUrl(file) );
+}
+
+void TelegramGui::copyFile(const QString &file)
+{
+    QStringList paths;
+    paths << file;
+
+    QList<QUrl> urls;
+    QString data = "copy";
+
+    foreach( const QString & p, paths ) {
+        QUrl url = QUrl::fromLocalFile(p);
+        urls << url;
+        data += "\nfile://" + url.toLocalFile();
+    }
+
+    QMimeData *mimeData = new QMimeData();
+    mimeData->setUrls( urls );
+    mimeData->setData( "x-special/gnome-copied-files", data.toUtf8() );
+
+    QGuiApplication::clipboard()->setMimeData(mimeData);
+}
+
+void TelegramGui::saveFile(const QString &file)
+{
+    const QString & path = QFileDialog::getSaveFileName();
+    if( path.isEmpty() )
+        return;
+
+    QFile::copy( file, path );
+}
+
+void TelegramGui::copyText(const QString &txt)
+{
+    QGuiApplication::clipboard()->setText( txt );
+}
+
+int TelegramGui::showMenu(const QStringList &list)
+{
+    QMenu menu;
+
+    QList<QAction*> actions;
+    foreach( const QString & l, list )
+        actions << (l.isEmpty()? menu.addSeparator() : menu.addAction(l));
+
+    menu.move( QCursor::pos() );
+    QAction *res = menu.exec();
+
+    return actions.indexOf(res);
 }
 
 void TelegramGui::notify_action(uint id, const QString &act)

@@ -85,6 +85,12 @@ Item {
                     visible: text.length != 0
 
                     property real msgWidth: Telegram.messageBodyTextWidth(msg_id)
+
+                    MouseArea {
+                        anchors.fill: parent
+                        acceptedButtons: Qt.RightButton
+                        onClicked: item.showMenu()
+                    }
                 }
 
                 MsgMedia {
@@ -153,6 +159,17 @@ Item {
                     }
                 }
             }
+        }
+    }
+
+    function showMenu() {
+        var acts = [ qsTr("Copy") ]
+
+        var res = Gui.showMenu( acts )
+        switch( res ) {
+        case 0:
+            Gui.copyText( txt.text )
+            break;
         }
     }
 }

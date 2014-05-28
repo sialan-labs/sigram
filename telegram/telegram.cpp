@@ -49,6 +49,10 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     connect( p->tg_thread, SIGNAL(msgSent(qint64,qint64))              , SIGNAL(msgSent(qint64,qint64))               );
     connect( p->tg_thread, SIGNAL(userPhotoChanged(int))               , SIGNAL(userPhotoChanged(int))                );
     connect( p->tg_thread, SIGNAL(chatPhotoChanged(int))               , SIGNAL(chatPhotoChanged(int))                );
+    connect( p->tg_thread, SIGNAL(fileUploaded(int,QString))           , SIGNAL(fileUploaded(int,QString))            );
+    connect( p->tg_thread, SIGNAL(fileUploading(int,QString,qreal))    , SIGNAL(fileUploading(int,QString,qreal))     );
+    connect( p->tg_thread, SIGNAL(fileUserUploaded(int))               , SIGNAL(fileUserUploaded(int))                );
+    connect( p->tg_thread, SIGNAL(fileUserUploading(int,qreal))        , SIGNAL(fileUserUploading(int,qreal))         );
     connect( p->tg_thread, SIGNAL(msgFileDownloaded(qint64))           , SIGNAL(msgFileDownloaded(qint64))            );
     connect( p->tg_thread, SIGNAL(msgFileDownloading(qint64,qreal))    , SIGNAL(msgFileDownloading(qint64,qreal))     );
     connect( p->tg_thread, SIGNAL(tgStarted())                         , SLOT(_startedChanged())                      );
@@ -421,13 +425,14 @@ void Telegram::sendFile(int dId, const QString &file)
     p->tg_thread->sendFile(dId,file);
 }
 
-void Telegram::sendFileDialog(int dId)
+bool Telegram::sendFileDialog(int dId)
 {
     const QString & file = QFileDialog::getOpenFileName();
     if( file.isEmpty() )
-        return;
+        return false;
 
     sendFile(dId, file);
+    return true;
 }
 
 void Telegram::markRead(int dId)

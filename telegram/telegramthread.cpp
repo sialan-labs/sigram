@@ -25,6 +25,8 @@ public:
     QHash<qint64,qint64> messageDates;
     QHash<qint64,MessageClass> messages;
     QHash<qint64,qint64> messageMedias;
+
+    QHash<int, QHash<QString,qreal> > uploads;
 };
 
 TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
@@ -382,7 +384,29 @@ void TelegramThread::_fileLoaded(qint64 volume, int localId, const QString &path
 
 void TelegramThread::_fileUploading(int user_id, const QString &file, qint64 total, qint64 uploaded)
 {
+    qreal percent = uploaded*100.0/total;
+    p->uploads[user_id][file] = percent;
 
+    qreal user_percent = 0;
+    const QHash<QString,qreal> & percent_hash = p->uploads[user_id];
+    QHashIterator<QString,qreal> i(percent_hash);
+    while( i.hasNext() )
+    {
+        i.next();
+        user_percent += i.value()/percent_hash.count();
+    }
+
+    emit fileUploading( user_id, file, percent );
+    emit fileUserUploading( user_id, user_percent );
+
+    if( total <= uploaded )
+    {
+        emit fileUploaded( user_id, file );
+        p->uploads[user_id].remove(file);
+
+        if( p->uploads[user_id].isEmpty() )
+            emit fileUserUploaded( user_id );
+    }
 }
 
 void TelegramThread::_fileDownloading(qint64 volume, qint64 total, qint64 downloaded)

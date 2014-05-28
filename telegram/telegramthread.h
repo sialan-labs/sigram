@@ -56,6 +56,11 @@ signals:
     void msgChanged( qint64 msg_id );
     void msgSent( qint64 old_id, qint64 msg_id );
 
+    void fileUploaded( int user_id, const QString & file );
+    void fileUploading(int user_id, const QString & file, qreal percent );
+    void fileUserUploaded( int user_id );
+    void fileUserUploading( int user_id, qreal percent );
+
     void msgFileDownloaded( qint64 msg_id );
     void msgFileDownloading( qint64 msg_id, qreal percent );
 

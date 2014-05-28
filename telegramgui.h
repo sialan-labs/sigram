@@ -26,6 +26,12 @@ public slots:
     void sendNotify(quint64 msg_id);
 
     void openFile( const QString & file );
+    void copyFile( const QString & file );
+    void saveFile( const QString & file );
+
+    void copyText( const QString & txt );
+
+    int showMenu( const QStringList & list );
 
 signals:
     void muted( int id, bool stt );

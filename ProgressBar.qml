@@ -5,7 +5,6 @@ Rectangle {
     width: 100
     height: 30
     color: "#333333"
-    radius: 3*physicalPlatformScale
     smooth: true
 
     property real percent: 0
@@ -21,7 +20,7 @@ Rectangle {
         visible: width >= radius*2
 
         Behavior on width {
-            NumberAnimation { easing.type: Easing.OutCubic; duration: 100 }
+            NumberAnimation { easing.type: Easing.OutCubic; duration: 500 }
         }
     }
 

@@ -18,79 +18,44 @@ TextEdit {
                 txt.accepted()
     }
 
-    Menu {
-        id: menu
-
-        property variant item
-
-        MenuItem {
-            text: qsTr("Copy")
-            onTriggered: txt.copy()
-            shortcut: "Ctrl+C"
-        }
-
-        MenuItem {
-            text: qsTr("Cut")
-            enabled: !txt.readOnly
-            onTriggered: txt.cut()
-            shortcut: "Ctrl+X"
-        }
-
-        MenuItem {
-            text: qsTr("Paste")
-            enabled: !txt.readOnly
-            onTriggered: txt.paste()
-            shortcut: "Ctrl+V"
-        }
-
-        MenuSeparator {}
-
-        MenuItem {
-            text: qsTr("Remove")
-            shortcut: "Delete"
-            enabled: !txt.readOnly
-            onTriggered: {
-                txt.remove(txt.selectionStart,txt.selectionEnd)
-                txt.deselect()
-            }
-        }
-
-        MenuSeparator {}
-
-        MenuItem {
-            text: qsTr("Select All")
-            shortcut: "Ctrl+A"
-            onTriggered: txt.selectAll()
-        }
-
-        MenuSeparator {}
-
-        MenuItem {
-            text: qsTr("Undo")
-            enabled: !txt.readOnly
-            shortcut: "Ctrl+Z"
-            onTriggered: txt.undo()
-        }
-
-        MenuItem {
-            text: qsTr("Redo")
-            enabled: !txt.readOnly
-            shortcut: "Ctrl+Shift+Z"
-            onTriggered: txt.redo()
-        }
-
-        function show(){
-            menu.popup()
-        }
-    }
-
     MouseArea {
         id: marea
         anchors.fill: parent
         acceptedButtons: Qt.RightButton
 
         onClicked: {
-            menu.show()
+            txt.showMenu()
+        }
+    }
+
+    function showMenu() {
+        var acts = [ qsTr("Copy"), qsTr("Cut"), qsTr("Paste"), "", qsTr("Remove"), "", qsTr("Select All"),
+                 "", qsTr("Undo"), qsTr("Redo") ]
+
+        var res = Gui.showMenu( acts )
+        switch( res ) {
+        case 0:
+            txt.copy()
+            break;
+        case 1:
+            txt.cut()
+            break;
+        case 2:
+            txt.paste()
+            break;
+        case 4:
+            txt.remove(txt.selectionStart,txt.selectionEnd)
+            txt.deselect()
+            break;
+        case 6:
+            txt.selectAll()
+            break;
+        case 8:
+            txt.undo()
+            break;
+        case 9:
+            txt.redo()
+            break;
         }
     }
 }
