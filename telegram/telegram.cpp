@@ -49,6 +49,8 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     connect( p->tg_thread, SIGNAL(msgSent(qint64,qint64))              , SIGNAL(msgSent(qint64,qint64))               );
     connect( p->tg_thread, SIGNAL(userPhotoChanged(int))               , SIGNAL(userPhotoChanged(int))                );
     connect( p->tg_thread, SIGNAL(chatPhotoChanged(int))               , SIGNAL(chatPhotoChanged(int))                );
+    connect( p->tg_thread, SIGNAL(msgFileDownloaded(qint64))           , SIGNAL(msgFileDownloaded(qint64))            );
+    connect( p->tg_thread, SIGNAL(msgFileDownloading(qint64,qreal))    , SIGNAL(msgFileDownloading(qint64,qreal))     );
     connect( p->tg_thread, SIGNAL(tgStarted())                         , SLOT(_startedChanged())                      );
 
     p->tg_thread->start();
@@ -321,12 +323,17 @@ QString Telegram::messageFromName(qint64 id) const
 
 qint64 Telegram::messageMediaType(qint64 id) const
 {
-    return message(id).media;
+    return message(id).mediaType;
 }
 
 bool Telegram::messageIsPhoto(qint64 id) const
 {
     return messageMediaType(id) == Enums::MediaPhoto;
+}
+
+QString Telegram::messageMediaFile(qint64 id) const
+{
+    return message(id).mediaFile;
 }
 
 int Telegram::me() const
@@ -402,6 +409,11 @@ void Telegram::loadChatInfo(int chatId)
 
     p->tg_thread->loadChatInfo(chatId);
     p->loaded_chats_info.insert(chatId);
+}
+
+void Telegram::loadPhoto(qint64 msg_id)
+{
+    p->tg_thread->loadPhoto(msg_id);
 }
 
 void Telegram::sendFile(int dId, const QString &file)

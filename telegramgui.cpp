@@ -20,6 +20,7 @@
 #include <QAction>
 #include <QPointer>
 #include <QSettings>
+#include <QDesktopServices>
 #include <QQuickWindow>
 #include <QDir>
 
@@ -162,6 +163,11 @@ void TelegramGui::sendNotify(quint64 msg_id)
     p->notify->sendNotify( title, body, icon, 0, 3000, actions );
 }
 
+void TelegramGui::openFile(const QString &file)
+{
+    QDesktopServices::openUrl( QUrl(file) );
+}
+
 void TelegramGui::notify_action(uint id, const QString &act)
 {
     Q_UNUSED(id)
@@ -183,10 +189,12 @@ void TelegramGui::notify_action(uint id, const QString &act)
         p->root->setVisible( true );
         p->root->setProperty( "current", current );
         p->root->requestActivate();
+        p->notify->closeNotification(id);
         break;
 
     case NOTIFY_ACT_MUTE:
         setMute( current, true );
+        p->notify->closeNotification(id);
         break;
 
     case NOTIFY_ACT_RMND:

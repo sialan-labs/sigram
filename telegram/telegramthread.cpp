@@ -1,9 +1,11 @@
 #define INVOKE_METHOD(...) QMetaObject::invokeMethod(p->tg,__FUNCTION__,__VA_ARGS__)
+#define DOWNLOADS_PATH QString( QDir::homePath() + "/.telegram/downloads/" )
 
 #include "telegramthread.h"
 #include "strcuts.h"
 #include "telegramcore.h"
 
+#include <QDir>
 #include <QTimer>
 #include <QMap>
 #include <QFile>
@@ -22,6 +24,7 @@ public:
     QHash<int,QMap<qint64, qint64> > usersMessages;
     QHash<qint64,qint64> messageDates;
     QHash<qint64,MessageClass> messages;
+    QHash<qint64,qint64> messageMedias;
 };
 
 TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
@@ -50,8 +53,8 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     connect( p->tg, SIGNAL(userStatusChanged(int,int,QDateTime))             , SLOT(_userStatusChanged(int,int,QDateTime))             , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(fileLoaded(qint64,int,QString))                   , SLOT(_fileLoaded(qint64,int,QString))                   , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(photoFound(int,qint64))                           , SLOT(_photoFound(int,qint64))                           , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(fileUploading(qint64,int,QString,qint64,qint64))  , SLOT(_fileUploading(qint64,int,QString,qint64,qint64))  , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(fileDownloading(qint64,qint64,int,qint64,qint64)) , SLOT(_fileDownloading(qint64,qint64,int,qint64,qint64)) , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(fileUploading(int,QString,qint64,qint64))         , SLOT(_fileUploading(int,QString,qint64,qint64))         , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(fileDownloading(qint64,qint64,qint64))            , SLOT(_fileDownloading(qint64,qint64,qint64))            , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(userIsTyping(int,int))                            , SIGNAL(userIsTyping(int,int))                           , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(started())                                        , SIGNAL(tgStarted())                                     , Qt::QueuedConnection );
 
@@ -140,6 +143,11 @@ void TelegramThread::loadChatInfo(int chatId)
     }
 
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,dialog.chatClass.title) );
+}
+
+void TelegramThread::loadPhoto(qint64 msg_id)
+{
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(qint64,msg_id) );
 }
 
 void TelegramThread::sendFile(int dId, const QString &file)
@@ -245,22 +253,47 @@ void TelegramThread::_msgSent(qint64 msg_id, const QDateTime & date)
     p->usersMessages[msg.from_id][msg.date.toMSecsSinceEpoch()] = msg.msg_id;
     p->messageDates[msg.date.toMSecsSinceEpoch()] = msg.msg_id;
 
+    if( msg.mediaType == Enums::MediaPhoto )
+//    if( msg.mediaType != Enums::MediaEmpty )
+    {
+        p->messageMedias[msg.media.volume] = msg.msg_id;
+    }
+
     p->messages.remove(mid);
 
     emit msgSent(mid,msg_id);
 }
 
-void TelegramThread::_incomingMsg(const MessageClass &msg)
+void TelegramThread::_incomingMsg(const MessageClass &_msg)
 {
+    MessageClass msg = _msg;
     if( p->messages.contains(msg.msg_id) )
     {
         emit incomingMsg(msg.msg_id);
         return;
     }
 
+    if( msg.mediaType == Enums::MediaPhoto )
+//    if( msg.mediaType != Enums::MediaEmpty )
+    {
+        p->messageMedias[msg.media.volume] = msg.msg_id;
+
+        const QStringList & downloads = QDir(DOWNLOADS_PATH).entryList(QDir::Files);
+        foreach( const QString & f, downloads )
+            if( f.contains(QString::number(msg.media.volume)) )
+            {
+                msg.mediaFile = DOWNLOADS_PATH + "/" + f;
+                break;
+            }
+
+        if( msg.mediaFile.isEmpty() )
+            loadPhoto( msg.msg_id );
+    }
+
     p->messages[msg.msg_id] = msg;
     p->usersMessages[msg.from_id][msg.date.toMSecsSinceEpoch()] = msg.msg_id;
     p->messageDates[msg.date.toMSecsSinceEpoch()] = msg.msg_id;
+    p->messageMedias[msg.media.volume] = msg.msg_id;
 
     emit incomingNewMsg(msg.msg_id);
     emit incomingMsg(msg.msg_id);
@@ -338,16 +371,27 @@ void TelegramThread::_fileLoaded(qint64 volume, int localId, const QString &path
             break;
         }
     }
+
+    if( p->messageMedias.contains(volume) )
+    {
+        qint64 msg_id = p->messageMedias.value(volume);
+        p->messages[msg_id].mediaFile = path;
+        emit msgFileDownloaded(msg_id);
+    }
 }
 
-void TelegramThread::_fileUploading(qint64 fid, int user_id, const QString &file, qint64 total, qint64 uploaded)
+void TelegramThread::_fileUploading(int user_id, const QString &file, qint64 total, qint64 uploaded)
 {
 
 }
 
-void TelegramThread::_fileDownloading(qint64 fid, qint64 volume, int local_id, qint64 total, qint64 downloaded)
+void TelegramThread::_fileDownloading(qint64 volume, qint64 total, qint64 downloaded)
 {
-
+    if( p->messageMedias.contains(volume) )
+    {
+        qint64 msg_id = p->messageMedias.value(volume);
+        emit msgFileDownloading( msg_id, downloaded*100.0/total );
+    }
 }
 
 QString TelegramThread::normalizePhoto(const QString &path)

@@ -67,6 +67,7 @@ public:
     Q_INVOKABLE QString messageFromName( qint64 id ) const;
     Q_INVOKABLE qint64 messageMediaType( qint64 id ) const;
     Q_INVOKABLE bool messageIsPhoto( qint64 id ) const;
+    Q_INVOKABLE QString messageMediaFile( qint64 id ) const;
 
     Q_INVOKABLE int me() const;
     Q_INVOKABLE bool started() const;
@@ -83,6 +84,8 @@ public slots:
 
     void loadUserInfo( int userId );
     void loadChatInfo( int chatId );
+
+    void loadPhoto( qint64 msg_id );
 
     void sendFile( int dId, const QString & file );
     void sendFileDialog( int dId );
@@ -102,6 +105,10 @@ signals:
     void userPhotoChanged( int user_id );
     void chatPhotoChanged( int user_id );
     void msgSent( qint64 old_id, qint64 msg_id );
+
+    void msgFileDownloaded( qint64 msg_id );
+    void msgFileDownloading( qint64 msg_id, qreal percent );
+
     void startedChanged();
 
 private slots:

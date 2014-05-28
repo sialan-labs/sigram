@@ -25,6 +25,8 @@ public slots:
     void start();
     void sendNotify(quint64 msg_id);
 
+    void openFile( const QString & file );
+
 signals:
     void muted( int id, bool stt );
     void desktopSessionChanged();

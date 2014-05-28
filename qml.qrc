@@ -32,5 +32,6 @@
         <file>About.qml</file>
         <file>files/down.png</file>
         <file>MsgMedia.qml</file>
+        <file>ProgressBar.qml</file>
     </qresource>
 </RCC>

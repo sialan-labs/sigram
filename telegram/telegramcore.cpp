@@ -73,6 +73,11 @@ void TelegramCore::loadChatInfo(const QString &chat)
     send_command( QString("chat_info %1").arg(QString(chat).replace(" ","_")) );
 }
 
+void TelegramCore::loadPhoto(qint64 msg_id)
+{
+    send_command( QString("load_photo %1").arg(msg_id) );
+}
+
 void TelegramCore::sendFile(const QString &peer, const QString &file)
 {
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
@@ -273,9 +278,34 @@ void incomingMsg( struct message *m, struct user *u )
     msg.firstName = u->first_name;
     msg.lastName = u->last_name;
     msg.flags = m->flags;
-    msg.media = static_cast<Enums::messageType>(m->media.type);
+    msg.mediaType = static_cast<Enums::messageType>(m->media.type);
 
-    if( msg.out && msg.flags&Enums::UserPending )
+    switch( m->media.type )
+    {
+    case Enums::MediaEmpty:
+        break;
+
+    case Enums::MediaContact:
+        break;
+
+    case Enums::MediaGeo:
+        msg.media.latitude = m->media.geo.latitude;
+        msg.media.longitude = m->media.geo.longitude;
+        break;
+
+    case Enums::MediaPhoto:
+        msg.media.volume = m->media.photo.sizes->loc.volume;
+        msg.media.secret = m->media.photo.sizes->loc.secret;
+        break;
+
+    case Enums::MediaVideo:
+        break;
+
+    case Enums::MediaUnsupported:
+        break;
+    }
+
+    if( msg.out && (msg.flags&Enums::UserPending) )
         msg.msg_id = getUnknownIdentifier();
 
     foreach( TelegramCore *tg, telegram_objects )
@@ -308,13 +338,13 @@ void fileLoaded( struct download *d )
 void fileUploading( struct send_file *f, long long total, long long uploaded )
 {
     foreach( TelegramCore *tg, telegram_objects )
-        emit tg->fileUploading( f->id, f->to_id.id, f->file_name, total, uploaded );
+        emit tg->fileUploading( f->to_id.id, f->file_name, total, uploaded );
 }
 
 void fileDownloading( struct download *d, long long total, long long downloaded )
 {
     foreach( TelegramCore *tg, telegram_objects )
-        emit tg->fileDownloading( d->id, d->volume, d->local_id, total, downloaded );
+        emit tg->fileDownloading( d->volume, total, downloaded );
 }
 
 void qthreadExec()

@@ -57,7 +57,7 @@ public:
         MediaVideo = 0xa2d24290,
         MediaGeo = 0x56e0d474,
         MediaContact = 0x5e7d2f39,
-        MediUnsupported = 0x29632a36
+        MediaUnsupported = 0x29632a36
     };
 };
 
@@ -125,6 +125,16 @@ public:
     QString msgLast;
 };
 
+class MessageMedia
+{
+public:
+    qint64 volume;
+    qint64 secret;
+
+    qreal latitude;
+    qreal longitude;
+};
+
 class MessageClass
 {
 public:
@@ -144,7 +154,10 @@ public:
     int to_id;
 
     int flags;
-    Enums::messageType media;
+
+    QString mediaFile;
+    Enums::messageType mediaType;
+    MessageMedia media;
 };
 
 Q_DECLARE_METATYPE( UserClass )
