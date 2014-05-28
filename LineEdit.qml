@@ -6,6 +6,7 @@ TextEdit {
     width: 100
     selectionColor: "#0d80ec"
     selectedTextColor: "#ffffff"
+    wrapMode: Text.WordWrap
 
     onTextChanged: if( text.trim().length == 0 ) text = text.trim()
 

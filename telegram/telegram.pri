@@ -23,7 +23,8 @@ SOURCES += \
     telegram/telegram_cli/tmain.c \
     telegram/telegramthread.cpp \
     telegram/telegramcore.cpp \
-    telegram/telegram.cpp
+    telegram/telegram.cpp \
+    telegram/strcuts.cpp
 
 OTHER_FILES += \
     telegram/telegram_cli/config.h.in

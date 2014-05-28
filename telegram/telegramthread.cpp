@@ -38,20 +38,22 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     p->tg = new TelegramCore(argc,argv);
 //    p->tg->moveToThread(this);
 
-    connect( p->tg, SIGNAL(contactListClear())                   , SLOT(_contactListClear())                   , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(contactFounded(UserClass))            , SLOT(_contactFounded(UserClass))            , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(contactListFinished())                , SLOT(_contactListFinished())                , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(dialogListClear())                    , SLOT(_dialogListClear())                    , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(dialogFounded(DialogClass))           , SLOT(_dialogFounded(DialogClass))           , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(dialogListFinished())                 , SLOT(_dialogListFinished())                 , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(msgMarkedAsRead(qint64,QDateTime))    , SLOT(_msgMarkedAsRead(qint64,QDateTime))    , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(msgSent(qint64,QDateTime))            , SLOT(_msgSent(qint64,QDateTime))            , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(incomingMsg(MessageClass))            , SLOT(_incomingMsg(MessageClass))            , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(userStatusChanged(int,int,QDateTime)) , SLOT(_userStatusChanged(int,int,QDateTime)) , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(fileLoaded(qint64,int,QString))       , SLOT(_fileLoaded(qint64,int,QString))       , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(photoFound(int,qint64))               , SLOT(_photoFound(int,qint64))               , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(userIsTyping(int,int))                , SIGNAL(userIsTyping(int,int))               , Qt::QueuedConnection );
-    connect( p->tg, SIGNAL(started())                            , SIGNAL(tgStarted())                         , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(contactListClear())                               , SLOT(_contactListClear())                               , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(contactFounded(UserClass))                        , SLOT(_contactFounded(UserClass))                        , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(contactListFinished())                            , SLOT(_contactListFinished())                            , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(dialogListClear())                                , SLOT(_dialogListClear())                                , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(dialogFounded(DialogClass))                       , SLOT(_dialogFounded(DialogClass))                       , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(dialogListFinished())                             , SLOT(_dialogListFinished())                             , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(msgMarkedAsRead(qint64,QDateTime))                , SLOT(_msgMarkedAsRead(qint64,QDateTime))                , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(msgSent(qint64,QDateTime))                        , SLOT(_msgSent(qint64,QDateTime))                        , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(incomingMsg(MessageClass))                        , SLOT(_incomingMsg(MessageClass))                        , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(userStatusChanged(int,int,QDateTime))             , SLOT(_userStatusChanged(int,int,QDateTime))             , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(fileLoaded(qint64,int,QString))                   , SLOT(_fileLoaded(qint64,int,QString))                   , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(photoFound(int,qint64))                           , SLOT(_photoFound(int,qint64))                           , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(fileUploading(qint64,int,QString,qint64,qint64))  , SLOT(_fileUploading(qint64,int,QString,qint64,qint64))  , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(fileDownloading(qint64,qint64,int,qint64,qint64)) , SLOT(_fileDownloading(qint64,qint64,int,qint64,qint64)) , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(userIsTyping(int,int))                            , SIGNAL(userIsTyping(int,int))                           , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(started())                                        , SIGNAL(tgStarted())                                     , Qt::QueuedConnection );
 
     start();
 }
@@ -140,6 +142,21 @@ void TelegramThread::loadChatInfo(int chatId)
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,dialog.chatClass.title) );
 }
 
+void TelegramThread::sendFile(int dId, const QString &file)
+{
+    if( !p->dialogs.contains(dId) )
+        return;
+
+    const DialogClass & dialog = p->dialogs.value(dId);
+    QString peer;
+    if( dialog.is_chat )
+        peer = dialog.chatClass.title;
+    else
+        peer = dialog.userClass.username;
+
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,peer), Q_ARG(QString,file) );
+}
+
 void TelegramThread::markRead(int dId)
 {
     if( !p->dialogs.contains(dId) )
@@ -172,7 +189,7 @@ void TelegramThread::_contactListClear()
 
 void TelegramThread::_contactFounded(const UserClass &contact)
 {
-    if( contact.flags & TgStruncts::userUserSelf )
+    if( contact.flags & Enums::UserUserSelf )
         p->me = contact.user_id;
 
     p->contacts.insert( contact.user_id, contact );
@@ -251,7 +268,7 @@ void TelegramThread::_incomingMsg(const MessageClass &msg)
 
 void TelegramThread::_userStatusChanged(int user_id, int status, const QDateTime & when)
 {
-    p->contacts[user_id].state = static_cast<TgStruncts::OnlineState>(status);
+    p->contacts[user_id].state = static_cast<Enums::OnlineState>(status);
     p->contacts[user_id].lastTime = when;
 
     emit userStatusChanged(user_id,status,when);
@@ -321,6 +338,16 @@ void TelegramThread::_fileLoaded(qint64 volume, int localId, const QString &path
             break;
         }
     }
+}
+
+void TelegramThread::_fileUploading(qint64 fid, int user_id, const QString &file, qint64 total, qint64 uploaded)
+{
+
+}
+
+void TelegramThread::_fileDownloading(qint64 fid, qint64 volume, int local_id, qint64 total, qint64 downloaded)
+{
+
 }
 
 QString TelegramThread::normalizePhoto(const QString &path)

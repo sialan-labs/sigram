@@ -30,5 +30,7 @@
         <file>ChatFrame.qml</file>
         <file>Configure.qml</file>
         <file>About.qml</file>
+        <file>files/down.png</file>
+        <file>MsgMedia.qml</file>
     </qresource>
 </RCC>

@@ -8,6 +8,7 @@
 #include "userdata.h"
 #include "telegram/telegram.h"
 
+#include <QtQml>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
@@ -19,6 +20,7 @@
 #include <QAction>
 #include <QPointer>
 #include <QSettings>
+#include <QQuickWindow>
 #include <QDir>
 
 QPointer<QSettings> tg_settings;
@@ -35,7 +37,7 @@ public:
 
     char *args;
 
-    QObject *root;
+    QQuickWindow *root;
     QHash<int,bool> mutes;
 };
 
@@ -54,6 +56,8 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->notify = new Notification(this);
 
     connect( p->notify, SIGNAL(notifyAction(uint,QString)), SLOT(notify_action(uint,QString)) );
+
+    qmlRegisterType<Enums>("org.sialan.telegram", 1, 0, "Enums");
 }
 
 QSettings *TelegramGui::settings()
@@ -75,6 +79,38 @@ bool TelegramGui::isMuted(int id) const
     return p->mutes.value(id);
 }
 
+int TelegramGui::desktopSession()
+{
+    static int result = -1;
+    if( result != -1 )
+        return result;
+
+#ifdef Q_OS_MAC
+    result = Enums::Mac;
+#else
+#ifdef Q_OS_WIN
+    result = Enums::Windows;
+#else
+    static QString *desktop_session = 0;
+    if( !desktop_session )
+        desktop_session = new QString( qgetenv("DESKTOP_SESSION") );
+
+    if( desktop_session->contains("kde",Qt::CaseInsensitive) )
+        result = Enums::Kde;
+    else
+    if( QString(qgetenv("XDG_CURRENT_DESKTOP")).contains("unity",Qt::CaseInsensitive) )
+        result = Enums::Unity;
+    else
+        result = Enums::Gnome;
+#endif
+#endif
+
+    if( result == -1 )
+        result = Enums::Unknown;
+
+    return result;
+}
+
 void TelegramGui::start()
 {
     if( p->engine )
@@ -89,7 +125,7 @@ void TelegramGui::start()
     p->engine->rootContext()->setContextProperty( "UserData", p->userdata );
     p->engine->load(QUrl(QStringLiteral("qrc:///main.qml")));
 
-    p->root = p->engine->rootObjects().first();
+    p->root = static_cast<QQuickWindow*>(p->engine->rootObjects().first());
 
     p->sysTray = new QSystemTrayIcon( QIcon(":/files/sys_tray.png"), this );
     p->sysTray->show();
@@ -100,12 +136,17 @@ void TelegramGui::start()
 void TelegramGui::sendNotify(quint64 msg_id)
 {
     QStringList actions;
-    actions << QString("%1:%2").arg(NOTIFY_ACT_SHOW).arg(msg_id) << tr("Show");
-    actions << QString("%1:%2").arg(NOTIFY_ACT_MUTE).arg(msg_id) << tr("Mute");
-//    actions << QString("%1:%2").arg(NOTIFY_ACT_RMND).arg(msg_id) << tr("Mute & Remind");
+    if( desktopSession() != Enums::Unity )
+    {
+        actions << QString("%1:%2").arg(NOTIFY_ACT_SHOW).arg(msg_id) << tr("Show");
+        actions << QString("%1:%2").arg(NOTIFY_ACT_MUTE).arg(msg_id) << tr("Mute");
+//        actions << QString("%1:%2").arg(NOTIFY_ACT_RMND).arg(msg_id) << tr("Mute & Remind");
+    }
 
     int to_id = p->tg->messageToId(msg_id);
     int from_id = p->tg->messageFromId(msg_id);
+    if( from_id == p->tg->me() )
+        return;
     if( isMuted(to_id) || isMuted(from_id) )
         return;
 
@@ -139,9 +180,9 @@ void TelegramGui::notify_action(uint id, const QString &act)
 
     switch (act_id) {
     case NOTIFY_ACT_SHOW:
-        p->root->setProperty( "visible", true );
+        p->root->setVisible( true );
         p->root->setProperty( "current", current );
-        QMetaObject::invokeMethod( p->root, "requestActivate" );
+        p->root->requestActivate();
         break;
 
     case NOTIFY_ACT_MUTE:
@@ -158,8 +199,13 @@ void TelegramGui::systray_action(QSystemTrayIcon::ActivationReason act)
     switch( static_cast<int>(act) )
     {
     case QSystemTrayIcon::Trigger:
-        p->root->setProperty( "visible", true );
-        QMetaObject::invokeMethod( p->root, "requestActivate" );
+        if( p->root->isVisible() && p->root->isActive() )
+            p->root->hide();
+        else
+        {
+            p->root->setVisible( true );
+            p->root->requestActivate();
+        }
         break;
 
     case QSystemTrayIcon::Context:
@@ -183,24 +229,24 @@ void TelegramGui::showContextMenu()
 
     if( res_act == show_act )
     {
-        QMetaObject::invokeMethod( p->root, "requestActivate" );
-        p->root->setProperty( "visible", true );
+        p->root->setVisible( true );
+        p->root->requestActivate();
     }
     else
     if( res_act == conf_act )
     {
-        QMetaObject::invokeMethod( p->root, "requestActivate" );
+        p->root->setVisible( true );
+        p->root->requestActivate();
         p->root->setProperty( "configure", !p->root->property("configure").toBool() );
         p->root->setProperty( "focus", true );
-        p->root->setProperty( "visible", true );
     }
     else
     if( res_act == abut_act )
     {
-        QMetaObject::invokeMethod( p->root, "requestActivate" );
+        p->root->setVisible( true );
+        p->root->requestActivate();
         p->root->setProperty( "about", !p->root->property("about").toBool() );
         p->root->setProperty( "focus", true );
-        p->root->setProperty( "visible", true );
     }
     else
     if( res_act == exit_act )

@@ -5,14 +5,7 @@ Item {
     width: 100
     height: 62
 
-    property int userId
-
-    Connections {
-        target: Telegram
-        onContactsChanged: {
-            confg.userId = Telegram.me()
-        }
-    }
+    property int userId: Telegram.me
 
     Column {
         id: column

@@ -6,6 +6,7 @@
 #include <QTimerEvent>
 #include <QFontMetricsF>
 #include <QCoreApplication>
+#include <QFileDialog>
 #include <QDebug>
 
 class TelegramPrivate
@@ -37,6 +38,7 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
 
     p->tg_thread = new TelegramThread(argc,argv);
 
+    connect( p->tg_thread, SIGNAL(contactsChanged())                   , SIGNAL(meChanged())                          );
     connect( p->tg_thread, SIGNAL(contactsChanged())                   , SIGNAL(contactsChanged())                    );
     connect( p->tg_thread, SIGNAL(dialogsChanged())                    , SIGNAL(dialogsChanged())                     );
     connect( p->tg_thread, SIGNAL(incomingMsg(qint64))                 , SIGNAL(incomingMsg(qint64))                  );
@@ -317,6 +319,16 @@ QString Telegram::messageFromName(qint64 id) const
     return msg.firstName + " " + msg.lastName;
 }
 
+qint64 Telegram::messageMediaType(qint64 id) const
+{
+    return message(id).media;
+}
+
+bool Telegram::messageIsPhoto(qint64 id) const
+{
+    return messageMediaType(id) == Enums::MediaPhoto;
+}
+
 int Telegram::me() const
 {
     return p->tg_thread->me();
@@ -390,6 +402,20 @@ void Telegram::loadChatInfo(int chatId)
 
     p->tg_thread->loadChatInfo(chatId);
     p->loaded_chats_info.insert(chatId);
+}
+
+void Telegram::sendFile(int dId, const QString &file)
+{
+    p->tg_thread->sendFile(dId,file);
+}
+
+void Telegram::sendFileDialog(int dId)
+{
+    const QString & file = QFileDialog::getOpenFileName();
+    if( file.isEmpty() )
+        return;
+
+    sendFile(dId, file);
 }
 
 void Telegram::markRead(int dId)

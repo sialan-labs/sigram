@@ -79,7 +79,7 @@ void UserData::init_buffer()
             user.firstname = fname;
             user.lastname = lname;
             user.phone = phone;
-            user.state = TgStruncts::Offline;
+            user.state = Enums::Offline;
 
             p->contacts.insert( id, user );
 

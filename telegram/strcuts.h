@@ -6,8 +6,26 @@
 #include <QStringList>
 #include <QDateTime>
 
-namespace TgStruncts
+class Enums : public QObject
 {
+    Q_ENUMS(DesktopSession)
+    Q_ENUMS(OnlineState)
+    Q_ENUMS(UserFlags)
+    Q_ENUMS(messageType)
+    Q_OBJECT
+
+public:
+    Enums(QObject *parent = 0);
+
+    enum DesktopSession {
+        Unknown,
+        Gnome,
+        Unity,
+        Kde,
+        Windows,
+        Mac
+    };
+
     enum OnlineState {
         Offline = -1,
         NotOnlineYet = 0,
@@ -15,24 +33,33 @@ namespace TgStruncts
     };
 
     enum UserFlags {
-        userMessageEmpty = 1,
-        userDeleted = 2,
-        userForbidden = 4,
-        userHasPhoto = 8,
-        userCreated = 16,
+        UserMessageEmpty = 1,
+        UserDeleted = 2,
+        UserForbidden = 4,
+        UserHasPhoto = 8,
+        UserCreated = 16,
 
-        userUserSelf = 128,
-        userUserForeign = 256,
-        userUserContact = 512,
-        userUserInContact = 1024,
-        userUserOutContact = 2048,
+        UserUserSelf = 128,
+        UserUserForeign = 256,
+        UserUserContact = 512,
+        UserUserInContact = 1024,
+        UserUserOutContact = 2048,
 
-        userChatInChat = 128,
+        UserChatInChat = 128,
 
-        userEncrypted = 4096,
-        userPending = 8192
+        UserEncrypted = 4096,
+        UserPending = 8192
     };
-}
+
+    enum messageType {
+        MediaEmpty = 0x3ded6320,
+        MediaPhoto = 0xc8c45a2a,
+        MediaVideo = 0xa2d24290,
+        MediaGeo = 0x56e0d474,
+        MediaContact = 0x5e7d2f39,
+        MediUnsupported = 0x29632a36
+    };
+};
 
 class UserClass
 {
@@ -50,8 +77,8 @@ public:
     QString phone;
 
     QDateTime lastTime;
-    TgStruncts::OnlineState state;
-    TgStruncts::UserFlags flags;
+    Enums::OnlineState state;
+    Enums::UserFlags flags;
 };
 
 class ChatUserClass
@@ -75,6 +102,7 @@ public:
     QString title;
 
     int users_num;
+    int flags;
 
     QDateTime date;
     QList<ChatUserClass> users;
@@ -114,6 +142,9 @@ public:
 
     int from_id;
     int to_id;
+
+    int flags;
+    Enums::messageType media;
 };
 
 Q_DECLARE_METATYPE( UserClass )

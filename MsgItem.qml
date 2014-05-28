@@ -67,7 +67,7 @@ Item {
                 y: itemMargins
                 spacing: 5
 
-                property real maxWidth: Math.max( msg_details.width, Math.max(txt.width,user.width) )
+                property real maxWidth: Math.max( msg_details.width, Math.max(txt.width,(media.visible?media.width:user.width) ) )
 
                 Text {
                     id: user
@@ -82,8 +82,17 @@ Item {
                     width: msgWidth>item.width*0.6? item.width*0.6 : msgWidth
                     text: Telegram.messageBody(msg_id)
                     color: item.out? "#ffffff" : "#333333"
+                    visible: text.length != 0
 
                     property real msgWidth: Telegram.messageBodyTextWidth(msg_id)
+                }
+
+                MsgMedia {
+                    id: media
+                    height: 192
+                    width: 192
+                    msgId: msg_id
+                    visible: !txt.visible
                 }
 
                 Row {

@@ -127,5 +127,14 @@ Window {
             return
 
         Telegram.setStatusOnline( visible )
+        if( visible )
+            Telegram.markRead(current)
+    }
+
+    function sendNotify( msg_id ) {
+        if( Telegram.messageUnread(msg_id) !== 1 )
+            return
+
+        Gui.sendNotify(msg_id)
     }
 }

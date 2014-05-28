@@ -202,39 +202,6 @@ peer_id_t next_token_peer (void) {
   }
 }
 
-char *get_default_prompt (void) {
-  static char buf[1000];
-  return buf;
-  int l = 0;
-  if (in_chat_mode) {
-    peer_t *U = user_chat_get (chat_mode_id);
-    assert (U && U->print_name);
-    l += tsnprintf (buf + l, 999 - l, COLOR_RED "%.*s " COLOR_NORMAL, 100, U->print_name);
-  }
-  if (unread_messages || cur_uploading_bytes || cur_downloading_bytes) {
-    l += tsnprintf (buf + l, 999 - l, COLOR_RED "[");
-    int ok = 0;
-    if (unread_messages) {
-      l += tsnprintf (buf + l, 999 - l, "%d unread", unread_messages);
-      ok = 1;
-    }
-    if (cur_uploading_bytes) {
-      if (ok) { *(buf + l) = ' '; l ++; }
-      ok = 1;
-      l += tsnprintf (buf + l, 999 - l, "%lld%%Up", 100 * cur_uploaded_bytes / cur_uploading_bytes);
-    }
-    if (cur_downloading_bytes) {
-      if (ok) { *(buf + l) = ' '; l ++; }
-      ok = 1;
-      l += tsnprintf (buf + l, 999 - l, "%lld%%Down", 100 * cur_downloaded_bytes / cur_downloading_bytes);
-    }
-    l += tsnprintf (buf + l, 999 - l, "]" COLOR_NORMAL);
-    return buf;
-  } 
-  l += tsnprintf (buf + l, 999 - l, "%s", default_prompt);
-  return buf;
-}
-
 char *complete_none (const char *text UU, int state UU) {
   return 0;
 }
@@ -1314,7 +1281,7 @@ void print_message (struct message *M) {
   last_from_id = M->from_id;
   last_to_id = M->to_id;
   peer_t *U = user_chat_get (M->from_id);
-  incomingMsg( M->id, M->from_id.id, M->to_id.id, M->fwd_from_id.id, M->fwd_date, M->out, M->unread, M->date, M->service, M->message, U->user.first_name, U->user.last_name );
+  incomingMsg( M->id, M->from_id.id, M->to_id.id, M->fwd_from_id.id, M->fwd_date, M->out, M->unread, M->date, M->service, M->message, U->user.first_name, U->user.last_name, M->flags, M->media.type );
   return;
 
   print_start ();

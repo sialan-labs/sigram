@@ -34,6 +34,7 @@ public slots:
     void loadUserInfo( int userId );
     void loadChatInfo( int chatId );
 
+    void sendFile( int dId, const QString & file );
     void markRead( int dId );
 
     void setStatusOnline( bool stt );
@@ -70,6 +71,9 @@ private slots:
 
     void _photoFound( int id, qint64 volume );
     void _fileLoaded( qint64 volume, int localId, const QString & path );
+
+    void _fileUploading( qint64 fid, int user_id, const QString & file, qint64 total, qint64 uploaded );
+    void _fileDownloading( qint64 fid, qint64 volume, int local_id, qint64 total, qint64 downloaded );
 
 private:
     QString normalizePhoto( const QString & path );

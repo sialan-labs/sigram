@@ -1156,11 +1156,11 @@ int get_dialogs_on_answer (struct query *q UU) {
     switch (get_peer_type (plist[i])) {
     case PEER_USER:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_user( UC->user.id.id, UC->user.id.type, UC->user.first_name, UC->user.last_name, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message, UC->user.flags);
+      dialogList_addToBuffer_user( UC->user.id.id, UC->user.id.type, UC->user.first_name, UC->user.last_name, UC->user.print_name, UC->user.phone, UC->user.status.online, UC->user.status.when, dlist[2 * i + 1], UC->last->date, UC->last->message, UC->last->media.type, UC->user.flags, UC->last->flags);
       break;
     case PEER_CHAT:
       UC = user_chat_get (plist[i]);
-      dialogList_addToBuffer_chat( UC->chat.id.id, UC->chat.id.type, UC->chat.title, UC->chat.admin_id, UC->chat.user_list, UC->chat.user_list_size, UC->chat.users_num, UC->chat.date, dlist[2 * i + 1], UC->last->date, UC->last->message );
+      dialogList_addToBuffer_chat( UC->chat.id.id, UC->chat.id.type, UC->chat.title, UC->chat.admin_id, UC->chat.user_list, UC->chat.user_list_size, UC->chat.users_num, UC->chat.date, dlist[2 * i + 1], UC->last->date, UC->last->message, UC->last->media.type, UC->last->flags, UC->last->flags );
       break;
     }
   }
@@ -1471,6 +1471,8 @@ void send_part (struct send_file *f) {
     tfree_str (f->file_name);
     tfree (f, sizeof (*f));
   }
+
+  fileUploading( f->id, f->to_id.id, f->file_name, cur_uploading_bytes, cur_uploaded_bytes );
 }
 
 void send_file_thumb (struct send_file *f) {
@@ -1883,6 +1885,7 @@ void load_next_part (struct download *D) {
   out_int (D->offset);
   out_int (1 << 14);
   send_query (DC_list[D->dc], packet_ptr - packet_buffer, packet_buffer, &download_methods, D);
+  fileDownloading( D->id, D->volume, D->local_id, cur_downloading_bytes, cur_downloaded_bytes );
   //send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &download_methods, D);
 }
 

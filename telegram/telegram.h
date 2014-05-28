@@ -11,6 +11,7 @@ class TelegramPrivate;
 class Telegram : public QObject
 {
     Q_PROPERTY(bool started READ started NOTIFY startedChanged)
+    Q_PROPERTY(int me READ me NOTIFY meChanged)
     Q_OBJECT
 public:
     Telegram(int argc, char **argv, QObject *parent = 0);
@@ -64,6 +65,8 @@ public:
     Q_INVOKABLE int messageFromId( qint64 id ) const;
     Q_INVOKABLE int messageToId( qint64 id ) const;
     Q_INVOKABLE QString messageFromName( qint64 id ) const;
+    Q_INVOKABLE qint64 messageMediaType( qint64 id ) const;
+    Q_INVOKABLE bool messageIsPhoto( qint64 id ) const;
 
     Q_INVOKABLE int me() const;
     Q_INVOKABLE bool started() const;
@@ -81,6 +84,8 @@ public slots:
     void loadUserInfo( int userId );
     void loadChatInfo( int chatId );
 
+    void sendFile( int dId, const QString & file );
+    void sendFileDialog( int dId );
     void markRead( int dId );
 
     void setStatusOnline( bool stt );
@@ -88,6 +93,7 @@ public slots:
 signals:
     void contactsChanged();
     void dialogsChanged();
+    void meChanged();
     void incomingMsg( qint64 msg_id );
     void incomingNewMsg( qint64 msg_id );
     void userIsTyping( int chat_id, int user_id );

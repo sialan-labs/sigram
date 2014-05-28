@@ -31,6 +31,7 @@ public slots:
     void loadUserInfo( const QString & user );
     void loadChatInfo( const QString & chat );
 
+    void sendFile( const QString & peer, const QString & file );
     void markRead( const QString & peer );
 
     void start();
@@ -55,6 +56,9 @@ signals:
 
     void photoFound( int id, qint64 volume );
     void fileLoaded( qint64 volume, int localId, const QString & path );
+
+    void fileUploading( qint64 fid, int user_id, const QString & file, qint64 total, qint64 uploaded );
+    void fileDownloading( qint64 fid, qint64 volume, int local_id, qint64 total, qint64 downloaded );
 
 private:
     void send_command( const QString & cmd );
