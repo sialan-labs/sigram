@@ -4,6 +4,7 @@
 
 #include "telegramgui.h"
 #include "notification.h"
+#include "unitysystemtray.h"
 #include "telegram_macros.h"
 #include "userdata.h"
 #include "telegram/telegram.h"
@@ -18,6 +19,7 @@
 #include <QDebug>
 #include <QHash>
 #include <QFileDialog>
+#include <QFile>
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QAction>
@@ -36,6 +38,8 @@ public:
     UserData *userdata;
 
     QSystemTrayIcon *sysTray;
+    UnitySystemTray *unityTray;
+
     QQmlApplicationEngine *engine;
     Telegram *tg;
 
@@ -102,7 +106,7 @@ int TelegramGui::desktopSession()
     if( desktop_session->contains("kde",Qt::CaseInsensitive) )
         result = Enums::Kde;
     else
-    if( QString(qgetenv("XDG_CURRENT_DESKTOP")).contains("unity",Qt::CaseInsensitive) )
+    if( desktop_session->contains("ubuntu",Qt::CaseInsensitive) )
         result = Enums::Unity;
     else
         result = Enums::Gnome;
@@ -131,10 +135,23 @@ void TelegramGui::start()
 
     p->root = static_cast<QQuickWindow*>(p->engine->rootObjects().first());
 
-    p->sysTray = new QSystemTrayIcon( QIcon(":/files/sys_tray.png"), this );
-    p->sysTray->show();
+    if( desktopSession() == Enums::Unity )
+    {
+        QFile::copy(":/files/sys_tray.png","/tmp/sialan-telegram-client-trayicon.png");
 
-    connect( p->sysTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(systray_action(QSystemTrayIcon::ActivationReason)) );
+        p->unityTray = new UnitySystemTray( QCoreApplication::applicationName(), "/tmp/sialan-telegram-client-trayicon.png" );
+        p->unityTray->addMenu( tr("Show"), this, "show" );
+        p->unityTray->addMenu( tr("Configure"), this, "configure" );
+        p->unityTray->addMenu( tr("About"), this, "about" );
+        p->unityTray->addMenu( tr("Quit"), this, "quit" );
+    }
+    else
+    {
+        p->sysTray = new QSystemTrayIcon( QIcon(":/files/sys_tray.png"), this );
+        p->sysTray->show();
+
+        connect( p->sysTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(systray_action(QSystemTrayIcon::ActivationReason)) );
+    }
 }
 
 void TelegramGui::sendNotify(quint64 msg_id)
@@ -288,31 +305,43 @@ void TelegramGui::showContextMenu()
     QAction *res_act  = menu.exec();
 
     if( res_act == show_act )
-    {
-        p->root->setVisible( true );
-        p->root->requestActivate();
-    }
+        show();
     else
     if( res_act == conf_act )
-    {
-        p->root->setVisible( true );
-        p->root->requestActivate();
-        p->root->setProperty( "configure", !p->root->property("configure").toBool() );
-        p->root->setProperty( "focus", true );
-    }
+        configure();
     else
     if( res_act == abut_act )
-    {
-        p->root->setVisible( true );
-        p->root->requestActivate();
-        p->root->setProperty( "about", !p->root->property("about").toBool() );
-        p->root->setProperty( "focus", true );
-    }
+        about();
     else
     if( res_act == exit_act )
-    {
-        QCoreApplication::quit();
-    }
+        quit();
+}
+
+void TelegramGui::configure()
+{
+    p->root->setVisible( true );
+    p->root->requestActivate();
+    p->root->setProperty( "configure", !p->root->property("configure").toBool() );
+    p->root->setProperty( "focus", true );
+}
+
+void TelegramGui::about()
+{
+    p->root->setVisible( true );
+    p->root->requestActivate();
+    p->root->setProperty( "about", !p->root->property("about").toBool() );
+    p->root->setProperty( "focus", true );
+}
+
+void TelegramGui::quit()
+{
+    QCoreApplication::quit();
+}
+
+void TelegramGui::show()
+{
+    p->root->setVisible( true );
+    p->root->requestActivate();
 }
 
 TelegramGui::~TelegramGui()

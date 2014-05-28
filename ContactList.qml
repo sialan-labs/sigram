@@ -4,7 +4,7 @@ Rectangle {
     id: contact_list
     width: 100
     height: 62
-    color: "#dddddd"
+    color: "#ffffff"
 
     property int current
 
@@ -45,9 +45,20 @@ Rectangle {
         Component.onCompleted: start()
     }
 
+    ContactListHeader {
+        id: header
+        height: 53
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+    }
+
     ListView {
         id: clist
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: header.bottom
+        anchors.bottom: parent.bottom
         clip: true
         model: ListModel{}
         delegate: ContactListItem {
@@ -57,24 +68,7 @@ Rectangle {
             uid: user_id
             realId: item.isDialog? dialog_id : user_id
             selected: realId == contact_list.current
-        }
-
-        section.property: "itemMode"
-        section.criteria: ViewSection.FullString
-        section.labelPositioning: ViewSection.InlineLabels
-        section.delegate: Rectangle {
-            id: sect
-            height: 53
-            width: clist.width
-            color: "#dddddd"
-
-            Text {
-                id: sect_txt
-                text: section
-                anchors.centerIn: parent
-                font.pointSize: 10
-                color: "#333333"
-            }
+            onClicked: contact_list.current = item.isDialog? dialog_id : item.uid
         }
 
         function refresh() {
@@ -87,7 +81,7 @@ Rectangle {
             var dialogs = Telegram.dialogListIds()
 
             for( var i=0; i<dialogs.length; i++ ) {
-                model.append( {"user_id": 0, "dialog_id": dialogs[i], "itemMode": qsTr("Chats")} )
+                model.append( {"user_id": 0, "dialog_id": dialogs[i]} )
                 if( Telegram.dialogIsChat(dialogs[i]) )
                     Telegram.loadChatInfo(dialogs[i])
                 else
@@ -97,7 +91,7 @@ Rectangle {
                     contacts.splice(cIndex,1)
             }
             for( var i=0; i<contacts.length; i++ ) {
-                model.append( {"user_id":contacts[i], "dialog_id": 0, "itemMode": qsTr("Users")} )
+                model.append( {"user_id":contacts[i], "dialog_id": 0} )
                 Telegram.loadUserInfo(contacts[i])
             }
         }
@@ -106,8 +100,7 @@ Rectangle {
     }
 
     PhysicalScrollBar {
-        scrollArea: clist; height: clist.height-53; width: 8
+        scrollArea: clist; height: clist.height; width: 8
         anchors.right: clist.right; anchors.top: clist.top; color: "#333333"
-        anchors.topMargin: 53
     }
 }

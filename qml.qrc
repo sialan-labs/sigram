@@ -33,5 +33,8 @@
         <file>files/down.png</file>
         <file>MsgMedia.qml</file>
         <file>ProgressBar.qml</file>
+        <file>ContactListHeader.qml</file>
+        <file>files/add.png</file>
+        <file>files/search.png</file>
     </qresource>
 </RCC>

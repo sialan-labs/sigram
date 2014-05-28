@@ -33,6 +33,11 @@ public slots:
 
     int showMenu( const QStringList & list );
 
+    void configure();
+    void about();
+    void quit();
+    void show();
+
 signals:
     void muted( int id, bool stt );
     void desktopSessionChanged();

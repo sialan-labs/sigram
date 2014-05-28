@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("Sialan Telegram");
     app.setApplicationDisplayName("Sigram");
     app.setWindowIcon(QIcon(":/files/sys_tray.png"));
+    app.setQuitOnLastWindowClosed(false);
 
     TelegramGui gui;
     gui.start();

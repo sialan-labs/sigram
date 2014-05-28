@@ -12,11 +12,13 @@ Rectangle {
     property int realId: item.isDialog? dialog_id : item.uid
     property int onlineState: isDialog? Telegram.contactState(dialog_id) : Telegram.contactState(item.uid)
 
+    signal clicked()
+
     MouseArea {
         id: marea
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: contact_list.current = item.isDialog? dialog_id : item.uid
+        onClicked: item.clicked()
     }
 
     Row {

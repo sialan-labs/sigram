@@ -50,6 +50,7 @@ Item {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         wrapMode: Text.WordWrap
+        horizontalAlignment: Text.AlignHCenter
         text: qsTr("Video and Audio files not supported yet.")
         visible: !Telegram.messageIsPhoto(msgId)
     }

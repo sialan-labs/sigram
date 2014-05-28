@@ -190,6 +190,7 @@ void dialogList_addToBuffer( peer_t *uc, int is_chat, int unread_cnt )
     dialog.is_chat = is_chat;
     dialog.unread = unread_cnt;
     dialog.msgDate = convertDate(uc->last->date);
+    dialog.flags = uc->flags;
 
     UserClass & user = dialog.userClass;
     ChatClass & chat = dialog.chatClass;
@@ -237,7 +238,7 @@ void dialogList_addToBuffer( peer_t *uc, int is_chat, int unread_cnt )
         user.lastTime = convertDate(uc->user.status.when);
     }
 
-    if( !(uc->last->flags & Enums::UserMessageEmpty) && uc->last->media.type != 0 )
+    if( !(uc->last->flags & Enums::UserMessageEmpty) && uc->last->media.type != 0 && uc->last->prev )
         dialog.msgLast = uc->last->msg;
 
     foreach( TelegramCore *tg, telegram_objects )
@@ -359,5 +360,5 @@ void qthreadExit(int code)
 
 void qthreadExitRequest(int code)
 {
-    qDebug() << code;
+    qDebug() << __FUNCTION__ << code;
 }

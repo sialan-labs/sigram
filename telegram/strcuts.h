@@ -121,6 +121,7 @@ public:
 
     bool is_chat;
     int unread;
+    int flags;
     QDateTime msgDate;
     QString msgLast;
 };
