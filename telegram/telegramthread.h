@@ -29,7 +29,11 @@ public slots:
     void contactList();
     void dialogList();
     void getHistory(int id, int count );
+
     void sendMessage( int id, const QString & msg );
+    void forwardMessage( qint64 msg_id, int user_id );
+    void deleteMessage( qint64 msg_id );
+    void restoreMessage( qint64 msg_id );
 
     void loadUserInfo( int userId );
     void loadChatInfo( int chatId );
@@ -40,6 +44,16 @@ public slots:
     void markRead( int dId );
 
     void setStatusOnline( bool stt );
+
+    void createChat( const QString & title, int user_id );
+    void createSecretChat( int user_id );
+    void renameChat( int chat_id, const QString & new_title );
+
+    void chatAddUser( int chat_id, int user_id );
+    void chatDelUser( int chat_id, int user_id );
+
+    void search( int user_id, const QString & keyword );
+    void globalSearch( const QString & keyword );
 
 signals:
     void contactsChanged();
@@ -63,6 +77,9 @@ signals:
 
     void msgFileDownloaded( qint64 msg_id );
     void msgFileDownloading( qint64 msg_id, qreal percent );
+
+    void messageDeleted( qint64 msg_id );
+    void messageRestored( qint64 msg_id );
 
 protected:
     void run();

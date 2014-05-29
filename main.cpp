@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QWindow>
 #include <QIcon>
 
 #include "telegramgui.h"

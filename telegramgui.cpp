@@ -22,9 +22,11 @@
 #include <QFile>
 #include <QSystemTrayIcon>
 #include <QMenu>
+#include <QScreen>
 #include <QAction>
 #include <QPointer>
 #include <QSettings>
+#include <QQuickItem>
 #include <QDesktopServices>
 #include <QQuickWindow>
 #include <QDir>
@@ -85,6 +87,30 @@ void TelegramGui::setMute(int id, bool stt)
 bool TelegramGui::isMuted(int id) const
 {
     return p->mutes.value(id);
+}
+
+QSize TelegramGui::screenSize() const
+{
+    const QList<QScreen*> & list = QGuiApplication::screens();
+    if( list.isEmpty() )
+        return QSize();
+
+    return list.first()->size();
+}
+
+QPoint TelegramGui::mousePos() const
+{
+    return QCursor::pos();
+}
+
+QPoint TelegramGui::mapToGlobal(QQuickItem *item, const QPoint &pnt)
+{
+    return item->window()->mapToGlobal( item->mapToScene(pnt).toPoint() );
+}
+
+QPoint TelegramGui::mapToScene(QQuickItem *item, const QPoint &pnt)
+{
+    return item->mapToScene(pnt).toPoint();
 }
 
 int TelegramGui::desktopSession()

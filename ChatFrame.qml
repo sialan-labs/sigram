@@ -6,6 +6,9 @@ Rectangle {
 
     property alias current: contact_list.current
 
+    property alias contactList: contact_list
+    property alias chatView: chat_view
+
     ContactList {
         id: contact_list
         anchors.left: parent.left

@@ -55,6 +55,21 @@ void TelegramCore::sendMessage(const QString &user, const QString &msg)
     send_command( QString("msg %1 %2").arg(QString(user).replace(" ","_")).arg(msg) );
 }
 
+void TelegramCore::forwardMessage(qint64 msg_id, const QString &user)
+{
+    send_command( QString("fwd %1 %2").arg(QString(user).replace(" ","_")).arg(msg_id) );
+}
+
+void TelegramCore::deleteMessage(qint64 msg_id)
+{
+    send_command( QString("delete_msg %1").arg(msg_id) );
+}
+
+void TelegramCore::restoreMessage(qint64 msg_id)
+{
+    send_command( QString("restore_msg %1").arg(msg_id) );
+}
+
 void TelegramCore::setStatusOnline(bool stt)
 {
     if( stt )
@@ -94,6 +109,43 @@ void TelegramCore::sendFile(const QString &peer, const QString &file)
 void TelegramCore::markRead(const QString &peer)
 {
     send_command( QString("mark_read %1").arg(QString(peer).replace(" ","_")) );
+}
+
+void TelegramCore::createChat(const QString &title, const QString &user)
+{
+    send_command( QString("create_group_chat %1 %2").arg(QString(user).replace(" ","_")).arg(title) );
+}
+
+void TelegramCore::createSecretChat(const QString &user)
+{
+    send_command( QString("create_secret_chat %1").arg(QString(user).replace(" ","_")) );
+}
+
+void TelegramCore::renameChat(const QString &title, const QString &new_title)
+{
+    send_command( QString("rename_chat %1 %2").arg(QString(title).replace(" ","_")).arg(new_title) );
+}
+
+void TelegramCore::chatAddUser(const QString &chat, const QString &user)
+{
+    send_command( QString("chat_add_user %1 %2").arg(QString(chat).replace(" ","_"))
+                  .arg(QString(user).replace(" ","_")));
+}
+
+void TelegramCore::chatDelUser(const QString &chat, const QString &user)
+{
+    send_command( QString("chat_del_user %1 %2").arg(QString(chat).replace(" ","_"))
+                  .arg(QString(user).replace(" ","_")));
+}
+
+void TelegramCore::search(const QString &user, const QString &keyword)
+{
+    send_command( QString("search %1 %2").arg(QString(user).replace(" ","_")).arg(keyword) );
+}
+
+void TelegramCore::globalSearch(const QString &keyword)
+{
+    send_command( QString("global_search %1").arg(keyword) );
 }
 
 void TelegramCore::start()

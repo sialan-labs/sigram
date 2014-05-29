@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSystemTrayIcon>
 
+class QQuickItem;
 class QSettings;
 class TelegramGuiPrivate;
 class TelegramGui : public QObject
@@ -18,6 +19,12 @@ public:
 
     Q_INVOKABLE void setMute( int id, bool stt );
     Q_INVOKABLE bool isMuted( int id ) const;
+
+    Q_INVOKABLE QSize screenSize() const;
+    Q_INVOKABLE QPoint mousePos() const;
+
+    Q_INVOKABLE QPoint mapToGlobal(QQuickItem *item, const QPoint &pnt );
+    Q_INVOKABLE QPoint mapToScene(QQuickItem *item, const QPoint &pnt );
 
     static int desktopSession();
 

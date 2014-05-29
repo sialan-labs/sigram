@@ -139,6 +139,10 @@ public:
 class MessageClass
 {
 public:
+    MessageClass() {
+        deleted = false;
+    }
+
     qint64 msg_id;
     int fwd_id;
     QDateTime fwd_date;
@@ -155,6 +159,8 @@ public:
     int to_id;
 
     int flags;
+
+    bool deleted;
 
     QString mediaFile;
     Enums::messageType mediaType;

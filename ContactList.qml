@@ -51,6 +51,22 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
+        onSelected: {
+            cnct_change_timer.uid = uid
+            cnct_change_timer.restart()
+            menu.stop()
+        }
+
+        Timer {
+            id: cnct_change_timer
+            interval: 400
+            repeat: false
+            onTriggered: {
+                contact_list.current = uid
+                chatFrame.chatView.progressIndicator.stop()
+            }
+            property int uid
+        }
     }
 
     ListView {
@@ -90,10 +106,10 @@ Rectangle {
                 if( cIndex != -1 )
                     contacts.splice(cIndex,1)
             }
-            for( var i=0; i<contacts.length; i++ ) {
-                model.append( {"user_id":contacts[i], "dialog_id": 0} )
-                Telegram.loadUserInfo(contacts[i])
-            }
+//            for( var i=0; i<contacts.length; i++ ) {
+//                model.append( {"user_id":contacts[i], "dialog_id": 0} )
+//                Telegram.loadUserInfo(contacts[i])
+//            }
         }
 
         Component.onCompleted: refresh()

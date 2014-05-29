@@ -55,6 +55,8 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     connect( p->tg_thread, SIGNAL(fileUserUploading(int,qreal))        , SIGNAL(fileUserUploading(int,qreal))         );
     connect( p->tg_thread, SIGNAL(msgFileDownloaded(qint64))           , SIGNAL(msgFileDownloaded(qint64))            );
     connect( p->tg_thread, SIGNAL(msgFileDownloading(qint64,qreal))    , SIGNAL(msgFileDownloading(qint64,qreal))     );
+    connect( p->tg_thread, SIGNAL(messageDeleted(qint64))              , SIGNAL(messageDeleted(qint64))               );
+    connect( p->tg_thread, SIGNAL(messageRestored(qint64))             , SIGNAL(messageRestored(qint64))              );
     connect( p->tg_thread, SIGNAL(tgStarted())                         , SLOT(_startedChanged())                      );
 
     p->tg_thread->start();
@@ -100,7 +102,7 @@ QDateTime Telegram::contactLastTime(int id) const
     return contact(id).lastTime;
 }
 
-QString Telegram::contactTitle(int id)
+QString Telegram::contactTitle(int id) const
 {
     return contactFirstName(id) + " " + contactLastName(id);
 }
@@ -208,6 +210,16 @@ QDateTime Telegram::dialogMsgDate(int id) const
 QString Telegram::dialogMsgLast(int id) const
 {
     return dialog(id).msgLast;
+}
+
+bool Telegram::isDialog(int id) const
+{
+    return p->tg_thread->dialogs().contains(id);
+}
+
+QString Telegram::title(int id) const
+{
+    return isDialog(id)? dialogTitle(id) : contactTitle(id);
 }
 
 QString Telegram::getPhotoPath(int id) const
@@ -340,6 +352,11 @@ QString Telegram::messageMediaFile(qint64 id) const
     return message(id).mediaFile;
 }
 
+bool Telegram::messageIsDeleted(qint64 id) const
+{
+    return message(id).deleted;
+}
+
 int Telegram::me() const
 {
     return p->tg_thread->me();
@@ -397,6 +414,21 @@ void Telegram::sendMessage(int id, const QString &msg)
     p->tg_thread->sendMessage(id,msg);
 }
 
+void Telegram::forwardMessage(qint64 msg_id, int user_id)
+{
+    p->tg_thread->forwardMessage(msg_id,user_id);
+}
+
+void Telegram::deleteMessage(qint64 msg_id)
+{
+    p->tg_thread->deleteMessage(msg_id);
+}
+
+void Telegram::restoreMessage(qint64 msg_id)
+{
+    p->tg_thread->restoreMessage(msg_id);
+}
+
 void Telegram::loadUserInfo(int userId)
 {
     if( p->loaded_users_info.contains(userId) )
@@ -443,6 +475,41 @@ void Telegram::markRead(int dId)
 void Telegram::setStatusOnline(bool stt)
 {
     p->tg_thread->setStatusOnline(stt);
+}
+
+void Telegram::createChat(const QString &title, int user_id)
+{
+    p->tg_thread->createChat(title, user_id);
+}
+
+void Telegram::createSecretChat(int user_id)
+{
+    p->tg_thread->createSecretChat(user_id);
+}
+
+void Telegram::renameChat(int chat_id, const QString &new_title)
+{
+    p->tg_thread->renameChat(chat_id, new_title);
+}
+
+void Telegram::chatAddUser(int chat_id, int user_id)
+{
+    p->tg_thread->chatAddUser(chat_id, user_id);
+}
+
+void Telegram::chatDelUser(int chat_id, int user_id)
+{
+    p->tg_thread->chatDelUser(chat_id, user_id);
+}
+
+void Telegram::search(int user_id, const QString &keyword)
+{
+    p->tg_thread->search( user_id, keyword );
+}
+
+void Telegram::globalSearch(const QString &keyword)
+{
+    p->tg_thread->globalSearch(keyword);
 }
 
 void Telegram::_startedChanged()

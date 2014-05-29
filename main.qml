@@ -16,6 +16,10 @@ Window {
     property bool configure: false
     property bool about: false
 
+    property alias menu: mnu_item
+    property alias mainFrame: main_frame
+    property alias chatFrame: chat_frame
+
     property alias focus: main_frame.focus
 
     Connections {
@@ -113,6 +117,11 @@ Window {
                 NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
             }
         }
+    }
+
+    MenuWindow {
+        id: mnu_item
+        flags: Qt.Popup
     }
 
     Timer {

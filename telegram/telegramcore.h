@@ -24,7 +24,11 @@ public slots:
     void dialogList();
 
     void getHistory( const QString & user, int count );
+
     void sendMessage( const QString & user, const QString & msg );
+    void forwardMessage( qint64 msg_id, const QString & user );
+    void deleteMessage( qint64 msg_id );
+    void restoreMessage( qint64 msg_id );
 
     void setStatusOnline( bool stt );
 
@@ -35,6 +39,16 @@ public slots:
 
     void sendFile( const QString & peer, const QString & file );
     void markRead( const QString & peer );
+
+    void createChat( const QString & title, const QString & user );
+    void createSecretChat( const QString & user );
+    void renameChat( const QString & title, const QString & new_title );
+
+    void chatAddUser( const QString & chat, const QString & user );
+    void chatDelUser( const QString & chat, const QString & user );
+
+    void search( const QString & user, const QString & keyword );
+    void globalSearch( const QString & keyword );
 
     void start();
 

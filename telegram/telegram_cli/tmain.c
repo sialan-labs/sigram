@@ -475,8 +475,8 @@ void sig_abrt_handler (int signum __attribute__ ((unused))) {
 }
 
 int tmain (int argc, char **argv) {
-  signal (SIGSEGV, sig_segv_handler);
-  signal (SIGABRT, sig_abrt_handler);
+//  signal (SIGSEGV, sig_segv_handler);
+//  signal (SIGABRT, sig_abrt_handler);
 
   log_level = 10;
 

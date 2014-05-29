@@ -36,5 +36,9 @@
         <file>ContactListHeader.qml</file>
         <file>files/add.png</file>
         <file>files/search.png</file>
+        <file>MenuWindow.qml</file>
+        <file>AddMenu.qml</file>
+        <file>files/pointer.png</file>
+        <file>ContactDialog.qml</file>
     </qresource>
 </RCC>

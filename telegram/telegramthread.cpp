@@ -123,6 +123,31 @@ void TelegramThread::sendMessage(int id, const QString &msg)
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user), Q_ARG(QString,msg) );
 }
 
+void TelegramThread::forwardMessage(qint64 msg_id, int user_id)
+{
+    const DialogClass & dialog = p->dialogs.value(user_id);
+    const QString & user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(qint64,msg_id), Q_ARG(QString,user) );
+}
+
+void TelegramThread::deleteMessage(qint64 msg_id)
+{
+    if( p->messages.contains(msg_id) )
+        p->messages[msg_id].deleted = true;
+
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(qint64,msg_id) );
+    emit messageDeleted(msg_id);
+}
+
+void TelegramThread::restoreMessage(qint64 msg_id)
+{
+    if( p->messages.contains(msg_id) )
+        p->messages[msg_id].deleted = false;
+
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(qint64,msg_id) );
+    emit messageRestored(msg_id);
+}
+
 void TelegramThread::loadUserInfo(int userId)
 {
     if( !p->contacts.contains(userId) )
@@ -185,6 +210,89 @@ void TelegramThread::markRead(int dId)
 void TelegramThread::setStatusOnline(bool stt)
 {
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(bool,stt));
+}
+
+void TelegramThread::createChat(const QString &title, int user_id)
+{
+    if( !p->contacts.contains(user_id) )
+        return;
+
+    const UserClass & user = p->contacts.value(user_id);
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,title), Q_ARG(QString,user.username));
+}
+
+void TelegramThread::createSecretChat(int user_id)
+{
+    if( !p->contacts.contains(user_id) )
+        return;
+
+    const UserClass & user = p->contacts.value(user_id);
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user.username));
+}
+
+void TelegramThread::renameChat(int chat_id, const QString &new_title)
+{
+    if( !p->dialogs.contains(chat_id) )
+        return;
+
+    const DialogClass & dialog = p->dialogs.value(chat_id);
+    QString peer;
+    if( dialog.is_chat )
+        peer = dialog.chatClass.title;
+    else
+        return;
+
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,peer), Q_ARG(QString,new_title));
+}
+
+void TelegramThread::chatAddUser(int chat_id, int user_id)
+{
+    if( !p->dialogs.contains(chat_id) )
+        return;
+    if( !p->contacts.contains(user_id) )
+        return;
+
+    const DialogClass & dialog = p->dialogs.value(chat_id);
+    QString chat;
+    if( dialog.is_chat )
+        chat = dialog.chatClass.title;
+    else
+        return;
+
+    const UserClass & user = p->contacts.value(user_id);
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,chat), Q_ARG(QString,user.username));
+}
+
+void TelegramThread::chatDelUser(int chat_id, int user_id)
+{
+    if( !p->dialogs.contains(chat_id) )
+        return;
+    if( !p->contacts.contains(user_id) )
+        return;
+
+    const DialogClass & dialog = p->dialogs.value(chat_id);
+    QString chat;
+    if( dialog.is_chat )
+        chat = dialog.chatClass.title;
+    else
+        return;
+
+    const UserClass & user = p->contacts.value(user_id);
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,chat), Q_ARG(QString,user.username));
+}
+
+void TelegramThread::search(int user_id, const QString &keyword)
+{
+    if( !p->contacts.contains(user_id) )
+        return;
+
+    const UserClass & user = p->contacts.value(user_id);
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user.username), Q_ARG(QString,keyword));
+}
+
+void TelegramThread::globalSearch(const QString &keyword)
+{
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,keyword));
 }
 
 void TelegramThread::run()

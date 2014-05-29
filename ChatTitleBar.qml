@@ -42,7 +42,7 @@ Rectangle {
             font.pointSize: 14
             anchors.horizontalCenter: column.horizontalCenter
             color: "#bbbbbb"
-            text: Telegram.dialogTitle(titlebar.current)
+            text: Telegram.title(titlebar.current)
         }
 
         Text {

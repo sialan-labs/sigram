@@ -25,7 +25,7 @@ public:
     Q_INVOKABLE int contactUid(int id) const;
     Q_INVOKABLE int contactState(int id) const;
     Q_INVOKABLE QDateTime contactLastTime(int id) const;
-    Q_INVOKABLE QString contactTitle(int id);
+    Q_INVOKABLE QString contactTitle(int id) const;
 
     Q_INVOKABLE QList<int> dialogListIds();
     DialogClass dialog( int id ) const;
@@ -47,6 +47,9 @@ public:
     Q_INVOKABLE int dialogUnreadCount( int id ) const;
     Q_INVOKABLE QDateTime dialogMsgDate( int id ) const;
     Q_INVOKABLE QString dialogMsgLast( int id ) const;
+    Q_INVOKABLE bool isDialog( int id ) const;
+
+    Q_INVOKABLE QString title( int id ) const;
 
     Q_INVOKABLE QString getPhotoPath( int id ) const;
 
@@ -68,6 +71,7 @@ public:
     Q_INVOKABLE qint64 messageMediaType( qint64 id ) const;
     Q_INVOKABLE bool messageIsPhoto( qint64 id ) const;
     Q_INVOKABLE QString messageMediaFile( qint64 id ) const;
+    Q_INVOKABLE bool messageIsDeleted( qint64 id ) const;
 
     Q_INVOKABLE int me() const;
     Q_INVOKABLE bool started() const;
@@ -80,7 +84,11 @@ public slots:
     void updateDialogListUsingTimer();
 
     void getHistory( int id, int count );
+
     void sendMessage( int id, const QString & msg );
+    void forwardMessage( qint64 msg_id, int user_id );
+    void deleteMessage( qint64 msg_id );
+    void restoreMessage( qint64 msg_id );
 
     void loadUserInfo( int userId );
     void loadChatInfo( int chatId );
@@ -92,6 +100,15 @@ public slots:
     void markRead( int dId );
 
     void setStatusOnline( bool stt );
+
+    void createChat( const QString & title, int user_id );
+    void createSecretChat( int user_id );
+    void renameChat( int chat_id, const QString & new_title );
+    void chatAddUser( int chat_id, int user_id );
+    void chatDelUser( int chat_id, int user_id );
+
+    void search( int user_id, const QString & keyword );
+    void globalSearch( const QString & keyword );
 
 signals:
     void contactsChanged();
@@ -113,6 +130,9 @@ signals:
 
     void msgFileDownloaded( qint64 msg_id );
     void msgFileDownloading( qint64 msg_id, qreal percent );
+
+    void messageDeleted( qint64 msg_id );
+    void messageRestored( qint64 msg_id );
 
     void startedChanged();
 
