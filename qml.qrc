@@ -40,5 +40,8 @@
         <file>AddMenu.qml</file>
         <file>files/pointer.png</file>
         <file>ContactDialog.qml</file>
+        <file>files/icon.png</file>
+        <file>files/about_icon.png</file>
+        <file>files/sialan_logo.png</file>
     </qresource>
 </RCC>

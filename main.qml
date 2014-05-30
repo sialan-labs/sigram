@@ -10,7 +10,9 @@ Window {
 
     property real physicalPlatformScale: 1
     property real fontsScale: 1
-    property string globalFontFamily
+    property string globalNormalFontFamily: "Open Sans"
+    property string globalTextFontFamily: "Droid Arabic Naskh"
+
 
     property alias current: chat_frame.current
     property bool configure: false
@@ -26,9 +28,21 @@ Window {
         target: Telegram
         onStartedChanged: status_changer.restart()
     }
+    Component {
+        id: font_loader
+        FontLoader {}
+    }
 
     onActiveChanged: status_changer.restart()
     onVisibleChanged: status_changer.restart()
+
+    Component.onCompleted: {
+        var fonts = Gui.fonts()
+        for( var i=0; i<fonts.length; i++ ) {
+            var obj = font_loader.createObject(main)
+            obj.source = "file://" + fonts[i]
+        }
+    }
 
     About {
         anchors.fill: parent

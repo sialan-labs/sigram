@@ -20,8 +20,8 @@ Window {
         if( privates.oldItem )
             privates.oldItem.destroy()
         if( item ) {
-            item.parent = menu_main_item
-            item.anchors.fill = menu_main_item
+            item.parent = menu_items_parent
+            item.anchors.fill = menu_items_parent
         }
 
         privates.oldItem = item
@@ -82,6 +82,11 @@ Window {
             }
         }
 
+        Item {
+            id: menu_items_parent
+            anchors.fill: parent
+        }
+
         Behavior on scale {
             NumberAnimation{ easing.type: Easing.OutBack; duration: menu_win.duration }
         }
@@ -106,7 +111,7 @@ Window {
         menu_frame.height = y+h+shadowSize>height? height-y-shadowSize : h
         menu_frame.x = x - 1*menu_frame.width/2
         menu_frame.y = y
-        item = component.createObject(menu_main_item)
+        item = component.createObject(menu_items_parent)
         started = true
 
         return item

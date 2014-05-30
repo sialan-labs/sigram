@@ -36,6 +36,7 @@ Rectangle {
                 anchors.left: contact_image.right
                 anchors.leftMargin: 8
                 font.pointSize: 10
+                font.family: globalNormalFontFamily
                 text: Telegram.contactTitle(user_id)
             }
 

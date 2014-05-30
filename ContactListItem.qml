@@ -40,6 +40,7 @@ Rectangle {
 
         Column {
             id: column
+            width: row.width - img.width - row.spacing
             anchors.verticalCenter: parent.verticalCenter
             spacing: 4
 
@@ -47,7 +48,14 @@ Rectangle {
                 id: txt
                 text: item.isDialog ? Telegram.dialogTitle(dialog_id) : Telegram.contactTitle(item.uid)
                 anchors.left: parent.left
+                width: parent.width
                 font.pointSize: 10
+                font.weight: Font.DemiBold
+                font.family: globalNormalFontFamily
+                horizontalAlignment: Text.AlignLeft
+                maximumLineCount: 1
+                elide: Text.ElideRight
+                wrapMode: Text.WrapAnywhere
                 color: marea.pressed || item.selected? "#ffffff" : "#333333"
             }
 
@@ -55,6 +63,8 @@ Rectangle {
                 id: date
                 anchors.left: parent.left
                 font.pointSize: 9
+                font.weight: Font.Normal
+                font.family: globalNormalFontFamily
                 color: marea.pressed || item.selected? "#dddddd" : "#555555"
                 text: item.isDialog ? Telegram.convertDateToString(Telegram.dialogMsgDate(dialog_id)) : " "
             }

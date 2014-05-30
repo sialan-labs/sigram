@@ -2,9 +2,11 @@ TEMPLATE = app
 
 QT += qml quick dbus widgets sql
 
-manifest.source = database/userdata.db
-manifest.target = .
-COPYFOLDERS = manifest
+database.source = database/userdata.db
+database.target = .
+fonts.source = fonts
+fonts.target = .
+COPYFOLDERS = database fonts
 include(qmake/copyData.pri)
 copyData()
 

@@ -47,8 +47,8 @@ Rectangle {
             id: txt
             y: parent.height/2 - height/2 - 1*physicalPlatformScale
             color: "#ffffff"
-            font.bold: true
-            font.family: globalFontFamily
+            font.weight: Font.DemiBold
+            font.family: globalNormalFontFamily
             font.pointSize: 9*fontsScale
         }
     }

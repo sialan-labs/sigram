@@ -7,6 +7,7 @@ TextEdit {
     selectionColor: "#0d80ec"
     selectedTextColor: "#ffffff"
     wrapMode: Text.WordWrap
+    font.family: globalTextFontFamily
 
     onTextChanged: if( text.trim().length == 0 ) text = text.trim()
 

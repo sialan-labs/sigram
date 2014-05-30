@@ -75,6 +75,8 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: header.bottom
         anchors.bottom: parent.bottom
+        maximumFlickVelocity: 2500
+        flickDeceleration: 2500
         clip: true
         model: ListModel{}
         delegate: ContactListItem {

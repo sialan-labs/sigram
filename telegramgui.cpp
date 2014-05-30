@@ -113,6 +113,30 @@ QPoint TelegramGui::mapToScene(QQuickItem *item, const QPoint &pnt)
     return item->mapToScene(pnt).toPoint();
 }
 
+QString TelegramGui::appPath() const
+{
+    return QCoreApplication::applicationDirPath() + "/";
+}
+
+QStringList TelegramGui::fonts() const
+{
+    return fontsOf(appPath() + "/fonts");
+}
+
+QStringList TelegramGui::fontsOf(const QString &path) const
+{
+    QStringList res;
+    const QStringList & list = QDir(path).entryList(QStringList() << "*.ttf", QDir::Files);
+    foreach( const QString & f, list )
+        res << path + "/" + f;
+
+    const QStringList & dirs = QDir(path).entryList(QDir::Dirs|QDir::NoDotAndDotDot);
+    foreach( const QString & d, dirs )
+        res << fontsOf( path + "/" + d );
+
+    return res;
+}
+
 int TelegramGui::desktopSession()
 {
     static int result = -1;

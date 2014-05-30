@@ -19,7 +19,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         width: 42
         icon: "files/add.png"
-        iconHeight: 12
+        iconHeight: 22
         highlightColor: "#33B7CC"
         normalColor: "#bbbbbb"
         onClicked: {

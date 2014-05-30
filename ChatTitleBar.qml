@@ -39,15 +39,17 @@ Rectangle {
 
         Text {
             id: title
-            font.pointSize: 14
+            font.pointSize: 15
             anchors.horizontalCenter: column.horizontalCenter
             color: "#bbbbbb"
+            font.family: globalNormalFontFamily
             text: Telegram.title(titlebar.current)
         }
 
         Text {
             id: last_time
             font.pointSize: 10
+            font.family: globalNormalFontFamily
             anchors.horizontalCenter: parent.horizontalCenter
             color: "#bbbbbb"
             visible: !is_typing.visible
@@ -58,6 +60,7 @@ Rectangle {
         Text {
             id: is_typing
             font.pointSize: 10
+            font.family: globalNormalFontFamily
             anchors.horizontalCenter: parent.horizontalCenter
             color: "#bbbbbb"
             text: user==0? "" : Telegram.dialogTitle(user) + qsTr("is typing...")

@@ -72,6 +72,7 @@ Item {
                 Text {
                     id: user
                     font.pointSize: 8
+                    font.family: globalTextFontFamily
                     text: Telegram.messageFromName( msg_id )
                     color: item.out? "#ffffff" : "#333333"
                 }
@@ -82,6 +83,8 @@ Item {
                     width: msgWidth>item.width*0.6? item.width*0.6 : msgWidth
                     text: Telegram.messageBody(msg_id)
                     color: item.out? "#ffffff" : "#333333"
+                    font.family: globalTextFontFamily
+                    font.pointSize: 9
                     visible: text.length != 0
 
                     property real msgWidth: Telegram.messageBodyTextWidth(msg_id)
