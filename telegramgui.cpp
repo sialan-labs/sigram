@@ -49,6 +49,8 @@ public:
 
     QQuickWindow *root;
     QHash<int,bool> mutes;
+
+    QString background;
 };
 
 TelegramGui::TelegramGui(QObject *parent) :
@@ -63,6 +65,7 @@ TelegramGui::TelegramGui(QObject *parent) :
     if( !tg_settings )
         tg_settings = new QSettings( HOME_PATH + "/telegram.conf", QSettings::IniFormat, this);
 
+    p->background = tg_settings->value( "General/background", QString() ).toString();
     p->notify = new Notification(this);
 
     connect( p->notify, SIGNAL(notifyAction(uint,QString)), SLOT(notify_action(uint,QString)) );
@@ -135,6 +138,26 @@ QStringList TelegramGui::fontsOf(const QString &path) const
         res << fontsOf( path + "/" + d );
 
     return res;
+}
+
+void TelegramGui::setBackground(const QString &path)
+{
+    if( path == p->background )
+        return;
+
+    p->background = path;
+    tg_settings->setValue( "General/background", p->background );
+    emit backgroundChanged();
+}
+
+QString TelegramGui::background() const
+{
+    return p->background;
+}
+
+QString TelegramGui::getOpenFile()
+{
+    return QFileDialog::getOpenFileName();
 }
 
 int TelegramGui::desktopSession()

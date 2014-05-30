@@ -379,7 +379,7 @@ QString Telegram::convertDateToString(const QDateTime &date)
     if( date.date().day() != today.date().day() )
         return date.date().toString("MMM d");
     else
-        return tr("Today") + " " + date.time().toString("hh:mm");
+        return date.time().toString("hh:mm");
 }
 
 void Telegram::updateContactList()

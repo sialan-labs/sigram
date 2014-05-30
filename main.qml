@@ -13,6 +13,7 @@ Window {
     property string globalNormalFontFamily: "Open Sans"
     property string globalTextFontFamily: "Droid Arabic Naskh"
 
+    property bool imageBack: Gui.background.length != 0
 
     property alias current: chat_frame.current
     property bool configure: false

@@ -4,7 +4,7 @@ Rectangle {
     id: titlebar
     width: 100
     height: 53
-    color: "#403F3A"
+    color: imageBack? "#66ffffff" : "#403F3A"
 
     property int current
     property bool isChat: Telegram.dialogIsChat(current)
@@ -41,7 +41,7 @@ Rectangle {
             id: title
             font.pointSize: 15
             anchors.horizontalCenter: column.horizontalCenter
-            color: "#bbbbbb"
+            color: imageBack? "#333333" : "#bbbbbb"
             font.family: globalNormalFontFamily
             text: Telegram.title(titlebar.current)
         }
@@ -51,7 +51,7 @@ Rectangle {
             font.pointSize: 10
             font.family: globalNormalFontFamily
             anchors.horizontalCenter: parent.horizontalCenter
-            color: "#bbbbbb"
+            color: imageBack? "#333333" : "#bbbbbb"
             visible: !is_typing.visible
             text: titlebar.isChat? qsTr("Chat Room") :
                       qsTr("Last seen") + " " + Telegram.convertDateToString( Telegram.dialogUserLastTime(titlebar.current) )
@@ -62,7 +62,7 @@ Rectangle {
             font.pointSize: 10
             font.family: globalNormalFontFamily
             anchors.horizontalCenter: parent.horizontalCenter
-            color: "#bbbbbb"
+            color: imageBack? "#333333" : "#bbbbbb"
             text: user==0? "" : Telegram.dialogTitle(user) + qsTr("is typing...")
             visible: user!=0
 

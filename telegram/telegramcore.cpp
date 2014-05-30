@@ -290,7 +290,7 @@ void dialogList_addToBuffer( peer_t *uc, int is_chat, int unread_cnt )
         user.lastTime = convertDate(uc->user.status.when);
     }
 
-    if( !(uc->last->flags & Enums::UserMessageEmpty) && uc->last->media.type != 0 && uc->last->prev )
+    if( !(uc->last->flags & Enums::UserMessageEmpty) && uc->last->media.type != 0 )
         dialog.msgLast = uc->last->msg;
 
     foreach( TelegramCore *tg, telegram_objects )

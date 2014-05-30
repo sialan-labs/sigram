@@ -11,6 +11,7 @@ class TelegramGui : public QObject
 {
     Q_PROPERTY(int desktopSession READ desktopSession NOTIFY desktopSessionChanged)
     Q_PROPERTY(QString appPath READ appPath NOTIFY appPathChanged)
+    Q_PROPERTY(QString background READ background WRITE setBackground NOTIFY backgroundChanged)
     Q_OBJECT
 public:
     TelegramGui(QObject *parent = 0);
@@ -30,6 +31,11 @@ public:
     Q_INVOKABLE QString appPath() const;
     Q_INVOKABLE QStringList fonts() const;
     Q_INVOKABLE QStringList fontsOf( const QString & path ) const;
+
+    Q_INVOKABLE void setBackground( const QString & path );
+    Q_INVOKABLE QString background() const;
+
+    Q_INVOKABLE QString getOpenFile();
 
     static int desktopSession();
 
@@ -54,6 +60,7 @@ signals:
     void muted( int id, bool stt );
     void desktopSessionChanged();
     void appPathChanged();
+    void backgroundChanged();
 
 private slots:
     void notify_action( uint id, const QString & act );

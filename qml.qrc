@@ -43,5 +43,7 @@
         <file>files/icon.png</file>
         <file>files/about_icon.png</file>
         <file>files/sialan_logo.png</file>
+        <file>files/delete.png</file>
+        <file>files/indicator_light.png</file>
     </qresource>
 </RCC>

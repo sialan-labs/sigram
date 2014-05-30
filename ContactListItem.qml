@@ -40,33 +40,60 @@ Rectangle {
 
         Column {
             id: column
-            width: row.width - img.width - row.spacing
+            width: row.width - img.width - row.spacing - 4
             anchors.verticalCenter: parent.verticalCenter
             spacing: 4
 
-            Text {
-                id: txt
-                text: item.isDialog ? Telegram.dialogTitle(dialog_id) : Telegram.contactTitle(item.uid)
+            Item {
                 anchors.left: parent.left
                 width: parent.width
-                font.pointSize: 10
-                font.weight: Font.DemiBold
-                font.family: globalNormalFontFamily
-                horizontalAlignment: Text.AlignLeft
-                maximumLineCount: 1
-                elide: Text.ElideRight
-                wrapMode: Text.WrapAnywhere
-                color: marea.pressed || item.selected? "#ffffff" : "#333333"
+                height: txt.height
+
+                Text {
+                    id: txt
+                    text: item.isDialog ? Telegram.dialogTitle(dialog_id) : Telegram.contactTitle(item.uid)
+                    anchors.left: parent.left
+                    width: parent.width - date.width
+                    font.pointSize: 10
+                    font.weight: Font.DemiBold
+                    font.family: globalNormalFontFamily
+                    horizontalAlignment: Text.AlignLeft
+                    maximumLineCount: 1
+                    elide: Text.ElideRight
+                    wrapMode: Text.WrapAnywhere
+                    color: marea.pressed || item.selected? "#ffffff" : "#333333"
+                }
+
+                Text {
+                    id: date
+                    anchors.right: parent.right
+                    font.pointSize: 9
+                    font.weight: Font.Normal
+                    font.family: globalNormalFontFamily
+                    color: marea.pressed || item.selected? "#dddddd" : "#555555"
+                    text: item.isDialog ? Telegram.convertDateToString(Telegram.dialogMsgDate(dialog_id)) : " "
+                }
             }
 
-            Text {
-                id: date
+            Item {
                 anchors.left: parent.left
-                font.pointSize: 9
-                font.weight: Font.Normal
-                font.family: globalNormalFontFamily
-                color: marea.pressed || item.selected? "#dddddd" : "#555555"
-                text: item.isDialog ? Telegram.convertDateToString(Telegram.dialogMsgDate(dialog_id)) : " "
+                width: parent.width
+                height: last_msg.height
+
+                Text {
+                    id: last_msg
+                    text: Telegram.dialogMsgLast(dialog_id)
+                    anchors.left: parent.left
+                    width: parent.width
+                    font.pointSize: 9
+                    font.weight: Font.Normal
+                    font.family: globalTextFontFamily
+                    horizontalAlignment: Text.AlignLeft
+                    maximumLineCount: 1
+                    elide: Text.ElideRight
+                    wrapMode: Text.WrapAnywhere
+                    color: marea.pressed || item.selected? "#dddddd" : "#555555"
+                }
             }
         }
     }

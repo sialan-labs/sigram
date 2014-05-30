@@ -61,8 +61,7 @@ Item {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         visible: false
-        height: 5
-        color: "#88333333"
+        height: 15
     }
 
     MouseArea {

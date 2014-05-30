@@ -42,6 +42,7 @@ Rectangle {
     Indicator {
         id: indicator
         anchors.fill: parent
+        source: "files/indicator.png"
         Component.onCompleted: start()
     }
 

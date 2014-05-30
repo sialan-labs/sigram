@@ -45,8 +45,10 @@ Window {
         height: 300
         transformOrigin: Item.Top
         scale: menu_win.started? 1 : 0.1
-        opacity: menu_win.started? 1 : 0
+        opacity: menu_win.started? (low_opac? 0.99 : 1) : 0
         visible: opacity != 0
+
+        property bool low_opac: false
 
         DropShadow {
             anchors.fill: menu_item
@@ -102,6 +104,16 @@ Window {
         onTriggered: if( menu_win.item ) menu_win.item.destroy()
     }
 
+    Timer {
+        id: update_timer
+        interval: 500
+        repeat: true
+        onTriggered: {
+            menu_frame.update()
+            menu_frame.low_opac = !menu_frame.low_opac
+        }
+    }
+
     function start( component, x, y, w, h ) {
         var sz = Gui.screenSize()
         menu_win.width = sz.width
@@ -114,11 +126,13 @@ Window {
         item = component.createObject(menu_items_parent)
         started = true
 
+        update_timer.restart()
         return item
     }
 
     function stop() {
         started = false
         obj_destroyer.restart()
+        update_timer.stop()
     }
 }
