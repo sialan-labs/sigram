@@ -13,6 +13,8 @@ Item {
 
     property real itemMargins: 10
 
+    signal contactSelected( int uid )
+
     Connections {
         target: Telegram
         onMsgChanged: {
@@ -41,6 +43,12 @@ Item {
             borderColor: "#222222"
             uid: Telegram.messageFromId(msg_id)
             onlineState: true
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: item.contactSelected(img.uid)
+            }
         }
 
         Item {

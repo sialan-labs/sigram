@@ -449,55 +449,13 @@ int dlgot (void) {
 int new_dc_num;
 int wait_dialog_list;
 
-int loop (void) {
-  on_start ();
-  if (binlog_enabled) {
-    double t = get_double_time ();
-    logprintf ("replay log start\n");
-    replay_log ();
-    logprintf ("replay log end in %lf seconds\n", get_double_time () - t);
-    write_binlog ();
-    #ifdef USE_LUA
-      lua_binlog_end ();
-    #endif
-  } else {
-    read_auth_file ();
-  }
-  update_prompt ();
-
-  assert (DC_list[dc_working_num]);
-  if (!DC_working || !DC_working->auth_key_id) {
-//  if (auth_state == 0) {
-    DC_working = DC_list[dc_working_num];
-    assert (!DC_working->auth_key_id);
-    dc_authorize (DC_working);
-    assert (DC_working->auth_key_id);
-    auth_state = 100;
-    write_auth_file ();
-  }
-  
-  if (verbosity) {
-    logprintf ("Requesting info about DC...\n");
-  }
-  do_help_get_config ();
-  net_loop (0, mcs);
-  if (verbosity) {
-    logprintf ("DC_info: %d new DC got\n", new_dc_num);
-  }
-  int i;
-  for (i = 0; i <= MAX_DC_NUM; i++) if (DC_list[i] && !DC_list[i]->auth_key_id) {
-    dc_authorize (DC_list[i]);
-    assert (DC_list[i]->auth_key_id);
-    write_auth_file ();
-  }
-
-  if (auth_state == 100 || !(DC_working->has_auth)) {
+int start_registering() {
     if (!default_username) {
       size_t size = 0;
       char *user = 0;
 
       if (!user) {
-        printf ("Telephone number (with '+' sign): ");         
+        printf ("Telephone number (with '+' sign): ");
         if (net_getline (&user, &size) == -1) {
           perror ("getline()");
           qthreadExitRequest (EXIT_FAILURE);
@@ -562,7 +520,7 @@ int loop (void) {
       assert (dc_num >= 0 && dc_num <= MAX_DC_NUM && DC_list[dc_num]);
       dc_working_num = dc_num;
       DC_working = DC_list[dc_working_num];
-      
+
       do_send_code (default_username);
       printf ("Code from sms (if you did not receive an SMS and want to be called, type \"call\"): ");
       while (1) {
@@ -584,38 +542,91 @@ int loop (void) {
       }
       auth_state = 300;
     }
-  }
 
-  for (i = 0; i <= MAX_DC_NUM; i++) if (DC_list[i] && !DC_list[i]->has_auth) {
-    do_export_auth (i);
-    do_import_auth (i);
-    bl_do_dc_signed (i);
+    return 0;
+}
+
+int connect_to_server() {
+    int i = 0;
+    for (i = 0; i <= MAX_DC_NUM; i++) if (DC_list[i] && !DC_list[i]->has_auth) {
+      do_export_auth (i);
+      do_import_auth (i);
+      bl_do_dc_signed (i);
+      write_auth_file ();
+    }
+    write_auth_file ();
+
+    fflush (stdout);
+    fflush (stderr);
+
+    read_state_file ();
+    read_secret_chat_file ();
+
+    set_interface_callbacks ();
+
+  //  do_get_difference ();
+  //  net_loop (0, dgot);
+    #ifdef USE_LUA
+      lua_diff_end ();
+    #endif
+    send_all_unsent ();
+
+    tgStarted();
+  //  do_get_dialog_list ();
+  //  if (wait_dialog_list) {
+  //    dialog_list_got = 0;
+  //    net_loop (0, dlgot);
+  //  }
+
+    return main_loop ();
+}
+
+int loop (void) {
+  on_start ();
+  if (binlog_enabled) {
+    double t = get_double_time ();
+    logprintf ("replay log start\n");
+    replay_log ();
+    logprintf ("replay log end in %lf seconds\n", get_double_time () - t);
+    write_binlog ();
+    #ifdef USE_LUA
+      lua_binlog_end ();
+    #endif
+  } else {
+    read_auth_file ();
+  }
+  update_prompt ();
+
+  assert (DC_list[dc_working_num]);
+  if (!DC_working || !DC_working->auth_key_id) {
+//  if (auth_state == 0) {
+    DC_working = DC_list[dc_working_num];
+    assert (!DC_working->auth_key_id);
+    dc_authorize (DC_working);
+    assert (DC_working->auth_key_id);
+    auth_state = 100;
     write_auth_file ();
   }
-  write_auth_file ();
+  
+  if (verbosity) {
+    logprintf ("Requesting info about DC...\n");
+  }
+  do_help_get_config ();
+  net_loop (0, mcs);
+  if (verbosity) {
+    logprintf ("DC_info: %d new DC got\n", new_dc_num);
+  }
+  int i;
+  for (i = 0; i <= MAX_DC_NUM; i++) if (DC_list[i] && !DC_list[i]->auth_key_id) {
+    dc_authorize (DC_list[i]);
+    assert (DC_list[i]->auth_key_id);
+    write_auth_file ();
+  }
 
-  fflush (stdout);
-  fflush (stderr);
+  if (auth_state == 100 || !(DC_working->has_auth)) {
+      start_registering();
+  }
 
-  read_state_file ();
-  read_secret_chat_file ();
-
-  set_interface_callbacks ();
-
-//  do_get_difference ();
-//  net_loop (0, dgot);
-  #ifdef USE_LUA
-    lua_diff_end ();
-  #endif
-  send_all_unsent ();
-
-  tgStarted();
-//  do_get_dialog_list ();
-//  if (wait_dialog_list) {
-//    dialog_list_got = 0;
-//    net_loop (0, dlgot);
-//  }
-
-  return main_loop ();
+  return connect_to_server();
 }
 

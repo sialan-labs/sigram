@@ -45,5 +45,9 @@
         <file>files/sialan_logo.png</file>
         <file>files/delete.png</file>
         <file>files/indicator_light.png</file>
+        <file>UserConfig.qml</file>
+        <file>files/back.png</file>
+        <file>CheckBox.qml</file>
+        <file>Mirror.qml</file>
     </qresource>
 </RCC>

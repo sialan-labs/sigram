@@ -3,6 +3,7 @@ import QtQuick 2.0
 Rectangle {
     width: 100
     height: 62
+    clip: true
 
     property alias current: contact_list.current
 

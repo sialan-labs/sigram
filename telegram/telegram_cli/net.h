@@ -24,7 +24,9 @@ struct dc;
 #include "queries.h"
 #define TG_SERVER "173.240.5.1"
 #define TG_SERVER_TEST "173.240.5.253"
+/*de37bcf00f4688de900510f4f87384bb*/
 #define TG_APP_HASH "36722c72256a24c1225de00eb6a1ca74"
+/*13682*/
 #define TG_APP_ID 2899
 #define TG_BUILD "209"
 

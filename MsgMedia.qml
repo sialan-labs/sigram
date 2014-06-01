@@ -68,6 +68,7 @@ Item {
         anchors.fill: parent
         visible: f_img.path.length != 0
         acceptedButtons: Qt.RightButton | Qt.LeftButton
+        cursorShape: Qt.PointingHandCursor
         onClicked: {
             if (mouse.button == Qt.RightButton) {
                 msg_media.showMenu()
@@ -75,7 +76,6 @@ Item {
                 Gui.openFile(f_img.path)
             }
         }
-        cursorShape: Qt.PointingHandCursor
     }
 
     function showMenu() {

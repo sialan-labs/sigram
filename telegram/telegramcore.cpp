@@ -413,4 +413,6 @@ void qthreadExit(int code)
 void qthreadExitRequest(int code)
 {
     qDebug() << __FUNCTION__ << code;
+//    qthreadExit(code);
+//    QCoreApplication::exit(code);
 }

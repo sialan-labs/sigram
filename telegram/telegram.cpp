@@ -16,6 +16,10 @@ public:
 
     int update_dialog_timer_id;
     bool update_dialog_again;
+
+    int update_contact_timer_id;
+    bool update_contact_again;
+
     bool started;
 
     QSet<int> loaded_users_info;
@@ -34,6 +38,8 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     p = new TelegramPrivate;
     p->update_dialog_again = false;
     p->update_dialog_timer_id = 0;
+    p->update_contact_again = false;
+    p->update_contact_timer_id = 0;
     p->started = false;
 
     p->tg_thread = new TelegramThread(argc,argv);
@@ -105,6 +111,23 @@ QDateTime Telegram::contactLastTime(int id) const
 QString Telegram::contactTitle(int id) const
 {
     return contactFirstName(id) + " " + contactLastName(id);
+}
+
+QString Telegram::contactLastSeenText(int id) const
+{
+    switch( contactState(id) )
+    {
+    case Enums::Online:
+        return tr("Online");
+        break;
+
+    case Enums::Offline:
+    case Enums::NotOnlineYet:
+        return tr("Last seen") + " " + convertDateToString( contactLastTime(id) );
+        break;
+    }
+
+    return QString();
 }
 
 QList<int> Telegram::dialogListIds()
@@ -367,7 +390,7 @@ bool Telegram::started() const
     return p->started;
 }
 
-QString Telegram::convertDateToString(const QDateTime &date)
+QString Telegram::convertDateToString(const QDateTime &date) const
 {
     const QDateTime & today = QDateTime::currentDateTime();
     if( date.date().year() != today.date().year() )
@@ -402,6 +425,18 @@ void Telegram::updateDialogListUsingTimer()
 
     p->update_dialog_again = false;
     p->update_dialog_timer_id = startTimer(1000);
+}
+
+void Telegram::updateContactListUsingTimer()
+{
+    if( p->update_contact_timer_id )
+    {
+        p->update_contact_timer_id = true;
+        return;
+    }
+
+    p->update_contact_again = false;
+    p->update_contact_timer_id = startTimer(1000);
 }
 
 void Telegram::getHistory(int id, int count)
@@ -532,6 +567,20 @@ void Telegram::timerEvent(QTimerEvent *e)
         p->update_dialog_again = false;
         killTimer(p->update_dialog_timer_id);
         p->update_dialog_timer_id = 0;
+    }
+    else
+    if( e->timerId() == p->update_contact_timer_id )
+    {
+        updateContactList();
+        if( p->update_contact_again )
+        {
+            p->update_contact_again = false;
+            return;
+        }
+
+        p->update_contact_again = false;
+        killTimer(p->update_contact_timer_id);
+        p->update_contact_timer_id = 0;
     }
     else
         QObject::timerEvent(e);

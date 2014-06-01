@@ -57,6 +57,7 @@ Rectangle {
         id: marea
         anchors.fill: parent
         hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
         onEntered: button.enter = true
         onExited: button.enter = false
         onPressed: button.press = true

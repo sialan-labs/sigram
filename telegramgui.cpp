@@ -394,8 +394,7 @@ void TelegramGui::configure()
 {
     p->root->setVisible( true );
     p->root->requestActivate();
-    p->root->setProperty( "configure", !p->root->property("configure").toBool() );
-    p->root->setProperty( "focus", true );
+    QMetaObject::invokeMethod( p->root, "showMyConfigure" );
 }
 
 void TelegramGui::about()

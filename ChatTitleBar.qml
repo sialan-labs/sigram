@@ -8,6 +8,9 @@ Rectangle {
 
     property int current
     property bool isChat: Telegram.dialogIsChat(current)
+    property bool fakes: false
+
+    signal clicked()
 
     Connections {
         target: Telegram
@@ -17,6 +20,13 @@ Rectangle {
 
             is_typing.user = user_id
             typing_timer.restart()
+        }
+        onUserStatusChanged: {
+            if( titlebar.current != user_id )
+                return
+
+            fakes = true
+            fakes = false
         }
     }
 
@@ -29,6 +39,7 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
+        onClicked: titlebar.clicked()
     }
 
     Column {
@@ -53,8 +64,9 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             color: imageBack? "#333333" : "#bbbbbb"
             visible: !is_typing.visible
-            text: titlebar.isChat? qsTr("Chat Room") :
-                      qsTr("Last seen") + " " + Telegram.convertDateToString( Telegram.dialogUserLastTime(titlebar.current) )
+            text: titlebar.isChat? qsTr("Chat Room") : Telegram.contactLastSeenText(fakeCurrent)
+
+            property int fakeCurrent: fakes? 0 : titlebar.current
         }
 
         Text {

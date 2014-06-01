@@ -16,7 +16,6 @@ Window {
     property bool imageBack: Gui.background.length != 0
 
     property alias current: chat_frame.current
-    property bool configure: false
     property bool about: false
 
     property alias menu: mnu_item
@@ -36,7 +35,6 @@ Window {
 
     onActiveChanged: status_changer.restart()
     onVisibleChanged: status_changer.restart()
-
     Component.onCompleted: {
         var fonts = Gui.fonts()
         for( var i=0; i<fonts.length; i++ ) {
@@ -60,24 +58,10 @@ Window {
         Keys.onEscapePressed: {
             if( about )
                 about = false
-            else
-            if( configure )
-                configure = false
         }
 
         Behavior on y {
             NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
-        }
-
-        Configure {
-            id: confg
-            width: 273
-            height: parent.height
-            x: configure? 0 : -width/3
-
-            Behavior on x {
-                NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
-            }
         }
 
         Rectangle {
@@ -96,41 +80,8 @@ Window {
 
         ChatFrame {
             id: chat_frame
-            x: configure? 273 : 0
             width: parent.width
             height: parent.height
-
-            Behavior on x {
-                NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                visible: main.configure
-                onClicked: main.configure = false
-            }
-        }
-
-        Desaturate {
-            id: main_desaturate
-            anchors.fill: chat_frame
-            source: chat_frame
-            visible: false
-            desaturation: 0.8
-            cached: true
-        }
-
-        FastBlur {
-            anchors.fill: main_desaturate
-            source: main_desaturate
-            radius: 16
-            visible: opacity != 0
-            opacity: main.configure? 1 : 0
-            cached: true
-            Behavior on opacity {
-                NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
-            }
         }
     }
 
@@ -160,5 +111,9 @@ Window {
             return
 
         Gui.sendNotify(msg_id)
+    }
+
+    function showMyConfigure() {
+        chatFrame.chatView.showConfigure(Telegram.me)
     }
 }

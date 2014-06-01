@@ -26,6 +26,7 @@ public:
     Q_INVOKABLE int contactState(int id) const;
     Q_INVOKABLE QDateTime contactLastTime(int id) const;
     Q_INVOKABLE QString contactTitle(int id) const;
+    Q_INVOKABLE QString contactLastSeenText(int id) const;
 
     Q_INVOKABLE QList<int> dialogListIds();
     DialogClass dialog( int id ) const;
@@ -76,12 +77,13 @@ public:
     Q_INVOKABLE int me() const;
     Q_INVOKABLE bool started() const;
 
-    Q_INVOKABLE QString convertDateToString( const QDateTime & date );
+    Q_INVOKABLE QString convertDateToString( const QDateTime & date ) const;
 
 public slots:
     void updateContactList();
     void updateDialogList();
     void updateDialogListUsingTimer();
+    void updateContactListUsingTimer();
 
     void getHistory( int id, int count );
 
