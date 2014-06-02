@@ -37,6 +37,8 @@ public:
 
     Q_INVOKABLE QString getOpenFile();
 
+    Q_INVOKABLE QSize imageSize( const QString & path );
+
     static int desktopSession();
 
 public slots:
@@ -53,6 +55,7 @@ public slots:
 
     void configure();
     void about();
+    void aboutSialan();
     void quit();
     void show();
 

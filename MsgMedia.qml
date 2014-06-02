@@ -32,11 +32,30 @@ Item {
         id: f_img
         anchors.fill: parent
         sourceSize: Qt.size(width,height)
+        asynchronous: true
         fillMode: Image.PreserveAspectCrop
         clip: true
         source: path.length==0? "" : "file://" + path
 
         property string path: Telegram.messageMediaFile(msgId)
+
+        onPathChanged: {
+            if( path.length == 0 )
+                return
+
+            var sz = Gui.imageSize(path)
+
+            var item_ratio = msg_media.width/msg_media.height
+            var img_ratio = sz.width/sz.height
+
+            if( item_ratio > img_ratio ) {
+                sourceSize.width = msg_media.width
+                sourceSize.height = msg_media.width/img_ratio
+            } else {
+                sourceSize.width = msg_media.height*img_ratio
+                sourceSize.height = msg_media.height
+            }
+        }
     }
 
     Indicator {

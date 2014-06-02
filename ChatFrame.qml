@@ -15,7 +15,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: 213
+        width: 250
     }
 
     ChatView {

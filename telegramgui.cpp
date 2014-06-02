@@ -22,6 +22,7 @@
 #include <QFile>
 #include <QSystemTrayIcon>
 #include <QMenu>
+#include <QImageReader>
 #include <QScreen>
 #include <QAction>
 #include <QPointer>
@@ -160,6 +161,12 @@ QString TelegramGui::getOpenFile()
     return QFileDialog::getOpenFileName();
 }
 
+QSize TelegramGui::imageSize(const QString &path)
+{
+    QImageReader img(path);
+    return img.size();
+}
+
 int TelegramGui::desktopSession()
 {
     static int result = -1;
@@ -216,6 +223,7 @@ void TelegramGui::start()
         p->unityTray->addMenu( tr("Show"), this, "show" );
         p->unityTray->addMenu( tr("Configure"), this, "configure" );
         p->unityTray->addMenu( tr("About"), this, "about" );
+        p->unityTray->addMenu( tr("About Sialan"), this, "aboutSialan" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
     }
     else
@@ -373,6 +381,7 @@ void TelegramGui::showContextMenu()
     menu.addSeparator();
     QAction *conf_act = menu.addAction( tr("Configure") );
     QAction *abut_act = menu.addAction( tr("About") );
+    QAction *sabt_act = menu.addAction( tr("About Sialan") );
     menu.addSeparator();
     QAction *exit_act = menu.addAction( tr("Exit") );
     QAction *res_act  = menu.exec();
@@ -385,6 +394,9 @@ void TelegramGui::showContextMenu()
     else
     if( res_act == abut_act )
         about();
+    else
+    if( res_act == sabt_act )
+        aboutSialan();
     else
     if( res_act == exit_act )
         quit();
@@ -402,6 +414,14 @@ void TelegramGui::about()
     p->root->setVisible( true );
     p->root->requestActivate();
     p->root->setProperty( "about", !p->root->property("about").toBool() );
+    p->root->setProperty( "focus", true );
+}
+
+void TelegramGui::aboutSialan()
+{
+    p->root->setVisible( true );
+    p->root->requestActivate();
+    p->root->setProperty( "aboutSialan", !p->root->property("aboutSialan").toBool() );
     p->root->setProperty( "focus", true );
 }
 

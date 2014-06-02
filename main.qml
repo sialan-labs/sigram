@@ -17,6 +17,7 @@ Window {
 
     property alias current: chat_frame.current
     property bool about: false
+    property bool aboutSialan: false
 
     property alias menu: mnu_item
     property alias mainFrame: main_frame
@@ -41,21 +42,44 @@ Window {
             var obj = font_loader.createObject(main)
             obj.source = "file://" + fonts[i]
         }
+
+        auth_component.createObject(main)
+    }
+
+    Component {
+        id: auth_component
+        StartPage {
+            anchors.fill: parent
+        }
+    }
+
+    AboutSialan {
+        anchors.fill: parent
+        start: aboutSialan
     }
 
     About {
-        anchors.fill: parent
+        y: aboutSialan? main.height : 0
+        width: parent.width
+        height: parent.height
         color: "#0d80ec"
+
+        Behavior on y {
+            NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+        }
     }
 
     Rectangle {
         id: main_frame
-        y: about? main.height : 0
+        y: about || aboutSialan? main.height : 0
         width: parent.width
         height: parent.height
         color: "#4098BF"
 
         Keys.onEscapePressed: {
+            if( aboutSialan )
+                aboutSialan = false
+            else
             if( about )
                 about = false
         }

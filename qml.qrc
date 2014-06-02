@@ -49,5 +49,14 @@
         <file>files/back.png</file>
         <file>CheckBox.qml</file>
         <file>Mirror.qml</file>
+        <file>Authenticating.qml</file>
+        <file>files/registering_splash.jpg</file>
+        <file>sialan-bubbles/SialanBubbles.qml</file>
+        <file>sialan-bubbles/SialanCircles.qml</file>
+        <file>files/sialan.png</file>
+        <file>AboutSialan.qml</file>
+        <file>StartPage.qml</file>
+        <file>SialanSplash.qml</file>
+        <file>RegisterFrame.qml</file>
     </qresource>
 </RCC>
