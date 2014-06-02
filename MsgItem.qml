@@ -89,10 +89,11 @@ Item {
                     id: txt
                     wrapMode: Text.WordWrap
                     width: msgWidth>item.width*0.6? item.width*0.6 : msgWidth
-                    text: Telegram.messageBody(msg_id)
+                    text: Emojis.textToEmojiText( Telegram.messageBody(msg_id) )
                     color: item.out? "#ffffff" : "#333333"
                     font.family: globalTextFontFamily
                     font.pointSize: 9
+                    textFormat: Text.StyledText
                     visible: text.length != 0
 
                     property real msgWidth: Telegram.messageBodyTextWidth(msg_id)

@@ -6,7 +6,9 @@ database.source = database/userdata.db
 database.target = .
 fonts.source = fonts
 fonts.target = .
-COPYFOLDERS = database fonts
+emojis.source = emojis
+emojis.target = .
+COPYFOLDERS = database fonts emojis
 include(qmake/copyData.pri)
 copyData()
 
@@ -29,7 +31,8 @@ SOURCES += main.cpp \
     telegramgui.cpp \
     notification.cpp \
     userdata.cpp \
-    unitysystemtray.cpp
+    unitysystemtray.cpp \
+    emojis.cpp
 
 RESOURCES += qml.qrc
 
@@ -45,7 +48,8 @@ HEADERS += \
     notification.h \
     userdata.h \
     telegram_macros.h \
-    unitysystemtray.h
+    unitysystemtray.h \
+    emojis.h
 
 OTHER_FILES += \
     database/userdata.db \

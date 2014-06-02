@@ -6,6 +6,7 @@
 #include "notification.h"
 #include "unitysystemtray.h"
 #include "telegram_macros.h"
+#include "emojis.h"
 #include "userdata.h"
 #include "telegram/telegram.h"
 
@@ -39,6 +40,7 @@ class TelegramGuiPrivate
 public:
     Notification *notify;
     UserData *userdata;
+    Emojis *emojis;
 
     QSystemTrayIcon *sysTray;
     UnitySystemTray *unityTray;
@@ -224,11 +226,13 @@ void TelegramGui::start()
 
     p->tg = new Telegram(1,&(p->args));
     p->userdata = new UserData(this);
+    p->emojis = new Emojis(this);
 
     p->engine = new QQmlApplicationEngine(this);
     p->engine->rootContext()->setContextProperty( "Telegram", p->tg );
     p->engine->rootContext()->setContextProperty( "Gui", this );
     p->engine->rootContext()->setContextProperty( "UserData", p->userdata );
+    p->engine->rootContext()->setContextProperty( "Emojis", p->emojis );
     p->engine->load(QUrl(QStringLiteral("qrc:///main.qml")));
 
     p->root = static_cast<QQuickWindow*>(p->engine->rootObjects().first());
