@@ -20,7 +20,10 @@ public:
     int update_contact_timer_id;
     bool update_contact_again;
 
+    Enums::waitAndGet last_wait_and_get;
+
     bool started;
+    bool authenticating;
 
     QSet<int> loaded_users_info;
     QSet<int> loaded_chats_info;
@@ -40,7 +43,9 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     p->update_dialog_timer_id = 0;
     p->update_contact_again = false;
     p->update_contact_timer_id = 0;
+    p->authenticating = false;
     p->started = false;
+    p->last_wait_and_get = Enums::NoWaitAndGet;
 
     p->tg_thread = new TelegramThread(argc,argv);
 
@@ -63,6 +68,10 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     connect( p->tg_thread, SIGNAL(msgFileDownloading(qint64,qreal))    , SIGNAL(msgFileDownloading(qint64,qreal))     );
     connect( p->tg_thread, SIGNAL(messageDeleted(qint64))              , SIGNAL(messageDeleted(qint64))               );
     connect( p->tg_thread, SIGNAL(messageRestored(qint64))             , SIGNAL(messageRestored(qint64))              );
+    connect( p->tg_thread, SIGNAL(registeringStarted())                , SLOT(registeringStarted())                   );
+    connect( p->tg_thread, SIGNAL(registeringFinished())               , SLOT(registeringFinished())                  );
+    connect( p->tg_thread, SIGNAL(registeringInvalidCode())            , SIGNAL(registeringInvalidCode())             );
+    connect( p->tg_thread, SIGNAL(waitAndGet(int))                     , SLOT(_waitAndGet(int))                       );
     connect( p->tg_thread, SIGNAL(tgStarted())                         , SLOT(_startedChanged())                      );
 
     p->tg_thread->start();
@@ -405,6 +414,16 @@ QString Telegram::convertDateToString(const QDateTime &date) const
         return date.time().toString("hh:mm");
 }
 
+int Telegram::lastWaitAndGet() const
+{
+    return p->last_wait_and_get;
+}
+
+bool Telegram::authenticating() const
+{
+    return p->authenticating;
+}
+
 void Telegram::updateContactList()
 {
     p->tg_thread->contactList();
@@ -547,10 +566,61 @@ void Telegram::globalSearch(const QString &keyword)
     p->tg_thread->globalSearch(keyword);
 }
 
+void Telegram::waitAndGetCallback(Enums::waitAndGet type, const QVariant &var)
+{
+    p->tg_thread->waitAndGetCallback(type, var);
+    _waitAndGet(Enums::CheckingState);
+}
+
+void Telegram::waitAndGetPhoneCallBack(const QString &phone)
+{
+    WaitGetPhone v;
+    v.phone = phone;
+
+    waitAndGetCallback( Enums::PhoneNumber, QVariant::fromValue<WaitGetPhone>(v) );
+}
+
+void Telegram::waitAndGetAuthCodeCallBack(const QString &code, bool call_request)
+{
+    WaitGetAuthCode v;
+    v.code = code;
+    v.request_phone = call_request;
+
+    waitAndGetCallback( Enums::AuthCode, QVariant::fromValue<WaitGetAuthCode>(v) );
+}
+
+void Telegram::waitAndGetUserInfoCallBack(const QString &fname, const QString &lname)
+{
+    WaitGetUserDetails v;
+    v.firstname = fname;
+    v.lastname = lname;
+
+    waitAndGetCallback( Enums::UserDetails, QVariant::fromValue<WaitGetUserDetails>(v) );
+}
+
+void Telegram::_waitAndGet(int type)
+{
+    Enums::waitAndGet wg = static_cast<Enums::waitAndGet>(type);
+    p->last_wait_and_get = wg;
+    emit waitAndGetChanged();
+}
+
 void Telegram::_startedChanged()
 {
     p->started = true;
     emit startedChanged();
+}
+
+void Telegram::registeringStarted()
+{
+    p->authenticating = true;
+    emit authenticatingChanged();
+}
+
+void Telegram::registeringFinished()
+{
+    p->authenticating = false;
+    emit authenticatingChanged();
 }
 
 void Telegram::timerEvent(QTimerEvent *e)

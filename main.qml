@@ -25,9 +25,20 @@ Window {
 
     property alias focus: main_frame.focus
 
+    property variant auth_object
+
     Connections {
         target: Telegram
         onStartedChanged: status_changer.restart()
+        onAuthenticatingChanged: {
+            if(Telegram.authenticating)
+                startAuthenticating()
+            else
+            if( auth_object ) {
+                auth_object.destroy()
+                Gui.firstTime = false
+            }
+        }
     }
     Component {
         id: font_loader
@@ -43,7 +54,8 @@ Window {
             obj.source = "file://" + fonts[i]
         }
 
-        auth_component.createObject(main)
+        if( Telegram.authenticating || Gui.firstTime )
+            startAuthenticating()
     }
 
     Component {
@@ -139,5 +151,13 @@ Window {
 
     function showMyConfigure() {
         chatFrame.chatView.showConfigure(Telegram.me)
+    }
+
+    function startAuthenticating() {
+        if( auth_object )
+            return
+
+        Gui.firstTime = true
+        auth_object = auth_component.createObject(main)
     }
 }

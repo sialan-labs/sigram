@@ -58,5 +58,8 @@
         <file>StartPage.qml</file>
         <file>SialanSplash.qml</file>
         <file>RegisterFrame.qml</file>
+        <file>RegisterFramePhone.qml</file>
+        <file>RegisterFrameCode.qml</file>
+        <file>RegisterFrameUser.qml</file>
     </qresource>
 </RCC>

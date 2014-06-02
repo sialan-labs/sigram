@@ -45,7 +45,6 @@ HEADERS += \
     notification.h \
     userdata.h \
     telegram_macros.h \
-    telegram/telegram_cli/structers-only.h \
     unitysystemtray.h
 
 OTHER_FILES += \

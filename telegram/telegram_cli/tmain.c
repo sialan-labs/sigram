@@ -58,7 +58,7 @@
 #define PROGNAME "telegram-client"
 #define VERSION "0.01"
 
-#define CONFIG_DIRECTORY "." PROG_NAME
+#define CONFIG_DIRECTORY ".config/sialan/telegram"
 #define CONFIG_FILE "config"
 #define AUTH_KEY_FILE "auth"
 #define STATE_FILE "state"

@@ -52,6 +52,7 @@ public:
     QHash<int,bool> mutes;
 
     QString background;
+    bool firstTime;
 };
 
 TelegramGui::TelegramGui(QObject *parent) :
@@ -63,10 +64,12 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->args = QGuiApplication::arguments().first().toUtf8().data();
 
     QDir().mkpath(HOME_PATH);
+    QDir().mkpath(HOME_PATH + "/downloads");
     if( !tg_settings )
         tg_settings = new QSettings( HOME_PATH + "/telegram.conf", QSettings::IniFormat, this);
 
     p->background = tg_settings->value( "General/background", QString() ).toString();
+    p->firstTime = tg_settings->value( "General/firstTime", true ).toBool();
     p->notify = new Notification(this);
 
     connect( p->notify, SIGNAL(notifyAction(uint,QString)), SLOT(notify_action(uint,QString)) );
@@ -154,6 +157,21 @@ void TelegramGui::setBackground(const QString &path)
 QString TelegramGui::background() const
 {
     return p->background;
+}
+
+void TelegramGui::setFirstTime(bool stt)
+{
+    if( stt == p->firstTime )
+        return;
+
+    p->firstTime = stt;
+    tg_settings->setValue( "General/firstTime", p->firstTime );
+    emit firstTimeChanged();
+}
+
+bool TelegramGui::firstTime() const
+{
+    return p->firstTime;
 }
 
 QString TelegramGui::getOpenFile()

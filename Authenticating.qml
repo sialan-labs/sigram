@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
+import org.sialan.telegram 1.0
 
 Item {
     id: auth
@@ -56,7 +57,12 @@ Item {
     Timer {
         id: show_timer
         interval: 1000
-        onTriggered: auth.started = true
+        onTriggered: {
+            if( Telegram.waitAndGet == Enums.NoWaitAndGet )
+                auth.start()
+            else
+                auth.started = true
+        }
     }
 
     function start() {

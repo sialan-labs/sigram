@@ -12,6 +12,8 @@ class Telegram : public QObject
 {
     Q_PROPERTY(bool started READ started NOTIFY startedChanged)
     Q_PROPERTY(int me READ me NOTIFY meChanged)
+    Q_PROPERTY(int waitAndGet READ lastWaitAndGet NOTIFY waitAndGetChanged )
+    Q_PROPERTY(bool authenticating READ authenticating NOTIFY authenticatingChanged)
     Q_OBJECT
 public:
     Telegram(int argc, char **argv, QObject *parent = 0);
@@ -79,6 +81,9 @@ public:
 
     Q_INVOKABLE QString convertDateToString( const QDateTime & date ) const;
 
+    Q_INVOKABLE int lastWaitAndGet() const;
+    Q_INVOKABLE bool authenticating() const;
+
 public slots:
     void updateContactList();
     void updateDialogList();
@@ -112,6 +117,11 @@ public slots:
     void search( int user_id, const QString & keyword );
     void globalSearch( const QString & keyword );
 
+    void waitAndGetCallback( Enums::waitAndGet type, const QVariant & var );
+    void waitAndGetPhoneCallBack( const QString & phone );
+    void waitAndGetAuthCodeCallBack(const QString & code, bool call_request );
+    void waitAndGetUserInfoCallBack(const QString & fname, const QString & lname );
+
 signals:
     void contactsChanged();
     void dialogsChanged();
@@ -136,10 +146,18 @@ signals:
     void messageDeleted( qint64 msg_id );
     void messageRestored( qint64 msg_id );
 
+    void authenticatingChanged();
+    void registeringInvalidCode();
+
+    void waitAndGetChanged();
+
     void startedChanged();
 
 private slots:
+    void _waitAndGet( int type );
     void _startedChanged();
+    void registeringStarted();
+    void registeringFinished();
 
 protected:
     void timerEvent(QTimerEvent *e);

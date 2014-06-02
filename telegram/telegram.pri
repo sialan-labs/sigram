@@ -48,6 +48,7 @@ HEADERS += \
     telegram/telegram_cli/tools.h \
     telegram/telegram_cli/tree.h \
     telegram/telegram_cli/tmain.h \
+    telegram/telegram_cli/structers-only.h \
     telegram/telegramthread.h \
     telegram/strcuts.h \
     telegram/telegramcore.h \

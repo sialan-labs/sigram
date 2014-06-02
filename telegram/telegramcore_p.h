@@ -2,6 +2,7 @@
 #define TELEGRAM_P_H
 
 #ifdef __cplusplus
+class QVariant;
 #define EXTERNC extern "C"
 EXTERNC {
 #include "telegram_cli/structers-only.h"
@@ -10,6 +11,10 @@ EXTERNC {
 #define EXTERNC
 #include "telegram_cli/structers-only.h"
 #endif
+
+#define WAIT_AND_GET_PHONE_NUMBER 0
+#define WAIT_AND_GET_AUTH_CODE    1
+#define WAIT_AND_GET_USER_DETAILS 2
 
 EXTERNC void tgStarted();
 EXTERNC void qdebug( const char *m );
@@ -36,7 +41,16 @@ EXTERNC void fileLoaded( struct download *d );
 EXTERNC void fileUploading( struct send_file *f, long long total, long long uploaded );
 EXTERNC void fileDownloading( struct download *d, long long total, long long downloaded );
 
-EXTERNC void qthreadExec();
+EXTERNC void registeringStarted();
+EXTERNC void registeringFinished();
+EXTERNC void registeringInvalidCode();
+EXTERNC int waitAndGet( int type, void *pointer );
+
+#ifdef __cplusplus
+EXTERNC void waitAndGet_callback( int type, const QVariant & v );
+#endif
+
+EXTERNC int qthreadExec();
 EXTERNC void qthreadExit(int code);
 EXTERNC void qthreadExitRequest(int code);
 

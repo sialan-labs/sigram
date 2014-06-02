@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import org.sialan.telegram 1.0
 
 Item {
     width: 100
@@ -36,46 +37,39 @@ Item {
             height: 20
         }
 
-        Rectangle {
+        RegisterFramePhone {
+            id: phone
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: 10
-            height: 40
-            color: "#55ffffff"
-
-            Text {
-                anchors.fill: phone_line
-                verticalAlignment: Text.AlignVCenter
-                font: phone_line.font
-                text: qsTr("Your mobile phone")
-                color: "#aaaaaa"
-                visible: !phone_line.focus && phone_line.text.length == 0
-            }
-
-            TextInput {
-                id: phone_line
-                anchors.fill: parent
-                anchors.margins: 6
-                verticalAlignment: Text.AlignVCenter
-                font.pointSize: 11
-                font.family: globalNormalFontFamily
-                font.weight: Font.Normal
-                inputMethodHints: Qt.ImhDigitsOnly
-                validator: RegExpValidator{regExp: /(?!0)\d*/}
-            }
+            visible: Telegram.waitAndGet == Enums.PhoneNumber
         }
 
-        Button {
+        RegisterFrameCode {
+            id: code
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: 10
-            height: 40
-            normalColor: "#33CCAD"
-            highlightColor: "#3AE9C6"
-            textColor: "#ffffff"
-            textFont.pointSize: 11
-            textFont.family: globalNormalFontFamily
-            text: qsTr("Lets Go!")
+            visible: Telegram.waitAndGet == Enums.AuthCode
+        }
+
+        RegisterFrameUser {
+            id: user
+            anchors.left: parent.left
+            anchors.right: parent.right
+            visible: Telegram.waitAndGet == Enums.UserDetails
+        }
+
+        Indicator {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: 200
+            visible: Telegram.waitAndGet == Enums.CheckingState
+            source: "files/indicator_light.png"
+            onVisibleChanged: {
+                if( visible )
+                    start()
+                else
+                    stop()
+            }
         }
     }
 }

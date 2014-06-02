@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import org.sialan.telegram 1.0
 
 Rectangle {
     id: start_page
@@ -24,12 +25,21 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 50
         anchors.horizontalCenter: parent.horizontalCenter
+        visible: Telegram.waitAndGet == Enums.NoWaitAndGet || finished_timer.running
+
+        onVisibleChanged: {
+            if( visible )
+                indict.start()
+            else
+                indict.stop()
+        }
 
         Indicator {
             id: indict
             width: parent.width
             height: indicatorSize
             indicatorSize: 32
+            source: "files/indicator_light.png"
             Component.onCompleted: start()
         }
 
@@ -52,11 +62,7 @@ Rectangle {
     Timer {
         id: finished_timer
         interval: 4000
-        onTriggered: {
-            indict.stop()
-            connecting_frame.visible = false
-            auth.start()
-        }
+        onTriggered: auth.start()
     }
 
     Component.onCompleted: finished_timer.start()

@@ -2,9 +2,10 @@
 #define TELEGRAM_MACROS_H
 
 #include <QCoreApplication>
+#include <QDir>
 
 #define USERDATAS_DB_CONNECTION "userdata_db_connection"
 
-#define HOME_PATH QString( QCoreApplication::applicationDirPath() + "/.config/sialan/telegram/" )
+#define HOME_PATH QString( QDir::homePath() + "/.config/sialan/telegram/" )
 
 #endif // TELEGRAM_MACROS_H

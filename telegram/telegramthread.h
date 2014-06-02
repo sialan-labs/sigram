@@ -55,6 +55,8 @@ public slots:
     void search( int user_id, const QString & keyword );
     void globalSearch( const QString & keyword );
 
+    void waitAndGetCallback( int type, const QVariant & var );
+
 signals:
     void contactsChanged();
     void dialogsChanged();
@@ -81,6 +83,12 @@ signals:
     void messageDeleted( qint64 msg_id );
     void messageRestored( qint64 msg_id );
 
+    void registeringStarted();
+    void registeringFinished();
+    void registeringInvalidCode();
+
+    void waitAndGet( int type );
+
 protected:
     void run();
 
@@ -103,6 +111,8 @@ private slots:
 
     void _fileUploading(int user_id, const QString & file, qint64 total, qint64 uploaded );
     void _fileDownloading(qint64 volume, qint64 total, qint64 downloaded );
+
+    void _waitAndGet( int type );
 
 private:
     QString normalizePhoto( const QString & path );

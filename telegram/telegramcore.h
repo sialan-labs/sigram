@@ -50,6 +50,8 @@ public slots:
     void search( const QString & user, const QString & keyword );
     void globalSearch( const QString & keyword );
 
+    void waitAndGetCallback( int type, const QVariant & var );
+
     void start();
 
 signals:
@@ -75,6 +77,12 @@ signals:
 
     void fileUploading(int user_id, const QString & file, qint64 total, qint64 uploaded );
     void fileDownloading(qint64 volume, qint64 total, qint64 downloaded );
+
+    void registeringStarted();
+    void registeringFinished();
+    void registeringInvalidCode();
+
+    void waitAndGet( int type );
 
 private:
     void send_command( const QString & cmd );

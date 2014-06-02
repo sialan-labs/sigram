@@ -451,70 +451,34 @@ int wait_dialog_list;
 
 int start_registering() {
     if (!default_username) {
-      size_t size = 0;
-      char *user = 0;
-
-      if (!user) {
-        printf ("Telephone number (with '+' sign): ");
-        if (net_getline (&user, &size) == -1) {
-          perror ("getline()");
+        struct wait_get_phone phone;
+        if (waitAndGet( WAIT_AND_GET_PHONE_NUMBER, &phone) == -1)
           qthreadExitRequest (EXIT_FAILURE);
-        }
-        set_default_username (user);
-      }
+
+        set_default_username (phone.phone);
     }
     int res = do_auth_check_phone (default_username);
     assert (res >= 0);
-    logprintf ("%s\n", res > 0 ? "phone registered" : "phone not registered");
     if (res > 0 && !register_mode) {
       do_send_code (default_username);
-      char *code = 0;
-      size_t size = 0;
-      printf ("Code from sms (if you did not receive an SMS and want to be called, type \"call\"): ");
+      struct wait_get_auth_code auth_code;
       while (1) {
-        if (net_getline (&code, &size) == -1) {
-          perror ("getline()");
+        if (waitAndGet( WAIT_AND_GET_AUTH_CODE, &auth_code ) == -1)
           qthreadExitRequest (EXIT_FAILURE);
-        }
-        if (!strcmp (code, "call")) {
-          printf ("You typed \"call\", switching to phone system.\n");
+        if (auth_code.request_phone == 1) {
           do_phone_call (default_username);
-          printf ("Calling you! Code: ");
           continue;
         }
-        if (do_send_code_result (code) >= 0) {
+        if (do_send_code_result (auth_code.code) >= 0) {
           break;
         }
-        printf ("Invalid code. Try again: ");
-        tfree_str (code);
+        registeringInvalidCode();
       }
       auth_state = 300;
     } else {
-      printf ("User is not registered. Do you want to register? [Y/n] ");
-      char *code;
-      size_t size;
-      if (net_getline (&code, &size) == -1) {
-        perror ("getline()");
+      struct wait_get_user_details user_details;
+      if (waitAndGet(WAIT_AND_GET_USER_DETAILS, &user_details) == -1)
         qthreadExitRequest (EXIT_FAILURE);
-      }
-      if (!*code || *code == 'y' || *code == 'Y') {
-        printf ("Ok, starting registartion.\n");
-      } else {
-        printf ("Then try again\n");
-        qthreadExitRequest (EXIT_SUCCESS);
-      }
-      char *first_name;
-      printf ("First name: ");
-      if (net_getline (&first_name, &size) == -1) {
-        perror ("getline()");
-        qthreadExitRequest (EXIT_FAILURE);
-      }
-      char *last_name;
-      printf ("Last name: ");
-      if (net_getline (&last_name, &size) == -1) {
-        perror ("getline()");
-        qthreadExitRequest (EXIT_FAILURE);
-      }
 
       int dc_num = do_get_nearest_dc ();
       assert (dc_num >= 0 && dc_num <= MAX_DC_NUM && DC_list[dc_num]);
@@ -522,23 +486,18 @@ int start_registering() {
       DC_working = DC_list[dc_working_num];
 
       do_send_code (default_username);
-      printf ("Code from sms (if you did not receive an SMS and want to be called, type \"call\"): ");
+      struct wait_get_auth_code auth_code;
       while (1) {
-        if (net_getline (&code, &size) == -1) {
-          perror ("getline()");
+        if (waitAndGet( WAIT_AND_GET_AUTH_CODE, &auth_code ) == -1)
           qthreadExitRequest (EXIT_FAILURE);
-        }
-        if (!strcmp (code, "call")) {
-          printf ("You typed \"call\", switching to phone system.\n");
+        if (auth_code.request_phone == 1) {
           do_phone_call (default_username);
-          printf ("Calling you! Code: ");
           continue;
         }
-        if (do_send_code_result_auth (code, first_name, last_name) >= 0) {
+        if (do_send_code_result_auth (auth_code.code, user_details.firstname, user_details.lastname) >= 0) {
           break;
         }
-        printf ("Invalid code. Try again: ");
-        tfree_str (code);
+        registeringInvalidCode();
       }
       auth_state = 300;
     }
@@ -624,9 +583,11 @@ int loop (void) {
   }
 
   if (auth_state == 100 || !(DC_working->has_auth)) {
+      registeringStarted();
       start_registering();
   }
 
+  registeringFinished();
   return connect_to_server();
 }
 

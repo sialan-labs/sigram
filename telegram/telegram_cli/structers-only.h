@@ -3,6 +3,20 @@
 
 typedef struct { int type; int id; } peer_id_t;
 
+struct wait_get_phone {
+    char *phone;
+};
+
+struct wait_get_user_details {
+    char *firstname;
+    char *lastname;
+};
+
+struct wait_get_auth_code {
+    char *code;
+    int request_phone;
+};
+
 struct file_location {
   int dc;
   long long volume;

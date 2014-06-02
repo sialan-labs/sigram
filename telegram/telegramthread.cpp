@@ -39,6 +39,9 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     qRegisterMetaType<ChatClass>("ChatClass");
     qRegisterMetaType<DialogClass>("DialogClass");
     qRegisterMetaType<MessageClass>("MessageClass");
+    qRegisterMetaType<WaitGetPhone>("WaitGetPhone");
+    qRegisterMetaType<WaitGetAuthCode>("WaitGetAuthCode");
+    qRegisterMetaType<WaitGetUserDetails>("WaitGetUserDetails");
 
     p->tg = new TelegramCore(argc,argv);
 //    p->tg->moveToThread(this);
@@ -57,6 +60,10 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     connect( p->tg, SIGNAL(photoFound(int,qint64))                           , SLOT(_photoFound(int,qint64))                           , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(fileUploading(int,QString,qint64,qint64))         , SLOT(_fileUploading(int,QString,qint64,qint64))         , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(fileDownloading(qint64,qint64,qint64))            , SLOT(_fileDownloading(qint64,qint64,qint64))            , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(waitAndGet(int))                                  , SLOT(_waitAndGet(int))                                  , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(registeringStarted())                             , SIGNAL(registeringStarted())                            , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(registeringFinished())                            , SIGNAL(registeringFinished())                           , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(registeringInvalidCode())                         , SIGNAL(registeringInvalidCode())                        , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(userIsTyping(int,int))                            , SIGNAL(userIsTyping(int,int))                           , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(started())                                        , SIGNAL(tgStarted())                                     , Qt::QueuedConnection );
 
@@ -295,6 +302,11 @@ void TelegramThread::globalSearch(const QString &keyword)
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,keyword));
 }
 
+void TelegramThread::waitAndGetCallback(int type, const QVariant &var)
+{
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(int,type), Q_ARG(QVariant,var));
+}
+
 void TelegramThread::run()
 {
     p->tg->start();
@@ -524,6 +536,11 @@ void TelegramThread::_fileDownloading(qint64 volume, qint64 total, qint64 downlo
         qint64 msg_id = p->messageMedias.value(volume);
         emit msgFileDownloading( msg_id, downloaded*100.0/total );
     }
+}
+
+void TelegramThread::_waitAndGet(int type)
+{
+    emit waitAndGet(type);
 }
 
 QString TelegramThread::normalizePhoto(const QString &path)

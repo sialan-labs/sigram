@@ -13,6 +13,8 @@ extern "C" {
 #include <QSet>
 #include <QDateTime>
 #include <QMimeDatabase>
+#include <QWaitCondition>
+#include <QMutex>
 
 QSet<TelegramCore*> telegram_objects;
 
@@ -24,6 +26,18 @@ public:
 
     QMimeDatabase mime_db;
 };
+
+char* strcpy2(char*& dest, const char* src) {
+    int i = strlen(src);
+    dest = new char[i+1];
+    int j = 0;
+    while (j < i) {
+        dest[j] = src[j];
+        j++;
+    }
+    dest[i] = 0;
+    return dest;
+}
 
 TelegramCore::TelegramCore(int argc, char **argv, QObject *parent) :
     QObject(parent)
@@ -146,6 +160,11 @@ void TelegramCore::search(const QString &user, const QString &keyword)
 void TelegramCore::globalSearch(const QString &keyword)
 {
     send_command( QString("global_search %1").arg(keyword) );
+}
+
+void TelegramCore::waitAndGetCallback(int type, const QVariant &var)
+{
+    waitAndGet_callback( type, var );
 }
 
 void TelegramCore::start()
@@ -400,9 +419,85 @@ void fileDownloading( struct download *d, long long total, long long downloaded 
         emit tg->fileDownloading( d->volume, total, downloaded );
 }
 
-void qthreadExec()
+void registeringStarted()
 {
-    static_cast<TelegramThread*>(QThread::currentThread())->callExec();
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->registeringStarted();
+}
+
+void registeringFinished()
+{
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->registeringFinished();
+}
+
+void registeringInvalidCode()
+{
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->registeringInvalidCode();
+}
+
+QPair<int,void*> wait_and_get_unit;
+QMutex wait_and_get_muttex;
+QWaitCondition wait_and_get_wcond;
+QPair<int,QVariant> wait_and_get_callback_result;
+
+int waitAndGet( int type, void *pointer )
+{
+    wait_and_get_callback_result.first = type;
+
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->waitAndGet( type );
+
+    wait_and_get_muttex.lock();
+    wait_and_get_wcond.wait(&wait_and_get_muttex);
+    wait_and_get_muttex.unlock();
+
+    QVariant var = wait_and_get_callback_result.second;
+    switch( type )
+    {
+    case WAIT_AND_GET_AUTH_CODE:
+    {
+        WaitGetAuthCode v = var.value<WaitGetAuthCode>();
+        wait_get_auth_code *rv = static_cast<wait_get_auth_code*>(pointer);
+        strcpy2( rv->code, v.code.toUtf8() );
+        rv->request_phone = v.request_phone;
+    }
+        break;
+
+    case WAIT_AND_GET_PHONE_NUMBER:
+    {
+        WaitGetPhone v = var.value<WaitGetPhone>();
+        wait_get_phone *rv = static_cast<wait_get_phone*>(pointer);
+        strcpy2( rv->phone, v.phone.toUtf8() );
+    }
+        break;
+
+    case WAIT_AND_GET_USER_DETAILS:
+    {
+        WaitGetUserDetails v = var.value<WaitGetUserDetails>();
+        wait_get_user_details *rv = static_cast<wait_get_user_details*>(pointer);
+        strcpy2( rv->firstname ,v.firstname.toUtf8() );
+        strcpy2( rv->lastname ,v.lastname.toUtf8() );
+    }
+        break;
+    }
+
+    return 0;
+}
+
+void waitAndGet_callback( int type, const QVariant & v )
+{
+    if( wait_and_get_callback_result.first != type )
+        return;
+
+    wait_and_get_callback_result.second = v;
+    wait_and_get_wcond.wakeAll();
+}
+
+int qthreadExec()
+{
+    return static_cast<TelegramThread*>(QThread::currentThread())->callExec();
 }
 
 void qthreadExit(int code)

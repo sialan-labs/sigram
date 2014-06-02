@@ -6,12 +6,15 @@
 #include <QStringList>
 #include <QDateTime>
 
+#include "telegram_cli/structers-only.h"
+
 class Enums : public QObject
 {
     Q_ENUMS(DesktopSession)
     Q_ENUMS(OnlineState)
     Q_ENUMS(UserFlags)
     Q_ENUMS(messageType)
+    Q_ENUMS(waitAndGet)
     Q_OBJECT
 
 public:
@@ -59,6 +62,34 @@ public:
         MediaContact = 0x5e7d2f39,
         MediaUnsupported = 0x29632a36
     };
+
+    enum waitAndGet {
+        PhoneNumber = 0,
+        AuthCode = 1,
+        UserDetails = 2,
+        CheckingState = 3,
+        NoWaitAndGet = 4
+    };
+};
+
+class WaitGetPhone
+{
+public:
+    QString phone;
+};
+
+class WaitGetUserDetails
+{
+public:
+    QString firstname;
+    QString lastname;
+};
+
+class WaitGetAuthCode
+{
+public:
+    QString code;
+    bool request_phone;
 };
 
 class UserClass
@@ -171,5 +202,8 @@ Q_DECLARE_METATYPE( UserClass )
 Q_DECLARE_METATYPE( ChatClass )
 Q_DECLARE_METATYPE( DialogClass )
 Q_DECLARE_METATYPE( MessageClass )
+Q_DECLARE_METATYPE( WaitGetPhone )
+Q_DECLARE_METATYPE( WaitGetAuthCode )
+Q_DECLARE_METATYPE( WaitGetUserDetails )
 
 #endif // STRCUTS_H
