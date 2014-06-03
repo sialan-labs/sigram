@@ -25,6 +25,9 @@ Window {
 
     property alias focus: main_frame.focus
 
+    property int forwarding: 0
+    property int forwardTo: 0
+
     property variant auth_object
 
     Connections {

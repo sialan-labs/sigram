@@ -15,6 +15,7 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QGuiApplication>
+#include <QTextDocument>
 #include <QClipboard>
 #include <QMimeData>
 #include <QDebug>
@@ -42,6 +43,8 @@ public:
     UserData *userdata;
     Emojis *emojis;
 
+    QTextDocument *doc;
+
     QSystemTrayIcon *sysTray;
     UnitySystemTray *unityTray;
 
@@ -64,6 +67,7 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->engine = 0;
     p->tg = 0;
     p->args = QGuiApplication::arguments().first().toUtf8().data();
+    p->doc = new QTextDocument(this);
 
     QDir().mkpath(HOME_PATH);
     QDir().mkpath(HOME_PATH + "/downloads");
@@ -185,6 +189,12 @@ QSize TelegramGui::imageSize(const QString &path)
 {
     QImageReader img(path);
     return img.size();
+}
+
+qreal TelegramGui::htmlWidth(const QString &txt)
+{
+    p->doc->setHtml(txt);
+    return p->doc->size().width() + 10;
 }
 
 int TelegramGui::desktopSession()

@@ -65,7 +65,15 @@ Rectangle {
                 uid: user_id
                 realId: item.isDialog? dialog_id : user_id
                 selected: realId == contact_list.current
-                onClicked: contact_list.current = item.isDialog? dialog_id : item.uid
+                onClicked: {
+                    var iid = (item.isDialog? dialog_id : item.uid)
+                    if( forwarding != 0 ) {
+                        forwardTo = iid
+                        return
+                    }
+
+                    contact_list.current = iid
+                }
             }
 
             function refresh() {

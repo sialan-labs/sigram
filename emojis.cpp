@@ -10,6 +10,7 @@ class EmojisPrivate
 {
 public:
     QHash<QString,QString> emojis;
+    QStringList keys;
     QString theme;
 
     QTextDocument *doc;
@@ -35,6 +36,7 @@ void Emojis::setCurrentTheme(const QString &theme)
 
     p->theme = theme;
     p->emojis.clear();
+    p->keys.clear();
 
     const QString data = cfile.readAll();
     const QStringList & list = data.split("\n",QString::SkipEmptyParts);
@@ -44,7 +46,11 @@ void Emojis::setCurrentTheme(const QString &theme)
         if( parts.count() < 2 )
             continue;
 
-        p->emojis[parts.at(1)] = path + parts.at(0);
+        QString epath = path + parts.at(0);
+        QString ecode = parts.at(1);
+
+        p->emojis[ecode] = epath;
+        p->keys << ecode;
     }
 
     emit currentThemeChanged();
@@ -57,7 +63,7 @@ QString Emojis::currentTheme() const
 
 QString Emojis::textToEmojiText(const QString &txt)
 {
-    p->doc->setHtml(txt);
+    p->doc->setHtml(QString(txt).replace("\n","<br />"));
     QString res = p->doc->toPlainText();
     for( int i=0; i<res.size(); i++ )
     {
@@ -78,7 +84,18 @@ QString Emojis::textToEmojiText(const QString &txt)
     if( res.contains("<img") )
         res = "<font size=\"1\">.</font>" + res;
 
+    res = res.replace("\n","<br />");
     return res;
+}
+
+QList<QString> Emojis::keys() const
+{
+    return p->keys;
+}
+
+QString Emojis::pathOf(const QString &key) const
+{
+    return p->emojis.value(key);
 }
 
 Emojis::~Emojis()

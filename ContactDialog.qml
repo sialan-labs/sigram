@@ -43,7 +43,14 @@ Rectangle {
             MouseArea {
                 id: marea
                 anchors.fill: parent
-                onClicked: contact_dialog.selected(user_id)
+                onClicked: {
+                    if( forwarding != 0 ) {
+                        forwardTo = user_id
+                        return
+                    }
+
+                    contact_dialog.selected(user_id)
+                }
             }
         }
 

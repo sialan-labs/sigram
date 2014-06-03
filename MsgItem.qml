@@ -66,6 +66,12 @@ Item {
             Rectangle {
                 anchors.fill: parent
                 color: item.out? "#33B7CC" : "#E6E6E6"
+
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.RightButton
+                    onClicked: item.showMenu()
+                }
             }
 
             Column {
@@ -96,13 +102,7 @@ Item {
                     textFormat: Text.StyledText
                     visible: text.length != 0
 
-                    property real msgWidth: Telegram.messageBodyTextWidth(msg_id)
-
-                    MouseArea {
-                        anchors.fill: parent
-                        acceptedButtons: Qt.RightButton
-                        onClicked: item.showMenu()
-                    }
+                    property real msgWidth: Gui.htmlWidth(text)
                 }
 
                 MsgMedia {
@@ -175,12 +175,20 @@ Item {
     }
 
     function showMenu() {
-        var acts = [ qsTr("Copy") ]
+        var acts = [ qsTr("Copy"), qsTr("Delete"), qsTr("Forward") ]
 
         var res = Gui.showMenu( acts )
         switch( res ) {
         case 0:
-            Gui.copyText( txt.text )
+            Gui.copyText( Telegram.messageBody(msg_id) )
+            break;
+
+        case 1:
+            Telegram.deleteMessage(msg_id)
+            break;
+
+        case 2:
+            forwarding = msg_id
             break;
         }
     }

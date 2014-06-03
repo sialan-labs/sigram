@@ -1,22 +1,52 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.0
 
-TextEdit {
-    id: txt
+Item {
+    id: line_edit
     width: 100
-    selectionColor: "#0d80ec"
-    selectedTextColor: "#ffffff"
-    wrapMode: Text.WordWrap
-    font.family: globalTextFontFamily
 
-    onTextChanged: if( text.trim().length == 0 ) text = text.trim()
+    property alias color: txt.color
+    property alias text: txt.text
+    property alias textInput: txt
 
     signal accepted();
 
-    Keys.onPressed: {
-        if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
-            if( event.modifiers == Qt.NoModifier )
-                txt.accepted()
+    Flickable {
+        id: txt_flickable
+        anchors.fill: parent
+        contentWidth: txt.width
+        contentHeight: txt.height
+        flickableDirection: Flickable.VerticalFlick
+        clip: true
+
+        function ensureVisible(r)
+        {
+            var hg = height
+            if (contentY >= r.y)
+                contentY = r.y;
+            else if (contentY+hg <= r.y+r.height+15*physicalPlatformScale)
+                contentY = r.y+r.height-hg + 15*physicalPlatformScale;
+        }
+
+        TextEdit {
+            id: txt
+            width: txt_flickable.width
+            height: contentHeight<txt_flickable.height? txt_flickable.height : contentHeight
+            selectionColor: "#0d80ec"
+            selectedTextColor: "#ffffff"
+            wrapMode: Text.WordWrap
+            font.family: globalTextFontFamily
+            selectByMouse: true
+
+            onCursorRectangleChanged: txt_flickable.ensureVisible(cursorRectangle)
+            onTextChanged: if( text.trim().length == 0 ) text = ""
+
+            Keys.onPressed: {
+                if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
+                    if( event.modifiers == Qt.NoModifier )
+                        line_edit.accepted()
+            }
+        }
     }
 
     MouseArea {
@@ -25,8 +55,13 @@ TextEdit {
         acceptedButtons: Qt.RightButton
 
         onClicked: {
-            txt.showMenu()
+            line_edit.showMenu()
         }
+    }
+
+    PhysicalScrollBar {
+        scrollArea: txt_flickable; width: 8; anchors.right: parent.right; anchors.top: txt_flickable.top;
+        anchors.bottom: txt_flickable.bottom; color: "#ffffff"
     }
 
     function showMenu() {

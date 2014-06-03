@@ -42,6 +42,7 @@ public:
     Q_INVOKABLE QString getOpenFile();
 
     Q_INVOKABLE QSize imageSize( const QString & path );
+    Q_INVOKABLE qreal htmlWidth( const QString & txt );
 
     static int desktopSession();
 

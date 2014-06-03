@@ -2,6 +2,7 @@
 #define EMOJIS_H
 
 #include <QObject>
+#include <QList>
 
 class EmojisPrivate;
 class Emojis : public QObject
@@ -16,6 +17,9 @@ public:
     QString currentTheme() const;
 
     Q_INVOKABLE QString textToEmojiText( const QString & txt );
+
+    Q_INVOKABLE QList<QString> keys() const;
+    Q_INVOKABLE QString pathOf( const QString & key ) const;
 
 signals:
     void currentThemeChanged();

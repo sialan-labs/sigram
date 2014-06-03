@@ -157,7 +157,7 @@ Item {
         anchors.top: phone.top
         font.pointSize: 11
         font.family: globalNormalFontFamily
-        color: "#888888"
+        color: "#555555"
         text: qsTr("Mobile Phone:")
     }
 
@@ -179,7 +179,7 @@ Item {
         anchors.verticalCenter: notify.verticalCenter
         font.pointSize: 11
         font.family: globalNormalFontFamily
-        color: "#888888"
+        color: "#555555"
         text: qsTr("Notification:")
     }
 

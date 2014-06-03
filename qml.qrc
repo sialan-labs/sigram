@@ -61,5 +61,8 @@
         <file>RegisterFramePhone.qml</file>
         <file>RegisterFrameCode.qml</file>
         <file>RegisterFrameUser.qml</file>
+        <file>Smilies.qml</file>
+        <file>files/smilies.png</file>
+        <file>ForwardingPage.qml</file>
     </qresource>
 </RCC>

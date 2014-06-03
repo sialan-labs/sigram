@@ -275,6 +275,9 @@ QStringList Telegram::messagesOf(int current) const
     {
         i.next();
         const MessageClass & msg = i.value();
+        if( msg.deleted )
+            continue;
+        else
         if( is_chat && msg.to_id != current && msg.to_id != 0 )
             continue;
         else
