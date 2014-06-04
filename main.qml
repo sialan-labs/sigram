@@ -22,6 +22,7 @@ Window {
     property alias menu: mnu_item
     property alias mainFrame: main_frame
     property alias chatFrame: chat_frame
+    property alias flipMenu: flip_menu
 
     property alias focus: main_frame.focus
 
@@ -97,30 +98,24 @@ Window {
             else
             if( about )
                 about = false
+            else
+            if( flipMenu.start )
+                flipMenu.hide()
         }
 
         Behavior on y {
             NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
         }
 
-        Rectangle {
-            id: shadow
-            x: chat_frame.x
-            y: chat_frame.y
-            width: chat_frame.height
-            height: 15*physicalPlatformScale
-            rotation: 90
-            transformOrigin: Item.TopLeft
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "#55000000" }
-                GradientStop { position: 1.0; color: "#00000000" }
-            }
-        }
-
         ChatFrame {
             id: chat_frame
             width: parent.width
             height: parent.height
+        }
+
+        FlipMenu {
+            id: flip_menu
+            anchors.fill: chat_frame
         }
     }
 

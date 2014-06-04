@@ -92,23 +92,30 @@ Item {
             if (mouse.button == Qt.RightButton) {
                 msg_media.showMenu()
             } else {
-                Gui.openFile(f_img.path)
+                var obj = flipMenu.show(limoo_component)
+                obj.source = f_img.path
+                mainFrame.focus = true
             }
         }
     }
 
+    Component {
+        id: limoo_component
+        LimooImageComponent {
+            width: chatFrame.chatView.width*3/4
+            onRightClick: showMenu()
+        }
+    }
+
     function showMenu() {
-        var acts = [ qsTr("Open"), qsTr("Copy"), qsTr("Save as") ]
+        var acts = [ qsTr("Copy"), qsTr("Save as") ]
 
         var res = Gui.showMenu( acts )
         switch( res ) {
         case 0:
-            Gui.openFile(f_img.path)
-            break;
-        case 1:
             Gui.copyFile(f_img.path)
             break;
-        case 2:
+        case 1:
             Gui.saveFile(f_img.path)
             break;
         }

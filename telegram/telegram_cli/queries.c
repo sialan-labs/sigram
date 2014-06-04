@@ -1159,6 +1159,9 @@ int get_dialogs_on_answer (struct query *q UU) {
       UC = user_chat_get (plist[i]);
       dialogList_addToBuffer( UC, 1, dlist[2 * i + 1] );
       break;
+    case PEER_ENCR_CHAT:
+      qdebug(":P");
+      break;
     }
   }
   dialogList_finished();

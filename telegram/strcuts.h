@@ -15,6 +15,7 @@ class Enums : public QObject
     Q_ENUMS(UserFlags)
     Q_ENUMS(messageType)
     Q_ENUMS(waitAndGet)
+    Q_ENUMS(SecretChatState)
     Q_OBJECT
 
 public:
@@ -69,6 +70,14 @@ public:
         UserDetails = 2,
         CheckingState = 3,
         NoWaitAndGet = 4
+    };
+
+    enum SecretChatState {
+      SecretChatNone,
+      SecretChatWaiting,
+      SecretChatRequest,
+      SecretChatOk,
+      SecretChatDeleted
     };
 };
 

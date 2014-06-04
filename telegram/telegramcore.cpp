@@ -486,6 +486,22 @@ int waitAndGet( int type, void *pointer )
     return 0;
 }
 
+void encryptedChatUpdated( struct secret_chat *e )
+{
+    switch (e->state) {
+    case sc_none:
+      break;
+    case sc_waiting:
+      break;
+    case sc_request:
+      break;
+    case sc_ok:
+      break;
+    case sc_deleted:
+      break;
+    }
+}
+
 void waitAndGet_callback( int type, const QVariant & v )
 {
     if( wait_and_get_callback_result.first != type )

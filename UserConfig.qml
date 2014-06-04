@@ -6,6 +6,7 @@ Item {
     height: 62
 
     property int userId
+    property bool isChat: Telegram.dialogIsChat(userId)
 
     signal backRequest()
     signal chatRequest( string uid )
@@ -70,10 +71,23 @@ Item {
         uid: u_conf.userId
         onlineState: true
         borderColor: "#333333"
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                if( cimg.source.length == 0 )
+                    return
+
+                var obj = flipMenu.show(limoo_component)
+                obj.source = cimg.source
+                mainFrame.focus = true
+            }
+        }
     }
 
     Text {
-        id: fname
+        id: name
         anchors.top: cimg.top
         anchors.left: cimg.right
         anchors.leftMargin: 50
@@ -81,26 +95,14 @@ Item {
         font.weight: Font.DemiBold
         font.family: globalNormalFontFamily
         color: "#333333"
-        text: Telegram.contactFirstName(u_conf.userId)
-    }
-
-    Text {
-        id: lname
-        anchors.top: fname.top
-        anchors.left: fname.right
-        anchors.leftMargin: 10
-        font.pointSize: 18
-        font.weight: Font.DemiBold
-        font.family: globalNormalFontFamily
-        color: "#333333"
-        text: Telegram.contactLastName(u_conf.userId)
+        text: Telegram.title(u_conf.userId).trim()
     }
 
     Rectangle {
         id: name_splitter
-        anchors.top: fname.bottom
-        anchors.left: fname.left
-        anchors.right: lname.right
+        anchors.top: name.bottom
+        anchors.left: name.left
+        anchors.right: name.right
         anchors.topMargin: 4
         height: 1
         color: "#4098bf"
@@ -109,7 +111,7 @@ Item {
     Text {
         id: last_seen
         anchors.top: name_splitter.bottom
-        anchors.left: fname.left
+        anchors.left: name.left
         anchors.topMargin: 4
         font.pointSize: 10
         font.weight: Font.Normal
@@ -118,10 +120,27 @@ Item {
         text: Telegram.contactLastSeenText(u_conf.userId)
     }
 
+    ChatUsers {
+        id: c_users
+        anchors.top: last_seen.bottom
+        anchors.left: name.left
+        anchors.right: parent.right
+        anchors.rightMargin: 40
+        anchors.topMargin: 60
+        height: 237
+        color: "#66ffffff"
+        chatId: u_conf.isChat? u_conf.userId : 0
+        visible: u_conf.isChat
+        onSelected: {
+            u_conf.chatRequest(uid)
+            u_conf.backRequest()
+        }
+    }
+
     Button {
         id: chat_btn
         anchors.top: last_seen.bottom
-        anchors.left: fname.left
+        anchors.left: name.left
         anchors.topMargin: 60
         normalColor: "#00000000"
         highlightColor: "#00000000"
@@ -130,6 +149,7 @@ Item {
         textFont.pointSize: 11
         textFont.underline: true
         text: qsTr("Send Message")
+        visible: !u_conf.isChat
         onClicked: {
             u_conf.chatRequest(u_conf.userId)
             u_conf.backRequest()
@@ -139,15 +159,17 @@ Item {
     Button {
         id: secret_btn
         anchors.top: chat_btn.bottom
-        anchors.left: fname.left
+        anchors.left: name.left
         anchors.topMargin: 10
         normalColor: "#00000000"
         highlightColor: "#00000000"
-        textColor: press? "#50ab99" : "#33ccad"
+//        textColor: press? "#50ab99" : "#33ccad"
+        textColor: press? "#D04528" : "#ff5532"
         textFont.weight: Font.Normal
         textFont.pointSize: 11
         textFont.underline: true
-        text: qsTr("Start Secret Chat")
+        text: qsTr("Start Secret Chat (not working yet, we working on it)")
+        visible: !u_conf.isChat
     }
 
     Text {
@@ -159,17 +181,19 @@ Item {
         font.family: globalNormalFontFamily
         color: "#555555"
         text: qsTr("Mobile Phone:")
+        visible: !u_conf.isChat
     }
 
     Text {
         id: phone
         anchors.top: secret_btn.bottom
-        anchors.left: fname.left
+        anchors.left: name.left
         anchors.topMargin: 60
         font.pointSize: 11
         font.family: globalNormalFontFamily
         color: "#333333"
         text: Telegram.contactPhone(u_conf.userId)
+        visible: !u_conf.isChat
     }
 
     Text {
@@ -185,8 +209,8 @@ Item {
 
     CheckBox {
         id: notify
-        anchors.top: phone.bottom
-        anchors.left: fname.left
+        anchors.top: u_conf.isChat? c_users.bottom : phone.bottom
+        anchors.left: name.left
         anchors.topMargin: 10
         onCheckedChanged: Gui.setMute( u_conf.userId, checked )
     }
@@ -194,7 +218,7 @@ Item {
     Button {
         id: background_btn
         anchors.top: notify.bottom
-        anchors.left: fname.left
+        anchors.left: name.left
         anchors.topMargin: 50
         normalColor: "#00000000"
         highlightColor: "#00000000"
@@ -215,6 +239,13 @@ Item {
                 return
 
             Gui.background = path
+        }
+    }
+
+    Component {
+        id: limoo_component
+        LimooImageComponent {
+            width: chatFrame.chatView.width*3/4
         }
     }
 }

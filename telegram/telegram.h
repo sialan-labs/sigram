@@ -21,6 +21,7 @@ public:
 
     Q_INVOKABLE QList<int> contactListUsers() const;
     UserClass contact(int id ) const;
+    Q_INVOKABLE bool contactContains(int id) const;
     Q_INVOKABLE QString contactFirstName(int id) const;
     Q_INVOKABLE QString contactLastName(int id) const;
     Q_INVOKABLE QString contactPhone(int id) const;
@@ -37,6 +38,8 @@ public:
     Q_INVOKABLE int dialogChatAdmin( int id ) const;
     Q_INVOKABLE qint64 dialogChatPhotoId( int id ) const;
     Q_INVOKABLE int dialogChatUsersNumber( int id ) const;
+    Q_INVOKABLE QList<int> dialogChatUsers( int id ) const;
+    Q_INVOKABLE int dialogChatUsersInviter(int chat_id, int id ) const;
     Q_INVOKABLE QDateTime dialogChatDate( int id ) const;
     Q_INVOKABLE QString dialogUserName( int id ) const;
     Q_INVOKABLE QString dialogUserFirstName(int id) const;

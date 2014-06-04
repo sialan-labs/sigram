@@ -1211,6 +1211,7 @@ void work_update (struct connection *c UU, long long msg_id UU) {
   case CODE_update_encryption:
     {
       struct secret_chat *E = fetch_alloc_encrypted_chat ();
+      encryptedChatUpdated(E);
       if (verbosity >= 2) {
         logprintf ("Secret chat state = %d\n", E->state);
       }

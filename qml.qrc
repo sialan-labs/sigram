@@ -64,5 +64,9 @@
         <file>Smilies.qml</file>
         <file>files/smilies.png</file>
         <file>ForwardingPage.qml</file>
+        <file>ChatUsers.qml</file>
+        <file>FlipMenu.qml</file>
+        <file>LimooImageComponent.qml</file>
+        <file>files/limoo.png</file>
     </qresource>
 </RCC>

@@ -87,6 +87,11 @@ UserClass Telegram::contact(int id) const
     return p->tg_thread->contacts().value(id);
 }
 
+bool Telegram::contactContains(int id) const
+{
+    return p->tg_thread->contacts().contains(id);
+}
+
 QString Telegram::contactFirstName(int id) const
 {
     return contact(id).firstname;
@@ -177,6 +182,26 @@ qint64 Telegram::dialogChatPhotoId(int id) const
 int Telegram::dialogChatUsersNumber(int id) const
 {
     return dialog(id).chatClass.users_num;
+}
+
+QList<int> Telegram::dialogChatUsers(int id) const
+{
+    QList<int> res;
+    const QList<ChatUserClass> & users = dialog(id).chatClass.users;
+    foreach( const ChatUserClass & u, users )
+        res << u.user_id;
+
+    return res;
+}
+
+int Telegram::dialogChatUsersInviter(int chat_id, int id) const
+{
+    const QList<ChatUserClass> & users = dialog(chat_id).chatClass.users;
+    foreach( const ChatUserClass & u, users )
+        if( u.user_id == id )
+            return u.inviter_id;
+
+    return 0;
 }
 
 QDateTime Telegram::dialogChatDate(int id) const

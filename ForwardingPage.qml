@@ -3,7 +3,7 @@ import QtQuick 2.0
 Rectangle {
     width: 100
     height: 62
-    color: "#66ffffff"
+    color: imageBack? "#66ffffff" : "#d9d9d9"
 
     Column {
         id: column
@@ -30,6 +30,8 @@ Rectangle {
             font.pointSize: 11
             font.family: globalTextFontFamily
             color: "#333333"
+            maximumLineCount: 2
+            elide: Text.ElideRight
             text: Telegram.messageBody(forwarding)
         }
 

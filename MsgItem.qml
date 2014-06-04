@@ -33,7 +33,7 @@ Item {
         anchors.margins: 20
         height: msg_column.height
         y: item.itemMargins
-        spacing: 30
+        spacing: 10
 
         ContactImage {
             id: img
@@ -47,8 +47,32 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: item.contactSelected(img.uid)
+                onClicked: if( Telegram.contactContains(img.uid) ) item.contactSelected(img.uid)
             }
+        }
+
+        ContactImage {
+            id: fwd_img
+            width: 64
+            height: width
+            smooth: true
+            borderColor: "#222222"
+            uid: fwdId
+            onlineState: true
+            visible: fwdId != 0
+
+            property int fwdId: Telegram.messageForwardId(msg_id)
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: if( Telegram.contactContains(fwd_img.uid) ) item.contactSelected(fwd_img.uid)
+            }
+        }
+
+        Item {
+            height: 10
+            width: 20
         }
 
         Item {
@@ -87,8 +111,10 @@ Item {
                     id: user
                     font.pointSize: 8
                     font.family: globalTextFontFamily
-                    text: Telegram.messageFromName( msg_id )
+                    text: Telegram.messageFromName( msg_id ) + (fwd==0?"":qsTr(" ,Fwd: ") + Telegram.title(fwd))
                     color: item.out? "#ffffff" : "#333333"
+
+                    property int fwd: Telegram.messageForwardId(msg_id)
                 }
 
                 Text {

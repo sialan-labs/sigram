@@ -1,15 +1,20 @@
 import QtQuick 2.0
 
 Rectangle {
-    id: contact_dialog
+    id: chat_users
     width: 100
     height: 62
+    clip: true
 
+    property int chatId
     signal selected( int uid )
+
+    onChatIdChanged: clist.refresh()
 
     ListView {
         id: clist
         anchors.fill: parent
+        anchors.margins: 4
         model: ListModel{}
         clip: true
 
@@ -17,7 +22,7 @@ Rectangle {
             id: item
             height: 57
             width: clist.width
-            color: marea.pressed? "#E65245" : "#ffffff"
+            color: marea.pressed? "#E65245" : "#00000000"
 
             ContactImage {
                 id: contact_image
@@ -40,30 +45,34 @@ Rectangle {
                 text: Telegram.contactTitle(user_id)
             }
 
+            Button {
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.rightMargin: 4
+                normalColor: "#00000000"
+                highlightColor: "#00000000"
+                textColor: press? "#D04528" : "#ff5532"
+                visible: Telegram.dialogChatUsersInviter(chat_users.chatId,user_id) == Telegram.me
+                text: qsTr("Delete")
+                onClicked: Telegram.chatDelUser(chat_users.chatId,user_id)
+            }
+
             MouseArea {
                 id: marea
                 anchors.fill: parent
                 onClicked: {
-                    if( forwarding != 0 ) {
-                        forwardTo = user_id
+                    if( !Telegram.contactContains(user_id) )
                         return
-                    }
 
-                    contact_dialog.selected(user_id)
+                    chat_users.selected(user_id)
                 }
             }
         }
 
         function refresh() {
+            indicator.stop()
             model.clear()
-            var contacts = Telegram.contactListUsers()
-            var dialogs = Telegram.dialogListIds()
-
-            for( var i=0; i<dialogs.length; i++ ) {
-                var cIndex = contacts.indexOf(dialogs[i])
-                if( cIndex != -1 )
-                    contacts.splice(cIndex,1)
-            }
+            var contacts = Telegram.dialogChatUsers(chat_users.chatId)
             for( var i=0; i<contacts.length; i++ ) {
                 model.append( {"user_id":contacts[i]} )
                 Telegram.loadUserInfo(contacts[i])
@@ -75,6 +84,6 @@ Rectangle {
 
     PhysicalScrollBar {
         scrollArea: clist; height: clist.height; width: 8
-        anchors.right: clist.right; anchors.top: clist.top; color: "#333333"
+        anchors.right: clist.right; anchors.top: clist.top; color: "#ffffff"
     }
 }

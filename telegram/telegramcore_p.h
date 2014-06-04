@@ -46,6 +46,8 @@ EXTERNC void registeringFinished();
 EXTERNC void registeringInvalidCode();
 EXTERNC int waitAndGet( int type, void *pointer );
 
+EXTERNC void encryptedChatUpdated( struct secret_chat *e );
+
 #ifdef __cplusplus
 EXTERNC void waitAndGet_callback( int type, const QVariant & v );
 #endif
