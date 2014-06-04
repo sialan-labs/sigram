@@ -4,7 +4,7 @@ Rectangle {
     id: smilies
     width: 100
     height: 62
-    color: "#55ffffff"
+    color: imageBack? "#55ffffff" : "#404040"
     clip: true
 
     signal selected( string code )

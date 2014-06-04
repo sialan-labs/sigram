@@ -2,12 +2,12 @@ import QtQuick 2.0
 import QtQuick.Window 2.1
 import QtGraphicalEffects 1.0
 
-Window {
+Item {
     id: menu_win
     width: 300
     height: 400
-    color: "#00000000"
-    visible: menu_frame.visible
+//    color: "#00000000"
+    visible: menu_frame.opacity != 0
 
     property bool started: false
     property variant item
@@ -34,6 +34,9 @@ Window {
 
     MouseArea {
         anchors.fill: parent
+        acceptedButtons: Qt.RightButton | Qt.LeftButton
+        hoverEnabled: true
+        onWheel: wheel.accepted = true
         onClicked: menu_win.stop()
     }
 
@@ -45,10 +48,15 @@ Window {
         height: 300
         transformOrigin: Item.Top
         scale: menu_win.started? 1 : 0.1
-        opacity: menu_win.started? (low_opac? 0.99 : 1) : 0
-        visible: opacity != 0
+        opacity: menu_win.started? 1 : 0
 
-        property bool low_opac: false
+
+        Behavior on scale {
+            NumberAnimation{ easing.type: Easing.OutBack; duration: menu_win.duration }
+        }
+        Behavior on opacity {
+            NumberAnimation{ easing.type: Easing.OutCubic; duration: menu_win.duration }
+        }
 
         DropShadow {
             anchors.fill: menu_item
@@ -88,13 +96,6 @@ Window {
             id: menu_items_parent
             anchors.fill: parent
         }
-
-        Behavior on scale {
-            NumberAnimation{ easing.type: Easing.OutBack; duration: menu_win.duration }
-        }
-        Behavior on opacity {
-            NumberAnimation{ easing.type: Easing.OutCubic; duration: menu_win.duration }
-        }
     }
 
     Timer {
@@ -102,16 +103,6 @@ Window {
         interval: menu_win.duration
         repeat: false
         onTriggered: if( menu_win.item ) menu_win.item.destroy()
-    }
-
-    Timer {
-        id: update_timer
-        interval: 500
-        repeat: true
-        onTriggered: {
-            menu_frame.update()
-            menu_frame.low_opac = !menu_frame.low_opac
-        }
     }
 
     function start( component, x, y, w, h ) {
@@ -126,13 +117,11 @@ Window {
         item = component.createObject(menu_items_parent)
         started = true
 
-        update_timer.restart()
         return item
     }
 
     function stop() {
         started = false
         obj_destroyer.restart()
-        update_timer.stop()
     }
 }

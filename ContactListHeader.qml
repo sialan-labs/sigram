@@ -23,7 +23,7 @@ Rectangle {
         highlightColor: "#33B7CC"
         normalColor: "#bbbbbb"
         onClicked: {
-            var pnt = Gui.mapToGlobal( add_btn, Qt.point(add_btn.width/2,add_btn.height) )
+            var pnt = Gui.mapToScene( add_btn, Qt.point(add_btn.width/2,add_btn.height) )
             var obj = menu.start( add_menu_component, pnt.x, pnt.y, 253, main.height - add_btn.height/2 )
             obj.selected.connect( contact_header.selected )
         }

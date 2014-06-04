@@ -39,7 +39,7 @@ Item {
             font.pointSize: 11
             font.weight: Font.Normal
             font.family: globalNormalFontFamily
-            color: "#333333"
+            color: imageBack? "#333333" : "#cccccc"
             text: qsTr("Limoo image viewer")
         }
     }
