@@ -1198,9 +1198,12 @@ int our_id;
 
 void print_service_message (struct message *M) {
   assert (M);
+  peer_t *U = user_chat_get (M->from_id);
+  incomingMsg(M,(struct user*)U);
+  return;
   print_start ();
   push_color (COLOR_GREY);
-  
+
   push_color (COLOR_MAGENTA);
   if (msg_num_mode) {
     printf ("%lld ", M->id);
@@ -1216,7 +1219,7 @@ void print_service_message (struct message *M) {
   }
   printf (" ");
   print_user_name (M->from_id, user_chat_get (M->from_id));
- 
+
   switch (M->action.type) {
   case CODE_message_action_empty:
     printf ("\n");
@@ -1231,7 +1234,7 @@ void print_service_message (struct message *M) {
     printf (" created chat %s. %d users\n", M->action.title, M->action.user_num);
     break;
   case CODE_message_action_chat_edit_title:
-    printf (" changed title to %s\n", 
+    printf (" changed title to %s\n",
       M->action.new_title);
     break;
   case CODE_message_action_chat_edit_photo:

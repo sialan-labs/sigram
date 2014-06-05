@@ -20,7 +20,7 @@ public:
     int update_contact_timer_id;
     bool update_contact_again;
 
-    Enums::waitAndGet last_wait_and_get;
+    Enums::WaitAndGet last_wait_and_get;
 
     bool started;
     bool authenticating;
@@ -594,7 +594,7 @@ void Telegram::globalSearch(const QString &keyword)
     p->tg_thread->globalSearch(keyword);
 }
 
-void Telegram::waitAndGetCallback(Enums::waitAndGet type, const QVariant &var)
+void Telegram::waitAndGetCallback(Enums::WaitAndGet type, const QVariant &var)
 {
     p->tg_thread->waitAndGetCallback(type, var);
     _waitAndGet(Enums::CheckingState);
@@ -628,7 +628,7 @@ void Telegram::waitAndGetUserInfoCallBack(const QString &fname, const QString &l
 
 void Telegram::_waitAndGet(int type)
 {
-    Enums::waitAndGet wg = static_cast<Enums::waitAndGet>(type);
+    Enums::WaitAndGet wg = static_cast<Enums::WaitAndGet>(type);
     p->last_wait_and_get = wg;
     emit waitAndGetChanged();
 }

@@ -350,7 +350,33 @@ void incomingMsg( struct message *m, struct user *u )
     msg.firstName = u->first_name;
     msg.lastName = u->last_name;
     msg.flags = m->flags;
-    msg.mediaType = static_cast<Enums::messageType>(m->media.type);
+    msg.mediaType = static_cast<Enums::MessageType>(m->media.type);
+    msg.action = static_cast<Enums::MessageAction>(m->action.type);
+
+    switch( m->action.type )
+    {
+    case Enums::MessageActionEmpty:
+        break;
+
+    case Enums::MessageActionChatCreate:
+    case Enums::MessageActionChatEditTitle:
+        msg.actionNewTitle = m->action.new_title;
+        break;
+
+    case Enums::MessageActionChatEditPhoto:
+    case Enums::MessageActionChatDeletePhoto:
+        break;
+
+    case Enums::MessageActionChatAddUser:
+    case Enums::MessageActionChatDeleteUser:
+        msg.actionUser = m->action.user;
+        msg.actionUser = m->action.user;
+        break;
+
+    case Enums::MessageActionGeoChatCreate:
+    case Enums::MessageActionGeoChatCheckin:
+        break;
+    }
 
     switch( m->media.type )
     {

@@ -1,6 +1,24 @@
 #ifndef STRUCTERSONLY_H
 #define STRUCTERSONLY_H
 
+//#define FLAG_EMPTY 1
+#define FLAG_MESSAGE_EMPTY 1
+#define FLAG_DELETED 2
+#define FLAG_FORBIDDEN 4
+#define FLAG_HAS_PHOTO 8
+#define FLAG_CREATED 16
+
+#define FLAG_USER_SELF 128
+#define FLAG_USER_FOREIGN 256
+#define FLAG_USER_CONTACT 512
+#define FLAG_USER_IN_CONTACT 1024
+#define FLAG_USER_OUT_CONTACT 2048
+
+#define FLAG_CHAT_IN_CHAT 128
+
+#define FLAG_ENCRYPTED 4096
+#define FLAG_PENDING 8192
+
 typedef struct { int type; int id; } peer_id_t;
 
 struct wait_get_phone {

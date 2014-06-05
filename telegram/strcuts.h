@@ -7,15 +7,17 @@
 #include <QDateTime>
 
 #include "telegram_cli/structers-only.h"
+#include "telegram_cli/constants.h"
 
 class Enums : public QObject
 {
     Q_ENUMS(DesktopSession)
     Q_ENUMS(OnlineState)
     Q_ENUMS(UserFlags)
-    Q_ENUMS(messageType)
-    Q_ENUMS(waitAndGet)
+    Q_ENUMS(MessageType)
+    Q_ENUMS(WaitAndGet)
     Q_ENUMS(SecretChatState)
+    Q_ENUMS(MessageAction)
     Q_OBJECT
 
 public:
@@ -37,34 +39,34 @@ public:
     };
 
     enum UserFlags {
-        UserMessageEmpty = 1,
-        UserDeleted = 2,
-        UserForbidden = 4,
-        UserHasPhoto = 8,
-        UserCreated = 16,
+        UserMessageEmpty = FLAG_MESSAGE_EMPTY,
+        UserDeleted = FLAG_DELETED,
+        UserForbidden = FLAG_FORBIDDEN,
+        UserHasPhoto = FLAG_HAS_PHOTO,
+        UserCreated = FLAG_CREATED,
 
-        UserUserSelf = 128,
-        UserUserForeign = 256,
-        UserUserContact = 512,
-        UserUserInContact = 1024,
-        UserUserOutContact = 2048,
+        UserUserSelf = FLAG_USER_SELF,
+        UserUserForeign = FLAG_USER_FOREIGN,
+        UserUserContact = FLAG_USER_CONTACT,
+        UserUserInContact = FLAG_USER_IN_CONTACT,
+        UserUserOutContact = FLAG_USER_OUT_CONTACT,
 
-        UserChatInChat = 128,
+        UserChatInChat = FLAG_CHAT_IN_CHAT,
 
-        UserEncrypted = 4096,
-        UserPending = 8192
+        UserEncrypted = FLAG_ENCRYPTED,
+        UserPending = FLAG_PENDING
     };
 
-    enum messageType {
-        MediaEmpty = 0x3ded6320,
-        MediaPhoto = 0xc8c45a2a,
-        MediaVideo = 0xa2d24290,
-        MediaGeo = 0x56e0d474,
-        MediaContact = 0x5e7d2f39,
-        MediaUnsupported = 0x29632a36
+    enum MessageType {
+        MediaEmpty = CODE_message_media_empty,
+        MediaPhoto = CODE_message_media_photo,
+        MediaVideo = CODE_message_media_video,
+        MediaGeo = CODE_message_media_geo,
+        MediaContact = CODE_message_media_contact,
+        MediaUnsupported = CODE_message_media_unsupported
     };
 
-    enum waitAndGet {
+    enum WaitAndGet {
         PhoneNumber = 0,
         AuthCode = 1,
         UserDetails = 2,
@@ -78,6 +80,18 @@ public:
       SecretChatRequest,
       SecretChatOk,
       SecretChatDeleted
+    };
+
+    enum MessageAction {
+        MessageActionEmpty = CODE_message_action_empty,
+        MessageActionChatCreate = CODE_message_action_chat_create,
+        MessageActionChatEditTitle = CODE_message_action_chat_edit_title,
+        MessageActionChatEditPhoto = CODE_message_action_chat_edit_photo,
+        MessageActionChatDeletePhoto = CODE_message_action_chat_delete_photo,
+        MessageActionChatAddUser = CODE_message_action_chat_add_user,
+        MessageActionChatDeleteUser = CODE_message_action_chat_delete_user,
+        MessageActionGeoChatCreate = CODE_message_action_geo_chat_create,
+        MessageActionGeoChatCheckin = CODE_message_action_geo_chat_checkin,
     };
 };
 
@@ -181,6 +195,7 @@ class MessageClass
 public:
     MessageClass() {
         deleted = false;
+        action = Enums::MessageActionEmpty;
     }
 
     qint64 msg_id;
@@ -203,8 +218,12 @@ public:
     bool deleted;
 
     QString mediaFile;
-    Enums::messageType mediaType;
+    Enums::MessageType mediaType;
     MessageMedia media;
+
+    Enums::MessageAction action;
+    QString actionNewTitle;
+    int actionUser;
 };
 
 Q_DECLARE_METATYPE( UserClass )

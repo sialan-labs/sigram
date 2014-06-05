@@ -122,7 +122,6 @@ Window {
     MenuWindow {
         id: mnu_item
         anchors.fill: parent
-//        flags: Qt.Popup
     }
 
     Timer {

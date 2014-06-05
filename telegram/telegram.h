@@ -120,7 +120,7 @@ public slots:
     void search( int user_id, const QString & keyword );
     void globalSearch( const QString & keyword );
 
-    void waitAndGetCallback( Enums::waitAndGet type, const QVariant & var );
+    void waitAndGetCallback( Enums::WaitAndGet type, const QVariant & var );
     void waitAndGetPhoneCallBack( const QString & phone );
     void waitAndGetAuthCodeCallBack(const QString & code, bool call_request );
     void waitAndGetUserInfoCallBack(const QString & fname, const QString & lname );
