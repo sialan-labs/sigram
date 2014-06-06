@@ -128,6 +128,7 @@ Rectangle {
             return
 
         Telegram.sendMessage(send_frame.current,input.text.trim())
+        Telegram.setStatusOnline(true)
         input.text = ""
     }
 }

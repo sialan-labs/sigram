@@ -353,10 +353,10 @@ Rectangle {
 
         onHeightChanged: {
             if( height == 100 )
-                chat_list.gotoEnd()
+                chat_list.positionViewAtEnd()
             else
             if( height == 0 )
-                chat_list.gotoEnd()
+                chat_list.positionViewAtEnd()
         }
 
         Behavior on height {
