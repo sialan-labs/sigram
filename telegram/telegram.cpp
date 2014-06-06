@@ -27,6 +27,8 @@ public:
 
     QSet<int> loaded_users_info;
     QSet<int> loaded_chats_info;
+
+    QHash<QString, QList<int> > chat_group_buffer;
 };
 
 Telegram *sortDialogList_tmp_obj = 0;
@@ -53,7 +55,7 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     connect( p->tg_thread, SIGNAL(contactsChanged())                   , SIGNAL(contactsChanged())                    );
     connect( p->tg_thread, SIGNAL(dialogsChanged())                    , SIGNAL(dialogsChanged())                     );
     connect( p->tg_thread, SIGNAL(incomingMsg(qint64))                 , SIGNAL(incomingMsg(qint64))                  );
-    connect( p->tg_thread, SIGNAL(incomingNewMsg(qint64))              , SIGNAL(incomingNewMsg(qint64))               );
+    connect( p->tg_thread, SIGNAL(incomingNewMsg(qint64))              , SLOT(_incomingNewMsg(qint64))                );
     connect( p->tg_thread, SIGNAL(userIsTyping(int,int))               , SIGNAL(userIsTyping(int,int))                );
     connect( p->tg_thread, SIGNAL(userStatusChanged(int,int,QDateTime)), SIGNAL(userStatusChanged(int,int,QDateTime)) );
     connect( p->tg_thread, SIGNAL(msgChanged(qint64))                  , SIGNAL(msgChanged(qint64))                   );
@@ -269,6 +271,14 @@ QString Telegram::dialogMsgLast(int id) const
     return dialog(id).msgLast;
 }
 
+bool Telegram::dialogLeaved(int id) const
+{
+    if( id == me() )
+        return false;
+
+    return dialog(id).flags & Enums::UserUserSelf;
+}
+
 bool Telegram::isDialog(int id) const
 {
     return p->tg_thread->dialogs().contains(id);
@@ -303,15 +313,18 @@ QStringList Telegram::messagesOf(int current) const
         if( msg.deleted )
             continue;
         else
-        if( is_chat && msg.to_id != current && msg.to_id != 0 )
+        if( msg.to_id == 0 || msg.from_id == 0 )
+            continue;
+        else
+        if( is_chat && msg.to_id != current )
             continue;
         else
         if( !is_chat )
         {
-            if( msg.out && msg.to_id != current && msg.to_id != 0 )
+            if( msg.out && msg.to_id != current )
                 continue;
             else
-            if( !msg.out && msg.from_id != current && msg.from_id != 0 )
+            if( !msg.out && msg.from_id != current )
                 continue;
             else
             if( dialogIsChat(msg.to_id) || dialogIsChat(msg.from_id) )
@@ -415,6 +428,21 @@ QString Telegram::messageMediaFile(qint64 id) const
 bool Telegram::messageIsDeleted(qint64 id) const
 {
     return message(id).deleted;
+}
+
+int Telegram::messageAction(qint64 id) const
+{
+    return message(id).action;
+}
+
+int Telegram::messageActionUser(qint64 id) const
+{
+    return message(id).actionUser;
+}
+
+QString Telegram::messageActionNewTitle(qint64 id) const
+{
+    return message(id).actionNewTitle;
 }
 
 int Telegram::me() const
@@ -524,6 +552,8 @@ void Telegram::loadChatInfo(int chatId)
 {
     if( p->loaded_chats_info.contains(chatId) )
         return;
+    if( dialogLeaved(chatId) )
+        return;
 
     p->tg_thread->loadChatInfo(chatId);
     p->loaded_chats_info.insert(chatId);
@@ -562,6 +592,15 @@ void Telegram::setStatusOnline(bool stt)
 void Telegram::createChat(const QString &title, int user_id)
 {
     p->tg_thread->createChat(title, user_id);
+}
+
+void Telegram::createChatUsers(const QString &title, const QList<int> &users)
+{
+    if( users.isEmpty() )
+        return;
+
+    p->chat_group_buffer[title] = users.mid(1);
+    createChat(title, users.first());
 }
 
 void Telegram::createSecretChat(int user_id)
@@ -637,6 +676,22 @@ void Telegram::_startedChanged()
 {
     p->started = true;
     emit startedChanged();
+}
+
+void Telegram::_incomingNewMsg(qint64 msg_id)
+{
+    const MessageClass & msg = message(msg_id);
+    if( msg.service != 0 && msg.action == Enums::MessageActionChatCreate && msg.from_id == me() )
+    {
+        const QList<int> & list = p->chat_group_buffer.value(msg.actionNewTitle);
+        foreach( int id, list )
+            chatAddUser( msg.to_id, id );
+
+        p->chat_group_buffer.remove(msg.actionNewTitle);
+        updateDialogList();
+    }
+
+    emit incomingNewMsg(msg_id);
 }
 
 void Telegram::registeringStarted()

@@ -128,7 +128,6 @@ Item {
         anchors.rightMargin: 40
         anchors.topMargin: 60
         height: 237
-        color: "#66ffffff"
         chatId: u_conf.isChat? u_conf.userId : 0
         visible: u_conf.isChat
         onSelected: {

@@ -34,6 +34,7 @@ Item {
     }
 
     Image {
+        id: sialan_img
         x: parent.width/2 - width/2
         y: parent.height/2 - height/2
         width: 128
@@ -42,5 +43,34 @@ Item {
         source: "files/sialan.png"
         fillMode: Image.PreserveAspectFit
         smooth: true
+    }
+
+    Text {
+        id: slogo_txt
+        anchors.horizontalCenter: sialan_img.horizontalCenter
+        anchors.top: sialan_img.bottom
+        anchors.topMargin: 10
+        text: "SIALAN LABS"
+        font.weight: Font.Bold
+        font.family: globalNormalFontFamily
+        font.pointSize: 30
+        color: "#333333"
+    }
+
+    Text {
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 8
+        font.family: globalNormalFontFamily
+        font.pointSize: 10
+        color: "#333333"
+        text: "labs.sialan.org"
+
+        MouseArea {
+            anchors.fill: parent
+            anchors.margins: -8
+            cursorShape: Qt.PointingHandCursor
+            onClicked: Gui.openUrl("http://labs.sialan.org")
+        }
     }
 }

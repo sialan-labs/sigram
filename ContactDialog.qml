@@ -1,11 +1,18 @@
 import QtQuick 2.0
+import org.sialan.telegram 1.0
 
 Rectangle {
     id: contact_dialog
     width: 100
     height: 62
 
+    property bool multiSelectMode: false
+
     signal selected( int uid )
+
+    SetObject {
+        id: selecteds_set
+    }
 
     ListView {
         id: clist
@@ -17,7 +24,9 @@ Rectangle {
             id: item
             height: 57
             width: clist.width
-            color: marea.pressed? "#E65245" : "#ffffff"
+            color: marea.pressed || item.selected? "#E65245" : "#00000000"
+
+            property bool selected: selecteds_set.contains(user_id)
 
             ContactImage {
                 id: contact_image
@@ -44,6 +53,15 @@ Rectangle {
                 id: marea
                 anchors.fill: parent
                 onClicked: {
+                    if( contact_dialog.multiSelectMode ) {
+                        if( selecteds_set.contains(user_id) )
+                            selecteds_set.remove(user_id)
+                        else
+                            selecteds_set.insert(user_id)
+
+                        item.selected = selecteds_set.contains(user_id)
+                        return
+                    }
                     if( forwarding != 0 ) {
                         forwardTo = user_id
                         return
@@ -70,11 +88,34 @@ Rectangle {
             }
         }
 
-        Component.onCompleted: refresh()
+        function refreshAll() {
+            model.clear()
+            var contacts = Telegram.contactListUsers()
+            for( var i=0; i<contacts.length; i++ ) {
+                var cnct = contacts[i]
+                if( cnct == Telegram.me )
+                    continue
+
+                model.append( {"user_id":cnct} )
+                Telegram.loadUserInfo(cnct)
+            }
+        }
     }
 
     PhysicalScrollBar {
         scrollArea: clist; height: clist.height; width: 8
         anchors.right: clist.right; anchors.top: clist.top; color: "#333333"
+    }
+
+    function showFullContacts() {
+        clist.refreshAll()
+    }
+
+    function showNeededContacts() {
+        clist.refresh()
+    }
+
+    function selectedContacts() {
+        return selecteds_set.exportIntData()
     }
 }

@@ -32,7 +32,8 @@ SOURCES += main.cpp \
     notification.cpp \
     userdata.cpp \
     unitysystemtray.cpp \
-    emojis.cpp
+    emojis.cpp \
+    setobject.cpp
 
 RESOURCES += qml.qrc
 
@@ -49,7 +50,8 @@ HEADERS += \
     userdata.h \
     telegram_macros.h \
     unitysystemtray.h \
-    emojis.h
+    emojis.h \
+    setobject.h
 
 OTHER_FILES += \
     database/userdata.db \

@@ -7,6 +7,7 @@
 #include "unitysystemtray.h"
 #include "telegram_macros.h"
 #include "emojis.h"
+#include "setobject.h"
 #include "userdata.h"
 #include "telegram/telegram.h"
 
@@ -54,7 +55,6 @@ public:
     char *args;
 
     QQuickWindow *root;
-    QHash<int,bool> mutes;
 
     QString background;
     bool firstTime;
@@ -81,6 +81,7 @@ TelegramGui::TelegramGui(QObject *parent) :
     connect( p->notify, SIGNAL(notifyAction(uint,QString)), SLOT(notify_action(uint,QString)) );
 
     qmlRegisterType<Enums>("org.sialan.telegram", 1, 0, "Enums");
+    qmlRegisterType<SetObject>("org.sialan.telegram", 1, 0, "SetObject");
 }
 
 QSettings *TelegramGui::settings()
@@ -90,16 +91,20 @@ QSettings *TelegramGui::settings()
 
 void TelegramGui::setMute(int id, bool stt)
 {
-    if( p->mutes.value(id) == stt )
+    if( p->userdata->isMuted(id) == stt )
         return;
 
-    p->mutes.insert(id, stt);
+    if( stt )
+        p->userdata->addMute(id);
+    else
+        p->userdata->removeMute(id);
+
     emit muted(id, stt);
 }
 
 bool TelegramGui::isMuted(int id) const
 {
-    return p->mutes.value(id);
+    return p->userdata->isMuted(id);
 }
 
 QSize TelegramGui::screenSize() const
@@ -299,6 +304,11 @@ void TelegramGui::sendNotify(quint64 msg_id)
 void TelegramGui::openFile(const QString &file)
 {
     QDesktopServices::openUrl( QUrl(file) );
+}
+
+void TelegramGui::openUrl(const QUrl &url)
+{
+    QDesktopServices::openUrl( url );
 }
 
 void TelegramGui::copyFile(const QString &file)

@@ -21,16 +21,18 @@ public:
     QHash<int,DialogClass> dialogs;
     QHash<int,UserClass> contacts;
     QHash<int,QString> photos;
+
+    QHash<int,bool> mutes;
 };
 
 UserData::UserData(QObject *parent) :
     QObject(parent)
 {
     p = new UserDataPrivate;
-    p->path = HOME_PATH  + "/userdata.sqlite";
+    p->path = HOME_PATH  + "/userdata.db";
 
     if( !TelegramGui::settings()->value("initialize/userdata_db",false).toBool() )
-        QFile::copy("database/userdata.sqlite",p->path);
+        QFile::copy("database/userdata.db",p->path);
 
     TelegramGui::settings()->setValue("initialize/userdata_db",true);
     QFile(p->path).setPermissions(QFileDevice::WriteOwner|QFileDevice::WriteGroup|QFileDevice::ReadUser|QFileDevice::ReadGroup);
@@ -50,6 +52,46 @@ void UserData::reconnect()
 {
     p->db.open();
     init_buffer();
+}
+
+void UserData::addMute(int id)
+{
+    QSqlQuery mute_query(p->db);
+    mute_query.prepare("INSERT OR REPLACE INTO mutes (id,mute) VALUES (:id,:mute)");
+    mute_query.bindValue(":id",id);
+    mute_query.bindValue(":mute",1);
+    mute_query.exec();
+
+    p->mutes.insert(id,true);
+}
+
+void UserData::removeMute(int id)
+{
+    QSqlQuery query(p->db);
+    query.prepare("DELETE FROM mutes WHERE id=:id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    p->mutes.remove(id);
+}
+
+QList<int> UserData::mutes() const
+{
+    QList<int> res;
+    QHashIterator<int,bool> i(p->mutes);
+    while( i.hasNext() )
+    {
+        i.next();
+        if( i.value() )
+            res << i.key();
+    }
+
+    return res;
+}
+
+bool UserData::isMuted(int id)
+{
+    return p->mutes.value(id);
 }
 
 void UserData::init_buffer()
@@ -110,6 +152,16 @@ void UserData::init_buffer()
 
             p->photos.insert( id, photo );
         }
+    }
+
+    QSqlQuery mute_query(p->db);
+    mute_query.prepare("SELECT id, mute FROM mutes");
+    mute_query.exec();
+
+    while( mute_query.next() )
+    {
+        const QSqlRecord & record = mute_query.record();
+        p->mutes.insert( record.value(0).toInt(), record.value(1).toInt() );
     }
 }
 

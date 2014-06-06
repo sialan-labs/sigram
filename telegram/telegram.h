@@ -53,6 +53,7 @@ public:
     Q_INVOKABLE int dialogUnreadCount( int id ) const;
     Q_INVOKABLE QDateTime dialogMsgDate( int id ) const;
     Q_INVOKABLE QString dialogMsgLast( int id ) const;
+    Q_INVOKABLE bool dialogLeaved( int id ) const;
     Q_INVOKABLE bool isDialog( int id ) const;
 
     Q_INVOKABLE QString title( int id ) const;
@@ -78,6 +79,9 @@ public:
     Q_INVOKABLE bool messageIsPhoto( qint64 id ) const;
     Q_INVOKABLE QString messageMediaFile( qint64 id ) const;
     Q_INVOKABLE bool messageIsDeleted( qint64 id ) const;
+    Q_INVOKABLE int messageAction( qint64 id ) const;
+    Q_INVOKABLE int messageActionUser( qint64 id ) const;
+    Q_INVOKABLE QString messageActionNewTitle( qint64 id ) const;
 
     Q_INVOKABLE int me() const;
     Q_INVOKABLE bool started() const;
@@ -112,6 +116,7 @@ public slots:
     void setStatusOnline( bool stt );
 
     void createChat( const QString & title, int user_id );
+    void createChatUsers( const QString & title, const QList<int> & users );
     void createSecretChat( int user_id );
     void renameChat( int chat_id, const QString & new_title );
     void chatAddUser( int chat_id, int user_id );
@@ -159,6 +164,7 @@ signals:
 private slots:
     void _waitAndGet( int type );
     void _startedChanged();
+    void _incomingNewMsg( qint64 msg_id );
     void registeringStarted();
     void registeringFinished();
 

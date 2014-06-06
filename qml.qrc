@@ -68,5 +68,6 @@
         <file>FlipMenu.qml</file>
         <file>LimooImageComponent.qml</file>
         <file>files/limoo.png</file>
+        <file>MsgAction.qml</file>
     </qresource>
 </RCC>

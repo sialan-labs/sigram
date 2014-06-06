@@ -28,3 +28,12 @@ CREATE TABLE IF NOT EXISTS Dialogs (
   phone TEXT NULL,
   PRIMARY KEY (id));
 
+
+-- -----------------------------------------------------
+-- Table Mutes
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Mutes (
+  id BIGINT NOT NULL,
+  mute TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id));
+

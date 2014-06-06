@@ -6,7 +6,6 @@ Item {
     id: menu_win
     width: 300
     height: 400
-//    color: "#00000000"
     visible: menu_frame.opacity != 0
 
     property bool started: false
@@ -64,7 +63,7 @@ Item {
             samples: 32
             cached: true
             spread: 0.5
-            color: "#80000000"
+            color: "#44000000"
             source: menu_item
         }
 

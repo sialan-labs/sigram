@@ -82,7 +82,7 @@ Rectangle {
 
                 Text {
                     id: last_msg
-                    text: Telegram.dialogMsgLast(dialog_id)
+                    text: Telegram.dialogLeaved(dialog_id)? qsTr("Leaved") : Emojis.textToEmojiText( Telegram.dialogMsgLast(dialog_id) )
                     anchors.left: parent.left
                     width: parent.width
                     font.pointSize: 9

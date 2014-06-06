@@ -7,6 +7,7 @@ Item {
     clip: true
 
     signal selected( int uid )
+    signal close()
 
     property bool addGroup: false
 
@@ -24,10 +25,10 @@ Item {
             Text {
                 id: input_placeholder
                 anchors.fill: input_line
-                text: qsTr("Group Name")
+                text: qsTr("Enter name and select contacts")
                 font: input_line.font
                 color: "#888888"
-                visible: !input_line.focus && input_line.text.length == 0
+                visible: input_line.text.length == 0
                 verticalAlignment: Text.AlignVCenter
             }
 
@@ -36,6 +37,7 @@ Item {
                 anchors.fill: parent
                 anchors.margins: 4
                 verticalAlignment: Text.AlignVCenter
+                onAccepted: input_line_frame.addChat()
             }
 
             Rectangle {
@@ -45,6 +47,19 @@ Item {
                 color: "#dddddd"
                 height: 1
             }
+        }
+
+        function addChat() {
+            var txt = input_line.text.trim()
+            if( txt.length == 0 )
+                return
+
+            var cntcts = c_dialog.selectedContacts()
+            if( cntcts.length == 0 )
+                return
+
+            Telegram.createChatUsers( txt, cntcts )
+            add_menu.close()
         }
     }
 
@@ -82,15 +97,19 @@ Item {
             onClicked: {
                 add_menu.addGroup = true
                 input_line.focus = true
+                c_dialog.showFullContacts()
+                c_dialog.multiSelectMode = true
             }
         }
     }
 
     ContactDialog {
+        id: c_dialog
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: add_menu_header.bottom
         anchors.bottom: parent.bottom
         onSelected: add_menu.selected(uid)
+        Component.onCompleted: showNeededContacts()
     }
 }

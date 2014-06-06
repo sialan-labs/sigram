@@ -309,7 +309,7 @@ void dialogList_addToBuffer( peer_t *uc, int is_chat, int unread_cnt )
         user.lastTime = convertDate(uc->user.status.when);
     }
 
-    if( !(uc->last->flags & Enums::UserMessageEmpty) && uc->last->media.type != 0 )
+    if( !(uc->last->flags & Enums::UserMessageEmpty) && uc->last->media.type != 0 && uc->last->service == 0 )
         dialog.msgLast = uc->last->msg;
 
     foreach( TelegramCore *tg, telegram_objects )
@@ -344,7 +344,6 @@ void incomingMsg( struct message *m, struct user *u )
     msg.unread = m->unread;
     msg.date = convertDate(m->date);
     msg.service = m->service;
-    msg.message = QString(m->msg);
     msg.from_id = m->from_id.id;
     msg.to_id = m->to_id.id;
     msg.firstName = u->first_name;
@@ -352,6 +351,9 @@ void incomingMsg( struct message *m, struct user *u )
     msg.flags = m->flags;
     msg.mediaType = static_cast<Enums::MessageType>(m->media.type);
     msg.action = static_cast<Enums::MessageAction>(m->action.type);
+
+    if( msg.mediaType == Enums::MediaEmpty && !msg.service )
+        msg.message = QString(m->msg);
 
     switch( m->action.type )
     {

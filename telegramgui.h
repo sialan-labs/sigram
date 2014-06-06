@@ -51,6 +51,7 @@ public slots:
     void sendNotify(quint64 msg_id);
 
     void openFile( const QString & file );
+    void openUrl( const QUrl & url );
     void copyFile( const QString & file );
     void saveFile( const QString & file );
 

@@ -136,6 +136,9 @@ Rectangle {
             cnct_change_timer.restart()
             menu.stop()
         }
+        onClose: {
+            menu.stop()
+        }
 
         Timer {
             id: cnct_change_timer

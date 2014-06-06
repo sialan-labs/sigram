@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-Rectangle {
+Item {
     id: chat_users
     width: 100
     height: 62
@@ -11,9 +11,28 @@ Rectangle {
 
     onChatIdChanged: clist.refresh()
 
+    Rectangle {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: clist.top
+        height: 1
+        color: "#888888"
+    }
+
+    Rectangle {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: clist.bottom
+        height: 1
+        color: "#888888"
+    }
+
     ListView {
         id: clist
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: add_btn.top
         anchors.margins: 4
         model: ListModel{}
         clip: true
@@ -45,6 +64,17 @@ Rectangle {
                 text: Telegram.contactTitle(user_id)
             }
 
+            MouseArea {
+                id: marea
+                anchors.fill: parent
+                onClicked: {
+                    if( !Telegram.contactContains(user_id) )
+                        return
+
+                    chat_users.selected(user_id)
+                }
+            }
+
             Button {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
@@ -55,17 +85,6 @@ Rectangle {
                 visible: Telegram.dialogChatUsersInviter(chat_users.chatId,user_id) == Telegram.me
                 text: qsTr("Delete")
                 onClicked: Telegram.chatDelUser(chat_users.chatId,user_id)
-            }
-
-            MouseArea {
-                id: marea
-                anchors.fill: parent
-                onClicked: {
-                    if( !Telegram.contactContains(user_id) )
-                        return
-
-                    chat_users.selected(user_id)
-                }
             }
         }
 
@@ -82,8 +101,58 @@ Rectangle {
         Component.onCompleted: refresh()
     }
 
+    Button {
+        id: add_btn
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        normalColor: "#00000000"
+        highlightColor: "#00000000"
+        textColor: press? "#337fa2" : "#4098bf"
+        text: qsTr("Add User")
+        onClicked: flipMenu.show(add_user_dialog)
+
+    }
+
     PhysicalScrollBar {
         scrollArea: clist; height: clist.height; width: 8
         anchors.right: clist.right; anchors.top: clist.top; color: "#ffffff"
+    }
+
+    Component {
+        id: add_user_dialog
+        Item {
+            width: 237
+
+            ContactDialog {
+                id: c_dialog
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.bottom: ac_btn.top
+                multiSelectMode: true
+                color: "#00000000"
+                Component.onCompleted: showFullContacts()
+            }
+
+            Button {
+                id: ac_btn
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                normalColor: "#4098bf"
+                highlightColor: "#337fa2"
+                textColor: "#ffffff"
+                height: 42
+                text: qsTr("Add")
+                onClicked: {
+                    var users = c_dialog.selectedContacts()
+                    for( var i=0; i<users.length; i++ )
+                        Telegram.chatAddUser( chat_users.chatId, users[i] )
+
+                    flipMenu.hide()
+                    chatFrame.chatView.userConfig = false
+                }
+            }
+        }
     }
 }

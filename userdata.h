@@ -11,6 +11,11 @@ public:
     UserData(QObject *parent = 0);
     ~UserData();
 
+    void addMute( int id );
+    void removeMute( int id );
+    QList<int> mutes() const;
+    bool isMuted(int id);
+
 public slots:
     void reconnect();
     void disconnect();

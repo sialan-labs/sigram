@@ -66,4 +66,14 @@ Rectangle {
             source: "files/sialan_logo.png"
         }
     }
+
+    Text {
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 8
+        font.family: globalNormalFontFamily
+        font.pointSize: 10
+        color: "#ffffff"
+        text: "version 0.5"
+    }
 }
