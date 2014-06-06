@@ -2,6 +2,7 @@ import QtQuick 2.0
 import org.sialan.telegram 1.0
 
 Item {
+    id: register_frame
     width: 100
     height: 62
 
@@ -41,6 +42,7 @@ Item {
             id: phone
             anchors.left: parent.left
             anchors.right: parent.right
+            height: 300
             visible: Telegram.waitAndGet == Enums.PhoneNumber
         }
 

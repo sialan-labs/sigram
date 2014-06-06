@@ -59,12 +59,30 @@ Item {
 
     Text {
         anchors.right: parent.right
+        anchors.bottom: website.top
+        anchors.margins: 8
+        font.family: globalNormalFontFamily
+        font.pointSize: 10
+        color: "#333333"
+        text: "SialanLabs twitter"
+
+        MouseArea {
+            anchors.fill: parent
+            anchors.margins: -8
+            cursorShape: Qt.PointingHandCursor
+            onClicked: Gui.openUrl("https://twitter.com/SialanLabs")
+        }
+    }
+
+    Text {
+        id: website
+        anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 8
         font.family: globalNormalFontFamily
         font.pointSize: 10
         color: "#333333"
-        text: "labs.sialan.org"
+        text: "Sialan labs website"
 
         MouseArea {
             anchors.fill: parent

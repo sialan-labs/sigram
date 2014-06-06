@@ -8,7 +8,9 @@ fonts.source = fonts
 fonts.target = .
 emojis.source = emojis
 emojis.target = .
-COPYFOLDERS = database fonts emojis
+countries.source = countries
+countries.target = .
+COPYFOLDERS = database fonts emojis countries
 include(qmake/copyData.pri)
 copyData()
 
@@ -20,7 +22,8 @@ SOURCES += main.cpp \
     emojis.cpp \
     setobject.cpp \
     downloader.cpp \
-    versionchecker.cpp
+    versionchecker.cpp \
+    countries.cpp
 
 RESOURCES += qml.qrc
 
@@ -40,7 +43,8 @@ HEADERS += \
     emojis.h \
     setobject.h \
     downloader.h \
-    versionchecker.h
+    versionchecker.h \
+    countries.h
 
 OTHER_FILES += \
     database/userdata.db \

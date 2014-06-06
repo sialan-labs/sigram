@@ -8,6 +8,7 @@
 #include "telegram_macros.h"
 #include "versionchecker.h"
 #include "emojis.h"
+#include "countries.h"
 #include "setobject.h"
 #include "userdata.h"
 #include "telegram/telegram.h"
@@ -44,6 +45,7 @@ public:
     Notification *notify;
     UserData *userdata;
     Emojis *emojis;
+    Countries *countries;
 
     QTextDocument *doc;
 
@@ -312,6 +314,7 @@ void TelegramGui::start()
     p->userdata = new UserData(this);
     p->emojis = new Emojis(this);
     p->version_checker = new VersionChecker(this);
+    p->countries = new Countries(this);
 
     p->engine = new QQmlApplicationEngine(this);
     p->engine->rootContext()->setContextProperty( "Telegram", p->tg );
@@ -319,6 +322,7 @@ void TelegramGui::start()
     p->engine->rootContext()->setContextProperty( "UserData", p->userdata );
     p->engine->rootContext()->setContextProperty( "Emojis", p->emojis );
     p->engine->rootContext()->setContextProperty( "VersionChecker", p->version_checker );
+    p->engine->rootContext()->setContextProperty( "Countries", p->countries );
     p->engine->load(QUrl(QStringLiteral("qrc:///main.qml")));
 
     p->root = static_cast<QQuickWindow*>(p->engine->rootObjects().first());

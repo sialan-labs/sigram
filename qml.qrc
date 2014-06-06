@@ -71,5 +71,7 @@
         <file>MsgAction.qml</file>
         <file>UpdateDialog.qml</file>
         <file>files/go.png</file>
+        <file>CountryFrame.qml</file>
+        <file>CountryImage.qml</file>
     </qresource>
 </RCC>
