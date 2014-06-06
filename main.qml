@@ -44,6 +44,15 @@ Window {
             }
         }
     }
+    Connections {
+        target: VersionChecker
+        onUpdateAvailable: {
+            var obj = flipMenu.show(update_component)
+            obj.version = version
+            obj.text = info
+        }
+    }
+
     Component {
         id: font_loader
         FontLoader {}
@@ -129,6 +138,13 @@ Window {
         interval: 1
         repeat: false
         onTriggered: refreshStatus()
+    }
+
+    Component {
+        id: update_component
+        UpdateDialog {
+            width: 375
+        }
     }
 
     function refreshStatus() {

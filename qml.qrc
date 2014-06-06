@@ -69,5 +69,6 @@
         <file>LimooImageComponent.qml</file>
         <file>files/limoo.png</file>
         <file>MsgAction.qml</file>
+        <file>UpdateDialog.qml</file>
     </qresource>
 </RCC>
