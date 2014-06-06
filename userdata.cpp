@@ -50,7 +50,7 @@ UserData::UserData(QObject *parent) :
     p->path = HOME_PATH  + "/userdata.db";
 
     if( !TelegramGui::settings()->value("initialize/userdata_db",false).toBool() )
-        QFile::copy("database/userdata.db",p->path);
+        QFile::copy(QCoreApplication::applicationDirPath()+"/database/userdata.db",p->path);
 
     TelegramGui::settings()->setValue("initialize/userdata_db",true);
     QFile(p->path).setPermissions(QFileDevice::WriteOwner|QFileDevice::WriteGroup|QFileDevice::ReadUser|QFileDevice::ReadGroup);
