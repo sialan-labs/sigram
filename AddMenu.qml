@@ -47,6 +47,18 @@ Item {
                 color: "#dddddd"
                 height: 1
             }
+
+            Button {
+                id: create_chat_btn
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                anchors.bottomMargin: 1
+                normalColor: "#00000000"
+                highlightColor: "#660d80ec"
+                icon: "files/go.png"
+                onClicked: input_line_frame.addChat()
+            }
         }
 
         function addChat() {
@@ -83,6 +95,7 @@ Item {
             highlightColor: "#00000000"
             text: qsTr("Add Secret chat")
             textColor: press? "#0d80ec" : "#333333"
+            visible: false
         }
 
         Button {

@@ -4,9 +4,9 @@ import QtGraphicalEffects 1.0
 
 Window {
     id: main
-    visible: true
-    width: 1024
-    height: 600
+    visible: Gui.visible
+    width: Gui.width
+    height: Gui.height
 
     property real physicalPlatformScale: 1
     property real fontsScale: 1
@@ -58,8 +58,16 @@ Window {
         FontLoader {}
     }
 
+
+    onWidthChanged: Gui.width = width
+    onHeightChanged: Gui.height = height
+    onVisibleChanged: {
+        Gui.visible = visible
+        status_changer.restart()
+    }
+
     onActiveChanged: status_changer.restart()
-    onVisibleChanged: status_changer.restart()
+
     Component.onCompleted: {
         var fonts = Gui.fonts()
         for( var i=0; i<fonts.length; i++ ) {

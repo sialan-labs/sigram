@@ -60,6 +60,12 @@ public:
 
     QString background;
     bool firstTime;
+
+    int width;
+    int height;
+    bool visible;
+
+    bool quit_state;
 };
 
 TelegramGui::TelegramGui(QObject *parent) :
@@ -68,6 +74,7 @@ TelegramGui::TelegramGui(QObject *parent) :
     p = new TelegramGuiPrivate;
     p->engine = 0;
     p->tg = 0;
+    p->quit_state = false;
     p->args = QGuiApplication::arguments().first().toUtf8().data();
     p->doc = new QTextDocument(this);
 
@@ -78,6 +85,9 @@ TelegramGui::TelegramGui(QObject *parent) :
 
     p->background = tg_settings->value( "General/background", QString() ).toString();
     p->firstTime = tg_settings->value( "General/firstTime", true ).toBool();
+    p->width = tg_settings->value( "General/width", 1024 ).toInt();
+    p->height = tg_settings->value( "General/height", 600 ).toInt();
+    p->visible = tg_settings->value( "General/visible", true ).toBool();
     p->notify = new Notification(this);
 
     connect( p->notify, SIGNAL(notifyAction(uint,QString)), SLOT(notify_action(uint,QString)) );
@@ -234,6 +244,63 @@ int TelegramGui::desktopSession()
         result = Enums::Unknown;
 
     return result;
+}
+
+void TelegramGui::setWidth(int w)
+{
+    if( w == p->width )
+        return;
+
+    p->width = w;
+    if( p->quit_state )
+        return;
+
+    tg_settings->setValue( "General/width", w );
+
+    emit widthChanged();
+}
+
+int TelegramGui::width() const
+{
+    return p->width;
+}
+
+void TelegramGui::setHeight(int h)
+{
+    if( h == p->height )
+        return;
+
+    p->height = h;
+    if( p->quit_state )
+        return;
+
+    tg_settings->setValue( "General/height", h );
+
+    emit heightChanged();
+}
+
+int TelegramGui::height() const
+{
+    return p->height;
+}
+
+void TelegramGui::setVisible(bool v)
+{
+    if( v == p->visible )
+        return;
+
+    p->visible = v;
+    if( p->quit_state )
+        return;
+
+    tg_settings->setValue( "General/visible", v );
+
+    emit visibleChanged();
+}
+
+bool TelegramGui::visible() const
+{
+    return p->visible;
 }
 
 void TelegramGui::start()
@@ -473,6 +540,7 @@ void TelegramGui::aboutSialan()
 
 void TelegramGui::quit()
 {
+    p->quit_state = true;
     QCoreApplication::quit();
 }
 

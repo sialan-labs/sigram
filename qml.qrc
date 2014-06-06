@@ -70,5 +70,6 @@
         <file>files/limoo.png</file>
         <file>MsgAction.qml</file>
         <file>UpdateDialog.qml</file>
+        <file>files/go.png</file>
     </qresource>
 </RCC>

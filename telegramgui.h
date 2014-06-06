@@ -13,6 +13,9 @@ class TelegramGui : public QObject
     Q_PROPERTY(QString appPath READ appPath NOTIFY appPathChanged)
     Q_PROPERTY(QString background READ background WRITE setBackground NOTIFY backgroundChanged)
     Q_PROPERTY(bool firstTime READ firstTime WRITE setFirstTime NOTIFY firstTimeChanged)
+    Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged)
+    Q_PROPERTY(int height READ height WRITE setHeight NOTIFY heightChanged)
+    Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
     Q_OBJECT
 public:
     TelegramGui(QObject *parent = 0);
@@ -46,6 +49,15 @@ public:
 
     static int desktopSession();
 
+    void setWidth( int w );
+    int width() const;
+
+    void setHeight( int h );
+    int height() const;
+
+    void setVisible( bool v );
+    bool visible() const;
+
 public slots:
     void start();
     void sendNotify(quint64 msg_id);
@@ -71,6 +83,9 @@ signals:
     void appPathChanged();
     void backgroundChanged();
     void firstTimeChanged();
+    void heightChanged();
+    void widthChanged();
+    void visibleChanged();
 
 private slots:
     void notify_action( uint id, const QString & act );
