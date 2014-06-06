@@ -34,7 +34,11 @@ class TelegramGui : public QObject
     Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged)
     Q_PROPERTY(int height READ height WRITE setHeight NOTIFY heightChanged)
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
+    Q_PROPERTY(QString country READ country WRITE setCountry NOTIFY countryChanged)
+    Q_PROPERTY(bool donate READ donate WRITE setDonate NOTIFY donateChanged)
+    Q_PROPERTY(bool donateViewShowed READ donateViewShowed WRITE setDonateViewShowed NOTIFY donateViewShowedChanged)
     Q_OBJECT
+
 public:
     TelegramGui(QObject *parent = 0);
     ~TelegramGui();
@@ -78,6 +82,15 @@ public:
     void setVisible( bool v );
     bool visible() const;
 
+    static void setCountry(const QString & country);
+    static QString country();
+
+    static void setDonate(bool stt);
+    static bool donate();
+
+    static void setDonateViewShowed(bool stt);
+    static bool donateViewShowed();
+
 public slots:
     void start();
     void sendNotify(quint64 msg_id);
@@ -95,6 +108,7 @@ public slots:
     void about();
     void aboutSialan();
     void showLicense();
+    void showDonate();
     void quit();
     void show();
 
@@ -107,6 +121,9 @@ signals:
     void heightChanged();
     void widthChanged();
     void visibleChanged();
+    void countryChanged();
+    void donateChanged();
+    void donateViewShowedChanged();
 
 private slots:
     void notify_action( uint id, const QString & act );

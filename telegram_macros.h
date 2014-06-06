@@ -27,6 +27,8 @@
 #define HOME_PATH QString( QDir::homePath() + "/.config/sialan/telegram/" )
 #define EMOJIS_PATH QString( QCoreApplication::applicationDirPath() + "/emojis/" )
 
+#define DONATE_KEY "eb229602-6719-41a5-be54-f56d1cecff77"
+
 #define VERSION 0.5
 
 #endif // TELEGRAM_MACROS_H

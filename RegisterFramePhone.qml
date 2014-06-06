@@ -93,7 +93,10 @@ Column {
         anchors.right: parent.right
         height: parent.height
         visible: rf_phone.country.length == 0
-        onSelected: rf_phone.country = country
+        onSelected: {
+            rf_phone.country = country
+            Gui.country = country
+        }
     }
 
     function go() {

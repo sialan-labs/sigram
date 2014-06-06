@@ -56,7 +56,7 @@ Item {
             icon: cl_tools.mute? "files/mute.png" : "files/unmute.png"
             normalColor: "#00000000"
             highlightColor: "#00000000"
-            iconHeight: height - 4
+            iconHeight: height - 10
             hoverEnabled: false
             onClicked: Gui.setMute( cl_tools.uid, !cl_tools.mute )
         }

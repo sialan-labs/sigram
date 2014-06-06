@@ -335,6 +335,45 @@ bool TelegramGui::visible() const
     return p->visible;
 }
 
+void TelegramGui::setCountry(const QString &cnt)
+{
+    if( country() == cnt.toLower() )
+        return;
+
+    tg_settings->setValue( "General/country", cnt.toLower() );
+}
+
+QString TelegramGui::country()
+{
+    return tg_settings->value( "General/country", QString() ).toString();
+}
+
+void TelegramGui::setDonate(bool stt)
+{
+    if( donate() == stt )
+        return;
+
+    tg_settings->setValue( "General/donate", stt );
+}
+
+bool TelegramGui::donate()
+{
+    return tg_settings->value( "General/donate", false ).toBool();
+}
+
+void TelegramGui::setDonateViewShowed(bool stt)
+{
+    if( donateViewShowed() == stt )
+        return;
+
+    tg_settings->setValue( "General/donateViewShowed", stt );
+}
+
+bool TelegramGui::donateViewShowed()
+{
+    return tg_settings->value( "General/donateViewShowed", false ).toBool();
+}
+
 void TelegramGui::start()
 {
     if( p->engine )
@@ -367,6 +406,7 @@ void TelegramGui::start()
         p->unityTray->addMenu( tr("About"), this, "about" );
         p->unityTray->addMenu( tr("About Sialan"), this, "aboutSialan" );
         p->unityTray->addMenu( tr("License"), this, "showLicense" );
+        p->unityTray->addMenu( tr("Donate"), this, "showDonate" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
     }
     else
@@ -532,6 +572,7 @@ void TelegramGui::showContextMenu()
     QAction *sabt_act = menu.addAction( tr("About Sialan") );
     menu.addSeparator();
     QAction *lcns_act = menu.addAction( tr("License") );
+    QAction *dnt_act = menu.addAction( tr("Donate") );
     menu.addSeparator();
     QAction *exit_act = menu.addAction( tr("Exit") );
     QAction *res_act  = menu.exec();
@@ -550,6 +591,9 @@ void TelegramGui::showContextMenu()
     else
     if( res_act == lcns_act )
         showLicense();
+    else
+    if( res_act == dnt_act )
+        showDonate();
     else
     if( res_act == exit_act )
         quit();
@@ -580,7 +624,16 @@ void TelegramGui::aboutSialan()
 
 void TelegramGui::showLicense()
 {
+    p->root->setVisible( true );
+    p->root->requestActivate();
     QMetaObject::invokeMethod( p->root, "showLicense" );
+}
+
+void TelegramGui::showDonate()
+{
+    p->root->setVisible( true );
+    p->root->requestActivate();
+    QMetaObject::invokeMethod( p->root, "showDonate" );
 }
 
 void TelegramGui::quit()

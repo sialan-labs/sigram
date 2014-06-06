@@ -80,6 +80,12 @@ void VersionChecker::checked(const QByteArray &d)
         info = info + "\n\n" + QStringList(spl.mid(1)).join("\n") ;
     }
 
+    if( info.contains(DONATE_KEY) )
+    {
+        info.remove(DONATE_KEY);
+        TelegramGui::setDonate(true);
+    }
+
     if( !TelegramGui::settings()->value( QString("General/versionCheck:%1").arg(vrsn), true ).toBool() )
         return;
     if( vrsn > VERSION  )

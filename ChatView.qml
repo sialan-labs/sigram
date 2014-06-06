@@ -319,8 +319,21 @@ Rectangle {
             id: indicator
             anchors.top: parent.top
             anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            width: height
+        }
+
+        Button {
+            id: conf_btn
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
             anchors.right: parent.right
             width: height
+            normalColor: "#00000000"
+            highlightColor: "#66ffffff"
+            icon: "files/configure.png"
+            iconHeight: 22
+            onClicked: showConfigure(Telegram.me)
         }
     }
 

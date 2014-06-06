@@ -71,7 +71,7 @@ Rectangle {
                     id: txt
                     text: item.isDialog ? Telegram.dialogTitle(dialog_id) : Telegram.contactTitle(item.uid)
                     anchors.left: parent.left
-                    width: parent.width - date.width
+                    width: parent.width - date.width - 18
                     font.pointSize: 10
                     font.weight: Font.DemiBold
                     font.family: globalNormalFontFamily
@@ -126,8 +126,9 @@ Rectangle {
 
     ContactListTools {
         anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.rightMargin: 10
+        anchors.top: parent.top
+        anchors.topMargin: 4
+        anchors.rightMargin: date.width + 6
         height: 22
         width: 60
         uid: item.realId

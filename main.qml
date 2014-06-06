@@ -95,6 +95,10 @@ Window {
 
         if( Telegram.authenticating || Gui.firstTime )
             startAuthenticating()
+        if( Gui.donate && !Gui.donateViewShowed ) {
+            Gui.donateViewShowed = true
+            showDonate()
+        }
     }
 
     Component {
@@ -180,8 +184,19 @@ Window {
         }
     }
 
+    Component {
+        id: donate_component
+        DonatePage {
+            width: 500
+        }
+    }
+
     function showLicense() {
         flipMenu.show(license_component)
+    }
+
+    function showDonate() {
+        flipMenu.show(donate_component)
     }
 
     function refreshStatus() {

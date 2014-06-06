@@ -75,8 +75,8 @@ Rectangle {
             id: attach_btn
             width: tools_column.width
             height: width
-            normalColor: imageBack? "#88ffffff" : "#252626"
-            highlightColor: imageBack? "#bbffffff" : "#191A1A"
+            normalColor: "#252626"
+            highlightColor: "#191A1A"
             icon: "files/attach.png"
             iconHeight: 18
             onClicked: {
@@ -93,8 +93,8 @@ Rectangle {
             id: smilies_btn
             width: tools_column.width
             height: width
-            normalColor: imageBack? "#88ffffff" : "#252626"
-            highlightColor: imageBack? "#bbffffff" : "#191A1A"
+            normalColor: "#252626"
+            highlightColor: "#191A1A"
             icon: "files/smilies.png"
             iconHeight: 18
             onClicked: send_frame.smilies = !send_frame.smilies
