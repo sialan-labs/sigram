@@ -406,7 +406,8 @@ void TelegramGui::start()
         p->unityTray->addMenu( tr("About"), this, "about" );
         p->unityTray->addMenu( tr("About Sialan"), this, "aboutSialan" );
         p->unityTray->addMenu( tr("License"), this, "showLicense" );
-        p->unityTray->addMenu( tr("Donate"), this, "showDonate" );
+        if( donate() )
+            p->unityTray->addMenu( tr("Donate"), this, "showDonate" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
     }
     else
@@ -572,7 +573,7 @@ void TelegramGui::showContextMenu()
     QAction *sabt_act = menu.addAction( tr("About Sialan") );
     menu.addSeparator();
     QAction *lcns_act = menu.addAction( tr("License") );
-    QAction *dnt_act = menu.addAction( tr("Donate") );
+    QAction *dnt_act = donate()? menu.addAction( tr("Donate") ) : 0;
     menu.addSeparator();
     QAction *exit_act = menu.addAction( tr("Exit") );
     QAction *res_act  = menu.exec();
@@ -592,7 +593,7 @@ void TelegramGui::showContextMenu()
     if( res_act == lcns_act )
         showLicense();
     else
-    if( res_act == dnt_act )
+    if( res_act == dnt_act && dnt_act != 0 )
         showDonate();
     else
     if( res_act == exit_act )
