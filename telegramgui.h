@@ -65,6 +65,8 @@ public:
     Q_INVOKABLE QSize imageSize( const QString & path );
     Q_INVOKABLE qreal htmlWidth( const QString & txt );
 
+    Q_INVOKABLE QString license() const;
+
     static int desktopSession();
 
     void setWidth( int w );
@@ -92,6 +94,7 @@ public slots:
     void configure();
     void about();
     void aboutSialan();
+    void showLicense();
     void quit();
     void show();
 

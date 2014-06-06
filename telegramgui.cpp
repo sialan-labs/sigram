@@ -234,6 +234,18 @@ qreal TelegramGui::htmlWidth(const QString &txt)
     return p->doc->size().width() + 10;
 }
 
+QString TelegramGui::license() const
+{
+    QString res;
+
+    QFile license_file( QCoreApplication::applicationDirPath() + "/license.txt" );
+    if( !license_file.open(QFile::ReadOnly) )
+        return res;
+
+    res = license_file.readAll();
+    return res;
+}
+
 int TelegramGui::desktopSession()
 {
     static int result = -1;
@@ -354,6 +366,7 @@ void TelegramGui::start()
         p->unityTray->addMenu( tr("Configure"), this, "configure" );
         p->unityTray->addMenu( tr("About"), this, "about" );
         p->unityTray->addMenu( tr("About Sialan"), this, "aboutSialan" );
+        p->unityTray->addMenu( tr("License"), this, "showLicense" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
     }
     else
@@ -518,6 +531,8 @@ void TelegramGui::showContextMenu()
     QAction *abut_act = menu.addAction( tr("About") );
     QAction *sabt_act = menu.addAction( tr("About Sialan") );
     menu.addSeparator();
+    QAction *lcns_act = menu.addAction( tr("License") );
+    menu.addSeparator();
     QAction *exit_act = menu.addAction( tr("Exit") );
     QAction *res_act  = menu.exec();
 
@@ -532,6 +547,9 @@ void TelegramGui::showContextMenu()
     else
     if( res_act == sabt_act )
         aboutSialan();
+    else
+    if( res_act == lcns_act )
+        showLicense();
     else
     if( res_act == exit_act )
         quit();
@@ -558,6 +576,11 @@ void TelegramGui::aboutSialan()
     p->root->requestActivate();
     p->root->setProperty( "aboutSialan", !p->root->property("aboutSialan").toBool() );
     p->root->setProperty( "focus", true );
+}
+
+void TelegramGui::showLicense()
+{
+    QMetaObject::invokeMethod( p->root, "showLicense" );
 }
 
 void TelegramGui::quit()

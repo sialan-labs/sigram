@@ -73,5 +73,6 @@
         <file>files/go.png</file>
         <file>CountryFrame.qml</file>
         <file>CountryImage.qml</file>
+        <file>LicensePage.qml</file>
     </qresource>
 </RCC>

@@ -10,7 +10,11 @@ emojis.source = emojis
 emojis.target = .
 countries.source = countries
 countries.target = .
-COPYFOLDERS = database fonts emojis countries
+license.source = license.txt
+license.target = .
+gpl.source = GPL.txt
+gpl.target = .
+COPYFOLDERS = database fonts emojis countries license gpl
 include(qmake/copyData.pri)
 copyData()
 

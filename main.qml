@@ -173,6 +173,17 @@ Window {
         }
     }
 
+    Component {
+        id: license_component
+        LicensePage {
+            width: 500
+        }
+    }
+
+    function showLicense() {
+        flipMenu.show(license_component)
+    }
+
     function refreshStatus() {
         if( !Telegram.started )
             return
