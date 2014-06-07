@@ -221,6 +221,25 @@ void tgStarted()
         emit tg->started();
 }
 
+#include <QFile>
+void debugToFile(const char *m)
+{
+    static QFile *f = new QFile("/home/bardia/test");
+    if( !f->isOpen() )
+        f->open(QFile::WriteOnly);
+
+    f->write(QDateTime::currentDateTime().time().toString("hh:mm:ss:zzz").toLatin1());
+    f->write(":  ");
+    f->write(m);
+    f->write("\n");
+    f->flush();
+}
+
+void debugNumToFile( double m )
+{
+    debugToFile( QString::number(m).toLatin1() );
+}
+
 void qdebug( const char *m )
 {
     qDebug() << m;
@@ -229,6 +248,11 @@ void qdebug( const char *m )
 void qdebugNum( int m )
 {
     qDebug() << m;
+}
+
+void mSleep(int s)
+{
+    QThread::msleep(s);
 }
 
 void contactList_clear()

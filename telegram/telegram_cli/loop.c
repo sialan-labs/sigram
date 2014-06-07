@@ -65,6 +65,7 @@ int unread_messages;
 void got_it (char *line, int len);
 void net_loop (int flags, int (*is_end)(void)) {
   while (!is_end ()) {
+    mSleep(100);
 
     struct pollfd fds[101];
     int cc = 0;
@@ -100,7 +101,7 @@ void net_loop (int flags, int (*is_end)(void)) {
       lua_do_all ();
     #endif
     if (safe_quit && !queries_num) {
-      //printf ("All done. Exit\n");
+      printf ("All done. Exit\n");
       qthreadExitRequest (0);
     }
     if (unknown_user_list_pos) {

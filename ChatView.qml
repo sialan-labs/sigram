@@ -74,8 +74,6 @@ Rectangle {
             main.current = tmp
         }
         onIncomingNewMsg: {
-            if( chat_view.current == 0 )
-                return
             if( Telegram.messageIsDeleted(msg_id) )
                 return
 
@@ -110,7 +108,8 @@ Rectangle {
             }
 
             indicator.stop()
-            chat_list.append(msg_id)
+            if( chat_view.current != 0 )
+                chat_list.append(msg_id)
             if( !main.active || !main.visible ) {
                 sendNotify(msg_id)
                 return
@@ -135,8 +134,7 @@ Rectangle {
             chat_list.disableAnims = true
             dis_anim_timer.restart()
 
-            chat_list.model.remove(index,1)
-            chat_list.append(msg_id)
+            chat_list.model.setProperty(index,"msg",msg_id)
         }
     }
 
@@ -194,6 +192,8 @@ Rectangle {
                 height: msg_item.height
 
                 property variant msgItem
+                property int msg_id: msg
+                onMsg_idChanged: if(msgItem) msgItem.msg_id = msg_id
 
                 Component.onCompleted: {
                     if( Telegram.messageService(msg) != 0 )

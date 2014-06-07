@@ -114,6 +114,8 @@ public slots:
 
     void logout();
 
+    void incomingAppMessage( const QString & msg );
+
 signals:
     void muted( int id, bool stt );
     void desktopSessionChanged();

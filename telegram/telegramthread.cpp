@@ -135,23 +135,52 @@ void TelegramThread::dialogList()
 
 void TelegramThread::getHistory(int id, int count)
 {
-    const DialogClass & dialog = p->dialogs.value(id);
-    const QString & user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    QString user;
+    if( p->dialogs.contains(id) )
+    {
+        const DialogClass & dialog = p->dialogs.value(id);
+        user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    }
+    else
+    if( p->contacts.contains(id) )
+        user = p->contacts.value(id).username;
+    else
+        return;
 
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user), Q_ARG(int,count) );
 }
 
 void TelegramThread::sendMessage(int id, const QString &msg)
 {
-    const DialogClass & dialog = p->dialogs.value(id);
-    const QString & user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    QString user;
+    if( p->dialogs.contains(id) )
+    {
+        const DialogClass & dialog = p->dialogs.value(id);
+        user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    }
+    else
+    if( p->contacts.contains(id) )
+        user = p->contacts.value(id).username;
+    else
+        return;
+
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user), Q_ARG(QString,msg) );
 }
 
 void TelegramThread::forwardMessage(qint64 msg_id, int user_id)
 {
-    const DialogClass & dialog = p->dialogs.value(user_id);
-    const QString & user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    QString user;
+    if( p->dialogs.contains(user_id) )
+    {
+        const DialogClass & dialog = p->dialogs.value(user_id);
+        user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    }
+    else
+    if( p->contacts.contains(user_id) )
+        user = p->contacts.value(user_id).username;
+    else
+        return;
+
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(qint64,msg_id), Q_ARG(QString,user) );
 }
 
@@ -204,32 +233,36 @@ void TelegramThread::loadPhoto(qint64 msg_id)
 
 void TelegramThread::sendFile(int dId, const QString &file)
 {
-    if( !p->dialogs.contains(dId) )
+    QString user;
+    if( p->dialogs.contains(dId) )
+    {
+        const DialogClass & dialog = p->dialogs.value(dId);
+        user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    }
+    else
+    if( p->contacts.contains(dId) )
+        user = p->contacts.value(dId).username;
+    else
         return;
 
-    const DialogClass & dialog = p->dialogs.value(dId);
-    QString peer;
-    if( dialog.is_chat )
-        peer = dialog.chatClass.title;
-    else
-        peer = dialog.userClass.username;
-
-    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,peer), Q_ARG(QString,file) );
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user), Q_ARG(QString,file) );
 }
 
 void TelegramThread::markRead(int dId)
 {
-    if( !p->dialogs.contains(dId) )
+    QString user;
+    if( p->dialogs.contains(dId) )
+    {
+        const DialogClass & dialog = p->dialogs.value(dId);
+        user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    }
+    else
+    if( p->contacts.contains(dId) )
+        user = p->contacts.value(dId).username;
+    else
         return;
 
-    const DialogClass & dialog = p->dialogs.value(dId);
-    QString peer;
-    if( dialog.is_chat )
-        peer = dialog.chatClass.title;
-    else
-        peer = dialog.userClass.username;
-
-    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,peer) );
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user) );
 }
 
 void TelegramThread::setStatusOnline(bool stt)

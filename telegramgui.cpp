@@ -659,6 +659,12 @@ void TelegramGui::logout()
     quit();
 }
 
+void TelegramGui::incomingAppMessage(const QString &msg)
+{
+    if( msg == "show" )
+        show();
+}
+
 TelegramGui::~TelegramGui()
 {
     delete p;

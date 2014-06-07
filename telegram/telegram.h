@@ -72,6 +72,7 @@ public:
     Q_INVOKABLE QDateTime dialogMsgDate( int id ) const;
     Q_INVOKABLE QString dialogMsgLast( int id ) const;
     Q_INVOKABLE bool dialogLeaved( int id ) const;
+    Q_INVOKABLE bool dialogHasPhoto( int id ) const;
     Q_INVOKABLE bool isDialog( int id ) const;
 
     Q_INVOKABLE QString title( int id ) const;

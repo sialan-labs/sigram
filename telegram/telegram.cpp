@@ -294,7 +294,16 @@ bool Telegram::dialogLeaved(int id) const
     if( id == me() )
         return false;
 
-    return dialog(id).flags & Enums::UserUserSelf;
+    return (dialog(id).flags & Enums::UserDeleted) || (dialog(id).flags & Enums::UserUserSelf)
+            || (dialog(id).flags & Enums::UserForbidden);
+}
+
+bool Telegram::dialogHasPhoto(int id) const
+{
+    if( contactContains(id) || id == me() )
+        return true;
+
+    return dialog(id).flags & Enums::UserHasPhoto;
 }
 
 bool Telegram::isDialog(int id) const
@@ -572,6 +581,8 @@ void Telegram::loadChatInfo(int chatId)
         return;
     if( dialogLeaved(chatId) )
         return;
+//    if( !dialogHasPhoto(chatId) )
+//        return;
 
     p->tg_thread->loadChatInfo(chatId);
     p->loaded_chats_info.insert(chatId);

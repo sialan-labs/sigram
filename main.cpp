@@ -21,17 +21,26 @@
 #include <QIcon>
 
 #include "telegramgui.h"
+#include "qtsingleapplication/qtsingleapplication.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    QtSingleApplication app(argc, argv);
     app.setApplicationName("Sialan Telegram");
     app.setApplicationDisplayName("Sigram");
     app.setWindowIcon(QIcon(":/files/icon.png"));
     app.setQuitOnLastWindowClosed(false);
 
+    if( app.isRunning() )
+    {
+        app.sendMessage("show");
+        return 0;
+    }
+
     TelegramGui gui;
     gui.start();
+
+    QObject::connect( &app, SIGNAL(messageReceived(QString)), &gui, SLOT(incomingAppMessage(QString)) );
 
     return app.exec();
 }

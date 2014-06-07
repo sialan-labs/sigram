@@ -104,12 +104,15 @@ Rectangle {
                 var dialogs = Telegram.dialogListIds()
 
                 for( var i=0; i<dialogs.length; i++ ) {
-                    model.append( {"user_id": 0, "dialog_id": dialogs[i]} )
-                    if( Telegram.dialogIsChat(dialogs[i]) )
-                        Telegram.loadChatInfo(dialogs[i])
+                    var dlg = dialogs[i]
+                    if( Telegram.dialogLeaved(dlg) )
+                        continue
+                    model.append( {"user_id": 0, "dialog_id": dlg} )
+                    if( Telegram.dialogIsChat(dlg) )
+                        Telegram.loadChatInfo(dlg)
                     else
-                        Telegram.loadUserInfo(dialogs[i])
-                    var cIndex = contacts.indexOf(dialogs[i])
+                        Telegram.loadUserInfo(dlg)
+                    var cIndex = contacts.indexOf(dlg)
                     if( cIndex != -1 )
                         contacts.splice(cIndex,1)
                 }
@@ -117,6 +120,7 @@ Rectangle {
 //                    model.append( {"user_id":contacts[i], "dialog_id": 0} )
 //                    Telegram.loadUserInfo(contacts[i])
 //                }
+                Telegram.loadUserInfo(Telegram.me)
             }
 
             Component.onCompleted: refresh()

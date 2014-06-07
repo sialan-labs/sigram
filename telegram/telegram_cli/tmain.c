@@ -212,7 +212,7 @@ void running_for_first_time (void) {
   //char *downloads_directory = get_downloads_directory ();
 
   if (!mkdir (config_directory, CONFIG_DIRECTORY_MODE)) {
-    //printf ("[%s] created\n", config_directory);
+    printf ("[%s] created\n", config_directory);
   }
 
   tfree_str (config_directory);
@@ -329,7 +329,7 @@ void parse_config (void) {
 }
 #else
 void parse_config (void) {
-  //printf ("libconfig not enabled\n");
+  printf ("libconfig not enabled\n");
   tasprintf (&auth_file_name, "%s/%s/%s", get_home_directory (), CONFIG_DIRECTORY, AUTH_KEY_FILE);
   tasprintf (&state_file_name, "%s/%s/%s", get_home_directory (), CONFIG_DIRECTORY, STATE_FILE);
   tasprintf (&secret_chat_file_name, "%s/%s/%s", get_home_directory (), CONFIG_DIRECTORY, SECRET_CHAT_FILE);
@@ -343,25 +343,25 @@ void inner_main (void) {
 }
 
 void usage (void) {
-  //printf ("%s Usage\n", PROGNAME);
+  printf ("%s Usage\n", PROGNAME);
 
-  //printf (" -h                 this help list\n");
-  //printf (" -u username        specify username\n");
-  //printf (" -k public-key      specify server public key\n");
-  //printf (" -v                 verbose\n");
-  //printf (" -l [1-3]           log level\n");
-  //printf (" -L log-file        log net file\n");
-  //printf (" -N                 message num mode\n");
-  //printf (" -c config-file     specify config file\n");
-  //printf (" -p prefix          specify prefix\n");
-  //printf (" -R                 register mode\n");
-  //printf (" -f                 sync from start\n");
-  //printf (" -B                 enable binlog\n");
-  //printf (" -E                 disable auto accept\n");
-  //printf (" -w                 allow weak random\n");
-  //printf (" -s                 specify lua script\n");
-  //printf (" -W                 wait dialog list\n");
-  //printf ("\n");
+  printf (" -h                 this help list\n");
+  printf (" -u username        specify username\n");
+  printf (" -k public-key      specify server public key\n");
+  printf (" -v                 verbose\n");
+  printf (" -l [1-3]           log level\n");
+  printf (" -L log-file        log net file\n");
+  printf (" -N                 message num mode\n");
+  printf (" -c config-file     specify config file\n");
+  printf (" -p prefix          specify prefix\n");
+  printf (" -R                 register mode\n");
+  printf (" -f                 sync from start\n");
+  printf (" -B                 enable binlog\n");
+  printf (" -E                 disable auto accept\n");
+  printf (" -w                 allow weak random\n");
+  printf (" -s                 specify lua script\n");
+  printf (" -W                 wait dialog list\n");
+  printf ("\n");
 
   qthreadExitRequest (1);
 }

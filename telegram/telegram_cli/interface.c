@@ -523,13 +523,13 @@ void interpreter (char *line UU) {
   } else if (IS_WORD ("stats")) {
     static char stat_buf[1 << 15];
     print_stat (stat_buf, (1 << 15) - 1);
-    //printf ("%s\n", stat_buf);
+    printf ("%s\n", stat_buf);
   } else if (IS_WORD ("msg")) {
     GET_PEER;
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty message\n");
+      printf ("Empty message\n");
       RET;
     }
     do_send_message (id, s, strlen (s));
@@ -538,7 +538,7 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty new name\n");
+      printf ("Empty new name\n");
       RET;
     }
     do_rename_chat (id, s);
@@ -547,7 +547,7 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty file name\n");
+      printf ("Empty file name\n");
       RET;
     }
     do_send_photo (CODE_input_media_uploaded_photo, id, tstrndup (s, t));
@@ -556,7 +556,7 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty file name\n");
+      printf ("Empty file name\n");
       RET;
     }
     do_send_photo (CODE_input_media_uploaded_video, id, tstrndup (s, t));
@@ -565,7 +565,7 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty file name\n");
+      printf ("Empty file name\n");
       RET;
     }
     do_send_text (id, tstrndup (s, t));
@@ -573,14 +573,14 @@ void interpreter (char *line UU) {
     GET_PEER;
     int num = next_token_int ();
     if (num == NOT_FOUND || num <= 0) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     do_forward_message (id, num);
   } else if (IS_WORD ("load_photo")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
@@ -589,13 +589,13 @@ void interpreter (char *line UU) {
     } else if (M && !M->service && M->media.type == CODE_decrypted_message_media_photo) {
       do_load_encr_video (&M->media.encr_video, 1); // this is not a bug. 
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("view_photo")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
@@ -604,39 +604,39 @@ void interpreter (char *line UU) {
     } else if (M && !M->service && M->media.type == CODE_decrypted_message_media_photo) {
       do_load_encr_video (&M->media.encr_video, 2); // this is not a bug. 
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("load_video_thumb")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
     if (M && !M->service && M->media.type == CODE_message_media_video) {
       do_load_video_thumb (&M->media.video, 1);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("view_video_thumb")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
     if (M && !M->service && M->media.type == CODE_message_media_video) {
       do_load_video_thumb (&M->media.video, 2);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("load_video")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
@@ -645,13 +645,13 @@ void interpreter (char *line UU) {
     } else if (M && !M->service && M->media.type == CODE_decrypted_message_media_video) {
       do_load_encr_video (&M->media.encr_video, 1);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("view_video")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
@@ -660,7 +660,7 @@ void interpreter (char *line UU) {
     } else if (M && !M->service && M->media.type == CODE_decrypted_message_media_video) {
       do_load_encr_video (&M->media.encr_video, 2);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("chat_info")) {
@@ -688,17 +688,17 @@ void interpreter (char *line UU) {
     char *phone, *first_name, *last_name;
     phone = next_token (&phone_len);
     if (!phone) {
-      //printf ("No phone number found\n");
+      printf ("No phone number found\n");
       RET;
     }
     first_name = next_token (&first_name_len);
     if (!first_name_len) {
-      //printf ("No first name found\n");
+      printf ("No first name found\n");
       RET;
     }
     last_name = next_token (&last_name_len);
     if (!last_name_len) {
-      //printf ("No last name found\n");
+      printf ("No last name found\n");
       RET;
     }
     do_add_contact (phone, phone_len, first_name, first_name_len, last_name, last_name_len, 0);
@@ -706,11 +706,11 @@ void interpreter (char *line UU) {
     GET_PEER_USER;
     peer_t *U = user_chat_get (id);
     if (!U) {
-      //printf ("No such user\n");
+      printf ("No such user\n");
       RET;
     }
     if (!U->user.phone || !strlen (U->user.phone)) {
-      //printf ("User has no phone. Can not rename\n");
+      printf ("User has no phone. Can not rename\n");
       RET;
     }
     int phone_len, first_name_len, last_name_len;
@@ -719,60 +719,60 @@ void interpreter (char *line UU) {
     phone = U->user.phone;
     first_name = next_token (&first_name_len);
     if (!first_name_len) {
-      //printf ("No first name found\n");
+      printf ("No first name found\n");
       RET;
     }
     last_name = next_token (&last_name_len);
     if (!last_name_len) {
-      //printf ("No last name found\n");
+      printf ("No last name found\n");
       RET;
     }
     do_add_contact (phone, phone_len, first_name, first_name_len, last_name, last_name_len, 1);
   } else if (IS_WORD ("help")) {
     //print_start ();
     push_color (COLOR_YELLOW);
-    //printf (
-//      "help - prints this help\n"
-//      "msg <peer> Text - sends message to this peer\n"
-//      "contact_list - prints info about users in your contact list\n"
-//      "stats - just for debugging \n"
-//      "history <peer> [limit] - prints history (and marks it as read). Default limit = 40\n"
-//      "dialog_list - prints info about your dialogs\n"
-//      "send_photo <peer> <photo-file-name> - sends photo to peer\n"
-//      "send_video <peer> <video-file-name> - sends video to peer\n"
-//      "send_text <peer> <text-file-name> - sends text file as plain messages\n"
-//      "chat_info <chat> - prints info about chat\n"
-//      "user_info <user> - prints info about user\n"
-//      "fwd <user> <msg-seqno> - forward message to user. You can see message numbers starting client with -N\n"
-//      "rename_chat <chat> <new-name>\n"
-//      "load_photo/load_video/load_video_thumb <msg-seqno> - loads photo/video to download dir. You can see message numbers starting client with -N\n"
-//      "view_photo/view_video/view_video_thumb <msg-seqno> - loads photo/video to download dir and starts system default viewer. You can see message numbers starting client with -N\n"
-//      "show_license - prints contents of GPLv2\n"
-//      "search <peer> pattern - searches pattern in messages with peer\n"
-//      "global_search pattern - searches pattern in all messages\n"
-//      "mark_read <peer> - mark read all received messages with peer\n"
-//      "add_contact <phone-number> <first-name> <last-name> - tries to add contact to contact-list by phone\n"
-//      "create_secret_chat <user> - creates secret chat with this user\n"
-//      "create_group_chat <user> <chat-topic> - creates group chat with this user, add more users with chat_add_user <user>\n"
-//      "rename_contact <user> <first-name> <last-name> - tries to rename contact. If you have another device it will be a fight\n"
-//      "suggested_contacts - print info about contacts, you have max common friends\n"
-//      "visualize_key <secret_chat> - prints visualization of encryption key. You should compare it to your partner's one\n"
-//      "set <param> <param-value>. Possible <param> values are:\n"
-//      "\tdebug_verbosity - just as it sounds. Debug verbosity\n"
-//      "\tlog_level - level of logging of new events. Lower is less verbose:\n"
-//      "\t\tLevel 1: prints info about read messages\n"
-//      "\t\tLevel 2: prints line, when somebody is typing in chat\n"
-//      "\t\tLevel 3: prints line, when somebody changes online status\n"
-//      "\tmsg_num - enables/disables numeration of messages\n"
-//      "\talert - enables/disables alert sound notifications\n"
-//      "chat_with_peer <peer> - starts chat with this peer. Every command after is message to this peer. Type /exit or /quit to end this mode\n"
-//      );
+    printf (
+      "help - prints this help\n"
+      "msg <peer> Text - sends message to this peer\n"
+      "contact_list - prints info about users in your contact list\n"
+      "stats - just for debugging \n"
+      "history <peer> [limit] - prints history (and marks it as read). Default limit = 40\n"
+      "dialog_list - prints info about your dialogs\n"
+      "send_photo <peer> <photo-file-name> - sends photo to peer\n"
+      "send_video <peer> <video-file-name> - sends video to peer\n"
+      "send_text <peer> <text-file-name> - sends text file as plain messages\n"
+      "chat_info <chat> - prints info about chat\n"
+      "user_info <user> - prints info about user\n"
+      "fwd <user> <msg-seqno> - forward message to user. You can see message numbers starting client with -N\n"
+      "rename_chat <chat> <new-name>\n"
+      "load_photo/load_video/load_video_thumb <msg-seqno> - loads photo/video to download dir. You can see message numbers starting client with -N\n"
+      "view_photo/view_video/view_video_thumb <msg-seqno> - loads photo/video to download dir and starts system default viewer. You can see message numbers starting client with -N\n"
+      "show_license - prints contents of GPLv2\n"
+      "search <peer> pattern - searches pattern in messages with peer\n"
+      "global_search pattern - searches pattern in all messages\n"
+      "mark_read <peer> - mark read all received messages with peer\n"
+      "add_contact <phone-number> <first-name> <last-name> - tries to add contact to contact-list by phone\n"
+      "create_secret_chat <user> - creates secret chat with this user\n"
+      "create_group_chat <user> <chat-topic> - creates group chat with this user, add more users with chat_add_user <user>\n"
+      "rename_contact <user> <first-name> <last-name> - tries to rename contact. If you have another device it will be a fight\n"
+      "suggested_contacts - print info about contacts, you have max common friends\n"
+      "visualize_key <secret_chat> - prints visualization of encryption key. You should compare it to your partner's one\n"
+      "set <param> <param-value>. Possible <param> values are:\n"
+      "\tdebug_verbosity - just as it sounds. Debug verbosity\n"
+      "\tlog_level - level of logging of new events. Lower is less verbose:\n"
+      "\t\tLevel 1: prints info about read messages\n"
+      "\t\tLevel 2: prints line, when somebody is typing in chat\n"
+      "\t\tLevel 3: prints line, when somebody changes online status\n"
+      "\tmsg_num - enables/disables numeration of messages\n"
+      "\talert - enables/disables alert sound notifications\n"
+      "chat_with_peer <peer> - starts chat with this peer. Every command after is message to this peer. Type /exit or /quit to end this mode\n"
+      );
     pop_color ();
   } else if (IS_WORD ("show_license")) {
-//    char *b =
-//#include "LICENSE.h"
-//    ;
-    //printf ("%s", b);
+    char *b = 
+#include "LICENSE.h"
+    ;
+    printf ("%s", b);
   } else if (IS_WORD ("search")) {
     GET_PEER;
     int from = 0;
@@ -781,7 +781,7 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty message\n");
+      printf ("Empty message\n");
       RET;
     }
     do_msg_search (id, from, to, limit, s);
@@ -792,7 +792,7 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty message\n");
+      printf ("Empty message\n");
       RET;
     }
     do_msg_search (PEER_NOT_FOUND, from, to, limit, s);
@@ -810,7 +810,7 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty chat topic\n");
+      printf ("Empty chat topic\n");
       RET;
     }    
     do_create_group_chat (id, s);  
@@ -824,7 +824,7 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty search query\n");
+      printf ("Empty search query\n");
       RET;
     }
     do_contacts_search (100, s);
@@ -833,7 +833,7 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty file name\n");
+      printf ("Empty file name\n");
       RET;
     }
     do_send_photo (CODE_input_media_uploaded_audio, id, tstrndup (s, t));
@@ -842,14 +842,14 @@ void interpreter (char *line UU) {
     int t;
     char *s = next_token (&t);
     if (!s) {
-      //printf ("Empty file name\n");
+      printf ("Empty file name\n");
       RET;
     }
     do_send_photo (CODE_input_media_uploaded_document, id, tstrndup (s, t));
   } else if (IS_WORD ("load_audio")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
@@ -858,13 +858,13 @@ void interpreter (char *line UU) {
     } else if (M && !M->service && M->media.type == CODE_decrypted_message_media_audio) {
       do_load_encr_video (&M->media.encr_video, 1);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("view_audio")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
@@ -873,39 +873,39 @@ void interpreter (char *line UU) {
     } else if (M && !M->service && M->media.type == CODE_decrypted_message_media_audio) {
       do_load_encr_video (&M->media.encr_video, 2);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("load_document_thumb")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
     if (M && !M->service && M->media.type == (int)CODE_message_media_document) {
       do_load_document_thumb (&M->media.document, 1);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("view_document_thumb")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
     if (M && !M->service && M->media.type == (int)CODE_message_media_document) {
       do_load_document_thumb (&M->media.document, 2);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("load_document")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
@@ -914,13 +914,13 @@ void interpreter (char *line UU) {
     } else if (M && !M->service && M->media.type == CODE_decrypted_message_media_document) {
       do_load_encr_video (&M->media.encr_video, 1);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("view_document")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     struct message *M = message_get (num);
@@ -929,14 +929,14 @@ void interpreter (char *line UU) {
     } else if (M && !M->service && M->media.type == CODE_decrypted_message_media_document) {
       do_load_encr_video (&M->media.encr_video, 2);
     } else {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
   } else if (IS_WORD ("set")) {
     command = next_token (&l);
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     if (IS_WORD ("debug_verbosity")) {
@@ -955,21 +955,21 @@ void interpreter (char *line UU) {
   } else if (IS_WORD ("delete_msg")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     do_delete_msg (num);
   } else if (IS_WORD ("restore_msg")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     do_restore_msg (num);
   } else if (IS_WORD ("delete_restore_msg")) {
     long long num = next_token_int ();
     if (num == NOT_FOUND) {
-      //printf ("Bad msg id\n");
+      printf ("Bad msg id\n");
       RET;
     }
     do_delete_msg (num);
@@ -1006,9 +1006,8 @@ void print_end (void) {
 void hexdump (int *in_ptr, int *in_end) {
   print_start ();
   int *ptr = in_ptr;
-  while (ptr < in_end) { //printf (" %08x", *(ptr ++)); }
-  }
-  //printf ("\n");
+  while (ptr < in_end) { printf (" %08x", *(ptr ++)); }
+  printf ("\n");
   print_end (); 
 }
 
@@ -1019,12 +1018,12 @@ void logprintf (const char *format, ...) {
     x = 1;
     print_start ();
   }
-  //printf (COLOR_GREY " *** ");
+  printf (COLOR_GREY " *** ");
   va_list ap;
   va_start (ap, format);
   vfprintf (stdout, format, ap);
   va_end (ap);
-  //printf (COLOR_NORMAL);
+  printf (COLOR_NORMAL);
   if (x) {
     print_end ();
   }
@@ -1036,16 +1035,16 @@ const char *color_stack[10];
 void push_color (const char *color) {
   assert (color_stack_pos < 10);
   color_stack[color_stack_pos ++] = color;
-  //printf ("%s", color);
+  printf ("%s", color);
 }
 
 void pop_color (void) {
   assert (color_stack_pos > 0);
   color_stack_pos --;
   if (color_stack_pos >= 1) {
-    //printf ("%s", color_stack[color_stack_pos - 1]);
+    printf ("%s", color_stack[color_stack_pos - 1]);
   } else {
-    //printf ("%s", COLOR_NORMAL);
+    printf ("%s", COLOR_NORMAL);
   }
 }
 
@@ -1057,48 +1056,48 @@ void print_media (struct message_media *M) {
       return;
     case CODE_message_media_photo:
       if (M->photo.caption && strlen (M->photo.caption)) {
-        //printf ("[photo %s]", M->photo.caption);
+        printf ("[photo %s]", M->photo.caption);
       } else {
-        //printf ("[photo]");
+        printf ("[photo]");
       }
       return;
     case CODE_message_media_video:
-      //printf ("[video]");
+      printf ("[video]");
       return;
     case CODE_message_media_audio:
-      //printf ("[audio]");
+      printf ("[audio]");
       return;
     case CODE_message_media_document:
       if (M->document.mime_type && M->document.caption) {
-        //printf ("[document %s: type %s]", M->document.caption, M->document.mime_type);
+        printf ("[document %s: type %s]", M->document.caption, M->document.mime_type);
       } else {
-        //printf ("[document]");
+        printf ("[document]");
       }
       return;
     case CODE_decrypted_message_media_photo:
-       //printf ("[photo]");
+       printf ("[photo]");
       return;
     case CODE_decrypted_message_media_video:
-      //printf ("[video]");
+      printf ("[video]");
       return;
     case CODE_decrypted_message_media_audio:
-      //printf ("[audio]");
+      printf ("[audio]");
       return;
     case CODE_decrypted_message_media_document:
-      //printf ("[document]");
+      printf ("[document]");
       return;
     case CODE_message_media_geo:
-      //printf ("[geo] https://maps.google.com/?q=%.6lf,%.6lf", M->geo.latitude, M->geo.longitude);
+      printf ("[geo] https://maps.google.com/?q=%.6lf,%.6lf", M->geo.latitude, M->geo.longitude);
       return;
     case CODE_message_media_contact:
-      //printf ("[contact] ");
+      printf ("[contact] ");
       push_color (COLOR_RED);
-      //printf ("%s %s ", M->first_name, M->last_name);
+      printf ("%s %s ", M->first_name, M->last_name);
       pop_color ();
-      //printf ("%s", M->phone);
+      printf ("%s", M->phone);
       return;
     case CODE_message_media_unsupported:
-      //printf ("[unsupported]");
+      printf ("[unsupported]");
       return;
     default:
       assert (0);
@@ -1112,7 +1111,7 @@ void print_user_name (peer_id_t id, peer_t *U) {
   assert (get_peer_type (id) == PEER_USER);
   push_color (COLOR_RED);
   if (!U) {
-    //printf ("user#%d", get_peer_id (id));
+    printf ("user#%d", get_peer_id (id));
     int i;
     int ok = 1;
     for (i = 0; i < unknown_user_list_pos; i++) {
@@ -1130,15 +1129,15 @@ void print_user_name (peer_id_t id, peer_t *U) {
       push_color (COLOR_REDB);
     }
     if ((U->flags & FLAG_DELETED)) {
-      //printf ("deleted user#%d", get_peer_id (id));
+      printf ("deleted user#%d", get_peer_id (id));
     } else if (!(U->flags & FLAG_CREATED)) {
-      //printf ("empty user#%d", get_peer_id (id));
+      printf ("empty user#%d", get_peer_id (id));
     } else if (!U->user.first_name || !strlen (U->user.first_name)) {
-      //printf ("%s", U->user.last_name);
+      printf ("%s", U->user.last_name);
     } else if (!U->user.last_name || !strlen (U->user.last_name)) {
-      //printf ("%s", U->user.first_name);
+      printf ("%s", U->user.first_name);
     } else {
-      //printf ("%s %s", U->user.first_name, U->user.last_name);
+      printf ("%s %s", U->user.first_name, U->user.last_name); 
     }
     if (U->flags & (FLAG_USER_SELF | FLAG_USER_CONTACT)) {
       pop_color ();
@@ -1151,9 +1150,9 @@ void print_chat_name (peer_id_t id, peer_t *C) {
   assert (get_peer_type (id) == PEER_CHAT);
   push_color (COLOR_MAGENTA);
   if (!C) {
-    //printf ("chat#%d", get_peer_id (id));
+    printf ("chat#%d", get_peer_id (id));
   } else {
-    //printf ("%s", C->chat.title);
+    printf ("%s", C->chat.title);
   }
   pop_color ();
 }
@@ -1162,9 +1161,9 @@ void print_encr_chat_name (peer_id_t id, peer_t *C) {
   assert (get_peer_type (id) == PEER_ENCR_CHAT);
   push_color (COLOR_MAGENTA);
   if (!C) {
-    //printf ("encr_chat#%d", get_peer_id (id));
+    printf ("encr_chat#%d", get_peer_id (id));
   } else {
-    //printf ("%s", C->print_name);
+    printf ("%s", C->print_name);
   }
   pop_color ();
 }
@@ -1173,9 +1172,9 @@ void print_encr_chat_name_full (peer_id_t id, peer_t *C) {
   assert (get_peer_type (id) == PEER_ENCR_CHAT);
   push_color (COLOR_MAGENTA);
   if (!C) {
-    //printf ("encr_chat#%d", get_peer_id (id));
+    printf ("encr_chat#%d", get_peer_id (id));
   } else {
-    //printf ("%s", C->print_name);
+    printf ("%s", C->print_name);
   }
   pop_color ();
 }
@@ -1184,15 +1183,15 @@ static char *monthes[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"
 void print_date (long t) {
   struct tm *tm = localtime ((void *)&t);
   if (time (0) - t < 12 * 60 * 60) {
-    //printf ("[%02d:%02d] ", tm->tm_hour, tm->tm_min);
+    printf ("[%02d:%02d] ", tm->tm_hour, tm->tm_min);
   } else {
-    //printf ("[%02d %s]", tm->tm_mday, monthes[tm->tm_mon]);
+    printf ("[%02d %s]", tm->tm_mday, monthes[tm->tm_mon]);
   }
 }
 
 void print_date_full (long t) {
   struct tm *tm = localtime ((void *)&t);
-  //printf ("[%04d/%02d/%02d %02d:%02d:%02d]", tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec);
+  printf ("[%04d/%02d/%02d %02d:%02d:%02d]", tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec);
 }
 
 int our_id;
@@ -1207,55 +1206,55 @@ void print_service_message (struct message *M) {
 
   push_color (COLOR_MAGENTA);
   if (msg_num_mode) {
-    //printf ("%lld ", M->id);
+    printf ("%lld ", M->id);
   }
   print_date (M->date);
   pop_color ();
-  //printf (" ");
+  printf (" ");
   if (get_peer_type (M->to_id) == PEER_CHAT) {
     print_chat_name (M->to_id, user_chat_get (M->to_id));
   } else {
     assert (get_peer_type (M->to_id) == PEER_ENCR_CHAT);
     print_encr_chat_name (M->to_id, user_chat_get (M->to_id));
   }
-  //printf (" ");
+  printf (" ");
   print_user_name (M->from_id, user_chat_get (M->from_id));
 
   switch (M->action.type) {
   case CODE_message_action_empty:
-    //printf ("\n");
+    printf ("\n");
     break;
   case CODE_message_action_geo_chat_create:
-    //printf ("Created geo chat\n");
+    printf ("Created geo chat\n");
     break;
   case CODE_message_action_geo_chat_checkin:
-    //printf ("Checkin in geochat\n");
+    printf ("Checkin in geochat\n");
     break;
   case CODE_message_action_chat_create:
-    //printf (" created chat %s. %d users\n", M->action.title, M->action.user_num);
+    printf (" created chat %s. %d users\n", M->action.title, M->action.user_num);
     break;
   case CODE_message_action_chat_edit_title:
-    //printf (" changed title to %s\n",
-//      M->action.new_title);
+    printf (" changed title to %s\n",
+      M->action.new_title);
     break;
   case CODE_message_action_chat_edit_photo:
-    //printf (" changed photo\n");
+    printf (" changed photo\n");
     break;
   case CODE_message_action_chat_delete_photo:
-    //printf (" deleted photo\n");
+    printf (" deleted photo\n");
     break;
   case CODE_message_action_chat_add_user:
-    //printf (" added user ");
+    printf (" added user ");
     print_user_name (set_peer_id (PEER_USER, M->action.user), user_chat_get (set_peer_id (PEER_USER, M->action.user)));
-    //printf ("\n");
+    printf ("\n");
     break;
   case CODE_message_action_chat_delete_user:
-    //printf (" deleted user ");
+    printf (" deleted user ");
     print_user_name (set_peer_id (PEER_USER, M->action.user), user_chat_get (set_peer_id (PEER_USER, M->action.user)));
-    //printf ("\n");
+    printf ("\n");
     break;
   case CODE_decrypted_message_action_set_message_t_t_l:
-    //printf (" set ttl to %d seconds. Unsupported yet\n", M->action.ttl);
+    printf (" set ttl to %d seconds. Unsupported yet\n", M->action.ttl);
     break;
   default:
     assert (0);
@@ -1293,32 +1292,32 @@ void print_message (struct message *M) {
     if (M->out) {
       push_color (COLOR_GREEN);
       if (msg_num_mode) {
-        //printf ("%lld ", M->id);
+        printf ("%lld ", M->id);
       }
       print_date (M->date);
       pop_color ();
-      //printf (" ");
+      printf (" ");
       print_user_name (M->to_id, user_chat_get (M->to_id));
       push_color (COLOR_GREEN);
       if (M->unread) {
-        //printf (" <<< ");
+        printf (" <<< ");
       } else {
-        //printf (" ««« ");
+        printf (" ««« ");
       }
     } else {
       push_color (COLOR_BLUE);
       if (msg_num_mode) {
-        //printf ("%lld ", M->id);
+        printf ("%lld ", M->id);
       }
       print_date (M->date);
       pop_color ();
-      //printf (" ");
+      printf (" ");
       print_user_name (M->from_id, user_chat_get (M->from_id));
       push_color (COLOR_BLUE);
       if (M->unread) {
-        //printf (" >>> ");
+        printf (" >>> ");
       } else {
-        //printf (" »»» ");
+        printf (" »»» ");
       }
       if (alert_sound) {
         play_sound();
@@ -1330,31 +1329,31 @@ void print_message (struct message *M) {
     if (M->out) {
       push_color (COLOR_GREEN);
       if (msg_num_mode) {
-        //printf ("%lld ", M->id);
+        printf ("%lld ", M->id);
       }
       print_date (M->date);
-      //printf (" ");
+      printf (" ");
       push_color (COLOR_CYAN);
-      //printf (" %s", P->print_name);
+      printf (" %s", P->print_name);
       pop_color ();
       if (M->unread) {
-        //printf (" <<< ");
+        printf (" <<< ");
       } else {
-        //printf (" ««« ");
+        printf (" ««« ");
       }
     } else {
       push_color (COLOR_BLUE);
       if (msg_num_mode) {
-        //printf ("%lld ", M->id);
+        printf ("%lld ", M->id);
       }
       print_date (M->date);
       push_color (COLOR_CYAN);
-      //printf (" %s", P->print_name);
+      printf (" %s", P->print_name);
       pop_color ();
       if (M->unread) {
-        //printf (" >>> ");
+        printf (" >>> ");
       } else {
-        //printf (" »»» ");
+        printf (" »»» ");
       }
       if (alert_sound) {
         play_sound();
@@ -1364,13 +1363,13 @@ void print_message (struct message *M) {
     assert (get_peer_type (M->to_id) == PEER_CHAT);
     push_color (COLOR_MAGENTA);
     if (msg_num_mode) {
-      //printf ("%lld ", M->id);
+      printf ("%lld ", M->id);
     }
     print_date (M->date);
     pop_color ();
-    //printf (" ");
+    printf (" ");
     print_chat_name (M->to_id, user_chat_get (M->to_id));
-    //printf (" ");
+    printf (" ");
     print_user_name (M->from_id, user_chat_get (M->from_id));
     if ((get_peer_type (M->from_id) == PEER_USER) && (get_peer_id (M->from_id) == our_id)) {
       push_color (COLOR_GREEN);
@@ -1378,30 +1377,30 @@ void print_message (struct message *M) {
       push_color (COLOR_BLUE);
     }
     if (M->unread) {
-      //printf (" >>> ");
+      printf (" >>> ");
     } else {
-      //printf (" »»» ");
+      printf (" »»» ");
     }
   }
   if (get_peer_type (M->fwd_from_id) == PEER_USER) {
-    //printf ("[fwd from ");
+    printf ("[fwd from ");
     print_user_name (M->fwd_from_id, user_chat_get (M->fwd_from_id));
-    //printf ("] ");
+    printf ("] ");
   }
   if (M->msg && strlen (M->msg)) {
-    //printf ("%s", M->msg);
+    printf ("%s", M->msg);
   }
   if (M->media.type != CODE_message_media_empty) {
     print_media (&M->media);
   }
   pop_color ();
   assert (!color_stack_pos);
-  //printf ("\n");
+  printf ("\n");
   print_end();
 }
 
 void play_sound (void) {
-  //printf ("\a");
+  printf ("\a");
 }
 
 void set_interface_callbacks (void) {

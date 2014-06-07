@@ -31,7 +31,14 @@ SOURCES += main.cpp \
     setobject.cpp \
     downloader.cpp \
     versionchecker.cpp \
-    countries.cpp
+    countries.cpp\
+    qtsingleapplication/qtsinglecoreapplication.cpp \
+    qtsingleapplication/qtsingleapplication.cpp \
+    qtsingleapplication/qtlockedfile.cpp \
+    qtsingleapplication/qtlocalpeer.cpp
+
+win32: SOURCES += qtsingleapplication/qtlockedfile_win.cpp
+unix:  SOURCES += qtsingleapplication/qtlockedfile_unix.cpp
 
 RESOURCES += qml.qrc
 
@@ -52,7 +59,11 @@ HEADERS += \
     setobject.h \
     downloader.h \
     versionchecker.h \
-    countries.h
+    countries.h \
+    qtsingleapplication/qtsinglecoreapplication.h \
+    qtsingleapplication/qtsingleapplication.h \
+    qtsingleapplication/qtlockedfile.h \
+    qtsingleapplication/qtlocalpeer.h
 
 OTHER_FILES += \
     database/userdata.db \
