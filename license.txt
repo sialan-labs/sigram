@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
-Sigram
+Telegram Client
 =-=-=-=-=-=-=-=-=-=-=-=-=
 https://github.com/vysheng/tg
 

@@ -112,6 +112,8 @@ public slots:
     void quit();
     void show();
 
+    void logout();
+
 signals:
     void muted( int id, bool stt );
     void desktopSessionChanged();

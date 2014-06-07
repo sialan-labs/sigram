@@ -259,6 +259,22 @@ Item {
         }
     }
 
+    Button {
+        id: logout_btn
+        anchors.top: background_btn.bottom
+        anchors.left: name.left
+        anchors.topMargin: 20
+        normalColor: "#00000000"
+        highlightColor: "#00000000"
+        textColor: press? "#D04528" : "#ff5532"
+        textFont.weight: Font.Normal
+        textFont.pointSize: 11
+        textFont.underline: true
+        text: qsTr("Logout")
+        visible: u_conf.userId == Telegram.me
+        onClicked: Gui.logout()
+    }
+
     Component {
         id: limoo_component
         LimooImageComponent {

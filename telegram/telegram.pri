@@ -7,7 +7,7 @@
 QT       += core gui
 
 INCLUDEPATH += /usr/include/openssl/
-LIBS += -lssl -lcrypto -lhistory -lz
+LIBS += -lssl -lcrypto -lz
 
 SOURCES += \
     telegram/telegram_cli/binlog.c \

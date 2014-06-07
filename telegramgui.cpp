@@ -649,6 +649,16 @@ void TelegramGui::show()
     p->root->requestActivate();
 }
 
+void TelegramGui::logout()
+{
+    QStringList files = QDir(HOME_PATH).entryList(QDir::Files);
+    foreach( const QString & f, files )
+        QFile::remove(HOME_PATH+"/"+f);
+
+    QProcess::startDetached( QCoreApplication::applicationFilePath() );
+    quit();
+}
+
 TelegramGui::~TelegramGui()
 {
     delete p;

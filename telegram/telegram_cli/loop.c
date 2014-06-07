@@ -89,7 +89,7 @@ void net_loop (int flags, int (*is_end)(void)) {
 //        rl_callback_read_char ();
           qthreadExec();
       } else {
-        char *line = 0;        
+        char *line = 0;
         size_t len = 0;
         assert (getline (&line, &len, stdin) >= 0);
         got_it (line, strlen (line));
