@@ -100,7 +100,7 @@ void net_loop (int flags, int (*is_end)(void)) {
       lua_do_all ();
     #endif
     if (safe_quit && !queries_num) {
-      printf ("All done. Exit\n");
+      //printf ("All done. Exit\n");
       qthreadExitRequest (0);
     }
     if (unknown_user_list_pos) {
