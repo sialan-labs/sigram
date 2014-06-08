@@ -52,7 +52,7 @@ void VersionChecker::check()
     p->downloader->start();
 }
 
-void VersionChecker::dismiss(qreal version)
+void VersionChecker::dismiss(const QString &version)
 {
     TelegramGui::settings()->setValue( QString("General/versionCheck:%1").arg(version), false );
 }
@@ -62,7 +62,7 @@ void VersionChecker::checked(const QByteArray &d)
     QString data = d;
 
     QString info;
-    qreal vrsn = 0;
+    QString vrsn = "0";
 
     const QStringList & parts = data.split("\n\n",QString::SkipEmptyParts);
     foreach( const QString & s, parts )
@@ -71,7 +71,7 @@ void VersionChecker::checked(const QByteArray &d)
         if( spl.count() < 2 )
             continue;
 
-        qreal version = spl.first().toDouble();
+        QString version = spl.first().trimmed();
         if( version <= VERSION )
             continue;
         if( vrsn < version )

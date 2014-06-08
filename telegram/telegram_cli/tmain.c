@@ -329,7 +329,7 @@ void parse_config (void) {
 }
 #else
 void parse_config (void) {
-  printf ("libconfig not enabled\n");
+//  printf ("libconfig not enabled\n");
   tasprintf (&auth_file_name, "%s/%s/%s", get_home_directory (), CONFIG_DIRECTORY, AUTH_KEY_FILE);
   tasprintf (&state_file_name, "%s/%s/%s", get_home_directory (), CONFIG_DIRECTORY, STATE_FILE);
   tasprintf (&secret_chat_file_name, "%s/%s/%s", get_home_directory (), CONFIG_DIRECTORY, SECRET_CHAT_FILE);

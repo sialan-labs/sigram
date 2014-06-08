@@ -24,7 +24,7 @@ Item {
     height: 62
 
     property alias text: txt.text
-    property real version: 0
+    property string version: "0"
 
     Rectangle {
         id: update_title

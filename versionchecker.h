@@ -30,11 +30,11 @@ public:
     ~VersionChecker();
 
 signals:
-    void updateAvailable( qreal version, const QString & info );
+    void updateAvailable( const QString & version, const QString & info );
 
 public slots:
     void check();
-    void dismiss( qreal version );
+    void dismiss( const QString & version );
 
 private slots:
     void checked(const QByteArray & data);
