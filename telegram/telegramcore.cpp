@@ -583,7 +583,7 @@ void waitAndGet_callback( int type, const QVariant & v )
 
 int qthreadExec()
 {
-    return static_cast<TelegramThread*>(QThread::currentThread())->callExec();
+//    return static_cast<TelegramThread*>(QThread::currentThread())->callExec();
 }
 
 void qthreadExit(int code)
