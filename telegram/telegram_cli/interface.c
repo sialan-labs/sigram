@@ -550,7 +550,7 @@ void interpreter (char *line UU) {
       printf ("Empty file name\n");
       RET;
     }
-    do_send_photo (CODE_input_media_uploaded_photo, id, tstrndup (s, t));
+    do_send_photo (CODE_input_media_uploaded_photo, id, s);
   } else if (IS_WORD("send_video")) {
     GET_PEER;
     int t;
