@@ -49,6 +49,7 @@ struct query {
   void *extra;
 };
 
+struct dc *dcWorking();
 
 struct query *send_query (struct dc *DC, int len, void *data, struct query_methods *methods, void *extra);
 void query_ack (long long id);

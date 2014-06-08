@@ -65,7 +65,7 @@ int unread_messages;
 void got_it (char *line, int len);
 void net_loop (int flags, int (*is_end)(void)) {
   while (!is_end ()) {
-    mSleep(100);
+    uSleep(10000);
 
     struct pollfd fds[101];
     int cc = 0;

@@ -301,6 +301,20 @@ int want_dc_num;
 int new_dc_num;
 extern struct dc *DC_list[];
 extern struct dc *DC_working;
+extern int dc_working_num;
+extern int auth_state;
+
+struct dc *dcWorking()
+{
+    struct dc *res = DC_working;
+    while( !res->sessions[0] || !res->sessions[0]->c ) {
+        dc_create_session(res);
+        uSleep(1000000);
+        continue;
+    }
+
+    return res;
+}
 
 void out_random (int n) {
   assert (n <= 32);
@@ -382,9 +396,9 @@ struct query_methods help_get_config_methods  = {
 };
 
 void do_help_get_config (void) {
-  clear_packet ();  
+  clear_packet ();
   out_int (CODE_help_get_config);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &help_get_config_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &help_get_config_methods, 0);
 }
 /* }}} */
 
@@ -450,7 +464,7 @@ void do_send_code (const char *user) {
   out_string ("en");
 
   logprintf ("send_code: dc_num = %d\n", dc_working_num);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &send_code_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &send_code_methods, 0);
   net_loop (0, code_is_sent);
   if (want_dc_num == -1) { return; }
 
@@ -473,7 +487,7 @@ void do_send_code (const char *user) {
   out_string (TG_APP_HASH);
   out_string ("en");
 
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &send_code_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &send_code_methods, 0);
   net_loop (0, code_is_sent);
   assert (want_dc_num == -1);
 }
@@ -506,7 +520,7 @@ void do_phone_call (const char *user) {
   out_string (phone_code_hash);
 
   logprintf ("do_phone_call: dc_num = %d\n", dc_working_num);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &phone_call_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &phone_call_methods, 0);
 }
 /* }}} */
 
@@ -565,7 +579,7 @@ int do_auth_check_phone (const char *user) {
   out_int (CODE_auth_check_phone);
   out_string (user);
   check_phone_result = -1;
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &check_phone_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &check_phone_methods, 0);
   net_loop (0, cr_f);
   return check_phone_result;
 }
@@ -604,7 +618,7 @@ int do_get_nearest_dc (void) {
   clear_packet ();
   out_int (CODE_help_get_nearest_dc);
   nearest_dc_num = -1;
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &nearest_dc_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &nearest_dc_methods, 0);
   net_loop (0, nr_f);
   return nearest_dc_num;
 }
@@ -657,7 +671,7 @@ int do_send_code_result (const char *code) {
   out_string (suser);
   out_string (phone_code_hash);
   out_string (code);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &sign_in_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &sign_in_methods, 0);
   sign_in_ok = 0;
   net_loop (0, sign_in_is_ok);
   return sign_in_ok;
@@ -671,7 +685,7 @@ int do_send_code_result_auth (const char *code, const char *first_name, const ch
   out_string (code);
   out_string (first_name);
   out_string (last_name);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &sign_in_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &sign_in_methods, 0);
   sign_in_ok = 0;
   net_loop (0, sign_in_is_ok);
   return sign_in_ok;
@@ -712,7 +726,7 @@ void do_update_contact_list (void) {
   clear_packet ();
   out_int (CODE_contacts_get_contacts);
   out_string ("");
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &get_contacts_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &get_contacts_methods, 0);
 }
 /* }}} */
 
@@ -900,7 +914,7 @@ void do_send_encr_msg (struct message *M) {
   out_int (CODE_decrypted_message_media_empty);
   encr_finish (&P->encr_chat);
   
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &msg_send_encr_methods, M);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &msg_send_encr_methods, M);
 }
 
 void do_send_msg (struct message *M) {
@@ -913,7 +927,7 @@ void do_send_msg (struct message *M) {
   out_peer_id (M->to_id);
   out_cstring (M->msg, M->message_len);
   out_long (M->id);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &msg_send_methods, M);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &msg_send_methods, M);
 }
 
 void do_send_message (peer_id_t id, const char *msg, int len) {
@@ -991,7 +1005,7 @@ void do_messages_mark_read (peer_id_t id, int max_id) {
   out_peer_id (id);
   out_int (max_id);
   out_int (0);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &mark_read_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &mark_read_methods, 0);
 }
 
 void do_messages_mark_read_encr (peer_id_t id, long long access_hash, int last_time) {
@@ -1001,7 +1015,7 @@ void do_messages_mark_read_encr (peer_id_t id, long long access_hash, int last_t
   out_int (get_peer_id (id));
   out_long (access_hash);
   out_int (last_time);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &mark_read_encr_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &mark_read_encr_methods, 0);
 }
 
 void do_mark_read (peer_id_t id) {
@@ -1100,7 +1114,7 @@ void do_get_history (peer_id_t id, int limit) {
   out_int (0);
   out_int (0);
   out_int (limit);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &get_history_methods, (void *)*(long *)&id);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &get_history_methods, (void *)*(long *)&id);
 }
 /* }}} */
 
@@ -1181,7 +1195,7 @@ void do_get_dialog_list (void) {
   out_int (0);
   out_int (0);
   out_int (1000);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &get_dialogs_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &get_dialogs_methods, 0);
 }
 /* }}} */
 
@@ -1313,7 +1327,7 @@ void send_part (struct send_file *f) {
       assert (f->part_size == x);
     }
     update_prompt ();
-    send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &send_file_part_methods, f);
+    send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &send_file_part_methods, f);
   } else {
     cur_uploaded_bytes -= f->size;
     cur_uploading_bytes -= f->size;
@@ -1358,7 +1372,7 @@ void send_part (struct send_file *f) {
       }
 
       out_long (-lrand48 () * (1ll << 32) - lrand48 ());
-      send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &send_file_methods, 0);
+      send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &send_file_methods, 0);
     } else {
       struct message *M = talloc0 (sizeof (*M));
 
@@ -1447,7 +1461,7 @@ void send_part (struct send_file *f) {
       M->id = r;
       M->date = time (0);
       
-      send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &send_encr_file_methods, M);
+      send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &send_encr_file_methods, M);
 
     }
     tfree_str (f->file_name);
@@ -1464,7 +1478,7 @@ void send_file_thumb (struct send_file *f) {
   out_long (f->thumb_id);
   out_int (0);
   out_cstring ((void *)thumb_file, thumb_file_size);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &send_file_part_methods, f);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &send_file_part_methods, f);
 }
 
 void do_send_photo (int type, peer_id_t to_id, char *file_name) {
@@ -1562,7 +1576,7 @@ void do_forward_message (peer_id_t id, int n) {
   out_peer_id (id);
   out_int (n);
   out_long (lrand48 () * (1ll << 32) + lrand48 ());
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &fwd_msg_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &fwd_msg_methods, 0);
 }
 /* }}} */
 
@@ -1597,7 +1611,7 @@ void do_rename_chat (peer_id_t id, char *name UU) {
   assert (get_peer_type (id) == PEER_CHAT);
   out_int (get_peer_id (id));
   out_string (name);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &rename_chat_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &rename_chat_methods, 0);
 }
 /* }}} */
 
@@ -1636,7 +1650,7 @@ void do_get_chat_info (peer_id_t id) {
   out_int (CODE_messages_get_full_chat);
   assert (get_peer_type (id) == PEER_CHAT);
   out_int (get_peer_id (id));
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &chat_info_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &chat_info_methods, 0);
 }
 /* }}} */
 
@@ -1683,7 +1697,7 @@ void do_get_user_info (peer_id_t id) {
     out_int (CODE_input_user_contact);
     out_int (get_peer_id (id));
   }
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &user_info_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &user_info_methods, 0);
 }
 /* }}} */
 
@@ -1727,7 +1741,7 @@ void do_get_user_list_info_silent (int num, int *list) {
     out_int (list[i]);
     //out_long (0);
   }
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &user_list_info_silent_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &user_list_info_silent_methods, 0);
 }
 /* }}} */
 
@@ -1850,7 +1864,7 @@ void load_next_part (struct download *D) {
   out_int (1 << 14);
   send_query (DC_list[D->dc], packet_ptr - packet_buffer, packet_buffer, &download_methods, D);
   fileDownloading( D, cur_downloading_bytes, cur_downloaded_bytes );
-  //send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &download_methods, D);
+  //send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &download_methods, D);
 }
 
 void do_load_photo_size (struct photo_size *P, int next) {
@@ -2009,7 +2023,7 @@ void do_export_auth (int num) {
   clear_packet ();
   out_int (CODE_auth_export_authorization);
   out_int (num);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &export_auth_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &export_auth_methods, 0);
   net_loop (0, is_export_auth_str);
 }
 /* }}} */
@@ -2105,7 +2119,7 @@ void do_add_contact (const char *phone, int phone_len, const char *first_name, i
   out_cstring (first_name, first_name_len);
   out_cstring (last_name, last_name_len);
   out_int (force ? CODE_bool_true : CODE_bool_false);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &add_contact_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &add_contact_methods, 0);
 }
 /* }}} */
 
@@ -2137,7 +2151,7 @@ void do_msg_search (peer_id_t id, int from, int to, int limit, const char *s) {
   out_int (0); // offset
   out_int (0); // max_id
   out_int (limit);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &msg_search_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &msg_search_methods, 0);
 }
 /* }}} */
 
@@ -2177,7 +2191,7 @@ void do_contacts_search (int limit, const char *s) {
   out_int (CODE_contacts_search);
   out_string (s);
   out_int (limit);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &contacts_search_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &contacts_search_methods, 0);
 }
 /* }}} */
 
@@ -2301,7 +2315,7 @@ void do_send_accept_encr_chat (struct secret_chat *E, unsigned char *random) {
   BN_clear_free (p);
   BN_clear_free (r);
 
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &send_encr_accept_methods, E);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &send_encr_accept_methods, E);
 }
 
 void do_create_keys_end (struct secret_chat *U) {
@@ -2417,7 +2431,7 @@ void do_send_create_encr_chat (void *x, unsigned char *random) {
   BN_clear_free (p);
   BN_clear_free (r);
 
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &send_encr_request_methods, E);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &send_encr_request_methods, E);
 }
 
 int get_dh_config_on_answer (struct query *q UU) {
@@ -2466,7 +2480,7 @@ void do_accept_encr_chat_request (struct secret_chat *E) {
   void **x = talloc (2 * sizeof (void *));
   x[0] = do_send_accept_encr_chat;
   x[1] = E;
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &get_dh_config_methods, x);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &get_dh_config_methods, x);
 }
 
 void do_create_encr_chat_request (int user_id) {
@@ -2477,7 +2491,7 @@ void do_create_encr_chat_request (int user_id) {
   void **x = talloc (2 * sizeof (void *));
   x[0] = do_send_create_encr_chat;
   x[1] = (void *)(long)(user_id);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &get_dh_config_methods, x);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &get_dh_config_methods, x);
 }
 /* }}} */
 
@@ -2584,10 +2598,10 @@ void do_get_difference (void) {
     out_int (pts);
     out_int (last_date);
     out_int (qts);
-    send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &get_difference_methods, 0);
+    send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &get_difference_methods, 0);
   } else {
     out_int (CODE_updates_get_state);
-    send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &get_state_methods, 0);
+    send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &get_state_methods, 0);
   }
 }
 /* }}} */
@@ -2662,7 +2676,7 @@ void do_get_suggested (void) {
   clear_packet ();
   out_int (CODE_contacts_get_suggested);
   out_int (100);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &get_suggested_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &get_suggested_methods, 0);
 }
 /* }}} */
 
@@ -2688,7 +2702,7 @@ void do_add_user_to_chat (peer_id_t chat_id, peer_id_t id, int limit) {
     out_int (get_peer_id (id));
   }
   out_int (limit);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &add_user_to_chat_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &add_user_to_chat_methods, 0);
 }
 
 void do_del_user_from_chat (peer_id_t chat_id, peer_id_t id) {
@@ -2706,7 +2720,7 @@ void do_del_user_from_chat (peer_id_t chat_id, peer_id_t id) {
     out_int (CODE_input_user_contact);
     out_int (get_peer_id (id));
   }
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &add_user_to_chat_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &add_user_to_chat_methods, 0);
 }
 /* }}} */
 
@@ -2750,7 +2764,7 @@ void do_create_group_chat (peer_id_t id, char *chat_topic) {
     out_int (get_peer_id (id));
   }
   out_string (chat_topic);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &create_group_chat_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &create_group_chat_methods, 0);
 }
 /* }}} */
 
@@ -2775,7 +2789,7 @@ void do_delete_msg (long long id) {
   out_int (CODE_vector);
   out_int (1);
   out_int (id);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &delete_msg_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &delete_msg_methods, 0);
 }
 /* }}} */
 
@@ -2799,7 +2813,7 @@ void do_restore_msg (long long id) {
   out_int (CODE_vector);
   out_int (1);
   out_int (id);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &restore_msg_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &restore_msg_methods, 0);
 }
 /* }}} */
 int update_status_on_answer (struct query *q UU) {
@@ -2815,5 +2829,5 @@ void do_update_status (int online UU) {
   clear_packet ();
   out_int (CODE_account_update_status);
   out_int (online ? CODE_bool_false : CODE_bool_true);
-  send_query (DC_working, packet_ptr - packet_buffer, packet_buffer, &update_status_methods, 0);
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &update_status_methods, 0);
 }

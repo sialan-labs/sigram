@@ -250,9 +250,9 @@ void qdebugNum( int m )
     qDebug() << m;
 }
 
-void mSleep(int s)
+void uSleep(int s)
 {
-    QThread::msleep(s);
+    QThread::usleep(s);
 }
 
 void contactList_clear()
@@ -583,6 +583,7 @@ void waitAndGet_callback( int type, const QVariant & v )
 
 int qthreadExec()
 {
+    return 0;
 //    return static_cast<TelegramThread*>(QThread::currentThread())->callExec();
 }
 

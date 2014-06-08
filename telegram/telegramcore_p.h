@@ -39,7 +39,7 @@ EXTERNC void qdebug( const char *m );
 EXTERNC void qdebugNum( int num );
 EXTERNC void debugToFile( const char *m );
 EXTERNC void debugNumToFile( double m );
-EXTERNC void mSleep(int s);
+EXTERNC void uSleep(int s);
 
 EXTERNC void contactList_clear();
 EXTERNC void contactList_addToBuffer( struct user *u );

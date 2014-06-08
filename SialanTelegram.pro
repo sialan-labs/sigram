@@ -48,7 +48,7 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 include(telegram/telegram.pri)
-include(libs/libs.pri)
+#include(libs/libs.pri)
 
 HEADERS += \
     telegramgui.h \

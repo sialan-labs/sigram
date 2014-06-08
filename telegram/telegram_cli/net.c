@@ -639,10 +639,12 @@ void dc_create_session (struct dc *DC) {
   assert (RAND_pseudo_bytes ((unsigned char *) &S->session_id, 8) >= 0);
   S->dc = DC;
   S->c = create_connection (DC->ip, DC->port, S, &auth_methods);
-  if (!S->c) {
-    logprintf ("Can not create connection to DC. Is network down?\n");
-    qthreadExitRequest (1);
-  }
-  assert (!DC->sessions[0]);
+//  if (!S->c) {
+//    logprintf ("Can not create connection to DC. Is network down?\n");
+//    qthreadExitRequest (1);
+//  }
+//  assert (!DC->sessions[0]);
+  if( DC->sessions[0] )
+      free( DC->sessions[0] );
   DC->sessions[0] = S;
 }
