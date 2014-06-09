@@ -29,6 +29,6 @@
 
 #define DONATE_KEY "eb229602-6719-41a5-be54-f56d1cecff77"
 
-#define VERSION "0.5.2"
+#define VERSION "0.5.3"
 
 #endif // TELEGRAM_MACROS_H

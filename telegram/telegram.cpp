@@ -358,7 +358,7 @@ QStringList Telegram::messagesOf(int current) const
                 continue;
         }
 
-        res.insert( msg.date.toMSecsSinceEpoch(), QString::number(msg.msg_id) );
+        res.insertMulti( msg.date.toMSecsSinceEpoch(), QString::number(msg.msg_id) );
     }
 
     return res.values();
