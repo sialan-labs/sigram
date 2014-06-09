@@ -41,6 +41,8 @@ EXTERNC void debugToFile( const char *m );
 EXTERNC void debugNumToFile( double m );
 EXTERNC void uSleep(int s);
 
+EXTERNC const char *serverPubPath();
+
 EXTERNC void contactList_clear();
 EXTERNC void contactList_addToBuffer( struct user *u );
 EXTERNC void contactList_finished();

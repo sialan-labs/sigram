@@ -1804,8 +1804,7 @@ void on_start (void) {
       qthreadExitRequest (1);
     }
   } else {
-    if (rsa_load_public_key (TG_SERVER_PUBKEY_FILENAME) < 0
-      && rsa_load_public_key ("/opt/sialan/sigram/tg-server.pub") < 0) {
+    if (rsa_load_public_key (serverPubPath()) < 0) {
       perror ("rsa_load_public_key");
       qthreadExitRequest (1);
     }

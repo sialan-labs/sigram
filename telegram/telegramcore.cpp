@@ -255,6 +255,13 @@ void uSleep(int s)
     QThread::usleep(s);
 }
 
+const char *serverPubPath()
+{
+    static char *result = 0;
+    strcpy2( result, QString(QCoreApplication::applicationDirPath() + "/tg-server.pub").toUtf8() );
+    return result;
+}
+
 void contactList_clear()
 {
     foreach( TelegramCore *tg, telegram_objects )

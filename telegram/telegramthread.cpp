@@ -43,6 +43,8 @@ public:
     QHash<qint64,qint64> messageDates;
     QHash<qint64,MessageClass> messages;
     QHash<qint64,qint64> messageMedias;
+    QHash<int,QSet<qint64> > messagesFroms;
+    QHash<int,QSet<qint64> > messagesTos;
 
     QHash<int, QHash<QString,qreal> > uploads;
 };
@@ -116,6 +118,14 @@ const QHash<int, QMap<qint64, qint64> > &TelegramThread::usersMessages() const
 const QHash<qint64, MessageClass> &TelegramThread::messages() const
 {
     return p->messages;
+}
+
+QSet<qint64> TelegramThread::messagesOf(int uid) const
+{
+    QSet<qint64> res = p->messagesTos.value(uid);
+    res.unite(p->messagesFroms.value(uid));
+
+    return res;
 }
 
 int TelegramThread::me() const
@@ -426,6 +436,11 @@ void TelegramThread::_msgSent(qint64 msg_id, const QDateTime & date)
     p->usersMessages[msg.from_id][msg.date.toMSecsSinceEpoch()] = msg.msg_id;
     p->messageDates[msg.date.toMSecsSinceEpoch()] = msg.msg_id;
 
+    p->messagesFroms[msg.from_id].remove(mid);
+    p->messagesTos[msg.to_id].remove(mid);
+    p->messagesFroms[msg.from_id].insert(msg_id);
+    p->messagesTos[msg.to_id].insert(msg_id);
+
     if( msg.mediaType == Enums::MediaPhoto )
 //    if( msg.mediaType != Enums::MediaEmpty )
     {
@@ -467,6 +482,8 @@ void TelegramThread::_incomingMsg(const MessageClass &_msg)
     p->usersMessages[msg.from_id][msg.date.toMSecsSinceEpoch()] = msg.msg_id;
     p->messageDates[msg.date.toMSecsSinceEpoch()] = msg.msg_id;
     p->messageMedias[msg.media.volume] = msg.msg_id;
+    p->messagesFroms[msg.from_id].insert(msg.msg_id);
+    p->messagesTos[msg.to_id].insert(msg.msg_id);
 
     emit incomingNewMsg(msg.msg_id);
     emit incomingMsg(msg.msg_id);

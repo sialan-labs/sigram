@@ -40,6 +40,7 @@ public:
 
     const QHash<int,QMap<qint64, qint64> > & usersMessages() const;
     const QHash<qint64,MessageClass> & messages() const;
+    QSet<qint64> messagesOf(int uid) const;
 
     int me() const;
 
