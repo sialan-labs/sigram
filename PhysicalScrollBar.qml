@@ -62,7 +62,7 @@ import QtQuick 2.0
 Item {
     id: container
 
-    property variant scrollArea
+    property Flickable scrollArea
     property variant orientation: Qt.Vertical
     property alias color: bilbilak.color
 
@@ -125,17 +125,23 @@ Item {
                 if( !pressed )
                     return
 
+                var sz = mouseY-pinY
+                var minimum = inverse? container.scrollArea.height-container.scrollArea.contentHeight-container.height : 0
+                var maximum = inverse? -container.height : container.scrollArea.contentHeight-container.scrollArea.height
+
                 var cy = container.scrollArea.contentY + (mouseY-pinY)/scrollArea.visibleArea.heightRatio
-                if( cy < 0 )
-                    cy = 0
+
+                if( cy < minimum )
+                    cy = minimum
                 else
-                if( cy > container.scrollArea.contentHeight - container.scrollArea.height )
-                    cy = container.scrollArea.contentHeight - container.scrollArea.height
+                if( cy > maximum )
+                    cy = maximum
 
                 container.scrollArea.contentY  = cy
             }
 
             property real pinY
+            property bool inverse: container.scrollArea.verticalLayoutDirection == ListView.BottomToTop
         }
     }
 }

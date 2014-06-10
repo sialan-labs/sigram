@@ -47,12 +47,10 @@ Rectangle {
         current: contact_list.current
     }
 
-    FastBlur {
+    Mirror {
         id: chat_view_blur
         anchors.fill: chat_view
         source: chat_view
-        radius: 64
-        cached: true
         opacity: forwarding==0? 0 : 1
         visible: opacity != 0
 

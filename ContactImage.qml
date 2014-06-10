@@ -78,7 +78,7 @@ Item {
     Desaturate {
         anchors.fill: threshold
         source: threshold
-        desaturation: contact_image.onlineState? 0 : 1.0
+        desaturation: contact_image.onlineState? 0.0 : 1.0
 
         Behavior on desaturation {
             NumberAnimation{ easing.type: Easing.OutCubic; duration: 1000 }

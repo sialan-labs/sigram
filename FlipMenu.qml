@@ -88,14 +88,12 @@ Item {
             NumberAnimation{ easing.type: Easing.OutBack; duration: item_destroyer.interval }
         }
 
-        FastBlur {
+        Mirror {
             width: chatFrame.width
             height: chatFrame.height
             anchors.top: parent.top
             anchors.right: parent.right
             source: chatFrame
-            radius: 64
-            cached: true
         }
 
         MouseArea {

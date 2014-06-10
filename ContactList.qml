@@ -138,12 +138,11 @@ Rectangle {
         anchors.fill: cl_header
         clip: true
 
-        FastBlur {
+        Mirror {
             width: clist_frame.width
             height: clist_frame.height
             anchors.top: parent.top
             source: clist_frame
-            radius: 64
         }
     }
 

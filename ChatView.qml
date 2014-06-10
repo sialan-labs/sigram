@@ -35,24 +35,13 @@ Rectangle {
     property bool userConfig: false
     property alias smilies: send_frame.smilies
 
+    property int limit: 20
+    property int loadeds: 0
+
     onCurrentChanged: {
-        indicator.start()
         chat_list.clear()
-
-        userConfig = false
-        if( current == 0 )
-            return
-
-        chat_list.disableAnims = true
-
-        var ids = Telegram.messagesOf(current)
-        for( var i=0; i<ids.length; i++ ) {
-            cache = ids[i]
-            chat_list.append(cache)
-        }
-
-        Telegram.getHistory(current,100)
-        chat_list.positionViewAtEnd()
+        load(limit)
+        chat_list.positionViewAtBeginning()
     }
 
     Connections {
@@ -157,6 +146,7 @@ Rectangle {
             model: ListModel{}
             spacing: 5
             cacheBuffer: 500
+            verticalLayoutDirection: ListView.BottomToTop
 
             property bool disableAnims: false
 
@@ -176,12 +166,30 @@ Rectangle {
                 onTriggered: chat_list.disableAnims = false
             }
 
-            header: Item {
+            footer: Item {
                 width: chat_list.width
-                height: title_bar.height
+                height: title_bar.height + more_btn.height + 8
+
+                Button {
+                    id: more_btn
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    width: 200
+                    height: 40
+                    highlightColor: "#337fa2"
+                    normalColor: "#4098bf"
+                    textColor: "#ffffff"
+                    textFont.family: globalNormalFontFamily
+                    textFont.pointSize: 10
+                    text: qsTr("More")
+                    visible: chat_list.contentHeight>chat_list.height
+                    onClicked: {
+                        chat_view.load(loadeds+limit)
+                    }
+                }
             }
 
-            footer: Item {
+            header: Item {
                 width: chat_list.width
                 height: send_frame.height + (smilies_frame.visible? smilies_frame.height : 0)
             }
@@ -223,7 +231,7 @@ Rectangle {
             function gotoEnd() {
                 anim.stop()
                 var pos = chat_list.contentY;
-                chat_list.positionViewAtEnd()
+                chat_list.positionViewAtBeginning()
                 var destPos = chat_list.contentY;
                 anim.from = pos;
                 anim.to = destPos;
@@ -233,28 +241,29 @@ Rectangle {
             function append( msg_id ) {
                 var index = 0
                 for( var i=0; i<model.count; i++ ) {
-                    if( model.get(i).msg <= msg_id )
+                    var msg = model.get(i).msg
+                    if( msg > msg_id )
                         index = i+1
+                    else
+                    if( msg == msg_id )
+                        return;
                     else
                         break;
                 }
 
                 if( msg_id < 0 )
-                    index = model.count
+                    index = 0
 
-                var to_end = chat_list.atYEnd
+                var to_end = chat_list.atYBeginning
 
                 model.insert(index, {"msg":msg_id} )
+                loadeds++
 
-                if( to_end ) {
-                    if( msg_id < 0 )
-                        chat_list.gotoEnd()
-                    else
-                        chat_list.positionViewAtEnd()
-                }
+//                chat_list.positionViewAtBeginning()
             }
 
             function clear() {
+                loadeds = 0
                 model.clear()
             }
         }
@@ -313,7 +322,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
         current: chat_view.current
-        onClicked: showConfigure(chat_view.current)
+        onClicked: if(chat_view.current!=0) showConfigure(chat_view.current)
 
         Indicator {
             id: indicator
@@ -349,7 +358,7 @@ Rectangle {
         iconHeight: 18
         opacity: chat_list.atYEnd || anim.running? 0 : 1
         visible: opacity != 0
-        onClicked: chat_list.positionViewAtEnd()
+        onClicked: chat_list.positionViewAtBeginning()
 
         Behavior on opacity {
             NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -384,10 +393,10 @@ Rectangle {
 
         onHeightChanged: {
             if( height == 100 )
-                chat_list.positionViewAtEnd()
+                chat_list.positionViewAtBeginning()
             else
             if( height == 0 )
-                chat_list.positionViewAtEnd()
+                chat_list.positionViewAtBeginning()
         }
 
         Behavior on height {
@@ -478,11 +487,30 @@ Rectangle {
         }
     }
 
-    function showConfigure( uid ) {
-        u_config.userId = uid
-        if( u_config.userId == 0 )
+    function load( size ) {
+        userConfig = false
+        if( current == 0 )
             return
 
+        indicator.start()
+        chat_list.disableAnims = true
+
+        var ids = Telegram.messagesOf(current)
+
+        var start = ids.length-size
+        if( start<0 )
+            start = 0
+
+        for( var i=start; i<ids.length; i++ ) {
+            cache = ids[i]
+            chat_list.append(cache)
+        }
+
+        Telegram.getHistory(current,size)
+    }
+
+    function showConfigure( uid ) {
+        u_config.userId = uid
         userConfig = true
     }
 }
