@@ -35,6 +35,7 @@ class TelegramGui : public QObject
     Q_PROPERTY(int height READ height WRITE setHeight NOTIFY heightChanged)
     Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
     Q_PROPERTY(QString country READ country WRITE setCountry NOTIFY countryChanged)
+    Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
     Q_PROPERTY(bool donate READ donate WRITE setDonate NOTIFY donateChanged)
     Q_PROPERTY(bool donateViewShowed READ donateViewShowed WRITE setDonateViewShowed NOTIFY donateViewShowedChanged)
     Q_OBJECT
@@ -85,6 +86,11 @@ public:
     static void setCountry(const QString & country);
     static QString country();
 
+    void setLanguage(const QString & ln);
+    QString language() const;
+
+    Q_INVOKABLE QStringList languages() const;
+
     static void setDonate(bool stt);
     static bool donate();
 
@@ -127,6 +133,7 @@ signals:
     void visibleChanged();
     void countryChanged();
     void donateChanged();
+    void languageChanged();
     void donateViewShowedChanged();
 
 private slots:
@@ -135,6 +142,7 @@ private slots:
 
 private:
     void showContextMenu();
+    void init_languages();
 
 private:
     TelegramGuiPrivate *p;

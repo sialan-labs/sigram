@@ -85,6 +85,11 @@ public:
     int height;
     bool visible;
 
+    QTranslator *translator;
+    QHash<QString,QVariant> languages;
+    QHash<QString,QLocale> locales;
+    QString language;
+
     bool quit_state;
 };
 
@@ -97,6 +102,7 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->quit_state = false;
     p->args = QGuiApplication::arguments().first().toUtf8().data();
     p->doc = new QTextDocument(this);
+    p->translator = new QTranslator(this);
 
     QDir().mkpath(HOME_PATH);
     QDir().mkpath(HOME_PATH + "/downloads");
@@ -114,6 +120,8 @@ TelegramGui::TelegramGui(QObject *parent) :
 
     qmlRegisterType<Enums>("org.sialan.telegram", 1, 0, "Enums");
     qmlRegisterType<SetObject>("org.sialan.telegram", 1, 0, "SetObject");
+
+    init_languages();
 }
 
 QSettings *TelegramGui::settings()
@@ -346,6 +354,32 @@ void TelegramGui::setCountry(const QString &cnt)
 QString TelegramGui::country()
 {
     return tg_settings->value( "General/country", QString() ).toString();
+}
+
+void TelegramGui::setLanguage(const QString &lang)
+{
+    if( language() == lang )
+        return;
+
+    QGuiApplication::removeTranslator(p->translator);
+    p->translator->load(p->languages.value(lang).toString(),"languages");
+    QGuiApplication::installTranslator(p->translator);
+    p->language = lang;
+
+    tg_settings->setValue( "General/language", lang );
+    emit languageChanged();
+}
+
+QString TelegramGui::language() const
+{
+    return p->language;
+}
+
+QStringList TelegramGui::languages() const
+{
+    QStringList res = p->languages.keys();
+    res.sort();
+    return res;
 }
 
 void TelegramGui::setDonate(bool stt)
@@ -663,6 +697,32 @@ void TelegramGui::incomingAppMessage(const QString &msg)
 {
     if( msg == "show" )
         show();
+}
+
+void TelegramGui::init_languages()
+{
+    QDir dir(LOCALES_PATH);
+    QStringList languages = dir.entryList( QDir::Files );
+    if( !languages.contains("lang-en.qm") )
+        languages.prepend("lang-en.qm");
+
+    for( int i=0 ; i<languages.size() ; i++ )
+     {
+         QString locale_str = languages[i];
+             locale_str.truncate( locale_str.lastIndexOf('.') );
+             locale_str.remove( 0, locale_str.indexOf('-') + 1 );
+
+         QLocale locale(locale_str);
+
+         QString  lang = QLocale::languageToString(locale.language());
+         QVariant data = LOCALES_PATH + "/" + languages[i];
+
+         p->languages.insert( lang, data );
+         p->locales.insert( lang , locale );
+
+         if( lang == tg_settings->value("General/language","English").toString() )
+             setLanguage( lang );
+    }
 }
 
 TelegramGui::~TelegramGui()

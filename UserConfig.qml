@@ -232,9 +232,39 @@ Item {
         onCheckedChanged: Gui.setMute( u_conf.userId, checked )
     }
 
+    Text {
+        id: language_label
+        anchors.right: phone.left
+        anchors.rightMargin: 20
+        anchors.verticalCenter: lang_combo.verticalCenter
+        font.pointSize: 11
+        font.family: globalNormalFontFamily
+        color: "#555555"
+        text: qsTr("Language:")
+    }
+
+    ControlCombo {
+        id: lang_combo
+        anchors.top: notify.bottom
+        anchors.left: name.left
+        anchors.topMargin: 10
+        visible: u_conf.userId == Telegram.me
+        height: 30
+        width: 200
+        onCurrentTextChanged: if(inited) Gui.language = currentText
+        Component.onCompleted: {
+            var lang = Gui.language
+            model = Gui.languages()
+            currentIndex = find(lang)
+            inited = true
+        }
+
+        property bool inited: false
+    }
+
     Button {
         id: background_btn
-        anchors.top: notify.bottom
+        anchors.top: lang_combo.bottom
         anchors.left: name.left
         anchors.topMargin: 50
         normalColor: "#00000000"

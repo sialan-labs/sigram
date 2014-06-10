@@ -18,7 +18,9 @@ icons.source = icons
 icons.target = .
 server.source = tg-server.pub
 server.target = .
-COPYFOLDERS = database fonts emojis countries license gpl icons server
+translations.source = translations
+translations.target = .
+COPYFOLDERS = database fonts emojis countries license gpl icons server translations
 include(qmake/copyData.pri)
 copyData()
 

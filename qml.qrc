@@ -76,5 +76,6 @@
         <file>LicensePage.qml</file>
         <file>DonatePage.qml</file>
         <file>files/configure.png</file>
+        <file>ControlCombo.qml</file>
     </qresource>
 </RCC>
