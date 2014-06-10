@@ -93,7 +93,7 @@ Rectangle {
             font.family: globalNormalFontFamily
             anchors.horizontalCenter: parent.horizontalCenter
             color: imageBack? "#333333" : "#bbbbbb"
-            text: user==0? "" : Telegram.dialogTitle(user) + qsTr("is typing...")
+            text: user==0? "" : Telegram.dialogTitle(user) + qsTr(" is typing...")
             visible: user!=0
 
             property int user
