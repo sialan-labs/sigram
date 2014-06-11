@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>Dismiss</source>
-        <translation>Abbrechen</translation>
+        <translation>Alles klar</translation>
     </message>
 </context>
 <context>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>Dismiss</source>
-        <translation>Abbrechen</translation>
+        <translation>Alles klar, danke</translation>
     </message>
 </context>
 <context>
@@ -151,11 +151,11 @@
     <name>MsgAction</name>
     <message>
         <source>Chat created by </source>
-        <translation>Gruppenchat erstellt von</translation>
+        <translation>Gruppenchat erstellt von </translation>
     </message>
     <message>
         <source>Chat renamed to </source>
-        <translation>Gruppenchat umbenannt zu</translation>
+        <translation>Gruppenchat umbenannt zu </translation>
     </message>
     <message>
         <source> by </source>
@@ -167,11 +167,11 @@
     </message>
     <message>
         <source>Chat photo deleted by </source>
-        <translation>Gruppenchat Foto gelöscht von</translation>
+        <translation>Gruppenchat Foto gelöscht von </translation>
     </message>
     <message>
         <source> added </source>
-        <translation>hinzugefügt</translation>
+        <translation> hinzugefügt </translation>
     </message>
     <message>
         <source>to group</source>
