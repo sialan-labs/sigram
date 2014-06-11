@@ -135,7 +135,7 @@ Item {
                     property int fwd: Telegram.messageForwardId(msg_id)
                 }
 
-                Text {
+                TextEdit {
                     id: txt
                     wrapMode: Text.WordWrap
                     width: msgWidth>item.width*0.6? item.width*0.6 : msgWidth
@@ -143,8 +143,12 @@ Item {
                     color: item.out? "#ffffff" : "#333333"
                     font.family: globalTextFontFamily
                     font.pointSize: 9
-                    textFormat: Text.StyledText
+                    textFormat: TextEdit.RichText
                     visible: text.length != 0
+                    readOnly: true
+                    selectByMouse: true
+                    selectionColor: "#0d80ec"
+                    onLinkActivated: Gui.openUrl(link)
 
                     property real msgWidth: Gui.htmlWidth(text)
                 }
@@ -224,7 +228,10 @@ Item {
         var res = Gui.showMenu( acts )
         switch( res ) {
         case 0:
-            Gui.copyText( Telegram.messageBody(msg_id) )
+            if( txt.selectedText.length != 0 )
+                txt.copy()
+            else
+                Gui.copyText( Telegram.messageBody(msg_id) )
             break;
 
         case 1:
