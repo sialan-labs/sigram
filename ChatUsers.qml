@@ -119,6 +119,10 @@ Item {
         Component.onCompleted: refresh()
     }
 
+    NormalWheelScroll {
+        flick: clist
+    }
+
     Button {
         id: add_btn
         anchors.bottom: parent.bottom

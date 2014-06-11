@@ -75,6 +75,10 @@ Rectangle {
         Component.onCompleted: refresh()
     }
 
+    NormalWheelScroll {
+        flick: slist
+    }
+
     PhysicalScrollBar {
         scrollArea: slist; width: 8; anchors.right: parent.right; anchors.top: slist.top;
         anchors.bottom: slist.bottom; color: "#ffffff"

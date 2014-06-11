@@ -120,6 +120,10 @@ Rectangle {
         }
     }
 
+    NormalWheelScroll {
+        flick: clist
+    }
+
     PhysicalScrollBar {
         scrollArea: clist; height: clist.height; width: 8
         anchors.right: clist.right; anchors.top: clist.top; color: "#333333"

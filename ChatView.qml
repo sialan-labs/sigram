@@ -120,7 +120,7 @@ Rectangle {
             if( index == -1 )
                 return
 
-            chat_list.disableAnims = true
+            chat_list.disableAnims = false
             dis_anim_timer.restart()
 
             chat_list.model.setProperty(index,"msg",msg_id)
@@ -152,17 +152,18 @@ Rectangle {
             model: ListModel{}
             spacing: 5
             cacheBuffer: 500
+            maximumFlickVelocity: 2500
+            flickDeceleration: 2500
             verticalLayoutDirection: ListView.BottomToTop
 
             property bool disableAnims: false
 
-            NumberAnimation {
-                id: anim
-                target: chat_list
-                property: "contentY"
-                easing.type: Easing.OutCubic
-                duration: 400
-                onRunningChanged: if(!running) chat_list.returnToBounds()
+            rebound: Transition {
+                NumberAnimation {
+                    properties: "y"
+                    duration: 800
+                    easing.type: Easing.OutBounce
+                }
             }
 
             Timer {
@@ -188,7 +189,7 @@ Rectangle {
             delegate: Item {
                 id: item
                 width: chat_list.width
-                height: itemObj? itemObj.height : 0
+                height: itemObj? itemObj.height : 100
 
                 property variant itemObj
                 property int msgId: msg
@@ -201,31 +202,12 @@ Rectangle {
                     item.data = [itemObj]
                     itemObj.anchors.left = item.left
                     itemObj.anchors.right = item.right
-                    itemObj.ding()
+                    if( index == 0 )
+                        itemObj.ding()
                 }
                 Component.onDestruction: {
                     msg_obj_handler.freeObject(itemObj)
                 }
-            }
-
-            function gotoIndex(idx) {
-                anim.stop()
-                var pos = chat_list.contentY;
-                chat_list.positionViewAtIndex(idx, ListView.End);
-                var destPos = chat_list.contentY;
-                anim.from = pos;
-                anim.to = destPos;
-                anim.start()
-            }
-
-            function gotoEnd() {
-                anim.stop()
-                var pos = chat_list.contentY;
-                chat_list.positionViewAtBeginning()
-                var destPos = chat_list.contentY;
-                anim.from = pos;
-                anim.to = destPos;
-                anim.start()
             }
 
             function append( msg_id ) {
@@ -255,19 +237,8 @@ Rectangle {
         }
     }
 
-    Component {
-        id: tst_cmp
-        Rectangle {
-            width: 20
-            height: 20
-            Timer {
-                id: tst_timer
-                repeat: true
-                interval: 500
-                onTriggered: console.debug(":D")
-                Component.onCompleted: start()
-            }
-        }
+    NormalWheelScroll {
+        flick: chat_list
     }
 
     PhysicalScrollBar {
@@ -357,7 +328,7 @@ Rectangle {
         highlightColor: "#994098BF"
         icon: "files/down.png"
         iconHeight: 18
-        opacity: chat_list.atYEnd || anim.running? 0 : 1
+        opacity: chat_list.atYEnd? 0 : 1
         visible: opacity != 0
         onClicked: chat_list.positionViewAtBeginning()
 

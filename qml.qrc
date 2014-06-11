@@ -77,5 +77,6 @@
         <file>DonatePage.qml</file>
         <file>files/configure.png</file>
         <file>ControlCombo.qml</file>
+        <file>NormalWheelScroll.qml</file>
     </qresource>
 </RCC>
