@@ -238,12 +238,8 @@ Rectangle {
                 if( msg_id < 0 )
                     index = 0
 
-                var to_end = chat_list.atYBeginning
-
                 model.insert(index, {"msg":msg_id} )
                 loadeds++
-
-//                chat_list.positionViewAtBeginning()
             }
 
             function clear() {

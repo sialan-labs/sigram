@@ -81,8 +81,8 @@ QString Emojis::currentTheme() const
 
 QString Emojis::textToEmojiText(const QString &txt)
 {
-    p->doc->setHtml(QString(txt).replace("\n","<br />"));
-    QString res = p->doc->toPlainText();
+//    p->doc->setHtml(QString(txt.toHtmlEscaped()).replace("\n","<br />"));
+    QString res = txt.toHtmlEscaped();
     for( int i=0; i<res.size(); i++ )
     {
         for( int j=1; j<5; j++ )
@@ -102,7 +102,7 @@ QString Emojis::textToEmojiText(const QString &txt)
     if( res.contains("<img") )
         res = "<font size=\"1\">.</font>" + res;
 
-    res = res.replace("\n","<br />");
+    res = "<html><body>" + res.replace("\n","<br />") + "</body></html>";
     return res;
 }
 
