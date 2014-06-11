@@ -80,6 +80,10 @@ Item {
         }
     }
 
+    NormalWheelScroll {
+        flick: ltxt_flickable
+    }
+
     PhysicalScrollBar {
         scrollArea: ltxt_flickable; width: 8; anchors.right: parent.right; anchors.top: ltxt_flickable.top;
         anchors.bottom: ltxt_flickable.bottom; color: "#ffffff"
