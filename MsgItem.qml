@@ -144,7 +144,7 @@ Item {
                     font.family: globalTextFontFamily
                     font.pointSize: 9
                     textFormat: TextEdit.RichText
-                    visible: text.length != 0
+                    visible: Telegram.messageBody(msg_id).length != 0
                     readOnly: true
                     selectByMouse: true
                     selectionColor: "#0d80ec"
