@@ -166,27 +166,11 @@ Rectangle {
                 onTriggered: chat_list.disableAnims = false
             }
 
+            onAtYBeginningChanged: if(atYBeginning) chat_view.load(loadeds+limit)
+
             footer: Item {
                 width: chat_list.width
-                height: title_bar.height + more_btn.height + 8
-
-                Button {
-                    id: more_btn
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    width: 200
-                    height: 40
-                    highlightColor: "#337fa2"
-                    normalColor: "#4098bf"
-                    textColor: "#ffffff"
-                    textFont.family: globalNormalFontFamily
-                    textFont.pointSize: 10
-                    text: qsTr("More")
-                    visible: chat_list.contentHeight>chat_list.height
-                    onClicked: {
-                        chat_view.load(loadeds+limit)
-                    }
-                }
+                height: title_bar.height
             }
 
             header: Item {
