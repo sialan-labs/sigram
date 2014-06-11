@@ -25,6 +25,7 @@
 #include "unitysystemtray.h"
 #include "telegram_macros.h"
 #include "versionchecker.h"
+#include "qmlstaticobjecthandler.h"
 #include "emojis.h"
 #include "countries.h"
 #include "setobject.h"
@@ -120,6 +121,7 @@ TelegramGui::TelegramGui(QObject *parent) :
 
     qmlRegisterType<Enums>("org.sialan.telegram", 1, 0, "Enums");
     qmlRegisterType<SetObject>("org.sialan.telegram", 1, 0, "SetObject");
+    qmlRegisterType<QmlStaticObjectHandler>("org.sialan.telegram", 1, 0, "StaticObjectHandler");
 
     init_languages();
 }

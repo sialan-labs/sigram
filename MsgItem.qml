@@ -23,8 +23,8 @@ Item {
     width: 100
     height: msg_row.height + itemMargins*4
 
-    property bool out: Telegram.messageOut(msg_id)
-    property int unread: Telegram.messageUnread(msg_id)
+    property bool out: false
+    property int unread: 0
     property int unsent: msg_id < 0
 
     property int msg_id
@@ -32,6 +32,11 @@ Item {
     property real itemMargins: 10
 
     signal contactSelected( int uid )
+
+    onMsg_idChanged: {
+        out = Telegram.messageOut(msg_id)
+        unread = Telegram.messageUnread(msg_id)
+    }
 
     Connections {
         target: Telegram

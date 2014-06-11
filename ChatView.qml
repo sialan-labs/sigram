@@ -127,6 +127,12 @@ Rectangle {
         }
     }
 
+    StaticObjectHandler {
+        id: msg_obj_handler
+        createMethod: "createMsgItem"
+        createObject: chat_view
+    }
+
     Item {
         id: chat_list_frame
         anchors.fill: parent
@@ -178,27 +184,23 @@ Rectangle {
                 height: send_frame.height + (smilies_frame.visible? smilies_frame.height : 0)
             }
 
+            property bool firstObj: false
             delegate: Item {
                 id: item
                 width: chat_list.width
-                height: msg_item.height
+                height: itemObj? itemObj.height : 0
 
-                property variant msgItem
-                property int msg_id: msg
-                onMsg_idChanged: if(msgItem) msgItem.msg_id = msg_id
+                property variant itemObj
 
                 Component.onCompleted: {
-                    if( Telegram.messageService(msg) != 0 )
-                        msgItem = msg_act_component.createObject(item, {"msg_id":msg} )
-                    else
-                        msgItem = msg_component.createObject(item, {"msg_id":msg} )
-
-                    msgItem.heightChanged.connect(item.refreshHeight)
-                    item.height = msgItem.height
+                    itemObj = msg_obj_handler.newObject()
+                    itemObj.mid = msg
+                    item.data = [itemObj]
+                    itemObj.anchors.left = item.left
+                    itemObj.anchors.right = item.right
                 }
-
-                function refreshHeight() {
-                    item.height = msgItem.height
+                Component.onDestruction: {
+                    msg_obj_handler.freeObject(itemObj)
                 }
             }
 
@@ -245,6 +247,21 @@ Rectangle {
             function clear() {
                 loadeds = 0
                 model.clear()
+            }
+        }
+    }
+
+    Component {
+        id: tst_cmp
+        Rectangle {
+            width: 20
+            height: 20
+            Timer {
+                id: tst_timer
+                repeat: true
+                interval: 500
+                onTriggered: console.debug(":D")
+                Component.onCompleted: start()
             }
         }
     }
@@ -432,37 +449,47 @@ Rectangle {
     }
 
     Component {
-        id: msg_act_component
-        MsgAction {
-            id: msg_action
-            anchors.centerIn: parent
-        }
-    }
-
-    Component {
         id: msg_component
-        MsgItem {
-            id: msg_item
-            width: parent.width
-            y: height
-            scale: 1.1
-            transformOrigin: Item.Center
+        Item {
+            id: item
+            width: chat_list.width
+            height: msg_item.visible? msg_item.height : msg_action.height
 
-            onContactSelected: {
-                u_config.userId = uid
-                chat_view.userConfig = true
+            property int service: Telegram.messageService(mid)
+            property int mid: 0
+
+            MsgAction {
+                id: msg_action
+                anchors.centerIn: parent
+                msg_id: item.mid
+                visible: item.service != 0
             }
 
-            Behavior on y {
-                NumberAnimation{ easing.type: Easing.OutCubic; duration: chat_list.disableAnims? 0 : 600 }
-            }
-            Behavior on scale {
-                NumberAnimation{ easing.type: Easing.OutCubic; duration: chat_list.disableAnims? 0 : 600 }
-            }
+            MsgItem {
+                id: msg_item
+                width: parent.width
+                y: height
+                scale: 1.1
+                visible: item.service == 0
+                msg_id: item.mid
+                transformOrigin: Item.Center
 
-            Component.onCompleted: {
-                y = 0
-                scale = 1
+                onContactSelected: {
+                    u_config.userId = uid
+                    chat_view.userConfig = true
+                }
+
+                Behavior on y {
+                    NumberAnimation{ easing.type: Easing.OutCubic; duration: chat_list.disableAnims? 0 : 600 }
+                }
+                Behavior on scale {
+                    NumberAnimation{ easing.type: Easing.OutCubic; duration: chat_list.disableAnims? 0 : 600 }
+                }
+
+                Component.onCompleted: {
+                    y = 0
+                    scale = 1
+                }
             }
         }
     }
@@ -492,5 +519,9 @@ Rectangle {
     function showConfigure( uid ) {
         u_config.userId = uid
         userConfig = true
+    }
+
+    function createMsgItem() {
+        return msg_component.createObject(chat_view)
     }
 }

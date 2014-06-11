@@ -37,7 +37,8 @@ SOURCES += main.cpp \
     qtsingleapplication/qtsinglecoreapplication.cpp \
     qtsingleapplication/qtsingleapplication.cpp \
     qtsingleapplication/qtlockedfile.cpp \
-    qtsingleapplication/qtlocalpeer.cpp
+    qtsingleapplication/qtlocalpeer.cpp \
+    qmlstaticobjecthandler.cpp
 
 win32: SOURCES += qtsingleapplication/qtlockedfile_win.cpp
 unix:  SOURCES += qtsingleapplication/qtlockedfile_unix.cpp
@@ -66,7 +67,8 @@ HEADERS += \
     qtsingleapplication/qtsinglecoreapplication.h \
     qtsingleapplication/qtsingleapplication.h \
     qtsingleapplication/qtlockedfile.h \
-    qtsingleapplication/qtlocalpeer.h
+    qtsingleapplication/qtlocalpeer.h \
+    qmlstaticobjecthandler.h
 
 OTHER_FILES += \
     database/userdata.db \
