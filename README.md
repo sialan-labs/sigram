@@ -7,11 +7,14 @@ A different telegram client from Sialan.Labs
 
 Tested on Fedora 20. 
 ### Install dependencies
-```yum install qt-creator qt5-qtbase qt5-qtbase-devel qt5-qtdeclarative qt5-qtquick1 qt5-qtquick1-devel kde-plasma-applicationname kde-plasma-nm qt5-qtdeclarative-devel qt5-qtdeclarative-static qt5-qtgraphicaleffects```
+```
+yum install qt-creator qt5-qtbase qt5-qtbase-devel qt5-qtdeclarative qt5-qtquick1 qt5-qtquick1-devel kde-plasma-applicationname kde-plasma-nm qt5-qtdeclarative-devel qt5-qtdeclarative-static qt5-qtgraphicaleffects
+```
 
 For other distributions search for the corresponding packages.
 
 ### generate makefile
+
 ```
 mkdir build
 cd build
@@ -19,7 +22,12 @@ cd build
 ```
 
 ### compile
-```make```
 
-###run
-```./SialanTelegram ```
+```
+make
+```
+
+### run
+```
+./SialanTelegram 
+```
