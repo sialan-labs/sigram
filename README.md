@@ -1,5 +1,6 @@
 ### sigram
 A different telegram client from Sialan.Labs
+<<<<<<< HEAD
 Sigram project are released under the terms of the GPLv3 license.
 
 ### How to Compile
@@ -31,3 +32,26 @@ If you want to build UnitySystemTray plugin also run this command:
     make
 You can use command below after building to clean build directory on the each step.
     make clean
+=======
+
+## Build
+
+Tested on Fedora 20. 
+### Install dependencies
+```yum install qt-creator qt5-qtbase qt5-qtbase-devel qt5-qtdeclarative qt5-qtquick1 qt5-qtquick1-devel kde-plasma-applicationname kde-plasma-nm qt5-qtdeclarative-devel qt5-qtdeclarative-static qt5-qtgraphicaleffects```
+
+For other distributions search for the corresponding packages.
+
+### generate makefile
+```
+mkdir build
+cd build
+/bin/qmake-qt5 -o Makefile ../SialanTelegram.pro
+```
+
+### compile
+```make```
+
+###run
+```./SialanTelegram ```
+>>>>>>> 1ea43cacbe7217f50099b019fb8440b5d1d5a2ca
