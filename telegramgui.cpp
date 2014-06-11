@@ -682,6 +682,8 @@ void TelegramGui::quit()
 void TelegramGui::show()
 {
     p->root->setVisible( true );
+    p->root->setProperty( "aboutSialan", false );
+    p->root->setProperty( "about", false );
     p->root->requestActivate();
 }
 
