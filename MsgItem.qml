@@ -142,7 +142,7 @@ Item {
 
                 TextEdit {
                     id: txt
-                    wrapMode: Text.WordWrap
+                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     width: msgWidth>item.width*0.6? item.width*0.6 : msgWidth
                     text: Emojis.textToEmojiText( Telegram.messageBody(msg_id) )
                     color: item.out? "#ffffff" : "#333333"

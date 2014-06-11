@@ -191,13 +191,17 @@ Rectangle {
                 height: itemObj? itemObj.height : 0
 
                 property variant itemObj
+                property int msgId: msg
+
+                onMsgIdChanged: if(itemObj) itemObj.mid = msgId
 
                 Component.onCompleted: {
                     itemObj = msg_obj_handler.newObject()
-                    itemObj.mid = msg
+                    itemObj.mid = msgId
                     item.data = [itemObj]
                     itemObj.anchors.left = item.left
                     itemObj.anchors.right = item.right
+                    itemObj.ding()
                 }
                 Component.onDestruction: {
                     msg_obj_handler.freeObject(itemObj)
@@ -468,8 +472,6 @@ Rectangle {
             MsgItem {
                 id: msg_item
                 width: parent.width
-                y: height
-                scale: 1.1
                 visible: item.service == 0
                 msg_id: item.mid
                 transformOrigin: Item.Center
@@ -490,6 +492,20 @@ Rectangle {
                     y = 0
                     scale = 1
                 }
+            }
+
+            function ding() {
+                if( chat_list.disableAnims )
+                    return
+                if( !msg_item.visible )
+                    return
+
+                chat_list.disableAnims = true
+                msg_item.y = msg_item.height
+                msg_item.scale = 1.1
+                chat_list.disableAnims = false
+                msg_item.y = 0
+                msg_item.scale = 1
             }
         }
     }
