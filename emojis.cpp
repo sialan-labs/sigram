@@ -22,7 +22,6 @@
 #include <QHash>
 #include <QFile>
 #include <QDebug>
-#include <QTextDocument>
 
 class EmojisPrivate
 {
@@ -30,16 +29,12 @@ public:
     QHash<QString,QString> emojis;
     QStringList keys;
     QString theme;
-
-    QTextDocument *doc;
 };
 
 Emojis::Emojis(QObject *parent) :
     QObject(parent)
 {
     p = new EmojisPrivate;
-    p->doc = new QTextDocument(this);
-
     setCurrentTheme("apple");
 }
 
@@ -81,7 +76,6 @@ QString Emojis::currentTheme() const
 
 QString Emojis::textToEmojiText(const QString &txt)
 {
-//    p->doc->setHtml(QString(txt.toHtmlEscaped()).replace("\n","<br />"));
     QString res = txt.toHtmlEscaped();
     for( int i=0; i<res.size(); i++ )
     {
