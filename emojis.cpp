@@ -96,6 +96,17 @@ QString Emojis::textToEmojiText(const QString &txt)
     if( res.contains("<img") )
         res = "<font size=\"1\">.</font>" + res;
 
+    QRegExp links_rxp("((?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w\\/))");
+    int pos = 0;
+    while ((pos = links_rxp.indexIn(res, pos)) != -1)
+    {
+        QString link = links_rxp.cap(1);
+        QString atag = QString("<a href='%1'>%2</a>").arg(link,link);
+        res.replace( pos, link.length(), atag );
+        pos += atag.size();
+    }
+
+
     res = "<html><body>" + res.replace("\n","<br />") + "</body></html>";
     return res;
 }
