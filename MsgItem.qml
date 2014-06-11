@@ -145,7 +145,6 @@ Item {
                     font.pointSize: 9
                     textFormat: Text.StyledText
                     visible: text.length != 0
-                    onLinkActivated: Gui.openUrl(link)
 
                     property real msgWidth: Gui.htmlWidth(text)
                 }
