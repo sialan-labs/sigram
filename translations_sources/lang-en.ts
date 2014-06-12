@@ -38,7 +38,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>is typing...</source>
+        <source> is typing...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -369,6 +369,10 @@
     </message>
     <message>
         <source>Logout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Language:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
