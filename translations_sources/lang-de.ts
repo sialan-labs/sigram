@@ -171,15 +171,15 @@
     </message>
     <message>
         <source> added </source>
-        <translation> hinzugefügt </translation>
+        <translation> fügte </translation>
     </message>
     <message>
         <source>to group</source>
-        <translation>zur Gruppe</translation>
+        <translation>zur Gruppe hinzu</translation>
     </message>
     <message>
         <source> deleted </source>
-        <translation> gelöscht </translation>
+        <translation> löschte </translation>
     </message>
     <message>
         <source>from group</source>
