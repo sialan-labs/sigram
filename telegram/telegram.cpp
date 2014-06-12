@@ -271,7 +271,8 @@ QString Telegram::dialogUserTitle(int id) const
 
 QString Telegram::dialogTitle(int id) const
 {
-    return dialogIsChat(id)? dialogChatTitle(id) : dialogUserFirstName(id) + " " + dialogUserLastName(id);
+    QString res = (dialogIsChat(id)? dialogChatTitle(id) : dialogUserFirstName(id) + " " + dialogUserLastName(id));
+    return res.trimmed();
 }
 
 int Telegram::dialogUnreadCount(int id) const
