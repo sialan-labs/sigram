@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Network;Application;
+Comment=Sigram, Sialan Telegram VoIP and messenger
+Exec=/opt/sialan/sigram/Sigram
+GenericName=Sialan Telegram client
+Icon=/opt/sialan/sigram/icons/icon.png
+Name=Sigram
+StartupNotify=true
+Type=Application
+Version=0.5.4
