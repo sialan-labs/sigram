@@ -1197,10 +1197,10 @@ void print_date_full (long t) {
 int our_id;
 
 void print_service_message (struct message *M) {
+  return;
   assert (M);
   peer_t *U = user_chat_get (M->from_id);
   incomingMsg(M,(struct user*)U);
-  return;
   print_start ();
   push_color (COLOR_GREY);
 
