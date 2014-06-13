@@ -36,7 +36,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
-#include <QGuiApplication>
+#include <QApplication>
 #include <QTextDocument>
 #include <QClipboard>
 #include <QMimeData>
@@ -437,6 +437,8 @@ void TelegramGui::start()
         QFile::copy(":/files/sys_tray.png","/tmp/sialan-telegram-client-trayicon.png");
 
         p->unityTray = new UnitySystemTray( QCoreApplication::applicationName(), "/tmp/sialan-telegram-client-trayicon.png" );
+        if( !p->unityTray->pntr() )
+            QApplication::setQuitOnLastWindowClosed(true);
         p->unityTray->addMenu( tr("Show"), this, "show" );
         p->unityTray->addMenu( tr("Configure"), this, "configure" );
         p->unityTray->addMenu( tr("About"), this, "about" );
