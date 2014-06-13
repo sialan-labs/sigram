@@ -25,8 +25,14 @@
 #define USERDATAS_DB_CONNECTION "userdata_db_connection"
 
 #define HOME_PATH QString( QDir::homePath() + "/.config/sialan/telegram/" )
+
+#ifdef Q_OS_MAC
+#define EMOJIS_PATH QString( QCoreApplication::applicationDirPath() + "../Resources/emojis/" )
+#define LOCALES_PATH QString( QCoreApplication::applicationDirPath() + "../Resources/translations/" )
+#else
 #define EMOJIS_PATH QString( QCoreApplication::applicationDirPath() + "/emojis/" )
 #define LOCALES_PATH QString( QCoreApplication::applicationDirPath() + "/translations/" )
+#endif
 
 #define DONATE_KEY "eb229602-6719-41a5-be54-f56d1cecff77"
 

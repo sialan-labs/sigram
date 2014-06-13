@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick dbus widgets sql
+QT += qml quick widgets sql
 
 database.source = database/userdata.db
 database.target = .
@@ -26,7 +26,6 @@ copyData()
 
 SOURCES += main.cpp \
     telegramgui.cpp \
-    notification.cpp \
     userdata.cpp \
     unitysystemtray.cpp \
     emojis.cpp \
@@ -55,7 +54,6 @@ include(telegram/telegram.pri)
 
 HEADERS += \
     telegramgui.h \
-    notification.h \
     userdata.h \
     telegram_macros.h \
     unitysystemtray.h \
@@ -69,6 +67,14 @@ HEADERS += \
     qtsingleapplication/qtlockedfile.h \
     qtsingleapplication/qtlocalpeer.h \
     qmlstaticobjecthandler.h
+
+linux {
+    QT += dbus
+    SOURCES += \
+        notification.cpp
+    HEADERS += \
+        notification.h
+}
 
 OTHER_FILES += \
     database/userdata.db \

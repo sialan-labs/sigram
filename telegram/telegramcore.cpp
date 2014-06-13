@@ -258,7 +258,11 @@ void uSleep(int s)
 const char *serverPubPath()
 {
     static char *result = 0;
+#ifdef Q_OS_MAC
+    strcpy2( result, QString(QCoreApplication::applicationDirPath() + "/../Resources/tg-server.pub").toUtf8() );
+#else
     strcpy2( result, QString(QCoreApplication::applicationDirPath() + "/tg-server.pub").toUtf8() );
+#endif
     return result;
 }
 

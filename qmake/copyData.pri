@@ -30,7 +30,7 @@ for(sourceFiles, $${deploymentfolder}.source) {
             source = $$replace(source, \\\\, /)
             target = $$OUT_PWD/$$eval($${deploymentfolder}.target)/$$dirname(sourceFiles)
             target = $$replace(target, \\\\, /)
-            copyCommand += test -d \"$$target\" || mkdir -p \"$$target\" && cp -f -u -r \"$$source\" \"$$target\"
+            copyCommand += test -d \"$$target\" || mkdir -p \"$$target\" && cp -f -r \"$$source\" \"$$target\"
         }
     }
 }

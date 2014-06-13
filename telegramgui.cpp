@@ -21,7 +21,6 @@
 #define NOTIFY_ACT_RMND 2
 
 #include "telegramgui.h"
-#include "notification.h"
 #include "unitysystemtray.h"
 #include "telegram_macros.h"
 #include "versionchecker.h"
@@ -31,6 +30,9 @@
 #include "setobject.h"
 #include "userdata.h"
 #include "telegram/telegram.h"
+#ifdef Q_OS_LINUX
+#include "notification.h"
+#endif
 
 #include <QtQml>
 #include <QQmlApplicationEngine>
@@ -61,7 +63,10 @@ QPointer<QSettings> tg_settings;
 class TelegramGuiPrivate
 {
 public:
+#ifdef Q_OS_LINUX
     Notification *notify;
+#endif
+
     UserData *userdata;
     Emojis *emojis;
     Countries *countries;
@@ -115,9 +120,11 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->width = tg_settings->value( "General/width", 1024 ).toInt();
     p->height = tg_settings->value( "General/height", 600 ).toInt();
     p->visible = tg_settings->value( "General/visible", true ).toBool();
-    p->notify = new Notification(this);
 
+#ifdef Q_OS_LINUX
+    p->notify = new Notification(this);
     connect( p->notify, SIGNAL(notifyAction(uint,QString)), SLOT(notify_action(uint,QString)) );
+#endif
 
     qmlRegisterType<Enums>("org.sialan.telegram", 1, 0, "Enums");
     qmlRegisterType<SetObject>("org.sialan.telegram", 1, 0, "SetObject");
@@ -180,7 +187,11 @@ QString TelegramGui::appPath() const
 
 QStringList TelegramGui::fonts() const
 {
+#ifdef Q_OS_MAC
+    return fontsOf(appPath() + "../Resources/fonts");
+#else
     return fontsOf(appPath() + "/fonts");
+#endif
 }
 
 QStringList TelegramGui::fontsOf(const QString &path) const
@@ -483,7 +494,9 @@ void TelegramGui::sendNotify(quint64 msg_id)
     if( p->tg->dialogIsChat(from_id) )
         title += tr("at %1").arg(p->tg->dialogTitle(from_id));
 
+#ifdef Q_OS_LINUX
     p->notify->sendNotify( title, body, icon, 0, 3000, actions );
+#endif
 }
 
 void TelegramGui::openFile(const QString &file)
@@ -566,12 +579,16 @@ void TelegramGui::notify_action(uint id, const QString &act)
         p->root->setVisible( true );
         p->root->setProperty( "current", current );
         p->root->requestActivate();
+#ifdef Q_OS_LINUX
         p->notify->closeNotification(id);
+#endif
         break;
 
     case NOTIFY_ACT_MUTE:
         setMute( current, true );
+#ifdef Q_OS_LINUX
         p->notify->closeNotification(id);
+#endif
         break;
 
     case NOTIFY_ACT_RMND:

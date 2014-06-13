@@ -16,8 +16,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifdef Q_OS_MAC
+#define FILE_PATH QString(QCoreApplication::applicationDirPath() + "../Resources/countries/countries.csv")
+#define FLAGS_PATH QString(QCoreApplication::applicationDirPath() + "../Resources/countries/flags/")
+#else
 #define FILE_PATH QString(QCoreApplication::applicationDirPath() + "/countries/countries.csv")
 #define FLAGS_PATH QString(QCoreApplication::applicationDirPath() + "/countries/flags/")
+#endif
 
 #include "countries.h"
 
