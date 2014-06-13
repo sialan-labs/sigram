@@ -30,6 +30,14 @@
 #include <QSettings>
 #include <QHash>
 
+class SecretChatDBClass
+{
+public:
+    int id;
+    int userId;
+    QString title;
+};
+
 class UserDataPrivate
 {
 public:
@@ -39,6 +47,7 @@ public:
     QHash<int,DialogClass> dialogs;
     QHash<int,UserClass> contacts;
     QHash<int,QString> photos;
+    QHash<int,SecretChatDBClass> secretChats;
 
     QHash<int,bool> mutes;
 };
@@ -69,6 +78,7 @@ void UserData::disconnect()
 void UserData::reconnect()
 {
     p->db.open();
+    update_db();
     init_buffer();
 }
 
@@ -110,6 +120,48 @@ QList<int> UserData::mutes() const
 bool UserData::isMuted(int id)
 {
     return p->mutes.value(id);
+}
+
+void UserData::addSecretChat(int id, int userId, const QString &title)
+{
+    QSqlQuery mute_query(p->db);
+    mute_query.prepare("INSERT OR REPLACE INTO SecretChats (id,userId,title) VALUES (:id,:uid,:ttl)");
+    mute_query.bindValue(":id" ,id);
+    mute_query.bindValue(":uid",userId);
+    mute_query.bindValue(":ttl",title);
+    mute_query.exec();
+
+    SecretChatDBClass sc;
+    sc.id = id;
+    sc.userId = userId;
+    sc.title = title;
+
+    p->secretChats[id] = sc;
+}
+
+void UserData::removeSecretChat(int id)
+{
+    QSqlQuery query(p->db);
+    query.prepare("DELETE FROM SecretChats WHERE id=:id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    p->secretChats.remove(id);
+}
+
+int UserData::secretChatUserId(int id)
+{
+    return p->secretChats[id].userId;
+}
+
+QString UserData::secretChatTitle(int id)
+{
+    return p->secretChats[id].title;
+}
+
+QList<int> UserData::secretChats()
+{
+    return p->secretChats.keys();
 }
 
 void UserData::init_buffer()
@@ -180,6 +232,54 @@ void UserData::init_buffer()
     {
         const QSqlRecord & record = mute_query.record();
         p->mutes.insert( record.value(0).toInt(), record.value(1).toInt() );
+    }
+
+    QSqlQuery schat_query(p->db);
+    schat_query.prepare("SELECT id, userId, title FROM secretChats");
+    schat_query.exec();
+
+    while( schat_query.next() )
+    {
+        const QSqlRecord & record = schat_query.record();
+        SecretChatDBClass sc;
+        sc.id = record.value(0).toInt();
+        sc.userId = record.value(1).toInt();
+        sc.title = record.value(2).toString();
+
+        p->secretChats[sc.id] = sc;
+    }
+}
+
+void UserData::update_db()
+{
+    QSqlQuery version_query(p->db);
+    version_query.prepare("SELECT gvalue FROM general WHERE gkey=:gkey");
+    version_query.bindValue(":gkey","version");
+    version_query.exec();
+
+    QString version = 0;
+    if( version_query.next() )
+    {
+        const QSqlRecord & record = version_query.record();
+        version = record.value(0).toString();
+    }
+
+    if( version < "1" )
+    {
+        QSqlQuery query(p->db);
+        query.prepare("CREATE TABLE IF NOT EXISTS General ("
+                      "gkey TEXT NOT NULL,"
+                      "gvalue TEXT NOT NULL,"
+                      "PRIMARY KEY (gkey));");
+        query.exec();
+        query.prepare("CREATE TABLE IF NOT EXISTS SecretChats ("
+                      "id BIGINT NOT NULL,"
+                      "userId BIGINT NOT NULL DEFAULT 0,"
+                      "title TEXT NOT NULL,"
+                      "PRIMARY KEY (id));");
+        query.exec();
+        query.prepare("INSERT OR REPLACE INTO General (gkey,gvalue) VALUES (\"version\",\"1\")");
+        query.exec();
     }
 }
 
