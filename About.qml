@@ -92,6 +92,6 @@ Rectangle {
         font.family: globalNormalFontFamily
         font.pointSize: 10
         color: "#ffffff"
-        text: "version 0.5.5"
+        text: "version 0.5.5.1"
     }
 }
