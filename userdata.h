@@ -34,12 +34,19 @@ public:
     QList<int> mutes() const;
     bool isMuted(int id);
 
+    void addSecretChat( int id, int userId, const QString & title );
+    void removeSecretChat( int id );
+    int secretChatUserId( int id );
+    QString secretChatTitle( int id );
+    QList<int> secretChats();
+
 public slots:
     void reconnect();
     void disconnect();
 
 private:
     void init_buffer();
+    void update_db();
 
 private:
     UserDataPrivate *p;

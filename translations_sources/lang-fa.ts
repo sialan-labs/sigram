@@ -1,384 +1,379 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="en_US">
 <context>
     <name>About</name>
     <message>
         <source>Sigram</source>
-        <translation>Sigram</translation>
+        <translation>سیگرام</translation>
     </message>
     <message>
         <source>A different telegram client from Sialan.Labs</source>
-        <translation>Ein anderer Telegram client aus den Laboren von Sialan</translation>
+        <translation>کلاینتی تلگرام متفاوت از گروه تحقیقاتی سیالان</translation>
     </message>
     <message>
         <source>Sigram project are released under the terms of the GPLv3 license.</source>
-        <translation>Das Sigram Projekt ist lizenziert durch die GPLv3 Lizenz.</translation>
+        <translation>پروژه‌ی سیگرام تحت مجوز GPL نسخه‌ی سوم منتشر شده است.</translation>
     </message>
 </context>
 <context>
     <name>AddMenu</name>
     <message>
         <source>Enter name and select contacts</source>
-        <translation>Tippe den Namen ein und wähle einen Kontakt aus</translation>
+        <translation>نام را وارد کنید</translation>
     </message>
     <message>
         <source>Add Secret chat</source>
-        <translation>Füge einen verschlüsselten Chat hinzu</translation>
+        <translation>گفتگوی امن</translation>
     </message>
     <message>
         <source>Add Chat</source>
-        <translation>Füge einen Chat hinzu</translation>
+        <translation>گفتگوی جدید</translation>
     </message>
 </context>
 <context>
     <name>ChatTitleBar</name>
     <message>
         <source>Chat Room</source>
-        <translation>Gruppenchat</translation>
-    </message>
-    <message>
-        <source>is typing...</source>
-        <translation type="vanished">tippt...</translation>
+        <translation>اتاق گفت و گو</translation>
     </message>
     <message>
         <source> is typing...</source>
-        <translation type="unfinished"></translation>
+        <translation>در حال تایپ است...</translation>
     </message>
 </context>
 <context>
     <name>ChatUsers</name>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>پاک کردن</translation>
     </message>
     <message>
         <source>Add User</source>
-        <translation>Nutzer hinzufügen</translation>
+        <translation>اضافه کردن فرد جدید</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Hinzufügen</translation>
+        <translation>اضافه کردن</translation>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Change Background</source>
-        <translation>Hintergrund wechseln</translation>
+        <translation>تغییر پس‌زمینه</translation>
     </message>
 </context>
 <context>
     <name>DonatePage</name>
     <message>
         <source>Donate</source>
-        <translation>Spenden</translation>
+        <translation>کمک به توسعه پروژه</translation>
     </message>
     <message>
         <source>Your donations help to fund continuing maintenance tasks, development of new features and keep sigram and another sialan projects alive.</source>
-        <translation>Deine Spende hilft Wartungsarbeiten zu finanzieren, neue Features zu entwickeln und Sigram und weitere sialan Projekte am Leben zu erhalten.</translation>
+        <translation>کمک شما برای پیشرفت، توسعه پروژه و اضافه کردن قابلیت های جدید به برنامه و زنده نگه نداشتن پروژه صرف خواهد شد.</translation>
     </message>
     <message>
         <source>Dismiss</source>
-        <translation>Alles klar</translation>
+        <translation>باشه</translation>
     </message>
 </context>
 <context>
     <name>ForwardingPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>Wähle einen Kontakt aus...</translation>
+        <translation>لطفا یک فرد را انتخاب کنید...</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>An</translation>
+        <translation>به</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>لغو</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Weiterleiten</translation>
+        <translation>ارسال دوباره</translation>
     </message>
 </context>
 <context>
     <name>LicensePage</name>
     <message>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation>مجوز</translation>
     </message>
     <message>
         <source>Dismiss</source>
-        <translation>Alles klar, danke</translation>
+        <translation>باشه</translation>
     </message>
 </context>
 <context>
     <name>LimooImageComponent</name>
     <message>
         <source>Limoo image viewer</source>
-        <translation>Limoo Bildbetrachter</translation>
+        <translation>Limoo image viewr</translation>
     </message>
 </context>
 <context>
     <name>LineEdit</name>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation>کپی</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Ausschneiden</translation>
+        <translation>کات</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Einfügen</translation>
+        <translation>پیست</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation>پاک کردن</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Alle markieren</translation>
+        <translation>انتخاب همه</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Rückgängig</translation>
+        <translation>برگرد</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Wiederholen</translation>
+        <translation>به جلو</translation>
     </message>
 </context>
 <context>
     <name>MsgAction</name>
     <message>
         <source>Chat created by </source>
-        <translation>Gruppenchat erstellt von </translation>
+        <translation>اتاق گفت و گو ساخته شده توسط</translation>
     </message>
     <message>
         <source>Chat renamed to </source>
-        <translation>Gruppenchat umbenannt zu </translation>
+        <translation>نام گفت و گو تغییر کرد به</translation>
     </message>
     <message>
         <source> by </source>
-        <translation> von </translation>
+        <translation>توسط</translation>
     </message>
     <message>
         <source>Chat photo edited by </source>
-        <translation>Gruppenchat Foto bearbeitet von </translation>
+        <translation>عکس گفت و گو تغییر کرد توسط</translation>
     </message>
     <message>
         <source>Chat photo deleted by </source>
-        <translation>Gruppenchat Foto gelöscht von </translation>
+        <translation>عکس گفت و گو پاک شد توسط</translation>
     </message>
     <message>
         <source> added </source>
-        <translation> fügte </translation>
+        <translation>اضافه شد</translation>
     </message>
     <message>
         <source>to group</source>
-        <translation>zur Gruppe hinzu</translation>
+        <translation>به گروه</translation>
     </message>
     <message>
         <source> deleted </source>
-        <translation> löschte </translation>
+        <translation>پاک شد</translation>
     </message>
     <message>
         <source>from group</source>
-        <translation>aus der Gruppe</translation>
+        <translation>از گروه</translation>
     </message>
 </context>
 <context>
     <name>MsgItem</name>
     <message>
         <source> ,Fwd: </source>
-        <translation>,weitergeleitet:</translation>
+        <translation>ارسال شده از:</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation>کپی</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>پاک کردن</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Weiterleiten</translation>
+        <translation>ارسال دوباره</translation>
     </message>
 </context>
 <context>
     <name>MsgMedia</name>
     <message>
         <source>Video and Audio files not supported yet.</source>
-        <translation>Video und Audio Dateien werden noch nicht unterstützt.</translation>
+        <translation>ویدیو و صدا در حال حاضر پشتیبانی نمیشوند.</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation>کپی</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation>Speichern unter</translation>
+        <translation>ذخیره</translation>
     </message>
 </context>
 <context>
     <name>RegisterFrameCode</name>
     <message>
         <source>Authenticate Code</source>
-        <translation>Bestätigungs Code</translation>
+        <translation>کد تعیین هویت</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation>Abschicken</translation>
+        <translation>ارسال</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>Bitte ruf mich an</translation>
+        <translation>درخواست تماس</translation>
     </message>
 </context>
 <context>
     <name>RegisterFramePhone</name>
     <message>
         <source>Your mobile phone</source>
-        <translation>Deine Handynummer</translation>
+        <translation>شماره تلفن همراه شما</translation>
     </message>
     <message>
         <source>Lets Go!</source>
-        <translation>Los gehts!</translation>
+        <translation>بزن بریم!</translation>
     </message>
 </context>
 <context>
     <name>RegisterFrameUser</name>
     <message>
         <source>First Name</source>
-        <translation>Vorname</translation>
+        <translation>نام</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Nachname</translation>
+        <translation>نام خانوادگی</translation>
     </message>
     <message>
         <source>Submit</source>
-        <translation>Abschicken</translation>
+        <translation>تایید</translation>
     </message>
 </context>
 <context>
     <name>StartPage</name>
     <message>
         <source>Connecting...</source>
-        <translation>Verbindung wird hergestellt...</translation>
+        <translation>در حال اتصال...</translation>
     </message>
 </context>
 <context>
     <name>Telegram</name>
     <message>
         <source>Online</source>
-        <translation>Online</translation>
+        <translation>آنلاین</translation>
     </message>
     <message>
         <source>Last seen</source>
-        <translation>Zuletzt gesehen</translation>
+        <translation>آخرین مشاهده</translation>
     </message>
 </context>
 <context>
     <name>TelegramGui</name>
     <message>
         <source>Show</source>
-        <translation>Zeigen</translation>
+        <translation>نمایش</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Einstellungen</translation>
+        <translation>تنظیمات</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>درباره سیگرام</translation>
     </message>
     <message>
         <source>About Sialan</source>
-        <translation>Über Sialan</translation>
+        <translation>درباره سیالان</translation>
     </message>
     <message>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation>مجوز</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation>Spenden</translation>
+        <translation>اهدای کمک</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Beenden</translation>
+        <translation>خروج</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Stumm</translation>
+        <translation>بی صدا</translation>
     </message>
     <message>
         <source>at %1</source>
-        <translatorcomment>kenne den Kontext hier nicht...</translatorcomment>
-        <translation>bei %1</translation>
+        <translation>در %1</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Beenden</translation>
+        <translation>خروج</translation>
     </message>
 </context>
 <context>
     <name>UpdateDialog</name>
     <message>
         <source>New update is available :)</source>
-        <translation>Neue Version ist verfügbar :)</translation>
+        <translation>به روز رسانی جدید :)</translation>
     </message>
     <message>
         <source>Check</source>
-        <translation>Überprüfen</translation>
+        <translation>بررسی</translation>
     </message>
     <message>
         <source>Dismiss</source>
-        <translation>Abbrechen</translation>
+        <translation>باشه</translation>
     </message>
 </context>
 <context>
     <name>UserConfig</name>
     <message>
         <source>Back to conversation</source>
-        <translation>Zurück zu den Chats</translation>
+        <translation>برگرد به گفت و گو</translation>
     </message>
     <message>
         <source>Send Message</source>
-        <translation>Sende Nachricht</translation>
+        <translation>ارسال پیغام</translation>
     </message>
     <message>
         <source>Start Secret Chat (not working yet, we working on it)</source>
-        <translation>Starte verschlüsselten Chat (funktioniert noch nicht, wir arbeiten dran)</translation>
+        <translation>گفت و گوی امن (در حال حاضر پشتیبانی نمی شود. شاید به زودی)</translation>
     </message>
     <message>
         <source>Mobile Phone:</source>
-        <translation>Handynummer:</translation>
+        <translation>تلفن همراه:</translation>
     </message>
     <message>
         <source>Notification:</source>
-        <translation>Benachrichtigungen:</translation>
+        <translation>پیغام میزکار:</translation>
     </message>
     <message>
         <source>Change Background</source>
-        <translation>Hintergrund wechseln</translation>
+        <translation>تغییر پس‌زمینه</translation>
     </message>
     <message>
         <source>Remove Background</source>
-        <translation>Hintergrund löschen</translation>
+        <translation>پاک کردن پس‌زمینه</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Abmelden</translation>
+        <translation>خروج</translation>
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>زبان:</translation>
     </message>
 </context>
 </TS>

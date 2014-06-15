@@ -91,7 +91,7 @@ Rectangle {
                     wrapMode: Text.WordWrap
                     font.pointSize: 18
                     font.weight: Font.Normal
-                    font.family: globalTextFontFamily
+                    font.family: globalNormalFontFamily
                     color: "#333333"
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: qsTr("To")

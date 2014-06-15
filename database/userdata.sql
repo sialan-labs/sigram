@@ -37,3 +37,22 @@ CREATE TABLE IF NOT EXISTS Mutes (
   mute TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (id));
 
+
+-- -----------------------------------------------------
+-- Table SecretChats
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS SecretChats (
+  id BIGINT NOT NULL,
+  userId BIGINT NOT NULL DEFAULT 0,
+  title TEXT NOT NULL,
+  PRIMARY KEY (id));
+
+
+-- -----------------------------------------------------
+-- Table General
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS General (
+  gkey TEXT NOT NULL,
+  gvalue TEXT NOT NULL,
+  PRIMARY KEY (gkey));
+

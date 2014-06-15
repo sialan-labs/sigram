@@ -1464,7 +1464,7 @@ void send_part (struct send_file *f) {
       send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &send_encr_file_methods, M);
 
     }
-    tfree_str (f->file_name);
+//    tfree_str (f->file_name);
     tfree (f, sizeof (*f));
   }
 

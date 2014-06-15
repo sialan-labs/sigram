@@ -6,7 +6,7 @@
 
 QT       -= gui
 
-DESTDIR = ../../plugins
+#DESTDIR = ../../plugins
 TARGET = UnitySystemTray
 TEMPLATE = lib
 

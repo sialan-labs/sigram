@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="pt_BR">
 <context>
     <name>About</name>
     <message>
@@ -9,37 +9,37 @@
     </message>
     <message>
         <source>A different telegram client from Sialan.Labs</source>
-        <translation>Ein anderer Telegram client aus den Laboren von Sialan</translation>
+        <translation>Um cliente diferente do telegram feito por Sialan Labs</translation>
     </message>
     <message>
         <source>Sigram project are released under the terms of the GPLv3 license.</source>
-        <translation>Das Sigram Projekt ist lizenziert durch die GPLv3 Lizenz.</translation>
+        <translation>O projeto Sigram está disponível sob os termos da licença GPLv3.</translation>
     </message>
 </context>
 <context>
     <name>AddMenu</name>
     <message>
         <source>Enter name and select contacts</source>
-        <translation>Tippe den Namen ein und wähle einen Kontakt aus</translation>
+        <translation>Digite o nome e selecione os contatos</translation>
     </message>
     <message>
         <source>Add Secret chat</source>
-        <translation>Füge einen verschlüsselten Chat hinzu</translation>
+        <translation>Adicionar bate-papo secreto</translation>
     </message>
     <message>
         <source>Add Chat</source>
-        <translation>Füge einen Chat hinzu</translation>
+        <translation>Adicionar bate-papo</translation>
     </message>
 </context>
 <context>
     <name>ChatTitleBar</name>
     <message>
         <source>Chat Room</source>
-        <translation>Gruppenchat</translation>
+        <translation>Sala de bate-papo</translation>
     </message>
     <message>
         <source>is typing...</source>
-        <translation type="vanished">tippt...</translation>
+        <translation type="vanished">está digitando...</translation>
     </message>
     <message>
         <source> is typing...</source>
@@ -50,331 +50,330 @@
     <name>ChatUsers</name>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Deletar</translation>
     </message>
     <message>
         <source>Add User</source>
-        <translation>Nutzer hinzufügen</translation>
+        <translation>Adicionar usuário</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Hinzufügen</translation>
+        <translation>Adicionar</translation>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Change Background</source>
-        <translation>Hintergrund wechseln</translation>
+        <translation>Mudar plano de fundo</translation>
     </message>
 </context>
 <context>
     <name>DonatePage</name>
     <message>
         <source>Donate</source>
-        <translation>Spenden</translation>
+        <translation>Doar</translation>
     </message>
     <message>
         <source>Your donations help to fund continuing maintenance tasks, development of new features and keep sigram and another sialan projects alive.</source>
-        <translation>Deine Spende hilft Wartungsarbeiten zu finanzieren, neue Features zu entwickeln und Sigram und weitere sialan Projekte am Leben zu erhalten.</translation>
+        <translation>Suas doações ajudam a custear tarefas de manutenção, desenvolvimento de novas funcionalidades e mantém o sigram e outros projetos do sialan vivos.</translation>
     </message>
     <message>
         <source>Dismiss</source>
-        <translation>Alles klar</translation>
+        <translation>Dispensar</translation>
     </message>
 </context>
 <context>
     <name>ForwardingPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>Wähle einen Kontakt aus...</translation>
+        <translation>Por favor, selecione um contato...</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>An</translation>
+        <translation>Para</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Weiterleiten</translation>
+        <translation>Prosseguir</translation>
     </message>
 </context>
 <context>
     <name>LicensePage</name>
     <message>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation>Licença</translation>
     </message>
     <message>
         <source>Dismiss</source>
-        <translation>Alles klar, danke</translation>
+        <translation>Dispensar</translation>
     </message>
 </context>
 <context>
     <name>LimooImageComponent</name>
     <message>
         <source>Limoo image viewer</source>
-        <translation>Limoo Bildbetrachter</translation>
+        <translation>Visualizador de imagens Limoo</translation>
     </message>
 </context>
 <context>
     <name>LineEdit</name>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Ausschneiden</translation>
+        <translation>Recortar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Einfügen</translation>
+        <translation>Colar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Alle markieren</translation>
+        <translation>Selecionar tudo</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Rückgängig</translation>
+        <translation>Desfazer</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Wiederholen</translation>
+        <translation>Refazer</translation>
     </message>
 </context>
 <context>
     <name>MsgAction</name>
     <message>
         <source>Chat created by </source>
-        <translation>Gruppenchat erstellt von </translation>
+        <translation>Bate-papo criado por </translation>
     </message>
     <message>
         <source>Chat renamed to </source>
-        <translation>Gruppenchat umbenannt zu </translation>
+        <translation>Bate-papo renomeado para </translation>
     </message>
     <message>
         <source> by </source>
-        <translation> von </translation>
+        <translation> por </translation>
     </message>
     <message>
         <source>Chat photo edited by </source>
-        <translation>Gruppenchat Foto bearbeitet von </translation>
+        <translation>Foto do bate-papo editada por </translation>
     </message>
     <message>
         <source>Chat photo deleted by </source>
-        <translation>Gruppenchat Foto gelöscht von </translation>
+        <translation>Foto do bate-papo deletada por </translation>
     </message>
     <message>
         <source> added </source>
-        <translation> fügte </translation>
+        <translation> adicionado </translation>
     </message>
     <message>
         <source>to group</source>
-        <translation>zur Gruppe hinzu</translation>
+        <translation>para grupo</translation>
     </message>
     <message>
         <source> deleted </source>
-        <translation> löschte </translation>
+        <translation> deletado </translation>
     </message>
     <message>
         <source>from group</source>
-        <translation>aus der Gruppe</translation>
+        <translation>do grupo</translation>
     </message>
 </context>
 <context>
     <name>MsgItem</name>
     <message>
         <source> ,Fwd: </source>
-        <translation>,weitergeleitet:</translation>
+        <translation> ,Fwd: </translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Deletar</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Weiterleiten</translation>
+        <translation>Prosseguir</translation>
     </message>
 </context>
 <context>
     <name>MsgMedia</name>
     <message>
         <source>Video and Audio files not supported yet.</source>
-        <translation>Video und Audio Dateien werden noch nicht unterstützt.</translation>
+        <translation>Arquivos de áudio e vídeo não são suportados ainda.</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation>Speichern unter</translation>
+        <translation>Salvar como</translation>
     </message>
 </context>
 <context>
     <name>RegisterFrameCode</name>
     <message>
         <source>Authenticate Code</source>
-        <translation>Bestätigungs Code</translation>
+        <translation>Código de autenticação</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation>Abschicken</translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>Bitte ruf mich an</translation>
+        <translation>Requisitar chamada</translation>
     </message>
 </context>
 <context>
     <name>RegisterFramePhone</name>
     <message>
         <source>Your mobile phone</source>
-        <translation>Deine Handynummer</translation>
+        <translation>Seu telefone celular</translation>
     </message>
     <message>
         <source>Lets Go!</source>
-        <translation>Los gehts!</translation>
+        <translation>Vamos lá!</translation>
     </message>
 </context>
 <context>
     <name>RegisterFrameUser</name>
     <message>
         <source>First Name</source>
-        <translation>Vorname</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Nachname</translation>
+        <translation>Sobrenome</translation>
     </message>
     <message>
         <source>Submit</source>
-        <translation>Abschicken</translation>
+        <translation>Enviar</translation>
     </message>
 </context>
 <context>
     <name>StartPage</name>
     <message>
         <source>Connecting...</source>
-        <translation>Verbindung wird hergestellt...</translation>
+        <translation>Conectando...</translation>
     </message>
 </context>
 <context>
     <name>Telegram</name>
     <message>
         <source>Online</source>
-        <translation>Online</translation>
+        <translation>Conectado</translation>
     </message>
     <message>
         <source>Last seen</source>
-        <translation>Zuletzt gesehen</translation>
+        <translation>Visto pela última vez</translation>
     </message>
 </context>
 <context>
     <name>TelegramGui</name>
     <message>
         <source>Show</source>
-        <translation>Zeigen</translation>
+        <translation>Mostrar</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Einstellungen</translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>Sobre</translation>
     </message>
     <message>
         <source>About Sialan</source>
-        <translation>Über Sialan</translation>
+        <translation>Sobre Sialan</translation>
     </message>
     <message>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation>Licença</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation>Spenden</translation>
+        <translation>Doar</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Beenden</translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Stumm</translation>
+        <translation>Mudo</translation>
     </message>
     <message>
         <source>at %1</source>
-        <translatorcomment>kenne den Kontext hier nicht...</translatorcomment>
-        <translation>bei %1</translation>
+        <translation>em %1</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Beenden</translation>
+        <translation>Sair</translation>
     </message>
 </context>
 <context>
     <name>UpdateDialog</name>
     <message>
         <source>New update is available :)</source>
-        <translation>Neue Version ist verfügbar :)</translation>
+        <translation>Uma nova atualização está disponível :)</translation>
     </message>
     <message>
         <source>Check</source>
-        <translation>Überprüfen</translation>
+        <translation>Verificar</translation>
     </message>
     <message>
         <source>Dismiss</source>
-        <translation>Abbrechen</translation>
+        <translation>Dispensar</translation>
     </message>
 </context>
 <context>
     <name>UserConfig</name>
     <message>
         <source>Back to conversation</source>
-        <translation>Zurück zu den Chats</translation>
+        <translation>Voltar para conversa</translation>
     </message>
     <message>
         <source>Send Message</source>
-        <translation>Sende Nachricht</translation>
+        <translation>Enviar mensagem</translation>
     </message>
     <message>
         <source>Start Secret Chat (not working yet, we working on it)</source>
-        <translation>Starte verschlüsselten Chat (funktioniert noch nicht, wir arbeiten dran)</translation>
+        <translation>Iniciar bate-papo secreto (ainda não implementado, estamos trabalhando nisso)</translation>
     </message>
     <message>
         <source>Mobile Phone:</source>
-        <translation>Handynummer:</translation>
+        <translation>Telefone celular:</translation>
     </message>
     <message>
         <source>Notification:</source>
-        <translation>Benachrichtigungen:</translation>
+        <translation>Notificação:</translation>
     </message>
     <message>
         <source>Change Background</source>
-        <translation>Hintergrund wechseln</translation>
+        <translation>Mudar plano de fundo</translation>
     </message>
     <message>
         <source>Remove Background</source>
-        <translation>Hintergrund löschen</translation>
+        <translation>Remover plano de fundo</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Abmelden</translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <source>Language:</source>

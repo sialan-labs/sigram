@@ -54,6 +54,11 @@ void UnitySystemTray::addMenu( const QString & text, QObject *obj, const char *m
     p->addMenu( p->pntr, text, obj, member );
 }
 
+void *UnitySystemTray::pntr()
+{
+    return p->pntr;
+}
+
 UnitySystemTray::~UnitySystemTray()
 {
     delete p;

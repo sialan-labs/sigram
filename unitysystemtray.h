@@ -32,6 +32,8 @@ public:
 
     void addMenu( const QString & text, QObject *obj, const char *member );
 
+    void *pntr();
+
 private:
     UnitySystemTrayPrivate *p;
 };

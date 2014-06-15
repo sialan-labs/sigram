@@ -481,7 +481,6 @@ void TelegramThread::_incomingMsg(const MessageClass &_msg)
     p->messages[msg.msg_id] = msg;
     p->usersMessages[msg.from_id][msg.date.toMSecsSinceEpoch()] = msg.msg_id;
     p->messageDates[msg.date.toMSecsSinceEpoch()] = msg.msg_id;
-    p->messageMedias[msg.media.volume] = msg.msg_id;
     p->messagesFroms[msg.from_id].insert(msg.msg_id);
     p->messagesTos[msg.to_id].insert(msg.msg_id);
 

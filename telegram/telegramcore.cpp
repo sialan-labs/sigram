@@ -395,11 +395,14 @@ void incomingMsg( struct message *m, struct user *u )
     msg.service = m->service;
     msg.from_id = m->from_id.id;
     msg.to_id = m->to_id.id;
-    msg.firstName = u->first_name;
-    msg.lastName = u->last_name;
     msg.flags = m->flags;
     msg.mediaType = static_cast<Enums::MessageType>(m->media.type);
     msg.action = static_cast<Enums::MessageAction>(m->action.type);
+    if( u )
+    {
+        msg.firstName = u->first_name;
+        msg.lastName = u->last_name;
+    }
 
     if( msg.mediaType == Enums::MediaEmpty && !msg.service )
         msg.message = QString(m->msg);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es">
+<TS version="2.1" language="es">
 <context>
     <name>About</name>
     <message>
@@ -39,7 +39,11 @@
     </message>
     <message>
         <source>is typing...</source>
-        <translation>está escribiendo...</translation>
+        <translation type="vanished">está escribiendo...</translation>
+    </message>
+    <message>
+        <source> is typing...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -370,6 +374,10 @@
     <message>
         <source>Logout</source>
         <translation>Cerrar sesión</translation>
+    </message>
+    <message>
+        <source>Language:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
