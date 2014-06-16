@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>About</name>
     <message>
@@ -38,12 +38,8 @@
         <translation>Gruppenchat</translation>
     </message>
     <message>
-        <source>is typing...</source>
-        <translation type="vanished">tippt...</translation>
-    </message>
-    <message>
         <source> is typing...</source>
-        <translation type="unfinished"></translation>
+        <translation> tippt...</translation>
     </message>
 </context>
 <context>
@@ -175,15 +171,15 @@
     </message>
     <message>
         <source> added </source>
-        <translation> hinzugefügt </translation>
+        <translation> fügte </translation>
     </message>
     <message>
         <source>to group</source>
-        <translation>zur Gruppe</translation>
+        <translation>zur Gruppe hinzu</translation>
     </message>
     <message>
         <source> deleted </source>
-        <translation> gelöscht </translation>
+        <translation> löschte </translation>
     </message>
     <message>
         <source>from group</source>
@@ -320,7 +316,7 @@
     <message>
         <source>at %1</source>
         <translatorcomment>kenne den Kontext hier nicht...</translatorcomment>
-        <translation>bei %1</translation>
+        <translation> bei %1</translation>
     </message>
     <message>
         <source>Exit</source>
@@ -378,7 +374,7 @@
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache:</translation>
     </message>
 </context>
 </TS>
