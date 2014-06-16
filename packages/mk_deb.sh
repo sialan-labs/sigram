@@ -4,7 +4,7 @@ BUILD_DIR="deb-build-tmp-`uuidgen`"
 QMAKE='qmake'
 UNITY_FILE='/usr/bin/unity'
 ARCH_INTL=`arch`
-VERSION='0.5.5.1'
+VERSION='0.5.5.2'
 DEBIAN_REVISION='1'
 
 if [ "$ARCH_INTL" = "x86_64" ]
