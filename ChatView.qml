@@ -41,7 +41,7 @@ Rectangle {
     onCurrentChanged: {
         chat_list.clear()
         load(limit)
-        chat_list.positionViewAtBeginning()
+        chat_list.goToEnd()
     }
 
     Connections {
@@ -152,8 +152,6 @@ Rectangle {
             model: ListModel{}
             spacing: 5
             cacheBuffer: 500
-            maximumFlickVelocity: 2500
-            flickDeceleration: 2500
             verticalLayoutDirection: ListView.BottomToTop
 
             property bool disableAnims: false
@@ -173,7 +171,7 @@ Rectangle {
                 onTriggered: chat_list.disableAnims = false
             }
 
-            onAtYBeginningChanged: if(atYBeginning) chat_view.load(loadeds+limit)
+            onAtYBeginningChanged: if(atYBeginning && contentHeight>=height) chat_view.load(loadeds+limit)
 
             footer: Item {
                 width: chat_list.width
@@ -186,7 +184,7 @@ Rectangle {
             }
 
             property bool firstObj: false
-            delegate: Item {
+            delegate: msg_component /*Item {
                 id: item
                 width: chat_list.width
                 height: itemObj? itemObj.height : 100
@@ -208,9 +206,13 @@ Rectangle {
                 Component.onDestruction: {
                     msg_obj_handler.freeObject(itemObj)
                 }
-            }
+            }*/
 
             function append( msg_id ) {
+                Gui.call( chat_list, "append_prev", msg_id )
+            }
+
+            function append_prev( msg_id ) {
                 var index = 0
                 for( var i=0; i<model.count; i++ ) {
                     var msg = model.get(i).msg
@@ -226,13 +228,25 @@ Rectangle {
                 if( msg_id < 0 )
                     index = 0
 
-                model.insert(index, {"msg":msg_id} )
+                Gui.call( chat_list, "insertToModel", index, msg_id )
                 loadeds++
             }
 
+            function insertToModel( index, msg_id ) {
+                model.insert(index, {"msg":msg_id} )
+            }
+
             function clear() {
+                Gui.call( chat_list, "clear_prev" )
+            }
+
+            function clear_prev() {
                 loadeds = 0
                 model.clear()
+            }
+
+            function goToEnd() {
+                Gui.call( chat_list, "positionViewAtBeginning" )
             }
         }
     }
@@ -330,7 +344,7 @@ Rectangle {
         iconHeight: 18
         opacity: chat_list.atYEnd? 0 : 1
         visible: opacity != 0
-        onClicked: chat_list.positionViewAtBeginning()
+        onClicked: chat_list.goToEnd()
 
         Behavior on opacity {
             NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -365,10 +379,10 @@ Rectangle {
 
         onHeightChanged: {
             if( height == 100 )
-                chat_list.positionViewAtBeginning()
+                chat_list.goToEnd()
             else
             if( height == 0 )
-                chat_list.positionViewAtBeginning()
+                chat_list.goToEnd()
         }
 
         Behavior on height {
@@ -431,7 +445,7 @@ Rectangle {
             height: msg_item.visible? msg_item.height : msg_action.height
 
             property int service: Telegram.messageService(mid)
-            property int mid: 0
+            property int mid: msg
 
             MsgAction {
                 id: msg_action
@@ -482,6 +496,10 @@ Rectangle {
     }
 
     function load( size ) {
+        Gui.call( chat_view, "load_prev", size )
+    }
+
+    function load_prev( size ) {
         userConfig = false
         if( current == 0 )
             return

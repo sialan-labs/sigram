@@ -1650,6 +1650,7 @@ int process_rpc_message (struct connection *c UU, struct encrypted_message *enc,
     hexdump_in ();
   }
 
+  // BUUUUUUUG
   assert (this_server_time >= st - 300 && this_server_time <= st + 30);
   //assert (enc->msg_id > server_last_msg_id && (enc->msg_id & 3) == 1);
   if (verbosity >= 1) {

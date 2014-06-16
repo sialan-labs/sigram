@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QSystemTrayIcon>
+#include <QVariant>
 
 class QQuickItem;
 class QSettings;
@@ -121,6 +122,18 @@ public slots:
     void logout();
 
     void incomingAppMessage( const QString & msg );
+
+    /*! This funtion made to better debuging qml problems !*/
+    QVariant call( QObject *obj, const QString & member, const QVariant & v0 = QVariant(),
+                                                         const QVariant & v1 = QVariant(),
+                                                         const QVariant & v2 = QVariant(),
+                                                         const QVariant & v3 = QVariant(),
+                                                         const QVariant & v4 = QVariant(),
+                                                         const QVariant & v5 = QVariant(),
+                                                         const QVariant & v6 = QVariant(),
+                                                         const QVariant & v7 = QVariant(),
+                                                         const QVariant & v8 = QVariant(),
+                                                         const QVariant & v9 = QVariant() );
 
 signals:
     void muted( int id, bool stt );
