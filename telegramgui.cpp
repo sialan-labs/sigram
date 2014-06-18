@@ -773,8 +773,6 @@ QVariant TelegramGui::call(QObject *obj, const QString &member, const QVariant &
         }
     }
 
-    qDebug() << obj << member << tr_vals;
-
     int type = QMetaType::type(ret_type.toLatin1());
     void *res = QMetaType::create( type );
     bool is_pointer = ret_type.contains('*');
