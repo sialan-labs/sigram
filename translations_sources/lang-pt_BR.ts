@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>is typing...</source>
-        <translation>está digitando...</translation>
+        <translation type="vanished">está digitando...</translation>
     </message>
     <message>
         <source> is typing...</source>
