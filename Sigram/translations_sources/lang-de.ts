@@ -438,5 +438,13 @@
         <source>Disable all notifies:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Love:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favorite:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
