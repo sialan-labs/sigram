@@ -22,7 +22,7 @@ Rectangle {
     id: contact_header
     width: 100
     height: 62
-    color: imageBack? "#aabbbbbb" : "#cccccc"
+    color: imageBack? "#33333333" : "#cccccc"
 
     signal selected( int uid )
     signal close()

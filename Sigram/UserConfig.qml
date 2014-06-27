@@ -34,6 +34,8 @@ Item {
     onUserIdChanged: {
         privates.on_init = true
         notify.userMuted = Gui.isMuted(u_conf.userId)
+        fave.checked = Gui.isFavorited(u_conf.userId)
+        love.checked = (u_conf.userId == Gui.love)
         name.text = Telegram.title(u_conf.userId).trim()
         privates.on_init = false
     }
@@ -234,6 +236,58 @@ Item {
     }
 
     Text {
+        id: love_label
+        anchors.right: phone.left
+        anchors.rightMargin: 20
+        anchors.verticalCenter: love.verticalCenter
+        font.pointSize: 11
+        font.family: globalNormalFontFamily
+        color: "#555555"
+        visible: !u_conf.isChat
+        text: qsTr("Love:")
+    }
+
+    CheckBox {
+        id: love
+        anchors.top: phone.bottom
+        anchors.left: name.left
+        anchors.topMargin: 10
+        checked: false
+        visible: !u_conf.isChat
+        onCheckedChanged: {
+            if( !checked && Gui.love != u_conf.userId )
+                return
+
+            if( checked )
+                Gui.love = u_conf.userId
+            else
+                Gui.love = 0
+        }
+    }
+
+    Text {
+        id: fave_label
+        anchors.right: phone.left
+        anchors.rightMargin: 20
+        anchors.verticalCenter: fave.verticalCenter
+        font.pointSize: 11
+        font.family: globalNormalFontFamily
+        color: "#555555"
+        text: qsTr("Favorite:")
+    }
+
+    CheckBox {
+        id: fave
+        anchors.top: u_conf.isChat? c_users.bottom : love.bottom
+        anchors.left: name.left
+        anchors.topMargin: 10
+        checked: false
+        onCheckedChanged: {
+            Gui.setFavorite( u_conf.userId, checked )
+        }
+    }
+
+    Text {
         id: notify_label
         anchors.right: phone.left
         anchors.rightMargin: 20
@@ -246,7 +300,7 @@ Item {
 
     CheckBox {
         id: notify
-        anchors.top: u_conf.isChat? c_users.bottom : phone.bottom
+        anchors.top: fave.bottom
         anchors.left: name.left
         anchors.topMargin: 10
         checked: u_conf.userId == Telegram.me? Gui.muteAll : userMuted

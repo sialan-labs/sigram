@@ -52,6 +52,9 @@ public:
     Q_INVOKABLE void setMute( int id, bool stt );
     Q_INVOKABLE bool isMuted( int id ) const;
 
+    Q_INVOKABLE void setFavorite( int id, bool stt );
+    Q_INVOKABLE bool isFavorited( int id ) const;
+
     Q_INVOKABLE QSize screenSize() const;
     Q_INVOKABLE QPoint mousePos() const;
 
@@ -148,6 +151,7 @@ public slots:
 
 signals:
     void muted( int id, bool stt );
+    void favorited( int id, bool stt );
     void desktopSessionChanged();
     void appPathChanged();
     void backgroundChanged();

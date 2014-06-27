@@ -34,6 +34,11 @@ public:
     QList<int> mutes() const;
     bool isMuted(int id);
 
+    void addFavorite( int id );
+    void removeFavorite( int id );
+    QList<int> favorites() const;
+    bool isFavorited(int id);
+
     void addSecretChat( int id, int userId, const QString & title );
     void removeSecretChat( int id );
     int secretChatUserId( int id );

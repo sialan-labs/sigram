@@ -52,6 +52,12 @@ Rectangle {
         }
     }
 
+    Connections {
+        target: Gui
+        onLoveChanged: clist.refresh()
+        onFavorited: clist.refresh()
+    }
+
     QtObject {
         id: privates
         property bool contacts_refreshed: false
@@ -94,6 +100,24 @@ Rectangle {
                 }
             }
 
+            section.property: "type"
+            section.delegate: Item {
+                height: 38
+                width: clist.width
+
+                Image {
+                    id: sec_img
+                    anchors.left: parent.left
+                    anchors.bottom: parent.bottom
+                    anchors.leftMargin: 10
+                    anchors.bottomMargin: 4
+                    width: 14
+                    height: 14
+                    sourceSize: Qt.size(width,height)
+                    source: section==1? "files/favorite.png" : (section==0? "files/love.png" : "files/contact.png")
+                }
+            }
+
             function refresh() {
                 if( !privates.contacts_refreshed || !privates.dialogs_refreshed )
                     return
@@ -103,23 +127,33 @@ Rectangle {
                 var contacts = Telegram.contactListUsers()
                 var dialogs = Telegram.dialogListIds()
 
-                for( var i=0; i<dialogs.length; i++ ) {
-                    var dlg = dialogs[i]
-                    if( Telegram.dialogLeaved(dlg) )
-                        continue
-                    model.append( {"user_id": 0, "dialog_id": dlg} )
-                    if( Telegram.dialogIsChat(dlg) )
-                        Telegram.loadChatInfo(dlg)
-                    else
-                        Telegram.loadUserInfo(dlg)
-                    var cIndex = contacts.indexOf(dlg)
-                    if( cIndex != -1 )
-                        contacts.splice(cIndex,1)
+                for( var t=0; t<3; t++ ) {
+
+                    for( var i=0; i<dialogs.length; i++ ) {
+                        var dlg = dialogs[i]
+                        var type = 2
+                        if( dlg == Gui.love )
+                            type = 0
+                        else
+                        if( Gui.isFavorited(dlg) )
+                            type = 1
+
+                        if( type != t )
+                            continue
+
+                        if( Telegram.dialogLeaved(dlg) )
+                            continue
+                        model.append( {"user_id": 0, "dialog_id": dlg, "type": type} )
+                        if( Telegram.dialogIsChat(dlg) )
+                            Telegram.loadChatInfo(dlg)
+                        else
+                            Telegram.loadUserInfo(dlg)
+                        var cIndex = contacts.indexOf(dlg)
+                        if( cIndex != -1 )
+                            contacts.splice(cIndex,1)
+                    }
                 }
-//                for( var i=0; i<contacts.length; i++ ) {
-//                    model.append( {"user_id":contacts[i], "dialog_id": 0} )
-//                    Telegram.loadUserInfo(contacts[i])
-//                }
+
                 Telegram.loadUserInfo(Telegram.me)
             }
 

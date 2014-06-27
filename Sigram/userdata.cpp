@@ -50,6 +50,7 @@ public:
     QHash<int,SecretChatDBClass> secretChats;
 
     QHash<int,bool> mutes;
+    QHash<int,bool> favorites;
 };
 
 UserData::UserData(QObject *parent) :
@@ -124,6 +125,46 @@ QList<int> UserData::mutes() const
 bool UserData::isMuted(int id)
 {
     return p->mutes.value(id);
+}
+
+void UserData::addFavorite(int id)
+{
+    QSqlQuery mute_query(p->db);
+    mute_query.prepare("INSERT OR REPLACE INTO favorites (id,favorite) VALUES (:id,:fave)");
+    mute_query.bindValue(":id",id);
+    mute_query.bindValue(":fave",1);
+    mute_query.exec();
+
+    p->favorites.insert(id,true);
+}
+
+void UserData::removeFavorite(int id)
+{
+    QSqlQuery query(p->db);
+    query.prepare("DELETE FROM favorites WHERE id=:id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    p->favorites.remove(id);
+}
+
+QList<int> UserData::favorites() const
+{
+    QList<int> res;
+    QHashIterator<int,bool> i(p->favorites);
+    while( i.hasNext() )
+    {
+        i.next();
+        if( i.value() )
+            res << i.key();
+    }
+
+    return res;
+}
+
+bool UserData::isFavorited(int id)
+{
+    return p->favorites.value(id);
 }
 
 void UserData::addSecretChat(int id, int userId, const QString &title)
@@ -238,6 +279,16 @@ void UserData::init_buffer()
         p->mutes.insert( record.value(0).toInt(), record.value(1).toInt() );
     }
 
+    QSqlQuery faves_query(p->db);
+    faves_query.prepare("SELECT id, favorite FROM favorites");
+    faves_query.exec();
+
+    while( faves_query.next() )
+    {
+        const QSqlRecord & record = faves_query.record();
+        p->favorites.insert( record.value(0).toInt(), record.value(1).toInt() );
+    }
+
     QSqlQuery schat_query(p->db);
     schat_query.prepare("SELECT id, userId, title FROM secretChats");
     schat_query.exec();
@@ -283,6 +334,17 @@ void UserData::update_db()
                       "PRIMARY KEY (id));");
         query.exec();
         query.prepare("INSERT OR REPLACE INTO General (gkey,gvalue) VALUES (\"version\",\"1\")");
+        query.exec();
+    }
+    if( version < "2" )
+    {
+        QSqlQuery query(p->db);
+        query.prepare("CREATE TABLE IF NOT EXISTS Favorites ("
+                      "id BIGINT NOT NULL,"
+                      "favorite TINYINT(1) NOT NULL DEFAULT 0,"
+                      "PRIMARY KEY (id));");
+        query.exec();
+        query.prepare("INSERT OR REPLACE INTO General (gkey,gvalue) VALUES (\"version\",\"2\")");
         query.exec();
     }
 }

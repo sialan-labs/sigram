@@ -81,5 +81,8 @@
         <file>LineEdit.qml</file>
         <file>AddContact.qml</file>
         <file>files/add_contact.png</file>
+        <file>files/love.png</file>
+        <file>files/favorite.png</file>
+        <file>files/contact.png</file>
     </qresource>
 </RCC>

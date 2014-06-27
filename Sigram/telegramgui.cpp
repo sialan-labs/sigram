@@ -168,6 +168,24 @@ bool TelegramGui::isMuted(int id) const
     return p->userdata->isMuted(id);
 }
 
+void TelegramGui::setFavorite(int id, bool stt)
+{
+    if( p->userdata->isFavorited(id) == stt )
+        return;
+
+    if( stt )
+        p->userdata->addFavorite(id);
+    else
+        p->userdata->removeFavorite(id);
+
+    emit favorited(id, stt);
+}
+
+bool TelegramGui::isFavorited(int id) const
+{
+    return p->userdata->isFavorited(id);
+}
+
 QSize TelegramGui::screenSize() const
 {
     const QList<QScreen*> & list = QGuiApplication::screens();
@@ -692,6 +710,7 @@ QImage TelegramGui::generateIcon(const QImage &img, int count)
     path.addEllipse(rct);
 
     QPainter painter(&res);
+    painter.setRenderHint( QPainter::Antialiasing , true );
     painter.fillPath( path, QColor("#ff0000") );
     painter.setPen("#ffffff");
     painter.drawText( rct, Qt::AlignCenter | Qt::AlignHCenter, QString::number(count) );

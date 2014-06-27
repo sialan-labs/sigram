@@ -39,6 +39,15 @@ CREATE TABLE IF NOT EXISTS Mutes (
 
 
 -- -----------------------------------------------------
+-- Table Favorites
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Favorites (
+  id BIGINT NOT NULL,
+  favorite TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id));
+
+
+-- -----------------------------------------------------
 -- Table SecretChats
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS SecretChats (
