@@ -71,6 +71,8 @@ public slots:
     void chatAddUser( int chat_id, int user_id );
     void chatDelUser( int chat_id, int user_id );
 
+    void addContact( const QString & number, const QString & fname, const QString & lname, bool force );
+
     void search( int user_id, const QString & keyword );
     void globalSearch( const QString & keyword );
 

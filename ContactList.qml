@@ -58,7 +58,7 @@ Rectangle {
         property bool dialogs_refreshed: false
     }
 
-    Item {
+    Rectangle {
         id: clist_frame
         anchors.fill: parent
 

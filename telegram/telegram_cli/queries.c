@@ -711,9 +711,16 @@ int get_contacts_on_answer (struct query *q UU) {
   n = fetch_int ();
   for (i = 0; i < n; i++) {
     struct user *U = fetch_alloc_user ();
+    if( U->id.id == our_id )
+        continue;
+
     contactList_addToBuffer( U );
   }
+
+  struct user U = user_chat_get(ourPeer(our_id))->user;
+  contactList_addToBuffer( &U );
   contactList_finished();
+
   return 0;
 }
 
@@ -2073,33 +2080,8 @@ int add_contact_on_answer (struct query *q UU) {
   n = fetch_int ();
   for (i = 0; i < n ; i++) {
     struct user *U = fetch_alloc_user ();
-    print_start ();
-    push_color (COLOR_YELLOW);
-    printf ("User #%d: ", get_peer_id (U->id));
-    print_user_name (U->id, (peer_t *)U);
-    push_color (COLOR_GREEN);
-    printf (" (");
-    printf ("%s", U->print_name);
-    if (U->phone) {
-      printf (" ");
-      printf ("%s", U->phone);
-    }
-    printf (") ");
-    pop_color ();
-    if (U->status.online > 0) {
-      printf ("online\n");
-    } else {
-      if (U->status.online < 0) {
-        printf ("offline. Was online ");
-        print_date_full (U->status.when);
-      } else {
-        printf ("offline permanent");
-      }
-      printf ("\n");
-    }
-    pop_color ();
-    print_end ();
-
+    contactList_addToBuffer(U);
+    contactList_finished();
   }
   return 0;
 }
@@ -2677,6 +2659,11 @@ void do_get_suggested (void) {
   out_int (CODE_contacts_get_suggested);
   out_int (100);
   send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &get_suggested_methods, 0);
+}
+
+peer_id_t ourPeer(int our_id)
+{
+    return MK_USER(our_id);
 }
 /* }}} */
 

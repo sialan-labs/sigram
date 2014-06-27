@@ -26,6 +26,7 @@ int fetch_file_location (struct file_location *loc);
 int fetch_user_status (struct user_status *S);
 int fetch_user (struct user *U);
 struct user *fetch_alloc_user (void);
+struct user *fetch_alloc_user_uid (int uid);
 struct user *fetch_alloc_user_full (void);
 struct chat *fetch_alloc_chat (void);
 struct chat *fetch_alloc_chat_full (void);

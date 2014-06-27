@@ -653,6 +653,20 @@ void Telegram::chatDelUser(int chat_id, int user_id)
     p->tg_thread->chatDelUser(chat_id, user_id);
 }
 
+void Telegram::addContact(const QString &number, const QString &fname, const QString &lname, bool force)
+{
+    p->tg_thread->addContact(number, fname, lname, force );
+}
+
+void Telegram::renameContact(const QString &number, const QString &newName)
+{
+    QStringList splits = newName.split(" ",QString::SkipEmptyParts);
+    while( splits.count() < 2 )
+        splits << QString();
+
+    addContact( number, splits.first(), QStringList(splits.mid(1)).join(" "), true );
+}
+
 void Telegram::search(int user_id, const QString &keyword)
 {
     p->tg_thread->search( user_id, keyword );

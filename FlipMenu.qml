@@ -51,12 +51,17 @@ Item {
         onItemChanged: {
             if( item ) {
                 item.parent = back_frame
-                frame.width = item.width + 2*back_frame.anchors.margins
                 item.anchors.top = back_frame.top
                 item.anchors.bottom = back_frame.bottom
+                item.widthChanged.connect(privates.widthChanged)
+                widthChanged()
             } else {
                 flip_menu.visible = false
             }
+        }
+
+        function widthChanged() {
+            frame.width = item.width + 2*back_frame.anchors.margins
         }
     }
 

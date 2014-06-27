@@ -38,6 +38,7 @@ class TelegramGui : public QObject
     Q_PROPERTY(QString country READ country WRITE setCountry NOTIFY countryChanged)
     Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
     Q_PROPERTY(bool donate READ donate WRITE setDonate NOTIFY donateChanged)
+    Q_PROPERTY(bool muteAll READ muteAll WRITE setMuteAll NOTIFY muteAllChanged)
     Q_PROPERTY(bool donateViewShowed READ donateViewShowed WRITE setDonateViewShowed NOTIFY donateViewShowedChanged)
     Q_OBJECT
 
@@ -63,6 +64,9 @@ public:
     Q_INVOKABLE void setBackground( const QString & path );
     Q_INVOKABLE QString background() const;
 
+    Q_INVOKABLE void setMuteAll( bool state );
+    Q_INVOKABLE bool muteAll() const;
+
     Q_INVOKABLE void setFirstTime( bool stt );
     Q_INVOKABLE bool firstTime() const;
 
@@ -72,6 +76,8 @@ public:
     Q_INVOKABLE qreal htmlWidth( const QString & txt );
 
     Q_INVOKABLE QString license() const;
+
+    Q_INVOKABLE QString fixPhoneNumber(QString number );
 
     static int desktopSession();
 
@@ -148,6 +154,7 @@ signals:
     void donateChanged();
     void languageChanged();
     void donateViewShowedChanged();
+    void muteAllChanged();
 
 private slots:
     void notify_action( uint id, const QString & act );

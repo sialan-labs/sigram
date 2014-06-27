@@ -32,7 +32,10 @@ Item {
     Keys.onEscapePressed: backRequest()
 
     onUserIdChanged: {
-        notify.checked = Gui.isMuted(u_conf.userId)
+        privates.on_init = true
+        notify.userMuted = Gui.isMuted(u_conf.userId)
+        name.text = Telegram.title(u_conf.userId).trim()
+        privates.on_init = false
     }
 
     Connections {
@@ -41,8 +44,13 @@ Item {
             if( id != u_conf.userId )
                 return
 
-            notify.checked = Gui.isMuted(u_conf.userId)
+            notify.userMuted = Gui.isMuted(u_conf.userId)
         }
+    }
+
+    QtObject {
+        id: privates
+        property bool on_init: false
     }
 
     MouseArea {
@@ -104,7 +112,7 @@ Item {
         }
     }
 
-    Text {
+    LineEdit {
         id: name
         anchors.top: cimg.top
         anchors.left: cimg.right
@@ -112,8 +120,20 @@ Item {
         font.pointSize: 18
         font.weight: Font.DemiBold
         font.family: globalNormalFontFamily
-        color: "#333333"
-        text: Telegram.title(u_conf.userId).trim()
+    }
+
+    Button {
+        anchors.verticalCenter: name.verticalCenter
+        anchors.left: name.right
+        visible: !name.readOnly
+        textColor: "#ffffff"
+        normalColor: "#4098bf"
+        highlightColor: "#337fa2"
+        text: qsTr("Rename")
+        onClicked: {
+            Telegram.renameContact( phone.text, name.text )
+            name.readOnly = true
+        }
     }
 
     Rectangle {
@@ -126,7 +146,7 @@ Item {
         color: "#4098bf"
     }
 
-    Text {
+    TextInput {
         id: last_seen
         anchors.top: name_splitter.bottom
         anchors.left: name.left
@@ -221,7 +241,7 @@ Item {
         font.pointSize: 11
         font.family: globalNormalFontFamily
         color: "#555555"
-        text: qsTr("Notification:")
+        text: u_conf.userId == Telegram.me? qsTr("Disable all notifies:") : qsTr("Notification:")
     }
 
     CheckBox {
@@ -229,7 +249,15 @@ Item {
         anchors.top: u_conf.isChat? c_users.bottom : phone.bottom
         anchors.left: name.left
         anchors.topMargin: 10
-        onCheckedChanged: Gui.setMute( u_conf.userId, checked )
+        checked: u_conf.userId == Telegram.me? Gui.muteAll : userMuted
+        onCheckedChanged: {
+            if( u_conf.userId == Telegram.me )
+                Gui.muteAll = checked
+            else
+                Gui.setMute( u_conf.userId, checked )
+        }
+
+        property bool userMuted: false
     }
 
     Text {

@@ -17,7 +17,7 @@
         <file>files/send_icon.png</file>
         <file>files/attach.png</file>
         <file>files/details.png</file>
-        <file>LineEdit.qml</file>
+        <file>TextArea.qml</file>
         <file>bubbles/Bubbles.qml</file>
         <file>bubbles/Circles.qml</file>
         <file>ContactListItem.qml</file>
@@ -78,5 +78,8 @@
         <file>files/configure.png</file>
         <file>ControlCombo.qml</file>
         <file>NormalWheelScroll.qml</file>
+        <file>LineEdit.qml</file>
+        <file>AddContact.qml</file>
+        <file>files/add_contact.png</file>
     </qresource>
 </RCC>

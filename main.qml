@@ -130,6 +130,7 @@ Window {
         width: parent.width
         height: parent.height
         color: "#4098BF"
+        focus: true
 
         Keys.onEscapePressed: {
             if( aboutSialan )
@@ -140,6 +141,11 @@ Window {
             else
             if( flipMenu.start )
                 flipMenu.hide()
+        }
+
+        Keys.onPressed: {
+            if ((event.key == Qt.Key_Q) && (event.modifiers == Qt.ControlModifier))
+                Gui.quit()
         }
 
         Behavior on y {

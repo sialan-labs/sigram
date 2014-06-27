@@ -503,6 +503,16 @@ void sendCommand( char *data )
     interpreter(data);
 }
 
+int myPeer(int our_id)
+{
+    return ourPeer(our_id).id;
+}
+
+void doAddContact( const char *phone, const char *fname, const char *lname, int force )
+{
+    do_add_contact( phone, strlen(phone), fname, strlen(fname), lname, strlen(lname), force );
+}
+
 int dateYear( long t )
 {
     struct tm *tm = localtime ((void *)&t);

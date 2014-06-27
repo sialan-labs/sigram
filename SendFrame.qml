@@ -53,7 +53,7 @@ Rectangle {
         }
     }
 
-    LineEdit {
+    TextArea {
         id: input
         anchors.top: parent.top
         anchors.bottom: parent.bottom

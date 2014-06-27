@@ -349,6 +349,11 @@ void TelegramThread::chatDelUser(int chat_id, int user_id)
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,chat), Q_ARG(QString,user.username));
 }
 
+void TelegramThread::addContact(const QString &number, const QString &fname, const QString &lname, bool force)
+{
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,number), Q_ARG(QString,fname), Q_ARG(QString,lname), Q_ARG(bool,force));
+}
+
 void TelegramThread::search(int user_id, const QString &keyword)
 {
     if( !p->contacts.contains(user_id) )
@@ -383,7 +388,12 @@ void TelegramThread::_contactFounded(const UserClass &contact)
     if( contact.flags & Enums::UserUserSelf )
         p->me = contact.user_id;
 
-    p->contacts.insert( contact.user_id, contact );
+    p->contacts[contact.user_id] = contact;
+    if( p->dialogs.contains(contact.user_id) )
+    {
+        p->dialogs[contact.user_id].userClass = contact;
+        emit dialogsChanged();
+    }
 }
 
 void TelegramThread::_contactListFinished()

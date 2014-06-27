@@ -88,6 +88,7 @@ void do_create_encr_chat_request (int user_id);
 void do_create_secret_chat (peer_id_t id);
 void do_create_group_chat (peer_id_t id, char *chat_topic);
 void do_get_suggested (void);
+peer_id_t ourPeer(int our_id);
 
 struct photo;
 struct video;

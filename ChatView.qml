@@ -156,14 +156,6 @@ Rectangle {
 
             property bool disableAnims: false
 
-            rebound: Transition {
-                NumberAnimation {
-                    properties: "y"
-                    duration: 800
-                    easing.type: Easing.OutBounce
-                }
-            }
-
             Timer {
                 id: dis_anim_timer
                 interval: 500

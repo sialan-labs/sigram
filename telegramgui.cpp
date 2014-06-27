@@ -86,6 +86,7 @@ public:
     QQuickWindow *root;
 
     QString background;
+    bool mute_all;
     bool firstTime;
 
     int width;
@@ -121,6 +122,7 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->width = tg_settings->value( "General/width", 1024 ).toInt();
     p->height = tg_settings->value( "General/height", 600 ).toInt();
     p->visible = tg_settings->value( "General/visible", true ).toBool();
+    p->mute_all = tg_settings->value( "General/muteAll", false ).toBool();
 
 #ifdef Q_OS_LINUX
     p->notify = new Notification(this);
@@ -224,6 +226,21 @@ QString TelegramGui::background() const
     return p->background;
 }
 
+void TelegramGui::setMuteAll(bool state)
+{
+    if( state == p->mute_all )
+        return;
+
+    p->mute_all = state;
+    tg_settings->setValue( "General/muteAll", p->mute_all );
+    emit muteAllChanged();
+}
+
+bool TelegramGui::muteAll() const
+{
+    return p->mute_all;
+}
+
 void TelegramGui::setFirstTime(bool stt)
 {
     if( stt == p->firstTime )
@@ -266,6 +283,21 @@ QString TelegramGui::license() const
 
     res = license_file.readAll();
     return res;
+}
+
+QString TelegramGui::fixPhoneNumber(QString number)
+{
+    if( number.isEmpty() )
+        return number;
+    if( number[0] == '0' )
+    {
+        number.remove(0,1);
+        number = p->countries->phoneCode(country()) + number;
+    }
+    if( number[0] != '+' )
+        number = "+" + number;
+
+    return number;
 }
 
 int TelegramGui::desktopSession()
@@ -471,6 +503,9 @@ void TelegramGui::start()
 
 void TelegramGui::sendNotify(quint64 msg_id)
 {
+    if( p->mute_all )
+        return;
+
     QStringList actions;
     if( desktopSession() != Enums::Unity )
     {

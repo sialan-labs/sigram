@@ -49,9 +49,32 @@ Rectangle {
         }
     }
 
+    Button {
+        id: add_contact_btn
+        anchors.top: parent.top
+        anchors.right: add_btn.left
+        anchors.bottom: parent.bottom
+        width: 42
+        icon: "files/add_contact.png"
+        iconHeight: 16
+        highlightColor: "#33B7CC"
+        normalColor: "#bbbbbb"
+        onClicked: {
+            var pnt = Gui.mapToScene( add_contact_btn, Qt.point(add_contact_btn.width/2,add_contact_btn.height) )
+            var obj = menu.start( add_contact_coponent, pnt.x, pnt.y, 253, 280 )
+            obj.close.connect( contact_header.close )
+        }
+    }
+
     Component {
         id: add_menu_component
         AddMenu {
+        }
+    }
+
+    Component {
+        id: add_contact_coponent
+        AddContact {
         }
     }
 }

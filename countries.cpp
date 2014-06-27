@@ -57,13 +57,13 @@ QStringList Countries::countries()
 QString Countries::phoneCode(const QString &country)
 {
     init_buff();
-    return p->data[country]["callingCode"];
+    return p->data[country.toLower()]["callingCode"];
 }
 
 QString Countries::countryFlag(const QString &country)
 {
     init_buff();
-    return FLAGS_PATH + p->data[country]["cca2"].toLower() + ".png";
+    return FLAGS_PATH + p->data[country.toLower()]["cca2"].toLower() + ".png";
 }
 
 void Countries::init_buff()
@@ -88,7 +88,7 @@ void Countries::init_buff()
         for( int i=0; i<parts.count(); i++ )
         {
             const QString & prt = parts.at(i);
-            p->data[parts.first()][heads.at(i)] = prt;
+            p->data[parts.first().toLower()][heads.at(i)] = prt;
         }
     }
 

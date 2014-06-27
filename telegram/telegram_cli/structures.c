@@ -1514,11 +1514,15 @@ static int id_cmp (struct message *M1, struct message *M2) {
 struct user *fetch_alloc_user (void) {
   int data[2];
   prefetch_data (data, 8);
-  peer_t *U = user_chat_get (MK_USER (data[1]));
+  return fetch_alloc_user_uid(data[1]);
+}
+
+struct user *fetch_alloc_user_uid (int uid) {
+  peer_t *U = user_chat_get (MK_USER (uid));
   if (!U) {
     users_allocated ++;
     U = talloc0 (sizeof (*U));
-    U->id = MK_USER (data[1]);
+    U->id = MK_USER (uid);
     peer_tree = tree_insert_peer (peer_tree, U, lrand48 ());
     assert (peer_num < MAX_PEER_NUM);
     Peers[peer_num ++] = U;

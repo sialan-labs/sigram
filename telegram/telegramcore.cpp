@@ -170,6 +170,19 @@ void TelegramCore::chatDelUser(const QString &chat, const QString &user)
                   .arg(QString(user).replace(" ","_")));
 }
 
+void TelegramCore::addContact(const QString &number, const QString &fname, const QString &lname, bool force)
+{
+    static char *nmb;
+    static char *fnm;
+    static char *lnm;
+
+    strcpy2( nmb, number.toUtf8() );
+    strcpy2( fnm, fname.toUtf8() );
+    strcpy2( lnm, lname.toUtf8() );
+
+    doAddContact( nmb, fnm, lnm, force );
+}
+
 void TelegramCore::search(const QString &user, const QString &keyword)
 {
     send_command( QString("search %1 %2").arg(QString(user).replace(" ","_")).arg(keyword) );
