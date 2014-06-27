@@ -17,6 +17,29 @@
     </message>
 </context>
 <context>
+    <name>AddContact</name>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Adicionar</translation>
+    </message>
+</context>
+<context>
     <name>AddMenu</name>
     <message>
         <source>Enter name and select contacts</source>
@@ -124,31 +147,31 @@
     <name>LineEdit</name>
     <message>
         <source>Copy</source>
-        <translation>Copiar</translation>
+        <translation type="vanished">Copiar</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Recortar</translation>
+        <translation type="vanished">Recortar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Colar</translation>
+        <translation type="vanished">Colar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Remover</translation>
+        <translation type="vanished">Remover</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Selecionar tudo</translation>
+        <translation type="vanished">Selecionar tudo</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Desfazer</translation>
+        <translation type="vanished">Desfazer</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Refazer</translation>
+        <translation type="vanished">Refazer</translation>
     </message>
 </context>
 <context>
@@ -327,6 +350,37 @@
     </message>
 </context>
 <context>
+    <name>TextArea</name>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">Copiar</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished">Recortar</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished">Colar</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Remover</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished">Selecionar tudo</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished">Desfazer</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished">Refazer</translation>
+    </message>
+</context>
+<context>
     <name>UpdateDialog</name>
     <message>
         <source>New update is available :)</source>
@@ -378,6 +432,14 @@
     <message>
         <source>Language:</source>
         <translation>Idioma:</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable all notifies:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

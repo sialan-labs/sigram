@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en">
 <context>
     <name>About</name>
     <message>
@@ -14,6 +14,29 @@
     <message>
         <source>Sigram project are released under the terms of the GPLv3 license.</source>
         <translation>Das Sigram Projekt ist lizenziert durch die GPLv3 Lizenz.</translation>
+    </message>
+</context>
+<context>
+    <name>AddContact</name>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -120,31 +143,31 @@
     <name>LineEdit</name>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation type="vanished">Kopieren</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Ausschneiden</translation>
+        <translation type="vanished">Ausschneiden</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Einfügen</translation>
+        <translation type="vanished">Einfügen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation type="vanished">Entfernen</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Alle markieren</translation>
+        <translation type="vanished">Alle markieren</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Rückgängig</translation>
+        <translation type="vanished">Rückgängig</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Wiederholen</translation>
+        <translation type="vanished">Wiederholen</translation>
     </message>
 </context>
 <context>
@@ -324,6 +347,37 @@
     </message>
 </context>
 <context>
+    <name>TextArea</name>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">Kopieren</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished">Ausschneiden</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished">Einfügen</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Entfernen</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished">Alle markieren</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished">Rückgängig</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished">Wiederholen</translation>
+    </message>
+</context>
+<context>
     <name>UpdateDialog</name>
     <message>
         <source>New update is available :)</source>
@@ -375,6 +429,14 @@
     <message>
         <source>Language:</source>
         <translation>Sprache:</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable all notifies:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

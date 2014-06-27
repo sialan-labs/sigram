@@ -17,6 +17,29 @@
     </message>
 </context>
 <context>
+    <name>AddContact</name>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">اضافه کردن</translation>
+    </message>
+</context>
+<context>
     <name>AddMenu</name>
     <message>
         <source>Enter name and select contacts</source>
@@ -120,31 +143,31 @@
     <name>LineEdit</name>
     <message>
         <source>Copy</source>
-        <translation>کپی</translation>
+        <translation type="vanished">کپی</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>کات</translation>
+        <translation type="vanished">کات</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>پیست</translation>
+        <translation type="vanished">پیست</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>پاک کردن</translation>
+        <translation type="vanished">پاک کردن</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>انتخاب همه</translation>
+        <translation type="vanished">انتخاب همه</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>برگرد</translation>
+        <translation type="vanished">برگرد</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>به جلو</translation>
+        <translation type="vanished">به جلو</translation>
     </message>
 </context>
 <context>
@@ -323,6 +346,37 @@
     </message>
 </context>
 <context>
+    <name>TextArea</name>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">کپی</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished">کات</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished">پیست</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">پاک کردن</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished">انتخاب همه</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation type="unfinished">برگرد</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished">به جلو</translation>
+    </message>
+</context>
+<context>
     <name>UpdateDialog</name>
     <message>
         <source>New update is available :)</source>
@@ -374,6 +428,14 @@
     <message>
         <source>Language:</source>
         <translation>زبان:</translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable all notifies:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
