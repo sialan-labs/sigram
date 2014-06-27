@@ -31,6 +31,7 @@ public:
     ~UnitySystemTray();
 
     void addMenu( const QString & text, QObject *obj, const char *member );
+    void setIcon( const QString & icon );
 
     void *pntr();
 

@@ -24,12 +24,14 @@
 
 typedef void* (*CreateObjectPrototype)(const QString & name, const QString & icon);
 typedef void (*AddMenuPrototype)(void *pntr, const QString & text, QObject *obj, const char *member);
+typedef void (*SetIconPrototype)(void *pntr, const QString & icon);
 
 class UnitySystemTrayPrivate
 {
 public:
     CreateObjectPrototype createObject;
     AddMenuPrototype addMenu;
+    SetIconPrototype setIcon;
 
     void *pntr;
 };
@@ -52,6 +54,14 @@ void UnitySystemTray::addMenu( const QString & text, QObject *obj, const char *m
         return;
 
     p->addMenu( p->pntr, text, obj, member );
+}
+
+void UnitySystemTray::setIcon( const QString & icon )
+{
+    if( !p->pntr )
+        return;
+
+    p->setIcon( p->pntr, icon );
 }
 
 void *UnitySystemTray::pntr()
