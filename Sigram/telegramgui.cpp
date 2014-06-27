@@ -20,6 +20,8 @@
 #define NOTIFY_ACT_MUTE 1
 #define NOTIFY_ACT_RMND 2
 
+#define UNITY_ICON_PATH(NUM) "/tmp/sialan-telegram-client-trayicon" + QString::number(NUM) + ".png"
+
 #include "telegramgui.h"
 #include "unitysystemtray.h"
 #include "telegram_macros.h"
@@ -61,6 +63,7 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QDir>
+#include <QImageWriter>
 
 QPointer<QSettings> tg_settings;
 
@@ -115,6 +118,7 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->args = QGuiApplication::arguments().first().toUtf8().data();
     p->doc = new QTextDocument(this);
     p->translator = new QTranslator(this);
+    p->sysTray = 0;
 
     QDir().mkpath(HOME_PATH);
     QDir().mkpath(HOME_PATH + "/downloads");
@@ -498,7 +502,7 @@ void TelegramGui::start()
 
     if( desktopSession() == Enums::Unity )
     {
-        QFile::copy(":/files/sys_tray.png","/tmp/sialan-telegram-client-trayicon.png");
+        QFile::copy(":/files/sys_tray.png",UNITY_ICON_PATH(0));
 
         p->unityTray = new UnitySystemTray( QCoreApplication::applicationName(), "/tmp/sialan-telegram-client-trayicon.png" );
         if( !p->unityTray->pntr() )
@@ -797,11 +801,20 @@ void TelegramGui::logout()
 
 void TelegramGui::setSysTrayCounter(int count)
 {
-    if( !p->sysTray )
-        return;
-
     const QImage & img = generateIcon( QImage(":/files/sys_tray.png"), count );
-    p->sysTray->setIcon( QPixmap::fromImage(img) );
+    if( p->sysTray )
+    {
+        p->sysTray->setIcon( QPixmap::fromImage(img) );
+    }
+    else
+    if( p->unityTray )
+    {
+        QString path = UNITY_ICON_PATH(count);
+        QFile::remove(path);
+        QImageWriter writer(path);
+        writer.write(img);
+        p->unityTray->setIcon(path);
+    }
 }
 
 void TelegramGui::incomingAppMessage(const QString &msg)

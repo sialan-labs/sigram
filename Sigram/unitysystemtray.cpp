@@ -43,6 +43,7 @@ UnitySystemTray::UnitySystemTray(const QString & name, const QString & icon)
 
     p->createObject = (CreateObjectPrototype) QLibrary::resolve(LIB_PATH, "createObject");
     p->addMenu = (AddMenuPrototype) QLibrary::resolve(LIB_PATH, "addMenu");
+    p->setIcon = (SetIconPrototype) QLibrary::resolve(LIB_PATH, "setIcon");
 
     if( p->createObject )
         p->pntr = p->createObject(name, icon);
