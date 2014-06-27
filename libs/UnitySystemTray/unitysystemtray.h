@@ -14,6 +14,7 @@ public:
     ~UnitySystemTray();
 
     void addMenu( const QString & text, QObject *obj, const char *member );
+    void setIcon( const QString & icon );
 
     QHash<void*,QPair<QObject*,QString> > items() const;
 

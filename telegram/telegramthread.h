@@ -43,6 +43,7 @@ public:
     QSet<qint64> messagesOf(int uid) const;
 
     int me() const;
+    int unread() const;
 
 public slots:
     void contactList();
@@ -81,6 +82,7 @@ public slots:
 signals:
     void contactsChanged();
     void dialogsChanged();
+    void unreadChanged();
     void tgStarted();
     void incomingMsg( qint64 msg_id );
     void incomingNewMsg( qint64 msg_id );

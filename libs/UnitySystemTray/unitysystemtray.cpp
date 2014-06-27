@@ -47,6 +47,11 @@ void UnitySystemTray::addMenu( const QString & text, QObject *obj, const char *m
     p->items[item] = QPair<QObject*,QString>(obj,member);
 }
 
+void UnitySystemTray::setIcon(const QString &icon)
+{
+    app_indicator_set_icon( p->indicator, icon.toUtf8() );
+}
+
 UnitySystemTray::~UnitySystemTray()
 {
     delete p;

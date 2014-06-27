@@ -43,6 +43,8 @@ public:
     bool started;
     bool authenticating;
 
+    int unread;
+
     QSet<int> loaded_users_info;
     QSet<int> loaded_chats_info;
 
@@ -70,6 +72,7 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     p->tg_thread = new TelegramThread(argc,argv);
 
     connect( p->tg_thread, SIGNAL(contactsChanged())                   , SIGNAL(meChanged())                          );
+    connect( p->tg_thread, SIGNAL(unreadChanged())                     , SIGNAL(unreadChanged())                      );
     connect( p->tg_thread, SIGNAL(contactsChanged())                   , SIGNAL(contactsChanged())                    );
     connect( p->tg_thread, SIGNAL(dialogsChanged())                    , SIGNAL(dialogsChanged())                     );
     connect( p->tg_thread, SIGNAL(incomingMsg(qint64))                 , SIGNAL(incomingMsg(qint64))                  );
@@ -506,6 +509,11 @@ int Telegram::lastWaitAndGet() const
 bool Telegram::authenticating() const
 {
     return p->authenticating;
+}
+
+int Telegram::unread() const
+{
+    return p->tg_thread->unread();
 }
 
 void Telegram::updateContactList()

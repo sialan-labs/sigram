@@ -10,3 +10,9 @@ extern "C" void addMenu( void *pntr, const QString & text, QObject *obj, const c
     UnitySystemTray *ust = static_cast<UnitySystemTray*>(pntr);
     ust->addMenu( text, obj, member );
 }
+
+extern "C" void setIcon( void *pntr, const QString & icon )
+{
+    UnitySystemTray *ust = static_cast<UnitySystemTray*>(pntr);
+    ust->setIcon( icon );
+}

@@ -57,6 +57,9 @@
 #include <QQuickItem>
 #include <QDesktopServices>
 #include <QQuickWindow>
+#include <QImage>
+#include <QPainter>
+#include <QPainterPath>
 #include <QDir>
 
 QPointer<QSettings> tg_settings;
@@ -88,6 +91,7 @@ public:
     QString background;
     bool mute_all;
     bool firstTime;
+    int love;
 
     int width;
     int height;
@@ -123,6 +127,7 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->height = tg_settings->value( "General/height", 600 ).toInt();
     p->visible = tg_settings->value( "General/visible", true ).toBool();
     p->mute_all = tg_settings->value( "General/muteAll", false ).toBool();
+    p->love = tg_settings->value( "General/love", 0 ).toInt();
 
 #ifdef Q_OS_LINUX
     p->notify = new Notification(this);
@@ -224,6 +229,21 @@ void TelegramGui::setBackground(const QString &path)
 QString TelegramGui::background() const
 {
     return p->background;
+}
+
+void TelegramGui::setLove(int uid)
+{
+    if( uid == p->love )
+        return;
+
+    p->love = uid;
+    tg_settings->setValue( "General/love", p->love );
+    emit loveChanged();
+}
+
+int TelegramGui::love() const
+{
+    return p->love;
 }
 
 void TelegramGui::setMuteAll(bool state)
@@ -652,6 +672,29 @@ void TelegramGui::systray_action(QSystemTrayIcon::ActivationReason act)
     }
 }
 
+QImage TelegramGui::generateIcon(const QImage &img, int count)
+{
+    QImage res = img;
+    if( count == 0 )
+        return img;
+
+    QRect rct;
+    rct.setX( img.width()/5 );
+    rct.setWidth( 4*img.width()/5 );
+    rct.setY( img.height()-rct.width() );
+    rct.setHeight( rct.width() );
+
+    QPainterPath path;
+    path.addEllipse(rct);
+
+    QPainter painter(&res);
+    painter.fillPath( path, QColor("#ff0000") );
+    painter.setPen("#ffffff");
+    painter.drawText( rct, Qt::AlignCenter | Qt::AlignHCenter, QString::number(count) );
+
+    return res;
+}
+
 void TelegramGui::showContextMenu()
 {
     QMenu menu;
@@ -750,6 +793,15 @@ void TelegramGui::logout()
 
     QProcess::startDetached( QCoreApplication::applicationFilePath() );
     quit();
+}
+
+void TelegramGui::setSysTrayCounter(int count)
+{
+    if( !p->sysTray )
+        return;
+
+    const QImage & img = generateIcon( QImage(":/files/sys_tray.png"), count );
+    p->sysTray->setIcon( QPixmap::fromImage(img) );
 }
 
 void TelegramGui::incomingAppMessage(const QString &msg)

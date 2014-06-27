@@ -32,6 +32,7 @@ class Telegram : public QObject
     Q_PROPERTY(int me READ me NOTIFY meChanged)
     Q_PROPERTY(int waitAndGet READ lastWaitAndGet NOTIFY waitAndGetChanged )
     Q_PROPERTY(bool authenticating READ authenticating NOTIFY authenticatingChanged)
+    Q_PROPERTY(int unread READ unread NOTIFY unreadChanged)
     Q_OBJECT
 public:
     Telegram(int argc, char **argv, QObject *parent = 0);
@@ -110,6 +111,8 @@ public:
     Q_INVOKABLE int lastWaitAndGet() const;
     Q_INVOKABLE bool authenticating() const;
 
+    int unread() const;
+
 public slots:
     void updateContactList();
     void updateDialogList();
@@ -155,6 +158,7 @@ public slots:
 signals:
     void contactsChanged();
     void dialogsChanged();
+    void unreadChanged();
     void meChanged();
     void incomingMsg( qint64 msg_id );
     void incomingNewMsg( qint64 msg_id );

@@ -52,6 +52,7 @@ Window {
     Connections {
         target: Telegram
         onStartedChanged: status_changer.restart()
+        onUnreadChanged: Gui.setSysTrayCounter(Telegram.unread)
         onAuthenticatingChanged: {
             if(Telegram.authenticating)
                 startAuthenticating()

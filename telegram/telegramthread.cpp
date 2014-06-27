@@ -34,6 +34,7 @@ public:
     TelegramCore *tg;
 
     int me;
+    int unread;
 
     QHash<int,UserClass> contacts;
     QHash<int,DialogClass> dialogs;
@@ -54,6 +55,7 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
 {
     p = new TelegramThreadPrivate;
     p->me = 0;
+    p->unread = 0;
 
     qRegisterMetaType<UserClass>("UserClass");
     qRegisterMetaType<ChatClass>("ChatClass");
@@ -131,6 +133,11 @@ QSet<qint64> TelegramThread::messagesOf(int uid) const
 int TelegramThread::me() const
 {
     return p->me;
+}
+
+int TelegramThread::unread() const
+{
+    return p->unread;
 }
 
 void TelegramThread::contactList()
@@ -416,6 +423,20 @@ void TelegramThread::_dialogFounded(const DialogClass &dialog)
 
 void TelegramThread::_dialogListFinished()
 {
+    int unread = 0;
+    QHashIterator<int,DialogClass> i(p->dialogs);
+    while( i.hasNext() )
+    {
+        i.next();
+        unread += i.value().unread;
+    }
+
+    if( unread != p->unread )
+    {
+        p->unread = unread;
+        emit unreadChanged();
+    }
+
     emit dialogsChanged();
 }
 

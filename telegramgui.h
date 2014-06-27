@@ -40,6 +40,7 @@ class TelegramGui : public QObject
     Q_PROPERTY(bool donate READ donate WRITE setDonate NOTIFY donateChanged)
     Q_PROPERTY(bool muteAll READ muteAll WRITE setMuteAll NOTIFY muteAllChanged)
     Q_PROPERTY(bool donateViewShowed READ donateViewShowed WRITE setDonateViewShowed NOTIFY donateViewShowedChanged)
+    Q_PROPERTY(int love READ love WRITE setLove NOTIFY loveChanged)
     Q_OBJECT
 
 public:
@@ -63,6 +64,9 @@ public:
 
     Q_INVOKABLE void setBackground( const QString & path );
     Q_INVOKABLE QString background() const;
+
+    Q_INVOKABLE void setLove( int uid );
+    Q_INVOKABLE int love() const;
 
     Q_INVOKABLE void setMuteAll( bool state );
     Q_INVOKABLE bool muteAll() const;
@@ -127,6 +131,7 @@ public slots:
 
     void logout();
 
+    void setSysTrayCounter( int count );
     void incomingAppMessage( const QString & msg );
 
     /*! This funtion made to better debuging qml problems !*/
@@ -155,12 +160,15 @@ signals:
     void languageChanged();
     void donateViewShowedChanged();
     void muteAllChanged();
+    void loveChanged();
 
 private slots:
     void notify_action( uint id, const QString & act );
     void systray_action( QSystemTrayIcon::ActivationReason act );
 
 private:
+    QImage generateIcon( const QImage & img, int count );
+
     void showContextMenu();
     void init_languages();
 
