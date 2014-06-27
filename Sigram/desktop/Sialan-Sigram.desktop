@@ -7,4 +7,4 @@ Icon=/opt/sialan/sigram/icons/icon.png
 Name=Sigram
 StartupNotify=true
 Type=Application
-Version=0.5.5.2
+Version=0.6

@@ -4,7 +4,7 @@ BUILD_DIR="deb-build-tmp-`uuidgen`"
 QMAKE='qmake'
 UNITY_FILE='/usr/bin/unity'
 ARCH_INTL=`arch`
-VERSION='0.5.5.2'
+VERSION='0.6.0'
 DEBIAN_REVISION='1'
 
 if [ "$ARCH_INTL" = "x86_64" ]
@@ -68,15 +68,6 @@ make $MAKE_JOBS
 make clean
 rm Makefile
 
-# Build UnitySystemTray
-mkdir plugins
-cd plugins
-qmake -r "$DATA_PATH"/../libs/UnitySystemTray
-make $MAKE_JOBS
-make clean
-rm Makefile
-cd ..
-
 # Move builded files to /opt
 cd ..
 mkdir -p ./opt/sialan
@@ -85,7 +76,7 @@ mv ./opt/sialan/sigram/SialanTelegram ./opt/sialan/sigram/Sigram
 
 # Copy .desktop file
 mkdir -p ./usr/share/applications
-cp "$DATA_PATH"/../desktop/Sialan-Sigram.desktop ./usr/share/applications/
+cp "$DATA_PATH"/../Sigram/desktop/Sialan-Sigram.desktop ./usr/share/applications/
 
 # Set Persmissons of the files
 chmod 755 `find .`
