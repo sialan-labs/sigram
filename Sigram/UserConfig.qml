@@ -391,6 +391,21 @@ Item {
         id: limoo_component
         LimooImageComponent {
             width: chatFrame.chatView.width*3/4
+            onRightClick: showMenu()
+        }
+    }
+
+    function showMenu() {
+        var acts = [ qsTr("Copy"), qsTr("Save as") ]
+
+        var res = Gui.showMenu( acts )
+        switch( res ) {
+        case 0:
+            Gui.copyFile(cimg.source)
+            break;
+        case 1:
+            Gui.saveFile(cimg.source)
+            break;
         }
     }
 }

@@ -68,6 +68,10 @@ Item {
         }
     }
 
+    NormalWheelScroll {
+        flick: txt_flickable
+    }
+
     MouseArea {
         id: marea
         anchors.fill: parent

@@ -37,7 +37,8 @@ SOURCES += main.cpp \
     qtsingleapplication/qtsingleapplication.cpp \
     qtsingleapplication/qtlockedfile.cpp \
     qtsingleapplication/qtlocalpeer.cpp \
-    qmlstaticobjecthandler.cpp
+    qmlstaticobjecthandler.cpp \
+    hashobject.cpp
 
 win32: SOURCES += qtsingleapplication/qtlockedfile_win.cpp
 unix:  SOURCES += qtsingleapplication/qtlockedfile_unix.cpp
@@ -65,7 +66,8 @@ HEADERS += \
     qtsingleapplication/qtsingleapplication.h \
     qtsingleapplication/qtlockedfile.h \
     qtsingleapplication/qtlocalpeer.h \
-    qmlstaticobjecthandler.h
+    qmlstaticobjecthandler.h \
+    hashobject.h
 
 linux {
     QT += dbus

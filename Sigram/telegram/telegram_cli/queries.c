@@ -711,14 +711,14 @@ int get_contacts_on_answer (struct query *q UU) {
   n = fetch_int ();
   for (i = 0; i < n; i++) {
     struct user *U = fetch_alloc_user ();
-    if( U->id.id == our_id )
-        continue;
+//    if( U->id.id == our_id )
+//        continue;
 
     contactList_addToBuffer( U );
   }
 
-  struct user U = user_chat_get(ourPeer(our_id))->user;
-  contactList_addToBuffer( &U );
+//  struct user U = user_chat_get(ourPeer(our_id))->user;
+//  contactList_addToBuffer( &U );
   contactList_finished();
 
   return 0;

@@ -78,8 +78,6 @@ Rectangle {
         ListView {
             id: clist
             anchors.fill: parent
-            maximumFlickVelocity: 2500
-            flickDeceleration: 2500
             model: ListModel{}
             header: Item{ height: cl_header.height }
             delegate: ContactListItem {

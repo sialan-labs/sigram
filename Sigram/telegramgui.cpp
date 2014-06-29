@@ -26,6 +26,7 @@
 #include "unitysystemtray.h"
 #include "telegram_macros.h"
 #include "versionchecker.h"
+#include "hashobject.h"
 #include "qmlstaticobjecthandler.h"
 #include "emojis.h"
 #include "countries.h"
@@ -64,6 +65,8 @@
 #include <QPainterPath>
 #include <QDir>
 #include <QImageWriter>
+#include <QMimeDatabase>
+#include <QMimeType>
 
 QPointer<QSettings> tg_settings;
 
@@ -105,6 +108,8 @@ public:
     QHash<QString,QLocale> locales;
     QString language;
 
+    QMimeDatabase mime_db;
+
     bool quit_state;
 };
 
@@ -140,9 +145,11 @@ TelegramGui::TelegramGui(QObject *parent) :
 
     qmlRegisterType<Enums>("org.sialan.telegram", 1, 0, "Enums");
     qmlRegisterType<SetObject>("org.sialan.telegram", 1, 0, "SetObject");
+    qmlRegisterType<HashObject>("org.sialan.telegram", 1, 0, "HashObject");
     qmlRegisterType<QmlStaticObjectHandler>("org.sialan.telegram", 1, 0, "StaticObjectHandler");
 
     init_languages();
+    check_files();
 }
 
 QSettings *TelegramGui::settings()
@@ -522,7 +529,7 @@ void TelegramGui::start()
     {
         QFile::copy(":/files/sys_tray.png",UNITY_ICON_PATH(0));
 
-        p->unityTray = new UnitySystemTray( QCoreApplication::applicationName(), "/tmp/sialan-telegram-client-trayicon.png" );
+        p->unityTray = new UnitySystemTray( QCoreApplication::applicationName(), UNITY_ICON_PATH(0) );
         if( !p->unityTray->pntr() )
             QApplication::setQuitOnLastWindowClosed(true);
         p->unityTray->addMenu( tr("Show"), this, "show" );
@@ -948,6 +955,21 @@ void TelegramGui::init_languages()
 
          if( lang == tg_settings->value("General/language","English").toString() )
              setLanguage( lang );
+    }
+}
+
+void TelegramGui::check_files()
+{
+    const QString & folder = HOME_PATH + "/downloads";
+    const QStringList & files = QDir(folder).entryList(QDir::Files);
+    foreach( const QString & f, files )
+    {
+        const QMimeType & t = p->mime_db.mimeTypeForFile(folder + "/" + f);
+        const QString & tname = t.name();
+        if( !tname.contains("audio",Qt::CaseInsensitive) &&
+            !tname.contains("video",Qt::CaseInsensitive) &&
+            !tname.contains("image",Qt::CaseInsensitive) )
+            QFile::remove(folder + "/" + f);
     }
 }
 

@@ -45,7 +45,7 @@ Item {
         id: txt
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: line_edit.pad/2
+        anchors.leftMargin: txt.readOnly? 0 : line_edit.pad/2
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignLeft
         color: "#333333"

@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import org.sialan.telegram 1.0
 
 Rectangle {
     id: send_frame
@@ -31,8 +32,20 @@ Rectangle {
     property alias textInput: input.textInput
 
     onCurrentChanged: {
-        input.text = ""
+        var draft = msg_drafts.value(current)
+        msg_drafts.insert(privates.last, input.text)
+        input.text = draft? draft : ""
         p_bar.visible = false
+        privates.last = current
+    }
+
+    QtObject {
+        id: privates
+        property int last: 0
+    }
+
+    HashObject {
+        id: msg_drafts
     }
 
     Connections {

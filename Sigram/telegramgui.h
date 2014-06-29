@@ -175,6 +175,7 @@ private:
 
     void showContextMenu();
     void init_languages();
+    void check_files();
 
 private:
     TelegramGuiPrivate *p;
