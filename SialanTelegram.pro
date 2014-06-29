@@ -1,4 +1,4 @@
 TEMPLATE = subdirs
 CONFIG += ordered
-SUBDIRS += Sigram \
-    libs
+SUBDIRS += Sigram
+#SUBDIRS += libs
