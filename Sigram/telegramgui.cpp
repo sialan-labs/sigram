@@ -124,6 +124,7 @@ TelegramGui::TelegramGui(QObject *parent) :
     p->doc = new QTextDocument(this);
     p->translator = new QTranslator(this);
     p->sysTray = 0;
+    p->unityTray = 0;
 
     QDir().mkpath(HOME_PATH);
     QDir().mkpath(HOME_PATH + "/downloads");
@@ -371,6 +372,9 @@ int TelegramGui::desktopSession()
     if( desktop_session->contains("ubuntu",Qt::CaseInsensitive) )
         result = Enums::Unity;
     else
+    if( desktop_session->contains("gnome-fallback",Qt::CaseInsensitive) )
+        result = Enums::GnomeFallBack;
+    else
         result = Enums::Gnome;
 #endif
 #endif
@@ -525,7 +529,7 @@ void TelegramGui::start()
 
     p->root = static_cast<QQuickWindow*>(p->engine->rootObjects().first());
 
-    if( desktopSession() == Enums::Unity )
+    if( desktopSession() == Enums::Unity || desktopSession() == Enums::GnomeFallBack )
     {
         QFile::copy(":/files/sys_tray.png",UNITY_ICON_PATH(0));
 
