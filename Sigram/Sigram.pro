@@ -20,7 +20,9 @@ server.source = tg-server.pub
 server.target = .
 translations.source = translations
 translations.target = .
-COPYFOLDERS = database fonts emojis countries license gpl icons server translations
+run_file.source = run
+run_file.target = .
+COPYFOLDERS = database fonts emojis countries license gpl icons server translations run_file
 include(../qmake/copyData.pri)
 copyData()
 
