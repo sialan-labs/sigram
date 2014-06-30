@@ -25,7 +25,6 @@ run_file.target = .
 COPYFOLDERS = database fonts emojis countries license gpl icons server translations run_file
 include(../qmake/copyData.pri)
 copyData()
-
 SOURCES += main.cpp \
     telegramgui.cpp \
     userdata.cpp \

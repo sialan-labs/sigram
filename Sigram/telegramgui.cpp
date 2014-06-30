@@ -723,6 +723,8 @@ QImage TelegramGui::generateIcon(const QImage &img, int count)
     QPainter painter(&res);
     painter.setRenderHint( QPainter::Antialiasing , true );
     painter.fillPath( path, QColor("#ff0000") );
+    painter.setPen("#333333");
+    painter.drawPath( path );
     painter.setPen("#ffffff");
     painter.drawText( rct, Qt::AlignCenter | Qt::AlignHCenter, QString::number(count) );
 
