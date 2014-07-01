@@ -3,25 +3,25 @@ TEMPLATE = app
 QT += qml quick widgets sql
 
 database.source = database/userdata.db
-database.target = .
+database.target = $${DESTDIR}
 fonts.source = fonts
-fonts.target = .
+fonts.target = $${DESTDIR}
 emojis.source = emojis
-emojis.target = .
+emojis.target = $${DESTDIR}
 countries.source = countries
-countries.target = .
+countries.target = $${DESTDIR}
 license.source = license.txt
-license.target = .
+license.target = $${DESTDIR}
 gpl.source = GPL.txt
-gpl.target = .
+gpl.target = $${DESTDIR}
 icons.source = icons
-icons.target = .
+icons.target = $${DESTDIR}
 server.source = tg-server.pub
-server.target = .
+server.target = $${DESTDIR}
 translations.source = translations
-translations.target = .
+translations.target = $${DESTDIR}
 run_file.source = run
-run_file.target = .
+run_file.target = $${DESTDIR}
 COPYFOLDERS = database fonts emojis countries license gpl icons server translations run_file
 include(../qmake/copyData.pri)
 copyData()
