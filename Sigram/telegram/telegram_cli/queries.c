@@ -2805,6 +2805,7 @@ void do_restore_msg (long long id) {
 /* }}} */
 int update_status_on_answer (struct query *q UU) {
   fetch_bool ();
+  myStatusUpdated();
   return 0;
 }
 
@@ -2817,4 +2818,22 @@ void do_update_status (int online UU) {
   out_int (CODE_account_update_status);
   out_int (online ? CODE_bool_false : CODE_bool_true);
   send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &update_status_methods, 0);
+}
+/* }}} */
+int update_typing_on_answer (struct query *q UU) {
+  fetch_bool ();
+  return 0;
+}
+
+struct query_methods update_typing_methods = {
+  .on_answer = update_typing_on_answer
+};
+
+void do_update_typing (peer_id_t id, int state)
+{
+    clear_packet ();
+    out_int (CODE_messages_set_typing);
+    out_peer_id (id);
+    out_int (state ? CODE_bool_false : CODE_bool_true);
+    send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &update_typing_methods, 0);
 }

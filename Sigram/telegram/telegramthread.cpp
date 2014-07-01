@@ -87,6 +87,7 @@ TelegramThread::TelegramThread(int argc, char **argv, QObject *parent) :
     connect( p->tg, SIGNAL(registeringFinished())                            , SIGNAL(registeringFinished())                           , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(registeringInvalidCode())                         , SIGNAL(registeringInvalidCode())                        , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(userIsTyping(int,int))                            , SIGNAL(userIsTyping(int,int))                           , Qt::QueuedConnection );
+    connect( p->tg, SIGNAL(myStatusUpdated())                                , SIGNAL(myStatusUpdated())                               , Qt::QueuedConnection );
     connect( p->tg, SIGNAL(started())                                        , SIGNAL(tgStarted())                                     , Qt::QueuedConnection );
 
     start();
@@ -285,6 +286,23 @@ void TelegramThread::markRead(int dId)
 void TelegramThread::setStatusOnline(bool stt)
 {
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(bool,stt));
+}
+
+void TelegramThread::setTypingState(int dId, bool state)
+{
+    QString user;
+    if( p->dialogs.contains(dId) )
+    {
+        const DialogClass & dialog = p->dialogs.value(dId);
+        user = dialog.is_chat? dialog.chatClass.title : dialog.userClass.username;
+    }
+    else
+    if( p->contacts.contains(dId) )
+        user = p->contacts.value(dId).username;
+    else
+        return;
+
+    INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,user), Q_ARG(bool,state));
 }
 
 void TelegramThread::createChat(const QString &title, int user_id)

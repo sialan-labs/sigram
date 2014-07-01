@@ -110,6 +110,14 @@ void TelegramCore::setStatusOnline(bool stt)
         send_command("status_offline");
 }
 
+void TelegramCore::setTypingState(const QString &peer, bool state)
+{
+    if( state )
+        send_command( QString("typing_on %1").arg(QString(peer).replace(" ","_")) );
+    else
+        send_command( QString("typing_off %1").arg(QString(peer).replace(" ","_")) );
+}
+
 void TelegramCore::loadUserInfo(const QString &user)
 {
     send_command( QString("user_info %1").arg(QString(user).replace(" ","_")) );
@@ -491,6 +499,12 @@ void userStatusChanged( peer_t *uc )
 {
     foreach( TelegramCore *tg, telegram_objects )
         emit tg->userStatusChanged(uc->id.id, uc->user.status.online, convertDate(uc->user.status.when) );
+}
+
+void myStatusUpdated()
+{
+    foreach( TelegramCore *tg, telegram_objects )
+        emit tg->myStatusUpdated();
 }
 
 void photoFound( int id, long long volume )

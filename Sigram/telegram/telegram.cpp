@@ -94,6 +94,7 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     connect( p->tg_thread, SIGNAL(registeringStarted())                , SLOT(registeringStarted())                   );
     connect( p->tg_thread, SIGNAL(registeringFinished())               , SLOT(registeringFinished())                  );
     connect( p->tg_thread, SIGNAL(registeringInvalidCode())            , SIGNAL(registeringInvalidCode())             );
+    connect( p->tg_thread, SIGNAL(myStatusUpdated())                   , SIGNAL(myStatusUpdated())                    );
     connect( p->tg_thread, SIGNAL(waitAndGet(int))                     , SLOT(_waitAndGet(int))                       );
     connect( p->tg_thread, SIGNAL(tgStarted())                         , SLOT(_startedChanged())                      );
 
@@ -625,6 +626,11 @@ void Telegram::markRead(int dId)
 void Telegram::setStatusOnline(bool stt)
 {
     p->tg_thread->setStatusOnline(stt);
+}
+
+void Telegram::setTypingState(int dId, bool state)
+{
+    p->tg_thread->setTypingState(dId,state);
 }
 
 void Telegram::createChat(const QString &title, int user_id)

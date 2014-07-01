@@ -260,6 +260,8 @@ char *commands[] = {
   "chat_del_user",
   "status_online",
   "status_offline",
+  "typing_on",
+  "typing_off",
   "contacts_search",
   "quit",
   "safe_quit",
@@ -820,6 +822,12 @@ void interpreter (char *line UU) {
     do_update_status (1);
   } else if (IS_WORD ("status_offline")) {
     do_update_status (0);
+  } else if (IS_WORD ("typing_on")) {
+    GET_PEER;
+    do_update_typing(id, 1);
+  } else if (IS_WORD ("typing_off")) {
+    GET_PEER;
+    do_update_typing(id, 0);
   } else if (IS_WORD ("contacts_search")) {
     int t;
     char *s = next_token (&t);

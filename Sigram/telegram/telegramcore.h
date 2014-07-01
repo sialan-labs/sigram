@@ -49,6 +49,7 @@ public slots:
     void restoreMessage( qint64 msg_id );
 
     void setStatusOnline( bool stt );
+    void setTypingState( const QString & peer, bool state );
 
     void loadUserInfo( const QString & user );
     void loadChatInfo( const QString & chat );
@@ -102,6 +103,7 @@ signals:
     void registeringFinished();
     void registeringInvalidCode();
 
+    void myStatusUpdated();
     void waitAndGet( int type );
 
 private:

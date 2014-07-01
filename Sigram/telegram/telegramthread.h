@@ -64,6 +64,7 @@ public slots:
     void markRead( int dId );
 
     void setStatusOnline( bool stt );
+    void setTypingState( int dId, bool state );
 
     void createChat( const QString & title, int user_id );
     void createSecretChat( int user_id );
@@ -110,6 +111,7 @@ signals:
     void registeringFinished();
     void registeringInvalidCode();
 
+    void myStatusUpdated();
     void waitAndGet( int type );
 
 protected:

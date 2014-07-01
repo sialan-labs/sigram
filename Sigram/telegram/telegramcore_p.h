@@ -54,6 +54,8 @@ void incomingMsg( struct message *msg, struct user *u );
 void userIsTyping( int chat_id, int user_id );
 void userStatusChanged( peer_t *uc );
 
+void myStatusUpdated();
+
 void photoFound( int id, long long volume );
 void fileLoaded( struct download *d );
 

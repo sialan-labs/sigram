@@ -32,6 +32,11 @@ Rectangle {
     property alias textInput: input.textInput
 
     onCurrentChanged: {
+        if( typing_state_timer.running ) {
+            Telegram.setTypingState(privates.last,state)
+            typing_state_timer.stop()
+        }
+
         var draft = msg_drafts.value(current)
         msg_drafts.insert(privates.last, input.text)
         input.text = draft? draft : ""
@@ -46,6 +51,13 @@ Rectangle {
 
     HashObject {
         id: msg_drafts
+    }
+
+    Timer {
+        id: typing_state_timer
+        interval: 5000
+        repeat: false
+        onTriggered: setTypingStatus(false)
     }
 
     Connections {
@@ -74,6 +86,7 @@ Rectangle {
         anchors.right: tools_column.left
         anchors.margins: 4
         color: imageBack? "#000000" : "#ffffff"
+        onTextChanged: setTypingStatus(text.length==0? false : true)
         onAccepted: send_frame.send()
     }
 
@@ -161,5 +174,15 @@ Rectangle {
         Telegram.sendMessage(send_frame.current,input.text.trim())
         Telegram.setStatusOnline(true)
         input.text = ""
+        setTypingStatus(false)
+    }
+
+    function setTypingStatus( state ) {
+        Telegram.setTypingState(send_frame.current,state)
+
+        if( state )
+            typing_state_timer.restart()
+        else
+            typing_state_timer.stop()
     }
 }

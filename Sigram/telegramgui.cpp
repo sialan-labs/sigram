@@ -810,7 +810,11 @@ void TelegramGui::showDonate()
 void TelegramGui::quit()
 {
     p->quit_state = true;
-    QCoreApplication::quit();
+
+    connect( p->tg, SIGNAL(myStatusUpdated()), QCoreApplication::instance(), SLOT(quit()) );
+    p->tg->setStatusOnline(false);
+
+    QTimer::singleShot(3000, QCoreApplication::instance(), SLOT(quit()));
 }
 
 void TelegramGui::show()
