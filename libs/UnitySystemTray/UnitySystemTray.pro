@@ -6,7 +6,7 @@
 
 QT       -= gui
 
-DESTDIR = ../../Sigram/plugins
+DESTDIR = ../../Sigram/build/plugins
 TARGET = UnitySystemTray
 TEMPLATE = lib
 
