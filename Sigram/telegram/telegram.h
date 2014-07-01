@@ -38,7 +38,7 @@ public:
     Telegram(int argc, char **argv, QObject *parent = 0);
     ~Telegram();
 
-    Q_INVOKABLE QList<int> contactListUsers() const;
+    Q_INVOKABLE QList<int> contactListUsers();
     UserClass contact(int id ) const;
     Q_INVOKABLE bool contactContains(int id) const;
     Q_INVOKABLE QString contactFirstName(int id) const;

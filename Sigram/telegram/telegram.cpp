@@ -57,6 +57,12 @@ bool sortDialogList(int m1, int m2)
     return sortDialogList_tmp_obj->dialogMsgDate(m1) > sortDialogList_tmp_obj->dialogMsgDate(m2);
 }
 
+Telegram *sortContactList_tmp_obj = 0;
+bool sortContactList(int m1, int m2)
+{
+    return sortContactList_tmp_obj->contactTitle(m1) < sortContactList_tmp_obj->contactTitle(m2);
+}
+
 Telegram::Telegram(int argc, char **argv, QObject *parent) :
     QObject(parent)
 {
@@ -101,9 +107,14 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     p->tg_thread->start();
 }
 
-QList<int> Telegram::contactListUsers() const
+QList<int> Telegram::contactListUsers()
 {
-    return p->tg_thread->contacts().keys();
+    QList<int> res = p->tg_thread->contacts().keys();
+
+    sortContactList_tmp_obj = this;
+    qSort( res.begin(), res.end(), sortContactList );
+
+    return res;
 }
 
 UserClass Telegram::contact(int id) const
