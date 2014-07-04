@@ -1,7 +1,7 @@
 TEMPLATE = app
 
 QT += qml quick widgets sql
-DESTDIR = build
+DESTDIR = ../build
 
 database.source = database/userdata.db
 database.target = $${DESTDIR}
