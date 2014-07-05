@@ -102,7 +102,7 @@ Item {
             highlightColor: "#337fa2"
             text: qsTr("Check")
             onClicked: {
-                Gui.openUrl("http://labs.sialan.org/sigram")
+                Gui.openUrl("http://labs.sialan.org/projects/sigram")
                 flipMenu.hide()
             }
         }

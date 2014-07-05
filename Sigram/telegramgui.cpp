@@ -545,7 +545,7 @@ void TelegramGui::start()
             p->unityTray->addMenu( tr("Donate"), this, "showDonate" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
     }
-    else
+    if( !p->unityTray || !p->unityTray->pntr() )
     {
         p->sysTray = new QSystemTrayIcon( QIcon(":/files/sys_tray.png"), this );
         p->sysTray->show();
