@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define UPDATE_TEXT_URL "http://labs.sialan.org/projects/sigram/update.txt"
+#define UPDATE_TEXT_URL "http://dl.labs.sialan.org/sigram_update.txt"
 
 #include <QDir>
 #include <QTimerEvent>

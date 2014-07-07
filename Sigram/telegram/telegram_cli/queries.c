@@ -990,6 +990,7 @@ int mark_read_on_receive (struct query *q UU) {
   fetch_pts ();
   fetch_seq ();
   fetch_int (); // offset
+  do_get_dialog_list();
   return 0;
 }
 
