@@ -440,11 +440,11 @@
     </message>
     <message>
         <source>Love:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lieben:</translation>
     </message>
     <message>
         <source>Favorite:</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorit:</translation>
     </message>
 </context>
 </TS>
