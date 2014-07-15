@@ -80,9 +80,9 @@ void VersionChecker::checked(const QByteArray &d)
         info = info + "\n\n" + QStringList(spl.mid(1)).join("\n") ;
     }
 
-    if( info.contains(DONATE_KEY) )
+    if( data.contains(DONATE_KEY) )
     {
-        info.remove(DONATE_KEY);
+        data.remove(DONATE_KEY);
         TelegramGui::setDonate(true);
     }
 
