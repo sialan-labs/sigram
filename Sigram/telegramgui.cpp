@@ -481,6 +481,44 @@ QStringList TelegramGui::languages() const
     return res;
 }
 
+Qt::LayoutDirection TelegramGui::directionOf(const QString &str)
+{
+    Qt::LayoutDirection res = Qt::LeftToRight;
+    if( str.isEmpty() )
+        return res;
+
+    int ltr = 0;
+    int rtl = 0;
+
+    foreach( const QChar & ch, str )
+    {
+        QChar::Direction dir = ch.direction();
+        switch( static_cast<int>(dir) )
+        {
+        case QChar::DirL:
+        case QChar::DirLRE:
+        case QChar::DirLRO:
+        case QChar::DirEN:
+            ltr++;
+            break;
+
+        case QChar::DirR:
+        case QChar::DirRLE:
+        case QChar::DirRLO:
+        case QChar::DirAL:
+            rtl++;
+            break;
+        }
+    }
+
+    if( ltr >= rtl )
+        res = Qt::LeftToRight;
+    else
+        res = Qt::RightToLeft;
+
+    return res;
+}
+
 void TelegramGui::setDonate(bool stt)
 {
     if( donate() == stt )

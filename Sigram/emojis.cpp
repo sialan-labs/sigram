@@ -17,6 +17,7 @@
 */
 
 #include "emojis.h"
+#include "telegramgui.h"
 #include "telegram_macros.h"
 
 #include <QHash>
@@ -77,6 +78,7 @@ QString Emojis::currentTheme() const
 QString Emojis::textToEmojiText(const QString &txt)
 {
     QString res = txt.toHtmlEscaped();
+    Qt::LayoutDirection dir = TelegramGui::directionOf(txt);
 
     QRegExp links_rxp("((?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w\\/))");
     int pos = 0;
@@ -108,7 +110,8 @@ QString Emojis::textToEmojiText(const QString &txt)
         res = "<font size=\"1\">.</font>" + res;
 
 
-    res = "<html><body>" + res.replace("\n","<br />") + "</body></html>";
+    QString dir_txt = dir==Qt::LeftToRight? "ltr" : "rtl";
+    res = QString("<html><body><p dir='%1'>").arg(dir_txt) + res.replace("\n","<br />") + "</p></body></html>";
     return res;
 }
 

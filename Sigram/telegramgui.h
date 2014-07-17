@@ -105,6 +105,8 @@ public:
 
     Q_INVOKABLE QStringList languages() const;
 
+    static Qt::LayoutDirection directionOf( const QString & str );
+
     static void setDonate(bool stt);
     static bool donate();
 
