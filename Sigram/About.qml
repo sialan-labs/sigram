@@ -85,6 +85,25 @@ Rectangle {
         }
     }
 
+    Button {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10*physicalPlatformScale
+        height: 42*physicalPlatformScale
+        width: 200*physicalPlatformScale
+        fontSize: 10*fontsScale
+        textColor: "#ffffff"
+        normalColor: "#ff5532"
+        highlightColor: "#D04528"
+        text: qsTr("Donate")
+        onClicked: {
+            if( Gui.country == "iran" )
+                Gui.openUrl("http://labs.sialan.org/donate-ir")
+            else
+                Gui.openUrl("http://labs.sialan.org/donate")
+        }
+    }
+
     Text {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -92,6 +111,6 @@ Rectangle {
         font.family: globalNormalFontFamily
         font.pointSize: 10
         color: "#ffffff"
-        text: "version 0.6.0"
+        text: "version 0.6.1"
     }
 }

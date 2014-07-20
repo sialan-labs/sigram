@@ -194,6 +194,12 @@ bool TelegramGui::isFavorited(int id) const
     return p->userdata->isFavorited(id);
 }
 
+QString TelegramGui::aboutSialanStr() const
+{
+    return tr("Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.") + "\n\n" +
+           tr("By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.");
+}
+
 QSize TelegramGui::screenSize() const
 {
     const QList<QScreen*> & list = QGuiApplication::screens();
@@ -579,8 +585,7 @@ void TelegramGui::start()
         p->unityTray->addMenu( tr("About"), this, "about" );
         p->unityTray->addMenu( tr("About Sialan"), this, "aboutSialan" );
         p->unityTray->addMenu( tr("License"), this, "showLicense" );
-        if( donate() )
-            p->unityTray->addMenu( tr("Donate"), this, "showDonate" );
+        p->unityTray->addMenu( tr("Donate"), this, "showDonate" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
     }
     if( !p->unityTray || !p->unityTray->pntr() )
@@ -781,7 +786,7 @@ void TelegramGui::showContextMenu()
     QAction *sabt_act = menu.addAction( tr("About Sialan") );
     menu.addSeparator();
     QAction *lcns_act = menu.addAction( tr("License") );
-    QAction *dnt_act = donate()? menu.addAction( tr("Donate") ) : 0;
+    QAction *dnt_act  = menu.addAction( tr("Donate") );
     menu.addSeparator();
     QAction *exit_act = menu.addAction( tr("Exit") );
     QAction *res_act  = menu.exec();
