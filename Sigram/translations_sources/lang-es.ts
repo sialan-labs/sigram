@@ -20,19 +20,19 @@
     <name>AddContact</name>
     <message>
         <source>Add Contact</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Añadir Contacto</translation>
     </message>
     <message>
         <source>Phone number</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Número de teléfono</translation>
     </message>
     <message>
         <source>First name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nombre</translation>
     </message>
     <message>
         <source>Last name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Apellidos</translation>
     </message>
     <message>
         <source>Add</source>
@@ -66,7 +66,7 @@
     </message>
     <message>
         <source> is typing...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">está escribiendo...</translation>
     </message>
 </context>
 <context>
@@ -384,7 +384,7 @@
     <name>UpdateDialog</name>
     <message>
         <source>New update is available :)</source>
-        <translation>Nueva actualización está disponible :)</translation>
+        <translation>Nueva actualización disponible :)</translation>
     </message>
     <message>
         <source>Check</source>
@@ -407,7 +407,7 @@
     </message>
     <message>
         <source>Start Secret Chat (not working yet, we working on it)</source>
-        <translation>Iniciar chat secreto (no funciona todavía, estamos trabajando en eso)</translation>
+        <translation>Iniciar chat secreto (no funciona todavía, estamos trabajando en ello)</translation>
     </message>
     <message>
         <source>Mobile Phone:</source>
@@ -431,15 +431,15 @@
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Idioma:</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambiar nombre</translation>
     </message>
     <message>
         <source>Disable all notifies:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Desactivar todas las notificaciones:</translation>
     </message>
     <message>
         <source>Love:</source>
@@ -447,7 +447,7 @@
     </message>
     <message>
         <source>Favorite:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Favorito:</translation>
     </message>
 </context>
 </TS>
