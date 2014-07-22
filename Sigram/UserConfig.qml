@@ -92,9 +92,8 @@ Item {
         id: cimg
         width: 128
         height: width
-        anchors.left: parent.left
+        x: (name.x-width)/2
         anchors.top: header.bottom
-        anchors.leftMargin: 50
         anchors.topMargin: 60
         uid: u_conf.userId
         onlineState: true
@@ -117,8 +116,8 @@ Item {
     LineEdit {
         id: name
         anchors.top: cimg.top
-        anchors.left: cimg.right
-        anchors.leftMargin: 50
+        anchors.left: parent.left
+        anchors.leftMargin: Math.max(notify_label.width+40, 220 )
         font.pointSize: 18
         font.weight: Font.DemiBold
         font.family: globalNormalFontFamily

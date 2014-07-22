@@ -43,8 +43,11 @@ Item {
             Text {
                 id: input_placeholder
                 anchors.fill: input_line
+                clip: true
                 text: qsTr("Enter name and select contacts")
                 font: input_line.font
+                elide: Text.ElideRight
+                wrapMode: Text.WrapAnywhere
                 color: "#888888"
                 visible: input_line.text.length == 0
                 verticalAlignment: Text.AlignVCenter
@@ -53,6 +56,8 @@ Item {
             TextInput {
                 id: input_line
                 anchors.fill: parent
+                anchors.rightMargin: create_chat_btn.width
+                clip: true
                 anchors.margins: 4
                 verticalAlignment: Text.AlignVCenter
                 onAccepted: input_line_frame.addChat()

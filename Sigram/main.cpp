@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
     QtSingleApplication app(argc, argv);
     app.setApplicationName("Sialan Telegram");
     app.setApplicationDisplayName("Sigram");
+    app.setOrganizationDomain("org.sialan.kaqaz");
+    app.setOrganizationName("Sialan");
     app.setWindowIcon(QIcon(":/files/icon.png"));
     app.setQuitOnLastWindowClosed(false);
 
