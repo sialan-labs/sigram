@@ -56,6 +56,7 @@ public:
     Q_INVOKABLE bool isFavorited( int id ) const;
 
     Q_INVOKABLE QString aboutSialanStr() const;
+    Q_INVOKABLE QString version() const;
 
     Q_INVOKABLE QSize screenSize() const;
     Q_INVOKABLE QPoint mousePos() const;

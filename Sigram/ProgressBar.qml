@@ -28,6 +28,7 @@ Rectangle {
     property real frameSize: 4
     property real percent: 0
     property alias progressColor: top.color
+    property alias topColor: top.color
 
     Rectangle {
         id: top

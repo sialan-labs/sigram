@@ -25,6 +25,7 @@ Item {
 
     property bool isPhoto: Telegram.messageIsPhoto(msgId)
     property int msgId
+    property bool out: false
 
     Connections {
         target: Telegram
@@ -99,6 +100,8 @@ Item {
         anchors.bottom: parent.bottom
         visible: false
         height: 15
+        color: msg_media.out? "#0d7080" : "#B6B6B6"
+        topColor: msg_media.out? "#33B7CC" : "#E6E6E6"
     }
 
     MouseArea {

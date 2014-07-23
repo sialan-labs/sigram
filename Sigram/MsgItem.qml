@@ -163,6 +163,7 @@ Item {
                     height: 192
                     width: 192
                     msgId: msg_id
+                    out: item.out
                     visible: !txt.visible
                 }
 

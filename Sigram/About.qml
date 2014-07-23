@@ -111,6 +111,6 @@ Rectangle {
         font.family: globalNormalFontFamily
         font.pointSize: 10
         color: "#ffffff"
-        text: "version 0.6.1"
+        text: "version " + Gui.version()
     }
 }
