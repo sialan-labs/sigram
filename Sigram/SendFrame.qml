@@ -36,6 +36,8 @@ Rectangle {
             Telegram.setTypingState(privates.last,state)
             typing_state_timer.stop()
         }
+        if( typing_send_typing.running )
+            typing_send_typing.stop()
 
         var draft = msg_drafts.value(current)
         msg_drafts.insert(privates.last, input.text)
@@ -57,7 +59,23 @@ Rectangle {
         id: typing_state_timer
         interval: 5000
         repeat: false
-        onTriggered: setTypingStatus(false)
+        onTriggered: send_frame.setNotTyping()
+    }
+
+    Timer {
+        id: typing_send_typing
+        interval: 2000
+        onTriggered: {
+            Telegram.setTypingState(typing_send_typing.current,true)
+            typing_state_timer.restart()
+            if( onceAgain )
+                typing_send_typing.restart()
+
+            onceAgain = false
+        }
+
+        property int current
+        property bool onceAgain: false
     }
 
     Connections {
@@ -86,8 +104,13 @@ Rectangle {
         anchors.right: tools_column.left
         anchors.margins: 4
         color: imageBack? "#000000" : "#ffffff"
-        onTextChanged: setTypingStatus(text.length==0? false : true)
         onAccepted: send_frame.send()
+        onTextChanged: {
+            if(text.length!=0)
+                send_frame.setOnTyping()
+            else
+                send_frame.setNotTyping()
+        }
     }
 
     Column {
@@ -174,15 +197,24 @@ Rectangle {
         Telegram.sendMessage(send_frame.current,input.text.trim())
         Telegram.setStatusOnline(true)
         input.text = ""
-        setTypingStatus(false)
+        setNotTyping()
     }
 
-    function setTypingStatus( state ) {
-        Telegram.setTypingState(send_frame.current,state)
+    function setOnTyping() {
+        if( typing_send_typing.running ) {
+            typing_send_typing.onceAgain = true
+            return
+        }
 
-        if( state )
-            typing_state_timer.restart()
-        else
-            typing_state_timer.stop()
+        Telegram.setTypingState(send_frame.current,true)
+        typing_send_typing.current = send_frame.current
+        typing_send_typing.onceAgain = false
+        typing_send_typing.restart()
+    }
+
+    function setNotTyping() {
+        Telegram.setTypingState(send_frame.current,false)
+        typing_state_timer.stop()
+        typing_send_typing.stop()
     }
 }
