@@ -4,6 +4,8 @@
     <version>0.6.2</version>
     <licenseFile>LICENSE</licenseFile>
     <htmlLicenseFile>LICENSE.html</htmlLicenseFile>
+    <leftImage>installer/logo.png</leftImage>
+    <logoImage>installer/icon.png</logoImage>
     <componentList>
         <component>
             <name>default</name>
@@ -99,21 +101,25 @@
             </startMenuShortcutList>
         </component>
     </componentList>
+    <compressionAlgorithm>lzma-ultra</compressionAlgorithm>
+    <disableSplashScreen>1</disableSplashScreen>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
+    <height>400</height>
+    <licenseFileEncoding>utf-8</licenseFileEncoding>
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Sialan Labs</vendor>
+    <width>600</width>
     <parameterList>
         <directoryParameter>
             <name>installdir</name>
             <description>Installer.Parameter.installdir.description</description>
             <explanation>Installer.Parameter.installdir.explanation</explanation>
-            <value></value>
+            <value>${platform_install_prefix}/Sialan/${product_shortname}-${product_version}</value>
             <default>${platform_install_prefix}/${product_shortname}-${product_version}</default>
             <allowEmptyValue>0</allowEmptyValue>
-            <ask>yes</ask>
             <cliOptionName>prefix</cliOptionName>
-            <mustBeWritable>yes</mustBeWritable>
+            <mustBeWritable>1</mustBeWritable>
             <mustExist>0</mustExist>
             <width>30</width>
         </directoryParameter>
