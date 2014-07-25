@@ -78,6 +78,7 @@ Rectangle {
         ListView {
             id: clist
             anchors.fill: parent
+            anchors.rightMargin: 8
             model: ListModel{}
             header: Item{ height: cl_header.height }
             delegate: ContactListItem {
@@ -164,7 +165,7 @@ Rectangle {
 
         PhysicalScrollBar {
             scrollArea: clist; height: clist.height; width: 8
-            anchors.right: clist.right; anchors.top: clist.top; color: "#333333"
+            anchors.right: parent.right; anchors.top: clist.top; color: "#333333"
             anchors.topMargin: cl_header.height
         }
     }
