@@ -20,6 +20,7 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
 Rectangle {
+    id: chat_frame
     width: 100
     height: 62
     clip: true
@@ -34,12 +35,12 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: 250
+        anchors.right: splitter.horizontalCenter
     }
 
     ChatView {
         id: chat_view
-        anchors.left: contact_list.right
+        anchors.left: splitter.horizontalCenter
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -67,6 +68,34 @@ Rectangle {
 
         ForwardingPage {
             anchors.fill: parent
+        }
+    }
+
+    Item {
+        id: splitter
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: 5
+        x: Gui.chatListWidth
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.SplitHCursor
+            onPressed: pinX = mouseX
+            onMouseXChanged: {
+                if( !pressed )
+                    return
+
+                var newX = Gui.chatListWidth + mouseX - pinX
+                if( newX < 200 )
+                    newX = 200
+                if( newX > chat_frame.width-200 )
+                    newX = chat_frame.width-200
+
+                Gui.chatListWidth = newX
+            }
+            property real pinX
         }
     }
 }

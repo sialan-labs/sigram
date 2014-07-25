@@ -94,6 +94,7 @@ public:
 
     QQuickWindow *root;
 
+    qreal chatListWidth;
     QString background;
     bool mute_all;
     bool firstTime;
@@ -132,6 +133,7 @@ TelegramGui::TelegramGui(QObject *parent) :
         tg_settings = new QSettings( HOME_PATH + "/telegram.conf", QSettings::IniFormat, this);
 
     p->background = tg_settings->value( "General/background", QString() ).toString();
+    p->chatListWidth = tg_settings->value( "General/chatListWidth", 250 ).toDouble();
     p->firstTime = tg_settings->value( "General/firstTime", true ).toBool();
     p->width = tg_settings->value( "General/width", 1024 ).toInt();
     p->height = tg_settings->value( "General/height", 600 ).toInt();
@@ -270,6 +272,21 @@ void TelegramGui::setBackground(const QString &path)
 QString TelegramGui::background() const
 {
     return p->background;
+}
+
+void TelegramGui::setChatListWidth(qreal w)
+{
+    if( w == p->chatListWidth )
+        return;
+
+    p->chatListWidth = w;
+    tg_settings->setValue( "General/chatListWidth", p->chatListWidth );
+    emit chatListWidthChanged();
+}
+
+qreal TelegramGui::chatListWidth() const
+{
+    return p->chatListWidth;
 }
 
 void TelegramGui::setLove(int uid)
