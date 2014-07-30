@@ -142,6 +142,14 @@ void TelegramCore::sendFile(const QString &peer, const QString &file)
     else
     if( t.name().contains("video") )
         cmd = "send_video";
+    else
+    if( t.name().contains("audio") )
+        cmd = "send_audio";
+    else
+    if( t.name().contains("text") )
+        cmd = "send_text";
+    else
+        cmd = "send_document";
 
     send_command( QString("%1 %2 %3").arg(cmd).arg(QString(peer).replace(" ","_")).arg(file) );
 }

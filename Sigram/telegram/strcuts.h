@@ -77,11 +77,13 @@ public:
     };
 
     enum MessageType {
-        MediaEmpty = CODE_message_media_empty,
-        MediaPhoto = CODE_message_media_photo,
-        MediaVideo = CODE_message_media_video,
-        MediaGeo = CODE_message_media_geo,
-        MediaContact = CODE_message_media_contact,
+        MediaEmpty    = CODE_message_media_empty,
+        MediaPhoto    = CODE_message_media_photo,
+        MediaVideo    = CODE_message_media_video,
+        MediaDocument = CODE_message_media_document,
+        MediaAudio    = CODE_message_media_audio,
+        MediaGeo      = CODE_message_media_geo,
+        MediaContact  = CODE_message_media_contact,
         MediaUnsupported = CODE_message_media_unsupported
     };
 

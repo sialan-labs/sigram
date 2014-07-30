@@ -302,12 +302,12 @@ Item {
         anchors.top: fave.bottom
         anchors.left: name.left
         anchors.topMargin: 10
-        checked: u_conf.userId == Telegram.me? Gui.muteAll : userMuted
+        checked: u_conf.userId == Telegram.me? Gui.muteAll : !userMuted
         onCheckedChanged: {
             if( u_conf.userId == Telegram.me )
                 Gui.muteAll = checked
             else
-                Gui.setMute( u_conf.userId, checked )
+                Gui.setMute( u_conf.userId, !checked )
         }
 
         property bool userMuted: false
