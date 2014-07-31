@@ -61,7 +61,7 @@ Item {
         clip: true
         source: path.length==0? "" : "file://" + path
 
-        property string path: Telegram.messageMediaFile(msgId)
+        property string path: msg_media.isPhoto? Telegram.messageMediaFile(msgId) : ""
 
         onPathChanged: {
             if( path.length == 0 )
@@ -87,17 +87,6 @@ Item {
         anchors.fill: parent
     }
 
-    Button {
-        id: download_btn
-        anchors.centerIn: parent
-        width: 150*physicalPlatformScale
-        height: 35*physicalPlatformScale
-        normalColor: msg_media.out? "#0d7080" : "#B6B6B6"
-        text: Telegram.messageMediaFile(msgId)? qsTr("Open") : qsTr("Download")
-        visible: !Telegram.messageIsPhoto(msgId)
-        onClicked: Telegram.loadMedia(msgId)
-    }
-
     ProgressBar {
         id: p_bar
         anchors.left: parent.left
@@ -111,7 +100,7 @@ Item {
 
     MouseArea {
         anchors.fill: parent
-        visible: f_img.path.length != 0
+        visible: msg_media.isPhoto
         acceptedButtons: Qt.RightButton | Qt.LeftButton
         cursorShape: Qt.PointingHandCursor
         onClicked: {
@@ -123,6 +112,17 @@ Item {
                 mainFrame.focus = true
             }
         }
+    }
+
+    Button {
+        id: download_btn
+        anchors.centerIn: parent
+        width: 150*physicalPlatformScale
+        height: 35*physicalPlatformScale
+        normalColor: msg_media.out? "#0d7080" : "#B6B6B6"
+        text: Telegram.messageMediaFile(msgId)? qsTr("Open") : qsTr("Download")
+        visible: !Telegram.messageIsPhoto(msgId)
+        onClicked: Telegram.loadMedia(msgId)
     }
 
     Component {
