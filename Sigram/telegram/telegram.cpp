@@ -614,6 +614,11 @@ void Telegram::loadPhoto(qint64 msg_id)
     p->tg_thread->loadPhoto(msg_id);
 }
 
+void Telegram::loadMedia(qint64 msg_id)
+{
+    p->tg_thread->loadMedia(msg_id);
+}
+
 void Telegram::sendFile(int dId, const QString &file)
 {
     p->tg_thread->sendFile(dId,file);

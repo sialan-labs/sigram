@@ -133,20 +133,35 @@ void TelegramCore::loadPhoto(qint64 msg_id)
     send_command( QString("load_photo %1").arg(msg_id) );
 }
 
+void TelegramCore::loadVideo(qint64 msg_id)
+{
+    send_command( QString("load_video %1").arg(msg_id) );
+}
+
+void TelegramCore::loadAudio(qint64 msg_id)
+{
+    send_command( QString("load_audio %1").arg(msg_id) );
+}
+
+void TelegramCore::loadDocument(qint64 msg_id)
+{
+    send_command( QString("load_document %1").arg(msg_id) );
+}
+
 void TelegramCore::sendFile(const QString &peer, const QString &file)
 {
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
     QString cmd = "send_text";
-    if( t.name().contains("image") )
+    if( t.name().contains("image/") )
         cmd = "send_photo";
     else
-    if( t.name().contains("video") )
+    if( t.name().contains("video/") )
         cmd = "send_video";
     else
-    if( t.name().contains("audio") )
+    if( t.name().contains("audio/") )
         cmd = "send_audio";
     else
-    if( t.name().contains("text") )
+    if( t.name().contains("text/") )
         cmd = "send_text";
     else
         cmd = "send_document";
@@ -440,6 +455,22 @@ void incomingMsg( struct message *m, struct user *u )
     if( msg.mediaType == Enums::MediaEmpty && !msg.service )
         msg.message = QString(m->msg);
 
+    switch( m->media.type )
+    {
+    case Enums::MediaAudio:
+        msg.accessHash = m->media.audio.access_hash;
+        break;
+    case Enums::MediaDocument:
+        msg.accessHash = m->media.document.access_hash;
+        break;
+    case Enums::MediaVideo:
+        msg.accessHash = m->media.video.access_hash;
+        break;
+    case Enums::MediaPhoto:
+        msg.accessHash = m->media.photo.access_hash;
+        break;
+    }
+
     switch( m->action.type )
     {
     case Enums::MessageActionEmpty:
@@ -524,7 +555,7 @@ void photoFound( int id, long long volume )
 void fileLoaded( struct download *d )
 {
     foreach( TelegramCore *tg, telegram_objects )
-        emit tg->fileLoaded(d->volume, d->local_id, d->name );
+        emit tg->fileLoaded(d->volume, d->local_id, d->access_hash, d->name );
 }
 void fileUploading( struct send_file *f, long long total, long long uploaded )
 {
@@ -535,7 +566,7 @@ void fileUploading( struct send_file *f, long long total, long long uploaded )
 void fileDownloading( struct download *d, long long total, long long downloaded )
 {
     foreach( TelegramCore *tg, telegram_objects )
-        emit tg->fileDownloading( d->volume, total, downloaded );
+        emit tg->fileDownloading( d->volume, total, d->access_hash, downloaded );
 }
 
 void registeringStarted()

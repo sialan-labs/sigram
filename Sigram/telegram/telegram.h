@@ -130,6 +130,7 @@ public slots:
     void loadChatInfo( int chatId );
 
     void loadPhoto( qint64 msg_id );
+    void loadMedia( qint64 msg_id );
 
     void sendFile( int dId, const QString & file );
     bool sendFileDialog( int dId );

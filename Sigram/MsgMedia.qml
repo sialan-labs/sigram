@@ -43,7 +43,12 @@ Item {
 
             p_bar.visible = false
             f_indicator.stop()
-            f_img.path = Telegram.messageMediaFile(msgId)
+            f_img.path = ""
+
+            if( Telegram.messageIsPhoto(msgId) )
+                f_img.path = Telegram.messageMediaFile(msgId)
+            else
+                Gui.openFile(Telegram.messageMediaFile(msgId))
         }
     }
 
@@ -82,15 +87,15 @@ Item {
         anchors.fill: parent
     }
 
-    Text {
-        id: not_support_text
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        wrapMode: Text.WordWrap
-        horizontalAlignment: Text.AlignHCenter
-        text: qsTr("Video and Audio files not supported yet.")
+    Button {
+        id: download_btn
+        anchors.centerIn: parent
+        width: 150*physicalPlatformScale
+        height: 35*physicalPlatformScale
+        normalColor: msg_media.out? "#0d7080" : "#B6B6B6"
+        text: Telegram.messageMediaFile(msgId)? qsTr("Open") : qsTr("Download")
         visible: !Telegram.messageIsPhoto(msgId)
+        onClicked: Telegram.loadMedia(msgId)
     }
 
     ProgressBar {

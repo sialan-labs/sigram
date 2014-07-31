@@ -235,6 +235,7 @@ public:
     int to_id;
 
     int flags;
+    qint64 accessHash;
 
     bool deleted;
 

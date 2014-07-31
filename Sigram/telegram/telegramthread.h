@@ -59,6 +59,7 @@ public slots:
     void loadChatInfo( int chatId );
 
     void loadPhoto( qint64 msg_id );
+    void loadMedia( qint64 msg_id );
 
     void sendFile( int dId, const QString & file );
     void markRead( int dId );
@@ -103,6 +104,7 @@ signals:
 
     void msgFileDownloaded( qint64 msg_id );
     void msgFileDownloading( qint64 msg_id, qreal percent );
+    void fileDownloaded( const QString & path );
 
     void messageDeleted( qint64 msg_id );
     void messageRestored( qint64 msg_id );
@@ -132,10 +134,10 @@ private slots:
     void _userStatusChanged(int user_id, int status, const QDateTime &when );
 
     void _photoFound( int id, qint64 volume );
-    void _fileLoaded( qint64 volume, int localId, const QString & path );
+    void _fileLoaded(qint64 volume, int localId, qint64 hash, const QString & path );
 
     void _fileUploading(int user_id, const QString & file, qint64 total, qint64 uploaded );
-    void _fileDownloading(qint64 volume, qint64 total, qint64 downloaded );
+    void _fileDownloading(qint64 volume, qint64 total, qint64 hash, qint64 downloaded );
 
     void _waitAndGet( int type );
 
