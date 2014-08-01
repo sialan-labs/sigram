@@ -160,7 +160,7 @@ Item {
 
                 MsgMedia {
                     id: media
-                    height: isPhoto? 192 : 50
+                    height: isPhoto? 192 : 100
                     width: 192
                     msgId: msg_id
                     out: item.out
