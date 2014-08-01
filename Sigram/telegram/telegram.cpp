@@ -25,7 +25,10 @@
 #include <QFontMetricsF>
 #include <QCoreApplication>
 #include <QFileDialog>
+#include <QQueue>
 #include <QDebug>
+
+typedef QPair<int,QString> MessageQueueItem;
 
 class TelegramPrivate
 {
@@ -49,6 +52,9 @@ public:
     QSet<int> loaded_chats_info;
 
     QHash<QString, QList<int> > chat_group_buffer;
+
+    QQueue<MessageQueueItem> msg_send_queue;
+    int msg_send_timer;
 };
 
 Telegram *sortDialogList_tmp_obj = 0;
@@ -73,6 +79,7 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     p->update_contact_timer_id = 0;
     p->authenticating = false;
     p->started = false;
+    p->msg_send_timer = 0;
     p->last_wait_and_get = Enums::NoWaitAndGet;
 
     p->tg_thread = new TelegramThread(argc,argv);
@@ -569,7 +576,16 @@ void Telegram::getHistory(int id, int count)
 
 void Telegram::sendMessage(int id, const QString &msg)
 {
-    p->tg_thread->sendMessage(id,msg);
+    MessageQueueItem item;
+    item.first = id;
+    item.second = msg;
+
+    p->msg_send_queue.append(item);
+    if( p->msg_send_queue.count() == 1 )
+    {
+        p->tg_thread->sendMessage(id,msg);
+        p->msg_send_timer = startTimer(1000);
+    }
 }
 
 void Telegram::forwardMessage(qint64 msg_id, int user_id)
@@ -808,6 +824,20 @@ void Telegram::timerEvent(QTimerEvent *e)
         p->update_contact_again = false;
         killTimer(p->update_contact_timer_id);
         p->update_contact_timer_id = 0;
+    }
+    else
+    if( e->timerId() == p->msg_send_timer )
+    {
+        p->msg_send_queue.takeFirst();
+        if( p->msg_send_queue.isEmpty() )
+        {
+            killTimer(p->msg_send_timer);
+            p->msg_send_timer = 0;
+            return;
+        }
+
+        const MessageQueueItem & item = p->msg_send_queue.first();
+        p->tg_thread->sendMessage(item.first,item.second);
     }
     else
         QObject::timerEvent(e);
