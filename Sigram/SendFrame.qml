@@ -103,6 +103,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: tools_column.left
         anchors.margins: 4
+        font.pointSize: 9
         color: imageBack? "#000000" : "#ffffff"
         onAccepted: send_frame.send()
         onTextChanged: {
