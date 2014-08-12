@@ -241,6 +241,23 @@ Rectangle {
                 Gui.call( chat_list, "positionViewAtBeginning" )
             }
         }
+
+        DropArea {
+            anchors.fill: parent
+            onDropped: {
+                if( chat_view.current == 0 )
+                    return
+                if( drop.hasUrls ) {
+                    var urls = drop.urls
+                    for( var i=0; i<urls.length; i++ )
+                        Telegram.sendFile(chat_view.current,urls[i])
+                }
+                else
+                if( drop.hasText ) {
+
+                }
+            }
+        }
     }
 
     NormalWheelScroll {
