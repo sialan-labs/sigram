@@ -267,7 +267,7 @@ void TelegramThread::loadMedia(qint64 msg_id)
         break;
 
     case Enums::MediaVideo:
-        QMetaObject::invokeMethod( p->tg, "loadVieo", Qt::QueuedConnection, Q_ARG(qint64,msg_id) );
+        QMetaObject::invokeMethod( p->tg, "loadVideo", Qt::QueuedConnection, Q_ARG(qint64,msg_id) );
         break;
 
     case Enums::MediaDocument:
