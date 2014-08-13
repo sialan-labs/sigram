@@ -239,7 +239,7 @@ QString TelegramGui::appPath() const
 QStringList TelegramGui::fonts() const
 {
 #ifdef Q_OS_MAC
-    return fontsOf(appPath() + "../Resources/fonts");
+    return fontsOf(appPath() + "/../Resources/fonts");
 #else
     return fontsOf(appPath() + "/fonts");
 #endif

@@ -61,7 +61,7 @@ UserData::UserData(QObject *parent) :
 
     if( !TelegramGui::settings()->value("initialize/userdata_db",false).toBool() )
 #ifdef Q_OS_MAC
-        QFile::copy(QCoreApplication::applicationDirPath()+"../Resources/database/userdata.db",p->path);
+        QFile::copy(QCoreApplication::applicationDirPath()+"/../Resources/database/userdata.db",p->path);
 #else
         QFile::copy(QCoreApplication::applicationDirPath()+"/database/userdata.db",p->path);
 #endif

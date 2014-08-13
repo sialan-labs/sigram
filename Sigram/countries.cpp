@@ -17,8 +17,8 @@
 */
 
 #ifdef Q_OS_MAC
-#define FILE_PATH QString(QCoreApplication::applicationDirPath() + "../Resources/countries/countries.csv")
-#define FLAGS_PATH QString(QCoreApplication::applicationDirPath() + "../Resources/countries/flags/")
+#define FILE_PATH QString(QCoreApplication::applicationDirPath() + "/../Resources/countries/countries.csv")
+#define FLAGS_PATH QString(QCoreApplication::applicationDirPath() + "/../Resources/countries/flags/")
 #else
 #define FILE_PATH QString(QCoreApplication::applicationDirPath() + "/countries/countries.csv")
 #define FLAGS_PATH QString(QCoreApplication::applicationDirPath() + "/countries/flags/")
