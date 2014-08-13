@@ -1,3 +1,4 @@
+
 /*
     Copyright (C) 2014 Sialan Labs
     http://labs.sialan.org
@@ -132,7 +133,7 @@ public slots:
     void loadPhoto( qint64 msg_id );
     void loadMedia( qint64 msg_id );
 
-    void sendFile( int dId, const QString & file );
+    void sendFile( int dId, QString file );
     bool sendFileDialog( int dId );
     void markRead( int dId );
 

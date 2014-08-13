@@ -28,6 +28,10 @@
 #include <QQueue>
 #include <QDebug>
 
+#define NORMALIZE_PATH( PATH ) \
+    while( PATH.left(7) == "file://" ) \
+        PATH = PATH.mid(7);
+
 typedef QPair<int,QString> MessageQueueItem;
 
 class TelegramPrivate
@@ -636,8 +640,9 @@ void Telegram::loadMedia(qint64 msg_id)
     p->tg_thread->loadMedia(msg_id);
 }
 
-void Telegram::sendFile(int dId, const QString &file)
+void Telegram::sendFile(int dId, QString file)
 {
+    NORMALIZE_PATH(file)
     p->tg_thread->sendFile(dId,file);
 }
 
