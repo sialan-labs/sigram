@@ -187,7 +187,7 @@ Item {
         textFont.pointSize: 11
         textFont.underline: true
         text: qsTr("Send Message")
-        visible: !u_conf.isChat
+        visible: u_conf.userId !== Telegram.me && !u_conf.isChat
         onClicked: {
             u_conf.chatRequest(u_conf.userId)
             u_conf.backRequest()
@@ -207,7 +207,7 @@ Item {
         textFont.pointSize: 11
         textFont.underline: true
         text: qsTr("Start Secret Chat (not working yet, we working on it)")
-        visible: !u_conf.isChat
+        visible: u_conf.userId !== Telegram.me && !u_conf.isChat
     }
 
     Text {
@@ -322,6 +322,7 @@ Item {
         font.family: globalNormalFontFamily
         color: "#555555"
         text: qsTr("Language:")
+        visible: u_conf.userId == Telegram.me
     }
 
     ControlCombo {

@@ -58,6 +58,8 @@ public slots:
     void loadUserInfo( int userId );
     void loadChatInfo( int chatId );
 
+    void loadOwnInfo();
+
     void loadPhoto( qint64 msg_id );
     void loadMedia( qint64 msg_id );
 

@@ -118,6 +118,11 @@ void TelegramCore::setTypingState(const QString &peer, bool state)
         send_command( QString("typing_off %1").arg(QString(peer).replace(" ","_")) );
 }
 
+void TelegramCore::loadOwnInfo()
+{
+    send_command( QString("own_info") );
+}
+
 void TelegramCore::loadUserInfo(const QString &user)
 {
     send_command( QString("user_info %1").arg(QString(user).replace(" ","_")) );

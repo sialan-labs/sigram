@@ -320,7 +320,10 @@ Rectangle {
             highlightColor: "#66ffffff"
             icon: "files/configure.png"
             iconHeight: 22
-            onClicked: showConfigure(Telegram.me)
+            onClicked: if(chat_view.current!=0)
+                          showConfigure(chat_view.current)
+                       else
+                          showConfigure(Telegram.me)
         }
     }
 

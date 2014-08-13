@@ -240,7 +240,7 @@ int fetch_user (struct user *U) {
       long long access_token = 0;
       if (x != CODE_user_self) {
         access_token = fetch_long ();
-      }
+      }      
       int phone_len = 0;
       char *phone = 0;
       if (x != CODE_user_foreign) {

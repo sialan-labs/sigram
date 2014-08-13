@@ -239,6 +239,7 @@ char *commands[] = {
   "send_text",
   "chat_info",
   "user_info",
+  "own_info",
   "fwd",
   "rename_chat",
   "load_photo",
@@ -671,6 +672,8 @@ void interpreter (char *line UU) {
   } else if (IS_WORD ("user_info")) {
     GET_PEER_USER;
     do_get_user_info (id);
+  } else if (IS_WORD ("own_info")) {
+    do_get_own_info();
   } else if (IS_WORD ("history")) {
     GET_PEER;
     int limit = next_token_int ();
