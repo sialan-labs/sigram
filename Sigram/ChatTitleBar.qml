@@ -72,7 +72,7 @@ Rectangle {
             anchors.horizontalCenter: column.horizontalCenter
             color: imageBack? "#333333" : "#bbbbbb"
             font.family: globalNormalFontFamily
-            text: Telegram.title(titlebar.current)
+            text: Emojis.textToEmojiText( Telegram.title(titlebar.current) )
         }
 
         Text {
