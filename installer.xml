@@ -1,7 +1,7 @@
 <project>
     <shortName>sigram</shortName>
     <fullName>Sigram</fullName>
-    <version>0.6.2</version>
+    <version>0.7.0</version>
     <licenseFile>LICENSE</licenseFile>
     <htmlLicenseFile>LICENSE.html</htmlLicenseFile>
     <leftImage>installer/logo.png</leftImage>
