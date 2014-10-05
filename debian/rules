@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@ 
+
+override_dh_auto_configure:
+	dh_auto_configure -- PREFIX=/opt/sialan/sigram/ BUILD_MODE=opt BUILD_TYPE=pro
+
+override_dh_install:
+	dh_install
+	mkdir -p debian/sigram/usr/bin
+	ln -s /opt/sialan/sigram/Sigram debian/sigram/usr/bin/sigram
+
+override_dh_clean:
+	dh_clean
