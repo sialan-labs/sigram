@@ -41,14 +41,15 @@ Switch to source directory
 ##### Ubuntu
 
     mkdir build && cd build
-    qmake -r ..
+    qmake -r .. PREFIX=/usr
     make
+    make install
 
-If you want to build UnitySystemTray plugin also run this command:
+If you want to build UnitySystemTray plugin run this command:
 
-    mkdir plugins && cd plugins
-    qmake -r ../../libs/UnitySystemTray
+    qmake -r .. EXTENSIONS+=unity PREFIX=/usr
     make
+    make install
 
 You can use command below after building to clean build directory on the each step.
 
