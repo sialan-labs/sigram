@@ -16,15 +16,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifdef Q_OS_MAC
-#define FILE_PATH QString(QCoreApplication::applicationDirPath() + "/../Resources/countries/countries.csv")
-#define FLAGS_PATH QString(QCoreApplication::applicationDirPath() + "/../Resources/countries/flags/")
-#else
-#define FILE_PATH QString(QCoreApplication::applicationDirPath() + "/countries/countries.csv")
-#define FLAGS_PATH QString(QCoreApplication::applicationDirPath() + "/countries/flags/")
-#endif
+#define FILE_PATH QString(TelegramGui::resourcesPath() + "/countries/countries.csv")
+#define FLAGS_PATH QString(TelegramGui::resourcesPath() + "/countries/flags/")
 
 #include "countries.h"
+#include "telegramgui.h"
 
 #include <QCoreApplication>
 #include <QFile>

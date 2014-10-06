@@ -8,7 +8,7 @@
 	dh $@ 
 
 override_dh_auto_configure:
-	dh_auto_configure -- PREFIX=/opt/sialan/sigram/ BUILD_MODE=opt BUILD_TYPE=pro
+	dh_auto_configure -- PREFIX=/opt/sialan/sigram/ BUILD_MODE=opt EXNTESIONS+=unity
 
 override_dh_install:
 	dh_install

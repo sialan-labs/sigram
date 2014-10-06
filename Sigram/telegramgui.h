@@ -94,6 +94,7 @@ public:
     Q_INVOKABLE QString fixPhoneNumber(QString number );
 
     static int desktopSession();
+    static const QString &resourcesPath();
 
     void setWidth( int w );
     int width() const;

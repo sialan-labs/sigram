@@ -1,4 +1,10 @@
-kaqaz (0.7.0) trusty; urgency=low
+sigram (0.7.0ubuntu2) trusty; urgency=medium
+
+  * Fix missed libssl package for build.
+
+ -- Sialan Labs <contact@sialan.org>  Mon, 06 Oct 2014 09:57:18 +0330
+
+sigram (0.7.0ubuntu1) trusty; urgency=medium
 
   * Initial Release.
 

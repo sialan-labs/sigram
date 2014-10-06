@@ -32,3 +32,23 @@ SOURCES += unitysystemtray.cpp \
 
 HEADERS += unitysystemtray.h\
         unitysystemtray_global.h
+
+isEmpty(PREFIX) {
+    PREFIX = /usr
+}
+
+contains(BUILD_MODE,opt) {
+    BIN_PATH = $$PREFIX/plugins
+} else {
+    BIN_PATH = $$PREFIX/lib/sigram/plugins
+}
+
+android {
+} else {
+linux {
+    target = $$TARGET
+    target.path = $$BIN_PATH
+
+    INSTALLS = target
+}
+}

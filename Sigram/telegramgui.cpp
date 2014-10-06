@@ -238,11 +238,7 @@ QString TelegramGui::appPath() const
 
 QStringList TelegramGui::fonts() const
 {
-#ifdef Q_OS_MAC
-    return fontsOf(appPath() + "/../Resources/fonts");
-#else
-    return fontsOf(appPath() + "/fonts");
-#endif
+    return fontsOf(TelegramGui::resourcesPath() + "/fonts");
 }
 
 QStringList TelegramGui::fontsOf(const QString &path) const
@@ -411,6 +407,27 @@ int TelegramGui::desktopSession()
         result = Enums::Unknown;
 
     return result;
+}
+
+const QString & TelegramGui::resourcesPath()
+{
+    static QString *result;
+    if( !result )
+    {
+        result = new QString();
+
+#ifdef Q_OS_MAC
+        *result = QFileInfo(QCoreApplication::applicationDirPath() + "/../Resources/").filePath();
+#else
+        QString res = QCoreApplication::applicationDirPath();
+        if( !QFile::exists(res) )
+            res = QCoreApplication::applicationDirPath() + "../share/sigram";
+
+        *result = QFileInfo(res).filePath();
+#endif
+    }
+
+    return *result;
 }
 
 void TelegramGui::setWidth(int w)
