@@ -35,6 +35,7 @@ public:
     QString currentTheme() const;
 
     Q_INVOKABLE QString textToEmojiText( const QString & txt );
+    Q_INVOKABLE QString bodyTextToEmojiText( const QString & txt );
 
     Q_INVOKABLE QList<QString> keys() const;
     Q_INVOKABLE QString pathOf( const QString & key ) const;

@@ -144,7 +144,7 @@ Item {
                     id: txt
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     width: msgWidth>item.width*0.6? item.width*0.6 : msgWidth
-                    text: Emojis.textToEmojiText( Telegram.messageBody(msg_id) )
+                    text: Emojis.bodyTextToEmojiText( Telegram.messageBody(msg_id) )
                     color: item.out? "#ffffff" : "#333333"
                     font.family: globalTextFontFamily
                     font.pointSize: 9

@@ -113,6 +113,16 @@ QString Emojis::textToEmojiText(const QString &txt)
     return res;
 }
 
+QString Emojis::bodyTextToEmojiText(const QString &txt)
+{
+    QString res;
+    Qt::LayoutDirection dir = TelegramGui::directionOf(txt);
+
+    QString dir_txt = dir==Qt::LeftToRight? "ltr" : "rtl";
+    res = QString("<html><body><p dir='%1'>").arg(dir_txt) + textToEmojiText(txt) + "</p></body></html>";
+    return res;
+}
+
 QList<QString> Emojis::keys() const
 {
     return p->keys;
