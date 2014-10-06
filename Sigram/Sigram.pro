@@ -122,7 +122,7 @@ linux {
     countries.files = countries
     countries.path = $$SHARES_PATH/
     emojis.files = emojis
-    emojis.path = $$SHARES_PATH/emojis
+    emojis.path = $$SHARES_PATH/
     server_pub.files = tg-server.pub
     server_pub.path = $$SHARES_PATH/
     run_script.files = run
