@@ -54,6 +54,8 @@ public slots:
     void loadUserInfo( const QString & user );
     void loadChatInfo( const QString & chat );
 
+    void loadOwnInfo();
+
     void loadPhoto( qint64 msg_id );
     void loadVideo( qint64 msg_id );
     void loadAudio( qint64 msg_id );

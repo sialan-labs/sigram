@@ -195,6 +195,7 @@ private slots:
     void _waitAndGet( int type );
     void _startedChanged();
     void _incomingNewMsg( qint64 msg_id );
+    void _loadOwnInfo();
     void registeringStarted();
     void registeringFinished();
 

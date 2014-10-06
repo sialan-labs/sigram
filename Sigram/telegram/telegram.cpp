@@ -89,6 +89,7 @@ Telegram::Telegram(int argc, char **argv, QObject *parent) :
     p->tg_thread = new TelegramThread(argc,argv);
 
     connect( p->tg_thread, SIGNAL(contactsChanged())                   , SIGNAL(meChanged())                          );
+    connect( p->tg_thread, SIGNAL(contactsChanged())                   , SLOT(_loadOwnInfo())                         );
     connect( p->tg_thread, SIGNAL(unreadChanged())                     , SIGNAL(unreadChanged())                      );
     connect( p->tg_thread, SIGNAL(contactsChanged())                   , SIGNAL(contactsChanged())                    );
     connect( p->tg_thread, SIGNAL(dialogsChanged())                    , SIGNAL(dialogsChanged())                     );
@@ -771,6 +772,11 @@ void Telegram::_startedChanged()
 {
     p->started = true;
     emit startedChanged();
+}
+
+void Telegram::_loadOwnInfo()
+{
+    p->tg_thread->loadOwnInfo();
 }
 
 void Telegram::_incomingNewMsg(qint64 msg_id)
