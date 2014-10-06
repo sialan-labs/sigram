@@ -245,6 +245,11 @@ void TelegramThread::loadChatInfo(int chatId)
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(QString,dialog.chatClass.title) );
 }
 
+void TelegramThread::loadOwnInfo()
+{
+    INVOKE_METHOD(Qt::QueuedConnection);
+}
+
 void TelegramThread::loadPhoto(qint64 msg_id)
 {
     INVOKE_METHOD(Qt::QueuedConnection, Q_ARG(qint64,msg_id) );

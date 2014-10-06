@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es">
+<TS version="2.0" language="es">
 <context>
     <name>About</name>
     <message>
@@ -20,23 +20,23 @@
     <name>AddContact</name>
     <message>
         <source>Add Contact</source>
-        <translation type="unfinished">Añadir Contacto</translation>
+        <translation>Añadir Contacto</translation>
     </message>
     <message>
         <source>Phone number</source>
-        <translation type="unfinished">Número de teléfono</translation>
+        <translation>Número de teléfono</translation>
     </message>
     <message>
         <source>First name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Last name</source>
-        <translation type="unfinished">Apellidos</translation>
+        <translation>Apellidos</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Agregar</translation>
+        <translation>Agregar</translation>
     </message>
 </context>
 <context>
@@ -62,11 +62,11 @@
     </message>
     <message>
         <source>is typing...</source>
-        <translation type="vanished">está escribiendo...</translation>
+        <translation>está escribiendo...</translation>
     </message>
     <message>
         <source> is typing...</source>
-        <translation type="unfinished">está escribiendo...</translation>
+        <translation> está escribiendo...</translation>
     </message>
 </context>
 <context>
@@ -147,31 +147,31 @@
     <name>LineEdit</name>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Copiar</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="vanished">Cortar</translation>
+        <translation>Cortar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="vanished">Pegar</translation>
+        <translation>Pegar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="vanished">Eliminar</translation>
+        <translation>Eliminar</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">Seleccionar todo</translation>
+        <translation>Seleccionar todo</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="vanished">Deshacer</translation>
+        <translation>Deshacer</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="vanished">Rehacer</translation>
+        <translation>Rehacer</translation>
     </message>
 </context>
 <context>
@@ -353,31 +353,31 @@
     <name>TextArea</name>
     <message>
         <source>Copy</source>
-        <translation type="unfinished">Copiar</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">Cortar</translation>
+        <translation>Cortar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished">Pegar</translation>
+        <translation>Pegar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Eliminar</translation>
+        <translation>Eliminar</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished">Seleccionar todo</translation>
+        <translation>Seleccionar todo</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished">Deshacer</translation>
+        <translation>Deshacer</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished">Rehacer</translation>
+        <translation>Rehacer</translation>
     </message>
 </context>
 <context>
@@ -431,23 +431,23 @@
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished">Idioma:</translation>
+        <translation>Idioma:</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished">Cambiar nombre</translation>
+        <translation>Cambiar nombre</translation>
     </message>
     <message>
         <source>Disable all notifies:</source>
-        <translation type="unfinished">Desactivar todas las notificaciones:</translation>
+        <translation>Desactivar todas las notificaciones:</translation>
     </message>
     <message>
         <source>Love:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Me gusta:</translation>
     </message>
     <message>
         <source>Favorite:</source>
-        <translation type="unfinished">Favorito:</translation>
+        <translation>Favorito:</translation>
     </message>
 </context>
 </TS>

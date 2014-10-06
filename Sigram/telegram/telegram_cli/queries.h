@@ -79,6 +79,7 @@ void do_send_photo (int type, peer_id_t to_id, char *file_name);
 void do_get_chat_info (peer_id_t id);
 void do_get_user_list_info_silent (int num, int *list);
 void do_get_user_info (peer_id_t id);
+void do_get_own_info();
 void do_load_user_photo(void *UV );
 void do_load_chat_photo(void *CV );
 void do_forward_message (peer_id_t id, int n);

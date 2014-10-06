@@ -1690,6 +1690,8 @@ void do_get_user_info (peer_id_t id) {
       rprintf ("No such user\n");
     } else {
       print_user_info (&C->user);
+
+      contactList_addToBuffer (&C->user);
     }
     return;
   }
@@ -1708,6 +1710,43 @@ void do_get_user_info (peer_id_t id) {
   send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &user_info_methods, 0);
 }
 /* }}} */
+
+int own_info_on_answer (struct query *q UU) {
+  struct user *U = fetch_alloc_user_full ();
+
+  contactList_addToBuffer ( U );
+
+  return 0;
+}
+
+struct query_methods own_info_methods = {
+  .on_answer = own_info_on_answer
+};
+
+void do_get_own_info () {
+  if (offline_mode) {
+    peer_t *C = user_chat_get (ourPeer(our_id));
+    if (!C) {
+      rprintf ("No such user\n");
+    } else {
+      contactList_addToBuffer ( &C->user );
+    }
+    return;
+  }
+  clear_packet ();
+  out_int (CODE_users_get_full_user);
+  assert (get_peer_type (ourPeer(our_id)) == PEER_USER);
+  peer_t *U = user_chat_get (ourPeer(our_id));
+  if (U && U->user.access_hash) {
+    out_int (CODE_input_user_foreign);
+    out_int (get_peer_id (ourPeer(our_id)));
+    out_long (U->user.access_hash);
+  } else {
+    out_int (CODE_input_user_contact);
+    out_int (get_peer_id (ourPeer(our_id)));
+  }
+  send_query (dcWorking(), packet_ptr - packet_buffer, packet_buffer, &own_info_methods, 0);
+}
 
 void do_load_user_photo(void *UV)
 {

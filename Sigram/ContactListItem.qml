@@ -69,7 +69,7 @@ Rectangle {
 
                 Text {
                     id: txt
-                    text: item.isDialog ? Telegram.dialogTitle(dialog_id) : Telegram.contactTitle(item.uid)
+                    text: Emojis.textToEmojiText( item.isDialog ? Telegram.dialogTitle(dialog_id) : Telegram.contactTitle(item.uid) )
                     anchors.left: parent.left
                     width: parent.width - date.width - 18
                     font.pointSize: 10
