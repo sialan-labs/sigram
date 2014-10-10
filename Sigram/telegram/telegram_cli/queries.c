@@ -1511,7 +1511,11 @@ void do_send_photo (int type, peer_id_t to_id, char *file_name) {
   f->offset = 0;
   f->part_num = 0;
   int tmp = ((size + 2999) / 3000);
-  f->part_size = (1 << 10);
+
+  f->part_size = 1024*32;
+  while( f->part_size > f->size/3 )
+      f->part_size /= 2;
+
   while (f->part_size < tmp) {
     f->part_size *= 2;
   }

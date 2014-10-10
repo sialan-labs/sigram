@@ -129,7 +129,9 @@ linux {
     run_script.path = $$SHARES_PATH/
     desktopFile.files = $$APPDESK_SRC/Sigram.desktop
     desktopFile.path = $$APPDESK_PATH/share/applications
+    pixmapFile.files = desktop/sigram.png
+    pixmapFile.path = $$APPDESK_PATH/share/pixmaps
 
-    INSTALLS = target fonts translations icons database countries emojis server_pub run_script desktopFile
+    INSTALLS = target fonts translations icons database countries emojis server_pub run_script desktopFile pixmapFile
 }
 }
