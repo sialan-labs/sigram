@@ -126,6 +126,9 @@ Rectangle {
                 var contacts = Telegram.contactListUsers()
                 var dialogs = Telegram.dialogListIds()
 
+                for( var j=0; j<contacts.length; j++ )
+                    Telegram.loadUserInfo(contacts[j])
+
                 for( var t=0; t<3; t++ ) {
 
                     for( var i=0; i<dialogs.length; i++ ) {
