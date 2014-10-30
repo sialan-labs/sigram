@@ -60,7 +60,7 @@
     </message>
     <message>
         <source> is typing...</source>
-        <translation>ta escribiendo...</translation>
+        <translation> ta escribiendo...</translation>
     </message>
 </context>
 <context>
@@ -149,19 +149,19 @@
     </message>
     <message>
         <source> by </source>
-        <translation>por</translation>
+        <translation> por </translation>
     </message>
     <message>
         <source>Chat photo edited by </source>
-        <translation>Semeya de la charra editada por</translation>
+        <translation>Semeya de la charra editada por </translation>
     </message>
     <message>
         <source>Chat photo deleted by </source>
-        <translation>Semeya de la charra desaniciada por</translation>
+        <translation>Semeya de la charra desaniciada por </translation>
     </message>
     <message>
         <source> added </source>
-        <translation>amestáu</translation>
+        <translation> amestáu </translation>
     </message>
     <message>
         <source>to group</source>
@@ -169,7 +169,7 @@
     </message>
     <message>
         <source> deleted </source>
-        <translation>desaniciáu</translation>
+        <translation> desaniciáu </translation>
     </message>
     <message>
         <source>from group</source>
@@ -180,7 +180,7 @@
     <name>MsgItem</name>
     <message>
         <source> ,Fwd: </source>
-        <translation>,Reunvió:</translation>
+        <translation> reunvió: </translation>
     </message>
     <message>
         <source>Copy</source>
@@ -266,7 +266,7 @@
     </message>
     <message>
         <source>Last seen</source>
-        <translation>última visita</translation>
+        <translation>Última visita:</translation>
     </message>
 </context>
 <context>
@@ -281,7 +281,7 @@
     </message>
     <message>
         <source>About</source>
-        <translation>Tocante a</translation>
+        <translation>Tocante a Sigram</translation>
     </message>
     <message>
         <source>About Sialan</source>
@@ -305,7 +305,7 @@
     </message>
     <message>
         <source>at %1</source>
-        <translation>a les %1</translation>
+        <translation> en %1</translation>
     </message>
     <message>
         <source>Exit</source>
