@@ -1,3 +1,15 @@
+sigram (0.7.1ubuntu3) utopic; urgency=medium
+
+  * Fix dependency problem on utopic
+
+ -- Sialan Labs <contact@sialan.org>  Fri, 24 Oct 2014 02:01:42 +0330
+
+sigram (0.7.1ubuntu2) utopic; urgency=medium
+
+  * First release of utopic
+
+ -- Sialan Labs <contact@sialan.org>  Thu, 23 Oct 2014 16:51:11 +0330
+
 sigram (0.7.1ubuntu1) trusty; urgency=medium
 
   * Improve on file send speed.
