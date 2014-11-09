@@ -20,10 +20,12 @@ import QtQuick 2.0
 
 STextEdit {
     id: core
+    selectByMouse: !pickerEnable
 
     property alias press: cpicker.press
     property alias commitBlocker: cpicker.commitBlocker
     property alias pickersVisible: cpicker.pickersVisible
+    property alias pickerEnable: marea.visible
 
     onTextChanged: {
         if( privates.last_text != text )
@@ -42,6 +44,14 @@ STextEdit {
     }
 
     MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.IBeamCursor
+        visible: !marea.visible
+        onPressed: mouse.accepted = false
+    }
+
+    MouseArea {
+        id: marea
         anchors.fill: parent
         onPressed: {
             cpicker.show()

@@ -16,32 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SIGRAM_H
-#define SIGRAM_H
+#ifndef SIGRAM_MACROS_H
+#define SIGRAM_MACROS_H
 
-#include <QObject>
+#define PROFILES_DB_CONNECTION "profiles_connection"
+#define PROFILES_DB_PATH ":/database/profiles.sqlite"
 
-class SigramPrivate;
-class Sigram : public QObject
-{
-    Q_OBJECT
-public:
-    Sigram(QObject *parent = 0);
-    ~Sigram();
-
-public slots:
-    void start();
-    void close();
-    void incomingAppMessage( const QString & msg );
-
-signals:
-    void backRequest();
-
-protected:
-    bool eventFilter(QObject *o, QEvent *e);
-
-private:
-    SigramPrivate *p;
-};
-
-#endif // SIGRAM_H
+#endif // SIGRAM_MACROS_H

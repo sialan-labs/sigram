@@ -20,6 +20,9 @@
 
 #include <QDir>
 #include <QFont>
+#include <QSettings>
+
+static QSettings *app_global_settings = 0;
 
 class SialanApplicationPrivate
 {
@@ -151,6 +154,17 @@ QString SialanApplication::globalMonoFontFamily() const
     return p->globalMonoFontFamily;
 }
 
+QSettings *SialanApplication::settings()
+{
+    if( !app_global_settings )
+    {
+        QDir().mkpath(SialanApplication::homePath());
+        app_global_settings = new QSettings( SialanApplication::homePath() + "/config.ini", QSettings::IniFormat );
+    }
+
+    return app_global_settings;
+}
+
 void SialanApplication::refreshTranslations()
 {
     emit languageUpdated();
@@ -159,6 +173,16 @@ void SialanApplication::refreshTranslations()
 void SialanApplication::back()
 {
     emit backRequest();
+}
+
+void SialanApplication::setSetting(const QString &key, const QVariant &value)
+{
+    settings()->setValue(key, value);
+}
+
+QVariant SialanApplication::readSetting(const QString &key, const QVariant &defaultValue)
+{
+    return settings()->value(key, defaultValue);
 }
 
 SialanApplication::~SialanApplication()

@@ -9,12 +9,13 @@ Rectangle {
 
     Column {
         anchors.centerIn: parent
+        spacing: 20*physicalPlatformScale
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: SApp.globalFontFamily
             font.pixelSize: 50*fontsScale
-            text: "Sigram"
+            text: "Sigram One"
             color: "#ffffff"
         }
 

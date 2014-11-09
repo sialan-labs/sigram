@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("org.sialan.sigram");
     app.setOrganizationName("Sialan");
     app.setWindowIcon(QIcon(app.applicationDirPath()+"/qml/Sigram/files/kaqaz.png"));
+    app.setGlobalFontFamily("Droid Sans");
 
 #ifdef DESKTOP_DEVICE
     if( app.isRunning() )

@@ -108,11 +108,11 @@ public:
     QString clipboard() const;
     bool keyboard() const;
 
-    QString cameraLocation() const;
-    QString picturesLocation() const;
-    QString musicsLocation() const;
-    QString documentsLocation() const;
-    QString resourcePath() const;
+    static QString cameraLocation();
+    static QString picturesLocation();
+    static QString musicsLocation();
+    static QString documentsLocation();
+    static QString resourcePath();
 
 public slots:
     void hideKeyboard();

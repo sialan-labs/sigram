@@ -37,7 +37,7 @@ public:
 };
 #endif
 
-
+class QSettings;
 class SialanApplicationPrivate;
 class SialanApplication : public INHERIT_QAPP
 {
@@ -74,9 +74,14 @@ public:
     void setGlobalMonoFontFamily( const QString & fontFamily );
     QString globalMonoFontFamily() const;
 
+    static QSettings *settings();
+
 public slots:
     void refreshTranslations();
     void back();
+
+    void setSetting( const QString & key, const QVariant & value );
+    QVariant readSetting( const QString & key, const QVariant & defaultValue = QVariant() );
 
 signals:
     void fakeSignal();

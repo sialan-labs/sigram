@@ -25,9 +25,14 @@ Rectangle {
     width: 100*physicalPlatformScale
 
     property alias placeholder: pholder.text
+    property alias placeholderColor: pholder.color
     property alias text: main_item.text
+    property alias textColor: main_item.color
+    property alias font: main_item.font
     property alias echoMode: main_item.echoMode
     property alias lineFocus: main_item.focus
+    property alias pickerEnable: main_item.pickerEnable
+    property alias validator: main_item.validator
 
     signal accepted()
 
@@ -40,7 +45,7 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
     }
 
-    STextInput {
+    TextLineCore {
         id: main_item
         anchors.fill: parent
         anchors.margins: 4*physicalPlatformScale

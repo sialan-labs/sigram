@@ -8,19 +8,42 @@ SialanMain {
     height: 600
     color: "#333333"
     mainFrame: main_frame
+    focus: true
 
     property variant authDialog
+    property alias profiles: profile_model
 
-    Telegram {
-        id: telegram
-        configPath: SApp.homePath
-        publicKeyFile: Devices.resourcePath + "/tg-server.pub"
-//        phoneNumber: "+989128448407"
-        onAuthNeededChanged: {
-            if( !authNeeded )
-                return
+    Keys.onEscapePressed: {
+        SApp.back()
+    }
 
-            authDialog = auth_dlg_component.createObject(mainFrame)
+    Connections {
+        target: Sigram
+        onBackRequest: SApp.back()
+    }
+
+    Connections {
+        target: SApp
+        onBackRequest: {
+            var res = BackHandler.back()
+            if( !res && !Devices.isDesktop )
+                Sigram.close()
+        }
+    }
+
+    ProfilesModel {
+        id: profile_model
+    }
+
+    Timer {
+        id: init_timer
+        interval: 1500
+        Component.onCompleted: start()
+        onTriggered: {
+            if( profiles.count == 0 )
+                qlist.currentIndex = 2
+            else
+                qlist.currentIndex = 1
         }
     }
 
@@ -31,14 +54,8 @@ SialanMain {
         QueueList {
             id: qlist
             anchors.fill: parent
-            components: [splash_component, auth_dlg_component]
-        }
-
-        Timer {
-            interval: 4000
-            repeat: true
-            onTriggered: qlist.currentIndex++
-            Component.onCompleted: start()
+            components: [splash_component, accounts_frame, auth_dlg_component]
+            currentIndex: 0
         }
     }
 
@@ -46,6 +63,19 @@ SialanMain {
         id: auth_dlg_component
         AuthenticateDialog {
             anchors.fill: parent
+            onAccepted: {
+                var item = profiles.add(number)
+                item.name = "AA"
+                qlist.currentIndex = 1
+            }
+        }
+    }
+
+    Component {
+        id: accounts_frame
+        AccountsTabFrame {
+            anchors.fill: parent
+            property bool onceInstance: true
         }
     }
 
@@ -55,5 +85,15 @@ SialanMain {
             id: splash
             anchors.fill: parent
         }
+    }
+
+    function addAccount() {
+        qlist.currentIndex = 2
+        BackHandler.pushHandler(main, main.backToAccounts )
+    }
+
+    function backToAccounts() {
+        qlist.currentIndex = 1
+        BackHandler.removeHandler(main)
     }
 }

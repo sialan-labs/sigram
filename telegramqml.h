@@ -33,11 +33,16 @@ class TelegramQml : public QObject
 
     Q_PROPERTY(Telegram* telegram READ telegram NOTIFY telegramChanged)
 
-    Q_PROPERTY(bool authNeeded      READ authNeeded      NOTIFY authNeededChanged     )
-    Q_PROPERTY(bool authLoggedIn    READ authLoggedIn    NOTIFY authLoggedInChanged   )
-    Q_PROPERTY(bool phoneRegistered READ phoneRegistered NOTIFY phoneRegisteredChanged)
-    Q_PROPERTY(bool phoneInvited    READ phoneInvited    NOTIFY phoneInvitedChanged   )
-    Q_PROPERTY(bool connected       READ connected       NOTIFY connectedChanged      )
+    Q_PROPERTY(bool authNeeded          READ authNeeded          NOTIFY authNeededChanged         )
+    Q_PROPERTY(bool authLoggedIn        READ authLoggedIn        NOTIFY authLoggedInChanged       )
+    Q_PROPERTY(bool authPhoneRegistered READ authPhoneRegistered NOTIFY authPhoneRegisteredChanged)
+    Q_PROPERTY(bool authPhoneInvited    READ authPhoneInvited    NOTIFY authPhoneInvitedChanged   )
+    Q_PROPERTY(bool authPhoneChecked    READ authPhoneChecked    NOTIFY authPhoneCheckedChanged   )
+    Q_PROPERTY(bool connected           READ connected           NOTIFY connectedChanged          )
+
+    Q_PROPERTY(QString authSignUpError READ authSignUpError NOTIFY authSignUpErrorChanged)
+    Q_PROPERTY(QString authSignInError READ authSignInError NOTIFY authSignInErrorChanged)
+    Q_PROPERTY(QString error           READ error           NOTIFY errorChanged          )
 
 public:
     TelegramQml(QObject *parent = 0);
@@ -54,19 +59,27 @@ public:
 
     Telegram *telegram() const;
 
+
+
     bool authNeeded() const;
     bool authLoggedIn() const;
-    bool phoneRegistered() const;
-    bool phoneInvited() const;
+    bool authPhoneChecked() const;
+    bool authPhoneRegistered() const;
+    bool authPhoneInvited() const;
     bool connected() const;
 
-public slots:
-    void logout();
-    void sendCall();
-    void sendInvites(const QStringList &phoneNumbers, const QString &inviteText);
+    QString authSignUpError() const;
+    QString authSignInError() const;
+    QString error() const;
 
-    void signIn(const QString &code);
-    void signUp(const QString &code, const QString &firstName, const QString &lastName);
+
+
+public slots:
+    void authLogout();
+    void authSendCall();
+    void authSendInvites(const QStringList &phoneNumbers, const QString &inviteText);
+    void authSignIn(const QString &code);
+    void authSignUp(const QString &code, const QString &firstName, const QString &lastName);
 
 signals:
     void phoneNumberChanged();
@@ -76,9 +89,19 @@ signals:
 
     void authNeededChanged();
     void authLoggedInChanged();
-    void phoneRegisteredChanged();
-    void phoneInvitedChanged();
+    void authPhoneRegisteredChanged();
+    void authPhoneInvitedChanged();
+    void authPhoneCheckedChanged();
     void connectedChanged();
+
+    void authSignUpErrorChanged();
+    void authSignInErrorChanged();
+
+    void authCodeRequested( bool phoneRegistered, qint32 sendCallTimeout );
+    void authCallRequested( bool ok );
+    void authInvitesSent( bool ok );
+
+    void errorChanged();
 
 protected:
     void try_init();
@@ -87,7 +110,14 @@ private slots:
     void authNeeded_slt();
     void authLoggedIn_slt();
     void authLogOut_slt(qint64 id, bool ok);
+    void authSendCode_slt(qint64 id, bool phoneRegistered, qint32 sendCallTimeout);
+    void authSendCall_slt(qint64 id, bool ok);
+    void authSendInvites_slt(qint64 id, bool ok);
     void authCheckPhone_slt(qint64 id, bool phoneRegistered, bool phoneInvited);
+    void authSignInError_slt(qint64 id, qint32 errorCode, QString errorText);
+    void authSignUpError_slt(qint64 id, qint32 errorCode, QString errorText);
+
+    void error(qint64 id, qint32 errorCode, QString errorText);
 
 private:
     TelegramQmlPrivate *p;

@@ -72,7 +72,8 @@ SOURCES += \
     sialantools/sialanbackhandler.cpp \
     sialantools/sialansysteminfo.cpp \
     sialantools/sialanabstractcolorfulllistmodel.cpp \
-    sialantools/sialanimagecoloranalizor.cpp
+    sialantools/sialanimagecoloranalizor.cpp \
+    $$PWD/sialancountriesmodel.cpp
 
 HEADERS += \
     sialantools/sialandevices.h \
@@ -89,7 +90,8 @@ HEADERS += \
     sialantools/sialanbackhandler.h \
     sialantools/sialansysteminfo.h \
     sialantools/sialanabstractcolorfulllistmodel.h \
-    sialantools/sialanimagecoloranalizor.h
+    sialantools/sialanimagecoloranalizor.h \
+    $$PWD/sialancountriesmodel.h
 
 OTHER_FILES += \
     sialantools/android-build/src/org/sialan/android/SialanActivity.java \

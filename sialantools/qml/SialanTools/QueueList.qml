@@ -32,33 +32,8 @@ Rectangle {
 
     property real dscale: 0.5
 
-    onCurrentIndexChanged: {
-        if( currentIndex >= list.count ) {
-            currentIndex = list.count-1
-            return
-        }
-        if( privates.lastIndex == currentIndex )
-            return
-
-        var prevItem = privates.currentItem
-        var component = list.at(currentIndex)
-
-        var startScale = (privates.lastIndex<currentIndex? 1+dscale : 1-dscale)
-        var startOpacity = (privates.lastIndex<currentIndex? 0 : 1)
-        var newItem = item_frame_component.createObject(ql_mainframe, {"scale": startScale, "opacity": startOpacity})
-        newItem.item = component.createObject(newItem)
-        newItem.scale = 1
-        newItem.opacity = 1
-
-        if( prevItem ) {
-            prevItem.scale = (privates.lastIndex<currentIndex? 1-dscale : 1+dscale)
-            prevItem.opacity = (privates.lastIndex<currentIndex? 1 : 0)
-            prevItem.end()
-        }
-
-        privates.currentItem = newItem
-        privates.lastIndex = currentIndex
-    }
+    onCurrentIndexChanged: refresh()
+    onComponentsChanged: refresh()
 
     QtObject {
         id: privates
@@ -69,6 +44,18 @@ Rectangle {
 
     ListObject {
         id: list
+    }
+
+    ListObject {
+        id: once_instances
+
+        function item( cmpnt ) {
+            for( var i=0; i<once_instances.count; i++ )
+                if( once_instances.at(i).cmp == cmpnt )
+                    return once_instances.at(i).item
+
+            return 0
+        }
     }
 
     Item {
@@ -106,5 +93,43 @@ Rectangle {
                 destroy_timer.restart()
             }
         }
+    }
+
+    function refresh() {
+        if( currentIndex >= list.count ) {
+            return
+        }
+        if( privates.lastIndex == currentIndex )
+            return
+
+        var prevItem = privates.currentItem
+        var component = list.at(currentIndex)
+
+        var startScale = (privates.lastIndex<currentIndex? 1+dscale : 1-dscale)
+        var startOpacity = (privates.lastIndex<currentIndex? 0 : 1)
+        var newItem = once_instances.item(component)
+        if( newItem == 0 ) {
+            newItem = item_frame_component.createObject(ql_mainframe, {"scale": startScale, "opacity": startOpacity})
+            newItem.item = component.createObject(newItem)
+        }
+
+        newItem.visible = true
+        newItem.scale = 1
+        newItem.opacity = 1
+
+        if( newItem.item.onceInstance ) {
+            var map = {"cmp":component, "item": newItem}
+            once_instances.append(map)
+        }
+
+        if( prevItem ) {
+            prevItem.scale = (privates.lastIndex<currentIndex? 1-dscale : 1+dscale)
+            prevItem.opacity = (privates.lastIndex<currentIndex? 1 : 0)
+            if( !prevItem.item.onceInstance )
+                prevItem.end()
+        }
+
+        privates.currentItem = newItem
+        privates.lastIndex = currentIndex
     }
 }

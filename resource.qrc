@@ -1,10 +1,15 @@
 <RCC>
     <qresource prefix="/">
+        <file>database/profiles.sqlite</file>
         <file>qml/Sigram/main.qml</file>
         <file>qml/Sigram/files/icon.png</file>
         <file>qml/Sigram/AuthenticateDialog.qml</file>
-        <file>qml/Sigram/files/auth_back.jpg</file>
         <file>qml/Sigram/SigramSplash.qml</file>
-        <file>qml/Sigram/QueueList.qml</file>
+        <file>qml/Sigram/CountriesPhoneList.qml</file>
+        <file>qml/Sigram/AccountsTabFrame.qml</file>
+        <file>qml/Sigram/AccountFrame.qml</file>
+        <file>qml/Sigram/files/add_account.png</file>
+        <file>qml/Sigram/AccountLoading.qml</file>
+        <file>qml/Sigram/AccountSign.qml</file>
     </qresource>
 </RCC>

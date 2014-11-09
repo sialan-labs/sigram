@@ -19,16 +19,19 @@
 #include "sigram.h"
 #include "sialantools/sialanquickview.h"
 #include "telegramqml.h"
+#include "profilesmodel.h"
 
 #include <QPointer>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QtQml>
+#include <QDebug>
 
 class SigramPrivate
 {
 public:
     QPointer<SialanQuickView> viewer;
+    bool close_blocker;
 };
 
 Sigram::Sigram(QObject *parent) :
@@ -36,7 +39,15 @@ Sigram::Sigram(QObject *parent) :
 {
     p = new SigramPrivate;
 
+#ifdef Q_OS_ANDROID
+    p->close_blocker = true;
+#else
+    p->close_blocker = false;
+#endif
+
     qmlRegisterType<TelegramQml>("Sigram", 1, 0, "Telegram");
+    qmlRegisterType<ProfilesModel>("Sigram", 1, 0, "ProfilesModel");
+    qmlRegisterType<ProfilesModelItem>("Sigram", 1, 0, "ProfilesModelItem");
 }
 
 void Sigram::start()
@@ -51,9 +62,15 @@ void Sigram::start()
                 SialanQuickView::AllComponents
 #endif
                 );
-    p->viewer->engine()->rootContext()->setContextProperty( "sigram", this );
+    p->viewer->engine()->rootContext()->setContextProperty( "Sigram", this );
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Sigram/main.qml")));
     p->viewer->show();
+}
+
+void Sigram::close()
+{
+    p->close_blocker = false;
+    p->viewer->close();
 }
 
 void Sigram::incomingAppMessage(const QString &msg)
@@ -63,6 +80,31 @@ void Sigram::incomingAppMessage(const QString &msg)
         p->viewer->show();
         p->viewer->requestActivate();
     }
+}
+
+bool Sigram::eventFilter(QObject *o, QEvent *e)
+{
+    if( o == p->viewer )
+    {
+        switch( static_cast<int>(e->type()) )
+        {
+        case QEvent::Close:
+            if( p->close_blocker )
+            {
+                static_cast<QCloseEvent*>(e)->ignore();
+                emit backRequest();
+            }
+            else
+            {
+                static_cast<QCloseEvent*>(e)->accept();
+            }
+
+            return false;
+            break;
+        }
+    }
+
+    return QObject::eventFilter(o,e);
 }
 
 Sigram::~Sigram()

@@ -54,5 +54,6 @@
         <file>qml/SialanTools/files/sialan-logo.png</file>
         <file>qml/SialanTools/SialanLogo.qml</file>
         <file>qml/SialanTools/QueueList.qml</file>
+        <file>files/countries.csv</file>
     </qresource>
 </RCC>

@@ -27,6 +27,7 @@
 #include "sialancalendarconverter.h"
 #include "sialanimagecoloranalizor.h"
 #include "sialanbackhandler.h"
+#include "sialancountriesmodel.h"
 #ifdef Q_OS_ANDROID
 #include "sialanjavalayer.h"
 #endif
@@ -92,6 +93,7 @@ SialanQuickView::SialanQuickView(int options, QWindow *parent) :
     qmlRegisterType<SialanHashObject>("SialanTools", 1,0, "HashObject");
     qmlRegisterType<SialanListObject>("SialanTools", 1,0, "ListObject");
     qmlRegisterType<SialanImageColorAnalizor>("SialanTools", 1,0, "ImageColorAnalizor");
+    qmlRegisterType<SialanCountriesModel>("SialanTools", 1,0, "CountriesModel");
 #ifdef DESKTOP_LINUX
     qmlRegisterType<SialanMimeApps>("SialanTools", 1,0, "MimeApps");
 #endif
