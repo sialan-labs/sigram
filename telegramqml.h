@@ -21,6 +21,14 @@
 
 #include <QObject>
 
+class Message;
+class User;
+class Chat;
+class Dialog;
+class DialogObject;
+class MessageObject;
+class ChatObject;
+class UserObject;
 class Telegram;
 class TelegramQmlPrivate;
 class TelegramQml : public QObject
@@ -72,7 +80,10 @@ public:
     QString authSignInError() const;
     QString error() const;
 
-
+    Q_INVOKABLE DialogObject *dialog(qint64 id) const;
+    Q_INVOKABLE MessageObject *message(qint64 id) const;
+    Q_INVOKABLE ChatObject *chat(qint64 id) const;
+    Q_INVOKABLE UserObject *user(qint64 id) const;
 
 public slots:
     void authLogout();
@@ -117,7 +128,15 @@ private slots:
     void authSignInError_slt(qint64 id, qint32 errorCode, QString errorText);
     void authSignUpError_slt(qint64 id, qint32 errorCode, QString errorText);
 
+    void messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> & dialogs, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
+
     void error(qint64 id, qint32 errorCode, QString errorText);
+
+private:
+    void insertDialog( const Dialog & dialog );
+    void insertMessage( const Message & message );
+    void insertUser( const User & user );
+    void insertChat( const Chat & chat );
 
 private:
     TelegramQmlPrivate *p;

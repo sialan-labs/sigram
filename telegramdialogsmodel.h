@@ -31,26 +31,27 @@ class TelegramDialogsModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(Telegram* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
+    Q_PROPERTY(QObject* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(bool intializing READ intializing NOTIFY intializingChanged)
 
 public:
+    enum DialogsRoles {
+        ItemRole = Qt::UserRole
+    };
+
     TelegramDialogsModel(QObject *parent = 0);
     ~TelegramDialogsModel();
 
-    Telegram *telegram() const;
-    void setTelegram( Telegram *tg );
+    QObject *telegram() const;
+    void setTelegram( QObject *tg );
 
-    QString id( const QModelIndex &index ) const;
-
+    qint64 id( const QModelIndex &index ) const;
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
     QHash<qint32,QByteArray> roleNames() const;
-    Qt::ItemFlags flags(const QModelIndex &index) const;
 
     int count() const;
     bool intializing() const;
@@ -61,7 +62,7 @@ signals:
     void intializingChanged();
 
 private slots:
-    void messagesGetDialogsAnswer(qint64 id, qint32 sliceCount, const QList<Dialog> & dialogs, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
+    void messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> & dialogs, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
 
 private:
     TelegramDialogsModelPrivate *p;

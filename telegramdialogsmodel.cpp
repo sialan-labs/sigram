@@ -17,6 +17,7 @@
 */
 
 #include "telegramdialogsmodel.h"
+#include "telegramqml.h"
 #include "objects/types.h"
 
 #include <telegram.h>
@@ -24,8 +25,10 @@
 class TelegramDialogsModelPrivate
 {
 public:
-    Telegram *telegram;
+    TelegramQml *telegram;
     bool intializing;
+
+    QList<qint64> dialogs;
 };
 
 TelegramDialogsModel::TelegramDialogsModel(QObject *parent) :
@@ -36,13 +39,14 @@ TelegramDialogsModel::TelegramDialogsModel(QObject *parent) :
     p->intializing = false;
 }
 
-Telegram *TelegramDialogsModel::telegram() const
+QObject *TelegramDialogsModel::telegram() const
 {
     return p->telegram;
 }
 
-void TelegramDialogsModel::setTelegram(Telegram *tg)
+void TelegramDialogsModel::setTelegram(QObject *tgo)
 {
+    TelegramQml *tg = static_cast<TelegramQml*>(tgo);
     if( p->telegram == tg )
         return;
 
@@ -53,27 +57,38 @@ void TelegramDialogsModel::setTelegram(Telegram *tg)
     if( !p->telegram )
         return;
 
-    p->telegram->messagesGetDialogs();
+    Telegram *tgObject = p->telegram->telegram();
+
+    connect( tgObject, SIGNAL(messagesGetDialogsAnswer(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
+             SLOT(messagesGetDialogs_slt(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)) );
+
+    tgObject->messagesGetDialogs(0,0,1000);
 }
 
-QString TelegramDialogsModel::id(const QModelIndex &index) const
+qint64 TelegramDialogsModel::id(const QModelIndex &index) const
 {
-
+    int row = index.row();
+    return p->dialogs.at(row);
 }
 
 int TelegramDialogsModel::rowCount(const QModelIndex &parent) const
 {
-
+    Q_UNUSED(parent)
+    return p->dialogs.count();
 }
 
 QVariant TelegramDialogsModel::data(const QModelIndex &index, int role) const
 {
+    QVariant res;
+    const qint64 key = id(index);
+    switch( role )
+    {
+    case ItemRole:
+        res = QVariant::fromValue<DialogObject*>(p->telegram->dialog(key));
+        break;
+    }
 
-}
-
-bool TelegramDialogsModel::setData(const QModelIndex &index, const QVariant &value, int role)
-{
-
+    return res;
 }
 
 QHash<qint32, QByteArray> TelegramDialogsModel::roleNames() const
@@ -83,19 +98,13 @@ QHash<qint32, QByteArray> TelegramDialogsModel::roleNames() const
         return *res;
 
     res = new QHash<qint32, QByteArray>();
-//    res->insert( NumberRole, "number");
+    res->insert( ItemRole, "item");
     return *res;
-}
-
-Qt::ItemFlags TelegramDialogsModel::flags(const QModelIndex &index) const
-{
-    Q_UNUSED(index)
-    return Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
 int TelegramDialogsModel::count() const
 {
-
+    return p->dialogs.count();
 }
 
 bool TelegramDialogsModel::intializing() const
@@ -103,20 +112,23 @@ bool TelegramDialogsModel::intializing() const
     return p->intializing;
 }
 
-void TelegramDialogsModel::messagesGetDialogsAnswer(qint64 id, qint32 sliceCount, const QList<Dialog> &dialogs, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users)
+void TelegramDialogsModel::messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> &dialogs, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users)
 {
     Q_UNUSED(id)
-    for( int i=0; i<sliceCount; i++ )
-    {
-        const Dialog & dialog = dialogs.at(i);
-        const Message & message = messages.at(i);
-        const Chat & chat = chats.at(i);
-        const User & user = users.at(i);
+    Q_UNUSED(sliceCount)
+    Q_UNUSED(users)
+    Q_UNUSED(messages)
+    Q_UNUSED(chats)
 
-        DialogObject *dialog_o = new DialogObject(dialog, this);
-        MessageObject *message_o = new MessageObject(message, this);
-        ChatObject *chat_o = new ChatObject(chat, this);
-        UserObject *user_o = new UserObject(user, this);
+    foreach( const Dialog & d, dialogs )
+    {
+        qint32 did = d.peer().classType()==Peer::typePeerChat? d.peer().chatId() : d.peer().userId();
+        if( p->dialogs.contains(did) )
+            continue;
+
+        beginInsertRows(QModelIndex(), count(), count());
+        p->dialogs.append(did);
+        endInsertRows();
     }
 }
 

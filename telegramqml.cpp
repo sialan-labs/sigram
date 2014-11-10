@@ -17,11 +17,13 @@
 */
 
 #include "telegramqml.h"
+#include "objects/types.h"
 
 #include <telegram.h>
 
 #include <QPointer>
 #include <QDebug>
+#include <QHash>
 
 class TelegramQmlPrivate
 {
@@ -44,6 +46,11 @@ public:
 
     qint64 logout_req_id;
     qint64 checkphone_req_id;
+
+    QHash<qint64,DialogObject*> dialogs;
+    QHash<qint64,MessageObject*> messages;
+    QHash<qint64,ChatObject*> chats;
+    QHash<qint64,UserObject*> users;
 };
 
 TelegramQml::TelegramQml(QObject *parent) :
@@ -159,6 +166,26 @@ QString TelegramQml::error() const
     return p->error;
 }
 
+DialogObject *TelegramQml::dialog(qint64 id) const
+{
+    return p->dialogs.value(id);
+}
+
+MessageObject *TelegramQml::message(qint64 id) const
+{
+    return p->messages.value(id);
+}
+
+ChatObject *TelegramQml::chat(qint64 id) const
+{
+    return p->chats.value(id);
+}
+
+UserObject *TelegramQml::user(qint64 id) const
+{
+    return p->users.value(id);
+}
+
 void TelegramQml::authLogout()
 {
     if( !p->telegram )
@@ -238,6 +265,9 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(authSignUpError(qint64,qint32,QString)), SLOT(authSignUpError_slt(qint64,qint32,QString)) );
     connect( p->telegram, SIGNAL(connected())                           , SIGNAL(connectedChanged())                       );
     connect( p->telegram, SIGNAL(disconnected())                        , SIGNAL(connectedChanged())                       );
+
+    connect( p->telegram, SIGNAL(messagesGetDialogsAnswer(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
+             SLOT(messagesGetDialogs_slt(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)) );
 
     emit telegramChanged();
 
@@ -337,12 +367,76 @@ void TelegramQml::authSignUpError_slt(qint64 id, qint32 errorCode, QString error
     emit authSignUpErrorChanged();
 }
 
+void TelegramQml::messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> &dialogs, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(sliceCount)
+
+    foreach( const Dialog & d, dialogs )
+        insertDialog(d);
+    foreach( const Message & m, messages )
+        insertMessage(m);
+    foreach( const User & u, users )
+        insertUser(u);
+    foreach( const Chat & c, chats )
+        insertChat(c);
+}
+
 void TelegramQml::error(qint64 id, qint32 errorCode, QString errorText)
 {
     Q_UNUSED(id)
     Q_UNUSED(errorCode)
     p->error = errorText;
     emit errorChanged();
+}
+
+void TelegramQml::insertDialog(const Dialog &d)
+{
+    qint32 did = d.peer().classType()==Peer::typePeerChat? d.peer().chatId() : d.peer().userId();
+    DialogObject *obj = p->dialogs.value(did);
+    if( !obj )
+    {
+        obj = new DialogObject(d, this);
+        p->dialogs.insert(did, obj);
+    }
+    else
+        *obj = d;
+}
+
+void TelegramQml::insertMessage(const Message &m)
+{
+    MessageObject *obj = p->messages.value(m.id());
+    if( !obj )
+    {
+        obj = new MessageObject(m, this);
+        p->messages.insert(m.id(), obj);
+    }
+    else
+        *obj = m;
+}
+
+void TelegramQml::insertUser(const User &u)
+{
+    UserObject *obj = p->users.value(u.id());
+    if( !obj )
+    {
+        obj = new UserObject(u, this);
+        p->users.insert(u.id(), obj);
+    }
+    else
+        *obj = u;
+}
+
+void TelegramQml::insertChat(const Chat &c)
+{
+    ChatObject *obj = p->chats.value(c.id());
+    if( !obj )
+    {
+        obj = new ChatObject(c, this);
+        p->chats.insert(c.id(), obj);
+    }
+    else
+        *obj = c;
 }
 
 TelegramQml::~TelegramQml()

@@ -20,6 +20,7 @@
 #include "sialantools/sialanquickview.h"
 #include "telegramqml.h"
 #include "profilesmodel.h"
+#include "telegramdialogsmodel.h"
 
 #include <QPointer>
 #include <QQmlContext>
@@ -48,6 +49,7 @@ Sigram::Sigram(QObject *parent) :
     qmlRegisterType<TelegramQml>("Sigram", 1, 0, "Telegram");
     qmlRegisterType<ProfilesModel>("Sigram", 1, 0, "ProfilesModel");
     qmlRegisterType<ProfilesModelItem>("Sigram", 1, 0, "ProfilesModelItem");
+    qmlRegisterType<TelegramDialogsModel>("Sigram", 1, 0, "DialogsModel");
 }
 
 void Sigram::start()

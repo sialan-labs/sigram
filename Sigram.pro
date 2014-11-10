@@ -30,4 +30,7 @@ HEADERS += \
     objects/types.h
 
 OTHER_FILES += \
-    objects/types.sco
+    objects/types.sco \
+    objects/templates/class.template \
+    objects/templates/equals.template \
+    objects/templates/initialize.template

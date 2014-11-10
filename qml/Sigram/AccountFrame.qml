@@ -9,6 +9,7 @@ Rectangle {
     color: "#333333"
 
     property ProfilesModelItem accountItem
+    property AccountView view
 
     QtObject {
         id: privates
@@ -21,6 +22,13 @@ Rectangle {
         phoneNumber: accountItem.number
         onAuthCallRequested: acc_sign.callButton = false
         onAuthCodeRequested: acc_sign.timeOut = sendCallTimeout
+        onAuthLoggedInChanged: {
+            if( authLoggedIn && !view )
+                view = account_view.createObject(acc_frame)
+            else
+            if( !authLoggedIn && view )
+                view.destroy()
+        }
     }
 
     AccountSign {
@@ -41,5 +49,13 @@ Rectangle {
         active: (!telegram.authLoggedIn && !telegram.authNeeded &&
                 telegram.authSignInError.length==0 && telegram.authSignUpError.length==0) ||
                 !telegram.authPhoneChecked
+    }
+
+    Component {
+        id: account_view
+        AccountView {
+            anchors.fill: parent
+            telegramObject: telegram
+        }
     }
 }

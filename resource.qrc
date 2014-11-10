@@ -11,5 +11,6 @@
         <file>qml/Sigram/files/add_account.png</file>
         <file>qml/Sigram/AccountLoading.qml</file>
         <file>qml/Sigram/AccountSign.qml</file>
+        <file>qml/Sigram/AccountView.qml</file>
     </qresource>
 </RCC>
