@@ -1,0 +1,2 @@
+        %pointerflag_%name = another.%name();
+%equals

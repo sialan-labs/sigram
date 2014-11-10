@@ -260,11 +260,11 @@ void TelegramQml::authLoggedIn_slt()
 {
     p->authNeeded = false;
     p->authLoggedIn = true;
-
-    qDebug() << "\n\n\nLoggedIn\n\n\n";
+    p->phoneChecked = true;
 
     emit authNeededChanged();
     emit authLoggedInChanged();
+    emit authPhoneChecked();
 }
 
 void TelegramQml::authLogOut_slt(qint64 id, bool ok)

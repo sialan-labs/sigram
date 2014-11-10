@@ -12,7 +12,8 @@ INCLUDEPATH += /usr/include/libqtelegram
 SOURCES += main.cpp \
     sigram.cpp \
     telegramqml.cpp \
-    profilesmodel.cpp
+    profilesmodel.cpp \
+    telegramdialogsmodel.cpp
 
 RESOURCES += resource.qrc
 
@@ -24,4 +25,9 @@ HEADERS += \
     sigram.h \
     telegramqml.h \
     sigram_macros.h \
-    profilesmodel.h
+    profilesmodel.h \
+    telegramdialogsmodel.h \
+    objects/types.h
+
+OTHER_FILES += \
+    objects/types.sco
