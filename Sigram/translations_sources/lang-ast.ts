@@ -370,7 +370,7 @@
     </message>
     <message>
         <source>Start Secret Chat (not working yet, we working on it)</source>
-        <translation>Aniciar charra secreta (entá nun furrula, tamos trabayando n&apos;ello)</translation>
+        <translation>Aniciar charra secreta (entá nun furrula, tamos trabayando nello)</translation>
     </message>
     <message>
         <source>Mobile Phone:</source>
