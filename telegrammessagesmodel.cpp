@@ -82,6 +82,9 @@ void TelegramMessagesModel::setDialog(DialogObject *dlg)
     p->dialog = dlg;
     emit dialogChanged();
 
+    if( p->dialog && !p->dialog->peer()->chatId() && !p->dialog->peer()->userId() )
+        return;
+
     beginResetModel();
     p->messages.clear();
     endResetModel();
@@ -111,10 +114,7 @@ void TelegramMessagesModel::loadMore()
     if( !p->dialog )
         return;
 
-    bool isChat = p->dialog->peer()->classType()==Peer::typePeerChat;
-    InputPeer peer(isChat? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
-    peer.setChatId(p->dialog->peer()->chatId());
-    peer.setUserId(p->dialog->peer()->userId());
+    const InputPeer & peer = inputPeer();
 
     Telegram *tgObject = p->telegram->telegram();
     tgObject->messagesGetHistory(peer, 0, 0, p->load_count+40 );
@@ -186,6 +186,15 @@ bool TelegramMessagesModel::refreshing() const
     return p->refreshing;
 }
 
+InputPeer TelegramMessagesModel::inputPeer() const
+{
+    bool isChat = p->dialog->peer()->classType()==Peer::typePeerChat;
+    InputPeer peer(isChat? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
+    peer.setChatId(p->dialog->peer()->chatId());
+    peer.setUserId(p->dialog->peer()->userId());
+    return peer;
+}
+
 void TelegramMessagesModel::messagesChanged()
 {
     p->refreshing = false;
@@ -246,6 +255,12 @@ void TelegramMessagesModel::messagesChanged()
     }
 
     p->load_count = p->messages.count();
+
+    if( sender() )
+    {
+        p->telegram->telegram()->messagesReadHistory(inputPeer());
+        p->dialog->setUnreadCount(0);
+    }
 }
 
 TelegramMessagesModel::~TelegramMessagesModel()

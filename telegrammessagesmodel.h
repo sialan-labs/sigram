@@ -21,6 +21,7 @@
 
 #include <QAbstractListModel>
 
+class InputPeer;
 class DialogObject;
 class TelegramMessagesModelPrivate;
 class TelegramMessagesModel : public QAbstractListModel
@@ -57,6 +58,8 @@ public:
     int count() const;
     bool intializing() const;
     bool refreshing() const;
+
+    InputPeer inputPeer() const;
 
 public slots:
     void refresh();

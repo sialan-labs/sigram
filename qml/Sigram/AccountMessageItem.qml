@@ -7,6 +7,7 @@ Item {
     id: msg_item
     width: 100
     height: logicalHeight<minimumHeight? minimumHeight : logicalHeight
+    clip: true
 
     property real logicalHeight: column.height + frameMargins*2 + textMargins*2
     property real minimumHeight: 48*physicalPlatformScale
@@ -35,6 +36,14 @@ Item {
     property real typeMessageMediaAudio: 0xc6b68300
     property real typeMessageMediaPhoto: 0xc8c45a2a
     property real typeMessageMediaGeo: 0x56e0d474
+
+    onHasMediaChanged: {
+        if( !hasMedia )
+            return
+
+        if( media.classType==typeMessageMediaPhoto )
+            telegramObject.getFile(media.photo.sizes.last.location)
+    }
 
     onSentChanged: {
         if( sent )
@@ -83,8 +92,11 @@ Item {
             width: 300*physicalPlatformScale
             height: width
             visible: hasMedia
+            fillMode: Image.PreserveAspectCrop
+            sourceSize: Qt.size(width,height)
+            source: path
 
-//            property string path: media.classType==typeMessageMediaPhoto? media.photo
+            property string path: media.classType==typeMessageMediaPhoto? media.photo.sizes.last.location.download.location : ""
         }
 
         Row {

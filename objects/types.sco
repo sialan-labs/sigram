@@ -1,9 +1,11 @@
 #TelegramTypeObjects
 
 include <QString>;
+include <QStringList>;
 include <QtQml>;
 include <QFile>;
 include <types/types.h>;
+include "../photosizelist.h";
 
 object Download {
     QString location rw;
@@ -153,7 +155,7 @@ object Photo {
     qint64 id rw = another.%name();
     QString caption rw = another.%name();
     qint32 date rw = another.%name();
-    QList<PhotoSize> sizes rw = another.%name();
+    PhotoSizeList* sizes rw = new PhotoSizeList(another.%name(), this);
     GeoPointObject* geo rw = new GeoPointObject(another.%name(), this);
     qint64 accessHash rw = another.%name();
     qint32 userId rw = another.%name();
@@ -203,6 +205,7 @@ object Dialog {
     PeerNotifySettingsObject* notifySettings rw = new PeerNotifySettingsObject(another.%name(), this);
     qint32 topMessage rw = another.%name();
     qint32 unreadCount rw = another.%name();
+    QStringList typingUsers rw;
     Dialog::DialogType classType rw = another.%name();
 }
 
@@ -217,7 +220,7 @@ object MessageMedia {
     QString phoneNumber rw = another.%name();
     qint32 userId rw = another.%name();
     VideoObject* video rw = new VideoObject(another.%name(), this);
-    int classType rw = another.%name();
+    qint64 classType rw = another.%name();
 }
 
 object Message {

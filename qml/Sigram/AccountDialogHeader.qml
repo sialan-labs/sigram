@@ -11,8 +11,8 @@ Rectangle {
     property Dialog currentDialog
 
     property bool isChat: currentDialog? currentDialog.peer.chatId != 0 : false
-    property User user: currentDialog? telegramObject.user(currentDialog.peer.userId) : 0
-    property Chat chat: currentDialog? telegramObject.chat(currentDialog.peer.chatId) : 0
+    property User user: telegramObject.user(currentDialog.peer.userId)
+    property Chat chat: telegramObject.chat(currentDialog.peer.chatId)
 
     property bool refreshing: false
 

@@ -55,7 +55,8 @@ signals:
     void methodChanged();
 
 private slots:
-    void found( const QString & path );
+    void found(int method, const QString & path );
+    void start();
 
 private:
     SialanImageColorAnalizorPrivate *p;
@@ -70,16 +71,16 @@ public:
     SialanImageColorAnalizorThread(QObject *parent = 0);
     ~SialanImageColorAnalizorThread();
 
-    const QHash<QString,QColor> & results() const;
+    const QHash<int, QHash<QString, QColor> > &results() const;
 
 public slots:
     void analize(int method, const QString & path );
 
 signals:
-    void found( const QString & path );
+    void found( int method, const QString & path );
 
 private slots:
-    void found_slt(class SialanImageColorAnalizorCore *core, const QString & path , const QColor &color);
+    void found_slt(class SialanImageColorAnalizorCore *core, int method, const QString & path , const QColor &color);
 
 private:
     SialanImageColorAnalizorCore *getCore();
@@ -101,7 +102,7 @@ public slots:
     void analize( int method, const QString & path );
 
 signals:
-    void found_slt(SialanImageColorAnalizorCore *core, const QString & path , const QColor &color);
+    void found(SialanImageColorAnalizorCore *core, int method, const QString & path , const QColor &color);
 
 private:
     SialanImageColorAnalizorCorePrivate *p;

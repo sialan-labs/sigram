@@ -53,7 +53,6 @@ Sigram::Sigram(QObject *parent) :
 #else
     p->close_blocker = false;
 #endif
-
     qmlRegisterType<TelegramQml>("Sigram", 1, 0, "Telegram");
     qmlRegisterType<ProfilesModel>("Sigram", 1, 0, "ProfilesModel");
     qmlRegisterType<ProfilesModelItem>("Sigram", 1, 0, "ProfilesModelItem");

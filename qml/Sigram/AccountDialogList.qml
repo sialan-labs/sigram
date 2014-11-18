@@ -8,7 +8,7 @@ Item {
     height: 62
 
     property alias telegramObject: dialogs_model.telegram
-    property Dialog currentDialog
+    property Dialog currentDialog: telegramObject.dialog(0)
 
     DialogsModel {
         id: dialogs_model

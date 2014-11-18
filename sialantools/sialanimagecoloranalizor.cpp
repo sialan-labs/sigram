@@ -49,7 +49,7 @@ SialanImageColorAnalizor::SialanImageColorAnalizor(QObject *parent) :
     if( !colorizor_thread )
         colorizor_thread = new SialanImageColorAnalizorThread(QCoreApplication::instance());
 
-    connect( colorizor_thread, SIGNAL(found(QString)), SLOT(found(QString)) );
+    connect( colorizor_thread, SIGNAL(found(int,QString)), SLOT(found(int,QString)) );
 }
 
 QString SialanImageColorAnalizor::source() const
@@ -65,11 +65,7 @@ void SialanImageColorAnalizor::setSource(const QString &source)
     p->source = source;
     emit sourceChanged();
 
-    if( p->source.isEmpty() )
-        return;
-
-    colorizor_thread->analize(p->method, source);
-    found(p->source);
+    start();
 }
 
 int SialanImageColorAnalizor::method() const
@@ -84,6 +80,8 @@ void SialanImageColorAnalizor::setMethod(int m)
 
     p->method = static_cast<Method>(m);
     emit methodChanged();
+
+    start();
 }
 
 QColor SialanImageColorAnalizor::color() const
@@ -91,17 +89,28 @@ QColor SialanImageColorAnalizor::color() const
     return p->color;
 }
 
-void SialanImageColorAnalizor::found(const QString &path)
+void SialanImageColorAnalizor::found(int method, const QString &path)
 {
+    if( method != p->method )
+        return;
     if( path != p->source )
         return;
 
-    const QHash<QString,QColor> & results = colorizor_thread->results();
-    if( !results.contains(p->source) )
+    const QHash<int, QHash<QString,QColor> > & results = colorizor_thread->results();
+    if( !results.contains(p->method) || !results.value(p->method).contains(p->source) )
         return;
 
-    p->color = results.value(p->source);
+    p->color = results[p->method][p->source];
     emit colorChanged();
+}
+
+void SialanImageColorAnalizor::start()
+{
+    if( p->source.isEmpty() )
+        return;
+
+    colorizor_thread->analize(p->method, p->source);
+    found(p->method,p->source);
 }
 
 SialanImageColorAnalizor::~SialanImageColorAnalizor()
@@ -113,9 +122,9 @@ SialanImageColorAnalizor::~SialanImageColorAnalizor()
 class SialanImageColorAnalizorThreadPrivate
 {
 public:
-    QHash<QString,QColor> results;
+    QHash<int, QHash<QString,QColor> > results;
 
-    QQueue<QString> queue;
+    QQueue< QPair<int,QString> > queue;
     QSet<SialanImageColorAnalizorCore*> cores;
     QQueue<SialanImageColorAnalizorCore*> free_cores;
 };
@@ -126,30 +135,31 @@ SialanImageColorAnalizorThread::SialanImageColorAnalizorThread(QObject *parent) 
     p = new SialanImageColorAnalizorThreadPrivate;
 }
 
-const QHash<QString, QColor> &SialanImageColorAnalizorThread::results() const
+const QHash<int, QHash<QString,QColor> > &SialanImageColorAnalizorThread::results() const
 {
     return p->results;
 }
 
 void SialanImageColorAnalizorThread::analize(int method, const QString &path)
 {
-    if( p->results.contains(path) )
+    if( p->results.contains(method) && p->results.value(method).contains(path) )
         return;
 
     SialanImageColorAnalizorCore *core = getCore();
     if( !core )
     {
-        p->queue.append(path);
+        QPair<int,QString> pair(method, path);
+        p->queue.append(pair);
         return;
     }
 
     QMetaObject::invokeMethod( core, "analize", Qt::QueuedConnection, Q_ARG(int,method) , Q_ARG(QString,path) );
 }
 
-void SialanImageColorAnalizorThread::found_slt(SialanImageColorAnalizorCore *c, const QString &source, const QColor & color)
+void SialanImageColorAnalizorThread::found_slt(SialanImageColorAnalizorCore *c, int method, const QString &source, const QColor & color)
 {
-    p->results[source] = color;
-    emit found(source);
+    p->results[method][source] = color;
+    emit found(method, source);
 
     p->free_cores.append(c);
     if( p->queue.isEmpty() )
@@ -159,8 +169,8 @@ void SialanImageColorAnalizorThread::found_slt(SialanImageColorAnalizorCore *c, 
     if( !core )
         return;
 
-    const QString & path = p->queue.takeFirst();
-    QMetaObject::invokeMethod( core, "analize", Qt::QueuedConnection, Q_ARG(QString,path) );
+    const QPair<int,QString> & pair = p->queue.takeFirst();
+    QMetaObject::invokeMethod( core, "analize", Qt::QueuedConnection, Q_ARG(int,pair.first), Q_ARG(QString,pair.second) );
 }
 
 SialanImageColorAnalizorCore *SialanImageColorAnalizorThread::getCore()
@@ -175,7 +185,7 @@ SialanImageColorAnalizorCore *SialanImageColorAnalizorThread::getCore()
     SialanImageColorAnalizorCore *core = new SialanImageColorAnalizorCore();
     core->moveToThread(thread);
 
-    connect( core, SIGNAL(found_slt(SialanImageColorAnalizorCore*,QString,QColor)), SLOT(found_slt(SialanImageColorAnalizorCore*,QString,QColor)), Qt::QueuedConnection );
+    connect( core, SIGNAL(found(SialanImageColorAnalizorCore*,int,QString,QColor)), SLOT(found_slt(SialanImageColorAnalizorCore*,int,QString,QColor)), Qt::QueuedConnection );
 
     thread->start();
     p->cores.insert(core);
@@ -253,12 +263,32 @@ void SialanImageColorAnalizorCore::analize(int method, const QString &path)
 
     case SialanImageColorAnalizor::MoreSaturation:
     {
+        qreal sum_r = 0;
+        qreal sum_g = 0;
+        qreal sum_b = 0;
+        int count = 0;
 
+        for( int i=0 ; i<image_size.width(); i++ )
+        {
+            for( int j=0 ; j<image_size.height(); j++ )
+            {
+                QColor clr = img.pixel(i,j);
+                if( clr.saturation() < 150 || clr.lightness() < 100 )
+                    continue;
+
+                sum_r += clr.red();
+                sum_g += clr.green();
+                sum_b += clr.blue();
+                count++;
+            }
+        }
+
+        result = QColor( sum_r/count, sum_g/count, sum_b/count );
     }
         break;
     }
 
-    emit found_slt( this, path, result );
+    emit found( this, method, path, result );
 }
 
 SialanImageColorAnalizorCore::~SialanImageColorAnalizorCore()

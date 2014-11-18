@@ -67,7 +67,14 @@ public:
     QHash<qint64,MessageObject*> pend_messages;
     QHash<qint64, FileLocationObject*> downloadings;
 
+    QHash<int, QPair<qint64,qint64> > typing_timers;
     int upd_dialogs_timer;
+
+    DialogObject *nullDialog;
+    MessageObject *nullMessage;
+    ChatObject *nullChat;
+    UserObject *nullUser;
+    FileLocationObject *nullFile;
 };
 
 TelegramQml::TelegramQml(QObject *parent) :
@@ -86,6 +93,12 @@ TelegramQml::TelegramQml(QObject *parent) :
 
     p->logout_req_id = 0;
     p->checkphone_req_id = 0;
+
+    p->nullDialog = new DialogObject( Dialog(), this );
+    p->nullMessage = new MessageObject(Message(Message::typeMessageEmpty), this);
+    p->nullChat = new ChatObject(Chat(Chat::typeChatEmpty), this);
+    p->nullUser = new UserObject(User(User::typeUserEmpty), this);
+    p->nullFile = new FileLocationObject(FileLocation(FileLocation::typeFileLocationUnavailable), this);
 }
 
 QString TelegramQml::phoneNumber() const
@@ -219,22 +232,34 @@ QString TelegramQml::error() const
 
 DialogObject *TelegramQml::dialog(qint64 id) const
 {
-    return p->dialogs.value(id);
+    DialogObject *res = p->dialogs.value(id);
+    if( !res )
+        res = p->nullDialog;
+    return res;
 }
 
 MessageObject *TelegramQml::message(qint64 id) const
 {
-    return p->messages.value(id);
+    MessageObject *res = p->messages.value(id);
+    if( !res )
+        res = p->nullMessage;
+    return res;
 }
 
 ChatObject *TelegramQml::chat(qint64 id) const
 {
-    return p->chats.value(id);
+    ChatObject *res = p->chats.value(id);
+    if( !res )
+        res = p->nullChat;
+    return res;
 }
 
 UserObject *TelegramQml::user(qint64 id) const
 {
-    return p->users.value(id);
+    UserObject *res = p->users.value(id);
+    if( !res )
+        res = p->nullUser;
+    return res;
 }
 
 QList<qint64> TelegramQml::dialogs() const
@@ -367,11 +392,6 @@ void TelegramQml::getFile(FileLocationObject *l)
 
     qint64 id = p->telegram->uploadGetFile(input, 0, l->dcId());
     p->downloadings[id] = l;
-}
-
-void TelegramQml::getFile(PhotoObject *photo)
-{
-    const QList<PhotoSize> & sizez = photo->sizes();
 }
 
 void TelegramQml::timerUpdateDialogs(bool duration)
@@ -561,7 +581,7 @@ void TelegramQml::messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, 
     if( !did )
         did = msg.out()? msg.toId().userId() : msg.fromId();
 
-    p->messages.take(old_msgId)->deleteLater();
+    p->messages.take(old_msgId);
     p->messages_list[did].removeAll(old_msgId);
 
     insertMessage(msg);
@@ -844,6 +864,29 @@ void TelegramQml::insertUpdate(const Update &update)
         break;
 
     case Update::typeUpdateChatUserTyping:
+    {
+        DialogObject *dlg = p->dialogs.value(chat->id());
+        if( !dlg )
+            return;
+
+        const QString & id_str = QString::number(user->id());
+        const QPair<qint64,qint64> & timer_pair = QPair<qint64,qint64>(chat->id(), user->id());
+        QStringList tusers = dlg->typingUsers();
+        if( tusers.contains(id_str) )
+        {
+            const int timer_id = p->typing_timers.key(timer_pair);
+            killTimer(timer_id);
+            p->typing_timers.remove(timer_id);
+        }
+        else
+        {
+            tusers << id_str;
+            dlg->setTypingUsers( tusers );
+        }
+
+        int timer_id = startTimer(5000);
+        p->typing_timers.insert(timer_id, timer_pair);
+    }
         break;
 
     case Update::typeUpdateActivation:
@@ -900,6 +943,29 @@ void TelegramQml::insertUpdate(const Update &update)
         break;
 
     case Update::typeUpdateUserTyping:
+    {
+        DialogObject *dlg = p->dialogs.value(user->id());
+        if( !dlg )
+            return;
+
+        const QString & id_str = QString::number(user->id());
+        const QPair<qint64,qint64> & timer_pair = QPair<qint64,qint64>(user->id(), user->id());
+        QStringList tusers = dlg->typingUsers();
+        if( tusers.contains(id_str) )
+        {
+            const int timer_id = p->typing_timers.key(timer_pair);
+            killTimer(timer_id);
+            p->typing_timers.remove(timer_id);
+        }
+        else
+        {
+            tusers << id_str;
+            dlg->setTypingUsers( tusers );
+        }
+
+        int timer_id = startTimer(5000);
+        p->typing_timers.insert(timer_id, timer_pair);
+    }
         break;
 
     case Update::typeUpdateEncryptedChatTyping:
@@ -943,6 +1009,21 @@ void TelegramQml::timerEvent(QTimerEvent *e)
 
         killTimer(p->upd_dialogs_timer);
         p->upd_dialogs_timer = 0;
+    }
+    else
+    if( p->typing_timers.contains(e->timerId()) )
+    {
+        killTimer(e->timerId());
+
+        const QPair<qint64,qint64> & pair = p->typing_timers.take(e->timerId());
+        DialogObject *dlg = p->dialogs.value(pair.first);
+        if( !dlg )
+            return;
+
+        QStringList typings = dlg->typingUsers();
+        typings.removeAll(QString::number(pair.second));
+
+        dlg->setTypingUsers(typings);
     }
 }
 

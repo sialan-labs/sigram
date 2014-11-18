@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     profilesmodel.cpp \
     telegramdialogsmodel.cpp \
     telegrammessagesmodel.cpp \
-    emojis.cpp
+    emojis.cpp \
+    photosizelist.cpp
 
 RESOURCES += resource.qrc
 
@@ -33,7 +34,8 @@ HEADERS += \
     telegramdialogsmodel.h \
     objects/types.h \
     telegrammessagesmodel.h \
-    emojis.h
+    emojis.h \
+    photosizelist.h
 
 OTHER_FILES += \
     objects/types.sco \

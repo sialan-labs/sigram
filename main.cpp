@@ -5,6 +5,8 @@
 
 int main(int argc, char *argv[])
 {
+    qputenv("QT_LOGGING_RULES", "tg.*=false");
+
     SialanApplication app(argc, argv);
     app.setApplicationName("Sigram");
     app.setApplicationDisplayName("Sigram");

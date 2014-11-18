@@ -6,9 +6,11 @@
 #define TELEGRAMTYPEOBJECT_H
 
 #include <QString>
+#include <QStringList>
 #include <QtQml>
 #include <QFile>
 #include <types/types.h>
+#include "../photosizelist.h"
 
 class DownloadObject : public QObject
 {
@@ -27,7 +29,6 @@ public:
         _downloaded = 0;
         _total = 0;
         _file = 0;
-
     }
     ~DownloadObject(){}
 
@@ -2090,7 +2091,7 @@ class PhotoObject : public QObject
     Q_PROPERTY(qint64 id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(QString caption READ caption WRITE setCaption NOTIFY captionChanged)
     Q_PROPERTY(qint32 date READ date WRITE setDate NOTIFY dateChanged)
-    Q_PROPERTY(QList<PhotoSize> sizes READ sizes WRITE setSizes NOTIFY sizesChanged)
+    Q_PROPERTY(PhotoSizeList* sizes READ sizes WRITE setSizes NOTIFY sizesChanged)
     Q_PROPERTY(GeoPointObject* geo READ geo WRITE setGeo NOTIFY geoChanged)
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
@@ -2102,7 +2103,7 @@ public:
         _id = another.id();
         _caption = another.caption();
         _date = another.date();
-        _sizes = another.sizes();
+        _sizes =  new PhotoSizeList(another.sizes(), this);
         _geo = new GeoPointObject(another.geo(), this);
         _accessHash = another.accessHash();
         _userId = another.userId();
@@ -2148,11 +2149,13 @@ public:
         emit changed();
     }
 
-    QList<PhotoSize> sizes() const {
+    PhotoSizeList* sizes() const {
         return _sizes;
     }
 
-    void setSizes(QList<PhotoSize> value) {
+    void setSizes(PhotoSizeList* value) {
+        if( value == _sizes )
+            return;
         _sizes = value;
         emit sizesChanged();
         emit changed();
@@ -2214,7 +2217,7 @@ public:
         emit captionChanged();
         _date = another.date();
         emit dateChanged();
-        _sizes = another.sizes();
+        *_sizes = another.sizes();
         emit sizesChanged();
         *_geo = another.geo();
         emit geoChanged();
@@ -2242,7 +2245,7 @@ private:
     qint64 _id;
     QString _caption;
     qint32 _date;
-    QList<PhotoSize> _sizes;
+    PhotoSizeList* _sizes;
     GeoPointObject* _geo;
     qint64 _accessHash;
     qint32 _userId;
@@ -2831,6 +2834,7 @@ class DialogObject : public QObject
     Q_PROPERTY(PeerNotifySettingsObject* notifySettings READ notifySettings WRITE setNotifySettings NOTIFY notifySettingsChanged)
     Q_PROPERTY(qint32 topMessage READ topMessage WRITE setTopMessage NOTIFY topMessageChanged)
     Q_PROPERTY(qint32 unreadCount READ unreadCount WRITE setUnreadCount NOTIFY unreadCountChanged)
+    Q_PROPERTY(QStringList typingUsers READ typingUsers WRITE setTypingUsers NOTIFY typingUsersChanged)
     Q_PROPERTY(Dialog::DialogType classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
@@ -2894,6 +2898,18 @@ public:
         emit changed();
     }
 
+    QStringList typingUsers() const {
+        return _typingUsers;
+    }
+
+    void setTypingUsers(QStringList value) {
+        if( value == _typingUsers )
+            return;
+        _typingUsers = value;
+        emit typingUsersChanged();
+        emit changed();
+    }
+
     Dialog::DialogType classType() const {
         return _classType;
     }
@@ -2916,6 +2932,8 @@ public:
         emit topMessageChanged();
         _unreadCount = another.unreadCount();
         emit unreadCountChanged();
+        _typingUsers.clear();
+        emit typingUsersChanged();
         _classType = another.classType();
         emit classTypeChanged();
 
@@ -2927,6 +2945,7 @@ signals:
     void notifySettingsChanged();
     void topMessageChanged();
     void unreadCountChanged();
+    void typingUsersChanged();
     void classTypeChanged();
 
 private:
@@ -2934,6 +2953,7 @@ private:
     PeerNotifySettingsObject* _notifySettings;
     qint32 _topMessage;
     qint32 _unreadCount;
+    QStringList _typingUsers;
     Dialog::DialogType _classType;
 
 };
@@ -3865,6 +3885,9 @@ static bool initialize() {
 
     qmlRegisterType<UserObject>("SigramTypes", 1, 0, "User");
     qRegisterMetaType<UserObject*>("UserObject*");
+
+    qmlRegisterType<PhotoSizeList>("SigramTypes", 1, 0, "PhotoSizeList");
+    qRegisterMetaType<PhotoSizeList*>("PhotoSizeList*");
 
 
     return true;

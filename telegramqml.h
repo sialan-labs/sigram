@@ -112,7 +112,6 @@ public slots:
 
     void sendMessage( qint64 dialogId, const QString & msg );
     void getFile( FileLocationObject *location );
-    void getFile( PhotoObject *photo );
 
     void timerUpdateDialogs( bool duration = 1000 );
 
