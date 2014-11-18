@@ -27,6 +27,9 @@ STextEdit {
     property alias pickersVisible: cpicker.pickersVisible
     property alias pickerEnable: marea.visible
 
+    property alias pickersColor: cpicker.pickersColor
+    property alias pickersStrokeColor: cpicker.pickersStrokeColor
+
     onTextChanged: {
         if( privates.last_text != text )
             cpicker.hide()

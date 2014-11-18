@@ -42,6 +42,8 @@ Rectangle {
     property string normalColor: "#00000000"
     property alias textColor: txt.color
 
+    property alias cursorShape: marea.cursorShape
+
     signal clicked()
 
     Row {

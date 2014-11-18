@@ -1,6 +1,8 @@
 server.source = tg-server.pub
 server.target = $${DESTDIR}
-DEPLOYMENTFOLDERS = server
+emojis.source = emojis
+emojis.target = $${DESTDIR}
+DEPLOYMENTFOLDERS = server emojis
 
 TEMPLATE = app
 QT += qml quick sql
@@ -13,7 +15,9 @@ SOURCES += main.cpp \
     sigram.cpp \
     telegramqml.cpp \
     profilesmodel.cpp \
-    telegramdialogsmodel.cpp
+    telegramdialogsmodel.cpp \
+    telegrammessagesmodel.cpp \
+    emojis.cpp
 
 RESOURCES += resource.qrc
 
@@ -27,7 +31,9 @@ HEADERS += \
     sigram_macros.h \
     profilesmodel.h \
     telegramdialogsmodel.h \
-    objects/types.h
+    objects/types.h \
+    telegrammessagesmodel.h \
+    emojis.h
 
 OTHER_FILES += \
     objects/types.sco \

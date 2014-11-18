@@ -4,7 +4,7 @@ import SialanTools 1.0
 Rectangle {
     width: 100
     height: 62
-    color: "#333333"
+    color: backColor0
     visible: active
 
     property bool active: false
@@ -29,7 +29,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             indicatorSize: 22*physicalPlatformScale
             modern: true
-            light: true
+            light: false
             Component.onCompleted: start()
         }
 
@@ -37,7 +37,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: SApp.globalFontFamily
             font.pixelSize: 11*fontsScale
-            color: "#ffffff"
+            color: textColor0
             text: qsTr("Loading...")
         }
     }

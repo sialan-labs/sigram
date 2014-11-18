@@ -126,6 +126,11 @@ QString SialanCalendarConverter::convertDateTimeToString(const QDateTime &dt)
     return SialanTools::translateNumbers( p->calendar->paperString(dt) );
 }
 
+QString SialanCalendarConverter::convertDateTimeToString(const QDateTime &dt, const QString &format)
+{
+    return SialanTools::translateNumbers( p->calendar->paperString(dt, format) );
+}
+
 QString SialanCalendarConverter::convertDateTimeToLittleString(const QDate &dt)
 {
     return SialanTools::translateNumbers( p->calendar->littleString(dt) );
@@ -189,6 +194,11 @@ QDate SialanCalendarConverter::convertDaysToDate(int days)
 int SialanCalendarConverter::convertDateToDays(const QDate &date)
 {
     return QDate(1,1,1).daysTo(date);
+}
+
+QDateTime SialanCalendarConverter::fromTime_t(uint sec)
+{
+    return QDateTime::fromTime_t(sec);
 }
 
 SialanCalendarConverter::~SialanCalendarConverter()

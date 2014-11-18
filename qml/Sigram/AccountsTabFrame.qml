@@ -6,11 +6,11 @@ Rectangle {
     id: acc_tab_frame
     width: 100
     height: 62
-    color: "#333333"
+    color: backColor0
 
     Rectangle {
         anchors.fill: profiles_list
-        color: "#111111"
+        color: backColor1
     }
 
     Connections {
@@ -57,7 +57,7 @@ Rectangle {
         delegate: Rectangle {
             width: profiles_list.width
             height: width
-            color: marea.pressed? "#88339DCC" : (index==profiles_list.currentIndex? "#333333" : "#00000000")
+            color: marea.pressed? "#88339DCC" : (index==profiles_list.currentIndex? backColor2 : "#00000000")
 
             property string itemName: item.name
             property string itemNumber: item.number
@@ -66,7 +66,7 @@ Rectangle {
                 anchors.centerIn: parent
                 font.family: SApp.globalFontFamily
                 font.pixelSize: 11*fontsScale
-                color: "#ffffff"
+                color: textColor0
                 text: item.name
             }
 

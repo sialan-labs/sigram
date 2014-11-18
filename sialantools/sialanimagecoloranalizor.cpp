@@ -37,12 +37,14 @@ class SialanImageColorAnalizorPrivate
 public:
     QString source;
     QColor color;
+    int method;
 };
 
 SialanImageColorAnalizor::SialanImageColorAnalizor(QObject *parent) :
     QObject(parent)
 {
     p = new SialanImageColorAnalizorPrivate;
+    p->method = Normal;
 
     if( !colorizor_thread )
         colorizor_thread = new SialanImageColorAnalizorThread(QCoreApplication::instance());
@@ -66,8 +68,22 @@ void SialanImageColorAnalizor::setSource(const QString &source)
     if( p->source.isEmpty() )
         return;
 
-    colorizor_thread->analize(source);
+    colorizor_thread->analize(p->method, source);
     found(p->source);
+}
+
+int SialanImageColorAnalizor::method() const
+{
+    return p->method;
+}
+
+void SialanImageColorAnalizor::setMethod(int m)
+{
+    if( p->method == m )
+        return;
+
+    p->method = static_cast<Method>(m);
+    emit methodChanged();
 }
 
 QColor SialanImageColorAnalizor::color() const
@@ -115,7 +131,7 @@ const QHash<QString, QColor> &SialanImageColorAnalizorThread::results() const
     return p->results;
 }
 
-void SialanImageColorAnalizorThread::analize(const QString &path)
+void SialanImageColorAnalizorThread::analize(int method, const QString &path)
 {
     if( p->results.contains(path) )
         return;
@@ -127,7 +143,7 @@ void SialanImageColorAnalizorThread::analize(const QString &path)
         return;
     }
 
-    QMetaObject::invokeMethod( core, "analize", Qt::QueuedConnection, Q_ARG(QString,path) );
+    QMetaObject::invokeMethod( core, "analize", Qt::QueuedConnection, Q_ARG(int,method) , Q_ARG(QString,path) );
 }
 
 void SialanImageColorAnalizorThread::found_slt(SialanImageColorAnalizorCore *c, const QString &source, const QColor & color)
@@ -192,7 +208,7 @@ SialanImageColorAnalizorCore::SialanImageColorAnalizorCore(QObject *parent) :
     p = new SialanImageColorAnalizorCorePrivate;
 }
 
-void SialanImageColorAnalizorCore::analize(const QString &path)
+void SialanImageColorAnalizorCore::analize(int method, const QString &path)
 {
     QImageReader image(path);
 
@@ -204,28 +220,44 @@ void SialanImageColorAnalizorCore::analize(const QString &path)
     image.setScaledSize( image_size );
     const QImage & img = image.read();
 
-    qreal sum_r = 0;
-    qreal sum_g = 0;
-    qreal sum_b = 0;
-    int count = 0;
+    QColor result;
 
-    for( int i=0 ; i<image_size.width(); i++ )
+    switch( method )
     {
-        for( int j=0 ; j<image_size.height(); j++ )
-        {
-            QColor clr = img.pixel(i,j);
-            qreal mid = (clr.red()+clr.green()+clr.blue())/3;
-            if( mid > 180 || mid < 70 )
-                continue;
+    case SialanImageColorAnalizor::Normal:
+    {
+        qreal sum_r = 0;
+        qreal sum_g = 0;
+        qreal sum_b = 0;
+        int count = 0;
 
-            sum_r += clr.red();
-            sum_g += clr.green();
-            sum_b += clr.blue();
-            count++;
+        for( int i=0 ; i<image_size.width(); i++ )
+        {
+            for( int j=0 ; j<image_size.height(); j++ )
+            {
+                QColor clr = img.pixel(i,j);
+                qreal mid = (clr.red()+clr.green()+clr.blue())/3;
+                if( mid > 180 || mid < 70 )
+                    continue;
+
+                sum_r += clr.red();
+                sum_g += clr.green();
+                sum_b += clr.blue();
+                count++;
+            }
         }
+
+        result = QColor( sum_r/count, sum_g/count, sum_b/count );
+    }
+        break;
+
+    case SialanImageColorAnalizor::MoreSaturation:
+    {
+
+    }
+        break;
     }
 
-    QColor result = QColor( sum_r/count, sum_g/count, sum_b/count );
     emit found_slt( this, path, result );
 }
 

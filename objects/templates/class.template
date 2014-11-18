@@ -15,11 +15,14 @@ public:
     void operator= ( const %name & another) {
 %equals
     }
+
 signals:
     void changed();
 %notifies
 private:
 %variables
 };
+
+Q_DECLARE_METATYPE(%nameObject*)
 
 %next

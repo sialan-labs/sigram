@@ -33,6 +33,9 @@ Item {
     property bool commitBlocker: false
     property bool pickersVisible: top_picker.visible || bottom_picker.visible
 
+    property color pickersColor: "#333333"
+    property color pickersStrokeColor: "#000000"
+
     property variant textItem
 
     property int cursorPosition: textItem? textItem.cursorPosition : 0
@@ -126,6 +129,8 @@ Item {
         width: pickerWidth
         height: pickerHeight
         opacity: disabled? 0.2 : 1.0
+        fillColor: pickersColor
+        strokeColor: pickersStrokeColor
 
         property bool disabled: true
     }
@@ -135,6 +140,8 @@ Item {
         width: pickerWidth
         height: pickerHeight
         opacity: disabled? 0.5 : 1.0
+        fillColor: pickersColor
+        strokeColor: pickersStrokeColor
         onVisibleChanged: {
             pasteButton.textItem = visible? cursor_picker.textItem : 0
         }

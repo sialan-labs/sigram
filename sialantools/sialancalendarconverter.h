@@ -66,6 +66,7 @@ public slots:
 
     QString fromMSecSinceEpoch( qint64 t );
     QString convertDateTimeToString( const QDateTime & dt );
+    QString convertDateTimeToString( const QDateTime & dt, const QString & format );
     QString convertDateTimeToLittleString( const QDate & dt );
     int daysOfMonth( qint64 year, int month );
     QString monthName( int month );
@@ -78,6 +79,8 @@ public slots:
 
     static QDate convertDaysToDate( int days );
     static int convertDateToDays( const QDate & date );
+
+    QDateTime fromTime_t( uint sec );
 
 signals:
     void calendarChanged();

@@ -12,6 +12,14 @@ SialanMain {
 
     property variant authDialog
     property alias profiles: profile_model
+    property alias emojis: emojis_obj
+
+    property color backColor0: "#eeeeee"
+    property color backColor1: "#cccccc"
+    property color backColor2: "#fafafa"
+    property color textColor0: "#111111"
+    property color textColor1: "#333333"
+    property color textColor2: "#888888"
 
     Keys.onEscapePressed: {
         SApp.back()
@@ -29,6 +37,10 @@ SialanMain {
             if( !res && !Devices.isDesktop )
                 Sigram.close()
         }
+    }
+
+    Emojis {
+        id: emojis_obj
     }
 
     ProfilesModel {

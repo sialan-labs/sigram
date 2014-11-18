@@ -20,6 +20,7 @@
 #define SIGRAM_H
 
 #include <QObject>
+#include <QSize>
 
 class SigramPrivate;
 class Sigram : public QObject
@@ -28,6 +29,11 @@ class Sigram : public QObject
 public:
     Sigram(QObject *parent = 0);
     ~Sigram();
+
+    Q_INVOKABLE QSize imageSize( const QString & path );
+    Q_INVOKABLE qreal htmlWidth( const QString & txt );
+
+    Q_INVOKABLE QString getTimeString( const QDateTime & dt );
 
 public slots:
     void start();

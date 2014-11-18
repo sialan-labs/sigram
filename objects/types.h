@@ -7,11 +7,127 @@
 
 #include <QString>
 #include <QtQml>
+#include <QFile>
 #include <types/types.h>
+
+class DownloadObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QString location READ location WRITE setLocation NOTIFY locationChanged)
+    Q_PROPERTY(qint32 mtime READ mtime WRITE setMtime NOTIFY mtimeChanged)
+    Q_PROPERTY(qint32 partId READ partId WRITE setPartId NOTIFY partIdChanged)
+    Q_PROPERTY(qint32 downloaded READ downloaded WRITE setDownloaded NOTIFY downloadedChanged)
+    Q_PROPERTY(qint32 total READ total WRITE setTotal NOTIFY totalChanged)
+    Q_PROPERTY(QFile* file READ file WRITE setFile NOTIFY fileChanged)
+
+public:
+    DownloadObject(QObject *parent = 0) : QObject(parent){
+        _mtime = 0;
+        _partId = 0;
+        _downloaded = 0;
+        _total = 0;
+        _file = 0;
+
+    }
+    ~DownloadObject(){}
+
+    QString location() const {
+        return _location;
+    }
+
+    void setLocation(QString value) {
+        if( value == _location )
+            return;
+        _location = value;
+        emit locationChanged();
+        emit changed();
+    }
+
+    qint32 mtime() const {
+        return _mtime;
+    }
+
+    void setMtime(qint32 value) {
+        if( value == _mtime )
+            return;
+        _mtime = value;
+        emit mtimeChanged();
+        emit changed();
+    }
+
+    qint32 partId() const {
+        return _partId;
+    }
+
+    void setPartId(qint32 value) {
+        if( value == _partId )
+            return;
+        _partId = value;
+        emit partIdChanged();
+        emit changed();
+    }
+
+    qint32 downloaded() const {
+        return _downloaded;
+    }
+
+    void setDownloaded(qint32 value) {
+        if( value == _downloaded )
+            return;
+        _downloaded = value;
+        emit downloadedChanged();
+        emit changed();
+    }
+
+    qint32 total() const {
+        return _total;
+    }
+
+    void setTotal(qint32 value) {
+        if( value == _total )
+            return;
+        _total = value;
+        emit totalChanged();
+        emit changed();
+    }
+
+    QFile* file() const {
+        return _file;
+    }
+
+    void setFile(QFile* value) {
+        if( value == _file )
+            return;
+        _file = value;
+        emit fileChanged();
+        emit changed();
+    }
+
+signals:
+    void changed();
+    void locationChanged();
+    void mtimeChanged();
+    void partIdChanged();
+    void downloadedChanged();
+    void totalChanged();
+    void fileChanged();
+
+private:
+    QString _location;
+    qint32 _mtime;
+    qint32 _partId;
+    qint32 _downloaded;
+    qint32 _total;
+    QFile* _file;
+
+};
+
+Q_DECLARE_METATYPE(DownloadObject*)
 
 class FileLocationObject : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(DownloadObject* download READ download WRITE setDownload NOTIFY downloadChanged)
     Q_PROPERTY(qint32 localId READ localId WRITE setLocalId NOTIFY localIdChanged)
     Q_PROPERTY(qint64 secret READ secret WRITE setSecret NOTIFY secretChanged)
     Q_PROPERTY(qint32 dcId READ dcId WRITE setDcId NOTIFY dcIdChanged)
@@ -21,6 +137,7 @@ class FileLocationObject : public QObject
 public:
     FileLocationObject(const FileLocation & another, QObject *parent = 0) : QObject(parent){
         (void)another;
+        _download = new DownloadObject(this);
         _localId = another.localId();
         _secret = another.secret();
         _dcId = another.dcId();
@@ -30,6 +147,18 @@ public:
     }
     FileLocationObject(QObject *parent = 0) : QObject(parent){}
     ~FileLocationObject(){}
+
+    DownloadObject* download() const {
+        return _download;
+    }
+
+    void setDownload(DownloadObject* value) {
+        if( value == _download )
+            return;
+        _download = value;
+        emit downloadChanged();
+        emit changed();
+    }
 
     qint32 localId() const {
         return _localId;
@@ -105,8 +234,10 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
+    void downloadChanged();
     void localIdChanged();
     void secretChanged();
     void dcIdChanged();
@@ -114,6 +245,7 @@ signals:
     void classTypeChanged();
 
 private:
+    DownloadObject* _download;
     qint32 _localId;
     qint64 _secret;
     qint32 _dcId;
@@ -121,6 +253,8 @@ private:
     FileLocation::FileLocationType _classType;
 
 };
+
+Q_DECLARE_METATYPE(FileLocationObject*)
 
 class PeerObject : public QObject
 {
@@ -186,6 +320,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void chatIdChanged();
@@ -198,6 +333,106 @@ private:
     Peer::PeerType _classType;
 
 };
+
+Q_DECLARE_METATYPE(PeerObject*)
+
+class InputPeerObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint32 chatId READ chatId WRITE setChatId NOTIFY chatIdChanged)
+    Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
+    Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
+    Q_PROPERTY(InputPeer::InputPeerType classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    InputPeerObject(const InputPeer & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _chatId = another.chatId();
+        _userId = another.userId();
+        _accessHash = another.accessHash();
+        _classType = another.classType();
+
+    }
+    InputPeerObject(QObject *parent = 0) : QObject(parent){}
+    ~InputPeerObject(){}
+
+    qint32 chatId() const {
+        return _chatId;
+    }
+
+    void setChatId(qint32 value) {
+        if( value == _chatId )
+            return;
+        _chatId = value;
+        emit chatIdChanged();
+        emit changed();
+    }
+
+    qint32 userId() const {
+        return _userId;
+    }
+
+    void setUserId(qint32 value) {
+        if( value == _userId )
+            return;
+        _userId = value;
+        emit userIdChanged();
+        emit changed();
+    }
+
+    qint64 accessHash() const {
+        return _accessHash;
+    }
+
+    void setAccessHash(qint64 value) {
+        if( value == _accessHash )
+            return;
+        _accessHash = value;
+        emit accessHashChanged();
+        emit changed();
+    }
+
+    InputPeer::InputPeerType classType() const {
+        return _classType;
+    }
+
+    void setClassType(InputPeer::InputPeerType value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const InputPeer & another) {
+        _chatId = another.chatId();
+        emit chatIdChanged();
+        _userId = another.userId();
+        emit userIdChanged();
+        _accessHash = another.accessHash();
+        emit accessHashChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void chatIdChanged();
+    void userIdChanged();
+    void accessHashChanged();
+    void classTypeChanged();
+
+private:
+    qint32 _chatId;
+    qint32 _userId;
+    qint64 _accessHash;
+    InputPeer::InputPeerType _classType;
+
+};
+
+Q_DECLARE_METATYPE(InputPeerObject*)
 
 class UserStatusObject : public QObject
 {
@@ -263,6 +498,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void wasOnlineChanged();
@@ -275,6 +511,8 @@ private:
     UserStatus::UserStatusType _classType;
 
 };
+
+Q_DECLARE_METATYPE(UserStatusObject*)
 
 class GeoPointObject : public QObject
 {
@@ -340,6 +578,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void longitudeChanged();
@@ -352,6 +591,8 @@ private:
     GeoPoint::GeoPointType _classType;
 
 };
+
+Q_DECLARE_METATYPE(GeoPointObject*)
 
 class PeerNotifySettingsObject : public QObject
 {
@@ -368,7 +609,7 @@ public:
         _muteUntil = another.muteUntil();
         _eventsMask = another.eventsMask();
         _sound = another.sound();
-        _showPreviews = false;
+        _showPreviews = another.showPreviews();
         _classType = another.classType();
 
     }
@@ -449,6 +690,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void muteUntilChanged();
@@ -465,6 +707,576 @@ private:
     PeerNotifySettings::PeerNotifySettingsType _classType;
 
 };
+
+Q_DECLARE_METATYPE(PeerNotifySettingsObject*)
+
+class ContactsMyLinkObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(bool contact READ contact WRITE setContact NOTIFY contactChanged)
+
+public:
+    ContactsMyLinkObject(const ContactsMyLink & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _contact = another.contact();
+
+    }
+    ContactsMyLinkObject(QObject *parent = 0) : QObject(parent){}
+    ~ContactsMyLinkObject(){}
+
+    bool contact() const {
+        return _contact;
+    }
+
+    void setContact(bool value) {
+        if( value == _contact )
+            return;
+        _contact = value;
+        emit contactChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const ContactsMyLink & another) {
+        _contact = another.contact();
+        emit contactChanged();
+
+    }
+
+signals:
+    void changed();
+    void contactChanged();
+
+private:
+    bool _contact;
+
+};
+
+Q_DECLARE_METATYPE(ContactsMyLinkObject*)
+
+class EncryptedChatObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
+    Q_PROPERTY(QByteArray gA READ gA WRITE setGA NOTIFY gAChanged)
+    Q_PROPERTY(qint64 keyFingerprint READ keyFingerprint WRITE setKeyFingerprint NOTIFY keyFingerprintChanged)
+    Q_PROPERTY(qint32 date READ date WRITE setDate NOTIFY dateChanged)
+    Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
+    Q_PROPERTY(qint32 adminId READ adminId WRITE setAdminId NOTIFY adminIdChanged)
+    Q_PROPERTY(QByteArray gAOrB READ gAOrB WRITE setGAOrB NOTIFY gAOrBChanged)
+    Q_PROPERTY(qint32 participantId READ participantId WRITE setParticipantId NOTIFY participantIdChanged)
+    Q_PROPERTY(EncryptedChat::EncryptedChatType classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    EncryptedChatObject(const EncryptedChat & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _id = another.id();
+        _gA = another.gA();
+        _keyFingerprint = another.keyFingerprint();
+        _date = another.date();
+        _accessHash = another.accessHash();
+        _adminId = another.adminId();
+        _gAOrB = another.gAOrB();
+        _participantId = another.participantId();
+        _classType = another.classType();
+
+    }
+    EncryptedChatObject(QObject *parent = 0) : QObject(parent){}
+    ~EncryptedChatObject(){}
+
+    qint32 id() const {
+        return _id;
+    }
+
+    void setId(qint32 value) {
+        if( value == _id )
+            return;
+        _id = value;
+        emit idChanged();
+        emit changed();
+    }
+
+    QByteArray gA() const {
+        return _gA;
+    }
+
+    void setGA(QByteArray value) {
+        if( value == _gA )
+            return;
+        _gA = value;
+        emit gAChanged();
+        emit changed();
+    }
+
+    qint64 keyFingerprint() const {
+        return _keyFingerprint;
+    }
+
+    void setKeyFingerprint(qint64 value) {
+        if( value == _keyFingerprint )
+            return;
+        _keyFingerprint = value;
+        emit keyFingerprintChanged();
+        emit changed();
+    }
+
+    qint32 date() const {
+        return _date;
+    }
+
+    void setDate(qint32 value) {
+        if( value == _date )
+            return;
+        _date = value;
+        emit dateChanged();
+        emit changed();
+    }
+
+    qint64 accessHash() const {
+        return _accessHash;
+    }
+
+    void setAccessHash(qint64 value) {
+        if( value == _accessHash )
+            return;
+        _accessHash = value;
+        emit accessHashChanged();
+        emit changed();
+    }
+
+    qint32 adminId() const {
+        return _adminId;
+    }
+
+    void setAdminId(qint32 value) {
+        if( value == _adminId )
+            return;
+        _adminId = value;
+        emit adminIdChanged();
+        emit changed();
+    }
+
+    QByteArray gAOrB() const {
+        return _gAOrB;
+    }
+
+    void setGAOrB(QByteArray value) {
+        if( value == _gAOrB )
+            return;
+        _gAOrB = value;
+        emit gAOrBChanged();
+        emit changed();
+    }
+
+    qint32 participantId() const {
+        return _participantId;
+    }
+
+    void setParticipantId(qint32 value) {
+        if( value == _participantId )
+            return;
+        _participantId = value;
+        emit participantIdChanged();
+        emit changed();
+    }
+
+    EncryptedChat::EncryptedChatType classType() const {
+        return _classType;
+    }
+
+    void setClassType(EncryptedChat::EncryptedChatType value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const EncryptedChat & another) {
+        _id = another.id();
+        emit idChanged();
+        _gA = another.gA();
+        emit gAChanged();
+        _keyFingerprint = another.keyFingerprint();
+        emit keyFingerprintChanged();
+        _date = another.date();
+        emit dateChanged();
+        _accessHash = another.accessHash();
+        emit accessHashChanged();
+        _adminId = another.adminId();
+        emit adminIdChanged();
+        _gAOrB = another.gAOrB();
+        emit gAOrBChanged();
+        _participantId = another.participantId();
+        emit participantIdChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void idChanged();
+    void gAChanged();
+    void keyFingerprintChanged();
+    void dateChanged();
+    void accessHashChanged();
+    void adminIdChanged();
+    void gAOrBChanged();
+    void participantIdChanged();
+    void classTypeChanged();
+
+private:
+    qint32 _id;
+    QByteArray _gA;
+    qint64 _keyFingerprint;
+    qint32 _date;
+    qint64 _accessHash;
+    qint32 _adminId;
+    QByteArray _gAOrB;
+    qint32 _participantId;
+    EncryptedChat::EncryptedChatType _classType;
+
+};
+
+Q_DECLARE_METATYPE(EncryptedChatObject*)
+
+class ContactsForeignLinkObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(bool hasPhone READ hasPhone WRITE setHasPhone NOTIFY hasPhoneChanged)
+    Q_PROPERTY(ContactsForeignLink::ContactsForeignLinkType classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    ContactsForeignLinkObject(const ContactsForeignLink & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _hasPhone = another.hasPhone();
+        _classType = another.classType();
+
+    }
+    ContactsForeignLinkObject(QObject *parent = 0) : QObject(parent){}
+    ~ContactsForeignLinkObject(){}
+
+    bool hasPhone() const {
+        return _hasPhone;
+    }
+
+    void setHasPhone(bool value) {
+        if( value == _hasPhone )
+            return;
+        _hasPhone = value;
+        emit hasPhoneChanged();
+        emit changed();
+    }
+
+    ContactsForeignLink::ContactsForeignLinkType classType() const {
+        return _classType;
+    }
+
+    void setClassType(ContactsForeignLink::ContactsForeignLinkType value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const ContactsForeignLink & another) {
+        _hasPhone = another.hasPhone();
+        emit hasPhoneChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void hasPhoneChanged();
+    void classTypeChanged();
+
+private:
+    bool _hasPhone;
+    ContactsForeignLink::ContactsForeignLinkType _classType;
+
+};
+
+Q_DECLARE_METATYPE(ContactsForeignLinkObject*)
+
+class NotifyPeerObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(PeerObject* peer READ peer WRITE setPeer NOTIFY peerChanged)
+    Q_PROPERTY(NotifyPeer::NotifyPeerType classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    NotifyPeerObject(const NotifyPeer & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _peer = new PeerObject(another.peer(), this);
+        _classType = another.classType();
+
+    }
+    NotifyPeerObject(QObject *parent = 0) : QObject(parent){}
+    ~NotifyPeerObject(){}
+
+    PeerObject* peer() const {
+        return _peer;
+    }
+
+    void setPeer(PeerObject* value) {
+        if( value == _peer )
+            return;
+        _peer = value;
+        emit peerChanged();
+        emit changed();
+    }
+
+    NotifyPeer::NotifyPeerType classType() const {
+        return _classType;
+    }
+
+    void setClassType(NotifyPeer::NotifyPeerType value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const NotifyPeer & another) {
+        *_peer = another.peer();
+        emit peerChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void peerChanged();
+    void classTypeChanged();
+
+private:
+    PeerObject* _peer;
+    NotifyPeer::NotifyPeerType _classType;
+
+};
+
+Q_DECLARE_METATYPE(NotifyPeerObject*)
+
+class ChatParticipantObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
+    Q_PROPERTY(qint32 date READ date WRITE setDate NOTIFY dateChanged)
+    Q_PROPERTY(qint32 inviterId READ inviterId WRITE setInviterId NOTIFY inviterIdChanged)
+    Q_PROPERTY(ChatParticipant::ChatParticipantType classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    ChatParticipantObject(const ChatParticipant & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _userId = another.userId();
+        _date = another.date();
+        _inviterId = another.inviterId();
+        _classType = another.classType();
+
+    }
+    ChatParticipantObject(QObject *parent = 0) : QObject(parent){}
+    ~ChatParticipantObject(){}
+
+    qint32 userId() const {
+        return _userId;
+    }
+
+    void setUserId(qint32 value) {
+        if( value == _userId )
+            return;
+        _userId = value;
+        emit userIdChanged();
+        emit changed();
+    }
+
+    qint32 date() const {
+        return _date;
+    }
+
+    void setDate(qint32 value) {
+        if( value == _date )
+            return;
+        _date = value;
+        emit dateChanged();
+        emit changed();
+    }
+
+    qint32 inviterId() const {
+        return _inviterId;
+    }
+
+    void setInviterId(qint32 value) {
+        if( value == _inviterId )
+            return;
+        _inviterId = value;
+        emit inviterIdChanged();
+        emit changed();
+    }
+
+    ChatParticipant::ChatParticipantType classType() const {
+        return _classType;
+    }
+
+    void setClassType(ChatParticipant::ChatParticipantType value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const ChatParticipant & another) {
+        _userId = another.userId();
+        emit userIdChanged();
+        _date = another.date();
+        emit dateChanged();
+        _inviterId = another.inviterId();
+        emit inviterIdChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void userIdChanged();
+    void dateChanged();
+    void inviterIdChanged();
+    void classTypeChanged();
+
+private:
+    qint32 _userId;
+    qint32 _date;
+    qint32 _inviterId;
+    ChatParticipant::ChatParticipantType _classType;
+
+};
+
+Q_DECLARE_METATYPE(ChatParticipantObject*)
+
+class ChatParticipantsObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QList<ChatParticipant> participants READ participants WRITE setParticipants NOTIFY participantsChanged)
+    Q_PROPERTY(qint32 chatId READ chatId WRITE setChatId NOTIFY chatIdChanged)
+    Q_PROPERTY(qint32 version READ version WRITE setVersion NOTIFY versionChanged)
+    Q_PROPERTY(qint32 adminId READ adminId WRITE setAdminId NOTIFY adminIdChanged)
+    Q_PROPERTY(ChatParticipants::ChatParticipantsType classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    ChatParticipantsObject(const ChatParticipants & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _participants = another.participants();
+        _chatId = another.chatId();
+        _version = another.version();
+        _adminId = another.adminId();
+        _classType = another.classType();
+
+    }
+    ChatParticipantsObject(QObject *parent = 0) : QObject(parent){}
+    ~ChatParticipantsObject(){}
+
+    QList<ChatParticipant> participants() const {
+        return _participants;
+    }
+
+    void setParticipants(QList<ChatParticipant> value) {
+        _participants = value;
+        emit participantsChanged();
+        emit changed();
+    }
+
+    qint32 chatId() const {
+        return _chatId;
+    }
+
+    void setChatId(qint32 value) {
+        if( value == _chatId )
+            return;
+        _chatId = value;
+        emit chatIdChanged();
+        emit changed();
+    }
+
+    qint32 version() const {
+        return _version;
+    }
+
+    void setVersion(qint32 value) {
+        if( value == _version )
+            return;
+        _version = value;
+        emit versionChanged();
+        emit changed();
+    }
+
+    qint32 adminId() const {
+        return _adminId;
+    }
+
+    void setAdminId(qint32 value) {
+        if( value == _adminId )
+            return;
+        _adminId = value;
+        emit adminIdChanged();
+        emit changed();
+    }
+
+    ChatParticipants::ChatParticipantsType classType() const {
+        return _classType;
+    }
+
+    void setClassType(ChatParticipants::ChatParticipantsType value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const ChatParticipants & another) {
+        _participants = another.participants();
+        emit participantsChanged();
+        _chatId = another.chatId();
+        emit chatIdChanged();
+        _version = another.version();
+        emit versionChanged();
+        _adminId = another.adminId();
+        emit adminIdChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void participantsChanged();
+    void chatIdChanged();
+    void versionChanged();
+    void adminIdChanged();
+    void classTypeChanged();
+
+private:
+    QList<ChatParticipant> _participants;
+    qint32 _chatId;
+    qint32 _version;
+    qint32 _adminId;
+    ChatParticipants::ChatParticipantsType _classType;
+
+};
+
+Q_DECLARE_METATYPE(ChatParticipantsObject*)
 
 class PhotoSizeObject : public QObject
 {
@@ -594,6 +1406,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void hChanged();
@@ -614,6 +1427,8 @@ private:
     PhotoSize::PhotoSizeType _classType;
 
 };
+
+Q_DECLARE_METATYPE(PhotoSizeObject*)
 
 class AudioObject : public QObject
 {
@@ -775,6 +1590,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void idChanged();
@@ -799,6 +1615,8 @@ private:
     Audio::AudioType _classType;
 
 };
+
+Q_DECLARE_METATYPE(AudioObject*)
 
 class DocumentObject : public QObject
 {
@@ -976,6 +1794,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void idChanged();
@@ -1002,6 +1821,8 @@ private:
     Document::DocumentType _classType;
 
 };
+
+Q_DECLARE_METATYPE(DocumentObject*)
 
 class VideoObject : public QObject
 {
@@ -1227,6 +2048,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void idChanged();
@@ -1260,13 +2082,15 @@ private:
 
 };
 
+Q_DECLARE_METATYPE(VideoObject*)
+
 class PhotoObject : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(qint64 id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(QString caption READ caption WRITE setCaption NOTIFY captionChanged)
     Q_PROPERTY(qint32 date READ date WRITE setDate NOTIFY dateChanged)
-    Q_PROPERTY(QList<PhotoSizeObject*> sizes READ sizes WRITE setSizes NOTIFY sizesChanged)
+    Q_PROPERTY(QList<PhotoSize> sizes READ sizes WRITE setSizes NOTIFY sizesChanged)
     Q_PROPERTY(GeoPointObject* geo READ geo WRITE setGeo NOTIFY geoChanged)
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
@@ -1278,7 +2102,7 @@ public:
         _id = another.id();
         _caption = another.caption();
         _date = another.date();
-//        _sizes = another.sizes();
+        _sizes = another.sizes();
         _geo = new GeoPointObject(another.geo(), this);
         _accessHash = another.accessHash();
         _userId = another.userId();
@@ -1324,13 +2148,11 @@ public:
         emit changed();
     }
 
-    QList<PhotoSizeObject*> sizes() const {
+    QList<PhotoSize> sizes() const {
         return _sizes;
     }
 
-    void setSizes(QList<PhotoSizeObject*> value) {
-        if( value == _sizes )
-            return;
+    void setSizes(QList<PhotoSize> value) {
         _sizes = value;
         emit sizesChanged();
         emit changed();
@@ -1392,7 +2214,7 @@ public:
         emit captionChanged();
         _date = another.date();
         emit dateChanged();
-//        _sizes = another.sizes();
+        _sizes = another.sizes();
         emit sizesChanged();
         *_geo = another.geo();
         emit geoChanged();
@@ -1404,6 +2226,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void idChanged();
@@ -1419,13 +2242,15 @@ private:
     qint64 _id;
     QString _caption;
     qint32 _date;
-    QList<PhotoSizeObject*> _sizes;
+    QList<PhotoSize> _sizes;
     GeoPointObject* _geo;
     qint64 _accessHash;
     qint32 _userId;
     Photo::PhotoType _classType;
 
 };
+
+Q_DECLARE_METATYPE(PhotoObject*)
 
 class MessageActionObject : public QObject
 {
@@ -1539,6 +2364,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void addressChanged();
@@ -1557,6 +2383,8 @@ private:
     MessageAction::MessageActionType _classType;
 
 };
+
+Q_DECLARE_METATYPE(MessageActionObject*)
 
 class ChatPhotoObject : public QObject
 {
@@ -1622,6 +2450,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void photoBigChanged();
@@ -1634,6 +2463,8 @@ private:
     ChatPhoto::ChatPhotoType _classType;
 
 };
+
+Q_DECLARE_METATYPE(ChatPhotoObject*)
 
 class UserProfilePhotoObject : public QObject
 {
@@ -1715,6 +2546,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void photoIdChanged();
@@ -1729,6 +2561,8 @@ private:
     UserProfilePhoto::UserProfilePhotoType _classType;
 
 };
+
+Q_DECLARE_METATYPE(UserProfilePhotoObject*)
 
 class ChatObject : public QObject
 {
@@ -1760,8 +2594,8 @@ public:
         _photo = new ChatPhotoObject(another.photo(), this);
         _geo = new GeoPointObject(another.geo(), this);
         _accessHash = another.accessHash();
-        _checkedIn = false;
-        _left = false;
+        _checkedIn = another.checkedIn();
+        _left = another.left();
         _classType = another.classType();
 
     }
@@ -1954,6 +2788,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void participantsCountChanged();
@@ -1986,6 +2821,8 @@ private:
     Chat::ChatType _classType;
 
 };
+
+Q_DECLARE_METATYPE(ChatObject*)
 
 class DialogObject : public QObject
 {
@@ -2083,6 +2920,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void peerChanged();
@@ -2100,6 +2938,8 @@ private:
 
 };
 
+Q_DECLARE_METATYPE(DialogObject*)
+
 class MessageMediaObject : public QObject
 {
     Q_OBJECT
@@ -2113,7 +2953,7 @@ class MessageMediaObject : public QObject
     Q_PROPERTY(QString phoneNumber READ phoneNumber WRITE setPhoneNumber NOTIFY phoneNumberChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(VideoObject* video READ video WRITE setVideo NOTIFY videoChanged)
-    Q_PROPERTY(MessageMedia::MessageMediaType classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     MessageMediaObject(const MessageMedia & another, QObject *parent = 0) : QObject(parent){
@@ -2254,11 +3094,11 @@ public:
         emit changed();
     }
 
-    MessageMedia::MessageMediaType classType() const {
+    qint64 classType() const {
         return _classType;
     }
 
-    void setClassType(MessageMedia::MessageMediaType value) {
+    void setClassType(qint64 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -2292,6 +3132,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void audioChanged();
@@ -2317,14 +3158,17 @@ private:
     QString _phoneNumber;
     qint32 _userId;
     VideoObject* _video;
-    MessageMedia::MessageMediaType _classType;
+    qint64 _classType;
 
 };
+
+Q_DECLARE_METATYPE(MessageMediaObject*)
 
 class MessageObject : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
+    Q_PROPERTY(bool sent READ sent WRITE setSent NOTIFY sentChanged)
     Q_PROPERTY(PeerObject* toId READ toId WRITE setToId NOTIFY toIdChanged)
     Q_PROPERTY(bool unread READ unread WRITE setUnread NOTIFY unreadChanged)
     Q_PROPERTY(MessageActionObject* action READ action WRITE setAction NOTIFY actionChanged)
@@ -2341,11 +3185,12 @@ public:
     MessageObject(const Message & another, QObject *parent = 0) : QObject(parent){
         (void)another;
         _id = another.id();
+        _sent = true;
         _toId = new PeerObject(another.toId(), this);
-        _unread = false;
+        _unread = another.unread();
         _action = new MessageActionObject(another.action(), this);
         _fromId = another.fromId();
-        _out = false;
+        _out = another.out();
         _date = another.date();
         _media = new MessageMediaObject(another.media(), this);
         _fwdDate = another.fwdDate();
@@ -2366,6 +3211,18 @@ public:
             return;
         _id = value;
         emit idChanged();
+        emit changed();
+    }
+
+    bool sent() const {
+        return _sent;
+    }
+
+    void setSent(bool value) {
+        if( value == _sent )
+            return;
+        _sent = value;
+        emit sentChanged();
         emit changed();
     }
 
@@ -2505,6 +3362,8 @@ public:
     void operator= ( const Message & another) {
         _id = another.id();
         emit idChanged();
+        _sent = true;
+        emit sentChanged();
         *_toId = another.toId();
         emit toIdChanged();
         _unread = another.unread();
@@ -2529,9 +3388,11 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void idChanged();
+    void sentChanged();
     void toIdChanged();
     void unreadChanged();
     void actionChanged();
@@ -2546,6 +3407,7 @@ signals:
 
 private:
     qint32 _id;
+    bool _sent;
     PeerObject* _toId;
     bool _unread;
     MessageActionObject* _action;
@@ -2559,6 +3421,178 @@ private:
     Message::MessageType _classType;
 
 };
+
+Q_DECLARE_METATYPE(MessageObject*)
+
+class GeoChatMessageObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
+    Q_PROPERTY(MessageActionObject* action READ action WRITE setAction NOTIFY actionChanged)
+    Q_PROPERTY(qint32 fromId READ fromId WRITE setFromId NOTIFY fromIdChanged)
+    Q_PROPERTY(qint32 date READ date WRITE setDate NOTIFY dateChanged)
+    Q_PROPERTY(MessageMediaObject* media READ media WRITE setMedia NOTIFY mediaChanged)
+    Q_PROPERTY(qint32 chatId READ chatId WRITE setChatId NOTIFY chatIdChanged)
+    Q_PROPERTY(QString message READ message WRITE setMessage NOTIFY messageChanged)
+    Q_PROPERTY(GeoChatMessage::GeoChatMessageType classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    GeoChatMessageObject(const GeoChatMessage & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _id = another.id();
+        _action = new MessageActionObject(another.action(), this);
+        _fromId = another.fromId();
+        _date = another.date();
+        _media = new MessageMediaObject(another.media(), this);
+        _chatId = another.chatId();
+        _message = another.message();
+        _classType = another.classType();
+
+    }
+    GeoChatMessageObject(QObject *parent = 0) : QObject(parent){}
+    ~GeoChatMessageObject(){}
+
+    qint32 id() const {
+        return _id;
+    }
+
+    void setId(qint32 value) {
+        if( value == _id )
+            return;
+        _id = value;
+        emit idChanged();
+        emit changed();
+    }
+
+    MessageActionObject* action() const {
+        return _action;
+    }
+
+    void setAction(MessageActionObject* value) {
+        if( value == _action )
+            return;
+        _action = value;
+        emit actionChanged();
+        emit changed();
+    }
+
+    qint32 fromId() const {
+        return _fromId;
+    }
+
+    void setFromId(qint32 value) {
+        if( value == _fromId )
+            return;
+        _fromId = value;
+        emit fromIdChanged();
+        emit changed();
+    }
+
+    qint32 date() const {
+        return _date;
+    }
+
+    void setDate(qint32 value) {
+        if( value == _date )
+            return;
+        _date = value;
+        emit dateChanged();
+        emit changed();
+    }
+
+    MessageMediaObject* media() const {
+        return _media;
+    }
+
+    void setMedia(MessageMediaObject* value) {
+        if( value == _media )
+            return;
+        _media = value;
+        emit mediaChanged();
+        emit changed();
+    }
+
+    qint32 chatId() const {
+        return _chatId;
+    }
+
+    void setChatId(qint32 value) {
+        if( value == _chatId )
+            return;
+        _chatId = value;
+        emit chatIdChanged();
+        emit changed();
+    }
+
+    QString message() const {
+        return _message;
+    }
+
+    void setMessage(QString value) {
+        if( value == _message )
+            return;
+        _message = value;
+        emit messageChanged();
+        emit changed();
+    }
+
+    GeoChatMessage::GeoChatMessageType classType() const {
+        return _classType;
+    }
+
+    void setClassType(GeoChatMessage::GeoChatMessageType value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const GeoChatMessage & another) {
+        _id = another.id();
+        emit idChanged();
+        *_action = another.action();
+        emit actionChanged();
+        _fromId = another.fromId();
+        emit fromIdChanged();
+        _date = another.date();
+        emit dateChanged();
+        *_media = another.media();
+        emit mediaChanged();
+        _chatId = another.chatId();
+        emit chatIdChanged();
+        _message = another.message();
+        emit messageChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void idChanged();
+    void actionChanged();
+    void fromIdChanged();
+    void dateChanged();
+    void mediaChanged();
+    void chatIdChanged();
+    void messageChanged();
+    void classTypeChanged();
+
+private:
+    qint32 _id;
+    MessageActionObject* _action;
+    qint32 _fromId;
+    qint32 _date;
+    MessageMediaObject* _media;
+    qint32 _chatId;
+    QString _message;
+    GeoChatMessage::GeoChatMessageType _classType;
+
+};
+
+Q_DECLARE_METATYPE(GeoChatMessageObject*)
 
 class UserObject : public QObject
 {
@@ -2578,7 +3612,7 @@ public:
         (void)another;
         _id = another.id();
         _accessHash = another.accessHash();
-        _inactive = false;
+        _inactive = another.inactive();
         _phone = another.phone();
         _firstName = another.firstName();
         _photo = new UserProfilePhotoObject(another.photo(), this);
@@ -2720,6 +3754,7 @@ public:
         emit classTypeChanged();
 
     }
+
 signals:
     void changed();
     void idChanged();
@@ -2745,27 +3780,92 @@ private:
 
 };
 
+Q_DECLARE_METATYPE(UserObject*)
+
 
 
 static bool initialize() {
+    qmlRegisterType<DownloadObject>("SigramTypes", 1, 0, "Download");
+    qRegisterMetaType<DownloadObject*>("DownloadObject*");
+
     qmlRegisterType<FileLocationObject>("SigramTypes", 1, 0, "FileLocation");
+    qRegisterMetaType<FileLocationObject*>("FileLocationObject*");
+
     qmlRegisterType<PeerObject>("SigramTypes", 1, 0, "Peer");
+    qRegisterMetaType<PeerObject*>("PeerObject*");
+
+    qmlRegisterType<InputPeerObject>("SigramTypes", 1, 0, "InputPeer");
+    qRegisterMetaType<InputPeerObject*>("InputPeerObject*");
+
     qmlRegisterType<UserStatusObject>("SigramTypes", 1, 0, "UserStatus");
+    qRegisterMetaType<UserStatusObject*>("UserStatusObject*");
+
     qmlRegisterType<GeoPointObject>("SigramTypes", 1, 0, "GeoPoint");
+    qRegisterMetaType<GeoPointObject*>("GeoPointObject*");
+
     qmlRegisterType<PeerNotifySettingsObject>("SigramTypes", 1, 0, "PeerNotifySettings");
+    qRegisterMetaType<PeerNotifySettingsObject*>("PeerNotifySettingsObject*");
+
+    qmlRegisterType<ContactsMyLinkObject>("SigramTypes", 1, 0, "ContactsMyLink");
+    qRegisterMetaType<ContactsMyLinkObject*>("ContactsMyLinkObject*");
+
+    qmlRegisterType<EncryptedChatObject>("SigramTypes", 1, 0, "EncryptedChat");
+    qRegisterMetaType<EncryptedChatObject*>("EncryptedChatObject*");
+
+    qmlRegisterType<ContactsForeignLinkObject>("SigramTypes", 1, 0, "ContactsForeignLink");
+    qRegisterMetaType<ContactsForeignLinkObject*>("ContactsForeignLinkObject*");
+
+    qmlRegisterType<NotifyPeerObject>("SigramTypes", 1, 0, "NotifyPeer");
+    qRegisterMetaType<NotifyPeerObject*>("NotifyPeerObject*");
+
+    qmlRegisterType<ChatParticipantObject>("SigramTypes", 1, 0, "ChatParticipant");
+    qRegisterMetaType<ChatParticipantObject*>("ChatParticipantObject*");
+
+    qmlRegisterType<ChatParticipantsObject>("SigramTypes", 1, 0, "ChatParticipants");
+    qRegisterMetaType<ChatParticipantsObject*>("ChatParticipantsObject*");
+
     qmlRegisterType<PhotoSizeObject>("SigramTypes", 1, 0, "PhotoSize");
+    qRegisterMetaType<PhotoSizeObject*>("PhotoSizeObject*");
+
     qmlRegisterType<AudioObject>("SigramTypes", 1, 0, "Audio");
+    qRegisterMetaType<AudioObject*>("AudioObject*");
+
     qmlRegisterType<DocumentObject>("SigramTypes", 1, 0, "Document");
+    qRegisterMetaType<DocumentObject*>("DocumentObject*");
+
     qmlRegisterType<VideoObject>("SigramTypes", 1, 0, "Video");
+    qRegisterMetaType<VideoObject*>("VideoObject*");
+
     qmlRegisterType<PhotoObject>("SigramTypes", 1, 0, "Photo");
+    qRegisterMetaType<PhotoObject*>("PhotoObject*");
+
     qmlRegisterType<MessageActionObject>("SigramTypes", 1, 0, "MessageAction");
+    qRegisterMetaType<MessageActionObject*>("MessageActionObject*");
+
     qmlRegisterType<ChatPhotoObject>("SigramTypes", 1, 0, "ChatPhoto");
+    qRegisterMetaType<ChatPhotoObject*>("ChatPhotoObject*");
+
     qmlRegisterType<UserProfilePhotoObject>("SigramTypes", 1, 0, "UserProfilePhoto");
+    qRegisterMetaType<UserProfilePhotoObject*>("UserProfilePhotoObject*");
+
     qmlRegisterType<ChatObject>("SigramTypes", 1, 0, "Chat");
+    qRegisterMetaType<ChatObject*>("ChatObject*");
+
     qmlRegisterType<DialogObject>("SigramTypes", 1, 0, "Dialog");
+    qRegisterMetaType<DialogObject*>("DialogObject*");
+
     qmlRegisterType<MessageMediaObject>("SigramTypes", 1, 0, "MessageMedia");
+    qRegisterMetaType<MessageMediaObject*>("MessageMediaObject*");
+
     qmlRegisterType<MessageObject>("SigramTypes", 1, 0, "Message");
+    qRegisterMetaType<MessageObject*>("MessageObject*");
+
+    qmlRegisterType<GeoChatMessageObject>("SigramTypes", 1, 0, "GeoChatMessage");
+    qRegisterMetaType<GeoChatMessageObject*>("GeoChatMessageObject*");
+
     qmlRegisterType<UserObject>("SigramTypes", 1, 0, "User");
+    qRegisterMetaType<UserObject*>("UserObject*");
+
 
     return true;
 }

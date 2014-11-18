@@ -45,7 +45,7 @@ Rectangle {
         anchors.bottomMargin: 4*physicalPlatformScale
         font.family: SApp.globalFontFamily
         font.pixelSize: 10*fontsScale
-        color: "#ffffff"
+        color: textColor0
         visible: time_out_timer.running
         text: Math.floor(time_out_timer.countDown/60).toString() + ":" + time_out_timer.countDown%60
     }
@@ -61,9 +61,9 @@ Rectangle {
             width: column.width
             anchors.horizontalCenter: parent.horizontalCenter
             placeholder: qsTr("Code")
-            textColor: "#ffffff"
+            textColor: textColor0
             placeholderColor: "#888888"
-            color: "#111111"
+            color: backColor1
             validator: RegExpValidator{regExp: /\d*/}
             pickerEnable: Devices.isTouchDevice
             onAccepted: {
@@ -79,9 +79,9 @@ Rectangle {
             width: column.width
             anchors.horizontalCenter: parent.horizontalCenter
             placeholder: qsTr("First Name")
-            textColor: "#ffffff"
+            textColor: textColor0
             placeholderColor: "#888888"
-            color: "#111111"
+            color: backColor1
             validator: RegExpValidator{regExp: /\d*/}
             visible: !phoneRegistered
             pickerEnable: Devices.isTouchDevice
@@ -93,9 +93,9 @@ Rectangle {
             width: column.width
             anchors.horizontalCenter: parent.horizontalCenter
             placeholder: qsTr("Last Name")
-            textColor: "#ffffff"
+            textColor: textColor0
             placeholderColor: "#888888"
-            color: "#111111"
+            color: backColor1
             validator: RegExpValidator{regExp: /\d*/}
             visible: !phoneRegistered
             pickerEnable: Devices.isTouchDevice
@@ -108,7 +108,7 @@ Rectangle {
             height: 40*physicalPlatformScale
             normalColor: "#339DCC"
             highlightColor: "#3384CC"
-            textColor: "#ffffff"
+            textColor: textColor0
             text: phoneRegistered? qsTr("Sign In") : qsTr("Sign Up")
             onClicked: accept()
         }
@@ -122,7 +122,7 @@ Rectangle {
         font.family: SApp.globalFontFamily
         font.underline: true
         font.pixelSize: 10*fontsScale
-        color: callButton? "#ffffff" : "#aaaaaa"
+        color: callButton? textColor0 : "#aaaaaa"
         text: callButton? qsTr("Call Request") : qsTr("Requested")
         visible: false
 

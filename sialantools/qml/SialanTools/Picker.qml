@@ -23,12 +23,15 @@ Canvas {
     width: 100
     height: 62
 
+    property color fillColor: "#333333"
+    property color strokeColor: "#000000"
+
     onPaint: {
         var ctx = picker.getContext("2d");
         ctx.save();
 
-        ctx.strokeStyle = "#000000";
-        ctx.fillStyle = "#333333"
+        ctx.strokeStyle = fillColor;
+        ctx.fillStyle = strokeColor
         ctx.lineWidth = 1*physicalPlatformScale
         ctx.beginPath();
 

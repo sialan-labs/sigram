@@ -285,6 +285,11 @@ bool SialanDevices::transparentNavigationBar() const
 #endif
 }
 
+qreal SialanDevices::standardTitleBarHeight() const
+{
+    return 50*density();
+}
+
 int SialanDevices::densityDpi() const
 {
 #ifdef Q_OS_ANDROID

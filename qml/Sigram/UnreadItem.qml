@@ -2,12 +2,12 @@
     Copyright (C) 2014 Sialan Labs
     http://labs.sialan.org
 
-    This project is free software: you can redistribute it and/or modify
+    Sigram is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    This project is distributed in the hope that it will be useful,
+    Sigram is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -18,21 +18,19 @@
 
 import QtQuick 2.0
 
-Item {
-    id: slogo
-    width: img.width
-    height: 30
+Rectangle {
+    id: uread_item
+    width: txt.width<height? height : txt.width
+    height: 20
+    radius: height/2
+    color: "#ff1111"
 
-    property real ratio: 572/69
-    property bool dark: false
+    property int unread: 0
 
-    Image {
-        id: img
-        width: slogo.height*slogo.ratio
-        height: slogo.height
+    Text {
+        id: txt
         anchors.centerIn: parent
-        sourceSize: Qt.size(width,height)
-        fillMode: Image.PreserveAspectFit
-        source: dark? "files/sialan-logo-dark.png" : "files/sialan-logo.png"
+        color: "#ffffff"
+        text: uread_item.unread
     }
 }

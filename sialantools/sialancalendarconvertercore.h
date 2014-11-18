@@ -49,6 +49,7 @@ public:
     CalendarTypes calendar() const;
 
     QString paperString(const QDateTime &d );
+    QString paperString(const QDateTime &d, const QString & format );
     QString littleString(const QDate &d );
     QString historyString( const QDate & d );
     QString numberString( const QDate & d );

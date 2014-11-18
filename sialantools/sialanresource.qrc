@@ -55,5 +55,9 @@
         <file>qml/SialanTools/SialanLogo.qml</file>
         <file>qml/SialanTools/QueueList.qml</file>
         <file>files/countries.csv</file>
+        <file>qml/SialanTools/fonts/DroidKaqazSans.ttf</file>
+        <file>qml/SialanTools/fonts/DroidSansMono.ttf</file>
+        <file>qml/SialanTools/files/sialan-logo-dark.png</file>
+        <file>qml/SialanTools/MessageDialog.qml</file>
     </qresource>
 </RCC>

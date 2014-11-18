@@ -3,7 +3,8 @@ import SialanTools 1.0
 
 Rectangle {
     id: auth_dialog
-    color: "#555555"
+    color: backColor0
+    focus: true
 
     signal accepted( string number )
 
@@ -13,7 +14,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         height: View.statusBarHeight + 50*physicalPlatformScale
-        color: "#333333"
+        color: backColor1
 
         Text {
             anchors.fill: parent
@@ -22,7 +23,7 @@ Rectangle {
             font.family: SApp.globalFontFamily
             font.pixelSize: 13*fontsScale
             text: qsTr("Authenticating")
-            color: "#ffffff"
+            color: textColor0
         }
     }
 
@@ -63,7 +64,7 @@ Rectangle {
             anchors.margins: 8*physicalPlatformScale
             font.family: SApp.globalFontFamily
             font.pixelSize: 15*fontsScale
-            color: "#ffffff"
+            color: textColor0
             text: "+" + cphones_list.number
             visible: column.visible
         }
@@ -79,9 +80,9 @@ Rectangle {
                 width: frame.columnWidth
                 anchors.horizontalCenter: parent.horizontalCenter
                 placeholder: qsTr("Phone Number")
-                textColor: "#ffffff"
+                textColor: textColor0
                 placeholderColor: "#888888"
-                color: "#333333"
+                color: backColor0
                 validator: RegExpValidator{regExp: /(?!0)\d*/}
                 pickerEnable: Devices.isTouchDevice
                 onAccepted: auth_dialog.accepted( country_code.text + text )
@@ -93,7 +94,7 @@ Rectangle {
                 height: 40*physicalPlatformScale
                 normalColor: "#339DCC"
                 highlightColor: "#3384CC"
-                textColor: "#ffffff"
+                textColor: textColor0
                 text: qsTr("Login")
                 onClicked: phone_number.accepted()
             }
@@ -106,6 +107,6 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         height: View.navigationBarHeight + 50*physicalPlatformScale
-        color: "#333333"
+        color: backColor1
     }
 }

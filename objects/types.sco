@@ -2,9 +2,20 @@
 
 include <QString>;
 include <QtQml>;
+include <QFile>;
 include <types/types.h>;
 
+object Download {
+    QString location rw;
+    qint32 mtime rw = 0;
+    qint32 partId rw = 0;
+    qint32 downloaded rw = 0;
+    qint32 total rw = 0;
+    QFile* file rw = 0;
+}
+
 object FileLocation {
+    DownloadObject* download rw = new DownloadObject(this);
     qint32 localId rw = another.%name();
     qint64 secret rw = another.%name();
     qint32 dcId rw = another.%name();
@@ -16,6 +27,13 @@ object Peer {
     qint32 chatId rw = another.%name();
     qint32 userId rw = another.%name();
     Peer::PeerType classType rw = another.%name();
+}
+
+object InputPeer {
+    qint32 chatId rw = another.%name();
+    qint32 userId rw = another.%name();
+    qint64 accessHash rw = another.%name();
+    InputPeer::InputPeerType classType rw = another.%name();
 }
 
 object UserStatus {
@@ -34,8 +52,50 @@ object PeerNotifySettings {
     qint32 muteUntil rw = another.%name();
     qint32 eventsMask rw = another.%name();
     QString sound rw = another.%name();
-    bool showPreviews rw = false;
+    bool showPreviews rw = another.%name();
     PeerNotifySettings::PeerNotifySettingsType classType rw = another.%name();
+}
+
+object ContactsMyLink {
+    bool contact rw = another.%name();
+    ContactsMyLink::ContactsMyLinkType classType = another.%name();
+}
+
+object EncryptedChat {
+    qint32 id rw = another.%name();
+    QByteArray gA rw = another.%name();
+    qint64 keyFingerprint rw = another.%name();
+    qint32 date rw = another.%name();
+    qint64 accessHash rw = another.%name();
+    qint32 adminId rw = another.%name();
+    QByteArray gAOrB rw = another.%name();
+    qint32 participantId rw = another.%name();
+    EncryptedChat::EncryptedChatType classType rw = another.%name();
+}
+
+object ContactsForeignLink {
+    bool hasPhone rw = another.%name();
+    ContactsForeignLink::ContactsForeignLinkType classType rw = another.%name();
+}
+
+object NotifyPeer {
+    PeerObject* peer rw = new PeerObject(another.%name(), this);
+    NotifyPeer::NotifyPeerType classType rw = another.%name();
+}
+
+object ChatParticipant {
+    qint32 userId rw = another.%name();
+    qint32 date rw = another.%name();
+    qint32 inviterId rw = another.%name();
+    ChatParticipant::ChatParticipantType classType rw = another.%name();
+}
+
+object ChatParticipants {
+    QList<ChatParticipant> participants rw = another.%name();
+    qint32 chatId rw = another.%name();
+    qint32 version rw = another.%name();
+    qint32 adminId rw = another.%name();
+    ChatParticipants::ChatParticipantsType classType rw = another.%name();
 }
 
 object PhotoSize {
@@ -93,7 +153,7 @@ object Photo {
     qint64 id rw = another.%name();
     QString caption rw = another.%name();
     qint32 date rw = another.%name();
-    QList<PhotoSizeObject*> sizes rw = another.%name();
+    QList<PhotoSize> sizes rw = another.%name();
     GeoPointObject* geo rw = new GeoPointObject(another.%name(), this);
     qint64 accessHash rw = another.%name();
     qint32 userId rw = another.%name();
@@ -133,8 +193,8 @@ object Chat {
     ChatPhotoObject* photo rw = new ChatPhotoObject(another.%name(), this);
     GeoPointObject* geo rw = new GeoPointObject(another.%name(), this);
     qint64 accessHash rw = another.%name();
-    bool checkedIn rw = false;
-    bool left rw = false;
+    bool checkedIn rw = another.%name();
+    bool left rw = another.%name();
     Chat::ChatType classType rw = another.%name();
 }
 
@@ -157,16 +217,17 @@ object MessageMedia {
     QString phoneNumber rw = another.%name();
     qint32 userId rw = another.%name();
     VideoObject* video rw = new VideoObject(another.%name(), this);
-    MessageMedia::MessageMediaType classType rw = another.%name();
+    int classType rw = another.%name();
 }
 
 object Message {
     qint32 id rw = another.%name();
+    bool sent rw = true;
     PeerObject* toId rw = new PeerObject(another.%name(), this);
-    bool unread rw = false;
+    bool unread rw = another.%name();
     MessageActionObject* action rw = new MessageActionObject(another.%name(), this);
     qint32 fromId rw = another.%name();
-    bool out rw = false;
+    bool out rw = another.%name();
     qint32 date rw = another.%name();
     MessageMediaObject* media rw = new MessageMediaObject(another.%name(), this);
     qint32 fwdDate rw = another.%name();
@@ -175,10 +236,21 @@ object Message {
     Message::MessageType classType rw = another.%name();
 }
 
+object GeoChatMessage {
+    qint32 id rw = another.%name();
+    MessageActionObject* action rw = new MessageActionObject(another.%name(), this);
+    qint32 fromId rw = another.%name();
+    qint32 date rw = another.%name();
+    MessageMediaObject* media rw = new MessageMediaObject(another.%name(), this);
+    qint32 chatId rw = another.%name();
+    QString message rw = another.%name();
+    GeoChatMessage::GeoChatMessageType classType rw = another.%name();
+}
+
 object User {
     qint32 id rw = another.%name();
     qint64 accessHash rw = another.%name();
-    bool inactive rw = false;
+    bool inactive rw = another.%name();
     QString phone rw = another.%name();
     QString firstName rw = another.%name();
     UserProfilePhotoObject* photo rw = new UserProfilePhotoObject(another.%name(), this);

@@ -57,11 +57,9 @@ void TelegramDialogsModel::setTelegram(QObject *tgo)
     if( !p->telegram )
         return;
 
+    connect( p->telegram, SIGNAL(dialogsChanged()), SLOT(dialogsChanged()) );
+
     Telegram *tgObject = p->telegram->telegram();
-
-    connect( tgObject, SIGNAL(messagesGetDialogsAnswer(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
-             SLOT(messagesGetDialogs_slt(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)) );
-
     tgObject->messagesGetDialogs(0,0,1000);
 }
 
@@ -112,22 +110,58 @@ bool TelegramDialogsModel::intializing() const
     return p->intializing;
 }
 
-void TelegramDialogsModel::messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> &dialogs, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users)
+void TelegramDialogsModel::dialogsChanged()
 {
-    Q_UNUSED(id)
-    Q_UNUSED(sliceCount)
-    Q_UNUSED(users)
-    Q_UNUSED(messages)
-    Q_UNUSED(chats)
+    p->intializing = false;
+    emit intializingChanged();
 
-    foreach( const Dialog & d, dialogs )
+    QList<qint64> dialogs = p->telegram->dialogs();
+
+    for( int i=0 ; i<p->dialogs.count() ; i++ )
     {
-        qint32 did = d.peer().classType()==Peer::typePeerChat? d.peer().chatId() : d.peer().userId();
-        if( p->dialogs.contains(did) )
+        const qint64 dId = p->dialogs.at(i);
+        if( dialogs.contains(dId) )
             continue;
 
-        beginInsertRows(QModelIndex(), count(), count());
-        p->dialogs.append(did);
+        beginRemoveRows(QModelIndex(), i, i);
+        p->dialogs.removeAt(i);
+        i--;
+        endRemoveRows();
+    }
+
+
+    QList<qint64> temp_msgs = dialogs;
+    for( int i=0 ; i<temp_msgs.count() ; i++ )
+    {
+        const qint64 dId = temp_msgs.at(i);
+        if( p->dialogs.contains(dId) )
+            continue;
+
+        temp_msgs.removeAt(i);
+        i--;
+    }
+    while( p->dialogs != temp_msgs )
+        for( int i=0 ; i<p->dialogs.count() ; i++ )
+        {
+            const qint64 dId = p->dialogs.at(i);
+            int nw = temp_msgs.indexOf(dId);
+            if( i == nw )
+                continue;
+
+            beginMoveRows( QModelIndex(), i, i, QModelIndex(), nw>i?nw+1:nw );
+            p->dialogs.move( i, nw );
+            endMoveRows();
+        }
+
+
+    for( int i=0 ; i<dialogs.count() ; i++ )
+    {
+        const qint64 dId = dialogs.at(i);
+        if( p->dialogs.contains(dId) )
+            continue;
+
+        beginInsertRows(QModelIndex(), i, i );
+        p->dialogs.insert( i, dId );
         endInsertRows();
     }
 }

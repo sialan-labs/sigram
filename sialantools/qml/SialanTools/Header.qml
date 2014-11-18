@@ -21,9 +21,10 @@ import QtQuick 2.0
 Item {
     id: header
     width: 100
-    height: 60*physicalPlatformScale
+    height: Devices.standardTitleBarHeight
 
     property alias text: title_txt.text
+    property alias titleFont: title_txt.font
     property bool light: false
     property bool backButton: !Devices.isAndroid && !View.fullscreen
 

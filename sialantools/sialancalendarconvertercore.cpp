@@ -59,6 +59,28 @@ QString SialanCalendarConverterCore::paperString(const QDateTime &dt)
     return res;
 }
 
+QString SialanCalendarConverterCore::paperString(const QDateTime &d, const QString &format)
+{
+    const DateProperty & dp = getDate(d.date());
+    QString res = format;
+    res.replace("HH", QString::number(d.time().hour()).rightJustified(2,'0'));
+    res.replace("hh", QString::number(d.time().hour()%12).rightJustified(2,'0'));
+    res.replace("H", QString::number(d.time().hour()));
+    res.replace("h", QString::number(d.time().hour()%12));
+    res.replace("mm", QString::number(d.time().minute()).rightJustified(2,'0'));
+    res.replace("m", QString::number(d.time().minute()));
+    res.replace("ss", QString::number(d.time().second()).rightJustified(2,'0'));
+    res.replace("s", QString::number(d.time().second()));
+    res.replace("yyyy", QString::number(dp.year));
+    res.replace("yy", QString::number(dp.year).right(2));
+    res.replace("dddd", dayName(dp.day_of_week));
+    res.replace("MMMM", monthName(dp.month));
+    res.replace("dd", QString::number(dp.day).rightJustified(2,'0'));
+    res.replace("MM", QString::number(dp.month).rightJustified(2,'0'));
+
+    return res;
+}
+
 QString SialanCalendarConverterCore::littleString(const QDate &d)
 {
     const DateProperty & dp = getDate(d);

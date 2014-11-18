@@ -18,27 +18,35 @@
 
 #include "sigram.h"
 #include "sialantools/sialanquickview.h"
+#include "sialantools/sialancalendarconverter.h"
 #include "telegramqml.h"
 #include "profilesmodel.h"
+#include "telegrammessagesmodel.h"
 #include "telegramdialogsmodel.h"
+#include "emojis.h"
 
 #include <QPointer>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QtQml>
 #include <QDebug>
+#include <QTextDocument>
+#include <QImageReader>
 
 class SigramPrivate
 {
 public:
     QPointer<SialanQuickView> viewer;
     bool close_blocker;
+
+    QTextDocument *doc;
 };
 
 Sigram::Sigram(QObject *parent) :
     QObject(parent)
 {
     p = new SigramPrivate;
+    p->doc = new QTextDocument(this);
 
 #ifdef Q_OS_ANDROID
     p->close_blocker = true;
@@ -49,7 +57,35 @@ Sigram::Sigram(QObject *parent) :
     qmlRegisterType<TelegramQml>("Sigram", 1, 0, "Telegram");
     qmlRegisterType<ProfilesModel>("Sigram", 1, 0, "ProfilesModel");
     qmlRegisterType<ProfilesModelItem>("Sigram", 1, 0, "ProfilesModelItem");
+    qmlRegisterType<TelegramMessagesModel>("Sigram", 1, 0, "MessagesModel");
     qmlRegisterType<TelegramDialogsModel>("Sigram", 1, 0, "DialogsModel");
+    qmlRegisterType<Emojis>("Sigram", 1, 0, "Emojis");
+}
+
+QSize Sigram::imageSize(const QString &path)
+{
+    QImageReader img(path);
+    return img.size();
+}
+
+qreal Sigram::htmlWidth(const QString &txt)
+{
+    p->doc->setHtml(txt);
+    return p->doc->size().width() + 10;
+}
+
+QString Sigram::getTimeString(const QDateTime &dt)
+{
+    if( QDate::currentDate() == dt.date() ) // TODAY
+        return dt.toString("HH:mm");
+    else
+    if( dt.date().daysTo(QDate::currentDate()) < 7 )
+        return dt.toString("ddd HH:mm");
+    else
+    if( dt.date().year() == QDate::currentDate().year() )
+        return dt.toString("dd MMM");
+    else
+        return dt.toString("dd MMM yy");
 }
 
 void Sigram::start()

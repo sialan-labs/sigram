@@ -29,19 +29,30 @@ class SialanImageColorAnalizor : public QObject
     Q_OBJECT
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
     Q_PROPERTY(QColor color READ color NOTIFY colorChanged)
+    Q_PROPERTY(int method READ method WRITE setMethod NOTIFY methodChanged)
+    Q_ENUMS(Method)
 
 public:
+    enum Method {
+        Normal,
+        MoreSaturation
+    };
+
     SialanImageColorAnalizor(QObject *parent = 0);
     ~SialanImageColorAnalizor();
 
     QString source() const;
     void setSource( const QString & source );
 
+    int method() const;
+    void setMethod( int m );
+
     QColor color() const;
 
 signals:
     void sourceChanged();
     void colorChanged();
+    void methodChanged();
 
 private slots:
     void found( const QString & path );
@@ -62,7 +73,7 @@ public:
     const QHash<QString,QColor> & results() const;
 
 public slots:
-    void analize( const QString & path );
+    void analize(int method, const QString & path );
 
 signals:
     void found( const QString & path );
@@ -87,7 +98,7 @@ public:
     ~SialanImageColorAnalizorCore();
 
 public slots:
-    void analize( const QString & path );
+    void analize( int method, const QString & path );
 
 signals:
     void found_slt(SialanImageColorAnalizorCore *core, const QString & path , const QColor &color);

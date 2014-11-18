@@ -26,6 +26,9 @@ STextInput {
     property alias commitBlocker: cpicker.commitBlocker
     property alias pickerEnable: marea.visible
 
+    property alias pickersColor: cpicker.pickersColor
+    property alias pickersStrokeColor: cpicker.pickersStrokeColor
+
     onTextChanged: {
         if( privates.last_text != text )
             cpicker.hide()

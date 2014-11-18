@@ -61,12 +61,14 @@ import QtQuick 2.0
 
 Item {
     id: container
+    width: 6*physicalPlatformScale
 
     property variant scrollArea
     property variant orientation: Qt.Vertical
     property alias color: bilbilak.color
+    property bool forceVisible: false
 
-    opacity: scrollArea.movingVertically || scrollArea.movingHorizontally? 1 : 0
+    opacity: scrollArea.movingVertically || scrollArea.movingHorizontally || forceVisible? 1 : 0
 
     function position()
     {

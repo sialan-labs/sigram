@@ -2,43 +2,89 @@ import QtQuick 2.0
 import SialanTools 1.0
 import Sigram 1.0
 import SigramTypes 1.0
+import QtGraphicalEffects 1.0
 
 Rectangle {
     width: 100
     height: 62
-    color: "#333333"
+    color: backColor2
 
-    property alias telegramObject: dialogs_model.telegram
+    property alias telegramObject: dialogs.telegramObject
+    property color framesColor: "#aaffffff"
 
-    DialogsModel {
-        id: dialogs_model
-    }
-
-    ListView {
-        id: dlist
+    AccountDialogList {
+        id: dialogs
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: 300*physicalPlatformScale
+        width: 275*physicalPlatformScale
+    }
+
+    AccountMessageList {
+        id: messages
+        anchors.left: dialogs.right
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        topMargin: header.height
+        bottomMargin: send_msg.height
+        telegramObject: dialogs.telegramObject
+        currentDialog: dialogs.currentDialog
+    }
+
+    Item {
+        id: header_blur
+        anchors.fill: header
         clip: true
-        model: dialogs_model
-        delegate: Column {
-            width: dlist.width
 
-            Text {
-                color: "#ffffff"
-                text: isChat? chat.title : user.firstName + " " + user.lastName
-            }
-            Text {
-                color: "#ffffff"
-                text: message.message
-            }
-
-            property Dialog dItem: item
-            property bool isChat: dItem.peer.chatId != 0
-            property User user: telegramObject.user(dItem.peer.userId)
-            property Chat chat: telegramObject.chat(dItem.peer.chatId)
-            property Message message: telegramObject.message(dItem.topMessage)
+        FastBlur {
+            anchors.top: parent.top
+            width: messages.width
+            height: messages.height
+            source: messages
+            radius: 64
         }
+    }
+
+    Item {
+        id: send_msg_blur
+        anchors.fill: send_msg
+        clip: true
+
+        FastBlur {
+            anchors.bottom: parent.bottom
+            width: messages.width
+            height: messages.height
+            source: messages
+            radius: 64
+        }
+    }
+
+    Rectangle {
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: messages.left
+        width: 1*physicalPlatformScale
+        color: "#e9e9e9"
+    }
+
+    AccountDialogHeader {
+        id: header
+        anchors.left: dialogs.right
+        anchors.top: parent.top
+        anchors.right: parent.right
+        color: framesColor
+        currentDialog: dialogs.currentDialog
+        refreshing: messages.refreshing
+    }
+
+    AccountSendMessage {
+        id: send_msg
+        anchors.left: dialogs.right
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        color: framesColor
+        currentDialog: dialogs.currentDialog
+        onAccepted: messages.sendMessage(text)
     }
 }

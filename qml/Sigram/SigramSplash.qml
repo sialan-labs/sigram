@@ -5,7 +5,7 @@ import Sigram 1.0
 Rectangle {
     width: 100
     height: 62
-    color: "#333333"
+    color: backColor0
 
     Column {
         anchors.centerIn: parent
@@ -16,7 +16,7 @@ Rectangle {
             font.family: SApp.globalFontFamily
             font.pixelSize: 50*fontsScale
             text: "Sigram One"
-            color: "#ffffff"
+            color: textColor0
         }
 
         Indicator {
@@ -24,7 +24,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             indicatorSize: 22*physicalPlatformScale
             modern: true
-            light: true
+            light: false
             Component.onCompleted: start()
         }
     }
@@ -34,5 +34,6 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: 8*physicalPlatformScale
         height: 16
+        dark: true
     }
 }

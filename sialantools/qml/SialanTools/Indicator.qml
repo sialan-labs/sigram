@@ -75,5 +75,6 @@ Item {
             return
 
         privates.item.destroy()
+        privates.item = 0
     }
 }

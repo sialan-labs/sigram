@@ -33,7 +33,7 @@ Item {
                 anchors.margins: 8*physicalPlatformScale
                 font.family: SApp.globalFontFamily
                 font.pixelSize: 10*fontsScale
-                color: "#ffffff"
+                color: textColor0
                 text: name
             }
 
@@ -54,6 +54,6 @@ Item {
 
     ScrollBar {
         scrollArea: countries_list; height: countries_list.height; width: 6*physicalPlatformScale
-        anchors.left: countries_list.left; anchors.top: countries_list.top; color: "#ffffff"
+        anchors.left: countries_list.left; anchors.top: countries_list.top; color: textColor0
     }
 }

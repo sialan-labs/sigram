@@ -12,5 +12,14 @@
         <file>qml/Sigram/AccountLoading.qml</file>
         <file>qml/Sigram/AccountSign.qml</file>
         <file>qml/Sigram/AccountView.qml</file>
+        <file>qml/Sigram/AccountDialogList.qml</file>
+        <file>qml/Sigram/AccountMessageList.qml</file>
+        <file>qml/Sigram/AccountMessageItem.qml</file>
+        <file>qml/Sigram/AccountDialogHeader.qml</file>
+        <file>qml/Sigram/AccountSendMessage.qml</file>
+        <file>qml/Sigram/files/unknown.jpg</file>
+        <file>qml/Sigram/files/telegram_background.png</file>
+        <file>qml/Sigram/files/sent.png</file>
+        <file>qml/Sigram/UnreadItem.qml</file>
     </qresource>
 </RCC>

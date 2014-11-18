@@ -16,31 +16,36 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TELEGRAMDIALOGSMODEL_H
-#define TELEGRAMDIALOGSMODEL_H
+#ifndef TELEGRAMMESSAGESMODEL_H
+#define TELEGRAMMESSAGESMODEL_H
 
 #include <QAbstractListModel>
 
-class Telegram;
-class TelegramDialogsModelPrivate;
-class TelegramDialogsModel : public QAbstractListModel
+class DialogObject;
+class TelegramMessagesModelPrivate;
+class TelegramMessagesModel : public QAbstractListModel
 {
     Q_OBJECT
 
     Q_PROPERTY(QObject* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
+    Q_PROPERTY(DialogObject* dialog READ dialog WRITE setDialog NOTIFY dialogChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(bool intializing READ intializing NOTIFY intializingChanged)
+    Q_PROPERTY(bool refreshing  READ refreshing  NOTIFY refreshingChanged)
 
 public:
-    enum DialogsRoles {
+    enum MessagesRoles {
         ItemRole = Qt::UserRole
     };
 
-    TelegramDialogsModel(QObject *parent = 0);
-    ~TelegramDialogsModel();
+    TelegramMessagesModel(QObject *parent = 0);
+    ~TelegramMessagesModel();
 
     QObject *telegram() const;
     void setTelegram( QObject *tg );
+
+    DialogObject *dialog() const;
+    void setDialog( DialogObject *dlg );
 
     qint64 id( const QModelIndex &index ) const;
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
@@ -51,17 +56,25 @@ public:
 
     int count() const;
     bool intializing() const;
+    bool refreshing() const;
+
+public slots:
+    void refresh();
+    void loadMore();
+    void sendMessage( const QString & msg );
 
 signals:
     void telegramChanged();
+    void dialogChanged();
     void countChanged();
     void intializingChanged();
+    void refreshingChanged();
 
 private slots:
-    void dialogsChanged();
+    void messagesChanged();
 
 private:
-    TelegramDialogsModelPrivate *p;
+    TelegramMessagesModelPrivate *p;
 };
 
-#endif // TELEGRAMDIALOGSMODEL_H
+#endif // TELEGRAMMESSAGESMODEL_H
