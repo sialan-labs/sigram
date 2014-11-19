@@ -134,6 +134,12 @@ void TelegramMessagesModel::sendMessage(const QString &msg)
     p->telegram->sendMessage(did, msg);
 }
 
+void TelegramMessagesModel::setReaded()
+{
+    p->telegram->telegram()->messagesReadHistory(inputPeer());
+    p->dialog->setUnreadCount(0);
+}
+
 qint64 TelegramMessagesModel::id(const QModelIndex &index) const
 {
     int row = index.row();
@@ -255,12 +261,7 @@ void TelegramMessagesModel::messagesChanged()
     }
 
     p->load_count = p->messages.count();
-
-    if( sender() )
-    {
-        p->telegram->telegram()->messagesReadHistory(inputPeer());
-        p->dialog->setUnreadCount(0);
-    }
+    emit countChanged();
 }
 
 TelegramMessagesModel::~TelegramMessagesModel()

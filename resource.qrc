@@ -21,5 +21,10 @@
         <file>qml/Sigram/files/telegram_background.png</file>
         <file>qml/Sigram/files/sent.png</file>
         <file>qml/Sigram/UnreadItem.qml</file>
+        <file>qml/Sigram/files/document.png</file>
+        <file>qml/Sigram/AccountMessageMedia.qml</file>
+        <file>qml/Sigram/files/systray.png</file>
+        <file>qml/Sigram/Emoticons.qml</file>
+        <file>qml/Sigram/files/emoji.png</file>
     </qresource>
 </RCC>

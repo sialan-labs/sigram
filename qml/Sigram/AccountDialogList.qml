@@ -39,6 +39,7 @@ Item {
             width: dlist.width
             height: 60*physicalPlatformScale
             color: marea.pressed? "#88339DCC" : (selected? "#66339DCC" : "#00000000")
+            clip: true
 
             property Dialog dItem: item
             property bool isChat: dItem.peer.chatId != 0
@@ -93,7 +94,14 @@ Item {
                 color: textColor2
                 wrapMode: Text.WrapAnywhere
                 elide: Text.ElideRight
-                text: emojis.textToEmojiText(message.message)
+                clip: true
+                text: {
+                    var list = dItem.typingUsers
+                    if( list.length )
+                        return qsTr("Typing...")
+                    else
+                        return emojis.textToEmojiText(message.message)
+                }
             }
 
             Text {

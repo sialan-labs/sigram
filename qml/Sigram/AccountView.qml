@@ -5,12 +5,14 @@ import SigramTypes 1.0
 import QtGraphicalEffects 1.0
 
 Rectangle {
+    id: acc_view
     width: 100
     height: 62
     color: backColor2
 
     property alias telegramObject: dialogs.telegramObject
     property color framesColor: "#aaffffff"
+    property alias currentDialog: dialogs.currentDialog
 
     AccountDialogList {
         id: dialogs
@@ -86,5 +88,26 @@ Rectangle {
         color: framesColor
         currentDialog: dialogs.currentDialog
         onAccepted: messages.sendMessage(text)
+        onEmojiRequest: {
+            var item = emoticons_component.createObject(acc_view)
+            var w = 260*physicalPlatformScale
+            var h = w
+
+            pointerDialog.pointerLeftMargin = w*0.6
+            main.showPointDialog(item, x-w*0.6-20*physicalPlatformScale, y, w, h)
+        }
+    }
+
+    Component {
+        id: emoticons_component
+
+        Emoticons {
+            id: emoticons
+            anchors.right: parent.right
+            anchors.bottom: send_msg.top
+            anchors.top: header.bottom
+            width: 200*physicalPlatformScale
+            onSelected: send_msg.insertText(code)
+        }
     }
 }

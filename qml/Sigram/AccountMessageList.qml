@@ -4,6 +4,7 @@ import Sigram 1.0
 import SigramTypes 1.0
 
 Rectangle {
+    id: acc_msg_list
     width: 100
     height: 62
 
@@ -14,8 +15,22 @@ Rectangle {
     property alias topMargin: mlist.topMargin
     property alias bottomMargin: mlist.bottomMargin
 
+    property real maximumMediaHeight: (height-topMargin-bottomMargin)*0.75
+    property real maximumMediaWidth: width*0.75
+
+    property bool isActive: View.active
+
+    onIsActiveChanged: {
+        if( isActive )
+            messages_model.setReaded()
+    }
+
     MessagesModel {
         id: messages_model
+        onCountChanged: {
+            if(count>1 && isActive)
+                messages_model.setReaded()
+        }
     }
 
     Image {
@@ -37,6 +52,8 @@ Rectangle {
         delegate: AccountMessageItem {
             x: 8*physicalPlatformScale
             width: mlist.width - 2*x
+            maximumMediaHeight: acc_msg_list.maximumMediaHeight
+            maximumMediaWidth: acc_msg_list.maximumMediaWidth
             message: item
         }
     }

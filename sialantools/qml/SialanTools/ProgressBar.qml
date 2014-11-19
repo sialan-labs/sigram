@@ -21,12 +21,15 @@ import QtQuick 2.2
 Rectangle {
     id: progress_bar
     width: 100
-    height: 30
+    height: 6*physicalPlatformScale
     color: "#333333"
     radius: 3*physicalPlatformScale
     smooth: true
 
+    SystemPalette { id: palette; colorGroup: SystemPalette.Active }
+
     property real percent: 0
+    property color topColor: top.color
 
     Rectangle {
         id: top
@@ -34,7 +37,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: progress_bar.width*progress_bar.percent/100
-        color: "#3B97EC"
+        color: palette.highlight
         radius: progress_bar.radius
         visible: width >= radius*2
 

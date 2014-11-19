@@ -21,13 +21,13 @@
 
 #include <QAbstractListModel>
 
-class Telegram;
+class TelegramQml;
 class TelegramDialogsModelPrivate;
 class TelegramDialogsModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(QObject* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
+    Q_PROPERTY(TelegramQml* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(bool intializing READ intializing NOTIFY intializingChanged)
 
@@ -39,8 +39,8 @@ public:
     TelegramDialogsModel(QObject *parent = 0);
     ~TelegramDialogsModel();
 
-    QObject *telegram() const;
-    void setTelegram( QObject *tg );
+    TelegramQml *telegram() const;
+    void setTelegram(TelegramQml *tg );
 
     qint64 id( const QModelIndex &index ) const;
     int rowCount(const QModelIndex & parent = QModelIndex()) const;

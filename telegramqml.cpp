@@ -27,6 +27,8 @@
 #include <QDebug>
 #include <QHash>
 #include <QDateTime>
+#include <QMimeDatabase>
+#include <QMimeType>
 
 TelegramQmlPrivate *telegramp_qml_tmp = 0;
 bool checkDialogLessThan( qint64 a, qint64 b );
@@ -75,6 +77,8 @@ public:
     ChatObject *nullChat;
     UserObject *nullUser;
     FileLocationObject *nullFile;
+
+    QMimeDatabase mime_db;
 };
 
 TelegramQml::TelegramQml(QObject *parent) :
@@ -176,7 +180,7 @@ void TelegramQml::setOnline(bool stt)
         return;
 
     p->online = stt;
-    if( p->telegram )
+    if( p->telegram && p->authLoggedIn )
         p->telegram->accountUpdateStatus(!p->online);
 
     emit onlineChanged();
@@ -260,6 +264,39 @@ UserObject *TelegramQml::user(qint64 id) const
     if( !res )
         res = p->nullUser;
     return res;
+}
+
+DialogObject *TelegramQml::nullDialog() const
+{
+    return p->nullDialog;
+}
+
+MessageObject *TelegramQml::nullMessage() const
+{
+    return p->nullMessage;
+}
+
+ChatObject *TelegramQml::nullChat() const
+{
+    return p->nullChat;
+}
+
+UserObject *TelegramQml::nullUser() const
+{
+    return p->nullUser;
+}
+
+QString TelegramQml::fileLocation(FileLocationObject *l)
+{
+    const QString & dpath = downloadPath();
+    const QString & fname = QString("%1_%2").arg(l->volumeId()).arg(l->localId());
+
+    const QStringList & av_files = QDir(dpath).entryList(QDir::Files);
+    foreach( const QString & f, av_files )
+        if( QFileInfo(f).baseName() == fname )
+            return dpath + "/" + f;
+
+    return dpath + "/" + fname;
 }
 
 QList<qint64> TelegramQml::dialogs() const
@@ -378,7 +415,7 @@ void TelegramQml::getFile(FileLocationObject *l)
     if( l->secret() == 0 )
         return;
 
-    const QString & download_file = downloadPath() + "/" + QString("%1_%2").arg(l->volumeId()).arg(l->localId());
+    const QString & download_file = fileLocation(l);
     if( QFile::exists(download_file) )
     {
         l->download()->setLocation("file://"+download_file);
@@ -390,7 +427,7 @@ void TelegramQml::getFile(FileLocationObject *l)
     input.setSecret(l->secret());
     input.setVolumeId(l->volumeId());
 
-    qint64 id = p->telegram->uploadGetFile(input, 0, l->dcId());
+    qint64 id = p->telegram->uploadGetFile(input, 4092, l->dcId());
     p->downloadings[id] = l;
 }
 
@@ -465,6 +502,8 @@ void TelegramQml::authNeeded_slt()
 
     if( p->telegram && !p->checkphone_req_id )
         p->checkphone_req_id = p->telegram->authCheckPhone();
+
+    p->telegram->accountUpdateStatus(!p->online);
 }
 
 void TelegramQml::authLoggedIn_slt()
@@ -477,6 +516,8 @@ void TelegramQml::authLoggedIn_slt()
     emit authLoggedInChanged();
     emit authPhoneChecked();
     emit meChanged();
+
+    p->telegram->accountUpdateStatus(!p->online);
 }
 
 void TelegramQml::authLogOut_slt(qint64 id, bool ok)
@@ -489,6 +530,9 @@ void TelegramQml::authLogOut_slt(qint64 id, bool ok)
     emit authNeededChanged();
     emit authLoggedInChanged();
     emit meChanged();
+
+    if( p->authLoggedIn )
+        p->telegram->accountUpdateStatus(!p->online);
 }
 
 void TelegramQml::authSendCode_slt(qint64 id, bool phoneRegistered, qint32 sendCallTimeout)
@@ -665,6 +709,8 @@ void TelegramQml::updateShortMessage_slt(qint32 id, qint32 fromId, QString messa
     }
 
     timerUpdateDialogs(3000);
+
+    emit incomingMessage( p->messages.value(msg.id()) );
 }
 
 void TelegramQml::updateShortChatMessage_slt(qint32 id, qint32 fromId, qint32 chatId, QString message, qint32 pts, qint32 date, qint32 seq)
@@ -741,9 +787,14 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
         return;
 
     Q_UNUSED(type)
-    const QString & download_file = downloadPath() + "/" + QString("%1_%2").arg(obj->volumeId()).arg(obj->localId());
+    const QString & download_file = fileLocation(obj);
 
     DownloadObject *download = obj->download();
+    download->setMtime(mtime);
+    download->setPartId(partId);
+    download->setTotal(total);
+    download->setDownloaded(downloaded);
+
     if( !download->file() )
     {
         QFile *file = new QFile(download_file, download);
@@ -764,7 +815,17 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
         download->file()->flush();
         download->file()->deleteLater();
         download->setFile(0);
-        download->setLocation("file://" + download_file);
+
+        const QMimeType & t = p->mime_db.mimeTypeForFile(download_file);
+        const QStringList & suffixes = t.suffixes();
+        if( !suffixes.isEmpty() )
+        {
+            const QString & sfx = suffixes.first();
+            QFile::rename(download_file, download_file+"."+sfx);
+            download->setLocation("file://" + download_file+"."+sfx);
+        }
+        else
+            download->setLocation("file://" + download_file);
 
         p->downloadings.remove(id);
     }

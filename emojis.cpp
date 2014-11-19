@@ -39,7 +39,7 @@ Emojis::Emojis(QObject *parent) :
     QObject(parent)
 {
     p = new EmojisPrivate;
-    setCurrentTheme("apple");
+    setCurrentTheme("twitter");
 }
 
 void Emojis::setCurrentTheme(const QString &theme)

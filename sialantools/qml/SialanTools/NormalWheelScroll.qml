@@ -32,10 +32,10 @@ MouseArea {
             else
                 flick.contentY -= wheel.angleDelta.y/2
         } else {
-            if( flick.flickableDirection == Flickable.HorizontalFlick )
+            if( flick.flickableDirection == Flickable.VerticalFlick )
                 flick.contentY -= wheel.angleDelta.y/2
             else
-            if( flick.flickableDirection == Flickable.VerticalFlick )
+            if( flick.flickableDirection == Flickable.HorizontalFlick )
                 flick.contentX -= wheel.angleDelta.y/2
             else {
                 flick.contentY -= wheel.angleDelta.y/2

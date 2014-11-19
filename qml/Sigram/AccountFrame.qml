@@ -11,8 +11,36 @@ Rectangle {
     property ProfilesModelItem accountItem
     property AccountView view
 
+    property bool isActive: View.active
+
+    onIsActiveChanged: {
+        telegram.online = isActive
+    }
+
     QtObject {
         id: privates
+    }
+
+    HashObject {
+        id: notifies_hash
+    }
+
+    Notification {
+        id: notification
+        onNotifyClosed: notifies_hash.remove(id)
+        onNotifyAction: {
+            var msg = notifies_hash.value(id)
+            console.debug(action)
+            if( action == notifyActShow )
+                console.debug("show", msg.message)
+            else
+            if( action == notifyActMute )
+                console.debug("mute", msg.message)
+        }
+
+        property int notifyActShow: 0
+        property int notifyActMute: 1
+        property int notifyActRemind: 2
     }
 
     Telegram {
@@ -28,6 +56,27 @@ Rectangle {
             else
             if( !authLoggedIn && view )
                 view.destroy()
+        }
+        onIncomingMessage: {
+            if( view && isActive ) {
+                if( view.currentDialog.peer.chatId && view.currentDialog.peer.chatId == msg.toId.chatId )
+                    return
+                if( view.currentDialog.peer.userId && view.currentDialog.peer.userId == msg.fromId )
+                    return
+            }
+
+            var user = telegram.user(msg.fromId)
+            var title = user.firstName + " " + user.lastName
+
+            var actions = new Array
+            actions[0] = notification.notifyActShow
+            actions[1] = qsTr("Show")
+            actions[2] = notification.notifyActMute
+            actions[3] = qsTr("Mute")
+
+            var nid = notification.sendNotify( title, msg.message, user.photo.photoSmall.download.location, 0, 3000, actions )
+
+            notifies_hash.insert(nid, msg)
         }
     }
 

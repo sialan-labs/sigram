@@ -13,6 +13,7 @@ Rectangle {
     property real minimumHeight: 40*physicalPlatformScale
 
     signal accepted( string text )
+    signal emojiRequest(real x, real y)
 
     SystemPalette { id: palette; colorGroup: SystemPalette.Active }
 
@@ -25,7 +26,7 @@ Rectangle {
     TextAreaCore {
         id: txt
         anchors.left: parent.left
-        anchors.right: send_btn.left
+        anchors.right: emoji_btn.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: 4*physicalPlatformScale
         selectByMouse: true
@@ -38,10 +39,25 @@ Rectangle {
         Keys.onPressed: {
             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
                 if( event.modifiers == Qt.NoModifier )
-                {
-                    smsg.accepted(text)
-                    text = ""
-                }
+                    smsg.send()
+        }
+    }
+
+    Button {
+        id: emoji_btn
+        anchors.right: send_btn.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        normalColor: "#00000000"
+        highlightColor: "#1f000000"
+        cursorShape: Qt.PointingHandCursor
+        width: 26*physicalPlatformScale
+        iconHeight: 20*physicalPlatformScale
+        opacity: 0.6
+        icon: "files/emoji.png"
+        onClicked: {
+            var pnt = main.mapFromItem(emoji_btn,0,0)
+            smsg.emojiRequest(pnt.x + width/2, pnt.y + height*0.2)
         }
     }
 
@@ -56,6 +72,20 @@ Rectangle {
         width: 70*physicalPlatformScale
         cursorShape: Qt.PointingHandCursor
         textFont.pixelSize: 12*fontsScale
+        textMargin: -2*physicalPlatformScale
         text: qsTr("Send")
+        onClicked: smsg.send()
+    }
+
+    function insertText( str ) {
+        if( txt.selectedText.length != 0 )
+            txt.remove(txt.selectionStart, txt.selectionEnd)
+
+        txt.insert( txt.cursorPosition, str )
+    }
+
+    function send() {
+        smsg.accepted(txt.text)
+        txt.text = ""
     }
 }

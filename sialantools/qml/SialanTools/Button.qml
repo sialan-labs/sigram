@@ -43,6 +43,7 @@ Rectangle {
     property alias textColor: txt.color
 
     property alias cursorShape: marea.cursorShape
+    property real textMargin: 1*physicalPlatformScale
 
     signal clicked()
 
@@ -67,7 +68,7 @@ Rectangle {
 
         Text{
             id: txt
-            y: parent.height/2 - height/2 - 1*physicalPlatformScale
+            y: parent.height/2 - height/2 - textMargin
             color: "#ffffff"
             font.bold: Devices.isWindows? false : true
             font.family: SApp.globalFontFamily

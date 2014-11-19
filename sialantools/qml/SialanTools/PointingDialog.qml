@@ -29,6 +29,8 @@ Item {
     property real extraX: 0
     property real extraY: 7*physicalPlatformScale
 
+    property real pointerLeftMargin: pointer.width
+
     onVisibleChanged: {
         if( visible )
             BackHandler.pushHandler(p_dialog,p_dialog.hide)
@@ -68,6 +70,7 @@ Item {
         }
 
         Image {
+            id: pointer
             source: back.mirror? "files/pointer-down.png" : "files/pointer.png"
             width: 42*physicalPlatformScale
             height: 20*physicalPlatformScale
@@ -75,7 +78,7 @@ Item {
             anchors.bottom: back.mirror? border.bottom : border.top
             anchors.bottomMargin: back.mirror? 10 - 20*physicalPlatformScale : -11
             anchors.left: parent.left
-            anchors.leftMargin: width
+            anchors.leftMargin: pointerLeftMargin
         }
 
         Behavior on y {

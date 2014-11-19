@@ -16,14 +16,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#define UNITY_ICON_PATH(NUM) "/tmp/sialan-telegram-client-trayicon" + QString::number(NUM) + ".png"
+
 #include "sigram.h"
 #include "sialantools/sialanquickview.h"
 #include "sialantools/sialancalendarconverter.h"
+#include "sialantools/sialandesktoptools.h"
 #include "telegramqml.h"
 #include "profilesmodel.h"
 #include "telegrammessagesmodel.h"
 #include "telegramdialogsmodel.h"
 #include "emojis.h"
+#include "unitysystemtray.h"
 
 #include <QPointer>
 #include <QQmlContext>
@@ -32,6 +36,10 @@
 #include <QDebug>
 #include <QTextDocument>
 #include <QImageReader>
+#include <QSystemTrayIcon>
+#include <QGuiApplication>
+#include <QMenu>
+#include <QAction>
 
 class SigramPrivate
 {
@@ -40,6 +48,11 @@ public:
     bool close_blocker;
 
     QTextDocument *doc;
+
+    QSystemTrayIcon *sysTray;
+    UnitySystemTray *unityTray;
+
+    SialanDesktopTools *desktop;
 };
 
 Sigram::Sigram(QObject *parent) :
@@ -47,12 +60,18 @@ Sigram::Sigram(QObject *parent) :
 {
     p = new SigramPrivate;
     p->doc = new QTextDocument(this);
+    p->desktop = new SialanDesktopTools(this);
+    p->sysTray = 0;
+    p->unityTray = 0;
 
 #ifdef Q_OS_ANDROID
     p->close_blocker = true;
 #else
     p->close_blocker = false;
 #endif
+
+    qRegisterMetaType<TelegramQml*>("TelegramQml*");
+
     qmlRegisterType<TelegramQml>("Sigram", 1, 0, "Telegram");
     qmlRegisterType<ProfilesModel>("Sigram", 1, 0, "ProfilesModel");
     qmlRegisterType<ProfilesModelItem>("Sigram", 1, 0, "ProfilesModelItem");
@@ -102,6 +121,8 @@ void Sigram::start()
     p->viewer->engine()->rootContext()->setContextProperty( "Sigram", this );
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Sigram/main.qml")));
     p->viewer->show();
+
+    init_systray();
 }
 
 void Sigram::close()
@@ -142,6 +163,108 @@ bool Sigram::eventFilter(QObject *o, QEvent *e)
     }
 
     return QObject::eventFilter(o,e);
+}
+
+void Sigram::systray_action(QSystemTrayIcon::ActivationReason act)
+{
+    switch( static_cast<int>(act) )
+    {
+    case QSystemTrayIcon::Trigger:
+        if( p->viewer->isVisible() && p->viewer->isActive() )
+            p->viewer->hide();
+        else
+        {
+            p->viewer->setVisible( true );
+            p->viewer->requestActivate();
+        }
+        break;
+
+    case QSystemTrayIcon::Context:
+        showContextMenu();
+        break;
+    }
+}
+
+void Sigram::init_systray()
+{
+    if( p->desktop->desktopSession() == SialanDesktopTools::Unity || p->desktop->desktopSession() == SialanDesktopTools::GnomeFallBack )
+    {
+        QFile::copy(":/qml/Sigram/files/systray.png",UNITY_ICON_PATH(0));
+
+        p->unityTray = new UnitySystemTray( QCoreApplication::applicationName(), UNITY_ICON_PATH(0) );
+        if( !p->unityTray->pntr() )
+            QGuiApplication::setQuitOnLastWindowClosed(true);
+
+        p->unityTray->addMenu( tr("Show"), this, "show" );
+        p->unityTray->addMenu( tr("Configure"), this, "configure" );
+        p->unityTray->addMenu( tr("About"), this, "about" );
+        p->unityTray->addMenu( tr("About Sialan"), this, "aboutSialan" );
+        p->unityTray->addMenu( tr("License"), this, "showLicense" );
+        p->unityTray->addMenu( tr("Donate"), this, "showDonate" );
+        p->unityTray->addMenu( tr("Quit"), this, "quit" );
+    }
+    if( !p->unityTray || !p->unityTray->pntr() )
+    {
+        p->sysTray = new QSystemTrayIcon( QIcon(":/qml/Sigram/files/systray.png"), this );
+        p->sysTray->show();
+
+        connect( p->sysTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(systray_action(QSystemTrayIcon::ActivationReason)) );
+    }
+}
+
+void Sigram::showContextMenu()
+{
+    QMenu menu;
+    menu.move( QCursor::pos() );
+
+    QAction *show_act = menu.addAction( tr("Show") );
+    menu.addSeparator();
+    QAction *conf_act = menu.addAction( tr("Configure") );
+    QAction *abut_act = menu.addAction( tr("About") );
+    QAction *sabt_act = menu.addAction( tr("About Sialan") );
+    menu.addSeparator();
+    QAction *lcns_act = menu.addAction( tr("License") );
+    QAction *dnt_act  = menu.addAction( tr("Donate") );
+    menu.addSeparator();
+    QAction *exit_act = menu.addAction( tr("Exit") );
+    QAction *res_act  = menu.exec();
+
+    if( res_act == show_act )
+    {
+        p->viewer->setVisible( true );
+        p->viewer->requestActivate();
+    }
+    else
+    if( res_act == conf_act )
+    {
+
+    }
+    else
+    if( res_act == abut_act )
+    {
+
+    }
+    else
+    if( res_act == sabt_act )
+    {
+
+    }
+    else
+    if( res_act == lcns_act )
+    {
+
+    }
+    else
+    if( res_act == dnt_act && dnt_act != 0 )
+    {
+
+    }
+    else
+    if( res_act == exit_act )
+    {
+        p->viewer->close();
+        QGuiApplication::quit();
+    }
 }
 
 Sigram::~Sigram()

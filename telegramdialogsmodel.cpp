@@ -39,12 +39,12 @@ TelegramDialogsModel::TelegramDialogsModel(QObject *parent) :
     p->intializing = false;
 }
 
-QObject *TelegramDialogsModel::telegram() const
+TelegramQml *TelegramDialogsModel::telegram() const
 {
     return p->telegram;
 }
 
-void TelegramDialogsModel::setTelegram(QObject *tgo)
+void TelegramDialogsModel::setTelegram(TelegramQml *tgo)
 {
     TelegramQml *tg = static_cast<TelegramQml*>(tgo);
     if( p->telegram == tg )

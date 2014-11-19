@@ -41,6 +41,7 @@ SialanMain {
 
     Emojis {
         id: emojis_obj
+        currentTheme: "twitter"
     }
 
     ProfilesModel {

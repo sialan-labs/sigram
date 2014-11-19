@@ -65,6 +65,7 @@ public slots:
     void refresh();
     void loadMore();
     void sendMessage( const QString & msg );
+    void setReaded();
 
 signals:
     void telegramChanged();

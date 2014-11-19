@@ -101,7 +101,7 @@ SialanQuickView::SialanQuickView(int options, QWindow *parent) :
     qmlRegisterType<SialanSensors>("SialanTools", 1,0, "SialanSensors");
 #endif
 #ifdef SIALAN_NOTIFICATION
-    qmlRegisterType<SialanNotification>("SialanTools", 1,0, "SialanNotification");
+    qmlRegisterType<SialanNotification>("SialanTools", 1,0, "Notification");
 #endif
 
     setResizeMode(QQuickView::SizeRootObjectToView);

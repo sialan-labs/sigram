@@ -62,6 +62,11 @@ class TelegramQml : public QObject
     Q_PROPERTY(QString authSignInError READ authSignInError NOTIFY authSignInErrorChanged)
     Q_PROPERTY(QString error           READ error           NOTIFY errorChanged          )
 
+    Q_PROPERTY(DialogObject* nullDialog READ nullDialog NOTIFY fakeSignal)
+    Q_PROPERTY(MessageObject* nullMessage READ nullMessage NOTIFY fakeSignal)
+    Q_PROPERTY(ChatObject* nullChat READ nullChat NOTIFY fakeSignal)
+    Q_PROPERTY(UserObject* nullUser READ nullUser NOTIFY fakeSignal)
+
 public:
     TelegramQml(QObject *parent = 0);
     ~TelegramQml();
@@ -99,6 +104,13 @@ public:
     Q_INVOKABLE MessageObject *message(qint64 id) const;
     Q_INVOKABLE ChatObject *chat(qint64 id) const;
     Q_INVOKABLE UserObject *user(qint64 id) const;
+
+    DialogObject *nullDialog() const;
+    MessageObject *nullMessage() const;
+    ChatObject *nullChat() const;
+    UserObject *nullUser() const;
+
+    Q_INVOKABLE QString fileLocation( FileLocationObject *location );
 
     QList<qint64> dialogs() const;
     QList<qint64> messages(qint64 did) const;
@@ -141,6 +153,9 @@ signals:
 
     void errorChanged();
     void meChanged();
+    void fakeSignal();
+
+    void incomingMessage( MessageObject *msg );
 
 protected:
     void try_init();
@@ -184,5 +199,7 @@ protected:
 private:
     TelegramQmlPrivate *p;
 };
+
+Q_DECLARE_METATYPE(TelegramQml*)
 
 #endif // TELEGRAMQML_H

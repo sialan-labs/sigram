@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QSize>
+#include <QSystemTrayIcon>
 
 class SigramPrivate;
 class Sigram : public QObject
@@ -45,6 +46,13 @@ signals:
 
 protected:
     bool eventFilter(QObject *o, QEvent *e);
+
+private slots:
+    void systray_action( QSystemTrayIcon::ActivationReason act );
+
+private:
+    void init_systray();
+    void showContextMenu();
 
 private:
     SigramPrivate *p;

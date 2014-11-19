@@ -116,13 +116,6 @@ Item {
         opacity: 0.5
 
         property real diagonal: size()<20*physicalPlatformScale? 20*physicalPlatformScale : size()
-
-        Behavior on width {
-            NumberAnimation { duration: 300 }
-        }
-        Behavior on height {
-            NumberAnimation { duration: 300 }
-        }
     }
 
     Behavior on opacity {
