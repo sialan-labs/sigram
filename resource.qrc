@@ -26,5 +26,6 @@
         <file>qml/Sigram/files/systray.png</file>
         <file>qml/Sigram/Emoticons.qml</file>
         <file>qml/Sigram/files/emoji.png</file>
+        <file>database/userdata.sqlite</file>
     </qresource>
 </RCC>

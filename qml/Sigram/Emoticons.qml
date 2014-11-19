@@ -26,7 +26,13 @@ Item {
     anchors.margins: 10*physicalPlatformScale
     clip: true
 
+    property bool recent: true
+
     signal selected( string code )
+
+    onRecentChanged: slist.refresh()
+
+    SystemPalette { id: palette; colorGroup: SystemPalette.Active }
 
     MouseArea {
         anchors.fill: parent
@@ -35,9 +41,43 @@ Item {
         onWheel: wheel.accepted = true
     }
 
+    Row {
+        id: tab_row
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+
+        Button {
+            width: parent.width/2
+            textFont.family: SApp.globalFontFamily
+            textFont.pixelSize: 9*fontsScale
+            normalColor: "#00000000"
+            highlightColor: "#0f000000"
+            textColor: recent? palette.highlight : "#333333"
+            text: qsTr("Recent")
+            cursorShape: Qt.PointingHandCursor
+            onClicked: recent = true
+        }
+
+        Button {
+            width: parent.width/2
+            textFont.family: SApp.globalFontFamily
+            textFont.pixelSize: 9*fontsScale
+            normalColor: "#00000000"
+            highlightColor: "#0f000000"
+            textColor: recent? "#333333" : palette.highlight
+            text: qsTr("All Emoji")
+            cursorShape: Qt.PointingHandCursor
+            onClicked: recent = false
+        }
+    }
+
     GridView {
         id: slist
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: tab_row.bottom
+        anchors.bottom: parent.bottom
         anchors.margins: 4*physicalPlatformScale
         clip: true
         model: ListModel{}
@@ -62,13 +102,34 @@ Item {
             MouseArea {
                 id: marea
                 anchors.fill: parent
-                onClicked: smilies.selected(key)
+                onClicked: {
+                    smilies.selected(key)
+
+                    var newList = new Array
+                    newList[0] = key
+
+                    var cnt = 1
+                    var recentList = SApp.readSetting("recentEmoji")
+                    for( var i=0; cnt<35; i++ )
+                        if( recentList[i] != key ) {
+                            newList[cnt] = recentList[i]
+                            cnt++
+                        }
+
+                    SApp.setSetting("recentEmoji", newList)
+                }
             }
         }
 
         function refresh() {
             model.clear()
-            var keys = emojis.keys()
+            var recentList = SApp.readSetting("recentEmoji")
+            if( !recentList ) {
+                recentList = emojis.keys().slice(0,20)
+                SApp.setSetting("recentEmoji", recentList)
+            }
+
+            var keys = recent? recentList : emojis.keys()
             for( var i=0; i<keys.length; i++ )
                 model.append( {"key":keys[i]} )
         }

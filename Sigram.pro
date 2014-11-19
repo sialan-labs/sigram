@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     telegrammessagesmodel.cpp \
     emojis.cpp \
     photosizelist.cpp \
-    unitysystemtray.cpp
+    unitysystemtray.cpp \
+    userdata.cpp
 
 RESOURCES += resource.qrc
 
@@ -37,7 +38,8 @@ HEADERS += \
     telegrammessagesmodel.h \
     emojis.h \
     photosizelist.h \
-    unitysystemtray.h
+    unitysystemtray.h \
+    userdata.h
 
 OTHER_FILES += \
     objects/types.sco \

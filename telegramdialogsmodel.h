@@ -33,7 +33,8 @@ class TelegramDialogsModel : public QAbstractListModel
 
 public:
     enum DialogsRoles {
-        ItemRole = Qt::UserRole
+        ItemRole = Qt::UserRole,
+        SectionRole
     };
 
     TelegramDialogsModel(QObject *parent = 0);

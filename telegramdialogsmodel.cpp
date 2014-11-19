@@ -19,12 +19,14 @@
 #include "telegramdialogsmodel.h"
 #include "telegramqml.h"
 #include "objects/types.h"
+#include "userdata.h"
 
 #include <telegram.h>
 
 class TelegramDialogsModelPrivate
 {
 public:
+    UserData *userdata;
     TelegramQml *telegram;
     bool intializing;
 
@@ -36,6 +38,7 @@ TelegramDialogsModel::TelegramDialogsModel(QObject *parent) :
 {
     p = new TelegramDialogsModelPrivate;
     p->telegram = 0;
+    p->userdata = 0;
     p->intializing = false;
 }
 
@@ -55,12 +58,20 @@ void TelegramDialogsModel::setTelegram(TelegramQml *tgo)
     emit telegramChanged();
     emit intializingChanged();
     if( !p->telegram )
+    {
+        if( p->userdata )
+            delete p->userdata;
+
+        p->userdata = 0;
         return;
+    }
 
     connect( p->telegram, SIGNAL(dialogsChanged()), SLOT(dialogsChanged()) );
 
     Telegram *tgObject = p->telegram->telegram();
     tgObject->messagesGetDialogs(0,0,1000);
+
+    p->userdata = new UserData(p->telegram->phoneNumber(), this);
 }
 
 qint64 TelegramDialogsModel::id(const QModelIndex &index) const
@@ -84,6 +95,10 @@ QVariant TelegramDialogsModel::data(const QModelIndex &index, int role) const
     case ItemRole:
         res = QVariant::fromValue<DialogObject*>(p->telegram->dialog(key));
         break;
+
+    case SectionRole:
+        res = p->userdata->value("love").toLongLong()==key? 2 : (p->userdata->isFavorited(key)? 1 : 0);
+        break;
     }
 
     return res;
@@ -97,6 +112,7 @@ QHash<qint32, QByteArray> TelegramDialogsModel::roleNames() const
 
     res = new QHash<qint32, QByteArray>();
     res->insert( ItemRole, "item");
+    res->insert( SectionRole, "section");
     return *res;
 }
 

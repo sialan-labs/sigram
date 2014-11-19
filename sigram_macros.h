@@ -22,4 +22,7 @@
 #define PROFILES_DB_CONNECTION "profiles_connection"
 #define PROFILES_DB_PATH ":/database/profiles.sqlite"
 
+#define USERDATA_DB_CONNECTION "userdata_connection"
+#define USERDATA_DB_PATH ":/database/userdata.sqlite"
+
 #endif // SIGRAM_MACROS_H
