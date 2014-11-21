@@ -16,6 +16,7 @@
 class DownloadObject : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(qint64 fileId READ fileId WRITE setFileId NOTIFY fileIdChanged)
     Q_PROPERTY(QString location READ location WRITE setLocation NOTIFY locationChanged)
     Q_PROPERTY(qint32 mtime READ mtime WRITE setMtime NOTIFY mtimeChanged)
     Q_PROPERTY(qint32 partId READ partId WRITE setPartId NOTIFY partIdChanged)
@@ -25,6 +26,7 @@ class DownloadObject : public QObject
 
 public:
     DownloadObject(QObject *parent = 0) : QObject(parent){
+        _fileId = 0;
         _mtime = 0;
         _partId = 0;
         _downloaded = 0;
@@ -32,6 +34,18 @@ public:
         _file = new QFile(this);
     }
     ~DownloadObject(){}
+
+    qint64 fileId() const {
+        return _fileId;
+    }
+
+    void setFileId(qint64 value) {
+        if( value == _fileId )
+            return;
+        _fileId = value;
+        emit fileIdChanged();
+        emit changed();
+    }
 
     QString location() const {
         return _location;
@@ -107,6 +121,7 @@ public:
 
 signals:
     void changed();
+    void fileIdChanged();
     void locationChanged();
     void mtimeChanged();
     void partIdChanged();
@@ -115,6 +130,7 @@ signals:
     void fileChanged();
 
 private:
+    qint64 _fileId;
     QString _location;
     qint32 _mtime;
     qint32 _partId;
@@ -125,6 +141,103 @@ private:
 };
 
 Q_DECLARE_METATYPE(DownloadObject*)
+
+class UploadObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint64 fileId READ fileId WRITE setFileId NOTIFY fileIdChanged)
+    Q_PROPERTY(QString location READ location WRITE setLocation NOTIFY locationChanged)
+    Q_PROPERTY(qint32 partId READ partId WRITE setPartId NOTIFY partIdChanged)
+    Q_PROPERTY(qint32 uploaded READ uploaded WRITE setUploaded NOTIFY uploadedChanged)
+    Q_PROPERTY(qint32 totalSize READ totalSize WRITE setTotalSize NOTIFY totalSizeChanged)
+
+public:
+    UploadObject(QObject *parent = 0) : QObject(parent){
+        _fileId = 0;
+        _partId = 0;
+        _uploaded = 0;
+        _totalSize = 0;
+    }
+    ~UploadObject(){}
+
+    qint64 fileId() const {
+        return _fileId;
+    }
+
+    void setFileId(qint64 value) {
+        if( value == _fileId )
+            return;
+        _fileId = value;
+        emit fileIdChanged();
+        emit changed();
+    }
+
+    QString location() const {
+        return _location;
+    }
+
+    void setLocation(QString value) {
+        if( value == _location )
+            return;
+        _location = value;
+        emit locationChanged();
+        emit changed();
+    }
+
+    qint32 partId() const {
+        return _partId;
+    }
+
+    void setPartId(qint32 value) {
+        if( value == _partId )
+            return;
+        _partId = value;
+        emit partIdChanged();
+        emit changed();
+    }
+
+    qint32 uploaded() const {
+        return _uploaded;
+    }
+
+    void setUploaded(qint32 value) {
+        if( value == _uploaded )
+            return;
+        _uploaded = value;
+        emit uploadedChanged();
+        emit changed();
+    }
+
+    qint32 totalSize() const {
+        return _totalSize;
+    }
+
+    void setTotalSize(qint32 value) {
+        if( value == _totalSize )
+            return;
+        _totalSize = value;
+        emit totalSizeChanged();
+        emit changed();
+    }
+
+signals:
+    void changed();
+    void fileIdChanged();
+    void locationChanged();
+    void partIdChanged();
+    void uploadedChanged();
+    void totalSizeChanged();
+
+private:
+    qint64 _fileId;
+    QString _location;
+    qint32 _partId;
+    qint32 _uploaded;
+    qint32 _totalSize;
+
+};
+
+Q_DECLARE_METATYPE(UploadObject*)
 
 class FileLocationObject : public QObject
 {
@@ -3944,6 +4057,9 @@ Q_DECLARE_METATYPE(UserObject*)
 static bool initialize() {
     qmlRegisterType<DownloadObject>("SigramTypes", 1, 0, "Download");
     qRegisterMetaType<DownloadObject*>("DownloadObject*");
+
+    qmlRegisterType<UploadObject>("SigramTypes", 1, 0, "Upload");
+    qRegisterMetaType<UploadObject*>("UploadObject*");
 
     qmlRegisterType<FileLocationObject>("SigramTypes", 1, 0, "FileLocation");
     qRegisterMetaType<FileLocationObject*>("FileLocationObject*");

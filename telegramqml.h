@@ -38,6 +38,7 @@ class MessageObject;
 class InputPeerObject;
 class ChatObject;
 class UserObject;
+class UploadObject;
 class Telegram;
 class TelegramQmlPrivate;
 class TelegramQml : public QObject
@@ -112,6 +113,7 @@ public:
     Q_INVOKABLE qint64 messageDialogId(qint64 id) const;
     Q_INVOKABLE DialogObject *messageDialog(qint64 id) const;
     Q_INVOKABLE WallPaperObject *wallpaper(qint64 id) const;
+    Q_INVOKABLE UploadObject *upload(qint64 id) const;
 
     DialogObject *nullDialog() const;
     MessageObject *nullMessage() const;
@@ -123,6 +125,7 @@ public:
     QList<qint64> dialogs() const;
     QList<qint64> messages(qint64 did) const;
     QList<qint64> wallpapers() const;
+    QList<qint64> uploads() const;
 
 public slots:
     void authLogout();
@@ -132,7 +135,10 @@ public slots:
     void authSignUp(const QString &code, const QString &firstName, const QString &lastName);
 
     void sendMessage( qint64 dialogId, const QString & msg );
+    void sendFile( qint64 dialogId, const QString & file );
     void getFile( FileLocationObject *location );
+    void checkFile( FileLocationObject *location );
+    void cancelSendGet( qint64 fileId );
 
     void timerUpdateDialogs( bool duration = 1000 );
 
@@ -147,6 +153,7 @@ signals:
     void dialogsChanged();
     void messagesChanged();
     void wallpapersChanged();
+    void uploadsChanged();
 
     void authNeededChanged();
     void authLoggedInChanged();
@@ -198,6 +205,8 @@ private slots:
     void updates_slt(const QList<Update> & udts, const QList<User> & users, const QList<Chat> & chats, qint32 date, qint32 seq);
 
     void uploadGetFile_slt(qint64 id, const StorageFileType & type, qint32 mtime, const QByteArray & bytes, qint32 partId, qint32 downloaded, qint32 total);
+    void uploadSendFile_slt(qint64 fileId, qint32 partId, qint32 uploaded, qint32 totalSize);
+    void uploadCancelFile_slt(qint64 fileId, bool cancelled);
 
 private:
     void insertDialog( const Dialog & dialog );

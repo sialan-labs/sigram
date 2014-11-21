@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     unitysystemtray.cpp \
     userdata.cpp \
     telegramwallpapersmodel.cpp \
-    chatparticipantlist.cpp
+    chatparticipantlist.cpp \
+    telegramuploadsmodel.cpp
 
 RESOURCES += resource.qrc
 
@@ -43,7 +44,8 @@ HEADERS += \
     unitysystemtray.h \
     userdata.h \
     telegramwallpapersmodel.h \
-    chatparticipantlist.h
+    chatparticipantlist.h \
+    telegramuploadsmodel.h
 
 OTHER_FILES += \
     objects/types.sco \

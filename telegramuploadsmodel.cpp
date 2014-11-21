@@ -16,82 +16,72 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "telegramwallpapersmodel.h"
+#include "telegramuploadsmodel.h"
 #include "telegramqml.h"
 #include "objects/types.h"
 
 #include <telegram.h>
 
-#include <QDebug>
-
-class TelegramWallpapersModelPrivate
+class TelegramUploadsModelPrivate
 {
 public:
     TelegramQml *telegram;
-    bool intializing;
-
-    QList<qint64> wallpapers;
+    QList<qint64> uploads;
 };
 
-TelegramWallpapersModel::TelegramWallpapersModel(QObject *parent) :
+TelegramUploadsModel::TelegramUploadsModel(QObject *parent) :
     QAbstractListModel(parent)
 {
-    p = new TelegramWallpapersModelPrivate;
+    p = new TelegramUploadsModelPrivate;
     p->telegram = 0;
-    p->intializing = false;
 }
 
-TelegramQml *TelegramWallpapersModel::telegram() const
+TelegramQml *TelegramUploadsModel::telegram() const
 {
     return p->telegram;
 }
 
-void TelegramWallpapersModel::setTelegram(TelegramQml *tgo)
+void TelegramUploadsModel::setTelegram(TelegramQml *tgo)
 {
     TelegramQml *tg = static_cast<TelegramQml*>(tgo);
     if( p->telegram == tg )
         return;
 
     p->telegram = tg;
-    p->intializing = tg;
     emit telegramChanged();
-    emit intializingChanged();
     if( !p->telegram )
         return;
 
-    connect( p->telegram, SIGNAL(wallpapersChanged()), SLOT(wallpapersChanged()) );
-
-    Telegram *tgObject = p->telegram->telegram();
-    tgObject->accountGetWallPapers();
+    connect( p->telegram, SIGNAL(uploadsChanged()), SLOT(uploadsChanged()) );
 }
 
-qint64 TelegramWallpapersModel::id(const QModelIndex &index) const
+qint64 TelegramUploadsModel::id(const QModelIndex &index) const
 {
     int row = index.row();
-    return p->wallpapers.at(row);
+    return p->uploads.at(row);
 }
 
-int TelegramWallpapersModel::rowCount(const QModelIndex &parent) const
+int TelegramUploadsModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return p->wallpapers.count();
+    return p->uploads.count();
 }
 
-QVariant TelegramWallpapersModel::data(const QModelIndex &index, int role) const
+QVariant TelegramUploadsModel::data(const QModelIndex &index, int role) const
 {
     QVariant res;
     const qint64 key = id(index);
     switch( role )
     {
     case ItemRole:
-        res = QVariant::fromValue<WallPaperObject*>(p->telegram->wallpaper(key));
+        res = QVariant::fromValue<UploadObject*>(p->telegram->upload(key));
         break;
     }
 
     return res;
 }
 
-QHash<qint32, QByteArray> TelegramWallpapersModel::roleNames() const
+QHash<qint32, QByteArray> TelegramUploadsModel::roleNames() const
 {
     QHash<qint32, QByteArray> *res = 0;
     if( res )
@@ -102,40 +92,32 @@ QHash<qint32, QByteArray> TelegramWallpapersModel::roleNames() const
     return *res;
 }
 
-int TelegramWallpapersModel::count() const
+int TelegramUploadsModel::count() const
 {
-    return p->wallpapers.count();
+    return p->uploads.count();
 }
 
-bool TelegramWallpapersModel::intializing() const
+void TelegramUploadsModel::uploadsChanged()
 {
-    return p->intializing;
-}
-
-void TelegramWallpapersModel::wallpapersChanged()
-{
-    p->intializing = false;
-    emit intializingChanged();
-
-    const QList<qint64> & walls = p->telegram->wallpapers();
+    const QList<qint64> & uploads = p->telegram->uploads();
 
     beginResetModel();
-    p->wallpapers.clear();
+    p->uploads.clear();
     endResetModel();
 
-    for( int i=0 ; i<walls.count() ; i++ )
+    for( int i=0 ; i<uploads.count() ; i++ )
     {
-        const qint64 dId = walls.at(i);
-        if( p->wallpapers.contains(dId) )
+        const qint64 dId = uploads.at(i);
+        if( p->uploads.contains(dId) )
             continue;
 
         beginInsertRows(QModelIndex(), i, i );
-        p->wallpapers.insert( i, dId );
+        p->uploads.insert( i, dId );
         endInsertRows();
     }
 }
 
-TelegramWallpapersModel::~TelegramWallpapersModel()
+TelegramUploadsModel::~TelegramUploadsModel()
 {
     delete p;
 }

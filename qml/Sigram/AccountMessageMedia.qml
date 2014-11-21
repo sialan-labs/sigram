@@ -181,7 +181,25 @@ Rectangle {
         light: false
         modern: true
         indicatorSize: 22*physicalPlatformScale
-        property bool active: media_img.status != Image.Ready
+        property bool active: {
+            var result
+            switch( media.classType )
+            {
+            case typeMessageMediaPhoto:
+            case typeMessageMediaVideo:
+            case typeMessageMediaUnsupported:
+            case typeMessageMediaDocument:
+                result = media_img.status != Image.Ready
+                break;
+
+            case typeMessageMediaPhoto:
+            default:
+                result = false
+                break;
+            }
+
+            return result
+        }
 
         onActiveChanged: {
             if( active )

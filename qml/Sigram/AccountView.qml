@@ -106,6 +106,32 @@ Rectangle {
         }
     }
 
+    Item {
+        id: drop_file_blur
+        anchors.fill: drop_file
+        clip: true
+        opacity: drop_file.visibleRatio
+        visible: opacity != 0
+
+        FastBlur {
+            anchors.top: parent.top
+            anchors.topMargin: -messages.topMargin
+            width: messages.width
+            height: messages.height
+            source: messages
+            radius: 32
+        }
+    }
+
+    DialogDropFile {
+        id: drop_file
+        anchors.left: dialogs.right
+        anchors.top: header.bottom
+        anchors.right: parent.right
+        anchors.bottom: send_msg.top
+        currentDialog: dialogs.currentDialog
+    }
+
     Component {
         id: emoticons_component
 

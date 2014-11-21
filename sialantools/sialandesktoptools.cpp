@@ -21,6 +21,9 @@
 #include <QProcess>
 #include <QStringList>
 #include <QPalette>
+#include <QEventLoop>
+#include <QFileDialog>
+#include <QDebug>
 
 class SialanDesktopToolsPrivate
 {
@@ -193,6 +196,135 @@ bool SialanDesktopTools::titleBarIsDark() const
         return false;
     else
         return true;
+}
+
+QString SialanDesktopTools::getOpenFileName(QWindow *window, const QString & title, const QString &filter, const QString &startPath)
+{
+    const int dsession = desktopSession();
+    switch( dsession )
+    {
+    case SialanDesktopTools::Kde:
+        if( QFileInfo::exists("/usr/bin/kdialog") )
+        {
+            QStringList args = QStringList()<< "--title" << title << "--getopenfilename"
+                                            << startPath << filter;
+            if( window )
+                args << "--attach" << QString::number(window->winId());
+
+            QProcess process;
+            QEventLoop loop;
+            connect(&process, SIGNAL(finished(int)), &loop, SLOT(quit()), Qt::QueuedConnection );
+
+            process.start("/usr/bin/kdialog", args );
+            loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+            if( process.exitStatus() == QProcess::NormalExit )
+                return QString(process.readAll()).remove("\n");
+            else
+                return QFileDialog::getOpenFileName(0, title, startPath, filter);
+        }
+        else
+        {
+            return QFileDialog::getOpenFileName(0, title, startPath, filter);
+        }
+        break;
+
+    case SialanDesktopTools::Mac:
+    case SialanDesktopTools::Windows:
+    case SialanDesktopTools::Unity:
+    case SialanDesktopTools::GnomeFallBack:
+    case SialanDesktopTools::Gnome:
+        return QFileDialog::getOpenFileName(0, title, startPath, filter);
+        break;
+    }
+
+    return QString();
+}
+
+QString SialanDesktopTools::getSaveFileName(QWindow *window, const QString &title, const QString &filter, const QString &startPath)
+{
+    const int dsession = desktopSession();
+    switch( dsession )
+    {
+    case SialanDesktopTools::Kde:
+        if( QFileInfo::exists("/usr/bin/kdialog") )
+        {
+            QStringList args = QStringList()<< "--title" << title << "--getsavefilename"
+                                            << startPath << filter;
+            if( window )
+                args << "--attach" << QString::number(window->winId());
+
+            QProcess process;
+            QEventLoop loop;
+            connect(&process, SIGNAL(finished(int)), &loop, SLOT(quit()), Qt::QueuedConnection );
+
+            process.start("/usr/bin/kdialog", args );
+            loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+            if( process.exitStatus() == QProcess::NormalExit )
+                return QString(process.readAll()).remove("\n");
+            else
+                return QFileDialog::getSaveFileName(0, title, startPath, filter);
+        }
+        else
+        {
+            return QFileDialog::getSaveFileName(0, title, startPath, filter);
+        }
+        break;
+
+    case SialanDesktopTools::Mac:
+    case SialanDesktopTools::Windows:
+    case SialanDesktopTools::Unity:
+    case SialanDesktopTools::GnomeFallBack:
+    case SialanDesktopTools::Gnome:
+        return QFileDialog::getSaveFileName(0, title, startPath, filter);
+        break;
+    }
+
+    return QString();
+}
+
+QString SialanDesktopTools::getExistingDirectory(QWindow *window, const QString &title, const QString &startPath)
+{
+    const int dsession = desktopSession();
+    switch( dsession )
+    {
+    case SialanDesktopTools::Kde:
+        if( QFileInfo::exists("/usr/bin/kdialog") )
+        {
+            QStringList args = QStringList()<< "--title" << title << "--getexistingdirectory"
+                                            << startPath;
+            if( window )
+                args << "--attach" << QString::number(window->winId());
+
+            QProcess process;
+            QEventLoop loop;
+            connect(&process, SIGNAL(finished(int)), &loop, SLOT(quit()), Qt::QueuedConnection );
+
+            process.start("/usr/bin/kdialog", args );
+            loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+            if( process.exitStatus() == QProcess::NormalExit )
+                return QString(process.readAll()).remove("\n");
+            else
+                return QFileDialog::getExistingDirectory(0, title, startPath);
+        }
+        else
+        {
+            return QFileDialog::getExistingDirectory(0, title, startPath);
+        }
+        break;
+
+    case SialanDesktopTools::Mac:
+    case SialanDesktopTools::Windows:
+    case SialanDesktopTools::Unity:
+    case SialanDesktopTools::GnomeFallBack:
+    case SialanDesktopTools::Gnome:
+        return QFileDialog::getExistingDirectory(0, title, startPath);
+        break;
+    }
+
+    return QString();
 }
 
 SialanDesktopTools::~SialanDesktopTools()

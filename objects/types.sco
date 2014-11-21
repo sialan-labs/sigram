@@ -9,12 +9,21 @@ include "../photosizelist.h";
 include "../chatparticipantlist.h";
 
 object Download {
+    qint64 fileId rw = 0;
     QString location rw;
     qint32 mtime rw = 0;
     qint32 partId rw = 0;
     qint32 downloaded rw = 0;
     qint32 total rw = 0;
     QFile* file rw = new QFile(this);
+}
+
+object Upload {
+    qint64 fileId rw = 0;
+    QString location rw;
+    qint32 partId rw = 0;
+    qint32 uploaded rw = 0;
+    qint32 totalSize rw = 0;
 }
 
 object FileLocation {

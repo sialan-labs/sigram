@@ -141,6 +141,12 @@ Item {
                 dialog: dItem
                 show: marea.containsMouse
             }
+
+            DialogDropFile {
+                anchors.fill: parent
+                currentDialog: dItem
+                color: "#ddffffff"
+            }
         }
 
         section.property: "section"

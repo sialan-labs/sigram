@@ -22,6 +22,7 @@
 #include "objects/types.h"
 
 #include <telegram.h>
+#include <limits>
 
 #include <QPointer>
 #include <QTimerEvent>
@@ -70,7 +71,8 @@ public:
     QMap<qint64, WallPaperObject*> wallpapers_map;
 
     QHash<qint64,MessageObject*> pend_messages;
-    QHash<qint64, FileLocationObject*> downloadings;
+    QHash<qint64,FileLocationObject*> downloads;
+    QHash<qint64,UploadObject*> uploads;
 
     QHash<int, QPair<qint64,qint64> > typing_timers;
     int upd_dialogs_timer;
@@ -81,8 +83,11 @@ public:
     UserObject *nullUser;
     FileLocationObject *nullFile;
     WallPaperObject *nullWallpaper;
+    UploadObject *nullUpload;
 
     QMimeDatabase mime_db;
+
+    qint32 msg_send_id_counter;
 };
 
 TelegramQml::TelegramQml(QObject *parent) :
@@ -91,6 +96,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p = new TelegramQmlPrivate;
     p->upd_dialogs_timer = 0;
     p->online = false;
+    p->msg_send_id_counter = INT_MAX - 100000;
 
     p->userdata = 0;
     p->telegram = 0;
@@ -109,6 +115,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->nullUser = new UserObject(User(User::typeUserEmpty), this);
     p->nullFile = new FileLocationObject(FileLocation(FileLocation::typeFileLocationUnavailable), this);
     p->nullWallpaper = new WallPaperObject(WallPaper(WallPaper::typeWallPaperSolid), this);
+    p->nullUpload = new UploadObject(this);
 }
 
 QString TelegramQml::phoneNumber() const
@@ -314,6 +321,14 @@ WallPaperObject *TelegramQml::wallpaper(qint64 id) const
     return res;
 }
 
+UploadObject *TelegramQml::upload(qint64 id) const
+{
+    UploadObject *res = p->uploads.value(id);
+    if( !res )
+        res = p->nullUpload;
+    return res;
+}
+
 DialogObject *TelegramQml::nullDialog() const
 {
     return p->nullDialog;
@@ -360,6 +375,11 @@ QList<qint64> TelegramQml::messages( qint64 did ) const
 QList<qint64> TelegramQml::wallpapers() const
 {
     return p->wallpapers_map.keys();
+}
+
+QList<qint64> TelegramQml::uploads() const
+{
+    return p->uploads.keys();
 }
 
 void TelegramQml::authLogout()
@@ -436,9 +456,8 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     to_peer.setChatId(dlg->peer()->chatId());
     to_peer.setUserId(dlg->peer()->userId());
 
-    qint64 msgId = 0;
-    if( !p->messages_list.value(dId).isEmpty() )
-        msgId = p->messages_list.value(dId).first()+1;
+    qint32 msgId = p->msg_send_id_counter;
+    p->msg_send_id_counter++;
 
     Message message(Message::typeMessage);
     message.setId(msgId);
@@ -461,6 +480,48 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     timerUpdateDialogs();
 }
 
+void TelegramQml::sendFile(qint64 dId, const QString &fpath)
+{
+    QString file = fpath;
+    if( file.left(7) == "file://" )
+        file = file.mid(7);
+
+    if( !QFileInfo::exists(file) )
+        return;
+    if( !p->telegram )
+        return;
+
+    DialogObject *dlg = dialog(dId);
+    if( !dlg )
+        return;
+
+    bool isChat = dlg->peer()->classType()==Peer::typePeerChat;
+    InputPeer peer(isChat? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
+    peer.setChatId(dlg->peer()->chatId());
+    peer.setUserId(dlg->peer()->userId());
+
+    qint64 fileId;
+    const QMimeType & t = p->mime_db.mimeTypeForFile(file);
+    if( t.name().contains("image/") )
+        fileId = p->telegram->messagesSendPhoto(peer, file);
+    else
+    if( t.name().contains("video/") )
+        fileId = p->telegram->messagesSendVideo(peer, file, 0, 0, 0);
+    else
+    if( t.name().contains("audio/") )
+        fileId = p->telegram->messagesSendAudio(peer, file, 0);
+    else
+        fileId = p->telegram->messagesSendDocument(peer, file);
+
+    UploadObject *upload = new UploadObject(this);
+    upload->setFileId(fileId);
+    upload->setLocation(file);
+    upload->setTotalSize(QFileInfo(file).size());
+
+    p->uploads[fileId] = upload;
+    emit uploadsChanged();
+}
+
 void TelegramQml::getFile(FileLocationObject *l)
 {
     if( !p->telegram )
@@ -480,8 +541,32 @@ void TelegramQml::getFile(FileLocationObject *l)
     input.setSecret(l->secret());
     input.setVolumeId(l->volumeId());
 
-    qint64 id = p->telegram->uploadGetFile(input, 4092, l->dcId());
-    p->downloadings[id] = l;
+    qint64 fileId = p->telegram->uploadGetFile(input, 4092, l->dcId());
+    p->downloads[fileId] = l;
+
+    l->download()->setFileId(fileId);
+}
+
+void TelegramQml::checkFile(FileLocationObject *l)
+{
+    if( !p->telegram )
+        return;
+    if( l->secret() == 0 )
+        return;
+
+    const QString & download_file = fileLocation(l);
+    if( !QFile::exists(download_file) )
+        return;
+
+    l->download()->setLocation("file://"+download_file);
+}
+
+void TelegramQml::cancelSendGet(qint64 fileId)
+{
+    if( !p->telegram )
+        return;
+
+    p->telegram->uploadCancelFile(fileId);
 }
 
 void TelegramQml::timerUpdateDialogs(bool duration)
@@ -541,6 +626,10 @@ void TelegramQml::try_init()
 
     connect( p->telegram, SIGNAL(uploadGetFileAnswer(qint64,StorageFileType,qint32,QByteArray,qint32,qint32,qint32)),
              SLOT(uploadGetFile_slt(qint64,StorageFileType,qint32,QByteArray,qint32,qint32,qint32)) );
+    connect( p->telegram, SIGNAL(uploadCancelFileAnswer(qint64,bool)), this,
+             SLOT(uploadCancelFile_slt(qint64,bool)) );
+    connect( p->telegram, SIGNAL(uploadSendFileAnswer(qint64,qint32,qint32,qint32)), this,
+             SLOT(uploadSendFile_slt(qint64,qint32,qint32,qint32)) );
 
     emit telegramChanged();
 
@@ -662,9 +751,13 @@ void TelegramQml::accountGetWallPapers_slt(qint64 id, const QList<WallPaper> &wa
         WallPaperObject *obj = new WallPaperObject(wp, this);
         p->wallpapers_map[wp.id()] = obj;
 
-        PhotoSizeObject *size = obj->sizes()->first();
-        if( size )
-            getFile(size->location());
+        PhotoSizeObject *sml_size = obj->sizes()->last();
+        if( sml_size )
+            getFile(sml_size->location());
+
+        PhotoSizeObject *lrg_size = obj->sizes()->first();
+        if( lrg_size )
+            checkFile(lrg_size->location());
     }
 
     emit wallpapersChanged();
@@ -860,7 +953,7 @@ void TelegramQml::updates_slt(const QList<Update> & updates, const QList<User> &
 
 void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint32 mtime, const QByteArray & bytes, qint32 partId, qint32 downloaded, qint32 total)
 {
-    FileLocationObject *obj = p->downloadings.value(id);
+    FileLocationObject *obj = p->downloads.value(id);
     if( !obj )
         return;
 
@@ -898,7 +991,33 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
         else
             download->setLocation("file://" + download_file);
 
-        p->downloadings.remove(id);
+        p->downloads.remove(id);
+    }
+}
+
+void TelegramQml::uploadSendFile_slt(qint64 fileId, qint32 partId, qint32 uploaded, qint32 totalSize)
+{
+    UploadObject *upload = p->uploads.value(fileId);
+    if(!upload)
+        return;
+
+    upload->setPartId(partId);
+    upload->setUploaded(uploaded);
+    upload->setTotalSize(totalSize);
+}
+
+void TelegramQml::uploadCancelFile_slt(qint64 fileId, bool cancelled)
+{
+    if(!cancelled)
+        return;
+    if( p->uploads.contains(fileId) )
+    {
+
+    }
+    else
+    if( p->downloads.contains(fileId) )
+    {
+
     }
 }
 

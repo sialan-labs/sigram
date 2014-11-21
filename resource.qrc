@@ -39,5 +39,7 @@
         <file>qml/Sigram/Wallpapers.qml</file>
         <file>qml/Sigram/files/group.png</file>
         <file>qml/Sigram/files/user.png</file>
+        <file>qml/Sigram/files/attach.png</file>
+        <file>qml/Sigram/DialogDropFile.qml</file>
     </qresource>
 </RCC>

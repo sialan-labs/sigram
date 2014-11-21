@@ -12,6 +12,8 @@ Rectangle {
     property Dialog currentDialog
     property real minimumHeight: 40*physicalPlatformScale
 
+    property bool isChat: currentDialog? currentDialog.peer.chatId != 0 : false
+
     signal accepted( string text )
     signal emojiRequest(real x, real y)
 
@@ -23,7 +25,7 @@ Rectangle {
 
     TextAreaCore {
         id: txt
-        anchors.left: parent.left
+        anchors.left: attach_btn.right
         anchors.right: emoji_btn.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: 4*physicalPlatformScale
@@ -32,12 +34,38 @@ Rectangle {
         selectedTextColor: masterPalette.highlightedText
         pickerEnable: false
         color: textColor0
+        wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
+        clip: true
 
         onTextChanged: if( text.trim().length == 0 ) text = ""
         Keys.onPressed: {
             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
                 if( event.modifiers == Qt.NoModifier )
                     smsg.send()
+        }
+    }
+
+    Button {
+        id: attach_btn
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        normalColor: "#00000000"
+        highlightColor: "#1f000000"
+        cursorShape: Qt.PointingHandCursor
+        width: height
+        iconHeight: 20*physicalPlatformScale
+        opacity: 0.6
+        icon: "files/attach.png"
+        onClicked: {
+            if( currentDialog == telegramObject.nullDialog )
+                return
+            var file = Desktop.getOpenFileName(View)
+            if( file.length == 0 )
+                return
+
+            var dId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
+            telegramObject.sendFile(dId, file)
         }
     }
 

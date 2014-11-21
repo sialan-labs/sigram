@@ -16,28 +16,27 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TELEGRAMWALLPAPERSMODEL_H
-#define TELEGRAMWALLPAPERSMODEL_H
+#ifndef TELEGRAMUPLOADSMODEL_H
+#define TELEGRAMUPLOADSMODEL_H
 
 #include <QAbstractListModel>
 
 class TelegramQml;
-class TelegramWallpapersModelPrivate;
-class TelegramWallpapersModel : public QAbstractListModel
+class TelegramUploadsModelPrivate;
+class TelegramUploadsModel : public QAbstractListModel
 {
     Q_OBJECT
 
     Q_PROPERTY(TelegramQml* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(bool intializing READ intializing NOTIFY intializingChanged)
 
 public:
     enum DialogsRoles {
         ItemRole = Qt::UserRole
     };
 
-    TelegramWallpapersModel(QObject *parent = 0);
-    ~TelegramWallpapersModel();
+    TelegramUploadsModel(QObject *parent = 0);
+    ~TelegramUploadsModel();
 
     TelegramQml *telegram() const;
     void setTelegram(TelegramQml *tg );
@@ -50,18 +49,16 @@ public:
     QHash<qint32,QByteArray> roleNames() const;
 
     int count() const;
-    bool intializing() const;
 
 signals:
     void telegramChanged();
     void countChanged();
-    void intializingChanged();
 
 private slots:
-    void wallpapersChanged();
+    void uploadsChanged();
 
-protected:
-    TelegramWallpapersModelPrivate *p;
+private:
+    TelegramUploadsModelPrivate *p;
 };
 
-#endif // TELEGRAMWALLPAPERSMODEL_H
+#endif // TELEGRAMUPLOADSMODEL_H

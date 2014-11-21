@@ -61,7 +61,7 @@ Rectangle {
                 if( isChat ) {
                     result += chat.participantsCount + qsTr(" participants")
                 } else {
-                    var isOnline = header.user.status == typeUserStatusOnline
+                    var isOnline = header.user.status.classType == typeUserStatusOnline
                     result += isOnline? qsTr("Online") : Sigram.getTimeString(CalendarConv.fromTime_t(header.user.status.wasOnline)) + qsTr(" was online")
                 }
 

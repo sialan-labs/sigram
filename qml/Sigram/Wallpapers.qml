@@ -31,7 +31,7 @@ Rectangle {
         id: grid
         anchors.fill: parent
         model: wallpapers_model
-        cellWidth: 128*physicalPlatformScale
+        cellWidth: width/Math.floor(width/128*physicalPlatformScale)
         cellHeight: cellWidth
         clip: true
         delegate: Item {
@@ -40,13 +40,44 @@ Rectangle {
             height: grid.cellHeight
 
             property WallPaper wallpaper: item
+            property bool downloaded: ditem.wallpaper.sizes.first.location.download.location.length != 0
 
             Image {
                 anchors.fill: parent
                 anchors.margins: 4*physicalPlatformScale
-                sourceSize: Qt.size(width,height)
+                sourceSize: Qt.size(width,height*2)
                 smooth: true
-                source: ditem.wallpaper.sizes.first.location.download.location
+                fillMode: Image.PreserveAspectCrop
+                source: {
+                    if(downloaded)
+                        return ditem.wallpaper.sizes.first.location.download.location
+                    else
+                        return ditem.wallpaper.sizes.last.location.download.location
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                anchors.margins: 4*physicalPlatformScale
+                cursorShape: Qt.PointingHandCursor
+                onClicked: telegramObject.getFile(ditem.wallpaper.sizes.first.location)
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "#000000"
+                    opacity: 0.5
+                    visible: !downloaded
+                }
+
+                Text {
+                    anchors.centerIn: parent
+                    font.family: SApp.globalFontFamily
+                    font.pixelSize: 12*fontsScale
+                    font.bold: true
+                    color: "#ffffff"
+                    text: "Download"
+                    visible: !downloaded
+                }
             }
         }
     }
