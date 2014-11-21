@@ -26,7 +26,6 @@
 class TelegramDialogsModelPrivate
 {
 public:
-    UserData *userdata;
     TelegramQml *telegram;
     bool intializing;
 
@@ -38,7 +37,6 @@ TelegramDialogsModel::TelegramDialogsModel(QObject *parent) :
 {
     p = new TelegramDialogsModelPrivate;
     p->telegram = 0;
-    p->userdata = 0;
     p->intializing = false;
 }
 
@@ -53,25 +51,26 @@ void TelegramDialogsModel::setTelegram(TelegramQml *tgo)
     if( p->telegram == tg )
         return;
 
+    if( !tg && p->telegram )
+    {
+        disconnect( p->telegram->userData(), SIGNAL(favoriteChanged(int)) , this, SLOT(userDataChanged()) );
+        disconnect( p->telegram->userData(), SIGNAL(valueChanged(QString)), this, SLOT(userDataChanged()) );
+    }
+
     p->telegram = tg;
     p->intializing = tg;
     emit telegramChanged();
     emit intializingChanged();
     if( !p->telegram )
-    {
-        if( p->userdata )
-            delete p->userdata;
-
-        p->userdata = 0;
         return;
-    }
 
     connect( p->telegram, SIGNAL(dialogsChanged()), SLOT(dialogsChanged()) );
 
+    connect( p->telegram->userData(), SIGNAL(favoriteChanged(int)) , this, SLOT(userDataChanged()) );
+    connect( p->telegram->userData(), SIGNAL(valueChanged(QString)), this, SLOT(userDataChanged()) );
+
     Telegram *tgObject = p->telegram->telegram();
     tgObject->messagesGetDialogs(0,0,1000);
-
-    p->userdata = new UserData(p->telegram->phoneNumber(), this);
 }
 
 qint64 TelegramDialogsModel::id(const QModelIndex &index) const
@@ -97,7 +96,7 @@ QVariant TelegramDialogsModel::data(const QModelIndex &index, int role) const
         break;
 
     case SectionRole:
-        res = p->userdata->value("love").toLongLong()==key? 2 : (p->userdata->isFavorited(key)? 1 : 0);
+        res = p->telegram->userData()->value("love").toLongLong()==key? 2 : (p->telegram->userData()->isFavorited(key)? 1 : 0);
         break;
     }
 
@@ -131,7 +130,7 @@ void TelegramDialogsModel::dialogsChanged()
     p->intializing = false;
     emit intializingChanged();
 
-    QList<qint64> dialogs = p->telegram->dialogs();
+    const QList<qint64> & dialogs = fixDialogs(p->telegram->dialogs());
 
     for( int i=0 ; i<p->dialogs.count() ; i++ )
     {
@@ -180,6 +179,47 @@ void TelegramDialogsModel::dialogsChanged()
         p->dialogs.insert( i, dId );
         endInsertRows();
     }
+}
+
+void TelegramDialogsModel::userDataChanged()
+{
+    const QList<qint64> & dialogs = fixDialogs(p->telegram->dialogs());
+
+    beginResetModel();
+    p->dialogs.clear();
+    endResetModel();
+
+    for( int i=0 ; i<dialogs.count() ; i++ )
+    {
+        const qint64 dId = dialogs.at(i);
+        if( p->dialogs.contains(dId) )
+            continue;
+
+        beginInsertRows(QModelIndex(), i, i );
+        p->dialogs.insert( i, dId );
+        endInsertRows();
+    }
+}
+
+QList<qint64> TelegramDialogsModel::fixDialogs(QList<qint64> dialogs)
+{
+    int fav_counts = 0;
+    for( int i=0; i<dialogs.count(); i++ )
+    {
+        qint64 dId = dialogs.at(i);
+        if( p->telegram->userData()->isFavorited(dId) )
+        {
+            dialogs.move(i, fav_counts);
+            fav_counts++;
+        }
+    }
+
+    qint64 love_id = p->telegram->userData()->value("love").toLongLong();
+    int love_idx = dialogs.indexOf(love_id);
+    if( love_idx != -1 )
+        dialogs.move(love_idx, 0);
+
+    return dialogs;
 }
 
 TelegramDialogsModel::~TelegramDialogsModel()

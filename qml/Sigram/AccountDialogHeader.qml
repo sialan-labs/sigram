@@ -20,15 +20,14 @@ Rectangle {
     property real typeUserStatusEmpty: 0x9d05049
     property real typeUserStatusOnline: 0xedb93949
 
+    signal clicked()
+
     onRefreshingChanged: {
         if( refreshing )
             indicator.start()
         else
             indicator.stop()
     }
-
-    SystemPalette { id: palette; colorGroup: SystemPalette.Active }
-
 
     Text {
         id: title_txt
@@ -51,7 +50,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: title_txt.horizontalCenter
         anchors.bottomMargin: -4*physicalPlatformScale
-        color: palette.highlight
+        color: masterPalette.highlight
         font.pixelSize: 9*fontsScale
         font.family: SApp.globalFontFamily
         visible: currentDialog != telegramObject.nullDialog
@@ -92,5 +91,11 @@ Rectangle {
         light: false
         modern: true
         indicatorSize: 20*physicalPlatformScale
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: header.clicked()
     }
 }

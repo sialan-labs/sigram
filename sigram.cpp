@@ -26,8 +26,10 @@
 #include "profilesmodel.h"
 #include "telegrammessagesmodel.h"
 #include "telegramdialogsmodel.h"
+#include "telegramwallpapersmodel.h"
 #include "emojis.h"
 #include "unitysystemtray.h"
+#include "userdata.h"
 
 #include <QPointer>
 #include <QQmlContext>
@@ -71,13 +73,16 @@ Sigram::Sigram(QObject *parent) :
 #endif
 
     qRegisterMetaType<TelegramQml*>("TelegramQml*");
+    qRegisterMetaType<UserData*>("UserData*");
 
     qmlRegisterType<TelegramQml>("Sigram", 1, 0, "Telegram");
     qmlRegisterType<ProfilesModel>("Sigram", 1, 0, "ProfilesModel");
     qmlRegisterType<ProfilesModelItem>("Sigram", 1, 0, "ProfilesModelItem");
     qmlRegisterType<TelegramMessagesModel>("Sigram", 1, 0, "MessagesModel");
+    qmlRegisterType<TelegramWallpapersModel>("Sigram", 1, 0, "WallpapersModel");
     qmlRegisterType<TelegramDialogsModel>("Sigram", 1, 0, "DialogsModel");
     qmlRegisterType<Emojis>("Sigram", 1, 0, "Emojis");
+    qmlRegisterUncreatableType<UserData>("Sigram", 1, 0, "UserData", "");
 }
 
 QSize Sigram::imageSize(const QString &path)
@@ -135,9 +140,14 @@ void Sigram::incomingAppMessage(const QString &msg)
 {
     if( msg == "show" )
     {
-        p->viewer->show();
-        p->viewer->requestActivate();
+        active();
     }
+}
+
+void Sigram::active()
+{
+    p->viewer->show();
+    p->viewer->requestActivate();
 }
 
 bool Sigram::eventFilter(QObject *o, QEvent *e)
@@ -174,8 +184,7 @@ void Sigram::systray_action(QSystemTrayIcon::ActivationReason act)
             p->viewer->hide();
         else
         {
-            p->viewer->setVisible( true );
-            p->viewer->requestActivate();
+            active();
         }
         break;
 
@@ -231,8 +240,7 @@ void Sigram::showContextMenu()
 
     if( res_act == show_act )
     {
-        p->viewer->setVisible( true );
-        p->viewer->requestActivate();
+        active();
     }
     else
     if( res_act == conf_act )

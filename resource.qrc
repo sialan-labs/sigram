@@ -27,5 +27,17 @@
         <file>qml/Sigram/Emoticons.qml</file>
         <file>qml/Sigram/files/emoji.png</file>
         <file>database/userdata.sqlite</file>
+        <file>qml/Sigram/AccountMessageAction.qml</file>
+        <file>qml/Sigram/DialogItemTools.qml</file>
+        <file>qml/Sigram/files/mute.png</file>
+        <file>qml/Sigram/files/unmute.png</file>
+        <file>qml/Sigram/files/love.png</file>
+        <file>qml/Sigram/files/favorite.png</file>
+        <file>qml/Sigram/UserProperties.qml</file>
+        <file>qml/Sigram/UserPropertiesBase.qml</file>
+        <file>qml/Sigram/files/contact.png</file>
+        <file>qml/Sigram/Wallpapers.qml</file>
+        <file>qml/Sigram/files/group.png</file>
+        <file>qml/Sigram/files/user.png</file>
     </qresource>
 </RCC>

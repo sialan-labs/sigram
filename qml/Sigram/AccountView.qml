@@ -78,6 +78,14 @@ Rectangle {
         color: framesColor
         currentDialog: dialogs.currentDialog
         refreshing: messages.refreshing
+        onClicked: {
+            if( properties )
+                properties.end()
+            else
+                properties = user_prp_component.createObject(acc_view)
+        }
+
+        property UserProperties properties
     }
 
     AccountSendMessage {
@@ -108,6 +116,22 @@ Rectangle {
             anchors.top: header.bottom
             width: 200*physicalPlatformScale
             onSelected: send_msg.insertText(code)
+        }
+    }
+
+    Component {
+        id: user_prp_component
+        UserProperties {
+            anchors.left: dialogs.right
+            anchors.top: header.bottom
+            anchors.right: parent.right
+            anchors.bottom: send_msg.top
+            currentDialog: acc_view.currentDialog
+            blurSource: messages
+            blurTopMargin: -messages.topMargin
+            color: "#66ffffff"
+
+            Component.onCompleted: inited = true
         }
     }
 }

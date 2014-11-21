@@ -15,8 +15,6 @@ Rectangle {
     signal accepted( string text )
     signal emojiRequest(real x, real y)
 
-    SystemPalette { id: palette; colorGroup: SystemPalette.Active }
-
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.IBeamCursor
@@ -30,8 +28,8 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: 4*physicalPlatformScale
         selectByMouse: true
-        selectionColor: palette.highlight
-        selectedTextColor: palette.highlightedText
+        selectionColor: masterPalette.highlight
+        selectedTextColor: masterPalette.highlightedText
         pickerEnable: false
         color: textColor0
 
@@ -66,7 +64,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        textColor: "#0d80ec"
+        textColor: masterPalette.highlight
         normalColor: "#00000000"
         highlightColor: "#0f000000"
         width: 70*physicalPlatformScale
@@ -85,7 +83,13 @@ Rectangle {
     }
 
     function send() {
-        smsg.accepted(txt.text)
+        if( currentDialog == telegramObject.nullDialog )
+            return
+        var msg = txt.text.trim()
+        if( msg == "" )
+            return
+
+        smsg.accepted(msg)
         txt.text = ""
     }
 }

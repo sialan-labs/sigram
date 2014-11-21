@@ -10,7 +10,7 @@ Rectangle {
 
     Rectangle {
         anchors.fill: profiles_list
-        color: backColor1
+        color: masterPalette.highlight
     }
 
     Connections {
@@ -86,6 +86,7 @@ Rectangle {
         height: width
         normalColor: "#00000000"
         highlightColor: "#88339DCC"
+        cursorShape: Qt.PointingHandCursor
         icon: "files/add_account.png"
         iconHeight: 14*physicalPlatformScale
         onClicked: addAccount()

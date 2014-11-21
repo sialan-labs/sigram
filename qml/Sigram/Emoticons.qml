@@ -32,8 +32,6 @@ Item {
 
     onRecentChanged: slist.refresh()
 
-    SystemPalette { id: palette; colorGroup: SystemPalette.Active }
-
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.RightButton | Qt.LeftButton
@@ -53,7 +51,7 @@ Item {
             textFont.pixelSize: 9*fontsScale
             normalColor: "#00000000"
             highlightColor: "#0f000000"
-            textColor: recent? palette.highlight : "#333333"
+            textColor: recent? masterPalette.highlight : "#333333"
             text: qsTr("Recent")
             cursorShape: Qt.PointingHandCursor
             onClicked: recent = true
@@ -65,7 +63,7 @@ Item {
             textFont.pixelSize: 9*fontsScale
             normalColor: "#00000000"
             highlightColor: "#0f000000"
-            textColor: recent? "#333333" : palette.highlight
+            textColor: recent? "#333333" : masterPalette.highlight
             text: qsTr("All Emoji")
             cursorShape: Qt.PointingHandCursor
             onClicked: recent = false

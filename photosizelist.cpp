@@ -40,13 +40,24 @@ PhotoSizeList::PhotoSizeList(const QList<PhotoSize> & another, QObject *parent) 
 
 void PhotoSizeList::operator =(const QList<PhotoSize> &another)
 {
-    foreach( PhotoSizeObject *obj, p->list )
-        obj->deleteLater();
-
-    p->list.clear();
-
     foreach( const PhotoSize & size, another )
     {
+        bool containt = false;
+        for( int i=0; i<p->list.count(); i++ )
+        {
+            PhotoSizeObject *tmp = p->list.at(i);
+            if( tmp->location()->localId() != size.location().localId() ||
+                tmp->location()->dcId() != size.location().dcId() ||
+                tmp->location()->volumeId() != size.location().volumeId() ||
+                tmp->location()->secret() != size.location().secret() )
+                continue;
+
+            containt = true;
+            break;
+        }
+        if( containt )
+            continue;
+
         PhotoSizeObject *obj = new PhotoSizeObject(size, this);
         p->list << obj;
     }

@@ -117,6 +117,16 @@ qreal SialanTools::colorSaturation(const QColor &clr)
     return clr.saturation()/255.0;
 }
 
+QVariantMap SialanTools::colorHsl(const QColor &clr)
+{
+    QVariantMap res;
+    res["hue"] = colorHue(clr);
+    res["lightness"] = colorLightness(clr);
+    res["saturation"] = colorSaturation(clr);
+
+    return res;
+}
+
 QString SialanTools::translateNumbers(QString input)
 {
     input.replace("0",sialan_tools_numtranslate_0);

@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QVariant>
+#include <QVariantMap>
 
 class SialanToolsPrivate;
 class SialanTools : public QObject
@@ -45,6 +46,8 @@ public slots:
     static qreal colorHue( const QColor & clr );
     static qreal colorLightness( const QColor & clr );
     static qreal colorSaturation( const QColor & clr );
+
+    static QVariantMap colorHsl( const QColor & clr );
 
     static QString translateNumbers( QString input );
     static QString passToMd5( const QString & pass );

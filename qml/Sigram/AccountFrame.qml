@@ -30,12 +30,19 @@ Rectangle {
         onNotifyClosed: notifies_hash.remove(id)
         onNotifyAction: {
             var msg = notifies_hash.value(id)
-            console.debug(action)
-            if( action == notifyActShow )
-                console.debug("show", msg.message)
-            else
-            if( action == notifyActMute )
-                console.debug("mute", msg.message)
+            if( action == notifyActShow ) {
+                if( view )
+                    view.currentDialog = telegram.messageDialog(msg.id)
+
+                Sigram.active()
+            } else
+            if( action == notifyActMute ) {
+                if( !view )
+                    return
+
+                var dId = telegram.messageDialogId(msg.id)
+                telegram.userData.addMute(dId)
+            }
         }
 
         property int notifyActShow: 0
@@ -65,6 +72,10 @@ Rectangle {
                     return
             }
 
+            var dId = telegram.messageDialogId(msg.id)
+            if( telegram.userData.isMuted(dId) )
+                return
+
             var user = telegram.user(msg.fromId)
             var title = user.firstName + " " + user.lastName
 
@@ -83,7 +94,7 @@ Rectangle {
     AccountSign {
         id: acc_sign
         anchors.fill: parent
-        color: "#333333"
+        color: backColor0
         phoneRegistered: telegram.authPhoneRegistered
         visible: (telegram.authNeeded || telegram.authSignInError.length!=0 ||
                   telegram.authSignUpError.length != 0) && telegram.authPhoneChecked

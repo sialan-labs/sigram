@@ -188,7 +188,7 @@ Item {
             anchors.rightMargin: 40*physicalPlatformScale
             fontSize: 9*fontsScale
             normalColor: "#3B97EC"
-            highlightColor: "#0d80ec"
+            highlightColor: masterPalette.highlight
             textColor: "#333333"
             onClicked: get_pass.done()
         }

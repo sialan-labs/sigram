@@ -29,6 +29,7 @@ Rectangle {
     property alias pointerDialog: point_dialog
     property alias tooltip: tool_tip
     property alias messageDialog: message_dialog
+    property alias masterPalette: palette
 
     property color subMessageBackground: "#66ffffff"
     property bool subMessageBlur: true
@@ -43,6 +44,11 @@ Rectangle {
     }
     FontLoader{
         source: "fonts/DroidSansMono.ttf"
+    }
+
+    SystemPalette {
+        id: palette
+        colorGroup: View.active? SystemPalette.Active : SystemPalette.Inactive
     }
 
     PointingDialog{

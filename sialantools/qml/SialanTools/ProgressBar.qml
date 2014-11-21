@@ -26,8 +26,6 @@ Rectangle {
     radius: 3*physicalPlatformScale
     smooth: true
 
-    SystemPalette { id: palette; colorGroup: SystemPalette.Active }
-
     property real percent: 0
     property color topColor: top.color
 
@@ -37,7 +35,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: progress_bar.width*progress_bar.percent/100
-        color: palette.highlight
+        color: masterPalette.highlight
         radius: progress_bar.radius
         visible: width >= radius*2
 

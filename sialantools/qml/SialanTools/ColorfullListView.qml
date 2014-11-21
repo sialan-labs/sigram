@@ -25,7 +25,7 @@ Item {
     clip: true
 
     property alias titleBarHeight: titlebar.height
-    property color titleBarDefaultColor: "#0d80ec"
+    property color titleBarDefaultColor: masterPalette.highlight
     property color titleBarDefaultTextColor: "#ffffff"
     property alias titleBarFont: title_txt.font
     property alias titleBarColor: titlebar.color

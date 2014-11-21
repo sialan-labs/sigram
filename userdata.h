@@ -29,6 +29,7 @@ public:
     UserData(const QString &phoneNumber, QObject *parent = 0);
     ~UserData();
 
+public slots:
     void addMute( int id );
     void removeMute( int id );
     QList<int> mutes() const;
@@ -42,9 +43,13 @@ public:
     void setValue( const QString & key, const QString & value );
     QString value( const QString & key );
 
-public slots:
     void reconnect();
     void disconnect();
+
+signals:
+    void muteChanged(int id);
+    void favoriteChanged(int id);
+    void valueChanged( const QString & key );
 
 private:
     void init_buffer();
@@ -53,5 +58,7 @@ private:
 private:
     UserDataPrivate *p;
 };
+
+Q_DECLARE_METATYPE(UserData*)
 
 #endif // USERDATA_H

@@ -27,6 +27,7 @@
 #include <QSqlRecord>
 #include <QFile>
 #include <QSettings>
+#include <QFileInfo>
 #include <QDebug>
 
 class ProfilesModelPrivate
@@ -45,10 +46,9 @@ ProfilesModel::ProfilesModel(QObject *parent) :
     p = new ProfilesModelPrivate;
     p->path = SialanApplication::homePath()  + "/profiles.sqlite";
 
-    if( !SialanApplication::settings()->value("initialize/profiles_db",false).toBool() )
+    if( !QFileInfo::exists(p->path) )
         QFile::copy(PROFILES_DB_PATH,p->path);
 
-    SialanApplication::settings()->setValue("initialize/profiles_db",true);
     QFile(p->path).setPermissions(QFile::WriteOwner|QFile::WriteGroup|QFile::ReadUser|QFile::ReadGroup);
 
     p->db = QSqlDatabase::addDatabase("QSQLITE",PROFILES_DB_CONNECTION);

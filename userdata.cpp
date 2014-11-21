@@ -30,6 +30,7 @@
 #include <QDateTime>
 #include <QSettings>
 #include <QHash>
+#include <QFileInfo>
 
 class SecretChatDBClass
 {
@@ -56,13 +57,12 @@ UserData::UserData(const QString & phoneNumber, QObject *parent) :
     p = new UserDataPrivate;
     p->path = SialanApplication::homePath() + "/" + phoneNumber + "/userdata.db";
 
-    if( !SialanApplication::settings()->value("initialize/userdata_db",false).toBool() )
+    if( !QFileInfo::exists(p->path) )
         QFile::copy(USERDATA_DB_PATH,p->path);
 
-    SialanApplication::settings()->setValue("initialize/userdata_db",true);
     QFile(p->path).setPermissions(QFileDevice::WriteOwner|QFileDevice::WriteGroup|QFileDevice::ReadUser|QFileDevice::ReadGroup);
 
-    p->db = QSqlDatabase::addDatabase("QSQLITE",USERDATA_DB_CONNECTION);
+    p->db = QSqlDatabase::addDatabase("QSQLITE",USERDATA_DB_CONNECTION+phoneNumber);
     p->db.setDatabaseName(p->path);
 
     reconnect();
@@ -89,6 +89,7 @@ void UserData::addMute(int id)
     mute_query.exec();
 
     p->mutes.insert(id,true);
+    emit muteChanged(id);
 }
 
 void UserData::removeMute(int id)
@@ -99,6 +100,7 @@ void UserData::removeMute(int id)
     query.exec();
 
     p->mutes.remove(id);
+    emit muteChanged(id);
 }
 
 QList<int> UserData::mutes() const
@@ -129,6 +131,7 @@ void UserData::addFavorite(int id)
     mute_query.exec();
 
     p->favorites.insert(id,true);
+    emit favoriteChanged(id);
 }
 
 void UserData::removeFavorite(int id)
@@ -139,6 +142,7 @@ void UserData::removeFavorite(int id)
     query.exec();
 
     p->favorites.remove(id);
+    emit favoriteChanged(id);
 }
 
 QList<int> UserData::favorites() const
@@ -169,6 +173,7 @@ void UserData::setValue(const QString &key, const QString &value)
     mute_query.exec();
 
     p->general[key] = value;
+    emit valueChanged(key);
 }
 
 QString UserData::value(const QString &key)

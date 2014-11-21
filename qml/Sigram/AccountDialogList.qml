@@ -2,6 +2,7 @@ import QtQuick 2.0
 import SialanTools 1.0
 import Sigram 1.0
 import SigramTypes 1.0
+import QtGraphicalEffects 1.0
 
 Item {
     width: 100
@@ -38,7 +39,6 @@ Item {
             id: list_item
             width: dlist.width
             height: 60*physicalPlatformScale
-            color: marea.pressed? "#88339DCC" : (selected? "#66339DCC" : "#00000000")
             clip: true
 
             property Dialog dItem: item
@@ -50,6 +50,12 @@ Item {
 
             property bool selected: currentDialog==dItem
 
+            Rectangle {
+                anchors.fill: parent
+                color: marea.pressed || selected? masterPalette.highlight : "#00000000"
+                opacity: marea.pressed? 0.3 : (selected? 0.2 : 0)
+            }
+
             Image {
                 id: profile_img
                 anchors.top: parent.top
@@ -58,7 +64,8 @@ Item {
                 anchors.margins: 4*physicalPlatformScale
                 width: height
                 sourceSize: Qt.size(width,height)
-                source: imgPath.length==0? "files/unknown.jpg" : imgPath
+                source: imgPath.length==0? (isChat?"files/group.png":"files/user.png") : imgPath
+                asynchronous: true
 
                 property string imgPath: isChat? chat.photo.photoSmall.download.location : user.photo.photoSmall.download.location
             }
@@ -122,8 +129,47 @@ Item {
 
             MouseArea {
                 id: marea
+                hoverEnabled: true
                 anchors.fill: parent
                 onClicked: currentDialog = list_item.dItem
+            }
+
+            DialogItemTools {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                height: 22*physicalPlatformScale
+                dialog: dItem
+                show: marea.containsMouse
+            }
+        }
+
+        section.property: "section"
+        section.criteria: ViewSection.FullString
+        section.labelPositioning: ViewSection.InlineLabels
+        section.delegate: Item {
+            height: 30*physicalPlatformScale
+            width: dlist.width
+
+            Image {
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                anchors.margins: 4*physicalPlatformScale
+                width: 12*physicalPlatformScale
+                height: width
+                sourceSize: Qt.size(width,height)
+                smooth: true
+                source: {
+                    if( section == 0 )
+                        return "files/contact.png"
+                    else
+                    if( section == 1 )
+                        return "files/favorite.png"
+                    else
+                    if( section == 2 )
+                        return "files/love.png"
+                    else
+                        return ""
+                }
             }
         }
     }

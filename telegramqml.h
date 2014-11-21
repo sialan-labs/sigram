@@ -21,6 +21,9 @@
 
 #include <QObject>
 
+class WallPaper;
+class WallPaperObject;
+class UserData;
 class StorageFileType;
 class FileLocationObject;
 class PhotoObject;
@@ -49,6 +52,7 @@ class TelegramQml : public QObject
     Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
 
     Q_PROPERTY(Telegram* telegram READ telegram NOTIFY telegramChanged)
+    Q_PROPERTY(UserData* userData READ userData NOTIFY userDataChanged)
     Q_PROPERTY(qint64    me       READ me       NOTIFY meChanged)
 
     Q_PROPERTY(bool authNeeded          READ authNeeded          NOTIFY authNeededChanged         )
@@ -82,6 +86,7 @@ public:
     QString publicKeyFile() const;
     void setPublicKeyFile( const QString & file );
 
+    UserData *userData() const;
     Telegram *telegram() const;
     qint64 me() const;
 
@@ -104,6 +109,9 @@ public:
     Q_INVOKABLE MessageObject *message(qint64 id) const;
     Q_INVOKABLE ChatObject *chat(qint64 id) const;
     Q_INVOKABLE UserObject *user(qint64 id) const;
+    Q_INVOKABLE qint64 messageDialogId(qint64 id) const;
+    Q_INVOKABLE DialogObject *messageDialog(qint64 id) const;
+    Q_INVOKABLE WallPaperObject *wallpaper(qint64 id) const;
 
     DialogObject *nullDialog() const;
     MessageObject *nullMessage() const;
@@ -114,6 +122,7 @@ public:
 
     QList<qint64> dialogs() const;
     QList<qint64> messages(qint64 did) const;
+    QList<qint64> wallpapers() const;
 
 public slots:
     void authLogout();
@@ -132,10 +141,12 @@ signals:
     void configPathChanged();
     void publicKeyFileChanged();
     void telegramChanged();
+    void userDataChanged();
     void onlineChanged();
     void downloadPathChanged();
     void dialogsChanged();
     void messagesChanged();
+    void wallpapersChanged();
 
     void authNeededChanged();
     void authLoggedInChanged();
@@ -170,6 +181,8 @@ private slots:
     void authCheckPhone_slt(qint64 id, bool phoneRegistered, bool phoneInvited);
     void authSignInError_slt(qint64 id, qint32 errorCode, QString errorText);
     void authSignUpError_slt(qint64 id, qint32 errorCode, QString errorText);
+
+    void accountGetWallPapers_slt(qint64 id, const QList<WallPaper> & wallPapers);
 
     void messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, qint32 pts, qint32 seq, const QList<ContactsLink> & links);
     void messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> & dialogs, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);

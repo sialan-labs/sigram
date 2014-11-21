@@ -16,48 +16,41 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SIGRAM_H
-#define SIGRAM_H
+#ifndef CHATPARTICIPANTLIST_H
+#define CHATPARTICIPANTLIST_H
 
 #include <QObject>
-#include <QSize>
-#include <QVariantMap>
-#include <QSystemTrayIcon>
 
-class SigramPrivate;
-class Sigram : public QObject
+class ChatParticipant;
+class ChatParticipantObject;
+class ChatParticipantListPrivate;
+class ChatParticipantList : public QObject
 {
     Q_OBJECT
 public:
-    Sigram(QObject *parent = 0);
-    ~Sigram();
+    ChatParticipantList(QObject *parent = 0);
+    ChatParticipantList(const QList<ChatParticipant> & another, QObject *parent = 0);
+    ~ChatParticipantList();
 
-    Q_INVOKABLE QSize imageSize( const QString & path );
-    Q_INVOKABLE qreal htmlWidth( const QString & txt );
+    void operator =( const QList<ChatParticipant> & another );
 
-    Q_INVOKABLE QString getTimeString( const QDateTime & dt );
+    ChatParticipantObject *first() const;
+    ChatParticipantObject *last() const;
+
+    int count() const;
 
 public slots:
-    void start();
-    void close();
-    void incomingAppMessage( const QString & msg );
-    void active();
+    ChatParticipantObject *at( int idx );
 
 signals:
-    void backRequest();
-
-protected:
-    bool eventFilter(QObject *o, QEvent *e);
-
-private slots:
-    void systray_action( QSystemTrayIcon::ActivationReason act );
+    void firstChanged();
+    void lastChanged();
+    void countChanged();
 
 private:
-    void init_systray();
-    void showContextMenu();
-
-private:
-    SigramPrivate *p;
+    ChatParticipantListPrivate *p;
 };
 
-#endif // SIGRAM_H
+Q_DECLARE_METATYPE(ChatParticipantList*)
+
+#endif // CHATPARTICIPANTLIST_H

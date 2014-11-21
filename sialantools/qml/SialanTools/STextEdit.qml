@@ -20,8 +20,8 @@ import QtQuick 2.0
 
 TextEdit {
     id: textedit
-    selectionColor: palette.highlight
-    selectedTextColor: palette.highlightedText
+    selectionColor: masterPalette.highlight
+    selectedTextColor: masterPalette.highlightedText
 
     onFocusChanged: {
         if( focus )

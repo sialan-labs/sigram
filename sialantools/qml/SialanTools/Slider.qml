@@ -52,7 +52,7 @@ Item {
         width: height
         radius: height/2
         border.width: 1*physicalPlatformScale
-        border.color: "#0d80ec"
+        border.color: masterPalette.highlight
         x: (slider.width-seeker.width)*slider.value/slider.maximum
     }
 

@@ -20,10 +20,8 @@ import QtQuick 2.0
 
 TextInput {
     id: textinput
-    selectionColor: palette.highlight
-    selectedTextColor: palette.highlightedText
-
-    SystemPalette { id: palette; colorGroup: SystemPalette.Active }
+    selectionColor: masterPalette.highlight
+    selectedTextColor: masterPalette.highlightedText
 
     onFocusChanged: {
         if( focus )

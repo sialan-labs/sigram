@@ -26,6 +26,9 @@ Item {
 
     property color color: "#ffffff"
     property bool checked: false
+    property alias cursorShape: marea.cursorShape
+
+    property bool labels: true
 
     Rectangle {
         id: border
@@ -59,6 +62,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.leftMargin: 2*physicalPlatformScale
         clip: true
+        visible: labels
 
         Text {
             id: on_txt
@@ -77,6 +81,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.rightMargin: 2*physicalPlatformScale
         clip: true
+        visible: labels
 
         Text {
             id: off_txt
@@ -88,6 +93,7 @@ Item {
     }
 
     MouseArea {
+        id: marea
         anchors.fill: parent
         onClicked: checkbox.checked = !checkbox.checked
     }

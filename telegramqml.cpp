@@ -18,6 +18,7 @@
 
 #include "sialantools/sialanapplication.h"
 #include "telegramqml.h"
+#include "userdata.h"
 #include "objects/types.h"
 
 #include <telegram.h>
@@ -37,6 +38,7 @@ bool checkMessageLessThan( qint64 a, qint64 b );
 class TelegramQmlPrivate
 {
 public:
+    UserData *userdata;
     Telegram *telegram;
 
     QString phoneNumber;
@@ -65,6 +67,7 @@ public:
 
     QList<qint64> dialogs_list;
     QHash<qint64, QList<qint64> > messages_list;
+    QMap<qint64, WallPaperObject*> wallpapers_map;
 
     QHash<qint64,MessageObject*> pend_messages;
     QHash<qint64, FileLocationObject*> downloadings;
@@ -77,6 +80,7 @@ public:
     ChatObject *nullChat;
     UserObject *nullUser;
     FileLocationObject *nullFile;
+    WallPaperObject *nullWallpaper;
 
     QMimeDatabase mime_db;
 };
@@ -88,6 +92,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->upd_dialogs_timer = 0;
     p->online = false;
 
+    p->userdata = 0;
     p->telegram = 0;
     p->authNeeded = false;
     p->authLoggedIn = false;
@@ -103,6 +108,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->nullChat = new ChatObject(Chat(Chat::typeChatEmpty), this);
     p->nullUser = new UserObject(User(User::typeUserEmpty), this);
     p->nullFile = new FileLocationObject(FileLocation(FileLocation::typeFileLocationUnavailable), this);
+    p->nullWallpaper = new WallPaperObject(WallPaper(WallPaper::typeWallPaperSolid), this);
 }
 
 QString TelegramQml::phoneNumber() const
@@ -119,6 +125,12 @@ void TelegramQml::setPhoneNumber(const QString &phone)
     emit phoneNumberChanged();
     emit downloadPathChanged();
     try_init();
+
+    if( p->userdata )
+        delete p->userdata;
+
+    p->userdata = new UserData(phone, this);
+    emit userDataChanged();
 }
 
 QString TelegramQml::downloadPath() const
@@ -154,6 +166,11 @@ void TelegramQml::setPublicKeyFile(const QString &file)
     p->publicKeyFile = file;
     emit publicKeyFileChanged();
     try_init();
+}
+
+UserData *TelegramQml::userData() const
+{
+    return p->userdata;
 }
 
 Telegram *TelegramQml::telegram() const
@@ -266,6 +283,37 @@ UserObject *TelegramQml::user(qint64 id) const
     return res;
 }
 
+qint64 TelegramQml::messageDialogId(qint64 id) const
+{
+    MessageObject *msg = p->messages.value(id);
+    if(!msg)
+        return 0;
+
+    qint64 dId = msg->toId()->chatId();
+    if( dId == 0 )
+        dId = msg->toId()->userId();
+
+    return dId;
+}
+
+DialogObject *TelegramQml::messageDialog(qint64 id) const
+{
+    qint64 dId = messageDialogId(id);
+    DialogObject *dlg = p->dialogs.value(dId);
+    if(!dlg)
+        dlg = p->nullDialog;
+
+    return dlg;
+}
+
+WallPaperObject *TelegramQml::wallpaper(qint64 id) const
+{
+    WallPaperObject *res = p->wallpapers_map.value(id);
+    if( !res )
+        res = p->nullWallpaper;
+    return res;
+}
+
 DialogObject *TelegramQml::nullDialog() const
 {
     return p->nullDialog;
@@ -307,6 +355,11 @@ QList<qint64> TelegramQml::dialogs() const
 QList<qint64> TelegramQml::messages( qint64 did ) const
 {
     return p->messages_list[did];
+}
+
+QList<qint64> TelegramQml::wallpapers() const
+{
+    return p->wallpapers_map.keys();
 }
 
 void TelegramQml::authLogout()
@@ -379,7 +432,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     peer.setChatId(dlg->peer()->chatId());
     peer.setUserId(dlg->peer()->userId());
 
-    Peer to_peer(dlg->peer()->classType());
+    Peer to_peer(static_cast<Peer::PeerType>(dlg->peer()->classType()));
     to_peer.setChatId(dlg->peer()->chatId());
     to_peer.setUserId(dlg->peer()->userId());
 
@@ -462,6 +515,9 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(authSignUpError(qint64,qint32,QString)), SLOT(authSignUpError_slt(qint64,qint32,QString)) );
     connect( p->telegram, SIGNAL(connected())                           , SIGNAL(connectedChanged())                       );
     connect( p->telegram, SIGNAL(disconnected())                        , SIGNAL(connectedChanged())                       );
+
+    connect( p->telegram, SIGNAL(accountGetWallPapersAnswer(qint64,QList<WallPaper>)), this
+             , SLOT(accountGetWallPapers_slt(qint64,QList<WallPaper>)) );
 
     connect( p->telegram, SIGNAL(messagesGetDialogsAnswer(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
              SLOT(messagesGetDialogs_slt(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)) );
@@ -594,6 +650,26 @@ void TelegramQml::authSignUpError_slt(qint64 id, qint32 errorCode, QString error
     emit authSignUpErrorChanged();
 }
 
+void TelegramQml::accountGetWallPapers_slt(qint64 id, const QList<WallPaper> &wallPapers)
+{
+    Q_UNUSED(id)
+
+    foreach( const WallPaper & wp, wallPapers )
+    {
+        if( p->wallpapers_map.contains(wp.id()) )
+            continue;
+
+        WallPaperObject *obj = new WallPaperObject(wp, this);
+        p->wallpapers_map[wp.id()] = obj;
+
+        PhotoSizeObject *size = obj->sizes()->first();
+        if( size )
+            getFile(size->location());
+    }
+
+    emit wallpapersChanged();
+}
+
 void TelegramQml::messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, qint32 pts, qint32 seq, const QList<ContactsLink> &links)
 {
     Q_UNUSED(pts)
@@ -608,7 +684,7 @@ void TelegramQml::messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, 
 
     qint64 old_msgId = msgObj->id();
 
-    Peer peer(msgObj->toId()->classType());
+    Peer peer(static_cast<Peer::PeerType>(msgObj->toId()->classType()));
     peer.setChatId(msgObj->toId()->chatId());
     peer.setUserId(msgObj->toId()->userId());
 
@@ -747,6 +823,8 @@ void TelegramQml::updateShortChatMessage_slt(qint32 id, qint32 fromId, qint32 ch
     }
 
     timerUpdateDialogs(3000);
+
+    emit incomingMessage( p->messages.value(msg.id()) );
 }
 
 void TelegramQml::updateShort_slt(const Update &update, qint32 date)
@@ -795,26 +873,19 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
     download->setTotal(total);
     download->setDownloaded(downloaded);
 
-    if( !download->file() )
+    if( !download->file()->isOpen() )
     {
-        QFile *file = new QFile(download_file, download);
-        if( !file->open(QFile::WriteOnly) )
-        {
-            delete file;
+        download->file()->setFileName(download_file);
+        if( !download->file()->open(QFile::WriteOnly) )
             return;
-        }
-
-        download->setFile(file);
     }
 
     download->file()->write(bytes);
 
     if( downloaded >= total )
     {
-        download->file()->close();
         download->file()->flush();
-        download->file()->deleteLater();
-        download->setFile(0);
+        download->file()->close();
 
         const QMimeType & t = p->mime_db.mimeTypeForFile(download_file);
         const QStringList & suffixes = t.suffixes();
