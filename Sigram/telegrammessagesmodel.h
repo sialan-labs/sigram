@@ -31,7 +31,7 @@ class TelegramMessagesModel : public QAbstractListModel
     Q_PROPERTY(QObject* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
     Q_PROPERTY(DialogObject* dialog READ dialog WRITE setDialog NOTIFY dialogChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(bool intializing READ intializing NOTIFY intializingChanged)
+    Q_PROPERTY(bool initializing READ initializing NOTIFY initializingChanged)
     Q_PROPERTY(bool refreshing  READ refreshing  NOTIFY refreshingChanged)
 
 public:
@@ -56,7 +56,7 @@ public:
     QHash<qint32,QByteArray> roleNames() const;
 
     int count() const;
-    bool intializing() const;
+    bool initializing() const;
     bool refreshing() const;
 
     InputPeer inputPeer() const;
@@ -71,7 +71,7 @@ signals:
     void telegramChanged();
     void dialogChanged();
     void countChanged();
-    void intializingChanged();
+    void initializingChanged();
     void refreshingChanged();
 
 private slots:

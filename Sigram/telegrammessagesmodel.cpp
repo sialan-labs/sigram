@@ -29,7 +29,7 @@ class TelegramMessagesModelPrivate
 {
 public:
     TelegramQml *telegram;
-    bool intializing;
+    bool initializing;
     bool refreshing;
 
     QList<qint64> messages;
@@ -44,7 +44,7 @@ TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
 {
     p = new TelegramMessagesModelPrivate;
     p->telegram = 0;
-    p->intializing = false;
+    p->initializing = false;
     p->refreshing = false;
     p->load_count = 0;
     p->load_limit = 0;
@@ -62,9 +62,9 @@ void TelegramMessagesModel::setTelegram(QObject *tgo)
         return;
 
     p->telegram = tg;
-    p->intializing = tg;
+    p->initializing = tg;
     emit telegramChanged();
-    emit intializingChanged();
+    emit initializingChanged();
     if( !p->telegram )
         return;
 
@@ -195,9 +195,9 @@ int TelegramMessagesModel::count() const
     return p->messages.count();
 }
 
-bool TelegramMessagesModel::intializing() const
+bool TelegramMessagesModel::initializing() const
 {
-    return p->intializing;
+    return p->initializing;
 }
 
 bool TelegramMessagesModel::refreshing() const

@@ -41,6 +41,12 @@ object Peer {
     qint64 classType rw = another.%name();
 }
 
+object Contact {
+    qint32 userId rw = another.%name();
+    bool mutual rw = another.%name();
+    qint64 classType rw = another.%name();
+}
+
 object InputPeer {
     qint32 chatId rw = another.%name();
     qint32 userId rw = another.%name();

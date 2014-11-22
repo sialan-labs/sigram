@@ -13,8 +13,8 @@ Item {
 
     DialogsModel {
         id: dialogs_model
-        onIntializingChanged: {
-            if( intializing )
+        onInitializingChanged: {
+            if( initializing )
                 indicator.start()
             else
                 indicator.stop()

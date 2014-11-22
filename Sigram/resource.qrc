@@ -46,5 +46,7 @@
         <file>qml/Sigram/files/configure.png</file>
         <file>qml/Sigram/files/add_chat.png</file>
         <file>qml/Sigram/files/framed_icon.png</file>
+        <file>qml/Sigram/files/add_user.png</file>
+        <file>qml/Sigram/AccountContactList.qml</file>
     </qresource>
 </RCC>

@@ -27,7 +27,7 @@ class TelegramDialogsModelPrivate
 {
 public:
     TelegramQml *telegram;
-    bool intializing;
+    bool initializing;
 
     QList<qint64> dialogs;
 };
@@ -37,7 +37,7 @@ TelegramDialogsModel::TelegramDialogsModel(QObject *parent) :
 {
     p = new TelegramDialogsModelPrivate;
     p->telegram = 0;
-    p->intializing = false;
+    p->initializing = false;
 }
 
 TelegramQml *TelegramDialogsModel::telegram() const
@@ -58,9 +58,9 @@ void TelegramDialogsModel::setTelegram(TelegramQml *tgo)
     }
 
     p->telegram = tg;
-    p->intializing = tg;
+    p->initializing = tg;
     emit telegramChanged();
-    emit intializingChanged();
+    emit initializingChanged();
     if( !p->telegram )
         return;
 
@@ -120,15 +120,15 @@ int TelegramDialogsModel::count() const
     return p->dialogs.count();
 }
 
-bool TelegramDialogsModel::intializing() const
+bool TelegramDialogsModel::initializing() const
 {
-    return p->intializing;
+    return p->initializing;
 }
 
 void TelegramDialogsModel::dialogsChanged()
 {
-    p->intializing = false;
-    emit intializingChanged();
+    p->initializing = false;
+    emit initializingChanged();
 
     const QList<qint64> & dialogs = fixDialogs(p->telegram->dialogs());
 

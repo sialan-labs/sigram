@@ -29,7 +29,7 @@ class TelegramDialogsModel : public QAbstractListModel
 
     Q_PROPERTY(TelegramQml* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(bool intializing READ intializing NOTIFY intializingChanged)
+    Q_PROPERTY(bool initializing READ initializing NOTIFY initializingChanged)
 
 public:
     enum DialogsRoles {
@@ -51,12 +51,12 @@ public:
     QHash<qint32,QByteArray> roleNames() const;
 
     int count() const;
-    bool intializing() const;
+    bool initializing() const;
 
 signals:
     void telegramChanged();
     void countChanged();
-    void intializingChanged();
+    void initializingChanged();
 
 private slots:
     void dialogsChanged();

@@ -10,6 +10,7 @@ Rectangle {
 
     property ProfilesModelItem accountItem
     property AccountView view
+    property alias telegramObject: telegram
 
     property bool isActive: View.active
 

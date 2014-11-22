@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import SialanTools 1.0
 import Sigram 1.0
+import SigramTypes 1.0
 
 Rectangle {
     id: acc_tab_frame
@@ -42,6 +43,19 @@ Rectangle {
         id: hash
     }
 
+    Item {
+        id: frame
+        anchors.left: left_frame.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+    }
+
+    SlideMenu {
+        id: slide_menu
+        anchors.fill: frame
+    }
+
     Rectangle {
         id: left_frame
         anchors.left: parent.left
@@ -62,7 +76,7 @@ Rectangle {
 
         Button {
             id: add_chat_btn
-            anchors.bottom: add_btn.top
+            anchors.bottom: add_user_btn.top
             anchors.left: parent.left
             width: parent.width
             height: width
@@ -71,10 +85,13 @@ Rectangle {
             cursorShape: Qt.PointingHandCursor
             icon: "files/add_chat.png"
             iconHeight: 26*physicalPlatformScale
+            tooltipText: qsTr("New group chat")
+            tooltipFont.family: SApp.globalFontFamily
+            tooltipFont.pixelSize: 9*fontsScale
         }
 
         Button {
-            id: add_btn
+            id: add_user_btn
             anchors.bottom: conf_btn.top
             anchors.left: parent.left
             width: parent.width
@@ -82,8 +99,14 @@ Rectangle {
             normalColor: "#00000000"
             highlightColor: "#88339DCC"
             cursorShape: Qt.PointingHandCursor
-            icon: "files/add_dialog.png"
-            iconHeight: 16*physicalPlatformScale
+            icon: "files/add_user.png"
+            iconHeight: 22*physicalPlatformScale
+            tooltipText: qsTr("New chat")
+            tooltipFont.family: SApp.globalFontFamily
+            tooltipFont.pixelSize: 9*fontsScale
+            onClicked: {
+                slide_menu.item = add_userchat_component.createObject(slide_menu)
+            }
         }
 
         Button {
@@ -97,15 +120,10 @@ Rectangle {
             cursorShape: Qt.PointingHandCursor
             icon: "files/configure.png"
             iconHeight: 22*physicalPlatformScale
+            tooltipText: qsTr("Configure")
+            tooltipFont.family: SApp.globalFontFamily
+            tooltipFont.pixelSize: 9*fontsScale
         }
-    }
-
-    Item {
-        id: frame
-        anchors.left: left_frame.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
     }
 
     Component {
@@ -113,6 +131,27 @@ Rectangle {
         AccountFrame {
             anchors.fill: parent
             visible: true
+        }
+    }
+
+    Component {
+        id: add_userchat_component
+
+        Rectangle {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: 237*physicalPlatformScale
+
+            AccountContactList {
+                anchors.fill: parent
+                telegram: accountView.telegramObject
+                onSelected: {
+                    slide_menu.end()
+                    accountView.view.currentDialog = telegram.fakeDialogObject(cid, false)
+                }
+
+                property variant accountView: hash.value(profiles.keys[0])
+            }
         }
     }
 }

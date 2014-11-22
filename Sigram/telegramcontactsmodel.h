@@ -16,14 +16,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TELEGRAMWALLPAPERSMODEL_H
-#define TELEGRAMWALLPAPERSMODEL_H
+#ifndef TELEGRAMCONTACTSMODEL_H
+#define TELEGRAMCONTACTSMODEL_H
 
 #include <QAbstractListModel>
 
 class TelegramQml;
-class TelegramWallpapersModelPrivate;
-class TelegramWallpapersModel : public QAbstractListModel
+class TelegramContactsModelPrivate;
+class TelegramContactsModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -36,8 +36,8 @@ public:
         ItemRole = Qt::UserRole
     };
 
-    TelegramWallpapersModel(QObject *parent = 0);
-    ~TelegramWallpapersModel();
+    TelegramContactsModel(QObject *parent = 0);
+    ~TelegramContactsModel();
 
     TelegramQml *telegram() const;
     void setTelegram(TelegramQml *tg );
@@ -52,16 +52,19 @@ public:
     int count() const;
     bool initializing() const;
 
+public slots:
+    void refresh();
+
 signals:
     void telegramChanged();
     void countChanged();
     void initializingChanged();
 
 private slots:
-    void wallpapersChanged();
+    void contactsChanged();
 
-protected:
-    TelegramWallpapersModelPrivate *p;
+private:
+    TelegramContactsModelPrivate *p;
 };
 
-#endif // TELEGRAMWALLPAPERSMODEL_H
+#endif // TELEGRAMCONTACTSMODEL_H

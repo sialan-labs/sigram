@@ -26,6 +26,7 @@ Item {
     property real frameMargins: 4*physicalPlatformScale
 
     property bool sent: message.sent
+    property bool uploading: message.upload.fileId != 0
 
     onSentChanged: {
         if( sent )
@@ -74,7 +75,7 @@ Item {
             id: column
             anchors.verticalCenter: parent.verticalCenter
             x: message.out? msg_item.width - width - textMargins - frameMargins - img.width : textMargins + frameMargins + img.width
-            height: (visibleNames?user_name.height:0) + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_row.height - 20*physicalPlatformScale
+            height: (visibleNames?user_name.height:0) + (uploading?upload_img.height:0) + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_row.height - 20*physicalPlatformScale
             clip: true
 
             Text {
@@ -86,10 +87,22 @@ Item {
                 visible: visibleNames
             }
 
+            Image {
+                id: upload_img
+                visible: uploading
+                width: height*imageSize.width/imageSize.height
+                height: 200*physicalPlatformScale
+                sourceSize: Qt.size(width,height)
+                smooth: true
+                source: uploading? "file://" + message.upload.location : ""
+
+                property size imageSize: uploading? Sigram.imageSize(message.upload.location) : Qt.size(0,0)
+            }
+
             AccountMessageMedia {
                 id: msg_media
                 media: message.media
-                visible: msg_media.hasMedia
+                visible: msg_media.hasMedia && !uploading
             }
 
             Row {
@@ -103,7 +116,7 @@ Item {
                     color: textColor0
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     text: emojis.bodyTextToEmojiText(message.message)
-                    visible: !msg_media.hasMedia
+                    visible: !msg_media.hasMedia && !uploading
 
                     property real htmlWidth: Sigram.htmlWidth(text)
                 }

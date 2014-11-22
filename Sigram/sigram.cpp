@@ -27,6 +27,7 @@
 #include "telegrammessagesmodel.h"
 #include "telegramdialogsmodel.h"
 #include "telegramwallpapersmodel.h"
+#include "telegramcontactsmodel.h"
 #include "telegramuploadsmodel.h"
 #include "telegramchatparticipantsmodel.h"
 #include "emojis.h"
@@ -83,6 +84,7 @@ Sigram::Sigram(QObject *parent) :
     qmlRegisterType<TelegramMessagesModel>("Sigram", 1, 0, "MessagesModel");
     qmlRegisterType<TelegramWallpapersModel>("Sigram", 1, 0, "WallpapersModel");
     qmlRegisterType<TelegramDialogsModel>("Sigram", 1, 0, "DialogsModel");
+    qmlRegisterType<TelegramContactsModel>("Sigram", 1, 0, "ContactsModel");
     qmlRegisterType<TelegramUploadsModel>("Sigram", 1, 0, "UploadsModel");
     qmlRegisterType<TelegramChatParticipantsModel>("Sigram", 1, 0, "ChatParticipantsModel");
     qmlRegisterType<Emojis>("Sigram", 1, 0, "Emojis");

@@ -11,8 +11,8 @@ Rectangle {
 
     WallpapersModel {
         id: wallpapers_model
-        onIntializingChanged: {
-            if( intializing )
+        onInitializingChanged: {
+            if( initializing )
                 indicator.start()
             else
                 indicator.stop()

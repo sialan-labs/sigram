@@ -28,7 +28,7 @@ class TelegramWallpapersModelPrivate
 {
 public:
     TelegramQml *telegram;
-    bool intializing;
+    bool initializing;
 
     QList<qint64> wallpapers;
 };
@@ -38,7 +38,7 @@ TelegramWallpapersModel::TelegramWallpapersModel(QObject *parent) :
 {
     p = new TelegramWallpapersModelPrivate;
     p->telegram = 0;
-    p->intializing = false;
+    p->initializing = false;
 }
 
 TelegramQml *TelegramWallpapersModel::telegram() const
@@ -53,9 +53,9 @@ void TelegramWallpapersModel::setTelegram(TelegramQml *tgo)
         return;
 
     p->telegram = tg;
-    p->intializing = tg;
+    p->initializing = tg;
     emit telegramChanged();
-    emit intializingChanged();
+    emit initializingChanged();
     if( !p->telegram )
         return;
 
@@ -107,15 +107,15 @@ int TelegramWallpapersModel::count() const
     return p->wallpapers.count();
 }
 
-bool TelegramWallpapersModel::intializing() const
+bool TelegramWallpapersModel::initializing() const
 {
-    return p->intializing;
+    return p->initializing;
 }
 
 void TelegramWallpapersModel::wallpapersChanged()
 {
-    p->intializing = false;
-    emit intializingChanged();
+    p->initializing = false;
+    emit initializingChanged();
 
     const QList<qint64> & walls = p->telegram->wallpapers();
 

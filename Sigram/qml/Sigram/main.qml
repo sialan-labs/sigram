@@ -9,6 +9,7 @@ SialanMain {
     color: "#333333"
     mainFrame: main_frame
     focus: true
+    masterPalette.colorGroup: SystemPalette.Active
 
     property variant authDialog
     property alias profiles: profile_model

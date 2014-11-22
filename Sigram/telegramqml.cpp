@@ -66,6 +66,9 @@ public:
     QHash<qint64,ChatObject*> chats;
     QHash<qint64,UserObject*> users;
     QHash<qint64,ChatFullObject*> chatfulls;
+    QHash<qint64,ContactObject*> contacts;
+
+    QHash<qint64,DialogObject*> fakeDialogs;
 
     QList<qint64> dialogs_list;
     QHash<qint64, QList<qint64> > messages_list;
@@ -88,6 +91,7 @@ public:
     WallPaperObject *nullWallpaper;
     UploadObject *nullUpload;
     ChatFullObject *nullChatFull;
+    ContactObject *nullContact;
 
     QMimeDatabase mime_db;
 
@@ -121,6 +125,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->nullWallpaper = new WallPaperObject(WallPaper(WallPaper::typeWallPaperSolid), this);
     p->nullUpload = new UploadObject(this);
     p->nullChatFull = new ChatFullObject(ChatFull(), this);
+    p->nullContact = new ContactObject(Contact(), this);
 }
 
 QString TelegramQml::phoneNumber() const
@@ -342,6 +347,33 @@ ChatFullObject *TelegramQml::chatFull(qint64 id) const
     return res;
 }
 
+ContactObject *TelegramQml::contact(qint64 id) const
+{
+    ContactObject *res = p->contacts.value(id);
+    if( !res )
+        res = p->nullContact;
+    return res;
+}
+
+DialogObject *TelegramQml::fakeDialogObject(qint64 id, bool isChat)
+{
+    if( p->fakeDialogs.contains(id) )
+        return p->fakeDialogs.value(id);
+
+    Peer peer(isChat? Peer::typePeerChat : Peer::typePeerUser);
+    if( isChat )
+        peer.setChatId(id);
+    else
+        peer.setUserId(id);
+
+    Dialog dialog;
+    dialog.setPeer(peer);
+
+    DialogObject *obj = new DialogObject(dialog);
+    p->fakeDialogs[id] = obj;
+    return obj;
+}
+
 DialogObject *TelegramQml::nullDialog() const
 {
     return p->nullDialog;
@@ -377,6 +409,11 @@ ChatFullObject *TelegramQml::nullChatFull() const
     return p->nullChatFull;
 }
 
+ContactObject *TelegramQml::nullContact() const
+{
+    return p->nullContact;
+}
+
 QString TelegramQml::fileLocation(FileLocationObject *l)
 {
     const QString & dpath = downloadPath();
@@ -410,6 +447,11 @@ QList<qint64> TelegramQml::wallpapers() const
 QList<qint64> TelegramQml::uploads() const
 {
     return p->uploads.keys();
+}
+
+QList<qint64> TelegramQml::contacts() const
+{
+    return p->contacts.keys();
 }
 
 void TelegramQml::authLogout()
@@ -642,8 +684,8 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(connected())                           , SIGNAL(connectedChanged())                       );
     connect( p->telegram, SIGNAL(disconnected())                        , SIGNAL(connectedChanged())                       );
 
-    connect( p->telegram, SIGNAL(accountGetWallPapersAnswer(qint64,QList<WallPaper>)), this
-             , SLOT(accountGetWallPapers_slt(qint64,QList<WallPaper>)) );
+    connect( p->telegram, SIGNAL(accountGetWallPapersAnswer(qint64,QList<WallPaper>)),
+             SLOT(accountGetWallPapers_slt(qint64,QList<WallPaper>)) );
 
     connect( p->telegram, SIGNAL(messagesGetDialogsAnswer(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
              SLOT(messagesGetDialogs_slt(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)) );
@@ -662,8 +704,11 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(messagesSendMediaAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)),
              SLOT(messagesSendMedia_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)) );
 
-    connect( p->telegram, SIGNAL(messagesGetFullChatAnswer(qint64,ChatFull,QList<Chat>,QList<User>)), this,
+    connect( p->telegram, SIGNAL(messagesGetFullChatAnswer(qint64,ChatFull,QList<Chat>,QList<User>)),
              SLOT(messagesGetFullChat_slt(qint64,ChatFull,QList<Chat>,QList<User>)) );
+
+    connect( p->telegram, SIGNAL(contactsGetContactsAnswer(qint64,bool,QList<Contact>,QList<User>)),
+             SLOT(contactsGetContacts_slt(qint64,bool,QList<Contact>,QList<User>)) );
 
     connect( p->telegram, SIGNAL(updates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)),
              SLOT(updates_slt(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)) );
@@ -680,9 +725,9 @@ void TelegramQml::try_init()
 
     connect( p->telegram, SIGNAL(uploadGetFileAnswer(qint64,StorageFileType,qint32,QByteArray,qint32,qint32,qint32)),
              SLOT(uploadGetFile_slt(qint64,StorageFileType,qint32,QByteArray,qint32,qint32,qint32)) );
-    connect( p->telegram, SIGNAL(uploadCancelFileAnswer(qint64,bool)), this,
+    connect( p->telegram, SIGNAL(uploadCancelFileAnswer(qint64,bool)),
              SLOT(uploadCancelFile_slt(qint64,bool)) );
-    connect( p->telegram, SIGNAL(uploadSendFileAnswer(qint64,qint32,qint32,qint32)), this,
+    connect( p->telegram, SIGNAL(uploadSendFileAnswer(qint64,qint32,qint32,qint32)),
              SLOT(uploadSendFile_slt(qint64,qint32,qint32,qint32)) );
 
     emit telegramChanged();
@@ -815,6 +860,17 @@ void TelegramQml::accountGetWallPapers_slt(qint64 id, const QList<WallPaper> &wa
     }
 
     emit wallpapersChanged();
+}
+
+void TelegramQml::contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> &contacts, const QList<User> &users)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(modified)
+
+    foreach( const User & user, users )
+        insertUser(user);
+    foreach( const Contact & contact, contacts )
+        insertContact(contact);
 }
 
 void TelegramQml::messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, qint32 pts, qint32 seq, const QList<ContactsLink> &links)
@@ -995,6 +1051,8 @@ void TelegramQml::messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QLi
         insertChat(c);
     foreach( const Message & m, messages )
         insertMessage(m);
+
+    emit messagesChanged();
 }
 
 void TelegramQml::messagesGetFullChat_slt(qint64 id, const ChatFull &chatFull, const QList<Chat> &chats, const QList<User> &users)
@@ -1441,6 +1499,20 @@ void TelegramQml::insertUpdate(const Update &update)
         timerUpdateDialogs();
         break;
     }
+}
+
+void TelegramQml::insertContact(const Contact &c)
+{
+    ContactObject *obj = p->contacts.value(c.userId());
+    if( !obj )
+    {
+        obj = new ContactObject(c, this);
+        p->contacts.insert(c.userId(), obj);
+    }
+    else
+        *obj = c;
+
+    emit contactsChanged();
 }
 
 void TelegramQml::timerEvent(QTimerEvent *e)

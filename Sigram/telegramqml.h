@@ -31,6 +31,8 @@ class ContactsLink;
 class Update;
 class Message;
 class User;
+class Contact;
+class ContactObject;
 class Chat;
 class ChatFull;
 class Dialog;
@@ -76,6 +78,7 @@ class TelegramQml : public QObject
     Q_PROPERTY(WallPaperObject* nullWallpaper READ nullWallpaper NOTIFY fakeSignal)
     Q_PROPERTY(UploadObject* nullUpload READ nullUpload NOTIFY fakeSignal)
     Q_PROPERTY(ChatFullObject* nullChatFull READ nullChatFull NOTIFY fakeSignal)
+    Q_PROPERTY(ContactObject* nullContact READ nullContact NOTIFY fakeSignal)
 
 public:
     TelegramQml(QObject *parent = 0);
@@ -120,6 +123,9 @@ public:
     Q_INVOKABLE WallPaperObject *wallpaper(qint64 id) const;
     Q_INVOKABLE MessageObject *upload(qint64 id) const;
     Q_INVOKABLE ChatFullObject *chatFull(qint64 id) const;
+    Q_INVOKABLE ContactObject *contact(qint64 id) const;
+
+    Q_INVOKABLE DialogObject *fakeDialogObject( qint64 id, bool isChat );
 
     DialogObject *nullDialog() const;
     MessageObject *nullMessage() const;
@@ -128,6 +134,7 @@ public:
     WallPaperObject *nullWallpaper() const;
     UploadObject *nullUpload() const;
     ChatFullObject *nullChatFull() const;
+    ContactObject *nullContact() const;
 
     Q_INVOKABLE QString fileLocation( FileLocationObject *location );
 
@@ -135,6 +142,7 @@ public:
     QList<qint64> messages(qint64 did) const;
     QList<qint64> wallpapers() const;
     QList<qint64> uploads() const;
+    QList<qint64> contacts() const;
 
 public slots:
     void authLogout();
@@ -164,6 +172,7 @@ signals:
     void wallpapersChanged();
     void uploadsChanged();
     void chatFullsChanged();
+    void contactsChanged();
 
     void authNeededChanged();
     void authLoggedInChanged();
@@ -201,6 +210,8 @@ private slots:
 
     void accountGetWallPapers_slt(qint64 id, const QList<WallPaper> & wallPapers);
 
+    void contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> & contacts, const QList<User> & users);
+
     void messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, qint32 pts, qint32 seq, const QList<ContactsLink> & links);
     void messagesSendMedia_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
     void messagesSendPhoto_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
@@ -231,6 +242,7 @@ private:
     void insertUser( const User & user );
     void insertChat( const Chat & chat );
     void insertUpdate( const Update & update );
+    void insertContact( const Contact & contact );
 
 protected:
     void timerEvent(QTimerEvent *e);
