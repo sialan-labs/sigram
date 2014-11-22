@@ -4,8 +4,8 @@ import Sigram 1.0
 
 SialanMain {
     id: main
-    width: 1024
-    height: 600
+    width: SApp.readSetting("General/width", 1024)
+    height: SApp.readSetting("General/height", 600)
     color: "#333333"
     mainFrame: main_frame
     focus: true
@@ -20,6 +20,9 @@ SialanMain {
     property color textColor0: "#111111"
     property color textColor1: "#333333"
     property color textColor2: "#888888"
+
+    onWidthChanged: size_save_timer.restart()
+    onHeightChanged: size_save_timer.restart()
 
     Keys.onEscapePressed: {
         SApp.back()
@@ -36,6 +39,15 @@ SialanMain {
             var res = BackHandler.back()
             if( !res && !Devices.isDesktop )
                 Sigram.close()
+        }
+    }
+
+    Timer {
+        id: size_save_timer
+        interval: 1000
+        onTriggered: {
+            SApp.setSetting("General/width", width)
+            SApp.setSetting("General/height", height)
         }
     }
 

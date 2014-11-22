@@ -41,5 +41,7 @@
         <file>qml/Sigram/files/user.png</file>
         <file>qml/Sigram/files/attach.png</file>
         <file>qml/Sigram/DialogDropFile.qml</file>
+        <file>qml/Sigram/UserPropertiesChatParticipants.qml</file>
+        <file>qml/Sigram/files/back.png</file>
     </qresource>
 </RCC>

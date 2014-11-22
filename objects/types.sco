@@ -196,6 +196,14 @@ object ChatPhoto {
     qint64 classType rw = another.%name();
 }
 
+object ChatFull {
+    ChatParticipantsObject* participants rw = new ChatParticipantsObject(another.%name(), this);
+    PhotoObject* chatPhoto rw = new PhotoObject(another.%name(), this);
+    qint32 id rw = another.%name();
+    PeerNotifySettingsObject* notifySettings rw = new PeerNotifySettingsObject(another.%name(), this);
+    qint64 classType rw = another.%name();
+}
+
 object UserProfilePhoto {
     qint64 photoId rw = another.%name();
     FileLocationObject* photoBig rw = new FileLocationObject(another.%name(), this);

@@ -32,10 +32,12 @@ class Update;
 class Message;
 class User;
 class Chat;
+class ChatFull;
 class Dialog;
 class DialogObject;
 class MessageObject;
 class InputPeerObject;
+class ChatFullObject;
 class ChatObject;
 class UserObject;
 class UploadObject;
@@ -71,6 +73,9 @@ class TelegramQml : public QObject
     Q_PROPERTY(MessageObject* nullMessage READ nullMessage NOTIFY fakeSignal)
     Q_PROPERTY(ChatObject* nullChat READ nullChat NOTIFY fakeSignal)
     Q_PROPERTY(UserObject* nullUser READ nullUser NOTIFY fakeSignal)
+    Q_PROPERTY(WallPaperObject* nullWallpaper READ nullWallpaper NOTIFY fakeSignal)
+    Q_PROPERTY(UploadObject* nullUpload READ nullUpload NOTIFY fakeSignal)
+    Q_PROPERTY(ChatFullObject* nullChatFull READ nullChatFull NOTIFY fakeSignal)
 
 public:
     TelegramQml(QObject *parent = 0);
@@ -114,11 +119,15 @@ public:
     Q_INVOKABLE DialogObject *messageDialog(qint64 id) const;
     Q_INVOKABLE WallPaperObject *wallpaper(qint64 id) const;
     Q_INVOKABLE UploadObject *upload(qint64 id) const;
+    Q_INVOKABLE ChatFullObject *chatFull(qint64 id) const;
 
     DialogObject *nullDialog() const;
     MessageObject *nullMessage() const;
     ChatObject *nullChat() const;
     UserObject *nullUser() const;
+    WallPaperObject *nullWallpaper() const;
+    UploadObject *nullUpload() const;
+    ChatFullObject *nullChatFull() const;
 
     Q_INVOKABLE QString fileLocation( FileLocationObject *location );
 
@@ -154,6 +163,7 @@ signals:
     void messagesChanged();
     void wallpapersChanged();
     void uploadsChanged();
+    void chatFullsChanged();
 
     void authNeededChanged();
     void authLoggedInChanged();
@@ -194,6 +204,8 @@ private slots:
     void messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, qint32 pts, qint32 seq, const QList<ContactsLink> & links);
     void messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> & dialogs, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
     void messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
+
+    void messagesGetFullChat_slt(qint64 id, const ChatFull & chatFull, const QList<Chat> & chats, const QList<User> & users);
 
     void error(qint64 id, qint32 errorCode, QString errorText);
 

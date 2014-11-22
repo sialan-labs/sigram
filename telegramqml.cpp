@@ -65,6 +65,7 @@ public:
     QHash<qint64,MessageObject*> messages;
     QHash<qint64,ChatObject*> chats;
     QHash<qint64,UserObject*> users;
+    QHash<qint64,ChatFullObject*> chatfulls;
 
     QList<qint64> dialogs_list;
     QHash<qint64, QList<qint64> > messages_list;
@@ -84,6 +85,7 @@ public:
     FileLocationObject *nullFile;
     WallPaperObject *nullWallpaper;
     UploadObject *nullUpload;
+    ChatFullObject *nullChatFull;
 
     QMimeDatabase mime_db;
 
@@ -116,6 +118,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->nullFile = new FileLocationObject(FileLocation(FileLocation::typeFileLocationUnavailable), this);
     p->nullWallpaper = new WallPaperObject(WallPaper(WallPaper::typeWallPaperSolid), this);
     p->nullUpload = new UploadObject(this);
+    p->nullChatFull = new ChatFullObject(ChatFull(), this);
 }
 
 QString TelegramQml::phoneNumber() const
@@ -329,6 +332,14 @@ UploadObject *TelegramQml::upload(qint64 id) const
     return res;
 }
 
+ChatFullObject *TelegramQml::chatFull(qint64 id) const
+{
+    ChatFullObject *res = p->chatfulls.value(id);
+    if( !res )
+        res = p->nullChatFull;
+    return res;
+}
+
 DialogObject *TelegramQml::nullDialog() const
 {
     return p->nullDialog;
@@ -347,6 +358,21 @@ ChatObject *TelegramQml::nullChat() const
 UserObject *TelegramQml::nullUser() const
 {
     return p->nullUser;
+}
+
+WallPaperObject *TelegramQml::nullWallpaper() const
+{
+    return p->nullWallpaper;
+}
+
+UploadObject *TelegramQml::nullUpload() const
+{
+    return p->nullUpload;
+}
+
+ChatFullObject *TelegramQml::nullChatFull() const
+{
+    return p->nullChatFull;
 }
 
 QString TelegramQml::fileLocation(FileLocationObject *l)
@@ -611,6 +637,9 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(messagesSendMessageAnswer(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)),
              SLOT(messagesSendMessage_slt(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)) );
 
+    connect( p->telegram, SIGNAL(messagesGetFullChatAnswer(qint64,ChatFull,QList<Chat>,QList<User>)), this,
+             SLOT(messagesGetFullChat_slt(qint64,ChatFull,QList<Chat>,QList<User>)) );
+
     connect( p->telegram, SIGNAL(updates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)),
              SLOT(updates_slt(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)) );
     connect( p->telegram, SIGNAL(updatesCombined(QList<Update>,QList<User>,QList<Chat>,qint32,qint32,qint32)),
@@ -826,6 +855,26 @@ void TelegramQml::messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QLi
         insertChat(c);
     foreach( const Message & m, messages )
         insertMessage(m);
+}
+
+void TelegramQml::messagesGetFullChat_slt(qint64 id, const ChatFull &chatFull, const QList<Chat> &chats, const QList<User> &users)
+{
+    Q_UNUSED(id)
+    foreach( const User & u, users )
+        insertUser(u);
+    foreach( const Chat & c, chats )
+        insertChat(c);
+
+    ChatFullObject *obj = p->chatfulls.value(chatFull.id());
+    if( !obj )
+    {
+        obj = new ChatFullObject(chatFull, this);
+        p->chatfulls.insert(chatFull.id(), obj);
+    }
+    else
+        *obj = chatFull;
+
+    emit chatFullsChanged();
 }
 
 void TelegramQml::error(qint64 id, qint32 errorCode, QString errorText)

@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#define LOAD_STEP_COUNT 50
+
 #include "telegrammessagesmodel.h"
 #include "telegramqml.h"
 #include "objects/types.h"
@@ -34,6 +36,7 @@ public:
     QPointer<DialogObject> dialog;
 
     int load_count;
+    int load_limit;
 };
 
 TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
@@ -44,6 +47,7 @@ TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
     p->intializing = false;
     p->refreshing = false;
     p->load_count = 0;
+    p->load_limit = 0;
 }
 
 QObject *TelegramMessagesModel::telegram() const
@@ -82,12 +86,14 @@ void TelegramMessagesModel::setDialog(DialogObject *dlg)
     p->dialog = dlg;
     emit dialogChanged();
 
-    if( p->dialog && !p->dialog->peer()->chatId() && !p->dialog->peer()->userId() )
-        return;
-
     beginResetModel();
     p->messages.clear();
     endResetModel();
+
+    if( !p->dialog )
+        return;
+    if( !p->dialog->peer()->chatId() && !p->dialog->peer()->userId() )
+        return;
 
     refresh();
 }
@@ -100,24 +106,31 @@ void TelegramMessagesModel::refresh()
         return;
 
     p->load_count = 0;
-    loadMore();
+    p->load_limit = LOAD_STEP_COUNT;
+    loadMore(true);
     messagesChanged();
 
     p->refreshing = true;
     emit refreshingChanged();
 }
 
-void TelegramMessagesModel::loadMore()
+void TelegramMessagesModel::loadMore(bool force)
 {
     if( !p->telegram )
         return;
     if( !p->dialog )
         return;
+    if( !force && p->refreshing )
+        return;
+    if( !force && p->messages.count() == 0 )
+        return;
 
     const InputPeer & peer = inputPeer();
 
+    p->load_limit = p->load_count + LOAD_STEP_COUNT;
+
     Telegram *tgObject = p->telegram->telegram();
-    tgObject->messagesGetHistory(peer, 0, 0, p->load_count+40 );
+    tgObject->messagesGetHistory(peer, p->load_count, 0, p->load_limit );
 
     p->refreshing = true;
     emit refreshingChanged();
@@ -210,7 +223,7 @@ void TelegramMessagesModel::messagesChanged()
         return;
 
     qint32 did = p->dialog->peer()->classType()==Peer::typePeerChat? p->dialog->peer()->chatId() : p->dialog->peer()->userId();
-    const QList<qint64> & messages = p->telegram->messages(did);
+    const QList<qint64> & messages = p->telegram->messages(did).mid(0,p->load_limit);
 
     for( int i=0 ; i<p->messages.count() ; i++ )
     {

@@ -46,7 +46,7 @@ Rectangle {
         id: mlist
         anchors.fill: parent
         verticalLayoutDirection: ListView.BottomToTop
-        onAtYBeginningChanged: if( atYBeginning && !messages_model.refreshing ) messages_model.loadMore()
+        onAtYBeginningChanged: if( atYBeginning && !messages_model.refreshing && currentDialog != telegramObject.nullDialog ) messages_model.loadMore()
         clip: true
         model: messages_model
         delegate: AccountMessageItem {

@@ -35,7 +35,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: inited? flickable.height : 0
+        height: inited? base.height : 0
         clip: true
 
         Behavior on height {
@@ -63,27 +63,10 @@ Item {
             onWheel: wheel.accepted = true
         }
 
-        Flickable {
-            id: flickable
-            height: up_dlg.height*0.6>base.height+base.frameMargins*2? base.height+base.frameMargins*2 : up_dlg.height*0.6
+        UserPropertiesBase {
+            id: base
             width: parent.width
-            contentWidth: base.width
-            contentHeight: base.height
-            flickableDirection: Flickable.VerticalFlick
-
-            UserPropertiesBase {
-                id: base
-                currentDialog: up_dlg.currentDialog
-            }
-        }
-
-        NormalWheelScroll {
-            flick: flickable
-        }
-
-        ScrollBar {
-            scrollArea: flickable; height: flickable.height; width: 6*physicalPlatformScale
-            anchors.right: flickable.right; anchors.top: flickable.top; color: textColor0
+            currentDialog: up_dlg.currentDialog
         }
     }
 

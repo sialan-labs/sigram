@@ -16,34 +16,34 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TELEGRAMMESSAGESMODEL_H
-#define TELEGRAMMESSAGESMODEL_H
+#ifndef TELEGRAMCHATPARTICIPANTSMODEL_H
+#define TELEGRAMCHATPARTICIPANTSMODEL_H
 
 #include <QAbstractListModel>
 
-class InputPeer;
+class TelegramQml;
 class DialogObject;
-class TelegramMessagesModelPrivate;
-class TelegramMessagesModel : public QAbstractListModel
+class TelegramChatParticipantsModelPrivate;
+class TelegramChatParticipantsModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(QObject* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
+    Q_PROPERTY(TelegramQml* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
     Q_PROPERTY(DialogObject* dialog READ dialog WRITE setDialog NOTIFY dialogChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(bool intializing READ intializing NOTIFY intializingChanged)
     Q_PROPERTY(bool refreshing  READ refreshing  NOTIFY refreshingChanged)
 
 public:
-    enum MessagesRoles {
+    enum DialogsRoles {
         ItemRole = Qt::UserRole
     };
 
-    TelegramMessagesModel(QObject *parent = 0);
-    ~TelegramMessagesModel();
+public:
+    TelegramChatParticipantsModel(QObject *parent = 0);
+    ~TelegramChatParticipantsModel();
 
-    QObject *telegram() const;
-    void setTelegram( QObject *tg );
+    TelegramQml *telegram() const;
+    void setTelegram(TelegramQml *tg );
 
     DialogObject *dialog() const;
     void setDialog( DialogObject *dlg );
@@ -56,29 +56,22 @@ public:
     QHash<qint32,QByteArray> roleNames() const;
 
     int count() const;
-    bool intializing() const;
     bool refreshing() const;
-
-    InputPeer inputPeer() const;
 
 public slots:
     void refresh();
-    void loadMore(bool force = false);
-    void sendMessage( const QString & msg );
-    void setReaded();
 
 signals:
     void telegramChanged();
     void dialogChanged();
     void countChanged();
-    void intializingChanged();
     void refreshingChanged();
 
 private slots:
-    void messagesChanged();
+    void chatFullsChanged();
 
 private:
-    TelegramMessagesModelPrivate *p;
+    TelegramChatParticipantsModelPrivate *p;
 };
 
-#endif // TELEGRAMMESSAGESMODEL_H
+#endif // TELEGRAMCHATPARTICIPANTSMODEL_H

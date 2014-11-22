@@ -2719,6 +2719,122 @@ private:
 
 Q_DECLARE_METATYPE(ChatPhotoObject*)
 
+class ChatFullObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(ChatParticipantsObject* participants READ participants WRITE setParticipants NOTIFY participantsChanged)
+    Q_PROPERTY(PhotoObject* chatPhoto READ chatPhoto WRITE setChatPhoto NOTIFY chatPhotoChanged)
+    Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
+    Q_PROPERTY(PeerNotifySettingsObject* notifySettings READ notifySettings WRITE setNotifySettings NOTIFY notifySettingsChanged)
+    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    ChatFullObject(const ChatFull & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _participants = new ChatParticipantsObject(another.participants(), this);
+        _chatPhoto = new PhotoObject(another.chatPhoto(), this);
+        _id = another.id();
+        _notifySettings = new PeerNotifySettingsObject(another.notifySettings(), this);
+        _classType = another.classType();
+
+    }
+    ChatFullObject(QObject *parent = 0) : QObject(parent){}
+    ~ChatFullObject(){}
+
+    ChatParticipantsObject* participants() const {
+        return _participants;
+    }
+
+    void setParticipants(ChatParticipantsObject* value) {
+        if( value == _participants )
+            return;
+        _participants = value;
+        emit participantsChanged();
+        emit changed();
+    }
+
+    PhotoObject* chatPhoto() const {
+        return _chatPhoto;
+    }
+
+    void setChatPhoto(PhotoObject* value) {
+        if( value == _chatPhoto )
+            return;
+        _chatPhoto = value;
+        emit chatPhotoChanged();
+        emit changed();
+    }
+
+    qint32 id() const {
+        return _id;
+    }
+
+    void setId(qint32 value) {
+        if( value == _id )
+            return;
+        _id = value;
+        emit idChanged();
+        emit changed();
+    }
+
+    PeerNotifySettingsObject* notifySettings() const {
+        return _notifySettings;
+    }
+
+    void setNotifySettings(PeerNotifySettingsObject* value) {
+        if( value == _notifySettings )
+            return;
+        _notifySettings = value;
+        emit notifySettingsChanged();
+        emit changed();
+    }
+
+    qint64 classType() const {
+        return _classType;
+    }
+
+    void setClassType(qint64 value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const ChatFull & another) {
+        *_participants = another.participants();
+        emit participantsChanged();
+        *_chatPhoto = another.chatPhoto();
+        emit chatPhotoChanged();
+        _id = another.id();
+        emit idChanged();
+        *_notifySettings = another.notifySettings();
+        emit notifySettingsChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void participantsChanged();
+    void chatPhotoChanged();
+    void idChanged();
+    void notifySettingsChanged();
+    void classTypeChanged();
+
+private:
+    ChatParticipantsObject* _participants;
+    PhotoObject* _chatPhoto;
+    qint32 _id;
+    PeerNotifySettingsObject* _notifySettings;
+    qint64 _classType;
+
+};
+
+Q_DECLARE_METATYPE(ChatFullObject*)
+
 class UserProfilePhotoObject : public QObject
 {
     Q_OBJECT
@@ -4120,6 +4236,9 @@ static bool initialize() {
 
     qmlRegisterType<ChatPhotoObject>("SigramTypes", 1, 0, "ChatPhoto");
     qRegisterMetaType<ChatPhotoObject*>("ChatPhotoObject*");
+
+    qmlRegisterType<ChatFullObject>("SigramTypes", 1, 0, "ChatFull");
+    qRegisterMetaType<ChatFullObject*>("ChatFullObject*");
 
     qmlRegisterType<UserProfilePhotoObject>("SigramTypes", 1, 0, "UserProfilePhoto");
     qRegisterMetaType<UserProfilePhotoObject*>("UserProfilePhotoObject*");

@@ -82,6 +82,7 @@ Rectangle {
             if( properties )
                 properties.end()
             else
+            if( currentDialog != telegramObject.nullDialog )
                 properties = user_prp_component.createObject(acc_view)
         }
 

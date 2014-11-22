@@ -28,6 +28,7 @@ class SigramPrivate;
 class Sigram : public QObject
 {
     Q_OBJECT
+
 public:
     Sigram(QObject *parent = 0);
     ~Sigram();
