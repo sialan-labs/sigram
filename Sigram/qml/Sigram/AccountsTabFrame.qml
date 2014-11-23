@@ -88,6 +88,9 @@ Rectangle {
             tooltipText: qsTr("New group chat")
             tooltipFont.family: SApp.globalFontFamily
             tooltipFont.pixelSize: 9*fontsScale
+            onClicked: {
+                slide_menu.show(add_groupchat_component)
+            }
         }
 
         Button {
@@ -105,7 +108,7 @@ Rectangle {
             tooltipFont.family: SApp.globalFontFamily
             tooltipFont.pixelSize: 9*fontsScale
             onClicked: {
-                slide_menu.item = add_userchat_component.createObject(slide_menu)
+                slide_menu.show(add_userchat_component)
             }
         }
 
@@ -151,6 +154,62 @@ Rectangle {
                 }
 
                 property variant accountView: hash.value(profiles.keys[0])
+            }
+        }
+    }
+
+    Component {
+        id: add_groupchat_component
+
+        Rectangle {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: 237*physicalPlatformScale
+
+            LineEdit {
+                id: topic_txt
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: 4*physicalPlatformScale
+                placeholder: qsTr("Group Topic")
+                pickerEnable: Devices.isTouchDevice
+            }
+
+            AccountContactList {
+                id: contact_list
+                anchors.top: topic_txt.bottom
+                anchors.bottom: done_btn.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.topMargin: 4*physicalPlatformScale
+                anchors.bottomMargin: 4*physicalPlatformScale
+                telegram: accountView.telegramObject
+
+                property variant accountView: hash.value(profiles.keys[0])
+            }
+
+            Button {
+                id: done_btn
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                normalColor: masterPalette.highlight
+                highlightColor: Qt.darker(masterPalette.highlight)
+                textColor: masterPalette.highlightedText
+                textFont.family: SApp.globalFontFamily
+                textFont.pixelSize: 9*fontsScale
+                textFont.bold: false
+                height: 40*physicalPlatformScale
+                text: qsTr("Create")
+                onClicked: {
+                    var topic = topic_txt.text.trim()
+                    if( topic.length == 0 )
+                        return
+
+                    slide_menu.end()
+                    contact_list.telegram.messagesCreateChat(contact_list.selecteds, topic)
+                }
             }
         }
     }

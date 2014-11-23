@@ -117,6 +117,20 @@ QString Sigram::getTimeString(const QDateTime &dt)
         return dt.toString("dd MMM yy");
 }
 
+int Sigram::showMenu(const QStringList &actions, QPoint point)
+{
+    if( point.isNull() )
+        point = QCursor::pos();
+
+    QMenu menu;
+    QList<QAction*> pointers;
+    for( int i=0; i<actions.count(); i++ )
+        pointers << menu.addAction(actions.value(i));
+
+    QAction *res = menu.exec(point);
+    return pointers.indexOf(res);
+}
+
 void Sigram::start()
 {
     if( p->viewer )

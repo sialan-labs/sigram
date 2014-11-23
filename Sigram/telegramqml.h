@@ -124,6 +124,7 @@ public:
     Q_INVOKABLE MessageObject *upload(qint64 id) const;
     Q_INVOKABLE ChatFullObject *chatFull(qint64 id) const;
     Q_INVOKABLE ContactObject *contact(qint64 id) const;
+    Q_INVOKABLE FileLocationObject *locationOf(qint64 accessHash);
 
     Q_INVOKABLE DialogObject *fakeDialogObject( qint64 id, bool isChat );
 
@@ -152,6 +153,11 @@ public slots:
     void authSignUp(const QString &code, const QString &firstName, const QString &lastName);
 
     void sendMessage( qint64 dialogId, const QString & msg );
+    void forwardMessage( qint64 msgId, qint64 peerId );
+    void deleteMessage( qint64 msgId );
+
+    void messagesCreateChat( const QList<qint32> & users, const QString & topic );
+
     void sendFile( qint64 dialogId, const QString & file );
     void getFile( FileLocationObject *location );
     void checkFile( FileLocationObject *location );
@@ -213,6 +219,9 @@ private slots:
     void contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> & contacts, const QList<User> & users);
 
     void messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, qint32 pts, qint32 seq, const QList<ContactsLink> & links);
+    void messagesForwardMessage_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
+    void messagesDeleteMessages_slt(qint64 id, const QList<qint32> & deletedMsgIds);
+
     void messagesSendMedia_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
     void messagesSendPhoto_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
     void messagesSendVideo_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
@@ -222,6 +231,7 @@ private slots:
     void messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
 
     void messagesGetFullChat_slt(qint64 id, const ChatFull & chatFull, const QList<Chat> & chats, const QList<User> & users);
+    void messagesCreateChat_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
 
     void error(qint64 id, qint32 errorCode, QString errorText);
 
@@ -247,6 +257,8 @@ private:
 protected:
     void timerEvent(QTimerEvent *e);
     Message newMessage(qint64 dId);
+
+    void startGarbageChecker();
 
 private:
     TelegramQmlPrivate *p;

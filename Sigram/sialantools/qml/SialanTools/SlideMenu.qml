@@ -24,30 +24,17 @@ Item {
     height: 62
     clip: true
 
-    property variant item
+    property color color: "#ffffff"
 
-    property alias color: menu.color
-
-    onItemChanged: {
-        if( item ) {
-            item.parent = menu_frame
-            menu.show = true
-        } else {
-            menu.show = false
-        }
-    }
-
-    Timer{
-        id: destroy_timer
-        repeat: false
-        interval: 400
-        onTriggered: if(item) item.destroy()
+    QtObject {
+        id: privates
+        property variant menu
     }
 
     MouseArea{
         anchors.fill: parent
         hoverEnabled: true
-        visible: item? true : false
+        visible: privates.menu? true : false
         onClicked: slide_menu.end()
         onWheel: wheel.accepted = true
     }
@@ -55,43 +42,78 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: "#000000"
-        opacity: menu.show? 0.5 : 0
+        opacity: privates.menu? 0.5 : 0
 
         Behavior on opacity {
-            NumberAnimation { easing.type: Easing.OutCubic; duration: destroy_timer.interval }
+            NumberAnimation { easing.type: Easing.OutCubic; duration: 400 }
         }
     }
 
-    Rectangle{
-        id: menu
-        width: item && show? item.width : 0
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        visible: item? true : false
-        clip: true
+    Component {
+        id: menu_component
 
-        property bool show: false
-
-        MouseArea{
-            anchors.fill: parent
-            hoverEnabled: true
-        }
-
-        Item {
-            id: menu_frame
+        Rectangle {
+            id: menu
+            width: item && show? item.width : 0
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            width: item? item.width : 0
-        }
+            clip: true
+            color: slide_menu.color
 
-        Behavior on width {
-            NumberAnimation { easing.type: Easing.OutCubic; duration: destroy_timer.interval }
+            property bool show: false
+            property variant item
+            property Component itemComponent
+
+            Behavior on width {
+                NumberAnimation { easing.type: Easing.OutCubic; duration: destroy_timer.interval }
+            }
+
+            MouseArea{
+                anchors.fill: parent
+                hoverEnabled: true
+            }
+
+            Item {
+                id: menu_frame
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                width: item? item.width : 0
+            }
+
+            Timer{
+                id: destroy_timer
+                repeat: false
+                interval: 400
+                onTriggered: {
+                    item.destroy()
+                    menu.destroy()
+                }
+            }
+
+            Component.onCompleted: {
+                menu.show = true
+                item = itemComponent.createObject(menu_frame)
+            }
+
+            function end(){
+                destroy_timer.restart()
+                menu.show = false
+            }
         }
     }
 
     function end(){
-        destroy_timer.restart()
-        menu.show = false
+        if( privates.menu ) {
+            privates.menu.end()
+            privates.menu = 0
+        }
+    }
+
+    function show( component ) {
+        if( privates.menu )
+            privates.menu.end()
+
+        privates.menu = menu_component.createObject(slide_menu, {"itemComponent":component})
     }
 }

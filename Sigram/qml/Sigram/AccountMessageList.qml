@@ -20,6 +20,8 @@ Rectangle {
 
     property bool isActive: View.active
 
+    signal forwardRequest( variant message )
+
     onIsActiveChanged: {
         if( isActive )
             messages_model.setReaded()
@@ -56,6 +58,32 @@ Rectangle {
             maximumMediaHeight: acc_msg_list.maximumMediaHeight
             maximumMediaWidth: acc_msg_list.maximumMediaWidth
             message: item
+
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                onPressed: {
+                    if( mouse.button == Qt.RightButton ) {
+                        var actions = ["Forward","Copy","Delete"]
+                        var res = Sigram.showMenu(actions)
+                        switch(res) {
+                        case 0:
+                            acc_msg_list.forwardRequest(message)
+                            break;
+
+                        case 1:
+                            Devices.clipboard = message.message
+                            break;
+
+                        case 2:
+                            telegramObject.deleteMessage(message.id)
+                            break;
+                        }
+                    } else {
+                        mouse.accepted = false
+                    }
+                }
+            }
         }
     }
 

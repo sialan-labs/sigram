@@ -38,6 +38,8 @@ public:
 
     Q_INVOKABLE QString getTimeString( const QDateTime & dt );
 
+    Q_INVOKABLE int showMenu( const QStringList & actions, QPoint point = QPoint() );
+
 public slots:
     void start();
     void close();

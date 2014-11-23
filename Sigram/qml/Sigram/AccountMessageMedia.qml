@@ -25,6 +25,8 @@ Rectangle {
     property real typeMessageMediaPhoto: 0xc8c45a2a
     property real typeMessageMediaGeo: 0x56e0d474
 
+    property FileLocation locationObj
+
     onHasMediaChanged: {
         if( !hasMedia )
             return
@@ -107,7 +109,7 @@ Rectangle {
     }
 
     property string fileLocation: {
-        var result
+        var result = ""
         switch( media.classType )
         {
         case typeMessageMediaPhoto:
@@ -115,14 +117,12 @@ Rectangle {
             break;
 
         case typeMessageMediaVideo:
-            result = ""
+        case typeMessageMediaDocument:
+        case typeMessageMediaAudio:
+            result = locationObj && locationObj.download? locationObj.download.location : ""
             break;
 
         case typeMessageMediaUnsupported:
-        case typeMessageMediaDocument:
-            result = "files/document.png"
-            break;
-
         default:
             result = ""
             break;
@@ -223,11 +223,22 @@ Rectangle {
                     telegramObject.getFile(media.photo.sizes.last.location)
                     break;
 
-                case typeMessageMediaVideo:
-                    break;
+//                case typeMessageMediaVideo:
+//                    locationObj = telegramObject.locationOf(media.video.accessHash)
+//                    telegramObject.getFile(locationObj)
+//                    break;
+
+//                case typeMessageMediaDocument:
+//                    locationObj = telegramObject.locationOf(media.document.accessHash)
+//                    telegramObject.getFile(locationObj)
+//                    break;
+
+//                case typeMessageMediaAudio:
+//                    locationObj = telegramObject.locationOf(media.audio.accessHash)
+//                    telegramObject.getFile(locationObj)
+//                    break;
 
                 case typeMessageMediaUnsupported:
-                case typeMessageMediaDocument:
                     break;
 
                 default:

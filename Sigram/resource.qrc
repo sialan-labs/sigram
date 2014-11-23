@@ -48,5 +48,6 @@
         <file>qml/Sigram/files/framed_icon.png</file>
         <file>qml/Sigram/files/add_user.png</file>
         <file>qml/Sigram/AccountContactList.qml</file>
+        <file>qml/Sigram/ForwardPage.qml</file>
     </qresource>
 </RCC>

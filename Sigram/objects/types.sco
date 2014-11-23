@@ -31,6 +31,7 @@ object FileLocation {
     qint32 localId rw = another.%name();
     qint64 secret rw = another.%name();
     qint32 dcId rw = another.%name();
+    qint64 accessHash rw = 0;
     qint64 volumeId rw = another.%name();
     qint64 classType rw = another.%name();
 }

@@ -246,6 +246,7 @@ class FileLocationObject : public QObject
     Q_PROPERTY(qint32 localId READ localId WRITE setLocalId NOTIFY localIdChanged)
     Q_PROPERTY(qint64 secret READ secret WRITE setSecret NOTIFY secretChanged)
     Q_PROPERTY(qint32 dcId READ dcId WRITE setDcId NOTIFY dcIdChanged)
+    Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
     Q_PROPERTY(qint64 volumeId READ volumeId WRITE setVolumeId NOTIFY volumeIdChanged)
     Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
@@ -256,6 +257,7 @@ public:
         _localId = another.localId();
         _secret = another.secret();
         _dcId = another.dcId();
+        _accessHash = 0;
         _volumeId = another.volumeId();
         _classType = another.classType();
 
@@ -311,6 +313,18 @@ public:
         emit changed();
     }
 
+    qint64 accessHash() const {
+        return _accessHash;
+    }
+
+    void setAccessHash(qint64 value) {
+        if( value == _accessHash )
+            return;
+        _accessHash = value;
+        emit accessHashChanged();
+        emit changed();
+    }
+
     qint64 volumeId() const {
         return _volumeId;
     }
@@ -343,6 +357,8 @@ public:
         emit secretChanged();
         _dcId = another.dcId();
         emit dcIdChanged();
+        _accessHash = 0;
+        emit accessHashChanged();
         _volumeId = another.volumeId();
         emit volumeIdChanged();
         _classType = another.classType();
@@ -356,6 +372,7 @@ signals:
     void localIdChanged();
     void secretChanged();
     void dcIdChanged();
+    void accessHashChanged();
     void volumeIdChanged();
     void classTypeChanged();
 
@@ -364,6 +381,7 @@ private:
     qint32 _localId;
     qint64 _secret;
     qint32 _dcId;
+    qint64 _accessHash;
     qint64 _volumeId;
     qint64 _classType;
 
@@ -3844,8 +3862,6 @@ public:
         emit idChanged();
         _sent = true;
         emit sentChanged();
-        _upload->setFileId(0);
-        emit uploadChanged();
         *_toId = another.toId();
         emit toIdChanged();
         _unread = another.unread();

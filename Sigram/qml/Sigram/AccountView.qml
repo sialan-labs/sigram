@@ -32,6 +32,7 @@ Rectangle {
         bottomMargin: send_msg.height
         telegramObject: dialogs.telegramObject
         currentDialog: dialogs.currentDialog
+        onForwardRequest: forward_component.createObject(acc_view, {"forwardMessage":message})
     }
 
     Item {
@@ -159,6 +160,35 @@ Rectangle {
             color: "#66ffffff"
 
             Component.onCompleted: inited = true
+        }
+    }
+
+    Component {
+        id: forward_component
+        Item {
+            id: forward_item
+            anchors.fill: messages
+            clip: true
+
+            property alias forwardMessage: forward_page.forwardMessage
+            property alias forwardDialog: forward_page.forwardDialog
+
+            FastBlur {
+                anchors.fill: parent
+                source: messages
+                radius: 64
+            }
+
+            ForwardPage {
+                id: forward_page
+                anchors.fill: parent
+                onCloseRequest: forward_item.destroy()
+            }
+
+            Connections {
+                target: acc_view
+                onCurrentDialogChanged: forwardDialog = acc_view.currentDialog
+            }
         }
     }
 }

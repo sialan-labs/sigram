@@ -32,7 +32,7 @@ Rectangle {
         selectByMouse: true
         selectionColor: masterPalette.highlight
         selectedTextColor: masterPalette.highlightedText
-        pickerEnable: false
+        pickerEnable: Devices.isTouchDevice
         color: textColor0
         wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
         clip: true
