@@ -266,7 +266,7 @@
     </message>
     <message>
         <source>Last seen</source>
-        <translation>Última visita:</translation>
+        <translation>Vistu:</translation>
     </message>
 </context>
 <context>
