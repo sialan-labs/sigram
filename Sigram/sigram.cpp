@@ -39,18 +39,22 @@
 #include <QQmlEngine>
 #include <QtQml>
 #include <QDebug>
+#include <QImageWriter>
 #include <QTextDocument>
 #include <QImageReader>
 #include <QSystemTrayIcon>
 #include <QGuiApplication>
 #include <QMenu>
 #include <QAction>
+#include <QPainter>
+#include <QPainterPath>
 
 class SigramPrivate
 {
 public:
     QPointer<SialanQuickView> viewer;
     bool close_blocker;
+    int sysTrayCounter;
 
     QTextDocument *doc;
 
@@ -68,6 +72,7 @@ Sigram::Sigram(QObject *parent) :
     p->desktop = new SialanDesktopTools(this);
     p->sysTray = 0;
     p->unityTray = 0;
+    p->sysTrayCounter = 0;
 
 #ifdef Q_OS_ANDROID
     p->close_blocker = true;
@@ -173,6 +178,35 @@ void Sigram::active()
 {
     p->viewer->show();
     p->viewer->requestActivate();
+}
+
+void Sigram::setSysTrayCounter(int count)
+{
+    if( count == p->sysTrayCounter )
+        return;
+
+    const QImage & img = generateIcon( QImage(":/qml/Sigram/files/systray.png"), count );
+    if( p->sysTray )
+    {
+        p->sysTray->setIcon( QPixmap::fromImage(img) );
+    }
+    else
+    if( p->unityTray )
+    {
+        QString path = UNITY_ICON_PATH(count);
+        QFile::remove(path);
+        QImageWriter writer(path);
+        writer.write(img);
+        p->unityTray->setIcon(path);
+    }
+
+    p->sysTrayCounter = count;
+    emit sysTrayCounterChanged();
+}
+
+int Sigram::sysTrayCounter() const
+{
+    return p->sysTrayCounter;
 }
 
 bool Sigram::eventFilter(QObject *o, QEvent *e)
@@ -298,6 +332,32 @@ void Sigram::showContextMenu()
         p->viewer->close();
         QGuiApplication::quit();
     }
+}
+
+QImage Sigram::generateIcon(const QImage &img, int count)
+{
+    QImage res = img;
+    if( count == 0 )
+        return img;
+
+    QRect rct;
+    rct.setX( img.width()/5 );
+    rct.setWidth( 4*img.width()/5 );
+    rct.setY( img.height()-rct.width() );
+    rct.setHeight( rct.width() );
+
+    QPainterPath path;
+    path.addEllipse(rct);
+
+    QPainter painter(&res);
+    painter.setRenderHint( QPainter::Antialiasing , true );
+    painter.fillPath( path, QColor("#ff0000") );
+    painter.setPen("#333333");
+    painter.drawPath( path );
+    painter.setPen("#ffffff");
+    painter.drawText( rct, Qt::AlignCenter | Qt::AlignHCenter, QString::number(count) );
+
+    return res;
 }
 
 Sigram::~Sigram()

@@ -29,6 +29,8 @@ class Sigram : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(int sysTrayCounter READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
+
 public:
     Sigram(QObject *parent = 0);
     ~Sigram();
@@ -40,6 +42,9 @@ public:
 
     Q_INVOKABLE int showMenu( const QStringList & actions, QPoint point = QPoint() );
 
+    void setSysTrayCounter( int count );
+    int sysTrayCounter() const;
+
 public slots:
     void start();
     void close();
@@ -49,6 +54,7 @@ public slots:
 
 signals:
     void backRequest();
+    void sysTrayCounterChanged();
 
 protected:
     bool eventFilter(QObject *o, QEvent *e);
@@ -59,6 +65,7 @@ private slots:
 private:
     void init_systray();
     void showContextMenu();
+    QImage generateIcon( const QImage & img, int count );
 
 private:
     SigramPrivate *p;

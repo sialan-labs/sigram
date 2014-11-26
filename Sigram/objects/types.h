@@ -243,6 +243,7 @@ class FileLocationObject : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(DownloadObject* download READ download WRITE setDownload NOTIFY downloadChanged)
+    Q_PROPERTY(qint64 id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(qint32 localId READ localId WRITE setLocalId NOTIFY localIdChanged)
     Q_PROPERTY(qint64 secret READ secret WRITE setSecret NOTIFY secretChanged)
     Q_PROPERTY(qint32 dcId READ dcId WRITE setDcId NOTIFY dcIdChanged)
@@ -254,6 +255,7 @@ public:
     FileLocationObject(const FileLocation & another, QObject *parent = 0) : QObject(parent){
         (void)another;
         _download = new DownloadObject(this);
+        _id = 0;
         _localId = another.localId();
         _secret = another.secret();
         _dcId = another.dcId();
@@ -274,6 +276,18 @@ public:
             return;
         _download = value;
         emit downloadChanged();
+        emit changed();
+    }
+
+    qint64 id() const {
+        return _id;
+    }
+
+    void setId(qint64 value) {
+        if( value == _id )
+            return;
+        _id = value;
+        emit idChanged();
         emit changed();
     }
 
@@ -351,6 +365,8 @@ public:
 
 
     void operator= ( const FileLocation & another) {
+        _id = 0;
+        emit idChanged();
         _localId = another.localId();
         emit localIdChanged();
         _secret = another.secret();
@@ -369,6 +385,7 @@ public:
 signals:
     void changed();
     void downloadChanged();
+    void idChanged();
     void localIdChanged();
     void secretChanged();
     void dcIdChanged();
@@ -378,6 +395,7 @@ signals:
 
 private:
     DownloadObject* _download;
+    qint64 _id;
     qint32 _localId;
     qint64 _secret;
     qint32 _dcId;
@@ -3862,6 +3880,8 @@ public:
         emit idChanged();
         _sent = true;
         emit sentChanged();
+        _upload->setFileId(0);
+        emit uploadChanged();
         *_toId = another.toId();
         emit toIdChanged();
         _unread = another.unread();

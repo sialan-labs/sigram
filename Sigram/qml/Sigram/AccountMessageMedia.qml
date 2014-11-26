@@ -25,6 +25,12 @@ Rectangle {
     property real typeMessageMediaPhoto: 0xc8c45a2a
     property real typeMessageMediaGeo: 0x56e0d474
 
+    property real typeInputVideoFileLocation: 0x3d0364ec
+    property real typeInputEncryptedFileLocation: 0xf5235d55
+    property real typeInputFileLocation: 0x14637196
+    property real typeInputAudioFileLocation: 0x74dc404d
+    property real typeInputDocumentFileLocation: 0x4e45abe9
+
     property FileLocation locationObj
 
     onHasMediaChanged: {
@@ -223,20 +229,20 @@ Rectangle {
                     telegramObject.getFile(media.photo.sizes.last.location)
                     break;
 
-//                case typeMessageMediaVideo:
-//                    locationObj = telegramObject.locationOf(media.video.accessHash)
-//                    telegramObject.getFile(locationObj)
-//                    break;
+                case typeMessageMediaVideo:
+                    var locationObj = telegramObject.locationOf(media.video.id, media.video.dcId, media.video.accessHash)
+                    telegramObject.getFile(locationObj, typeInputVideoFileLocation)
+                    break;
 
-//                case typeMessageMediaDocument:
-//                    locationObj = telegramObject.locationOf(media.document.accessHash)
-//                    telegramObject.getFile(locationObj)
-//                    break;
+                case typeMessageMediaDocument:
+                    var locationObj = telegramObject.locationOf(media.document.id, media.document.dcId, media.document.accessHash)
+                    telegramObject.getFile(locationObj, typeInputDocumentFileLocation)
+                    break;
 
-//                case typeMessageMediaAudio:
-//                    locationObj = telegramObject.locationOf(media.audio.accessHash)
-//                    telegramObject.getFile(locationObj)
-//                    break;
+                case typeMessageMediaAudio:
+                    var locationObj = telegramObject.locationOf(media.audio.id, media.audio.dcId, media.audio.accessHash)
+                    telegramObject.getFile(locationObj, typeInputAudioFileLocation)
+                    break;
 
                 case typeMessageMediaUnsupported:
                     break;

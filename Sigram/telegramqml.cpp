@@ -47,6 +47,7 @@ public:
     QString publicKeyFile;
 
     bool online;
+    int unreadCount;
 
     bool authNeeded;
     bool authLoggedIn;
@@ -106,6 +107,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p = new TelegramQmlPrivate;
     p->upd_dialogs_timer = 0;
     p->garbage_checker_timer = 0;
+    p->unreadCount = 0;
     p->online = false;
     p->msg_send_id_counter = INT_MAX - 100000;
 
@@ -223,6 +225,11 @@ void TelegramQml::setOnline(bool stt)
     emit onlineChanged();
 }
 
+int TelegramQml::unreadCount()
+{
+    return p->unreadCount;
+}
+
 bool TelegramQml::authNeeded() const
 {
     return p->authNeeded;
@@ -311,7 +318,7 @@ qint64 TelegramQml::messageDialogId(qint64 id) const
 
     qint64 dId = msg->toId()->chatId();
     if( dId == 0 )
-        dId = msg->toId()->userId();
+        dId = msg->out()? msg->toId()->userId() : msg->fromId();
 
     return dId;
 }
@@ -358,17 +365,19 @@ ContactObject *TelegramQml::contact(qint64 id) const
     return res;
 }
 
-FileLocationObject *TelegramQml::locationOf(qint64 accessHash)
+FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 accessHash)
 {
     if( p->accessHashes.contains(accessHash) )
         return p->accessHashes.value(accessHash);
 
-    FileLocationObject *location = new FileLocationObject(this);
-    location->setClassType(FileLocation::typeFileLocation);
-    location->setAccessHash(accessHash);
+    FileLocation location(FileLocation::typeFileLocation);
+    FileLocationObject *obj = new FileLocationObject(location,this);
+    obj->setId(id);
+    obj->setDcId(dcId);
+    obj->setAccessHash(accessHash);
 
-    p->accessHashes[accessHash] = location;
-    return location;
+    p->accessHashes[accessHash] = obj;
+    return obj;
 }
 
 DialogObject *TelegramQml::fakeDialogObject(qint64 id, bool isChat)
@@ -629,11 +638,9 @@ void TelegramQml::sendFile(qint64 dId, const QString &fpath)
     emit uploadsChanged();
 }
 
-void TelegramQml::getFile(FileLocationObject *l)
+void TelegramQml::getFile(FileLocationObject *l, qint64 type)
 {
     if( !p->telegram )
-        return;
-    if( l->secret() == 0 )
         return;
 
     const QString & download_file = fileLocation(l);
@@ -643,7 +650,9 @@ void TelegramQml::getFile(FileLocationObject *l)
         return;
     }
 
-    InputFileLocation input(InputFileLocation::typeInputFileLocation);
+    InputFileLocation input(static_cast<InputFileLocation::InputFileLocationType>(type));
+    input.setAccessHash(l->accessHash());
+    input.setId(l->id());
     input.setLocalId(l->localId());
     input.setSecret(l->secret());
     input.setVolumeId(l->volumeId());
@@ -1410,6 +1419,8 @@ void TelegramQml::insertDialog(const Dialog &d)
     {
         obj = new DialogObject(d, this);
         p->dialogs.insert(did, obj);
+
+        connect( obj, SIGNAL(unreadCountChanged()), SIGNAL(unreadCountChanged()) );
     }
     else
         *obj = d;
@@ -1418,6 +1429,16 @@ void TelegramQml::insertDialog(const Dialog &d)
 
     telegramp_qml_tmp = p;
     qStableSort( p->dialogs_list.begin(), p->dialogs_list.end(), checkDialogLessThan );
+
+    int unreadCount = 0;
+    foreach( DialogObject *obj, p->dialogs )
+        unreadCount += obj->unreadCount();
+
+    if( p->unreadCount != unreadCount )
+    {
+        p->unreadCount = unreadCount;
+        emit unreadCountChanged();
+    }
 
     emit dialogsChanged();
 }

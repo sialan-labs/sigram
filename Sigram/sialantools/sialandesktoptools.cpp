@@ -22,8 +22,11 @@
 #include <QStringList>
 #include <QPalette>
 #include <QEventLoop>
-#include <QFileDialog>
 #include <QDebug>
+
+#ifdef DESKTOP_DEVICE
+#include <QFileDialog>
+#endif
 
 class SialanDesktopToolsPrivate
 {
@@ -198,6 +201,7 @@ bool SialanDesktopTools::titleBarIsDark() const
         return true;
 }
 
+#ifdef DESKTOP_DEVICE
 QString SialanDesktopTools::getOpenFileName(QWindow *window, const QString & title, const QString &filter, const QString &startPath)
 {
     const int dsession = desktopSession();
@@ -326,6 +330,7 @@ QString SialanDesktopTools::getExistingDirectory(QWindow *window, const QString 
 
     return QString();
 }
+#endif
 
 SialanDesktopTools::~SialanDesktopTools()
 {

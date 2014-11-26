@@ -134,6 +134,7 @@ Rectangle {
         AccountFrame {
             anchors.fill: parent
             visible: true
+            onUnreadCountChanged: refreshUnreadCounts()
         }
     }
 
@@ -212,5 +213,16 @@ Rectangle {
                 }
             }
         }
+    }
+
+    function refreshUnreadCounts() {
+        var keys = hash.keys()
+        var counter = 0
+        for( var i=0; i<keys.length; i++ ) {
+            var acc = hash.value(keys[i])
+            counter += acc.unreadCount
+        }
+
+        Sigram.sysTrayCounter = counter
     }
 }

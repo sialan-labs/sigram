@@ -20,6 +20,7 @@
 #define TELEGRAMQML_H
 
 #include <QObject>
+#include "types/inputfilelocation.h"
 
 class WallPaper;
 class WallPaperObject;
@@ -55,6 +56,7 @@ class TelegramQml : public QObject
     Q_PROPERTY(QString downloadPath  READ downloadPath  NOTIFY downloadPathChanged )
 
     Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
+    Q_PROPERTY(int unreadCount READ unreadCount NOTIFY unreadCountChanged)
 
     Q_PROPERTY(Telegram* telegram READ telegram NOTIFY telegramChanged)
     Q_PROPERTY(UserData* userData READ userData NOTIFY userDataChanged)
@@ -102,6 +104,7 @@ public:
     bool online() const;
     void setOnline( bool stt );
 
+    int unreadCount();
 
     bool authNeeded() const;
     bool authLoggedIn() const;
@@ -124,7 +127,7 @@ public:
     Q_INVOKABLE MessageObject *upload(qint64 id) const;
     Q_INVOKABLE ChatFullObject *chatFull(qint64 id) const;
     Q_INVOKABLE ContactObject *contact(qint64 id) const;
-    Q_INVOKABLE FileLocationObject *locationOf(qint64 accessHash);
+    Q_INVOKABLE FileLocationObject *locationOf(qint64 id, qint64 dcId, qint64 accessHash);
 
     Q_INVOKABLE DialogObject *fakeDialogObject( qint64 id, bool isChat );
 
@@ -159,7 +162,7 @@ public slots:
     void messagesCreateChat( const QList<qint32> & users, const QString & topic );
 
     void sendFile( qint64 dialogId, const QString & file );
-    void getFile( FileLocationObject *location );
+    void getFile( FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation );
     void checkFile( FileLocationObject *location );
     void cancelSendGet( qint64 fileId );
 
@@ -179,6 +182,8 @@ signals:
     void uploadsChanged();
     void chatFullsChanged();
     void contactsChanged();
+
+    void unreadCountChanged();
 
     void authNeededChanged();
     void authLoggedInChanged();
