@@ -37,6 +37,8 @@ class ContactObject;
 class Chat;
 class ChatFull;
 class Dialog;
+class Photo;
+class UserProfilePhoto;
 class DialogObject;
 class MessageObject;
 class InputPeerObject;
@@ -104,6 +106,9 @@ public:
     bool online() const;
     void setOnline( bool stt );
 
+    void setInvisible( bool stt );
+    bool invisible() const;
+
     int unreadCount();
 
     bool authNeeded() const;
@@ -166,6 +171,8 @@ public slots:
     void checkFile( FileLocationObject *location );
     void cancelSendGet( qint64 fileId );
 
+    void setProfilePhoto( const QString & fileName );
+
     void timerUpdateDialogs( bool duration = 1000 );
 
 signals:
@@ -184,6 +191,7 @@ signals:
     void contactsChanged();
 
     void unreadCountChanged();
+    void invisibleChanged();
 
     void authNeededChanged();
     void authLoggedInChanged();
@@ -220,6 +228,8 @@ private slots:
     void authSignUpError_slt(qint64 id, qint32 errorCode, QString errorText);
 
     void accountGetWallPapers_slt(qint64 id, const QList<WallPaper> & wallPapers);
+    void photosUploadProfilePhoto_slt(qint64 id, const Photo & photo, const QList<User> & users);
+    void photosUpdateProfilePhoto_slt(qint64 id, const UserProfilePhoto & userProfilePhoto);
 
     void contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> & contacts, const QList<User> & users);
 
@@ -264,6 +274,9 @@ protected:
     Message newMessage(qint64 dId);
 
     void startGarbageChecker();
+
+private slots:
+    void refreshUnreadCount();
 
 private:
     TelegramQmlPrivate *p;

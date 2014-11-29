@@ -31,6 +31,10 @@
 #include <QDateTime>
 #include <QMimeDatabase>
 #include <QMimeType>
+#include <QImage>
+#include <QImageReader>
+#include <QImageWriter>
+#include <QBuffer>
 
 TelegramQmlPrivate *telegramp_qml_tmp = 0;
 bool checkDialogLessThan( qint64 a, qint64 b );
@@ -47,6 +51,7 @@ public:
     QString publicKeyFile;
 
     bool online;
+    bool invisible;
     int unreadCount;
 
     bool authNeeded;
@@ -61,6 +66,7 @@ public:
 
     qint64 logout_req_id;
     qint64 checkphone_req_id;
+    qint64 profile_upload_id;
 
     QHash<qint64,DialogObject*> dialogs;
     QHash<qint64,MessageObject*> messages;
@@ -109,6 +115,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->garbage_checker_timer = 0;
     p->unreadCount = 0;
     p->online = false;
+    p->invisible = false;
     p->msg_send_id_counter = INT_MAX - 100000;
 
     p->userdata = 0;
@@ -121,6 +128,7 @@ TelegramQml::TelegramQml(QObject *parent) :
 
     p->logout_req_id = 0;
     p->checkphone_req_id = 0;
+    p->profile_upload_id = 0;
 
     p->nullDialog = new DialogObject( Dialog(), this );
     p->nullMessage = new MessageObject(Message(Message::typeMessageEmpty), this);
@@ -220,9 +228,25 @@ void TelegramQml::setOnline(bool stt)
 
     p->online = stt;
     if( p->telegram && p->authLoggedIn )
-        p->telegram->accountUpdateStatus(!p->online);
+        p->telegram->accountUpdateStatus(!p->online || p->invisible);
 
     emit onlineChanged();
+}
+
+void TelegramQml::setInvisible(bool stt)
+{
+    if( p->invisible == stt )
+        return;
+
+    p->invisible = stt;
+    emit invisibleChanged();
+
+    p->telegram->accountUpdateStatus(true);
+}
+
+bool TelegramQml::invisible() const
+{
+    return p->invisible;
 }
 
 int TelegramQml::unreadCount()
@@ -709,6 +733,44 @@ void TelegramQml::cancelSendGet(qint64 fileId)
     p->telegram->uploadCancelFile(fileId);
 }
 
+void TelegramQml::setProfilePhoto(const QString &fileName)
+{
+    if( !p->telegram )
+        return;
+    if( p->profile_upload_id )
+        return;
+
+    QFileInfo file(fileName);
+    QImageReader reader(fileName);
+    QSize size = reader.size();
+    qreal ratio = (qreal)size.width()/size.height();
+    if( size.width()>1024 && size.width()>size.height() )
+    {
+        size.setWidth(1024);
+        size.setHeight(1024/ratio);
+    }
+    else
+    if( size.height()>1024 && size.height()>size.width() )
+    {
+        size.setHeight(1024);
+        size.setWidth(1024*ratio);
+    }
+
+    reader.setScaledSize(size);
+    const QImage & img = reader.read();
+
+    QByteArray data;
+    QBuffer buffer(&data);
+    buffer.open(QBuffer::WriteOnly);
+
+    QImageWriter writer(&buffer, "png");
+    writer.write(img);
+
+    buffer.close();
+
+    p->profile_upload_id = p->telegram->photosUploadProfilePhoto(data, file.fileName() );
+}
+
 void TelegramQml::timerUpdateDialogs(bool duration)
 {
     if( p->upd_dialogs_timer )
@@ -743,6 +805,11 @@ void TelegramQml::try_init()
 
     connect( p->telegram, SIGNAL(accountGetWallPapersAnswer(qint64,QList<WallPaper>)),
              SLOT(accountGetWallPapers_slt(qint64,QList<WallPaper>)) );
+
+    connect( p->telegram, SIGNAL(photosUploadProfilePhotoAnswer(qint64,Photo,QList<User>)),
+             SLOT(photosUploadProfilePhoto_slt(qint64,Photo,QList<User>)) );
+    connect( p->telegram, SIGNAL(photosUpdateProfilePhotoAnswer(qint64,UserProfilePhoto)),
+             SLOT(photosUpdateProfilePhoto_slt(qint64,UserProfilePhoto)) );
 
     connect( p->telegram, SIGNAL(messagesGetDialogsAnswer(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
              SLOT(messagesGetDialogs_slt(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)) );
@@ -812,7 +879,7 @@ void TelegramQml::authNeeded_slt()
     if( p->telegram && !p->checkphone_req_id )
         p->checkphone_req_id = p->telegram->authCheckPhone();
 
-    p->telegram->accountUpdateStatus(!p->online);
+    p->telegram->accountUpdateStatus(!p->online || p->invisible);
 }
 
 void TelegramQml::authLoggedIn_slt()
@@ -826,7 +893,7 @@ void TelegramQml::authLoggedIn_slt()
     emit authPhoneChecked();
     emit meChanged();
 
-    p->telegram->accountUpdateStatus(!p->online);
+    p->telegram->accountUpdateStatus(!p->online || p->invisible);
 }
 
 void TelegramQml::authLogOut_slt(qint64 id, bool ok)
@@ -841,7 +908,7 @@ void TelegramQml::authLogOut_slt(qint64 id, bool ok)
     emit meChanged();
 
     if( p->authLoggedIn )
-        p->telegram->accountUpdateStatus(!p->online);
+        p->telegram->accountUpdateStatus(!p->online || p->invisible);
 }
 
 void TelegramQml::authSendCode_slt(qint64 id, bool phoneRegistered, qint32 sendCallTimeout)
@@ -925,6 +992,27 @@ void TelegramQml::accountGetWallPapers_slt(qint64 id, const QList<WallPaper> &wa
     }
 
     emit wallpapersChanged();
+}
+
+void TelegramQml::photosUploadProfilePhoto_slt(qint64 id, const Photo &photo, const QList<User> &users)
+{
+    if( p->profile_upload_id != id )
+        return;
+
+    foreach( const User & user, users )
+        insertUser(user);
+
+    p->profile_upload_id = 0;
+    p->telegram->photosUpdateProfilePhoto(photo.id(), photo.accessHash());
+}
+
+void TelegramQml::photosUpdateProfilePhoto_slt(qint64 id, const UserProfilePhoto &userProfilePhoto)
+{
+    Q_UNUSED(id)
+
+    UserObject *user = p->users.value(me());
+    if(user)
+        *(user->photo()) = userProfilePhoto;
 }
 
 void TelegramQml::contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> &contacts, const QList<User> &users)
@@ -1420,7 +1508,7 @@ void TelegramQml::insertDialog(const Dialog &d)
         obj = new DialogObject(d, this);
         p->dialogs.insert(did, obj);
 
-        connect( obj, SIGNAL(unreadCountChanged()), SIGNAL(unreadCountChanged()) );
+        connect( obj, SIGNAL(unreadCountChanged()), SLOT(refreshUnreadCount()) );
     }
     else
         *obj = d;
@@ -1430,17 +1518,9 @@ void TelegramQml::insertDialog(const Dialog &d)
     telegramp_qml_tmp = p;
     qStableSort( p->dialogs_list.begin(), p->dialogs_list.end(), checkDialogLessThan );
 
-    int unreadCount = 0;
-    foreach( DialogObject *obj, p->dialogs )
-        unreadCount += obj->unreadCount();
-
-    if( p->unreadCount != unreadCount )
-    {
-        p->unreadCount = unreadCount;
-        emit unreadCountChanged();
-    }
-
     emit dialogsChanged();
+
+    refreshUnreadCount();
 }
 
 void TelegramQml::insertMessage(const Message &m)
@@ -1712,6 +1792,19 @@ void TelegramQml::startGarbageChecker()
         killTimer(p->garbage_checker_timer);
 
     p->garbage_checker_timer = startTimer(3000);
+}
+
+void TelegramQml::refreshUnreadCount()
+{
+    int unreadCount = 0;
+    foreach( DialogObject *obj, p->dialogs )
+        unreadCount += obj->unreadCount();
+
+    if( p->unreadCount == unreadCount )
+        return;
+
+    p->unreadCount = unreadCount;
+    emit unreadCountChanged();
 }
 
 TelegramQml::~TelegramQml()

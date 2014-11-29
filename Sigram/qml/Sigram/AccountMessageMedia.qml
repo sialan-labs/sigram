@@ -158,12 +158,15 @@ Rectangle {
                 result = media.video.thumb.location.download.location;
                 break;
 
+            case typeMessageMediaAudio:
             case typeMessageMediaUnsupported:
                 result = "files/document.png"
                 break;
 
             case typeMessageMediaDocument:
                 result = media.document.thumb.location.download.location
+                if(result.length==0)
+                    result = "files/document.png"
                 break;
 
             default:
@@ -215,6 +218,21 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        id: download_frame
+        anchors.fill: parent
+        color: "#88000000"
+        visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto
+
+        Text {
+            anchors.centerIn: parent
+            font.family: SApp.globalFontFamily
+            font.pixelSize: 9*fontsScale
+            color: "#ffffff"
+            text: qsTr("Click to Download")
+        }
+    }
+
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
@@ -230,17 +248,17 @@ Rectangle {
                     break;
 
                 case typeMessageMediaVideo:
-                    var locationObj = telegramObject.locationOf(media.video.id, media.video.dcId, media.video.accessHash)
+                    locationObj = telegramObject.locationOf(media.video.id, media.video.dcId, media.video.accessHash)
                     telegramObject.getFile(locationObj, typeInputVideoFileLocation)
                     break;
 
                 case typeMessageMediaDocument:
-                    var locationObj = telegramObject.locationOf(media.document.id, media.document.dcId, media.document.accessHash)
+                    locationObj = telegramObject.locationOf(media.document.id, media.document.dcId, media.document.accessHash)
                     telegramObject.getFile(locationObj, typeInputDocumentFileLocation)
                     break;
 
                 case typeMessageMediaAudio:
-                    var locationObj = telegramObject.locationOf(media.audio.id, media.audio.dcId, media.audio.accessHash)
+                    locationObj = telegramObject.locationOf(media.audio.id, media.audio.dcId, media.audio.accessHash)
                     telegramObject.getFile(locationObj, typeInputAudioFileLocation)
                     break;
 

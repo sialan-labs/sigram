@@ -149,6 +149,9 @@ void TelegramMessagesModel::sendMessage(const QString &msg)
 
 void TelegramMessagesModel::setReaded()
 {
+    if( p->telegram->invisible() )
+        return;
+
     p->telegram->telegram()->messagesReadHistory(inputPeer());
     p->dialog->setUnreadCount(0);
 }
