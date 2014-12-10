@@ -17,7 +17,7 @@ Item {
     MouseArea {
         anchors.fill: parent
         visible: frameItem? true : false
-        onClicked: BackHandler.back()
+        onClicked: SApp.back()
     }
 
     Rectangle {

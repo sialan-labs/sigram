@@ -105,6 +105,7 @@ public:
     QMimeDatabase mime_db;
 
     qint32 msg_send_id_counter;
+    qint32 msg_send_random_id;
 };
 
 TelegramQml::TelegramQml(QObject *parent) :
@@ -117,6 +118,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->online = false;
     p->invisible = false;
     p->msg_send_id_counter = INT_MAX - 100000;
+    p->msg_send_random_id = 100000;
 
     p->userdata = 0;
     p->telegram = 0;
@@ -572,7 +574,8 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     peer.setChatId(message.toId().chatId());
     peer.setUserId(message.toId().userId());
 
-    qint64 sendId = p->telegram->messagesSendMessage(peer, msg);
+    p->msg_send_random_id++;
+    qint64 sendId = p->telegram->messagesSendMessage(peer, p->msg_send_random_id, msg);
 
     insertMessage(message);
 
@@ -636,17 +639,18 @@ void TelegramQml::sendFile(qint64 dId, const QString &fpath)
     peer.setUserId(message.toId().userId());
 
     qint64 fileId;
+    p->msg_send_random_id++;
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
     if( t.name().contains("image/") )
-        fileId = p->telegram->messagesSendPhoto(peer, file);
+        fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
     else
     if( t.name().contains("video/") )
-        fileId = p->telegram->messagesSendVideo(peer, file, 0, 0, 0);
+        fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, 0, 0);
     else
     if( t.name().contains("audio/") )
-        fileId = p->telegram->messagesSendAudio(peer, file, 0);
+        fileId = p->telegram->messagesSendAudio(peer, p->msg_send_random_id, file, 0);
     else
-        fileId = p->telegram->messagesSendDocument(peer, file);
+        fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file);
 
     insertMessage(message);
 
@@ -1601,6 +1605,8 @@ void TelegramQml::insertUpdate(const Update &update)
         DialogObject *dlg = p->dialogs.value(chat->id());
         if( !dlg )
             return;
+        if( !user )
+            return;
 
         const QString & id_str = QString::number(user->id());
         const QPair<qint64,qint64> & timer_pair = QPair<qint64,qint64>(chat->id(), user->id());
@@ -1652,14 +1658,16 @@ void TelegramQml::insertUpdate(const Update &update)
         break;
 
     case Update::typeUpdateChatParticipantDelete:
-        chat->setParticipantsCount( chat->participantsCount()-1 );
+        if(chat)
+            chat->setParticipantsCount( chat->participantsCount()-1 );
         break;
 
     case Update::typeUpdateNewAuthorization:
         break;
 
     case Update::typeUpdateChatParticipantAdd:
-        chat->setParticipantsCount( chat->participantsCount()+1 );
+        if(chat)
+            chat->setParticipantsCount( chat->participantsCount()+1 );
         break;
 
     case Update::typeUpdateDcOptions:
@@ -1677,6 +1685,8 @@ void TelegramQml::insertUpdate(const Update &update)
 
     case Update::typeUpdateUserTyping:
     {
+        if(!user)
+            return;
         DialogObject *dlg = p->dialogs.value(user->id());
         if( !dlg )
             return;

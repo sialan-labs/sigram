@@ -35,6 +35,14 @@ Rectangle {
         }
     }
 
+    Timer {
+        id: refresh_timer
+        repeat: true
+        interval: 10000
+        onTriggered: messages_model.refresh()
+        Component.onCompleted: start()
+    }
+
     Image {
         anchors.fill: parent
         fillMode: Image.Tile

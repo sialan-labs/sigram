@@ -99,7 +99,7 @@ QObject *SialanBackHandler::tryPopHandler()
     const int count = p->stack.count();
 
     const QJSValue & res = item.jsv.call();
-    if( !res.isUndefined() && res.toBool() == false )
+    if( !res.isUndefined() && res.toBool() == false && !res.isError() )
         return 0;
 
     if( p->stack.count() == count )

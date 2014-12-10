@@ -70,7 +70,7 @@ void TelegramMessagesModel::setTelegram(QObject *tgo)
 
     connect( p->telegram, SIGNAL(messagesChanged()), SLOT(messagesChanged()) );
 
-    refresh();
+    init();
 }
 
 DialogObject *TelegramMessagesModel::dialog() const
@@ -95,20 +95,38 @@ void TelegramMessagesModel::setDialog(DialogObject *dlg)
     if( !p->dialog->peer()->chatId() && !p->dialog->peer()->userId() )
         return;
 
-    refresh();
+    init();
 }
 
-void TelegramMessagesModel::refresh()
+void TelegramMessagesModel::init()
 {
     if( !p->dialog )
         return;
     if( !p->telegram )
+        return;
+    if( p->dialog == p->telegram->nullDialog() )
         return;
 
     p->load_count = 0;
     p->load_limit = LOAD_STEP_COUNT;
     loadMore(true);
     messagesChanged();
+
+    p->refreshing = true;
+    emit refreshingChanged();
+}
+
+void TelegramMessagesModel::refresh()
+{
+    if( !p->telegram )
+        return;
+    if( !p->dialog )
+        return;
+
+    const InputPeer & peer = inputPeer();
+
+    Telegram *tgObject = p->telegram->telegram();
+    tgObject->messagesGetHistory(peer, 0, 0, LOAD_STEP_COUNT );
 
     p->refreshing = true;
     emit refreshingChanged();

@@ -27,7 +27,7 @@ Rectangle {
     smooth: true
 
     property real percent: 0
-    property color topColor: top.color
+    property alias topColor: top.color
 
     Rectangle {
         id: top

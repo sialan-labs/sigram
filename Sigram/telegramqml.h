@@ -189,6 +189,7 @@ signals:
     void uploadsChanged();
     void chatFullsChanged();
     void contactsChanged();
+    void autoUpdateChanged();
 
     void unreadCountChanged();
     void invisibleChanged();

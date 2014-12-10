@@ -76,6 +76,7 @@ signals:
 
 private slots:
     void messagesChanged();
+    void init();
 
 private:
     TelegramMessagesModelPrivate *p;
