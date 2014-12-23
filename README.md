@@ -1,16 +1,16 @@
 ### cutegram
 
-A different telegram client from Aseman.Labs.
-
+A different telegram client from Aseman team.
+Cutegram forked from Sigram by Sialan Labs.
 Cutegram project are released under the terms of the GPLv3 license.
 
 ### How to Compile
 #### Install dependencies
 
-Install gcc, g++, openssl, Qt5Core, Qt5DBus, Qt5Gui, Qt5Multimedia, Qt5MultimediaQuick_p, Qt5Network, Qt5PrintSupport, Qt5Qml, Qt5Quick, Qt5Sql, Qt5Svg, and Qt5Widgets.
+Install gcc, g++, openssl, bzr, git, Qt5Core, Qt5DBus, Qt5Gui, Qt5Multimedia, Qt5MultimediaQuick_p, Qt5Network, Qt5PrintSupport, Qt5Qml, Qt5Quick, Qt5Sql, Qt5Svg, and Qt5Widgets.
 on Ubuntu:
 
-    sudo apt-get install g++ gcc qtbase5-dev libqt5sql5-sqlite libqt5multimediaquick-p5 libqt5multimedia5-plugins libqt5multimedia5 libqt5qml5 libqt5qml-graphicaleffects libqt5qml-quickcontrols qtdeclarative5-dev libqt5quick5 
+    sudo apt-get install g++ gcc git bzr qtbase5-dev libqt5sql5-sqlite libqt5multimediaquick-p5 libqt5multimedia5-plugins libqt5multimedia5 libqt5qml5 libqt5qml-graphicaleffects libqt5qml-quickcontrols qtdeclarative5-dev libqt5quick5 
 
 on Fedora (tested on Fedora 20):
 
@@ -21,6 +21,20 @@ Also you should install AppIndicator and Gtk2 if you want to enable UnitySystemT
     sudo apt-get install libappindicator-dev libgtk2.0-dev
 
 For other distributions search for the corresponding packages.
+
+#### Get libqtelegtam
+
+First, you should build and install libqtelegtam.
+
+    bzr branch lp:libqtelegram 
+    
+And:
+
+    cd libqtelegram
+    chmod +x ./setup.sh
+    ./setup.sh
+    mkdir build
+    sudo make install
 
 #### Get source code from git repository
 
