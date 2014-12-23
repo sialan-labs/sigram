@@ -1,0 +1,3 @@
+        %pointerflag_%name = another.%name();
+        emit %nameChanged();
+%equals

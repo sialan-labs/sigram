@@ -40,7 +40,7 @@ isEmpty(PREFIX) {
 contains(BUILD_MODE,opt) {
     BIN_PATH = $$PREFIX/plugins
 } else {
-    BIN_PATH = $$PREFIX/lib/sigram/plugins
+    BIN_PATH = $$PREFIX/lib/cutegram/plugins
 }
 
 android {

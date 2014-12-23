@@ -1,0 +1,4 @@
+    qmlRegisterType<%nameObject>("CutegramTypes", 1, 0, "%name");
+    qRegisterMetaType<%nameObject*>("%nameObject*");
+
+%intializes
