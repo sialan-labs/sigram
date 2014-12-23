@@ -4,7 +4,9 @@ server.source = tg-server.pub
 server.target = $${DESTDIR}
 emojis.source = emojis
 emojis.target = $${DESTDIR}
-DEPLOYMENTFOLDERS = server emojis
+translations.source = translations
+translations.target = $$DESTDIR/files
+DEPLOYMENTFOLDERS = server emojis translations
 
 TEMPLATE = app
 QT += qml quick sql

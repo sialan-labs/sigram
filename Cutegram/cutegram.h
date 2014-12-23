@@ -28,10 +28,21 @@ class CutegramPrivate;
 class Cutegram : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(StartupOptions)
+
+    Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
+    Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
 
     Q_PROPERTY(int sysTrayCounter READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
+    Q_PROPERTY(int startupOption  READ startupOption  WRITE setStartupOption  NOTIFY startupOptionChanged )
 
 public:
+    enum StartupOptions {
+        StartupAutomatic = 0,
+        StartupVisible = 1,
+        StartupHide = 2
+    };
+
     Cutegram(QObject *parent = 0);
     ~Cutegram();
 
@@ -45,6 +56,14 @@ public:
     void setSysTrayCounter( int count );
     int sysTrayCounter() const;
 
+    QStringList languages();
+
+    void setLanguage( const QString & lang );
+    QString language() const;
+
+    void setStartupOption( int opt );
+    int startupOption() const;
+
 public slots:
     void start();
     void close();
@@ -55,6 +74,10 @@ public slots:
 signals:
     void backRequest();
     void sysTrayCounterChanged();
+    void fakeSignal();
+    void languageChanged();
+    void languageDirectionChanged();
+    void startupOptionChanged();
 
 protected:
     bool eventFilter(QObject *o, QEvent *e);
@@ -66,6 +89,7 @@ private:
     void init_systray();
     void showContextMenu();
     QImage generateIcon( const QImage & img, int count );
+    void init_languages();
 
 private:
     CutegramPrivate *p;

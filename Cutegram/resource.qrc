@@ -49,5 +49,6 @@
         <file>qml/Cutegram/files/add_user.png</file>
         <file>qml/Cutegram/AccountContactList.qml</file>
         <file>qml/Cutegram/ForwardPage.qml</file>
+        <file>qml/Cutegram/Configure.qml</file>
     </qresource>
 </RCC>

@@ -22,6 +22,8 @@
 #include "asemantools/asemanquickview.h"
 #include "asemantools/asemancalendarconverter.h"
 #include "asemantools/asemandesktoptools.h"
+#include "asemantools/asemandevices.h"
+#include "asemantools/asemanapplication.h"
 #include "telegramqml.h"
 #include "profilesmodel.h"
 #include "telegrammessagesmodel.h"
@@ -55,6 +57,7 @@ public:
     QPointer<AsemanQuickView> viewer;
     bool close_blocker;
     int sysTrayCounter;
+    int startupOption;
 
     QTextDocument *doc;
 
@@ -62,6 +65,13 @@ public:
     UnitySystemTray *unityTray;
 
     AsemanDesktopTools *desktop;
+
+    QTranslator *translator;
+    QString translationsPath;
+
+    QHash<QString,QVariant> languages;
+    QHash<QString,QLocale> locales;
+    QString language;
 };
 
 Cutegram::Cutegram(QObject *parent) :
@@ -73,11 +83,15 @@ Cutegram::Cutegram(QObject *parent) :
     p->sysTray = 0;
     p->unityTray = 0;
     p->sysTrayCounter = 0;
+    p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
+    p->translator = new QTranslator(this);
 
 #ifdef Q_OS_ANDROID
     p->close_blocker = true;
+    p->translationsPath = "assets:/files/translations";
 #else
     p->close_blocker = false;
+    p->translationsPath = AsemanDevices::resourcePath() + "/files/translations/";
 #endif
 
     qRegisterMetaType<TelegramQml*>("TelegramQml*");
@@ -94,6 +108,8 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<TelegramChatParticipantsModel>("Cutegram", 1, 0, "ChatParticipantsModel");
     qmlRegisterType<Emojis>("Cutegram", 1, 0, "Emojis");
     qmlRegisterUncreatableType<UserData>("Cutegram", 1, 0, "UserData", "");
+
+    init_languages();
 }
 
 QSize Cutegram::imageSize(const QString &path)
@@ -358,6 +374,76 @@ QImage Cutegram::generateIcon(const QImage &img, int count)
     painter.drawText( rct, Qt::AlignCenter | Qt::AlignHCenter, QString::number(count) );
 
     return res;
+}
+
+QStringList Cutegram::languages()
+{
+    QStringList res = p->languages.keys();
+    res.sort();
+    return res;
+}
+
+void Cutegram::setLanguage(const QString &lang)
+{
+    if( p->language == lang )
+        return;
+
+    QGuiApplication::removeTranslator(p->translator);
+    p->translator->load(p->languages.value(lang).toString(),"languages");
+    QGuiApplication::installTranslator(p->translator);
+    p->language = lang;
+
+    AsemanApplication::settings()->setValue("General/Language",lang);
+
+    emit languageChanged();
+    emit languageDirectionChanged();
+}
+
+QString Cutegram::language() const
+{
+    return p->language;
+}
+
+void Cutegram::setStartupOption(int opt)
+{
+    if(opt == p->startupOption)
+        return;
+
+    p->startupOption = opt;
+    AsemanApplication::settings()->setValue("General/startupOption", opt);
+    emit startupOptionChanged();
+}
+
+int Cutegram::startupOption() const
+{
+    return p->startupOption;
+}
+
+void Cutegram::init_languages()
+{
+    QDir dir(p->translationsPath);
+    QStringList languages = dir.entryList( QDir::Files );
+    if( !languages.contains("lang-en.qm") )
+        languages.prepend("lang-en.qm");
+
+    for( int i=0 ; i<languages.size() ; i++ )
+    {
+        QString locale_str = languages[i];
+        locale_str.truncate( locale_str.lastIndexOf('.') );
+        locale_str.remove( 0, locale_str.indexOf('-') + 1 );
+
+        QLocale locale(locale_str);
+
+        QString  lang = QLocale::languageToString(locale.language());
+        QVariant data = p->translationsPath + "/" + languages[i];
+
+        p->languages.insert( lang, data );
+        p->locales.insert( lang , locale );
+
+        if( lang == AsemanApplication::settings()->value("General/Language","English").toString() )
+            setLanguage( lang );
+    }
+    setLanguage( "English" );
 }
 
 Cutegram::~Cutegram()

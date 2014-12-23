@@ -10,9 +10,9 @@ int main(int argc, char *argv[])
     AsemanApplication app(argc, argv);
     app.setApplicationName("Cutegram");
     app.setApplicationDisplayName("Cutegram");
-    app.setOrganizationDomain("org.aseman.cutegram");
+    app.setOrganizationDomain("land.aseman");
     app.setOrganizationName("Aseman");
-    app.setWindowIcon(QIcon(app.applicationDirPath()+"/qml/Cutegram/files/papyrus.png"));
+    app.setWindowIcon(QIcon(":/qml/Cutegram/files/icon.png"));
     app.setQuitOnLastWindowClosed(false);
 
 #ifdef DESKTOP_DEVICE

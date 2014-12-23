@@ -146,7 +146,7 @@ Rectangle {
         smooth: true
         visible: media.classType != typeMessageMediaVideo
 
-        source:  {
+        source: {
             var result
             switch( media.classType )
             {
@@ -185,9 +185,39 @@ Rectangle {
         visible: !media_img.visible
     }
 
+    Rectangle {
+        id: download_frame
+        anchors.fill: parent
+        color: "#88000000"
+        visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto
+
+        Text {
+            anchors.centerIn: parent
+            font.family: AsemanApp.globalFontFamily
+            font.pixelSize: 9*Devices.fontDensity
+            color: "#ffffff"
+            text: qsTr("Click to Download")
+            visible: !indicator.active
+        }
+
+        ProgressBar {
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 4*Devices.density
+            height: 3*Devices.density
+            topColor: "#ffffff"
+            color: "#00000000"
+            radius: 0
+            percent: locationObj? !locationObj.download.downloaded/locationObj.download.total : false
+            visible: indicator.active
+        }
+    }
+
     Indicator {
+        id: indicator
         anchors.centerIn: parent
-        light: false
+        light: download_frame.visible
         modern: true
         indicatorSize: 22*Devices.density
         property bool active: {
@@ -195,13 +225,16 @@ Rectangle {
             switch( media.classType )
             {
             case typeMessageMediaPhoto:
-            case typeMessageMediaVideo:
-            case typeMessageMediaUnsupported:
-            case typeMessageMediaDocument:
                 result = media_img.status != Image.Ready
                 break;
 
-            case typeMessageMediaPhoto:
+            case typeMessageMediaVideo:
+            case typeMessageMediaAudio:
+            case typeMessageMediaUnsupported:
+            case typeMessageMediaDocument:
+                result = locationObj? locationObj.download.location.length==0 : false
+                break;
+
             default:
                 result = false
                 break;
@@ -215,21 +248,6 @@ Rectangle {
                 start()
             else
                 stop()
-        }
-    }
-
-    Rectangle {
-        id: download_frame
-        anchors.fill: parent
-        color: "#88000000"
-        visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto
-
-        Text {
-            anchors.centerIn: parent
-            font.family: AsemanApp.globalFontFamily
-            font.pixelSize: 9*Devices.fontDensity
-            color: "#ffffff"
-            text: qsTr("Click to Download")
         }
     }
 

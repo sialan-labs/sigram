@@ -118,7 +118,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->online = false;
     p->invisible = false;
     p->msg_send_id_counter = INT_MAX - 100000;
-    p->msg_send_random_id = 10000000;
+    p->msg_send_random_id = 1000000000 + qrand()%1000000000;
 
     p->userdata = 0;
     p->telegram = 0;

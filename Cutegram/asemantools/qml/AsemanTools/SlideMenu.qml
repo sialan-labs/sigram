@@ -25,8 +25,6 @@ Item {
     height: 62
     clip: true
 
-    property color color: "#ffffff"
-
     QtObject {
         id: privates
         property variant menu
@@ -53,13 +51,12 @@ Item {
     Component {
         id: menu_component
 
-        Rectangle {
+        Item {
             id: menu
             width: item && show? item.width : 0
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             clip: true
-            color: slide_menu.color
 
             property bool show: false
             property variant item

@@ -126,6 +126,9 @@ Rectangle {
             tooltipText: qsTr("Configure")
             tooltipFont.family: AsemanApp.globalFontFamily
             tooltipFont.pixelSize: 9*Devices.fontDensity
+            onClicked: {
+                slide_menu.show(configure_component)
+            }
         }
     }
 
@@ -156,6 +159,19 @@ Rectangle {
 
                 property variant accountView: hash.value(profiles.keys[0])
             }
+        }
+    }
+
+    Component {
+        id: configure_component
+
+        Configure {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: 357*Devices.density
+            telegram: accountView.telegramObject
+
+            property variant accountView: hash.value(profiles.keys[0])
         }
     }
 
