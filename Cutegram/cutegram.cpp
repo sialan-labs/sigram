@@ -58,6 +58,7 @@ public:
     bool close_blocker;
     int sysTrayCounter;
     int startupOption;
+    bool notification;
 
     QTextDocument *doc;
 
@@ -84,6 +85,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->unityTray = 0;
     p->sysTrayCounter = 0;
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
+    p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->translator = new QTranslator(this);
 
 #ifdef Q_OS_ANDROID
@@ -166,7 +168,21 @@ void Cutegram::start()
                 );
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Cutegram/main.qml")));
-    p->viewer->show();
+
+    switch(startupOption())
+    {
+    case StartupAutomatic:
+        if(AsemanApplication::settings()->value("General/lastWindowState",true).toBool())
+            p->viewer->show();
+        break;
+
+    case StartupVisible:
+        p->viewer->show();
+        break;
+
+    case StartupHide:
+        break;
+    }
 
     init_systray();
 }
@@ -320,7 +336,8 @@ void Cutegram::showContextMenu()
     else
     if( res_act == conf_act )
     {
-
+        emit configureRequest();
+        active();
     }
     else
     if( res_act == abut_act )
@@ -330,7 +347,8 @@ void Cutegram::showContextMenu()
     else
     if( res_act == sabt_act )
     {
-
+        emit aboutAsemanRequest();
+        active();
     }
     else
     if( res_act == lcns_act )
@@ -417,6 +435,21 @@ void Cutegram::setStartupOption(int opt)
 int Cutegram::startupOption() const
 {
     return p->startupOption;
+}
+
+void Cutegram::setNotification(bool stt)
+{
+    if(p->notification == stt)
+        return;
+
+    p->notification = stt;
+    AsemanApplication::settings()->setValue("General/notification", stt);
+    emit notificationChanged();
+}
+
+bool Cutegram::notification() const
+{
+    return p->notification;
 }
 
 void Cutegram::init_languages()

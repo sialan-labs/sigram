@@ -124,7 +124,7 @@ Rectangle {
 
         if( prevItem ) {
             prevItem.scale = (privates.lastIndex<currentIndex? 1-dscale : 1+dscale)
-            prevItem.opacity = (privates.lastIndex<currentIndex? 1 : 0)
+            prevItem.opacity = 0
             if( !prevItem.item.onceInstance )
                 prevItem.end()
         }

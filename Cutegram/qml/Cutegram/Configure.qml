@@ -125,8 +125,8 @@ Rectangle {
 
                 QtControls.CheckBox {
                     id: notify_checkbox
-                    checked: AsemanApp.readSetting("General/notification", true)
-                    onCheckedChanged: AsemanApp.setSetting("General/notification", checked)
+                    checked: Cutegram.notification
+                    onCheckedChanged: Cutegram.notification = checked
                 }
 
                 QtControls.ComboBox {

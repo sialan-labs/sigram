@@ -80,6 +80,8 @@ Rectangle {
             var dId = telegram.messageDialogId(msg.id)
             if( telegram.userData.isMuted(dId) )
                 return
+            if( !Cutegram.notification )
+                return
 
             var user = telegram.user(msg.fromId)
             var title = user.firstName + " " + user.lastName

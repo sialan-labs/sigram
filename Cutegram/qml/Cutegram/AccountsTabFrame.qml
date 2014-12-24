@@ -39,6 +39,11 @@ Rectangle {
         }
     }
 
+    Connections {
+        target: Cutegram
+        onConfigureRequest: conf_btn.clicked()
+    }
+
     HashObject {
         id: hash
     }

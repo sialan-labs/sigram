@@ -33,8 +33,9 @@ class Cutegram : public QObject
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
     Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
 
-    Q_PROPERTY(int sysTrayCounter READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
-    Q_PROPERTY(int startupOption  READ startupOption  WRITE setStartupOption  NOTIFY startupOptionChanged )
+    Q_PROPERTY(int  sysTrayCounter READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
+    Q_PROPERTY(int  startupOption  READ startupOption  WRITE setStartupOption  NOTIFY startupOptionChanged )
+    Q_PROPERTY(bool notification   READ notification   WRITE setNotification   NOTIFY notificationChanged  )
 
 public:
     enum StartupOptions {
@@ -64,6 +65,9 @@ public:
     void setStartupOption( int opt );
     int startupOption() const;
 
+    void setNotification(bool stt);
+    bool notification() const;
+
 public slots:
     void start();
     void close();
@@ -78,6 +82,10 @@ signals:
     void languageChanged();
     void languageDirectionChanged();
     void startupOptionChanged();
+    void notificationChanged();
+
+    void configureRequest();
+    void aboutAsemanRequest();
 
 protected:
     bool eventFilter(QObject *o, QEvent *e);

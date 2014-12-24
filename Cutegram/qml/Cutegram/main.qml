@@ -32,6 +32,7 @@ AsemanMain {
     Connections {
         target: Cutegram
         onBackRequest: AsemanApp.back()
+        onAboutAsemanRequest: qlist.currentIndex = 0
     }
 
     Connections {
@@ -40,6 +41,13 @@ AsemanMain {
             var res = BackHandler.back()
             if( !res && !Devices.isDesktop )
                 Cutegram.close()
+        }
+    }
+
+    Connections {
+        target: View
+        onActiveChanged: {
+            AsemanApp.setSetting("General/lastWindowState", View.active)
         }
     }
 
@@ -67,9 +75,9 @@ AsemanMain {
         Component.onCompleted: start()
         onTriggered: {
             if( profiles.count == 0 )
-                qlist.currentIndex = 2
+                qlist.currentIndex = 3
             else
-                qlist.currentIndex = 1
+                qlist.currentIndex = 2
         }
     }
 
@@ -80,8 +88,15 @@ AsemanMain {
         QueueList {
             id: qlist
             anchors.fill: parent
-            components: [splash_component, accounts_frame, auth_dlg_component]
-            currentIndex: 0
+            components: [aseman_about_component, splash_component, accounts_frame, auth_dlg_component]
+            currentIndex: 1
+            onCurrentIndexChanged: {
+                prevIndex = tmpIndex
+                tmpIndex = currentIndex
+            }
+
+            property int tmpIndex: 0
+            property int prevIndex: 0
         }
     }
 
@@ -92,7 +107,7 @@ AsemanMain {
             onAccepted: {
                 var item = profiles.add(number)
                 item.name = "AA"
-                qlist.currentIndex = 1
+                qlist.currentIndex = 2
             }
         }
     }
@@ -113,13 +128,26 @@ AsemanMain {
         }
     }
 
+    Component {
+        id: aseman_about_component
+        AsemanAbout {
+            id: aseman_about
+            anchors.fill: parent
+            Component.onCompleted: BackHandler.pushHandler(aseman_about, aseman_about.back)
+
+            function back() {
+                qlist.currentIndex = qlist.prevIndex
+            }
+        }
+    }
+
     function addAccount() {
-        qlist.currentIndex = 2
+        qlist.currentIndex = 3
         BackHandler.pushHandler(main, main.backToAccounts )
     }
 
     function backToAccounts() {
-        qlist.currentIndex = 1
+        qlist.currentIndex = 2
         BackHandler.removeHandler(main)
     }
 }

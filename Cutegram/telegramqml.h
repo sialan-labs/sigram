@@ -278,6 +278,7 @@ protected:
 
 private slots:
     void refreshUnreadCount();
+    qint64 generateRandomId() const;
 
 private:
     TelegramQmlPrivate *p;

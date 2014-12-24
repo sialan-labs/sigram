@@ -105,7 +105,7 @@ public:
     QMimeDatabase mime_db;
 
     qint32 msg_send_id_counter;
-    qint32 msg_send_random_id;
+    qint64 msg_send_random_id;
 };
 
 TelegramQml::TelegramQml(QObject *parent) :
@@ -118,7 +118,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->online = false;
     p->invisible = false;
     p->msg_send_id_counter = INT_MAX - 100000;
-    p->msg_send_random_id = 1000000000 + qrand()%1000000000;
+    p->msg_send_random_id = 0;
 
     p->userdata = 0;
     p->telegram = 0;
@@ -574,7 +574,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     peer.setChatId(message.toId().chatId());
     peer.setUserId(message.toId().userId());
 
-    p->msg_send_random_id++;
+    p->msg_send_random_id = generateRandomId();
     qint64 sendId = p->telegram->messagesSendMessage(peer, p->msg_send_random_id, msg);
 
     insertMessage(message);
@@ -639,7 +639,7 @@ void TelegramQml::sendFile(qint64 dId, const QString &fpath)
     peer.setUserId(message.toId().userId());
 
     qint64 fileId;
-    p->msg_send_random_id++;
+    p->msg_send_random_id = generateRandomId();
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
     if( t.name().contains("image/") )
         fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
@@ -1823,6 +1823,13 @@ void TelegramQml::refreshUnreadCount()
 
     p->unreadCount = unreadCount;
     emit unreadCountChanged();
+}
+
+qint64 TelegramQml::generateRandomId() const
+{
+    qint64 randomId;
+    Utils::randomBytes(&randomId, 8);
+    return randomId;
 }
 
 TelegramQml::~TelegramQml()
