@@ -56,18 +56,14 @@ Item {
                 opacity: marea.pressed? 0.3 : (selected? 0.2 : 0)
             }
 
-            Image {
+            ContactImage {
                 id: profile_img
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.margins: 4*Devices.density
                 width: height
-                sourceSize: Qt.size(width,height)
-                source: imgPath.length==0? (isChat?"files/group.png":"files/user.png") : imgPath
-                asynchronous: true
-
-                property string imgPath: isChat? chat.photo.photoSmall.download.location : user.photo.photoSmall.download.location
+                dialog: dItem
             }
 
             Text {
