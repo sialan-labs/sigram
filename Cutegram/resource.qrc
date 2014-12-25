@@ -51,5 +51,9 @@
         <file>qml/Cutegram/ForwardPage.qml</file>
         <file>qml/Cutegram/Configure.qml</file>
         <file>qml/Cutegram/ContactImage.qml</file>
+        <file>qml/Cutegram/files/telegram.png</file>
+        <file>qml/Cutegram/files/arrow-left.png</file>
+        <file>qml/Cutegram/files/arrow-right.png</file>
+        <file>qml/Cutegram/AboutCutegram.qml</file>
     </qresource>
 </RCC>

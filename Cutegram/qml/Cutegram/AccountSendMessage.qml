@@ -53,7 +53,7 @@ Rectangle {
         normalColor: "#00000000"
         highlightColor: "#1f000000"
         cursorShape: Qt.PointingHandCursor
-        width: height
+        width: 40*Devices.density
         iconHeight: 20*Devices.density
         opacity: 0.6
         icon: "files/attach.png"

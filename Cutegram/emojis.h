@@ -34,7 +34,7 @@ public:
     void setCurrentTheme( const QString & theme );
     QString currentTheme() const;
 
-    Q_INVOKABLE QString textToEmojiText( const QString & txt );
+    Q_INVOKABLE QString textToEmojiText(const QString & txt , int size = 16);
     Q_INVOKABLE QString bodyTextToEmojiText( const QString & txt );
 
     Q_INVOKABLE QList<QString> keys() const;

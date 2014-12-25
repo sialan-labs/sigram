@@ -8,11 +8,13 @@ Item {
     width: 100
     height: 62
 
+    property bool containsDrag: drop_area.containsDrag && currentDialog != telegramObject.nullDialog
+
     property Dialog currentDialog
     property bool isChat: currentDialog? currentDialog.peer.chatId != 0 : false
 
     property alias color: back.color
-    property real visibleRatio: drop_area.containsDrag && currentDialog != telegramObject.nullDialog? 1 : 0
+    property real visibleRatio: containsDrag? 1 : 0
 
     Behavior on visibleRatio {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }

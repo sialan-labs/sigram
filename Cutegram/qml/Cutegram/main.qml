@@ -15,6 +15,8 @@ AsemanMain {
     property alias profiles: profile_model
     property alias emojis: emojis_obj
 
+    property bool aboutMode: false
+
     property color backColor0: "#eeeeee"
     property color backColor1: "#cccccc"
     property color backColor2: "#fafafa"
@@ -24,6 +26,13 @@ AsemanMain {
 
     onWidthChanged: size_save_timer.restart()
     onHeightChanged: size_save_timer.restart()
+
+    onAboutModeChanged: {
+        if(aboutMode)
+            BackHandler.pushHandler(about, about.back)
+        else
+            BackHandler.removeHandler(about)
+    }
 
     Keys.onEscapePressed: {
         AsemanApp.back()
@@ -81,9 +90,24 @@ AsemanMain {
         }
     }
 
+    AboutCutegram {
+        id: about
+        anchors.fill: parent
+
+        function back() {
+            aboutMode = false
+        }
+    }
+
     Item {
         id: main_frame
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height
+        y: aboutMode? height : 0
+
+        Behavior on y {
+            NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+        }
 
         QueueList {
             id: qlist

@@ -20,18 +20,15 @@ Rectangle {
 
         Item { width: 10; height: 30*Devices.density }
 
-        Image {
+        ContactImage {
             id: img
             anchors.left: parent.left
             anchors.margins: 20*Devices.density
             width: 148*Devices.density
             height: 148
-            sourceSize: Qt.size(width,height)
-            fillMode: Image.PreserveAspectCrop
-            smooth: true
-            source: imgPath.length==0? "files/user.png" : imgPath
-
-            property string imgPath: user.photo.photoSmall.download.location
+            user: configure.user
+            isChat: false
+            telegram: configure.telegram
         }
 
         Item { width: 10; height: 20*Devices.density }
@@ -113,11 +110,6 @@ Rectangle {
                     color: "#333333"
                     text: qsTr("Languages")
                 }
-
-                Item {
-                    width: 10
-                    height: logout_btn.height
-                }
             }
 
             Column {
@@ -150,11 +142,6 @@ Rectangle {
 
                     onCurrentTextChanged: if(!init_timer.running) Cutegram.language = currentText
                 }
-
-                QtControls.Button {
-                    id: logout_btn
-                    text: qsTr("Logout")
-                }
             }
         }
     }
@@ -166,11 +153,11 @@ Rectangle {
         anchors.margins: 20*Devices.density
         textFont.family: AsemanApp.globalFontFamily
         textFont.pixelSize: 9*Devices.fontDensity
-        highlightColor: Qt.darker(masterPalette.highlight)
-        normalColor: masterPalette.highlight
-        textColor: masterPalette.highlightedText
+        highlightColor: Qt.darker(normalColor)
+        normalColor: "#C81414"
+        textColor: "#ffffff"
         height: 40*Devices.density
-        text: qsTr("About")
+        text: qsTr("Logout")
     }
 
     Timer {

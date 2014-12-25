@@ -27,12 +27,11 @@ Item {
     width: 100
     height: 62
 
+    property Telegram telegram: telegramObject
     property Dialog dialog
     property bool isChat: dialog.peer.chatId != 0
-    property User user: telegramObject.user(dialog.peer.userId)
-    property Chat chat: telegramObject.chat(dialog.peer.chatId)
-
-    property color borderColor: "#dddddd"
+    property User user: dialog? telegram.user(dialog.peer.userId) : telegram.nullUser
+    property Chat chat: dialog? telegram.chat(dialog.peer.chatId) : telegram.nullChat
 
     property real typeUserStatusOffline: 0x8c703f
     property real typeUserStatusEmpty: 0x9d05049
@@ -52,7 +51,7 @@ Item {
         sourceSize: Qt.size(width,height)
         source: imgPath.length==0? (isChat?"files/group.png":"files/user.png") : imgPath
         asynchronous: true
-        fillMode: Image.PreserveAspectFit
+        fillMode: Image.PreserveAspectCrop
         visible: false
 
         property string imgPath: isChat? chat.photo.photoSmall.download.location : user.photo.photoSmall.download.location
@@ -65,16 +64,6 @@ Item {
         maskSource: mask
         threshold: 0.4
         spread: 0.6
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        anchors.margins: -1
-        radius: width/2
-        smooth: true
-        border.color: contact_image.borderColor
-        border.width: 1*Devices.density
-        color: "#00000000"
     }
 }
 

@@ -199,19 +199,19 @@ Rectangle {
             text: qsTr("Click to Download")
             visible: !indicator.active
         }
+    }
 
-        ProgressBar {
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: 4*Devices.density
-            height: 3*Devices.density
-            topColor: "#ffffff"
-            color: "#00000000"
-            radius: 0
-            percent: locationObj? !locationObj.download.downloaded/locationObj.download.total : false
-            visible: indicator.active
-        }
+    ProgressBar {
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: 4*Devices.density
+        height: 3*Devices.density
+        topColor: masterPalette.highlight
+        color: masterPalette.highlightedText
+        radius: 0
+        percent: locationObj? locationObj.download.downloaded/locationObj.download.total : false
+        visible: indicator.active
     }
 
     Indicator {
@@ -267,17 +267,17 @@ Rectangle {
 
                 case typeMessageMediaVideo:
                     locationObj = telegramObject.locationOf(media.video.id, media.video.dcId, media.video.accessHash)
-                    telegramObject.getFile(locationObj, typeInputVideoFileLocation)
+                    telegramObject.getFile(locationObj, typeInputVideoFileLocation, media.video.size)
                     break;
 
                 case typeMessageMediaDocument:
                     locationObj = telegramObject.locationOf(media.document.id, media.document.dcId, media.document.accessHash)
-                    telegramObject.getFile(locationObj, typeInputDocumentFileLocation)
+                    telegramObject.getFile(locationObj, typeInputDocumentFileLocation, media.document.size)
                     break;
 
                 case typeMessageMediaAudio:
                     locationObj = telegramObject.locationOf(media.audio.id, media.audio.dcId, media.audio.accessHash)
-                    telegramObject.getFile(locationObj, typeInputAudioFileLocation)
+                    telegramObject.getFile(locationObj, typeInputAudioFileLocation, media.audio.size)
                     break;
 
                 case typeMessageMediaUnsupported:

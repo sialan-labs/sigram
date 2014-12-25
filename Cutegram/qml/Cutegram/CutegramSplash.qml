@@ -5,18 +5,28 @@ import Cutegram 1.0
 Rectangle {
     width: 100
     height: 62
-    color: backColor0
+    color: Desktop.titleBarColor
+
+    Image {
+        id: logo_img
+        anchors.centerIn: parent
+        width: 192
+        height: width
+        sourceSize: Qt.size(width,height)
+        source: "files/icon.png"
+    }
 
     Column {
-        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: logo_img.bottom
         spacing: 20*Devices.density
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: AsemanApp.globalFontFamily
-            font.pixelSize: 50*Devices.fontDensity
-            text: "Cutegram One"
-            color: textColor0
+            font.pixelSize: 30*Devices.fontDensity
+            text: "Cutegram"
+            color: Desktop.titleBarTextColor
         }
 
         Indicator {
@@ -24,7 +34,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             indicatorSize: 22*Devices.density
             modern: true
-            light: false
+            light: Desktop.titleBarIsDark
             Component.onCompleted: start()
         }
     }
@@ -33,7 +43,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 8*Devices.density
-        height: 16
-        dark: true
+        height: 30*Devices.density
+        dark: !Desktop.titleBarIsDark
     }
 }

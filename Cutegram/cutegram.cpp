@@ -198,6 +198,24 @@ void Cutegram::quit()
     QGuiApplication::quit();
 }
 
+void Cutegram::aboutAseman()
+{
+    emit aboutAsemanRequest();
+    active();
+}
+
+void Cutegram::about()
+{
+    p->viewer->root()->setProperty("aboutMode", true);
+    active();
+}
+
+void Cutegram::configure()
+{
+    emit configureRequest();
+    active();
+}
+
 void Cutegram::incomingAppMessage(const QString &msg)
 {
     if( msg == "show" )
@@ -336,19 +354,17 @@ void Cutegram::showContextMenu()
     else
     if( res_act == conf_act )
     {
-        emit configureRequest();
-        active();
+        configure();
     }
     else
     if( res_act == abut_act )
     {
-
+        about();
     }
     else
     if( res_act == sabt_act )
     {
-        emit aboutAsemanRequest();
-        active();
+        aboutAseman();
     }
     else
     if( res_act == lcns_act )

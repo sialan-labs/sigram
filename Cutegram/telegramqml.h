@@ -167,7 +167,7 @@ public slots:
     void messagesCreateChat( const QList<qint32> & users, const QString & topic );
 
     void sendFile( qint64 dialogId, const QString & file );
-    void getFile( FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation );
+    void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
     void checkFile( FileLocationObject *location );
     void cancelSendGet( qint64 fileId );
 

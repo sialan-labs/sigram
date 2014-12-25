@@ -34,6 +34,7 @@ Item {
         model: cmodel
         spacing: 4*Devices.density
         delegate: Item {
+            id: clist_item
             width: clist.width
             height: 50*Devices.density
 
@@ -48,18 +49,16 @@ Item {
                 opacity: 0.5
             }
 
-            Image {
+            ContactImage {
                 id: profile_img
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.margins: 4*Devices.density
                 width: height
-                sourceSize: Qt.size(width,height)
-                source: imgPath.length==0? "files/user.png" : imgPath
-                asynchronous: true
-
-                property string imgPath: user.photo.photoSmall.download.location
+                user: clist_item.user
+                isChat: false
+                telegram: ac_list.telegram
             }
 
             Text {

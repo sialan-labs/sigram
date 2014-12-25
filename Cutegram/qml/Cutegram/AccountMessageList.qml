@@ -49,7 +49,7 @@ Rectangle {
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
         source: "files/telegram_background.png"
-        opacity: 0.5
+        opacity: 0.7
     }
 
     ListView {

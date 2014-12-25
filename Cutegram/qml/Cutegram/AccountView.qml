@@ -8,7 +8,7 @@ Rectangle {
     id: acc_view
     width: 100
     height: 62
-    color: backColor2
+    color: "#222222"
 
     property alias telegramObject: dialogs.telegramObject
     property color framesColor: "#aaffffff"
@@ -19,7 +19,6 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: 275*Devices.density
     }
 
     AccountMessageList {
@@ -61,14 +60,6 @@ Rectangle {
             source: messages
             radius: 64
         }
-    }
-
-    Rectangle {
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: messages.left
-        width: 1*Devices.density
-        color: "#e9e9e9"
     }
 
     AccountDialogHeader {

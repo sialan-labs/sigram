@@ -36,22 +36,20 @@ Item {
         cellHeight: 92*Devices.density
         clip: true
         delegate: Item {
+            id: glist_item
             width: list.cellWidth
             height: list.cellHeight
 
             property ChatParticipant cpItem: item
             property User user: telegramObject.user(cpItem.userId)
 
-            Image {
+            ContactImage {
                 anchors.top: parent.top
                 anchors.bottom: txt.top
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: height
-                sourceSize: Qt.size(width,height)
-                fillMode: Image.PreserveAspectCrop
-                source: imgPath.length==0? "files/user.png" : imgPath
-
-                property string imgPath: user.photo.photoSmall.download.location
+                user: glist_item.user
+                isChat: false
             }
 
             Text {

@@ -5,11 +5,19 @@ import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
 
 Item {
-    width: 100
-    height: 62
+    id: ad_list
+    width: minimum? 80*Devices.density : 275*Devices.density
 
     property alias telegramObject: dialogs_model.telegram
     property Dialog currentDialog: telegramObject.dialog(0)
+
+    property bool minimumSwitcher: true
+    property bool unminimumForce: false
+    property bool minimum: minimumSwitcher && !unminimumForce
+
+    Behavior on width {
+        NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+    }
 
     DialogsModel {
         id: dialogs_model
@@ -24,18 +32,32 @@ Item {
     Indicator {
         id: indicator
         anchors.centerIn: parent
-        light: false
+        light: true
         modern: true
         indicatorSize: 20*Devices.density
+    }
+
+    Rectangle {
+        anchors.bottom: parent.top
+        anchors.right: parent.right
+        transformOrigin: Item.BottomRight
+        rotation: -90
+        width: parent.height
+        height: 5*Devices.density
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#00000000" }
+            GradientStop { position: 1.0; color: "#000000" }
+        }
     }
 
     ListView {
         id: dlist
         anchors.fill: parent
-        anchors.rightMargin: 6*Devices.density
+        anchors.leftMargin: 6*Devices.density
         clip: true
         model: dialogs_model
-        delegate: Rectangle {
+
+        delegate: Item {
             id: list_item
             width: dlist.width
             height: 60*Devices.density
@@ -54,73 +76,86 @@ Item {
                 anchors.fill: parent
                 color: marea.pressed || selected? masterPalette.highlight : "#00000000"
                 opacity: marea.pressed? 0.3 : (selected? 0.2 : 0)
+                anchors.topMargin: 3*Devices.density
+                anchors.bottomMargin: 3*Devices.density
             }
 
-            ContactImage {
-                id: profile_img
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.left: parent.left
-                anchors.margins: 4*Devices.density
-                width: height
-                dialog: dItem
-            }
+            Item {
+                anchors.fill: parent
+                anchors.topMargin: 3*Devices.density
+                anchors.bottomMargin: 3*Devices.density
+                anchors.leftMargin: 5*Devices.density
+                anchors.rightMargin: 12*Devices.density
 
-            Text {
-                id: title_txt
-                anchors.top: parent.top
-                anchors.bottom: parent.verticalCenter
-                anchors.left: profile_img.right
-                anchors.right: time_txt.left
-                anchors.margins: 4*Devices.density
-                anchors.bottomMargin: 0
-                font.family: AsemanApp.globalFontFamily
-                font.pixelSize: 11*Devices.fontDensity
-                horizontalAlignment: Text.AlignLeft
-                verticalAlignment: Text.AlignVCenter
-                color: textColor0
-                wrapMode: Text.WrapAnywhere
-                elide: Text.ElideRight
-                text: isChat? chat.title : user.firstName + " " + user.lastName
-            }
-
-            Text {
-                id: msg_txt
-                anchors.top: parent.verticalCenter
-                anchors.bottom: parent.bottom
-                anchors.left: profile_img.right
-                anchors.right: parent.right
-                anchors.margins: 4*Devices.density
-                anchors.topMargin: 0
-                font.family: AsemanApp.globalFontFamily
-                font.pixelSize: 9*Devices.fontDensity
-                color: textColor2
-                wrapMode: Text.WrapAnywhere
-                elide: Text.ElideRight
-                clip: true
-                text: {
-                    var list = dItem.typingUsers
-                    if( list.length )
-                        return qsTr("Typing...")
-                    else
-                        return emojis.textToEmojiText(message.message)
+                ContactImage {
+                    id: profile_img
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    anchors.margins: 4*Devices.density
+                    width: height
+                    dialog: dItem
                 }
-            }
 
-            Text {
-                id: time_txt
-                anchors.top: parent.top
-                anchors.right: parent.right
-                anchors.margins: 4*Devices.density
-                font.family: AsemanApp.globalFontFamily
-                font.pixelSize: 9*Devices.fontDensity
-                color: textColor1
-                text: Cutegram.getTimeString(msgDate)
-            }
+                Text {
+                    id: title_txt
+                    anchors.top: parent.top
+                    anchors.bottom: parent.verticalCenter
+                    anchors.left: profile_img.right
+                    anchors.right: time_txt.left
+                    anchors.margins: 4*Devices.density
+                    anchors.bottomMargin: 0
+                    font.family: AsemanApp.globalFontFamily
+                    font.pixelSize: 11*Devices.fontDensity
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                    color: "#ffffff"
+                    wrapMode: Text.WrapAnywhere
+                    elide: Text.ElideRight
+                    text: isChat? chat.title : user.firstName + " " + user.lastName
+                    visible: !minimum
+                }
 
-            UnreadItem {
-                unread: dItem.unreadCount
-                visible: unread != 0 && !selected
+                Text {
+                    id: msg_txt
+                    anchors.top: parent.verticalCenter
+                    anchors.bottom: parent.bottom
+                    anchors.left: profile_img.right
+                    anchors.right: parent.right
+                    anchors.margins: 4*Devices.density
+                    anchors.topMargin: 0
+                    font.family: AsemanApp.globalFontFamily
+                    font.pixelSize: 9*Devices.fontDensity
+                    color: "#bbbbbb"
+                    wrapMode: Text.WrapAnywhere
+                    elide: Text.ElideRight
+                    clip: true
+                    visible: !minimum
+                    text: {
+                        var list = dItem.typingUsers
+                        if( list.length )
+                            return qsTr("Typing...")
+                        else
+                            return emojis.textToEmojiText(message.message,14)
+                    }
+                }
+
+                Text {
+                    id: time_txt
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    anchors.margins: 4*Devices.density
+                    font.family: AsemanApp.globalFontFamily
+                    font.pixelSize: 9*Devices.fontDensity
+                    color: "#999999"
+                    text: Cutegram.getTimeString(msgDate)
+                    visible: !minimum
+                }
+
+                UnreadItem {
+                    unread: dItem.unreadCount
+                    visible: unread != 0 && !selected
+                }
             }
 
             MouseArea {
@@ -128,20 +163,35 @@ Item {
                 hoverEnabled: true
                 anchors.fill: parent
                 onClicked: currentDialog = list_item.dItem
+                onContainsMouseChanged: toggleMinimum(containsMouse)
             }
 
             DialogItemTools {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
+                anchors.rightMargin: 12*Devices.density
                 height: 22*Devices.density
                 dialog: dItem
                 show: marea.containsMouse
+                visible: (show || mute) && !minimum
             }
 
             DialogDropFile {
                 anchors.fill: parent
                 currentDialog: dItem
                 color: "#ddffffff"
+                onContainsDragChanged: toggleMinimum(containsDrag)
+            }
+
+            Rectangle {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.right
+                transformOrigin: Item.Center
+                rotation: 45
+                width: 16*Devices.density
+                height: width
+                color: "#E4E9EC"
+                visible: selected
             }
         }
 
@@ -180,8 +230,49 @@ Item {
         flick: dlist
     }
 
+    Timer {
+        id: restore_minimum_timer
+        interval: 500
+        onTriggered: unminimumForce = false
+    }
+
+    Timer {
+        id: restore_unminimum_timer
+        interval: 50
+        onTriggered: unminimumForce = true
+    }
+
     PhysicalScrollBar {
         scrollArea: dlist; height: dlist.height; width: 6*Devices.density
-        anchors.left: dlist.right; anchors.top: dlist.top; color: textColor0
+        anchors.right: dlist.left; anchors.top: dlist.top; color: "#777777"
+    }
+
+    Button {
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        height: 50*Devices.density
+        width: 10*Devices.density
+        normalColor: enter? "#88ffffff" : "#44ffffff"
+        highlightColor: "#aaffffff"
+        onClicked: minimumSwitcher = !minimumSwitcher
+        cursorShape: Qt.PointingHandCursor
+        icon: minimumSwitcher? "files/arrow-right.png" : "files/arrow-left.png"
+        iconHeight: 8*Devices.density
+
+        Behavior on color {
+            ColorAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+        }
+    }
+
+    function toggleMinimum(stt) {
+        if(!minimumSwitcher)
+            return
+        if(stt) {
+            restore_minimum_timer.stop()
+            restore_unminimum_timer.restart()
+        } else {
+            restore_unminimum_timer.stop()
+            restore_minimum_timer.restart()
+        }
     }
 }

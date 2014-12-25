@@ -78,7 +78,7 @@ QString Emojis::currentTheme() const
     return p->theme;
 }
 
-QString Emojis::textToEmojiText(const QString &txt)
+QString Emojis::textToEmojiText(const QString &txt, int size)
 {
     QString res = txt.toHtmlEscaped();
 
@@ -101,7 +101,7 @@ QString Emojis::textToEmojiText(const QString &txt)
                 continue;
 
             QString path = p->emojis.value(emoji);
-            QString in_txt = QString("<img align=\"top\" height=\"20\" width=\"20\" src=\"file://%1\" />").arg(path);
+            QString in_txt = QString("<img align=\"top\" height=\"%2\" width=\"%3\" src=\"file://%1\" />").arg(path).arg(size).arg(size);
             res.replace(i,j,in_txt);
             i += in_txt.size()-1;
             break;

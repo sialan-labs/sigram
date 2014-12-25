@@ -109,8 +109,8 @@ Item {
 
     Row {
         id: row
-        width: parent.width
-        x: particianMode? -width : 0
+        width: parent.width-10*Devices.density
+        x: particianMode? -width : 10*Devices.density
         anchors.top: parent.top
         anchors.margins: frameMargins
         spacing: 8*Devices.density

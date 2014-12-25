@@ -69,14 +69,23 @@ Rectangle {
         width: 48*Devices.density
         color: masterPalette.highlight
 
-        Image {
+        Button {
+            id: about_btn
             anchors.top: parent.top
             anchors.left: parent.left
             width: parent.width
             height: width
-            sourceSize: Qt.size(width,height)
-            source: "files/framed_icon.png"
-            smooth: true
+            normalColor: "#00000000"
+            highlightColor: "#88339DCC"
+            cursorShape: Qt.PointingHandCursor
+            icon: "files/telegram.png"
+            iconHeight: 26*Devices.density
+            tooltipText: qsTr("About Cutegram")
+            tooltipFont.family: AsemanApp.globalFontFamily
+            tooltipFont.pixelSize: 9*Devices.fontDensity
+            onClicked: {
+                aboutMode = true
+            }
         }
 
         Button {
@@ -133,6 +142,19 @@ Rectangle {
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
                 slide_menu.show(configure_component)
+            }
+        }
+
+        Rectangle {
+            anchors.bottom: parent.top
+            anchors.right: parent.right
+            transformOrigin: Item.BottomRight
+            rotation: -90
+            width: parent.height
+            height: 5*Devices.density
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#00000000" }
+                GradientStop { position: 1.0; color: "#88111111" }
             }
         }
     }

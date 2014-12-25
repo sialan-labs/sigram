@@ -666,7 +666,7 @@ void TelegramQml::sendFile(qint64 dId, const QString &fpath)
     emit uploadsChanged();
 }
 
-void TelegramQml::getFile(FileLocationObject *l, qint64 type)
+void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
 {
     if( !p->telegram )
         return;
@@ -685,7 +685,7 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type)
     input.setSecret(l->secret());
     input.setVolumeId(l->volumeId());
 
-    qint64 fileId = p->telegram->uploadGetFile(input, 4092, l->dcId());
+    qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId());
     p->downloads[fileId] = l;
 
     l->download()->setFileId(fileId);

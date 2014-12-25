@@ -72,6 +72,9 @@ public slots:
     void start();
     void close();
     void quit();
+    void aboutAseman();
+    void about();
+    void configure();
     void incomingAppMessage( const QString & msg );
     void active();
 

@@ -49,26 +49,23 @@ Item {
         visible: !action_item.hasAction
         spacing: frameMargins
 
-        Image {
+        ContactImage {
             id: img
             anchors.verticalCenter: parent.verticalCenter
             width: 40*Devices.density
             height: width
-            sourceSize: Qt.size(width,height)
-            source: imgPath.length==0? "files/user.png" : imgPath
-
-            property string imgPath: user.photo.photoSmall.download.location
+            user: msg_item.user
+            isChat: false
         }
 
-        Image {
+        ContactImage {
             id: forward_img
             anchors.verticalCenter: parent.verticalCenter
             width: img.width
             height: img.height
             visible: message.fwdFromId != 0
-            source: imgPath.length==0? "files/user.png" : imgPath
-
-            property string imgPath: fwdUser.photo.photoSmall.download.location
+            user: msg_item.fwdUser
+            isChat: false
         }
 
         Rectangle {
@@ -77,11 +74,13 @@ Item {
             height: column.height + 2*textMargins
             anchors.verticalCenter: parent.verticalCenter
             color: "#ffffff"
+            radius: 6*Devices.density
 
             Rectangle {
                 anchors.fill: parent
                 color: message.out? masterPalette.highlight : "#ffffff"
-                opacity: 0.2
+                opacity: 0.3
+                radius: parent.radius
             }
 
             Column {
