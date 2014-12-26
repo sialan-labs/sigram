@@ -36,6 +36,7 @@ class Cutegram : public QObject
     Q_PROPERTY(int  sysTrayCounter READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
     Q_PROPERTY(int  startupOption  READ startupOption  WRITE setStartupOption  NOTIFY startupOptionChanged )
     Q_PROPERTY(bool notification   READ notification   WRITE setNotification   NOTIFY notificationChanged  )
+    Q_PROPERTY(bool minimumDialogs READ minimumDialogs WRITE setMinimumDialogs NOTIFY minimumDialogsChanged)
 
 public:
     enum StartupOptions {
@@ -68,6 +69,9 @@ public:
     void setNotification(bool stt);
     bool notification() const;
 
+    void setMinimumDialogs(bool stt);
+    bool minimumDialogs() const;
+
 public slots:
     void start();
     void restart();
@@ -88,6 +92,7 @@ signals:
     void languageDirectionChanged();
     void startupOptionChanged();
     void notificationChanged();
+    void minimumDialogsChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

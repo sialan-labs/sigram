@@ -11,9 +11,8 @@ Item {
     property alias telegramObject: dialogs_model.telegram
     property Dialog currentDialog: telegramObject.dialog(0)
 
-    property bool minimumSwitcher: true
     property bool unminimumForce: false
-    property bool minimum: minimumSwitcher && !unminimumForce
+    property bool minimum: Cutegram.minimumDialogs && !unminimumForce
 
     Behavior on width {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -232,6 +231,14 @@ Item {
         }
     }
 
+    MouseArea {
+        anchors.left: parent.right
+        anchors.right: dlist.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        hoverEnabled: true
+    }
+
     NormalWheelScroll {
         flick: dlist
     }
@@ -260,9 +267,9 @@ Item {
         width: 10*Devices.density
         normalColor: enter? "#88ffffff" : "#44ffffff"
         highlightColor: "#aaffffff"
-        onClicked: minimumSwitcher = !minimumSwitcher
+        onClicked: Cutegram.minimumDialogs = !Cutegram.minimumDialogs
         cursorShape: Qt.PointingHandCursor
-        icon: minimumSwitcher? "files/arrow-right.png" : "files/arrow-left.png"
+        icon: Cutegram.minimumDialogs? "files/arrow-right.png" : "files/arrow-left.png"
         iconHeight: 8*Devices.density
 
         Behavior on color {
@@ -271,7 +278,7 @@ Item {
     }
 
     function toggleMinimum(stt) {
-        if(!minimumSwitcher)
+        if(!Cutegram.minimumDialogs)
             return
         if(stt) {
             restore_minimum_timer.stop()

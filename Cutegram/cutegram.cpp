@@ -59,6 +59,7 @@ public:
     int sysTrayCounter;
     int startupOption;
     bool notification;
+    bool minimumDialogs;
 
     QTextDocument *doc;
 
@@ -86,6 +87,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->sysTrayCounter = 0;
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
+    p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->translator = new QTranslator(this);
 
 #ifdef Q_OS_ANDROID
@@ -488,6 +490,21 @@ void Cutegram::setNotification(bool stt)
 bool Cutegram::notification() const
 {
     return p->notification;
+}
+
+void Cutegram::setMinimumDialogs(bool stt)
+{
+    if(p->minimumDialogs == stt)
+        return;
+
+    p->minimumDialogs = stt;
+    AsemanApplication::settings()->setValue("General/minimumDialogs", stt);
+    emit minimumDialogsChanged();
+}
+
+bool Cutegram::minimumDialogs() const
+{
+    return p->minimumDialogs;
 }
 
 void Cutegram::init_languages()
