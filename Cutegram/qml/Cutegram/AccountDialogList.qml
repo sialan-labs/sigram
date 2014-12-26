@@ -6,7 +6,7 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: ad_list
-    width: minimum? 80*Devices.density : 275*Devices.density
+    width: minimum? 80*Devices.density : dlist.width
 
     property alias telegramObject: dialogs_model.telegram
     property Dialog currentDialog: telegramObject.dialog(0)
@@ -52,7 +52,8 @@ Item {
 
     ListView {
         id: dlist
-        anchors.fill: parent
+        width: 275*Devices.density
+        height: parent.height
         anchors.leftMargin: 6*Devices.density
         clip: true
         model: dialogs_model
@@ -71,6 +72,11 @@ Item {
             property variant msgDate: CalendarConv.fromTime_t(message.date)
 
             property bool selected: currentDialog==dItem
+            property real itemOpacities: minimum? 0 : 1
+
+            Behavior on itemOpacities {
+                NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+            }
 
             Rectangle {
                 anchors.fill: parent
@@ -113,7 +119,7 @@ Item {
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     text: isChat? chat.title : user.firstName + " " + user.lastName
-                    visible: !minimum
+                    opacity: itemOpacities
                 }
 
                 Text {
@@ -130,7 +136,7 @@ Item {
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     clip: true
-                    visible: !minimum
+                    opacity: itemOpacities
                     text: {
                         var list = dItem.typingUsers
                         if( list.length )
@@ -149,7 +155,7 @@ Item {
                     font.pixelSize: 9*Devices.fontDensity
                     color: "#999999"
                     text: Cutegram.getTimeString(msgDate)
-                    visible: !minimum
+                    opacity: itemOpacities
                 }
 
                 UnreadItem {
@@ -173,7 +179,7 @@ Item {
                 height: 22*Devices.density
                 dialog: dItem
                 show: marea.containsMouse
-                visible: (show || mute) && !minimum
+                opacity: itemOpacities
             }
 
             DialogDropFile {
@@ -184,8 +190,8 @@ Item {
             }
 
             Rectangle {
+                x: ad_list.width - width/2
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.right
                 transformOrigin: Item.Center
                 rotation: 45
                 width: 16*Devices.density

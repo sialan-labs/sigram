@@ -158,6 +158,7 @@ Rectangle {
         textColor: "#ffffff"
         height: 40*Devices.density
         text: qsTr("Logout")
+        onClicked: Cutegram.logout()
     }
 
     Timer {

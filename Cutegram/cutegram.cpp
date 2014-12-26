@@ -187,6 +187,28 @@ void Cutegram::start()
     init_systray();
 }
 
+void Cutegram::restart()
+{
+    QProcess::startDetached(QCoreApplication::applicationFilePath(), QStringList()<<"--force");
+    quit();
+}
+
+void Cutegram::logout()
+{
+    const QString &home = AsemanApplication::homePath();
+    const QStringList &profiles = QDir(home).entryList(QDir::Dirs|QDir::NoDotAndDotDot);
+    foreach(const QString &profile, profiles)
+    {
+        const QString &ppath = home + "/" + profile;
+        QFile::remove(ppath + "/auth");
+        QFile::remove(ppath + "/config");
+//        QFile::remove(ppath + "/userdata.db");
+    }
+    QFile::remove(home + "/profiles.sqlite");
+
+    restart();
+}
+
 void Cutegram::close()
 {
     p->close_blocker = false;

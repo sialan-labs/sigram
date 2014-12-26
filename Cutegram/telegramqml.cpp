@@ -101,6 +101,7 @@ public:
     UploadObject *nullUpload;
     ChatFullObject *nullChatFull;
     ContactObject *nullContact;
+    FileLocationObject *nullLocation;
 
     QMimeDatabase mime_db;
 
@@ -141,6 +142,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->nullUpload = new UploadObject(this);
     p->nullChatFull = new ChatFullObject(ChatFull(), this);
     p->nullContact = new ContactObject(Contact(), this);
+    p->nullLocation = new FileLocationObject(FileLocation(), this);
 }
 
 QString TelegramQml::phoneNumber() const
@@ -465,6 +467,11 @@ ContactObject *TelegramQml::nullContact() const
     return p->nullContact;
 }
 
+FileLocationObject *TelegramQml::nullLocation() const
+{
+    return p->nullLocation;
+}
+
 QString TelegramQml::fileLocation(FileLocationObject *l)
 {
     const QString & dpath = downloadPath();
@@ -643,12 +650,12 @@ void TelegramQml::sendFile(qint64 dId, const QString &fpath)
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
     if( t.name().contains("image/") )
         fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
-    else
-    if( t.name().contains("video/") )
-        fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, 0, 0);
-    else
-    if( t.name().contains("audio/") )
-        fileId = p->telegram->messagesSendAudio(peer, p->msg_send_random_id, file, 0);
+//    else
+//    if( t.name().contains("video/") )
+//        fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, 0, 0);
+//    else
+//    if( t.name().contains("audio/") )
+//        fileId = p->telegram->messagesSendAudio(peer, p->msg_send_random_id, file, 0);
     else
         fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file);
 
@@ -913,9 +920,6 @@ void TelegramQml::authLogOut_slt(qint64 id, bool ok)
     emit authNeededChanged();
     emit authLoggedInChanged();
     emit meChanged();
-
-    if( p->authLoggedIn )
-        p->telegram->accountUpdateStatus(!p->online || p->invisible);
 }
 
 void TelegramQml::authSendCode_slt(qint64 id, bool phoneRegistered, qint32 sendCallTimeout)

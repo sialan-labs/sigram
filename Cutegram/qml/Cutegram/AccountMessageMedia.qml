@@ -31,7 +31,34 @@ Rectangle {
     property real typeInputAudioFileLocation: 0x74dc404d
     property real typeInputDocumentFileLocation: 0x4e45abe9
 
-    property FileLocation locationObj
+    property FileLocation locationObj: {
+        var result
+        switch( media.classType )
+        {
+        case typeMessageMediaPhoto:
+            result = media.photo.sizes.last.location
+            break;
+
+        case typeMessageMediaVideo:
+            result = telegramObject.locationOf(media.video.id, media.video.dcId, media.video.accessHash)
+            break;
+
+        case typeMessageMediaDocument:
+            result = telegramObject.locationOf(media.document.id, media.document.dcId, media.document.accessHash)
+            break;
+
+        case typeMessageMediaAudio:
+            result = telegramObject.locationOf(media.audio.id, media.audio.dcId, media.audio.accessHash)
+            break;
+
+        case typeMessageMediaUnsupported:
+        default:
+            result = telegramObject.nullLocation
+            break;
+        }
+
+        return result
+    }
 
     onHasMediaChanged: {
         if( !hasMedia )
@@ -114,28 +141,7 @@ Rectangle {
         return result
     }
 
-    property string fileLocation: {
-        var result = ""
-        switch( media.classType )
-        {
-        case typeMessageMediaPhoto:
-            result = media.photo.sizes.last.location.download.location;
-            break;
-
-        case typeMessageMediaVideo:
-        case typeMessageMediaDocument:
-        case typeMessageMediaAudio:
-            result = locationObj && locationObj.download? locationObj.download.location : ""
-            break;
-
-        case typeMessageMediaUnsupported:
-        default:
-            result = ""
-            break;
-        }
-
-        return result
-    }
+    property string fileLocation: locationObj.download.location
 
     Image {
         id: media_img
@@ -210,7 +216,7 @@ Rectangle {
         topColor: masterPalette.highlight
         color: masterPalette.highlightedText
         radius: 0
-        percent: locationObj? locationObj.download.downloaded/locationObj.download.total : false
+        percent: locationObj.download.downloaded/locationObj.download.total
         visible: indicator.active
     }
 
@@ -220,28 +226,7 @@ Rectangle {
         light: download_frame.visible
         modern: true
         indicatorSize: 22*Devices.density
-        property bool active: {
-            var result
-            switch( media.classType )
-            {
-            case typeMessageMediaPhoto:
-                result = media_img.status != Image.Ready
-                break;
-
-            case typeMessageMediaVideo:
-            case typeMessageMediaAudio:
-            case typeMessageMediaUnsupported:
-            case typeMessageMediaDocument:
-                result = locationObj? locationObj.download.location.length==0 : false
-                break;
-
-            default:
-                result = false
-                break;
-            }
-
-            return result
-        }
+        property bool active: locationObj.download.fileId!=0? locationObj.download.location.length==0 : false
 
         onActiveChanged: {
             if( active )
@@ -262,21 +247,18 @@ Rectangle {
                 switch( media.classType )
                 {
                 case typeMessageMediaPhoto:
-                    telegramObject.getFile(media.photo.sizes.last.location)
+                    telegramObject.getFile(locationObj)
                     break;
 
                 case typeMessageMediaVideo:
-                    locationObj = telegramObject.locationOf(media.video.id, media.video.dcId, media.video.accessHash)
                     telegramObject.getFile(locationObj, typeInputVideoFileLocation, media.video.size)
                     break;
 
                 case typeMessageMediaDocument:
-                    locationObj = telegramObject.locationOf(media.document.id, media.document.dcId, media.document.accessHash)
                     telegramObject.getFile(locationObj, typeInputDocumentFileLocation, media.document.size)
                     break;
 
                 case typeMessageMediaAudio:
-                    locationObj = telegramObject.locationOf(media.audio.id, media.audio.dcId, media.audio.accessHash)
                     telegramObject.getFile(locationObj, typeInputAudioFileLocation, media.audio.size)
                     break;
 

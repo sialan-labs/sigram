@@ -87,10 +87,12 @@ Rectangle {
             var title = user.firstName + " " + user.lastName
 
             var actions = new Array
-            actions[0] = notification.notifyActShow
-            actions[1] = qsTr("Show")
-            actions[2] = notification.notifyActMute
-            actions[3] = qsTr("Mute")
+            if(Desktop.desktopSession != Desktop.Unity) {
+                actions[0] = notification.notifyActShow
+                actions[1] = qsTr("Show")
+                actions[2] = notification.notifyActMute
+                actions[3] = qsTr("Mute")
+            }
 
             var nid = notification.sendNotify( title, msg.message, user.photo.photoSmall.download.location, 0, 3000, actions )
 

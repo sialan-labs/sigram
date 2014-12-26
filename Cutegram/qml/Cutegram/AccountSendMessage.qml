@@ -45,6 +45,33 @@ Rectangle {
         }
     }
 
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.RightButton
+        cursorShape: Qt.IBeamCursor
+        onClicked: {
+            if( mouse.button == Qt.RightButton ) {
+                var actions = ["Copy","Paste","Delete"]
+                var res = Cutegram.showMenu(actions)
+                switch(res) {
+                case 0:
+                    txt.copy()
+                    break;
+
+                case 1:txt
+                    txt.paste()
+                    break;
+
+                case 2:
+                    txt.remove(txt.selectionStart, txt.selectionEnd)
+                    break;
+                }
+            } else {
+                mouse.accepted = false
+            }
+        }
+    }
+
     Button {
         id: attach_btn
         anchors.left: parent.left

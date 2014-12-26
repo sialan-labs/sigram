@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     app.setPalette(palette);
 
 #ifdef DESKTOP_DEVICE
-    if( app.isRunning() )
+    if( !app.arguments().contains("--force") && app.isRunning() )
     {
         app.sendMessage("show");
         return 0;

@@ -83,6 +83,7 @@ class TelegramQml : public QObject
     Q_PROPERTY(UploadObject* nullUpload READ nullUpload NOTIFY fakeSignal)
     Q_PROPERTY(ChatFullObject* nullChatFull READ nullChatFull NOTIFY fakeSignal)
     Q_PROPERTY(ContactObject* nullContact READ nullContact NOTIFY fakeSignal)
+    Q_PROPERTY(FileLocationObject* nullLocation READ nullLocation NOTIFY fakeSignal)
 
 public:
     TelegramQml(QObject *parent = 0);
@@ -144,6 +145,7 @@ public:
     UploadObject *nullUpload() const;
     ChatFullObject *nullChatFull() const;
     ContactObject *nullContact() const;
+    FileLocationObject *nullLocation() const;
 
     Q_INVOKABLE QString fileLocation( FileLocationObject *location );
 

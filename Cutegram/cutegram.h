@@ -70,6 +70,8 @@ public:
 
 public slots:
     void start();
+    void restart();
+    void logout();
     void close();
     void quit();
     void aboutAseman();
