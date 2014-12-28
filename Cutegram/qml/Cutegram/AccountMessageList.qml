@@ -62,6 +62,7 @@ Rectangle {
         clip: true
         model: messages_model
         delegate: AccountMessageItem {
+            id: msg_item
             x: 8*Devices.density
             width: mlist.width - 2*x
             maximumMediaHeight: acc_msg_list.maximumMediaHeight

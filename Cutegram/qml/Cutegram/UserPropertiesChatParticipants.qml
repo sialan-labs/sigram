@@ -32,8 +32,8 @@ Item {
         id: list
         anchors.fill: parent
         model: cp_model
-        cellWidth: width/Math.floor(width/92*Devices.density)
-        cellHeight: 92*Devices.density
+        cellWidth: width/Math.floor(width/70*Devices.density)
+        cellHeight: 70*Devices.density
         clip: true
         delegate: Item {
             id: glist_item
@@ -61,6 +61,7 @@ Item {
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAnywhere
                 maximumLineCount: 1
+                color: "#dddddd"
                 text: user.firstName + " " + user.lastName
             }
         }

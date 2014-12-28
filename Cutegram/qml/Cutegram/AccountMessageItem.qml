@@ -29,6 +29,8 @@ Item {
     property bool sent: message.sent
     property bool uploading: message.upload.fileId != 0
 
+    property alias hasMedia: msg_media.hasMedia
+
     onSentChanged: {
         if( sent )
             indicator.stop()
