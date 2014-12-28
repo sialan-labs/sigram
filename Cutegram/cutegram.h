@@ -31,7 +31,9 @@ class Cutegram : public QObject
     Q_ENUMS(StartupOptions)
 
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
-    Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
+
+    Q_PROPERTY(QString language   READ language   WRITE setLanguage   NOTIFY languageChanged  )
+    Q_PROPERTY(QString background READ background WRITE setBackground NOTIFY backgroundChanged)
 
     Q_PROPERTY(int  sysTrayCounter  READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
     Q_PROPERTY(int  startupOption   READ startupOption  WRITE setStartupOption  NOTIFY startupOptionChanged )
@@ -76,6 +78,9 @@ public:
     void setShowLastMessage(bool stt);
     bool showLastMessage() const;
 
+    void setBackground(const QString &background);
+    QString background() const;
+
 public slots:
     void start();
     void restart();
@@ -98,6 +103,7 @@ signals:
     void notificationChanged();
     void minimumDialogsChanged();
     void showLastMessageChanged();
+    void backgroundChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

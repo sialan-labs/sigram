@@ -18,7 +18,7 @@ Rectangle {
     property real maximumMediaHeight: (height-topMargin-bottomMargin)*0.75
     property real maximumMediaWidth: width*0.75
 
-    property bool isActive: View.active
+    property bool isActive: View.active && View.visible
 
     signal forwardRequest( variant message )
 
@@ -45,10 +45,11 @@ Rectangle {
 
     Image {
         anchors.fill: parent
-        fillMode: Image.Tile
+        fillMode: Cutegram.background.length==0? Image.Tile : Image.PreserveAspectCrop
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
-        source: "files/telegram_background.png"
+        sourceSize: Cutegram.background.length==0? Cutegram.imageSize(":/qml/files/telegram_background.png") : Qt.size(width,height)
+        source: Cutegram.background.length==0? "files/telegram_background.png" : "file://" + Cutegram.background
         opacity: 0.7
     }
 

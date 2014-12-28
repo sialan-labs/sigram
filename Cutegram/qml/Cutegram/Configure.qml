@@ -120,6 +120,16 @@ Rectangle {
                     color: "#333333"
                     text: qsTr("Detailed List")
                 }
+
+                Text {
+                    id: background_text
+                    height: background_btn.height
+                    verticalAlignment: Text.AlignVCenter
+                    font.family: AsemanApp.globalFontFamily
+                    font.pixelSize: 9*Devices.fontDensity
+                    color: "#333333"
+                    text: qsTr("Background")
+                }
             }
 
             Column {
@@ -157,6 +167,22 @@ Rectangle {
                     id: last_msg_checkbox
                     checked: Cutegram.showLastMessage
                     onCheckedChanged: Cutegram.showLastMessage = checked
+                }
+
+                QtControls.Button {
+                    id: background_btn
+                    text: Cutegram.background.length==0? qsTr("Change") : qsTr("Remove")
+                    onClicked: {
+                        if(Cutegram.background.length==0) {
+                            var path = Desktop.getOpenFileName(View, qsTr("Select Image"), "*.png *.jpg *.jpeg")
+                            if(path.length == 0)
+                                return
+
+                            Cutegram.background = path
+                        } else {
+                            Cutegram.background = ""
+                        }
+                    }
                 }
             }
         }

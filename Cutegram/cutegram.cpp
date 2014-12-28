@@ -75,6 +75,8 @@ public:
     QHash<QString,QVariant> languages;
     QHash<QString,QLocale> locales;
     QString language;
+
+    QString background;
 };
 
 Cutegram::Cutegram(QObject *parent) :
@@ -90,6 +92,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
+    p->background = AsemanApplication::settings()->value("General/background").toString();
     p->translator = new QTranslator(this);
 
 #ifdef Q_OS_ANDROID
@@ -522,6 +525,20 @@ void Cutegram::setShowLastMessage(bool stt)
 bool Cutegram::showLastMessage() const
 {
     return p->showLastMessage;
+}
+
+void Cutegram::setBackground(const QString &background)
+{
+    if(p->background == background)
+        return;
+
+    p->background = background;
+    emit backgroundChanged();
+}
+
+QString Cutegram::background() const
+{
+    return p->background;
 }
 
 void Cutegram::init_languages()

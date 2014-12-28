@@ -13,7 +13,7 @@ Rectangle {
     property alias telegramObject: telegram
     property alias unreadCount: telegram.unreadCount
 
-    property bool isActive: View.active
+    property bool isActive: View.active && View.visible
 
     onIsActiveChanged: {
         telegram.online = isActive
@@ -59,7 +59,6 @@ Rectangle {
         phoneNumber: accountItem.number
         onAuthCallRequested: acc_sign.callButton = false
         onAuthCodeRequested: {
-            console.debug(sendCallTimeout)
             acc_sign.timeOut = sendCallTimeout
         }
         onAuthLoggedInChanged: {
