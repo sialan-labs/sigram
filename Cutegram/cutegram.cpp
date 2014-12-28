@@ -60,6 +60,7 @@ public:
     int startupOption;
     bool notification;
     bool minimumDialogs;
+    bool showLastMessage;
 
     QTextDocument *doc;
 
@@ -88,6 +89,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
+    p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->translator = new QTranslator(this);
 
 #ifdef Q_OS_ANDROID
@@ -505,6 +507,21 @@ void Cutegram::setMinimumDialogs(bool stt)
 bool Cutegram::minimumDialogs() const
 {
     return p->minimumDialogs;
+}
+
+void Cutegram::setShowLastMessage(bool stt)
+{
+    if(p->showLastMessage == stt)
+        return;
+
+    p->showLastMessage = stt;
+    AsemanApplication::settings()->setValue("General/showLastMessage", stt);
+    emit showLastMessageChanged();
+}
+
+bool Cutegram::showLastMessage() const
+{
+    return p->showLastMessage;
 }
 
 void Cutegram::init_languages()

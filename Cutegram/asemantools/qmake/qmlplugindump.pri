@@ -22,7 +22,7 @@ dmpPluginCommand = $(COPY_FILE) $$qmldirSrc $$qmkdirDst
 dmpPluginCommand = $$dmpPluginCommand && echo plugin $$TARGET >> $$qmkdirDst
 dmpPluginCommand = $$dmpPluginCommand && $(COPY_FILE) $$qmkdirDst $$qmkdirDst2
 unix {
-    dmpPluginCommand = $$dmpPluginCommand && LD_LIBRARY_PATH=$$OUT_PWD/$$DESTDIR
+    dmpPluginCommand = $$dmpPluginCommand && LD_LIBRARY_PATH=$$OUT_PWD/$$DESTDIR:$$PREFIX
     dmpPluginCommand = $$dmpPluginCommand $$QMAKE_QMLPLUGINDUMP $$uri 1.0 $$OUT_PWD/$$DESTDIR/.. > $$OUT_PWD/$$DESTDIR/plugins.qmltypes
 } win32 {
     CONFIG(debug, debug|release) {
@@ -31,7 +31,11 @@ unix {
         libsPath = $$replace(libsPath, /, \\)
         libsPath ~= s,\\\\\\.?\\\\,\\,
 
-        dmpPluginCommand = $$dmpPluginCommand && SET PATH=%PATH%;$$libsPath
+        prefixPath = $$PREFIX
+        prefixPath = $$replace(prefixPath, /, \\)
+        prefixPath ~= s,\\\\\\.?\\\\,\\,
+
+        dmpPluginCommand = $$dmpPluginCommand && SET PATH=%PATH%;$$libsPath;$$prefixPath
         dmpPluginCommand = $$dmpPluginCommand&& $$QMAKE_QMLPLUGINDUMP $$uri 1.0 $$OUT_PWD/$$DESTDIR/.. > $$OUT_PWD/$$DESTDIR/plugins.qmltypes
     }
 }

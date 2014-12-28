@@ -40,15 +40,18 @@ Rectangle {
             break;
 
         case typeMessageMediaVideo:
-            result = telegramObject.locationOf(media.video.id, media.video.dcId, media.video.accessHash)
+            result = telegramObject.locationOfVideo(media.video)
+            telegramObject.getFileJustCheck(result)
             break;
 
         case typeMessageMediaDocument:
-            result = telegramObject.locationOf(media.document.id, media.document.dcId, media.document.accessHash)
+            result = telegramObject.locationOfDocument(media.document)
+            telegramObject.getFileJustCheck(result)
             break;
 
         case typeMessageMediaAudio:
-            result = telegramObject.locationOf(media.audio.id, media.audio.dcId, media.audio.accessHash)
+            result = telegramObject.locationOfAudio(media.audio)
+            telegramObject.getFileJustCheck(result)
             break;
 
         case typeMessageMediaUnsupported:
@@ -216,7 +219,7 @@ Rectangle {
         topColor: masterPalette.highlight
         color: masterPalette.highlightedText
         radius: 0
-        percent: locationObj.download.downloaded/locationObj.download.total
+        percent: 100*locationObj.download.downloaded/locationObj.download.total
         visible: indicator.active
     }
 

@@ -37,6 +37,8 @@ Item {
     property real typeUserStatusEmpty: 0x9d05049
     property real typeUserStatusOnline: 0xedb93949
 
+    property bool circleMode: true
+
     Rectangle {
         id: mask
         anchors.fill: parent
@@ -52,7 +54,7 @@ Item {
         source: imgPath.length==0? (isChat?"files/group.png":"files/user.png") : imgPath
         asynchronous: true
         fillMode: Image.PreserveAspectCrop
-        visible: false
+        visible: !circleMode
 
         property string imgPath: isChat? chat.photo.photoSmall.download.location : user.photo.photoSmall.download.location
     }
@@ -62,8 +64,9 @@ Item {
         anchors.fill: img
         source: img
         maskSource: mask
-        threshold: 0.4
-        spread: 0.6
+        threshold: circleMode? 0.4 : 0
+        spread: circleMode? 0.6 : 0
+        visible: circleMode
     }
 }
 

@@ -22,6 +22,9 @@
 #include <QObject>
 #include "types/inputfilelocation.h"
 
+class DocumentObject;
+class VideoObject;
+class AudioObject;
 class WallPaper;
 class WallPaperObject;
 class UserData;
@@ -133,7 +136,11 @@ public:
     Q_INVOKABLE MessageObject *upload(qint64 id) const;
     Q_INVOKABLE ChatFullObject *chatFull(qint64 id) const;
     Q_INVOKABLE ContactObject *contact(qint64 id) const;
+
     Q_INVOKABLE FileLocationObject *locationOf(qint64 id, qint64 dcId, qint64 accessHash);
+    Q_INVOKABLE FileLocationObject *locationOfDocument(DocumentObject *doc);
+    Q_INVOKABLE FileLocationObject *locationOfVideo(VideoObject *vid);
+    Q_INVOKABLE FileLocationObject *locationOfAudio(AudioObject *aud);
 
     Q_INVOKABLE DialogObject *fakeDialogObject( qint64 id, bool isChat );
 
@@ -170,6 +177,7 @@ public slots:
 
     void sendFile( qint64 dialogId, const QString & file );
     void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
+    void getFileJustCheck(FileLocationObject *location);
     void checkFile( FileLocationObject *location );
     void cancelSendGet( qint64 fileId );
 

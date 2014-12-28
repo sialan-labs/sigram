@@ -408,6 +408,21 @@ FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 acces
     return obj;
 }
 
+FileLocationObject *TelegramQml::locationOfDocument(DocumentObject *doc)
+{
+    return locationOf(doc->id(), doc->dcId(), doc->accessHash());
+}
+
+FileLocationObject *TelegramQml::locationOfVideo(VideoObject *vid)
+{
+    return locationOf(vid->id(), vid->dcId(), vid->accessHash());
+}
+
+FileLocationObject *TelegramQml::locationOfAudio(AudioObject *aud)
+{
+    return locationOf(aud->id(), aud->dcId(), aud->accessHash());
+}
+
 DialogObject *TelegramQml::fakeDialogObject(qint64 id, bool isChat)
 {
     if( p->fakeDialogs.contains(id) )
@@ -475,7 +490,7 @@ FileLocationObject *TelegramQml::nullLocation() const
 QString TelegramQml::fileLocation(FileLocationObject *l)
 {
     const QString & dpath = downloadPath();
-    const QString & fname = l->accessHash()!=0? QString::number(l->accessHash()) :
+    const QString & fname = l->accessHash()!=0? QString::number(l->id()) :
                                                 QString("%1_%2").arg(l->volumeId()).arg(l->localId());
 
     QDir().mkpath(dpath);
@@ -696,6 +711,16 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
     p->downloads[fileId] = l;
 
     l->download()->setFileId(fileId);
+}
+
+void TelegramQml::getFileJustCheck(FileLocationObject *l)
+{
+    if( !p->telegram )
+        return;
+
+    const QString & download_file = fileLocation(l);
+    if( QFile::exists(download_file) )
+        l->download()->setLocation("file://"+download_file);
 }
 
 Message TelegramQml::newMessage(qint64 dId)

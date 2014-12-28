@@ -33,10 +33,11 @@ class Cutegram : public QObject
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
     Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
 
-    Q_PROPERTY(int  sysTrayCounter READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
-    Q_PROPERTY(int  startupOption  READ startupOption  WRITE setStartupOption  NOTIFY startupOptionChanged )
-    Q_PROPERTY(bool notification   READ notification   WRITE setNotification   NOTIFY notificationChanged  )
-    Q_PROPERTY(bool minimumDialogs READ minimumDialogs WRITE setMinimumDialogs NOTIFY minimumDialogsChanged)
+    Q_PROPERTY(int  sysTrayCounter  READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
+    Q_PROPERTY(int  startupOption   READ startupOption  WRITE setStartupOption  NOTIFY startupOptionChanged )
+    Q_PROPERTY(bool notification    READ notification   WRITE setNotification   NOTIFY notificationChanged  )
+    Q_PROPERTY(bool minimumDialogs  READ minimumDialogs WRITE setMinimumDialogs NOTIFY minimumDialogsChanged)
+    Q_PROPERTY(bool showLastMessage READ showLastMessage WRITE setShowLastMessage NOTIFY showLastMessageChanged)
 
 public:
     enum StartupOptions {
@@ -72,6 +73,9 @@ public:
     void setMinimumDialogs(bool stt);
     bool minimumDialogs() const;
 
+    void setShowLastMessage(bool stt);
+    bool showLastMessage() const;
+
 public slots:
     void start();
     void restart();
@@ -93,6 +97,7 @@ signals:
     void startupOptionChanged();
     void notificationChanged();
     void minimumDialogsChanged();
+    void showLastMessageChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

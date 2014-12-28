@@ -15,7 +15,7 @@
    height="96"
    id="svg2408"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="flash.svg">
+   sodipodi:docname="cutegram.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -26,14 +26,14 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1104"
-     inkscape:window-height="721"
+     inkscape:window-height="716"
      id="namedview59"
      showgrid="false"
      inkscape:zoom="4.9166667"
      inkscape:cx="37.839246"
      inkscape:cy="54.259387"
-     inkscape:window-x="48"
-     inkscape:window-y="0"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2408" />
   <defs
@@ -365,18 +365,7 @@
   </g>
   <g
      id="layer5"
-     transform="translate(0.20338983,0.20338983)">
-    <rect
-       width="66"
-       height="66"
-       rx="12"
-       ry="12"
-       x="15"
-       y="15"
-       clip-path="url(#clipPath3613)"
-       id="rect3171"
-       style="opacity:0.1;fill:url(#linearGradient3613);fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter3794)" />
-  </g>
+     transform="translate(0.20338983,0.20338983)" />
   <g
      id="g3083"
      transform="matrix(0.50185823,0,0,0.50185823,-10.575852,-14.081993)">

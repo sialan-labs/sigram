@@ -110,6 +110,16 @@ Rectangle {
                     color: "#333333"
                     text: qsTr("Languages")
                 }
+
+                Text {
+                    id: last_msg_text
+                    height: last_msg_checkbox.height
+                    verticalAlignment: Text.AlignVCenter
+                    font.family: AsemanApp.globalFontFamily
+                    font.pixelSize: 9*Devices.fontDensity
+                    color: "#333333"
+                    text: qsTr("Detailed List")
+                }
             }
 
             Column {
@@ -141,6 +151,12 @@ Rectangle {
                     }
 
                     onCurrentTextChanged: if(!init_timer.running) Cutegram.language = currentText
+                }
+
+                QtControls.CheckBox {
+                    id: last_msg_checkbox
+                    checked: Cutegram.showLastMessage
+                    onCheckedChanged: Cutegram.showLastMessage = checked
                 }
             }
         }

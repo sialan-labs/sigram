@@ -78,13 +78,13 @@ QString Emojis::currentTheme() const
     return p->theme;
 }
 
-QString Emojis::textToEmojiText(const QString &txt, int size)
+QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
 {
     QString res = txt.toHtmlEscaped();
 
     QRegExp links_rxp("((?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w\\/))");
     int pos = 0;
-    while ((pos = links_rxp.indexIn(res, pos)) != -1)
+    while (!skipLinks && (pos = links_rxp.indexIn(res, pos)) != -1)
     {
         QString link = links_rxp.cap(1);
         QString atag = QString("<a href='%1'>%2</a>").arg(link,link);

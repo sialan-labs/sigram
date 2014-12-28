@@ -6,13 +6,15 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: ad_list
-    width: minimum? 80*Devices.density : dlist.width
+    width: minimum? 80*Devices.density : 275*Devices.density
 
     property alias telegramObject: dialogs_model.telegram
     property Dialog currentDialog: telegramObject.dialog(0)
 
     property bool unminimumForce: false
     property bool minimum: Cutegram.minimumDialogs && !unminimumForce
+
+    property bool showLastMessage: Cutegram.showLastMessage
 
     Behavior on width {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -51,16 +53,16 @@ Item {
 
     ListView {
         id: dlist
-        width: 275*Devices.density
+        width: 275*Devices.density - ad_list.x
         height: parent.height
-        anchors.leftMargin: 6*Devices.density
+        x: 6*Devices.density
         clip: true
         model: dialogs_model
 
         delegate: Item {
             id: list_item
             width: dlist.width
-            height: 60*Devices.density
+            height: showLastMessage? 60*Devices.density : 54*Devices.density
             clip: true
 
             property Dialog dItem: item
@@ -100,12 +102,13 @@ Item {
                     anchors.margins: 4*Devices.density
                     width: height
                     dialog: dItem
+                    circleMode: false
                 }
 
                 Text {
                     id: title_txt
                     anchors.top: parent.top
-                    anchors.bottom: parent.verticalCenter
+                    anchors.bottom: showLastMessage? parent.verticalCenter : parent.bottom
                     anchors.left: profile_img.right
                     anchors.right: time_txt.left
                     anchors.margins: 4*Devices.density
@@ -117,6 +120,7 @@ Item {
                     color: "#ffffff"
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
+                    maximumLineCount: 1
                     text: isChat? chat.title : user.firstName + " " + user.lastName
                     opacity: itemOpacities
                 }
@@ -136,12 +140,13 @@ Item {
                     elide: Text.ElideRight
                     clip: true
                     opacity: itemOpacities
+                    visible: showLastMessage
                     text: {
                         var list = dItem.typingUsers
                         if( list.length )
                             return qsTr("Typing...")
                         else
-                            return emojis.textToEmojiText(message.message,14)
+                            return emojis.textToEmojiText(message.message,14,true)
                     }
                 }
 
@@ -155,6 +160,7 @@ Item {
                     color: "#999999"
                     text: Cutegram.getTimeString(msgDate)
                     opacity: itemOpacities
+                    visible: showLastMessage
                 }
 
                 UnreadItem {
@@ -189,7 +195,7 @@ Item {
             }
 
             Rectangle {
-                x: ad_list.width - width/2
+                x: ad_list.width - width/2 - dlist.x
                 anchors.verticalCenter: parent.verticalCenter
                 transformOrigin: Item.Center
                 rotation: 45
