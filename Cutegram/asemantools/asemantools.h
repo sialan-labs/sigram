@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QVariant>
 #include <QVariantMap>
+#include <QSize>
 
 class AsemanToolsPrivate;
 class AsemanTools : public QObject
@@ -48,6 +49,8 @@ public slots:
     static qreal colorSaturation( const QColor & clr );
 
     static QVariantMap colorHsl( const QColor & clr );
+
+    static bool createVideoThumbnail(const QString &video, const QString &output, QString ffmpegPath = QString());
 
     static QString translateNumbers( QString input );
     static QString passToMd5( const QString & pass );

@@ -103,6 +103,7 @@ Rectangle {
             break;
 
         case typeMessageMediaUnsupported:
+        case typeMessageMediaAudio:
         case typeMessageMediaDocument:
             result = 168*Devices.density
             break;
@@ -132,6 +133,7 @@ Rectangle {
             break;
 
         case typeMessageMediaUnsupported:
+        case typeMessageMediaAudio:
         case typeMessageMediaDocument:
             result = width
             break;
@@ -168,6 +170,9 @@ Rectangle {
                 break;
 
             case typeMessageMediaAudio:
+                result = "files/audio.png"
+                break;
+
             case typeMessageMediaUnsupported:
                 result = "files/document.png"
                 break;

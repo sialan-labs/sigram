@@ -17,6 +17,7 @@
 */
 
 #include "asemantools/asemanapplication.h"
+#include "asemantools/asemantools.h"
 #include "telegramqml.h"
 #include "userdata.h"
 #include "objects/types.h"
@@ -665,12 +666,28 @@ void TelegramQml::sendFile(qint64 dId, const QString &fpath)
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
     if( t.name().contains("image/") )
         fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
-//    else
-//    if( t.name().contains("video/") )
-//        fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, 0, 0);
-//    else
-//    if( t.name().contains("audio/") )
-//        fileId = p->telegram->messagesSendAudio(peer, p->msg_send_random_id, file, 0);
+    else
+    if( t.name().contains("video/") )
+    {
+        QString thumbnail = AsemanApplication::tempPath()+"/cutegram_thumbnail_" + QUuid::createUuid().toString() + ".jpg";
+        int width = 0;
+        int height = 0;
+
+        if( !AsemanTools::createVideoThumbnail(fpath, thumbnail) )
+            thumbnail.clear();
+        else
+        {
+            QImageReader reader(thumbnail);
+            QSize size = reader.size();
+            width = size.width();
+            height = size.height();
+        }
+
+        fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, width, height, thumbnail);
+    }
+    else
+    if( t.name().contains("audio/") )
+        fileId = p->telegram->messagesSendAudio(peer, p->msg_send_random_id, file, 0);
     else
         fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file);
 

@@ -55,5 +55,6 @@
         <file>qml/Cutegram/files/arrow-left.png</file>
         <file>qml/Cutegram/files/arrow-right.png</file>
         <file>qml/Cutegram/AboutCutegram.qml</file>
+        <file>qml/Cutegram/files/audio.png</file>
     </qresource>
 </RCC>

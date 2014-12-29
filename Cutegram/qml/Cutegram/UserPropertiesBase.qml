@@ -142,7 +142,7 @@ Item {
                 id: phone_lbl
                 font.family: AsemanApp.globalFontFamily
                 font.pixelSize: 11*Devices.fontDensity
-                color: "#eeeeee"
+                color: Desktop.titleBarTextColor
                 text: qsTr("Phone Number")
                 visible: !isChat
             }
@@ -151,7 +151,7 @@ Item {
                 id: favorite_lbl
                 font.family: AsemanApp.globalFontFamily
                 font.pixelSize: 11*Devices.fontDensity
-                color: "#eeeeee"
+                color: Desktop.titleBarTextColor
                 text: qsTr("Favorite")
             }
 
@@ -159,7 +159,7 @@ Item {
                 id: love_lbl
                 font.family: AsemanApp.globalFontFamily
                 font.pixelSize: 11*Devices.fontDensity
-                color: "#eeeeee"
+                color: Desktop.titleBarTextColor
                 text: qsTr("Love")
             }
 
@@ -167,7 +167,7 @@ Item {
                 id: mute_lbl
                 font.family: AsemanApp.globalFontFamily
                 font.pixelSize: 11*Devices.fontDensity
-                color: "#eeeeee"
+                color: Desktop.titleBarTextColor
                 text: qsTr("Mute")
             }
 
@@ -175,7 +175,7 @@ Item {
                 id: participants_lbl
                 font.family: AsemanApp.globalFontFamily
                 font.pixelSize: 11*Devices.fontDensity
-                color: "#eeeeee"
+                color: Desktop.titleBarTextColor
                 text: qsTr("Participants")
                 visible: isChat
             }
@@ -191,7 +191,7 @@ Item {
                 font.family: AsemanApp.globalFontFamily
                 font.pixelSize: 11*Devices.fontDensity
                 verticalAlignment: Text.AlignVCenter
-                color: "#dddddd"
+                color: Desktop.titleBarTextColor
                 text: user.phone
                 visible: !isChat
             }
@@ -204,7 +204,7 @@ Item {
                     id: favorite_check
                     height: 20*Devices.density
                     width: 30*Devices.density
-                    color: checked? masterPalette.highlight : "#555555"
+                    color: checked? masterPalette.highlight : "#666666"
                     anchors.verticalCenter: parent.verticalCenter
                     cursorShape: Qt.PointingHandCursor
                     labels: false
@@ -227,7 +227,7 @@ Item {
                     id: love_check
                     height: 20*Devices.density
                     width: 30*Devices.density
-                    color: checked? masterPalette.highlight : "#555555"
+                    color: checked? masterPalette.highlight : "#666666"
                     anchors.verticalCenter: parent.verticalCenter
                     cursorShape: Qt.PointingHandCursor
                     labels: false
@@ -247,7 +247,7 @@ Item {
                     id: mute_check
                     height: 20*Devices.density
                     width: 30*Devices.density
-                    color: checked? masterPalette.highlight : "#555555"
+                    color: checked? masterPalette.highlight : "#666666"
                     anchors.verticalCenter: parent.verticalCenter
                     cursorShape: Qt.PointingHandCursor
                     labels: false
@@ -270,7 +270,7 @@ Item {
                 Button {
                     id: particians_button
                     anchors.verticalCenter: parent.verticalCenter
-                    textColor: press? masterPalette.highlightedText : "#ffffff"
+                    textColor: press? masterPalette.highlightedText : Desktop.titleBarTextColor
                     textFont.family: AsemanApp.globalFontFamily
                     textFont.pixelSize: 11*Devices.fontDensity
                     textFont.bold: false

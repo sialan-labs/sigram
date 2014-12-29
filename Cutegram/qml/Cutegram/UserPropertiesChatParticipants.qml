@@ -61,7 +61,7 @@ Item {
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAnywhere
                 maximumLineCount: 1
-                color: "#dddddd"
+                color: Desktop.titleBarTextColor
                 text: user.firstName + " " + user.lastName
             }
         }

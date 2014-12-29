@@ -148,8 +148,8 @@ Rectangle {
 
         Rectangle {
             anchors.fill: parent
-            color: "#000000"
-            opacity: header.properties && header.properties.inited? 0.3 : 0
+            color: "#ffffff"
+            opacity: header.properties && header.properties.inited? 0.5 : 0
             visible: header.properties? true : false
 
             Behavior on opacity {
@@ -185,7 +185,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.right: parent.right
             currentDialog: acc_view.currentDialog
-            color: "#222222"
+            color: Desktop.titleBarColor
         }
     }
 
