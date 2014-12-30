@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     palette.setColor(QPalette::Highlight, QColor("#0C78DD"));
     palette.setColor(QPalette::HighlightedText, QColor("#ffffff"));
 
-    app.setPalette(palette);
+//    app.setPalette(palette);
 
 #ifdef DESKTOP_DEVICE
     if( !app.arguments().contains("--force") && app.isRunning() )

@@ -51,7 +51,7 @@ Item {
             textFont.pixelSize: 9*Devices.fontDensity
             normalColor: "#00000000"
             highlightColor: "#0f000000"
-            textColor: recent? masterPalette.highlight : "#333333"
+            textColor: recent? Cutegram.highlightColor : "#333333"
             text: qsTr("Recent")
             cursorShape: Qt.PointingHandCursor
             onClicked: recent = true
@@ -63,7 +63,7 @@ Item {
             textFont.pixelSize: 9*Devices.fontDensity
             normalColor: "#00000000"
             highlightColor: "#0f000000"
-            textColor: recent? "#333333" : masterPalette.highlight
+            textColor: recent? "#333333" : Cutegram.highlightColor
             text: qsTr("All Emoji")
             cursorShape: Qt.PointingHandCursor
             onClicked: recent = false

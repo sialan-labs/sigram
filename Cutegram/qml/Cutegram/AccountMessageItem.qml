@@ -80,7 +80,7 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                color: message.out? masterPalette.highlight : "#ffffff"
+                color: message.out? Cutegram.highlightColor : "#ffffff"
                 opacity: 0.3
                 radius: parent.radius
             }
@@ -95,7 +95,7 @@ Item {
                     id: user_name
                     font.pixelSize: 10*Devices.fontDensity
                     font.family: AsemanApp.globalFontFamily
-                    color: masterPalette.highlight
+                    color: Cutegram.highlightColor
                     text: user.firstName + " " + user.lastName
                     visible: visibleNames
                 }

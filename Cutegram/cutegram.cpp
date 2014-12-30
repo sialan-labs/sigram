@@ -77,6 +77,10 @@ public:
     QString language;
 
     QString background;
+    QString messageAudio;
+    QString masterColor;
+
+    QPalette mainPalette;
 };
 
 Cutegram::Cutegram(QObject *parent) :
@@ -93,6 +97,8 @@ Cutegram::Cutegram(QObject *parent) :
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
+    p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
+    p->messageAudio = AsemanApplication::settings()->value("General/messageAudio","files/new_msg.ogg").toString();
     p->translator = new QTranslator(this);
 
 #ifdef Q_OS_ANDROID
@@ -346,8 +352,6 @@ void Cutegram::init_systray()
         p->unityTray->addMenu( tr("Configure"), this, "configure" );
         p->unityTray->addMenu( tr("About"), this, "about" );
         p->unityTray->addMenu( tr("About Aseman"), this, "aboutAseman" );
-        p->unityTray->addMenu( tr("License"), this, "showLicense" );
-        p->unityTray->addMenu( tr("Donate"), this, "showDonate" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
     }
     if( !p->unityTray || !p->unityTray->pntr() )
@@ -370,9 +374,6 @@ void Cutegram::showContextMenu()
     QAction *abut_act = menu.addAction( tr("About") );
     QAction *sabt_act = menu.addAction( tr("About Aseman") );
     menu.addSeparator();
-    QAction *lcns_act = menu.addAction( tr("License") );
-    QAction *dnt_act  = menu.addAction( tr("Donate") );
-    menu.addSeparator();
     QAction *exit_act = menu.addAction( tr("Exit") );
     QAction *res_act  = menu.exec();
 
@@ -394,16 +395,6 @@ void Cutegram::showContextMenu()
     if( res_act == sabt_act )
     {
         aboutAseman();
-    }
-    else
-    if( res_act == lcns_act )
-    {
-
-    }
-    else
-    if( res_act == dnt_act && dnt_act != 0 )
-    {
-
     }
     else
     if( res_act == exit_act )
@@ -533,12 +524,50 @@ void Cutegram::setBackground(const QString &background)
         return;
 
     p->background = background;
+    AsemanApplication::settings()->setValue("General/background", background);
     emit backgroundChanged();
 }
 
 QString Cutegram::background() const
 {
     return p->background;
+}
+
+void Cutegram::setMessageAudio(const QString &file)
+{
+    if(p->messageAudio == file)
+        return;
+
+    p->messageAudio = file;
+    AsemanApplication::settings()->setValue("General/messageAudio", file);
+    emit messageAudioChanged();
+}
+
+QString Cutegram::messageAudio() const
+{
+    return p->messageAudio;
+}
+
+void Cutegram::setMasterColor(const QString &color)
+{
+    if(p->masterColor == color)
+        return;
+
+    p->masterColor = color;
+    AsemanApplication::settings()->setValue("General/masterColor", color);
+
+    emit masterColorChanged();
+    emit highlightColorChanged();
+}
+
+QString Cutegram::masterColor() const
+{
+    return p->masterColor;
+}
+
+QColor Cutegram::highlightColor() const
+{
+    return p->masterColor.isEmpty()? p->mainPalette.highlight().color() : QColor(p->masterColor);
 }
 
 void Cutegram::init_languages()

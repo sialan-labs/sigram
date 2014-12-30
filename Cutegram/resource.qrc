@@ -56,5 +56,6 @@
         <file>qml/Cutegram/files/arrow-right.png</file>
         <file>qml/Cutegram/AboutCutegram.qml</file>
         <file>qml/Cutegram/files/audio.png</file>
+        <file>qml/Cutegram/files/new_msg.ogg</file>
     </qresource>
 </RCC>

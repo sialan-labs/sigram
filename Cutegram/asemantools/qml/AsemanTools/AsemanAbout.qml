@@ -63,6 +63,7 @@ Rectangle {
 
     MouseArea {
         anchors.bottom: parent.bottom
+        anchors.bottomMargin: View.navigationBarHeight
         anchors.horizontalCenter: parent.horizontalCenter
         height: 40*Devices.density
         width: 300*Devices.density

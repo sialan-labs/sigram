@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
+import QtMultimedia 5.0
 
 Rectangle {
     id: acc_frame
@@ -25,6 +26,11 @@ Rectangle {
 
     HashObject {
         id: notifies_hash
+    }
+
+    MediaPlayer {
+        id: sound_notify
+        source: Cutegram.messageAudio
     }
 
     Notification {
@@ -91,6 +97,12 @@ Rectangle {
                 actions[1] = qsTr("Show")
                 actions[2] = notification.notifyActMute
                 actions[3] = qsTr("Mute")
+            }
+
+            if(Cutegram.messageAudio.length != 0) {
+                sound_notify.source = ""
+                sound_notify.source = Cutegram.messageAudio
+                sound_notify.play()
             }
 
             var nid = notification.sendNotify( title, msg.message, user.photo.photoSmall.download.location, 0, 3000, actions )

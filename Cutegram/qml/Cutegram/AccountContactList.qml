@@ -45,7 +45,7 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                color: itemSelected || area.pressed? masterPalette.highlight : "#00000000"
+                color: itemSelected || area.pressed? Cutegram.highlightColor : "#00000000"
                 opacity: 0.5
             }
 

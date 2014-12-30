@@ -67,7 +67,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: 48*Devices.density
-        color: masterPalette.highlight
+        color: Cutegram.highlightColor
 
         Button {
             id: about_btn
@@ -238,8 +238,8 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
-                normalColor: masterPalette.highlight
-                highlightColor: Qt.darker(masterPalette.highlight)
+                normalColor: Cutegram.highlightColor
+                highlightColor: Qt.darker(Cutegram.highlightColor)
                 textColor: masterPalette.highlightedText
                 textFont.family: AsemanApp.globalFontFamily
                 textFont.pixelSize: 9*Devices.fontDensity

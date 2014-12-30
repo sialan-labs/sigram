@@ -29,6 +29,8 @@ object Upload {
 object FileLocation {
     DownloadObject* download rw = new DownloadObject(this);
     qint64 id rw = 0;
+    QString fileName rw;
+    QString mimeType rw;
     qint32 localId rw = another.%name();
     qint64 secret rw = another.%name();
     qint32 dcId rw = another.%name();

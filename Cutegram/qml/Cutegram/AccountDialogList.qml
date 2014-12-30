@@ -81,7 +81,7 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                color: marea.pressed || selected? masterPalette.highlight : "#00000000"
+                color: marea.pressed || selected? Cutegram.highlightColor : "#00000000"
                 opacity: marea.pressed? 0.3 : (selected? 0.2 : 0)
                 anchors.topMargin: 3*Devices.density
                 anchors.bottomMargin: 3*Devices.density

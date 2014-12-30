@@ -50,7 +50,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: title_txt.horizontalCenter
         anchors.bottomMargin: -4*Devices.density
-        color: masterPalette.highlight
+        color: Cutegram.highlightColor
         font.pixelSize: 9*Devices.fontDensity
         font.family: AsemanApp.globalFontFamily
         visible: currentDialog != telegramObject.nullDialog

@@ -204,7 +204,7 @@ Item {
                     id: favorite_check
                     height: 20*Devices.density
                     width: 30*Devices.density
-                    color: checked? masterPalette.highlight : "#666666"
+                    color: checked? Cutegram.highlightColor : "#666666"
                     anchors.verticalCenter: parent.verticalCenter
                     cursorShape: Qt.PointingHandCursor
                     labels: false
@@ -227,7 +227,7 @@ Item {
                     id: love_check
                     height: 20*Devices.density
                     width: 30*Devices.density
-                    color: checked? masterPalette.highlight : "#666666"
+                    color: checked? Cutegram.highlightColor : "#666666"
                     anchors.verticalCenter: parent.verticalCenter
                     cursorShape: Qt.PointingHandCursor
                     labels: false
@@ -247,7 +247,7 @@ Item {
                     id: mute_check
                     height: 20*Devices.density
                     width: 30*Devices.density
-                    color: checked? masterPalette.highlight : "#666666"
+                    color: checked? Cutegram.highlightColor : "#666666"
                     anchors.verticalCenter: parent.verticalCenter
                     cursorShape: Qt.PointingHandCursor
                     labels: false

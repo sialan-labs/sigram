@@ -411,7 +411,11 @@ FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 acces
 
 FileLocationObject *TelegramQml::locationOfDocument(DocumentObject *doc)
 {
-    return locationOf(doc->id(), doc->dcId(), doc->accessHash());
+    FileLocationObject *res = locationOf(doc->id(), doc->dcId(), doc->accessHash());
+    res->setFileName(doc->fileName());
+    res->setMimeType(doc->mimeType());
+
+    return res;
 }
 
 FileLocationObject *TelegramQml::locationOfVideo(VideoObject *vid)
@@ -1502,7 +1506,14 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
         const QStringList & suffixes = t.suffixes();
         if( !suffixes.isEmpty() )
         {
-            const QString & sfx = suffixes.first();
+            QString sfx = suffixes.first();
+            if(!obj->fileName().isEmpty())
+            {
+                QFileInfo finfo(obj->fileName());
+                if(!finfo.suffix().isEmpty())
+                    sfx = finfo.suffix();
+            }
+
             QFile::rename(download_file, download_file+"."+sfx);
             download->setLocation("file://" + download_file+"."+sfx);
         }

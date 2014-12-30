@@ -69,7 +69,7 @@ QString AsemanApplication::appPath()
 QString AsemanApplication::logPath()
 {
 #ifdef Q_OS_ANDROID
-    return "/sdcard/" + QCoreApplication::organizationDomain() + "." + QCoreApplication::applicationName() + "/log";
+    return "/sdcard/" + QCoreApplication::organizationDomain() + "/" + QCoreApplication::applicationName() + "/log";
 #else
     return homePath()+"/log";
 #endif
@@ -83,7 +83,7 @@ QString AsemanApplication::confsPath()
 QString AsemanApplication::tempPath()
 {
 #ifdef Q_OS_ANDROID
-    return "/sdcard/" + QCoreApplication::organizationDomain() + "." + QCoreApplication::applicationName() + "/temp";
+    return "/sdcard/" + QCoreApplication::organizationDomain() + "/" + QCoreApplication::applicationName() + "/temp";
 #else
 #ifdef Q_OS_IOS
     return QDir::homePath() + "/tmp/";
@@ -96,7 +96,7 @@ QString AsemanApplication::tempPath()
 QString AsemanApplication::backupsPath()
 {
 #ifdef Q_OS_ANDROID
-    return "/sdcard/" + QCoreApplication::organizationDomain() + "." + QCoreApplication::applicationName() + "/backups";
+    return "/sdcard/" + QCoreApplication::organizationDomain() + "/" + QCoreApplication::applicationName() + "/backups";
 #else
 #ifdef Q_OS_IOS
     return QDir::homePath() + "/backups/";

@@ -30,7 +30,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: 4*Devices.density
         selectByMouse: true
-        selectionColor: masterPalette.highlight
+        selectionColor: Cutegram.highlightColor
         selectedTextColor: masterPalette.highlightedText
         pickerEnable: Devices.isTouchDevice
         color: textColor0
@@ -119,7 +119,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        textColor: masterPalette.highlight
+        textColor: Cutegram.highlightColor
         normalColor: "#00000000"
         highlightColor: "#0f000000"
         width: 70*Devices.density

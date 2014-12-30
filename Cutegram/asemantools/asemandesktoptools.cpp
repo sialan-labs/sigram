@@ -25,6 +25,7 @@
 #include <QDebug>
 
 #ifdef DESKTOP_DEVICE
+#include <QColorDialog>
 #include <QFileDialog>
 #endif
 
@@ -350,6 +351,15 @@ QString AsemanDesktopTools::getExistingDirectory(QWindow *window, const QString 
     Q_UNUSED(title)
     Q_UNUSED(startPath)
     return QString();
+#endif
+}
+
+QColor AsemanDesktopTools::getColor(const QColor &color) const
+{
+#ifdef DESKTOP_DEVICE
+    return QColorDialog::getColor(color);
+#else
+    return color;
 #endif
 }
 

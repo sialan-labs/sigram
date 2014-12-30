@@ -29,7 +29,7 @@ Item {
         Rectangle {
             anchors.fill: parent
             anchors.margins: 6*Devices.density
-            border.color: masterPalette.highlight
+            border.color: Cutegram.highlightColor
             border.width: 2*Devices.density
             radius: 3*Devices.density
             color: "#00000000"
@@ -39,7 +39,7 @@ Item {
             anchors.centerIn: parent
             font.family: AsemanApp.globalFontFamily
             font.pixelSize: 12*Devices.fontDensity
-            color: masterPalette.highlight
+            color: Cutegram.highlightColor
             text: qsTr("Drop files here to send")
         }
     }

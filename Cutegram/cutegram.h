@@ -31,9 +31,12 @@ class Cutegram : public QObject
     Q_ENUMS(StartupOptions)
 
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
+    Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY highlightColorChanged)
 
-    Q_PROPERTY(QString language   READ language   WRITE setLanguage   NOTIFY languageChanged  )
-    Q_PROPERTY(QString background READ background WRITE setBackground NOTIFY backgroundChanged)
+    Q_PROPERTY(QString language     READ language     WRITE setLanguage     NOTIFY languageChanged    )
+    Q_PROPERTY(QString messageAudio READ messageAudio WRITE setMessageAudio NOTIFY messageAudioChanged)
+    Q_PROPERTY(QString background   READ background   WRITE setBackground   NOTIFY backgroundChanged  )
+    Q_PROPERTY(QString masterColor  READ masterColor  WRITE setMasterColor  NOTIFY masterColorChanged )
 
     Q_PROPERTY(int  sysTrayCounter  READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
     Q_PROPERTY(int  startupOption   READ startupOption  WRITE setStartupOption  NOTIFY startupOptionChanged )
@@ -81,6 +84,14 @@ public:
     void setBackground(const QString &background);
     QString background() const;
 
+    void setMessageAudio(const QString &file);
+    QString messageAudio() const;
+
+    void setMasterColor(const QString &color);
+    QString masterColor() const;
+
+    QColor highlightColor() const;
+
 public slots:
     void start();
     void restart();
@@ -104,6 +115,9 @@ signals:
     void minimumDialogsChanged();
     void showLastMessageChanged();
     void backgroundChanged();
+    void messageAudioChanged();
+    void masterColorChanged();
+    void highlightColorChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

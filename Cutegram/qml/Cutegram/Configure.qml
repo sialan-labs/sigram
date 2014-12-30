@@ -130,6 +130,26 @@ Rectangle {
                     color: "#333333"
                     text: qsTr("Background")
                 }
+
+                Text {
+                    id: notify_sound_text
+                    height: notify_sound_combo.height
+                    verticalAlignment: Text.AlignVCenter
+                    font.family: AsemanApp.globalFontFamily
+                    font.pixelSize: 9*Devices.fontDensity
+                    color: "#333333"
+                    text: qsTr("Notify Sound")
+                }
+
+                Text {
+                    id: color_text
+                    height: color_combo.height
+                    verticalAlignment: Text.AlignVCenter
+                    font.family: AsemanApp.globalFontFamily
+                    font.pixelSize: 9*Devices.fontDensity
+                    color: "#333333"
+                    text: qsTr("Master Color")
+                }
             }
 
             Column {
@@ -145,7 +165,7 @@ Rectangle {
                     id: startup_combo
                     model: [ qsTr("Automatic"), qsTr("Always visible"), qsTr("Minimize to system tray") ]
                     currentIndex: Cutegram.startupOption
-                    onCurrentIndexChanged: if(!init_timer.running) Cutegram.startupOption = currentIndex
+                    onCurrentIndexChanged: if(init_timer.inited) Cutegram.startupOption = currentIndex
                 }
 
                 QtControls.ComboBox {
@@ -160,7 +180,7 @@ Rectangle {
                         return 0
                     }
 
-                    onCurrentTextChanged: if(!init_timer.running) Cutegram.language = currentText
+                    onCurrentTextChanged: if(init_timer.inited) Cutegram.language = currentText
                 }
 
                 QtControls.CheckBox {
@@ -182,6 +202,66 @@ Rectangle {
                         } else {
                             Cutegram.background = ""
                         }
+                    }
+                }
+
+                QtControls.ComboBox {
+                    id: notify_sound_combo
+                    model: [qsTr("None"), qsTr("Default"), qsTr("Custom")]
+                    currentIndex: {
+                        if(Cutegram.messageAudio.length == 0)
+                            return 0
+                        if(Cutegram.messageAudio == "files/new_msg.ogg")
+                            return 1
+                        else
+                            return 2
+                    }
+
+                    onCurrentIndexChanged: {
+                        if(!init_timer.inited)
+                            return
+
+                        switch(currentIndex)
+                        {
+                        case 0:
+                            Cutegram.messageAudio = ""
+                            break;
+
+                        case 1:
+                            Cutegram.messageAudio = "files/new_msg.ogg"
+                            break;
+
+                        case 2:
+                        {
+                            var file = Desktop.getOpenFileName(View, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
+                            if(file.length != 0)
+                                Cutegram.messageAudio = "file://" + file
+                            else
+                                Cutegram.messageAudio = ""
+                        }
+                            break;
+                        }
+                    }
+                }
+
+                QtControls.ComboBox {
+                    id: color_combo
+                    model: ["System Color", "Custom"]
+                    currentIndex: {
+                        if(Cutegram.masterColor.length == 0)
+                            return 0
+                        else
+                            return 1
+                    }
+                    onCurrentIndexChanged: {
+                        if(!init_timer.inited)
+                            return
+
+                        var color = ""
+                        if(currentIndex != 0)
+                            color = Desktop.getColor(Cutegram.highlightColor)
+
+                        Cutegram.masterColor = color
                     }
                 }
             }
@@ -207,5 +287,8 @@ Rectangle {
         id: init_timer
         interval: 500
         Component.onCompleted: start()
+        onTriggered: inited = true
+
+        property bool inited: false
     }
 }
