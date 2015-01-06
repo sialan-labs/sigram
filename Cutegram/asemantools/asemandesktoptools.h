@@ -63,6 +63,7 @@ public slots:
     QString getSaveFileName(QWindow *window = 0, const QString &title = QString(), const QString &filter = QString(), const QString & startPath = QDir::homePath() );
     QString getExistingDirectory(QWindow *window = 0, const QString &title = QString(), const QString & startPath = QDir::homePath());
     QColor getColor(const QColor &color = QColor()) const;
+    int showMenu( const QStringList & actions, QPoint point = QPoint() );
 
 signals:
     void titleBarColorChanged();

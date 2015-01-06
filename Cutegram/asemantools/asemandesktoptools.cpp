@@ -27,6 +27,8 @@
 #ifdef DESKTOP_DEVICE
 #include <QColorDialog>
 #include <QFileDialog>
+#include <QMenu>
+#include <QAction>
 #endif
 
 class AsemanDesktopToolsPrivate
@@ -360,6 +362,24 @@ QColor AsemanDesktopTools::getColor(const QColor &color) const
     return QColorDialog::getColor(color);
 #else
     return color;
+#endif
+}
+
+int AsemanDesktopTools::showMenu(const QStringList &actions, QPoint point)
+{
+#ifdef DESKTOP_DEVICE
+    if( point.isNull() )
+        point = QCursor::pos();
+
+    QMenu menu;
+    QList<QAction*> pointers;
+    foreach(const QString &act, actions)
+        pointers << (act.isEmpty()? menu.addSeparator() : menu.addAction(act));
+
+    QAction *res = menu.exec(point);
+    return pointers.indexOf(res);
+#else
+    return -1;
 #endif
 }
 

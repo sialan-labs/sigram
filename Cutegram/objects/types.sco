@@ -5,6 +5,7 @@ include <QStringList>;
 include <QtQml>;
 include <QFile>;
 include <types/types.h>;
+include <types/decryptedmessage.h>;
 include "../photosizelist.h";
 include "../chatparticipantlist.h";
 
@@ -83,6 +84,15 @@ object ContactsMyLink {
     qint64 classType = another.%name();
 }
 
+object EncryptedFile {
+    qint32 dcId rw = another.%name();
+    qint64 id rw = another.%name();
+    qint32 keyFingerprint rw = another.%name();
+    qint32 size rw = another.%name();
+    qint64 accessHash rw = another.%name();
+    qint64 classType rw = another.%name();
+}
+
 object EncryptedChat {
     qint32 id rw = another.%name();
     QByteArray gA rw = another.%name();
@@ -92,6 +102,15 @@ object EncryptedChat {
     qint32 adminId rw = another.%name();
     QByteArray gAOrB rw = another.%name();
     qint32 participantId rw = another.%name();
+    qint64 classType rw = another.%name();
+}
+
+object EncryptedMessage {
+    qint32 chatId rw = another.%name();
+    qint32 date rw = another.%name();
+    qint64 randomId rw = another.%name();
+    EncryptedFileObject* file rw = new EncryptedFileObject(another.%name(), this);
+    QByteArray bytes rw = another.%name();
     qint64 classType rw = another.%name();
 }
 
@@ -242,7 +261,53 @@ object Dialog {
     PeerNotifySettingsObject* notifySettings rw = new PeerNotifySettingsObject(another.%name(), this);
     qint32 topMessage rw = another.%name();
     qint32 unreadCount rw = another.%name();
+    bool encrypted rw = false;
     QStringList typingUsers rw;
+    qint64 classType rw = another.%name();
+}
+
+object SendMessageAction {
+    qint64 classType rw = another.%name();
+}
+
+object DecryptedMessageAction {
+    qint32 layer rw = another.%name();
+    QList<qint64> randomIds rw = another.%name();
+    qint32 ttlSeconds rw = another.%name();
+    qint32 startSeqNo rw = another.%name();
+    qint32 endSeqNo rw = another.%name();
+    SendMessageActionObject* action rw = new SendMessageActionObject(another.%name(), this);
+    qint64 classType rw = another.%name();
+}
+
+object DecryptedMessageMedia {
+    QByteArray thumb rw = another.%name();
+    qint32 thumbW rw = another.%name();
+    qint32 thumbH rw = another.%name();
+    qint32 duration rw = another.%name();
+    qint32 w rw = another.%name();
+    qint32 h rw = another.%name();
+    qint32 size rw = another.%name();
+    double latitude rw = another.%name();
+    double longitude rw = another.%name();
+    QByteArray key rw = another.%name();
+    QByteArray iv rw = another.%name();
+    QString phoneNumber rw = another.%name();
+    QString firstName rw = another.%name();
+    QString lastName rw = another.%name();
+    qint32 userId rw = another.%name();
+    QString fileName rw = another.%name();
+    QString mimeType rw = another.%name();
+    qint64 classType rw = another.%name();
+}
+
+object DecryptedMessage {
+    qint64 randomId rw = another.%name();
+    qint32 ttl rw = another.%name();
+    QByteArray randomBytes rw = another.%name();
+    QString message rw = another.%name();
+    DecryptedMessageMediaObject* media rw = new DecryptedMessageMediaObject(another.%name(), this);
+    DecryptedMessageActionObject* action rw = new DecryptedMessageActionObject(another.%name(), this);
     qint64 classType rw = another.%name();
 }
 
@@ -263,6 +328,7 @@ object MessageMedia {
 object Message {
     qint32 id rw = another.%name();
     bool sent rw = true;
+    bool encrypted rw = false;
     UploadObject* upload rw = new UploadObject(this);
     PeerObject* toId rw = new PeerObject(another.%name(), this);
     bool unread rw = another.%name();

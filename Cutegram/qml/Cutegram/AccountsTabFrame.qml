@@ -89,6 +89,25 @@ Rectangle {
         }
 
         Button {
+            id: add_secret_chat_btn
+            anchors.bottom: add_chat_btn.top
+            anchors.left: parent.left
+            width: parent.width
+            height: width
+            normalColor: "#00000000"
+            highlightColor: "#88339DCC"
+            cursorShape: Qt.PointingHandCursor
+            icon: "files/lock.png"
+            iconHeight: 18*Devices.density
+            tooltipText: qsTr("Add Secret Chat")
+            tooltipFont.family: AsemanApp.globalFontFamily
+            tooltipFont.pixelSize: 9*Devices.fontDensity
+            onClicked: {
+                slide_menu.show(add_secret_chat_component)
+            }
+        }
+
+        Button {
             id: add_chat_btn
             anchors.bottom: add_user_btn.top
             anchors.left: parent.left
@@ -182,6 +201,27 @@ Rectangle {
                 onSelected: {
                     slide_menu.end()
                     accountView.view.currentDialog = telegram.fakeDialogObject(cid, false)
+                }
+
+                property variant accountView: hash.value(profiles.keys[0])
+            }
+        }
+    }
+
+    Component {
+        id: add_secret_chat_component
+
+        Rectangle {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: 237*Devices.density
+
+            AccountContactList {
+                anchors.fill: parent
+                telegram: accountView.telegramObject
+                onSelected: {
+                    slide_menu.end()
+                    telegram.messagesCreateEncryptedChat(cid)
                 }
 
                 property variant accountView: hash.value(profiles.keys[0])

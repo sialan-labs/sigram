@@ -38,11 +38,12 @@ class Cutegram : public QObject
     Q_PROPERTY(QString background   READ background   WRITE setBackground   NOTIFY backgroundChanged  )
     Q_PROPERTY(QString masterColor  READ masterColor  WRITE setMasterColor  NOTIFY masterColorChanged )
 
-    Q_PROPERTY(int  sysTrayCounter  READ sysTrayCounter WRITE setSysTrayCounter NOTIFY sysTrayCounterChanged)
-    Q_PROPERTY(int  startupOption   READ startupOption  WRITE setStartupOption  NOTIFY startupOptionChanged )
-    Q_PROPERTY(bool notification    READ notification   WRITE setNotification   NOTIFY notificationChanged  )
-    Q_PROPERTY(bool minimumDialogs  READ minimumDialogs WRITE setMinimumDialogs NOTIFY minimumDialogsChanged)
+    Q_PROPERTY(int  sysTrayCounter  READ sysTrayCounter  WRITE setSysTrayCounter  NOTIFY sysTrayCounterChanged )
+    Q_PROPERTY(int  startupOption   READ startupOption   WRITE setStartupOption   NOTIFY startupOptionChanged  )
+    Q_PROPERTY(bool notification    READ notification    WRITE setNotification    NOTIFY notificationChanged   )
+    Q_PROPERTY(bool minimumDialogs  READ minimumDialogs  WRITE setMinimumDialogs  NOTIFY minimumDialogsChanged )
     Q_PROPERTY(bool showLastMessage READ showLastMessage WRITE setShowLastMessage NOTIFY showLastMessageChanged)
+    Q_PROPERTY(bool darkSystemTray  READ darkSystemTray  WRITE setDarkSystemTray  NOTIFY darkSystemTrayChanged )
 
 public:
     enum StartupOptions {
@@ -61,7 +62,7 @@ public:
 
     Q_INVOKABLE int showMenu( const QStringList & actions, QPoint point = QPoint() );
 
-    void setSysTrayCounter( int count );
+    void setSysTrayCounter(int count , bool force = false);
     int sysTrayCounter() const;
 
     QStringList languages();
@@ -80,6 +81,9 @@ public:
 
     void setShowLastMessage(bool stt);
     bool showLastMessage() const;
+
+    void setDarkSystemTray(bool stt);
+    bool darkSystemTray() const;
 
     void setBackground(const QString &background);
     QString background() const;
@@ -118,6 +122,7 @@ signals:
     void messageAudioChanged();
     void masterColorChanged();
     void highlightColorChanged();
+    void darkSystemTrayChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

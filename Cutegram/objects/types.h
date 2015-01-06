@@ -10,6 +10,7 @@
 #include <QtQml>
 #include <QFile>
 #include <types/types.h>
+#include <types/decryptedmessage.h>
 #include "../photosizelist.h"
 #include "../chatparticipantlist.h"
 
@@ -1019,6 +1020,140 @@ private:
 
 Q_DECLARE_METATYPE(ContactsMyLinkObject*)
 
+class EncryptedFileObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint32 dcId READ dcId WRITE setDcId NOTIFY dcIdChanged)
+    Q_PROPERTY(qint64 id READ id WRITE setId NOTIFY idChanged)
+    Q_PROPERTY(qint32 keyFingerprint READ keyFingerprint WRITE setKeyFingerprint NOTIFY keyFingerprintChanged)
+    Q_PROPERTY(qint32 size READ size WRITE setSize NOTIFY sizeChanged)
+    Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
+    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    EncryptedFileObject(const EncryptedFile & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _dcId = another.dcId();
+        _id = another.id();
+        _keyFingerprint = another.keyFingerprint();
+        _size = another.size();
+        _accessHash = another.accessHash();
+        _classType = another.classType();
+
+    }
+    EncryptedFileObject(QObject *parent = 0) : QObject(parent){}
+    ~EncryptedFileObject(){}
+
+    qint32 dcId() const {
+        return _dcId;
+    }
+
+    void setDcId(qint32 value) {
+        if( value == _dcId )
+            return;
+        _dcId = value;
+        emit dcIdChanged();
+        emit changed();
+    }
+
+    qint64 id() const {
+        return _id;
+    }
+
+    void setId(qint64 value) {
+        if( value == _id )
+            return;
+        _id = value;
+        emit idChanged();
+        emit changed();
+    }
+
+    qint32 keyFingerprint() const {
+        return _keyFingerprint;
+    }
+
+    void setKeyFingerprint(qint32 value) {
+        if( value == _keyFingerprint )
+            return;
+        _keyFingerprint = value;
+        emit keyFingerprintChanged();
+        emit changed();
+    }
+
+    qint32 size() const {
+        return _size;
+    }
+
+    void setSize(qint32 value) {
+        if( value == _size )
+            return;
+        _size = value;
+        emit sizeChanged();
+        emit changed();
+    }
+
+    qint64 accessHash() const {
+        return _accessHash;
+    }
+
+    void setAccessHash(qint64 value) {
+        if( value == _accessHash )
+            return;
+        _accessHash = value;
+        emit accessHashChanged();
+        emit changed();
+    }
+
+    qint64 classType() const {
+        return _classType;
+    }
+
+    void setClassType(qint64 value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const EncryptedFile & another) {
+        _dcId = another.dcId();
+        emit dcIdChanged();
+        _id = another.id();
+        emit idChanged();
+        _keyFingerprint = another.keyFingerprint();
+        emit keyFingerprintChanged();
+        _size = another.size();
+        emit sizeChanged();
+        _accessHash = another.accessHash();
+        emit accessHashChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void dcIdChanged();
+    void idChanged();
+    void keyFingerprintChanged();
+    void sizeChanged();
+    void accessHashChanged();
+    void classTypeChanged();
+
+private:
+    qint32 _dcId;
+    qint64 _id;
+    qint32 _keyFingerprint;
+    qint32 _size;
+    qint64 _accessHash;
+    qint64 _classType;
+
+};
+
+Q_DECLARE_METATYPE(EncryptedFileObject*)
+
 class EncryptedChatObject : public QObject
 {
     Q_OBJECT
@@ -1206,6 +1341,140 @@ private:
 };
 
 Q_DECLARE_METATYPE(EncryptedChatObject*)
+
+class EncryptedMessageObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint32 chatId READ chatId WRITE setChatId NOTIFY chatIdChanged)
+    Q_PROPERTY(qint32 date READ date WRITE setDate NOTIFY dateChanged)
+    Q_PROPERTY(qint64 randomId READ randomId WRITE setRandomId NOTIFY randomIdChanged)
+    Q_PROPERTY(EncryptedFileObject* file READ file WRITE setFile NOTIFY fileChanged)
+    Q_PROPERTY(QByteArray bytes READ bytes WRITE setBytes NOTIFY bytesChanged)
+    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    EncryptedMessageObject(const EncryptedMessage & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _chatId = another.chatId();
+        _date = another.date();
+        _randomId = another.randomId();
+        _file = new EncryptedFileObject(another.file(), this);
+        _bytes = another.bytes();
+        _classType = another.classType();
+
+    }
+    EncryptedMessageObject(QObject *parent = 0) : QObject(parent){}
+    ~EncryptedMessageObject(){}
+
+    qint32 chatId() const {
+        return _chatId;
+    }
+
+    void setChatId(qint32 value) {
+        if( value == _chatId )
+            return;
+        _chatId = value;
+        emit chatIdChanged();
+        emit changed();
+    }
+
+    qint32 date() const {
+        return _date;
+    }
+
+    void setDate(qint32 value) {
+        if( value == _date )
+            return;
+        _date = value;
+        emit dateChanged();
+        emit changed();
+    }
+
+    qint64 randomId() const {
+        return _randomId;
+    }
+
+    void setRandomId(qint64 value) {
+        if( value == _randomId )
+            return;
+        _randomId = value;
+        emit randomIdChanged();
+        emit changed();
+    }
+
+    EncryptedFileObject* file() const {
+        return _file;
+    }
+
+    void setFile(EncryptedFileObject* value) {
+        if( value == _file )
+            return;
+        _file = value;
+        emit fileChanged();
+        emit changed();
+    }
+
+    QByteArray bytes() const {
+        return _bytes;
+    }
+
+    void setBytes(QByteArray value) {
+        if( value == _bytes )
+            return;
+        _bytes = value;
+        emit bytesChanged();
+        emit changed();
+    }
+
+    qint64 classType() const {
+        return _classType;
+    }
+
+    void setClassType(qint64 value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const EncryptedMessage & another) {
+        _chatId = another.chatId();
+        emit chatIdChanged();
+        _date = another.date();
+        emit dateChanged();
+        _randomId = another.randomId();
+        emit randomIdChanged();
+        *_file = another.file();
+        emit fileChanged();
+        _bytes = another.bytes();
+        emit bytesChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void chatIdChanged();
+    void dateChanged();
+    void randomIdChanged();
+    void fileChanged();
+    void bytesChanged();
+    void classTypeChanged();
+
+private:
+    qint32 _chatId;
+    qint32 _date;
+    qint64 _randomId;
+    EncryptedFileObject* _file;
+    QByteArray _bytes;
+    qint64 _classType;
+
+};
+
+Q_DECLARE_METATYPE(EncryptedMessageObject*)
 
 class ContactsForeignLinkObject : public QObject
 {
@@ -3350,6 +3619,7 @@ class DialogObject : public QObject
     Q_PROPERTY(PeerNotifySettingsObject* notifySettings READ notifySettings WRITE setNotifySettings NOTIFY notifySettingsChanged)
     Q_PROPERTY(qint32 topMessage READ topMessage WRITE setTopMessage NOTIFY topMessageChanged)
     Q_PROPERTY(qint32 unreadCount READ unreadCount WRITE setUnreadCount NOTIFY unreadCountChanged)
+    Q_PROPERTY(bool encrypted READ encrypted WRITE setEncrypted NOTIFY encryptedChanged)
     Q_PROPERTY(QStringList typingUsers READ typingUsers WRITE setTypingUsers NOTIFY typingUsersChanged)
     Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
@@ -3360,6 +3630,7 @@ public:
         _notifySettings = new PeerNotifySettingsObject(another.notifySettings(), this);
         _topMessage = another.topMessage();
         _unreadCount = another.unreadCount();
+        _encrypted = false;
         _classType = another.classType();
 
     }
@@ -3414,6 +3685,18 @@ public:
         emit changed();
     }
 
+    bool encrypted() const {
+        return _encrypted;
+    }
+
+    void setEncrypted(bool value) {
+        if( value == _encrypted )
+            return;
+        _encrypted = value;
+        emit encryptedChanged();
+        emit changed();
+    }
+
     QStringList typingUsers() const {
         return _typingUsers;
     }
@@ -3448,6 +3731,8 @@ public:
         emit topMessageChanged();
         _unreadCount = another.unreadCount();
         emit unreadCountChanged();
+        _encrypted = false;
+        emit encryptedChanged();
         _typingUsers.clear();
         emit typingUsersChanged();
         _classType = another.classType();
@@ -3461,6 +3746,7 @@ signals:
     void notifySettingsChanged();
     void topMessageChanged();
     void unreadCountChanged();
+    void encryptedChanged();
     void typingUsersChanged();
     void classTypeChanged();
 
@@ -3469,12 +3755,711 @@ private:
     PeerNotifySettingsObject* _notifySettings;
     qint32 _topMessage;
     qint32 _unreadCount;
+    bool _encrypted;
     QStringList _typingUsers;
     qint64 _classType;
 
 };
 
 Q_DECLARE_METATYPE(DialogObject*)
+
+class SendMessageActionObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    SendMessageActionObject(const SendMessageAction & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _classType = another.classType();
+
+    }
+    SendMessageActionObject(QObject *parent = 0) : QObject(parent){}
+    ~SendMessageActionObject(){}
+
+    qint64 classType() const {
+        return _classType;
+    }
+
+    void setClassType(qint64 value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const SendMessageAction & another) {
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void classTypeChanged();
+
+private:
+    qint64 _classType;
+
+};
+
+Q_DECLARE_METATYPE(SendMessageActionObject*)
+
+class DecryptedMessageActionObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint32 layer READ layer WRITE setLayer NOTIFY layerChanged)
+    Q_PROPERTY(QList<qint64> randomIds READ randomIds WRITE setRandomIds NOTIFY randomIdsChanged)
+    Q_PROPERTY(qint32 ttlSeconds READ ttlSeconds WRITE setTtlSeconds NOTIFY ttlSecondsChanged)
+    Q_PROPERTY(qint32 startSeqNo READ startSeqNo WRITE setStartSeqNo NOTIFY startSeqNoChanged)
+    Q_PROPERTY(qint32 endSeqNo READ endSeqNo WRITE setEndSeqNo NOTIFY endSeqNoChanged)
+    Q_PROPERTY(SendMessageActionObject* action READ action WRITE setAction NOTIFY actionChanged)
+    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    DecryptedMessageActionObject(const DecryptedMessageAction & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _layer = another.layer();
+        _randomIds = another.randomIds();
+        _ttlSeconds = another.ttlSeconds();
+        _startSeqNo = another.startSeqNo();
+        _endSeqNo = another.endSeqNo();
+        _action = new SendMessageActionObject(another.action(), this);
+        _classType = another.classType();
+
+    }
+    DecryptedMessageActionObject(QObject *parent = 0) : QObject(parent){}
+    ~DecryptedMessageActionObject(){}
+
+    qint32 layer() const {
+        return _layer;
+    }
+
+    void setLayer(qint32 value) {
+        if( value == _layer )
+            return;
+        _layer = value;
+        emit layerChanged();
+        emit changed();
+    }
+
+    QList<qint64> randomIds() const {
+        return _randomIds;
+    }
+
+    void setRandomIds(QList<qint64> value) {
+        if( value == _randomIds )
+            return;
+        _randomIds = value;
+        emit randomIdsChanged();
+        emit changed();
+    }
+
+    qint32 ttlSeconds() const {
+        return _ttlSeconds;
+    }
+
+    void setTtlSeconds(qint32 value) {
+        if( value == _ttlSeconds )
+            return;
+        _ttlSeconds = value;
+        emit ttlSecondsChanged();
+        emit changed();
+    }
+
+    qint32 startSeqNo() const {
+        return _startSeqNo;
+    }
+
+    void setStartSeqNo(qint32 value) {
+        if( value == _startSeqNo )
+            return;
+        _startSeqNo = value;
+        emit startSeqNoChanged();
+        emit changed();
+    }
+
+    qint32 endSeqNo() const {
+        return _endSeqNo;
+    }
+
+    void setEndSeqNo(qint32 value) {
+        if( value == _endSeqNo )
+            return;
+        _endSeqNo = value;
+        emit endSeqNoChanged();
+        emit changed();
+    }
+
+    SendMessageActionObject* action() const {
+        return _action;
+    }
+
+    void setAction(SendMessageActionObject* value) {
+        if( value == _action )
+            return;
+        _action = value;
+        emit actionChanged();
+        emit changed();
+    }
+
+    qint64 classType() const {
+        return _classType;
+    }
+
+    void setClassType(qint64 value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const DecryptedMessageAction & another) {
+        _layer = another.layer();
+        emit layerChanged();
+        _randomIds = another.randomIds();
+        emit randomIdsChanged();
+        _ttlSeconds = another.ttlSeconds();
+        emit ttlSecondsChanged();
+        _startSeqNo = another.startSeqNo();
+        emit startSeqNoChanged();
+        _endSeqNo = another.endSeqNo();
+        emit endSeqNoChanged();
+        *_action = another.action();
+        emit actionChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void layerChanged();
+    void randomIdsChanged();
+    void ttlSecondsChanged();
+    void startSeqNoChanged();
+    void endSeqNoChanged();
+    void actionChanged();
+    void classTypeChanged();
+
+private:
+    qint32 _layer;
+    QList<qint64> _randomIds;
+    qint32 _ttlSeconds;
+    qint32 _startSeqNo;
+    qint32 _endSeqNo;
+    SendMessageActionObject* _action;
+    qint64 _classType;
+
+};
+
+Q_DECLARE_METATYPE(DecryptedMessageActionObject*)
+
+class DecryptedMessageMediaObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QByteArray thumb READ thumb WRITE setThumb NOTIFY thumbChanged)
+    Q_PROPERTY(qint32 thumbW READ thumbW WRITE setThumbW NOTIFY thumbWChanged)
+    Q_PROPERTY(qint32 thumbH READ thumbH WRITE setThumbH NOTIFY thumbHChanged)
+    Q_PROPERTY(qint32 duration READ duration WRITE setDuration NOTIFY durationChanged)
+    Q_PROPERTY(qint32 w READ w WRITE setW NOTIFY wChanged)
+    Q_PROPERTY(qint32 h READ h WRITE setH NOTIFY hChanged)
+    Q_PROPERTY(qint32 size READ size WRITE setSize NOTIFY sizeChanged)
+    Q_PROPERTY(double latitude READ latitude WRITE setLatitude NOTIFY latitudeChanged)
+    Q_PROPERTY(double longitude READ longitude WRITE setLongitude NOTIFY longitudeChanged)
+    Q_PROPERTY(QByteArray key READ key WRITE setKey NOTIFY keyChanged)
+    Q_PROPERTY(QByteArray iv READ iv WRITE setIv NOTIFY ivChanged)
+    Q_PROPERTY(QString phoneNumber READ phoneNumber WRITE setPhoneNumber NOTIFY phoneNumberChanged)
+    Q_PROPERTY(QString firstName READ firstName WRITE setFirstName NOTIFY firstNameChanged)
+    Q_PROPERTY(QString lastName READ lastName WRITE setLastName NOTIFY lastNameChanged)
+    Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
+    Q_PROPERTY(QString fileName READ fileName WRITE setFileName NOTIFY fileNameChanged)
+    Q_PROPERTY(QString mimeType READ mimeType WRITE setMimeType NOTIFY mimeTypeChanged)
+    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    DecryptedMessageMediaObject(const DecryptedMessageMedia & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _thumb = another.thumb();
+        _thumbW = another.thumbW();
+        _thumbH = another.thumbH();
+        _duration = another.duration();
+        _w = another.w();
+        _h = another.h();
+        _size = another.size();
+        _latitude = another.latitude();
+        _longitude = another.longitude();
+        _key = another.key();
+        _iv = another.iv();
+        _phoneNumber = another.phoneNumber();
+        _firstName = another.firstName();
+        _lastName = another.lastName();
+        _userId = another.userId();
+        _fileName = another.fileName();
+        _mimeType = another.mimeType();
+        _classType = another.classType();
+
+    }
+    DecryptedMessageMediaObject(QObject *parent = 0) : QObject(parent){}
+    ~DecryptedMessageMediaObject(){}
+
+    QByteArray thumb() const {
+        return _thumb;
+    }
+
+    void setThumb(QByteArray value) {
+        if( value == _thumb )
+            return;
+        _thumb = value;
+        emit thumbChanged();
+        emit changed();
+    }
+
+    qint32 thumbW() const {
+        return _thumbW;
+    }
+
+    void setThumbW(qint32 value) {
+        if( value == _thumbW )
+            return;
+        _thumbW = value;
+        emit thumbWChanged();
+        emit changed();
+    }
+
+    qint32 thumbH() const {
+        return _thumbH;
+    }
+
+    void setThumbH(qint32 value) {
+        if( value == _thumbH )
+            return;
+        _thumbH = value;
+        emit thumbHChanged();
+        emit changed();
+    }
+
+    qint32 duration() const {
+        return _duration;
+    }
+
+    void setDuration(qint32 value) {
+        if( value == _duration )
+            return;
+        _duration = value;
+        emit durationChanged();
+        emit changed();
+    }
+
+    qint32 w() const {
+        return _w;
+    }
+
+    void setW(qint32 value) {
+        if( value == _w )
+            return;
+        _w = value;
+        emit wChanged();
+        emit changed();
+    }
+
+    qint32 h() const {
+        return _h;
+    }
+
+    void setH(qint32 value) {
+        if( value == _h )
+            return;
+        _h = value;
+        emit hChanged();
+        emit changed();
+    }
+
+    qint32 size() const {
+        return _size;
+    }
+
+    void setSize(qint32 value) {
+        if( value == _size )
+            return;
+        _size = value;
+        emit sizeChanged();
+        emit changed();
+    }
+
+    double latitude() const {
+        return _latitude;
+    }
+
+    void setLatitude(double value) {
+        if( value == _latitude )
+            return;
+        _latitude = value;
+        emit latitudeChanged();
+        emit changed();
+    }
+
+    double longitude() const {
+        return _longitude;
+    }
+
+    void setLongitude(double value) {
+        if( value == _longitude )
+            return;
+        _longitude = value;
+        emit longitudeChanged();
+        emit changed();
+    }
+
+    QByteArray key() const {
+        return _key;
+    }
+
+    void setKey(QByteArray value) {
+        if( value == _key )
+            return;
+        _key = value;
+        emit keyChanged();
+        emit changed();
+    }
+
+    QByteArray iv() const {
+        return _iv;
+    }
+
+    void setIv(QByteArray value) {
+        if( value == _iv )
+            return;
+        _iv = value;
+        emit ivChanged();
+        emit changed();
+    }
+
+    QString phoneNumber() const {
+        return _phoneNumber;
+    }
+
+    void setPhoneNumber(QString value) {
+        if( value == _phoneNumber )
+            return;
+        _phoneNumber = value;
+        emit phoneNumberChanged();
+        emit changed();
+    }
+
+    QString firstName() const {
+        return _firstName;
+    }
+
+    void setFirstName(QString value) {
+        if( value == _firstName )
+            return;
+        _firstName = value;
+        emit firstNameChanged();
+        emit changed();
+    }
+
+    QString lastName() const {
+        return _lastName;
+    }
+
+    void setLastName(QString value) {
+        if( value == _lastName )
+            return;
+        _lastName = value;
+        emit lastNameChanged();
+        emit changed();
+    }
+
+    qint32 userId() const {
+        return _userId;
+    }
+
+    void setUserId(qint32 value) {
+        if( value == _userId )
+            return;
+        _userId = value;
+        emit userIdChanged();
+        emit changed();
+    }
+
+    QString fileName() const {
+        return _fileName;
+    }
+
+    void setFileName(QString value) {
+        if( value == _fileName )
+            return;
+        _fileName = value;
+        emit fileNameChanged();
+        emit changed();
+    }
+
+    QString mimeType() const {
+        return _mimeType;
+    }
+
+    void setMimeType(QString value) {
+        if( value == _mimeType )
+            return;
+        _mimeType = value;
+        emit mimeTypeChanged();
+        emit changed();
+    }
+
+    qint64 classType() const {
+        return _classType;
+    }
+
+    void setClassType(qint64 value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const DecryptedMessageMedia & another) {
+        _thumb = another.thumb();
+        emit thumbChanged();
+        _thumbW = another.thumbW();
+        emit thumbWChanged();
+        _thumbH = another.thumbH();
+        emit thumbHChanged();
+        _duration = another.duration();
+        emit durationChanged();
+        _w = another.w();
+        emit wChanged();
+        _h = another.h();
+        emit hChanged();
+        _size = another.size();
+        emit sizeChanged();
+        _latitude = another.latitude();
+        emit latitudeChanged();
+        _longitude = another.longitude();
+        emit longitudeChanged();
+        _key = another.key();
+        emit keyChanged();
+        _iv = another.iv();
+        emit ivChanged();
+        _phoneNumber = another.phoneNumber();
+        emit phoneNumberChanged();
+        _firstName = another.firstName();
+        emit firstNameChanged();
+        _lastName = another.lastName();
+        emit lastNameChanged();
+        _userId = another.userId();
+        emit userIdChanged();
+        _fileName = another.fileName();
+        emit fileNameChanged();
+        _mimeType = another.mimeType();
+        emit mimeTypeChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void thumbChanged();
+    void thumbWChanged();
+    void thumbHChanged();
+    void durationChanged();
+    void wChanged();
+    void hChanged();
+    void sizeChanged();
+    void latitudeChanged();
+    void longitudeChanged();
+    void keyChanged();
+    void ivChanged();
+    void phoneNumberChanged();
+    void firstNameChanged();
+    void lastNameChanged();
+    void userIdChanged();
+    void fileNameChanged();
+    void mimeTypeChanged();
+    void classTypeChanged();
+
+private:
+    QByteArray _thumb;
+    qint32 _thumbW;
+    qint32 _thumbH;
+    qint32 _duration;
+    qint32 _w;
+    qint32 _h;
+    qint32 _size;
+    double _latitude;
+    double _longitude;
+    QByteArray _key;
+    QByteArray _iv;
+    QString _phoneNumber;
+    QString _firstName;
+    QString _lastName;
+    qint32 _userId;
+    QString _fileName;
+    QString _mimeType;
+    qint64 _classType;
+
+};
+
+Q_DECLARE_METATYPE(DecryptedMessageMediaObject*)
+
+class DecryptedMessageObject : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(qint64 randomId READ randomId WRITE setRandomId NOTIFY randomIdChanged)
+    Q_PROPERTY(qint32 ttl READ ttl WRITE setTtl NOTIFY ttlChanged)
+    Q_PROPERTY(QByteArray randomBytes READ randomBytes WRITE setRandomBytes NOTIFY randomBytesChanged)
+    Q_PROPERTY(QString message READ message WRITE setMessage NOTIFY messageChanged)
+    Q_PROPERTY(DecryptedMessageMediaObject* media READ media WRITE setMedia NOTIFY mediaChanged)
+    Q_PROPERTY(DecryptedMessageActionObject* action READ action WRITE setAction NOTIFY actionChanged)
+    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+
+public:
+    DecryptedMessageObject(const DecryptedMessage & another, QObject *parent = 0) : QObject(parent){
+        (void)another;
+        _randomId = another.randomId();
+        _ttl = another.ttl();
+        _randomBytes = another.randomBytes();
+        _message = another.message();
+        _media = new DecryptedMessageMediaObject(another.media(), this);
+        _action = new DecryptedMessageActionObject(another.action(), this);
+        _classType = another.classType();
+
+    }
+    DecryptedMessageObject(QObject *parent = 0) : QObject(parent){}
+    ~DecryptedMessageObject(){}
+
+    qint64 randomId() const {
+        return _randomId;
+    }
+
+    void setRandomId(qint64 value) {
+        if( value == _randomId )
+            return;
+        _randomId = value;
+        emit randomIdChanged();
+        emit changed();
+    }
+
+    qint32 ttl() const {
+        return _ttl;
+    }
+
+    void setTtl(qint32 value) {
+        if( value == _ttl )
+            return;
+        _ttl = value;
+        emit ttlChanged();
+        emit changed();
+    }
+
+    QByteArray randomBytes() const {
+        return _randomBytes;
+    }
+
+    void setRandomBytes(QByteArray value) {
+        if( value == _randomBytes )
+            return;
+        _randomBytes = value;
+        emit randomBytesChanged();
+        emit changed();
+    }
+
+    QString message() const {
+        return _message;
+    }
+
+    void setMessage(QString value) {
+        if( value == _message )
+            return;
+        _message = value;
+        emit messageChanged();
+        emit changed();
+    }
+
+    DecryptedMessageMediaObject* media() const {
+        return _media;
+    }
+
+    void setMedia(DecryptedMessageMediaObject* value) {
+        if( value == _media )
+            return;
+        _media = value;
+        emit mediaChanged();
+        emit changed();
+    }
+
+    DecryptedMessageActionObject* action() const {
+        return _action;
+    }
+
+    void setAction(DecryptedMessageActionObject* value) {
+        if( value == _action )
+            return;
+        _action = value;
+        emit actionChanged();
+        emit changed();
+    }
+
+    qint64 classType() const {
+        return _classType;
+    }
+
+    void setClassType(qint64 value) {
+        if( value == _classType )
+            return;
+        _classType = value;
+        emit classTypeChanged();
+        emit changed();
+    }
+
+
+    void operator= ( const DecryptedMessage & another) {
+        _randomId = another.randomId();
+        emit randomIdChanged();
+        _ttl = another.ttl();
+        emit ttlChanged();
+        _randomBytes = another.randomBytes();
+        emit randomBytesChanged();
+        _message = another.message();
+        emit messageChanged();
+        *_media = another.media();
+        emit mediaChanged();
+        *_action = another.action();
+        emit actionChanged();
+        _classType = another.classType();
+        emit classTypeChanged();
+
+    }
+
+signals:
+    void changed();
+    void randomIdChanged();
+    void ttlChanged();
+    void randomBytesChanged();
+    void messageChanged();
+    void mediaChanged();
+    void actionChanged();
+    void classTypeChanged();
+
+private:
+    qint64 _randomId;
+    qint32 _ttl;
+    QByteArray _randomBytes;
+    QString _message;
+    DecryptedMessageMediaObject* _media;
+    DecryptedMessageActionObject* _action;
+    qint64 _classType;
+
+};
+
+Q_DECLARE_METATYPE(DecryptedMessageObject*)
 
 class MessageMediaObject : public QObject
 {
@@ -3705,6 +4690,7 @@ class MessageObject : public QObject
     Q_OBJECT
     Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(bool sent READ sent WRITE setSent NOTIFY sentChanged)
+    Q_PROPERTY(bool encrypted READ encrypted WRITE setEncrypted NOTIFY encryptedChanged)
     Q_PROPERTY(UploadObject* upload READ upload WRITE setUpload NOTIFY uploadChanged)
     Q_PROPERTY(PeerObject* toId READ toId WRITE setToId NOTIFY toIdChanged)
     Q_PROPERTY(bool unread READ unread WRITE setUnread NOTIFY unreadChanged)
@@ -3723,6 +4709,7 @@ public:
         (void)another;
         _id = another.id();
         _sent = true;
+        _encrypted = false;
         _upload = new UploadObject(this);
         _toId = new PeerObject(another.toId(), this);
         _unread = another.unread();
@@ -3761,6 +4748,18 @@ public:
             return;
         _sent = value;
         emit sentChanged();
+        emit changed();
+    }
+
+    bool encrypted() const {
+        return _encrypted;
+    }
+
+    void setEncrypted(bool value) {
+        if( value == _encrypted )
+            return;
+        _encrypted = value;
+        emit encryptedChanged();
         emit changed();
     }
 
@@ -3914,6 +4913,8 @@ public:
         emit idChanged();
         _sent = true;
         emit sentChanged();
+        _encrypted = false;
+        emit encryptedChanged();
         *_toId = another.toId();
         emit toIdChanged();
         _unread = another.unread();
@@ -3943,6 +4944,7 @@ signals:
     void changed();
     void idChanged();
     void sentChanged();
+    void encryptedChanged();
     void uploadChanged();
     void toIdChanged();
     void unreadChanged();
@@ -3959,6 +4961,7 @@ signals:
 private:
     qint32 _id;
     bool _sent;
+    bool _encrypted;
     UploadObject* _upload;
     PeerObject* _toId;
     bool _unread;
@@ -4367,8 +5370,14 @@ static bool initialize() {
     qmlRegisterType<ContactsMyLinkObject>("CutegramTypes", 1, 0, "ContactsMyLink");
     qRegisterMetaType<ContactsMyLinkObject*>("ContactsMyLinkObject*");
 
+    qmlRegisterType<EncryptedFileObject>("CutegramTypes", 1, 0, "EncryptedFile");
+    qRegisterMetaType<EncryptedFileObject*>("EncryptedFileObject*");
+
     qmlRegisterType<EncryptedChatObject>("CutegramTypes", 1, 0, "EncryptedChat");
     qRegisterMetaType<EncryptedChatObject*>("EncryptedChatObject*");
+
+    qmlRegisterType<EncryptedMessageObject>("CutegramTypes", 1, 0, "EncryptedMessage");
+    qRegisterMetaType<EncryptedMessageObject*>("EncryptedMessageObject*");
 
     qmlRegisterType<ContactsForeignLinkObject>("CutegramTypes", 1, 0, "ContactsForeignLink");
     qRegisterMetaType<ContactsForeignLinkObject*>("ContactsForeignLinkObject*");
@@ -4417,6 +5426,18 @@ static bool initialize() {
 
     qmlRegisterType<DialogObject>("CutegramTypes", 1, 0, "Dialog");
     qRegisterMetaType<DialogObject*>("DialogObject*");
+
+    qmlRegisterType<SendMessageActionObject>("CutegramTypes", 1, 0, "SendMessageAction");
+    qRegisterMetaType<SendMessageActionObject*>("SendMessageActionObject*");
+
+    qmlRegisterType<DecryptedMessageActionObject>("CutegramTypes", 1, 0, "DecryptedMessageAction");
+    qRegisterMetaType<DecryptedMessageActionObject*>("DecryptedMessageActionObject*");
+
+    qmlRegisterType<DecryptedMessageMediaObject>("CutegramTypes", 1, 0, "DecryptedMessageMedia");
+    qRegisterMetaType<DecryptedMessageMediaObject*>("DecryptedMessageMediaObject*");
+
+    qmlRegisterType<DecryptedMessageObject>("CutegramTypes", 1, 0, "DecryptedMessage");
+    qRegisterMetaType<DecryptedMessageObject*>("DecryptedMessageObject*");
 
     qmlRegisterType<MessageMediaObject>("CutegramTypes", 1, 0, "MessageMedia");
     qRegisterMetaType<MessageMediaObject*>("MessageMediaObject*");

@@ -42,6 +42,17 @@ Rectangle {
             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
                 if( event.modifiers == Qt.NoModifier )
                     smsg.send()
+            if(event.key == 8204 && event.modifiers == Qt.ShiftModifier)
+            {
+                if(txt.selectedText.length!=0)
+                    txt.remove(txt.selectionStart, txt.selectionEnd)
+
+                var npos = txt.cursorPosition+1
+                txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
+                txt.cursorPosition = npos
+
+                event.accepted = false
+            }
         }
     }
 

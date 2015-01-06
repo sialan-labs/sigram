@@ -16,7 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define UNITY_ICON_PATH(NUM) "/tmp/aseman-telegram-client-trayicon" + QString::number(NUM) + ".png"
+#define UNITY_LIGHT (p->desktop->desktopSession()==AsemanDesktopTools::Unity && !p->desktop->titleBarIsDark())
+#define UNITY_ICON_PATH(NUM) "/tmp/aseman-telegram-client-trayicon" + QString::number(NUM) + (darkSystemTray()?"-dark":"-light") + ".png"
+#define SYSTRAY_ICON (darkSystemTray()?":/qml/Cutegram/files/systray-dark.png":":/qml/Cutegram/files/systray.png")
 
 #include "cutegram.h"
 #include "asemantools/asemanquickview.h"
@@ -61,6 +63,7 @@ public:
     bool notification;
     bool minimumDialogs;
     bool showLastMessage;
+    bool darkSystemTray;
 
     QTextDocument *doc;
 
@@ -96,6 +99,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
+    p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
     p->messageAudio = AsemanApplication::settings()->value("General/messageAudio","files/new_msg.ogg").toString();
@@ -265,12 +269,12 @@ void Cutegram::active()
     p->viewer->requestActivate();
 }
 
-void Cutegram::setSysTrayCounter(int count)
+void Cutegram::setSysTrayCounter(int count, bool force)
 {
-    if( count == p->sysTrayCounter )
+    if( count == p->sysTrayCounter && !force )
         return;
 
-    const QImage & img = generateIcon( QImage(":/qml/Cutegram/files/systray.png"), count );
+    const QImage & img = generateIcon( QImage(SYSTRAY_ICON), count );
     if( p->sysTray )
     {
         p->sysTray->setIcon( QPixmap::fromImage(img) );
@@ -342,7 +346,8 @@ void Cutegram::init_systray()
 {
     if( p->desktop->desktopSession() == AsemanDesktopTools::Unity || p->desktop->desktopSession() == AsemanDesktopTools::GnomeFallBack )
     {
-        QFile::copy(":/qml/Cutegram/files/systray.png",UNITY_ICON_PATH(0));
+        QFile::remove(UNITY_ICON_PATH(0));
+        QFile::copy(SYSTRAY_ICON,UNITY_ICON_PATH(0));
 
         p->unityTray = new UnitySystemTray( QCoreApplication::applicationName(), UNITY_ICON_PATH(0) );
         if( !p->unityTray->pntr() )
@@ -356,7 +361,7 @@ void Cutegram::init_systray()
     }
     if( !p->unityTray || !p->unityTray->pntr() )
     {
-        p->sysTray = new QSystemTrayIcon( QIcon(":/qml/Cutegram/files/systray.png"), this );
+        p->sysTray = new QSystemTrayIcon( QIcon(SYSTRAY_ICON), this );
         p->sysTray->show();
 
         connect( p->sysTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(systray_action(QSystemTrayIcon::ActivationReason)) );
@@ -516,6 +521,23 @@ void Cutegram::setShowLastMessage(bool stt)
 bool Cutegram::showLastMessage() const
 {
     return p->showLastMessage;
+}
+
+void Cutegram::setDarkSystemTray(bool stt)
+{
+    if(p->darkSystemTray == stt)
+        return;
+
+    p->darkSystemTray = stt;
+    AsemanApplication::settings()->setValue("General/darkSystemTray", stt);
+
+    setSysTrayCounter(sysTrayCounter(), true);
+    emit darkSystemTrayChanged();
+}
+
+bool Cutegram::darkSystemTray() const
+{
+    return p->darkSystemTray;
 }
 
 void Cutegram::setBackground(const QString &background)

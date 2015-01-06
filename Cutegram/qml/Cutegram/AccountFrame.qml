@@ -92,7 +92,7 @@ Rectangle {
             var title = user.firstName + " " + user.lastName
 
             var actions = new Array
-            if(Desktop.desktopSession != Desktop.Unity) {
+            if(Desktop.desktopSession != 3) {
                 actions[0] = notification.notifyActShow
                 actions[1] = qsTr("Show")
                 actions[2] = notification.notifyActMute

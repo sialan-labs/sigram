@@ -57,5 +57,7 @@
         <file>qml/Cutegram/AboutCutegram.qml</file>
         <file>qml/Cutegram/files/audio.png</file>
         <file>qml/Cutegram/files/new_msg.ogg</file>
+        <file>qml/Cutegram/files/systray-dark.png</file>
+        <file>qml/Cutegram/files/lock.png</file>
     </qresource>
 </RCC>

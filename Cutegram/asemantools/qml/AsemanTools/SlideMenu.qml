@@ -92,11 +92,13 @@ Item {
             Component.onCompleted: {
                 menu.show = true
                 item = itemComponent.createObject(menu_frame)
+                BackHandler.pushHandler(slide_menu, slide_menu.end)
             }
 
             function end(){
                 destroy_timer.restart()
                 menu.show = false
+                BackHandler.removeHandler(menu)
             }
         }
     }
