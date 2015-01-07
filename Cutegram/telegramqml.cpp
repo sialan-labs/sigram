@@ -20,6 +20,7 @@
 #include "asemantools/asemantools.h"
 #include "telegramqml.h"
 #include "userdata.h"
+#include "database.h"
 #include "objects/types.h"
 
 #include <secret/secretchat.h>
@@ -48,6 +49,7 @@ class TelegramQmlPrivate
 {
 public:
     UserData *userdata;
+    Database *database;
     Telegram *telegram;
     Settings *tsettings;
 
@@ -177,6 +179,13 @@ void TelegramQml::setPhoneNumber(const QString &phone)
 
     p->userdata = new UserData(phone, this);
     emit userDataChanged();
+
+    p->database = new Database(phone, this);
+
+    connect(p->database, SIGNAL(chatFounded(Chat))      , SLOT(dbChatFounded(Chat))       );
+    connect(p->database, SIGNAL(userFounded(User))      , SLOT(dbUserFounded(User))       );
+    connect(p->database, SIGNAL(dialogFounded(Dialog))  , SLOT(dbDialogFounded(Dialog))   );
+    connect(p->database, SIGNAL(messageFounded(Message)), SLOT(dbMessageFounded(Message)) );
 }
 
 QString TelegramQml::downloadPath() const
@@ -217,6 +226,11 @@ void TelegramQml::setPublicKeyFile(const QString &file)
 UserData *TelegramQml::userData() const
 {
     return p->userdata;
+}
+
+Database *TelegramQml::database() const
+{
+    return p->database;
 }
 
 Telegram *TelegramQml::telegram() const
@@ -402,6 +416,14 @@ ContactObject *TelegramQml::contact(qint64 id) const
     ContactObject *res = p->contacts.value(id);
     if( !res )
         res = p->nullContact;
+    return res;
+}
+
+EncryptedChatObject *TelegramQml::encryptedChat(qint64 id) const
+{
+    EncryptedChatObject *res = p->encchats.value(id);
+    if( !res )
+        res = p->nullEncryptedChat;
     return res;
 }
 
@@ -1766,7 +1788,7 @@ void TelegramQml::uploadCancelFile_slt(qint64 fileId, bool cancelled)
     }
 }
 
-void TelegramQml::insertDialog(const Dialog &d, bool encrypted)
+void TelegramQml::insertDialog(const Dialog &d, bool encrypted, bool fromDb)
 {
     qint32 did = d.peer().classType()==Peer::typePeerChat? d.peer().chatId() : d.peer().userId();
     DialogObject *obj = p->dialogs.value(did);
@@ -1780,6 +1802,9 @@ void TelegramQml::insertDialog(const Dialog &d, bool encrypted)
         connect( obj, SIGNAL(unreadCountChanged()), SLOT(refreshUnreadCount()) );
     }
     else
+    if(fromDb)
+        return;
+    else
         *obj = d;
 
     p->dialogs_list = p->dialogs.keys();
@@ -1789,10 +1814,13 @@ void TelegramQml::insertDialog(const Dialog &d, bool encrypted)
 
     emit dialogsChanged();
 
-//    refreshUnreadCount();
+    refreshUnreadCount();
+
+    if(!fromDb)
+        p->database->insertDialog(d);
 }
 
-void TelegramQml::insertMessage(const Message &m, bool encrypted)
+void TelegramQml::insertMessage(const Message &m, bool encrypted, bool fromDb)
 {
     MessageObject *obj = p->messages.value(m.id());
     if( !obj )
@@ -1816,12 +1844,18 @@ void TelegramQml::insertMessage(const Message &m, bool encrypted)
         p->messages_list[did] = list;
     }
     else
+    if(fromDb)
+        return;
+    else
         *obj = m;
 
     emit messagesChanged();
+
+    if(!fromDb)
+        p->database->insertMessage(m);
 }
 
-void TelegramQml::insertUser(const User &u)
+void TelegramQml::insertUser(const User &u, bool fromDb)
 {
     UserObject *obj = p->users.value(u.id());
     if( !obj )
@@ -1832,10 +1866,16 @@ void TelegramQml::insertUser(const User &u)
         getFile(obj->photo()->photoSmall());
     }
     else
+    if(fromDb)
+        return;
+    else
         *obj = u;
+
+    if(!fromDb)
+        p->database->insertUser(u);
 }
 
-void TelegramQml::insertChat(const Chat &c)
+void TelegramQml::insertChat(const Chat &c, bool fromDb)
 {
     ChatObject *obj = p->chats.value(c.id());
     if( !obj )
@@ -1846,7 +1886,13 @@ void TelegramQml::insertChat(const Chat &c)
         getFile(obj->photo()->photoSmall());
     }
     else
+    if(fromDb)
+        return;
+    else
         *obj = c;
+
+    if(!fromDb)
+        p->database->insertChat(c);
 }
 
 void TelegramQml::insertUpdate(const Update &update)
@@ -2140,6 +2186,26 @@ void TelegramQml::startGarbageChecker()
     p->garbage_checker_timer = startTimer(3000);
 }
 
+void TelegramQml::dbUserFounded(const User &user)
+{
+    insertUser(user, true);
+}
+
+void TelegramQml::dbChatFounded(const Chat &chat)
+{
+    insertChat(chat, true);
+}
+
+void TelegramQml::dbDialogFounded(const Dialog &dialog)
+{
+    insertDialog(dialog, false, true);
+}
+
+void TelegramQml::dbMessageFounded(const Message &message)
+{
+    insertMessage(message, false, true);
+}
+
 void TelegramQml::refreshUnreadCount()
 {
     int unreadCount = 0;
@@ -2198,7 +2264,27 @@ bool checkDialogLessThan( qint64 a, qint64 b )
     if( !bo )
         return true;
 
-    return ao->topMessage() > bo->topMessage();
+    MessageObject *am = telegramp_qml_tmp->messages.value(ao->topMessage());
+    MessageObject *bm = telegramp_qml_tmp->messages.value(bo->topMessage());
+    if(!am || !bm)
+    {
+        if(ao->encrypted() || bo->encrypted())
+        {
+            EncryptedChatObject *aec = telegramp_qml_tmp->encchats.value( ao->peer()->chatId()?ao->peer()->chatId():ao->peer()->userId() );
+            EncryptedChatObject *bec = telegramp_qml_tmp->encchats.value( bo->peer()->chatId()?bo->peer()->chatId():bo->peer()->userId() );
+
+            if(aec && bec)
+                return aec->date() > bec->date();
+            if(aec && !bec)
+                return aec->date() > bm->date();
+            if(!aec && bec)
+                return am->date() > bec->date();
+        }
+        else
+            return ao->topMessage() > bo->topMessage();
+    }
+
+    return am->date() > bm->date();
 }
 
 bool checkMessageLessThan( qint64 a, qint64 b )

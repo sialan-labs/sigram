@@ -231,16 +231,37 @@ QString AsemanDesktopTools::getOpenFileName(QWindow *window, const QString & tit
                 return QFileDialog::getOpenFileName(0, title, startPath, filter);
         }
         else
-        {
             return QFileDialog::getOpenFileName(0, title, startPath, filter);
+        break;
+
+    case AsemanDesktopTools::Unity:
+    case AsemanDesktopTools::GnomeFallBack:
+    case AsemanDesktopTools::Gnome:
+        if( QFileInfo::exists("/usr/bin/zenity") )
+        {
+            QStringList args = QStringList()<< "--title=" << "--file-selection" <<
+                                               "--class=Cutegram" << "--name=Cutegram";
+            if(!filter.isEmpty())
+                args << "--file-filter=" + filter;
+
+            QProcess process;
+            QEventLoop loop;
+            connect(&process, SIGNAL(finished(int)), &loop, SLOT(quit()), Qt::QueuedConnection );
+
+            process.start("/usr/bin/zenity", args );
+            loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+            if( process.exitStatus() == QProcess::NormalExit )
+                return QString(process.readAll()).remove("\n");
+            else
+                return QFileDialog::getOpenFileName(0, title, startPath, filter);
         }
+        else
+            return QFileDialog::getOpenFileName(0, title, startPath, filter);
         break;
 
     case AsemanDesktopTools::Mac:
     case AsemanDesktopTools::Windows:
-    case AsemanDesktopTools::Unity:
-    case AsemanDesktopTools::GnomeFallBack:
-    case AsemanDesktopTools::Gnome:
         return QFileDialog::getOpenFileName(0, title, startPath, filter);
         break;
     }
@@ -287,11 +308,34 @@ QString AsemanDesktopTools::getSaveFileName(QWindow *window, const QString &titl
         }
         break;
 
-    case AsemanDesktopTools::Mac:
-    case AsemanDesktopTools::Windows:
     case AsemanDesktopTools::Unity:
     case AsemanDesktopTools::GnomeFallBack:
     case AsemanDesktopTools::Gnome:
+        if( QFileInfo::exists("/usr/bin/zenity") )
+        {
+            QStringList args = QStringList()<< "--title=" << "--file-selection" << "--save" <<
+                                               "--class=Cutegram" << "--name=Cutegram";
+            if(!filter.isEmpty())
+                args << "--file-filter=" + filter;
+
+            QProcess process;
+            QEventLoop loop;
+            connect(&process, SIGNAL(finished(int)), &loop, SLOT(quit()), Qt::QueuedConnection );
+
+            process.start("/usr/bin/zenity", args );
+            loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+            if( process.exitStatus() == QProcess::NormalExit )
+                return QString(process.readAll()).remove("\n");
+            else
+                return QFileDialog::getSaveFileName(0, title, startPath, filter);
+        }
+        else
+            return QFileDialog::getSaveFileName(0, title, startPath, filter);
+        break;
+
+    case AsemanDesktopTools::Mac:
+    case AsemanDesktopTools::Windows:
         return QFileDialog::getSaveFileName(0, title, startPath, filter);
         break;
     }
@@ -338,11 +382,32 @@ QString AsemanDesktopTools::getExistingDirectory(QWindow *window, const QString 
         }
         break;
 
-    case AsemanDesktopTools::Mac:
-    case AsemanDesktopTools::Windows:
     case AsemanDesktopTools::Unity:
     case AsemanDesktopTools::GnomeFallBack:
     case AsemanDesktopTools::Gnome:
+        if( QFileInfo::exists("/usr/bin/zenity") )
+        {
+            QStringList args = QStringList()<< "--title=" << "--file-selection" << "--directory" <<
+                                               "--class=Cutegram" << "--name=Cutegram";
+
+            QProcess process;
+            QEventLoop loop;
+            connect(&process, SIGNAL(finished(int)), &loop, SLOT(quit()), Qt::QueuedConnection );
+
+            process.start("/usr/bin/zenity", args );
+            loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+            if( process.exitStatus() == QProcess::NormalExit )
+                return QString(process.readAll()).remove("\n");
+            else
+                return QFileDialog::getExistingDirectory(0, title, startPath);
+        }
+        else
+            return QFileDialog::getExistingDirectory(0, title, startPath);
+        break;
+
+    case AsemanDesktopTools::Mac:
+    case AsemanDesktopTools::Windows:
         return QFileDialog::getExistingDirectory(0, title, startPath);
         break;
     }

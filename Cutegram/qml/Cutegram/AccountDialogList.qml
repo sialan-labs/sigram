@@ -66,9 +66,14 @@ Item {
             clip: true
 
             property Dialog dItem: item
+
             property bool isChat: dItem.peer.chatId != 0
-            property User user: telegramObject.user(dItem.peer.userId)
+            property User user: telegramObject.user(dItem.encrypted?enChatUid:dItem.peer.userId)
             property Chat chat: telegramObject.chat(dItem.peer.chatId)
+
+            property EncryptedChat enchat: telegramObject.encryptedChat(dItem.peer.userId)
+            property int enChatUid: enchat.adminId==telegramObject.me? enchat.participantId : enchat.adminId
+
             property Message message: telegramObject.message(dItem.topMessage)
             property variant msgDate: CalendarConv.fromTime_t(message.date)
 
@@ -190,7 +195,7 @@ Item {
             DialogDropFile {
                 anchors.fill: parent
                 currentDialog: dItem
-                color: "#ddffffff"
+                color: "#dd222222"
                 onContainsDragChanged: toggleMinimum(containsDrag)
             }
 

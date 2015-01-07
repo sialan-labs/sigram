@@ -20,6 +20,7 @@
 
 #include "telegrammessagesmodel.h"
 #include "telegramqml.h"
+#include "database.h"
 #include "objects/types.h"
 
 #include <telegram.h>
@@ -127,6 +128,8 @@ void TelegramMessagesModel::refresh()
 
     Telegram *tgObject = p->telegram->telegram();
     tgObject->messagesGetHistory(peer, 0, 0, LOAD_STEP_COUNT );
+
+    p->telegram->database()->readMessages(TelegramMessagesModel::peer(), 0, LOAD_STEP_COUNT);
 }
 
 void TelegramMessagesModel::loadMore(bool force)
@@ -146,6 +149,8 @@ void TelegramMessagesModel::loadMore(bool force)
 
     Telegram *tgObject = p->telegram->telegram();
     tgObject->messagesGetHistory(peer, p->load_count, 0, p->load_limit );
+
+    p->telegram->database()->readMessages(TelegramMessagesModel::peer(), p->load_count, LOAD_STEP_COUNT);
 
     p->refreshing = true;
     emit refreshingChanged();
@@ -227,6 +232,14 @@ InputPeer TelegramMessagesModel::inputPeer() const
 {
     bool isChat = p->dialog->peer()->classType()==Peer::typePeerChat;
     InputPeer peer(isChat? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
+    peer.setChatId(p->dialog->peer()->chatId());
+    peer.setUserId(p->dialog->peer()->userId());
+    return peer;
+}
+
+Peer TelegramMessagesModel::peer() const
+{
+    Peer peer( static_cast<Peer::PeerType>(p->dialog->peer()->classType()) );
     peer.setChatId(p->dialog->peer()->chatId());
     peer.setUserId(p->dialog->peer()->userId());
     return peer;

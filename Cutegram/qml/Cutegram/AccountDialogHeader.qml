@@ -11,8 +11,11 @@ Rectangle {
     property Dialog currentDialog
 
     property bool isChat: currentDialog? currentDialog.peer.chatId != 0 : false
-    property User user: telegramObject.user(currentDialog.peer.userId)
+    property User user: telegramObject.user(currentDialog.encrypted?enChatUid:currentDialog.peer.userId)
     property Chat chat: telegramObject.chat(currentDialog.peer.chatId)
+
+    property EncryptedChat enchat: telegramObject.encryptedChat(currentDialog.peer.userId)
+    property int enChatUid: enchat.adminId==telegramObject.me? enchat.participantId : enchat.adminId
 
     property bool refreshing: false
 

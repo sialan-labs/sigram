@@ -25,4 +25,7 @@
 #define USERDATA_DB_CONNECTION "userdata_connection"
 #define USERDATA_DB_PATH ":/database/userdata.sqlite"
 
+#define DATABASE_DB_CONNECTION "database_connection"
+#define DATABASE_DB_PATH ":/database/database.sqlite"
+
 #endif // CUTEGRAM_MACROS_H

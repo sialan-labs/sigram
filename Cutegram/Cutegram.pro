@@ -29,7 +29,9 @@ SOURCES += main.cpp \
     chatparticipantlist.cpp \
     telegramuploadsmodel.cpp \
     telegramchatparticipantsmodel.cpp \
-    telegramcontactsmodel.cpp
+    telegramcontactsmodel.cpp \
+    database.cpp \
+    databasecore.cpp
 
 RESOURCES += resource.qrc
 
@@ -53,7 +55,9 @@ HEADERS += \
     chatparticipantlist.h \
     telegramuploadsmodel.h \
     telegramchatparticipantsmodel.h \
-    telegramcontactsmodel.h
+    telegramcontactsmodel.h \
+    database.h \
+    databasecore.h
 
 OTHER_FILES += \
     objects/types.sco \

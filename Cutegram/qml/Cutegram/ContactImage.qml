@@ -51,7 +51,18 @@ Item {
         id: img
         anchors.fill: parent
         sourceSize: Qt.size(width,height)
-        source: imgPath.length==0? (isChat?"files/group.png":"files/user.png") : imgPath
+        source: {
+            if(dialog && dialog.encrypted)
+                return "files/user-enc.png"
+            else
+            if(imgPath.length==0 && isChat)
+                return "files/group.png"
+            else
+            if(imgPath.length==0)
+                return "files/user.png"
+            else
+                return imgPath
+        }
         asynchronous: true
         fillMode: Image.PreserveAspectCrop
         visible: !circleMode

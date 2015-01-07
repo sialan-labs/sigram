@@ -59,5 +59,7 @@
         <file>qml/Cutegram/files/new_msg.ogg</file>
         <file>qml/Cutegram/files/systray-dark.png</file>
         <file>qml/Cutegram/files/lock.png</file>
+        <file>qml/Cutegram/files/user-enc.png</file>
+        <file>database/database.sqlite</file>
     </qresource>
 </RCC>

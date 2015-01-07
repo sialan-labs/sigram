@@ -22,6 +22,7 @@
 #include <QObject>
 #include "types/inputfilelocation.h"
 
+class Database;
 class SecretChat;
 class EncryptedFile;
 class EncryptedFileObject;
@@ -115,6 +116,7 @@ public:
     void setPublicKeyFile( const QString & file );
 
     UserData *userData() const;
+    Database *database() const;
     Telegram *telegram() const;
     qint64 me() const;
 
@@ -147,6 +149,7 @@ public:
     Q_INVOKABLE MessageObject *upload(qint64 id) const;
     Q_INVOKABLE ChatFullObject *chatFull(qint64 id) const;
     Q_INVOKABLE ContactObject *contact(qint64 id) const;
+    Q_INVOKABLE EncryptedChatObject *encryptedChat(qint64 id) const;
 
     Q_INVOKABLE FileLocationObject *locationOf(qint64 id, qint64 dcId, qint64 accessHash);
     Q_INVOKABLE FileLocationObject *locationOfDocument(DocumentObject *doc);
@@ -299,10 +302,10 @@ private slots:
     void uploadCancelFile_slt(qint64 fileId, bool cancelled);
 
 private:
-    void insertDialog(const Dialog & dialog , bool encrypted = false);
-    void insertMessage(const Message & message , bool encrypted = false);
-    void insertUser( const User & user );
-    void insertChat( const Chat & chat );
+    void insertDialog(const Dialog & dialog , bool encrypted = false, bool fromDb = false);
+    void insertMessage(const Message & message , bool encrypted = false, bool fromDb = false);
+    void insertUser( const User & user, bool fromDb = false );
+    void insertChat( const Chat & chat, bool fromDb = false );
     void insertUpdate( const Update & update );
     void insertContact( const Contact & contact );
     void insertEncryptedMessage(const EncryptedMessage & emsg);
@@ -316,6 +319,11 @@ protected:
     void startGarbageChecker();
 
 private slots:
+    void dbUserFounded(const User &user);
+    void dbChatFounded(const Chat &chat);
+    void dbDialogFounded(const Dialog &dialog);
+    void dbMessageFounded(const Message &message);
+
     void refreshUnreadCount();
     void refreshSecretChats();
 

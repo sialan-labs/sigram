@@ -20,6 +20,7 @@
 #include "telegramqml.h"
 #include "objects/types.h"
 #include "userdata.h"
+#include "database.h"
 
 #include <telegram.h>
 
@@ -68,6 +69,8 @@ void TelegramDialogsModel::setTelegram(TelegramQml *tgo)
 
     connect( p->telegram->userData(), SIGNAL(favoriteChanged(int)) , this, SLOT(userDataChanged()) );
     connect( p->telegram->userData(), SIGNAL(valueChanged(QString)), this, SLOT(userDataChanged()) );
+
+    p->telegram->database()->readFullDialogs();
 
     Telegram *tgObject = p->telegram->telegram();
     tgObject->messagesGetDialogs(0,0,1000);
