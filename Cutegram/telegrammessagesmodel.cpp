@@ -124,6 +124,15 @@ void TelegramMessagesModel::refresh()
     if( !p->dialog )
         return;
 
+    if(p->dialog->encrypted())
+    {
+        Peer peer(Peer::typePeerChat);
+        peer.setChatId(p->dialog->peer()->userId());
+
+        p->telegram->database()->readMessages(peer, 0, LOAD_STEP_COUNT);
+        return;
+    }
+
     const InputPeer & peer = inputPeer();
 
     Telegram *tgObject = p->telegram->telegram();
@@ -143,9 +152,18 @@ void TelegramMessagesModel::loadMore(bool force)
     if( !force && p->messages.count() == 0 )
         return;
 
-    const InputPeer & peer = inputPeer();
-
     p->load_limit = p->load_count + LOAD_STEP_COUNT;
+
+    if(p->dialog->encrypted())
+    {
+        Peer peer(Peer::typePeerChat);
+        peer.setChatId(p->dialog->peer()->userId());
+
+        p->telegram->database()->readMessages(peer, p->load_count, LOAD_STEP_COUNT);
+        return;
+    }
+
+    const InputPeer & peer = inputPeer();
 
     Telegram *tgObject = p->telegram->telegram();
     tgObject->messagesGetHistory(peer, p->load_count, 0, p->load_limit );
@@ -169,6 +187,10 @@ void TelegramMessagesModel::sendMessage(const QString &msg)
 
 void TelegramMessagesModel::setReaded()
 {
+    if( !p->telegram )
+        return;
+    if( !p->dialog )
+        return;
     if( p->telegram->invisible() )
         return;
 

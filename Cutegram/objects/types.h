@@ -3731,8 +3731,6 @@ public:
         emit topMessageChanged();
         _unreadCount = another.unreadCount();
         emit unreadCountChanged();
-        _encrypted = false;
-        emit encryptedChanged();
         _typingUsers.clear();
         emit typingUsersChanged();
         _classType = another.classType();

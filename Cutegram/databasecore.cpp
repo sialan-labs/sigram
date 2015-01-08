@@ -268,6 +268,7 @@ void DatabaseCore::readMessages(const DbPeer &dpeer, int offset, int limit)
         Message message;
         message.setToId(toPeer);
         message.setAction(action);
+        message.setMedia(media);
         message.setId( record.value("id").toLongLong() );
         message.setUnread( record.value("unread").toBool() );
         message.setFromId( record.value("fromId").toLongLong() );
@@ -625,7 +626,7 @@ void DatabaseCore::insertPhoto(const Photo &photo)
     insertPhotoSize(photo.id(), photo.sizes());
 }
 
-void DatabaseCore::insertPhotoSize(int pid, const QList<PhotoSize> &sizes)
+void DatabaseCore::insertPhotoSize(qint64 pid, const QList<PhotoSize> &sizes)
 {
     begin();
     foreach(const PhotoSize &size, sizes)
@@ -725,6 +726,10 @@ Video DatabaseCore::readVideo(qint64 id)
     video.setUserId( record.value("userId").toLongLong() );
     video.setClassType( static_cast<Video::VideoType>(record.value("type").toLongLong()) );
 
+    const QList<PhotoSize> &sizes = readPhotoSize(video.id());
+    if(!sizes.isEmpty())
+        video.setThumb(sizes.first());
+
     return video;
 }
 
@@ -759,6 +764,10 @@ Document DatabaseCore::readDocument(qint64 id)
     document.setAccessHash( record.value("accessHash").toLongLong() );
     document.setUserId( record.value("userId").toLongLong() );
     document.setClassType( static_cast<Document::DocumentType>(record.value("type").toLongLong()) );
+
+    const QList<PhotoSize> &sizes = readPhotoSize(document.id());
+    if(!sizes.isEmpty())
+        document.setThumb(sizes.first());
 
     return document;
 }

@@ -661,7 +661,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
 
     }
 
-    insertMessage(message, false, false, true);
+    insertMessage(message, dlg->encrypted(), false, true);
 
     MessageObject *msgObj = p->messages.value(message.id());
     msgObj->setSent(false);
@@ -669,6 +669,9 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     p->pend_messages[sendId] = msgObj;
 
     timerUpdateDialogs();
+
+    if(dlg->encrypted())
+        messagesSendEncrypted_slt(sendId, message.date(), EncryptedFile());
 }
 
 void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)
@@ -845,8 +848,15 @@ Message TelegramQml::newMessage(qint64 dId)
     to_peer.setChatId(dlg->peer()->chatId());
     to_peer.setUserId(dlg->peer()->userId());
 
-    qint32 msgId = p->msg_send_id_counter;
-    p->msg_send_id_counter++;
+    if(dlg->encrypted())
+    {
+        Peer encPeer(Peer::typePeerChat);
+        encPeer.setChatId(dId);
+        to_peer = encPeer;
+    }
+
+    static qint32 msgId = INT_MAX-100000;
+    msgId++;
 
     Message message(Message::typeMessage);
     message.setId(msgId);
@@ -994,6 +1004,8 @@ void TelegramQml::try_init()
              SLOT(messagesEncryptedChatDiscarded_slt(qint32)) );
     connect( p->telegram, SIGNAL(messagesEncryptedChatCreated(qint32)),
              SLOT(messagesEncryptedChatCreated_slt(qint32)) );
+    connect( p->telegram, SIGNAL(messagesSendEncryptedAnswer(qint64,qint32,EncryptedFile)),
+             SLOT(messagesSendEncrypted_slt(qint64,qint32,EncryptedFile)) );
 
     connect( p->telegram, SIGNAL(contactsGetContactsAnswer(qint64,bool,QList<Contact>,QList<User>)),
              SLOT(contactsGetContacts_slt(qint64,bool,QList<Contact>,QList<User>)) );
@@ -1410,6 +1422,8 @@ void TelegramQml::messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QLi
         qint64 dId = dobj->peer()->chatId()?dobj->peer()->chatId():dobj->peer()->userId();
         if(dialogIds.contains(dId))
             continue;
+        if(dobj->encrypted())
+            continue;
 
         p->dialogs.remove(dId);
         p->garbages.insert(dobj);
@@ -1541,7 +1555,7 @@ void TelegramQml::messagesSendEncrypted_slt(qint64 id, qint32 date, const Encryp
 
     Message msg(Message::typeMessage);
     msg.setFromId(msgObj->fromId());
-    msg.setId(encryptedFile.id());
+    msg.setId(date);
     msg.setDate(date);
     msg.setOut(msgObj->out());
     msg.setToId(peer);
@@ -1686,6 +1700,7 @@ void TelegramQml::updates_slt(const QList<Update> & updates, const QList<User> &
 void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessage &m, qint32 date, qint32 qts, const EncryptedFile &attachment)
 {
     Q_UNUSED(qts)
+    Q_UNUSED(attachment)
 
     EncryptedChatObject *chat = p->encchats.value(chatId);
     if(!chat)
@@ -1698,7 +1713,7 @@ void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessa
     msg.setToId(peer);
     msg.setMessage(m.message());
     msg.setDate(date);
-    msg.setId(attachment.id());
+    msg.setId(date);
     msg.setOut(false);
     msg.setFromId(chat->adminId()==me()?chat->participantId():chat->adminId());
 
@@ -1820,7 +1835,11 @@ void TelegramQml::insertDialog(const Dialog &d, bool encrypted, bool fromDb)
     if(fromDb)
         return;
     else
+    {
         *obj = d;
+        if(encrypted)
+            obj->setEncrypted(true);
+    }
 
     p->dialogs_list = p->dialogs.keys();
 
@@ -1859,7 +1878,7 @@ void TelegramQml::insertMessage(const Message &m, bool encrypted, bool fromDb, b
         p->messages_list[did] = list;
     }
     else
-    if(fromDb)
+    if(fromDb && !encrypted)
         return;
     else
         *obj = m;
@@ -2218,7 +2237,12 @@ void TelegramQml::dbDialogFounded(const Dialog &dialog)
 
 void TelegramQml::dbMessageFounded(const Message &message)
 {
-    insertMessage(message, false, true);
+    bool encrypted = false;
+    DialogObject *dlg = p->dialogs.value(message.toId().chatId());
+    if(dlg)
+        encrypted = dlg->encrypted();
+
+    insertMessage(message, encrypted, true);
 }
 
 void TelegramQml::refreshUnreadCount()

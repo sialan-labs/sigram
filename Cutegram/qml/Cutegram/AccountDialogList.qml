@@ -86,10 +86,23 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                color: marea.pressed || selected? Cutegram.highlightColor : "#00000000"
                 opacity: marea.pressed? 0.3 : (selected? 0.2 : 0)
                 anchors.topMargin: 3*Devices.density
                 anchors.bottomMargin: 3*Devices.density
+                color: {
+                    var result = "#00000000"
+                    if(marea.pressed || selected) {
+                        result = Cutegram.highlightColor
+                        if(dItem.encrypted) {
+                            var r = result.r
+                            var g = result.g
+                            var b = result.b
+                            result = Qt.rgba(1-r, 1-g, 1-b, 1)
+                        }
+                    }
+
+                    return result
+                }
             }
 
             Item {
@@ -128,6 +141,16 @@ Item {
                     maximumLineCount: 1
                     text: isChat? chat.title : user.firstName + " " + user.lastName
                     opacity: itemOpacities
+                }
+
+                Image {
+                    x: title_txt.x + title_txt.paintedWidth + 4*Devices.density
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: "files/lock.png"
+                    sourceSize: Qt.size(width, height)
+                    visible: dItem.encrypted
+                    width: 14*Devices.density
+                    height: width
                 }
 
                 Text {

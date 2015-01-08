@@ -6,7 +6,6 @@ import CutegramTypes 1.0
 Rectangle {
     id: header
     height: 60*Devices.density
-    color: backColor2
 
     property Dialog currentDialog
 
@@ -32,11 +31,22 @@ Rectangle {
             indicator.stop()
     }
 
+    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.margins: 10*Devices.density
+        source: "files/lock.png"
+        sourceSize: Qt.size(width, height)
+        visible: currentDialog.encrypted
+        width: 14*Devices.density
+        height: width
+    }
+
     Text {
         id: title_txt
         anchors.centerIn: parent
         anchors.horizontalCenter: parent.horizontalCenter
-        color: textColor0
+        color: currentDialog.encrypted? "#eeeeee" : "#111111"
         font.pixelSize: 15*Devices.fontDensity
         font.family: AsemanApp.globalFontFamily
         text: {

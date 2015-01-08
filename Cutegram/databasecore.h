@@ -55,7 +55,7 @@ private:
     void insertDocument(const Document &document);
     void insertGeo(int id, const GeoPoint &geo);
     void insertPhoto(const Photo &photo);
-    void insertPhotoSize(int pid, const QList<PhotoSize> &sizes);
+    void insertPhotoSize(qint64 pid, const QList<PhotoSize> &sizes);
 
     Audio readAudio(qint64 id);
     Video readVideo(qint64 id);

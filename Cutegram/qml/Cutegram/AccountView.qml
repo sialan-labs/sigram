@@ -88,7 +88,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.right: parent.right
-            color: framesColor
+            color: currentDialog.encrypted? "#aa000000" : framesColor
             currentDialog: dialogs.currentDialog
             refreshing: messages.refreshing
             onClicked: {

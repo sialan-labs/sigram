@@ -29,9 +29,13 @@ Item {
 
     property Telegram telegram: telegramObject
     property Dialog dialog
+
     property bool isChat: dialog.peer.chatId != 0
-    property User user: dialog? telegram.user(dialog.peer.userId) : telegram.nullUser
+    property User user: dialog? telegram.user(dialog.encrypted?enChatUid:dialog.peer.userId) : telegram.nullUser
     property Chat chat: dialog? telegram.chat(dialog.peer.chatId) : telegram.nullChat
+
+    property EncryptedChat enchat: telegramObject.encryptedChat(dialog?dialog.peer.userId:0)
+    property int enChatUid: enchat.adminId==telegramObject.me? enchat.participantId : enchat.adminId
 
     property real typeUserStatusOffline: 0x8c703f
     property real typeUserStatusEmpty: 0x9d05049
@@ -52,9 +56,6 @@ Item {
         anchors.fill: parent
         sourceSize: Qt.size(width,height)
         source: {
-            if(dialog && dialog.encrypted)
-                return "files/user-enc.png"
-            else
             if(imgPath.length==0 && isChat)
                 return "files/group.png"
             else
