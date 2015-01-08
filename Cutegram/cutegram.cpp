@@ -115,6 +115,7 @@ Cutegram::Cutegram(QObject *parent) :
 
     qRegisterMetaType<TelegramQml*>("TelegramQml*");
     qRegisterMetaType<UserData*>("UserData*");
+    qRegisterMetaType< QList<qint32> >("QList<qint32>");
 
     qmlRegisterType<TelegramQml>("Cutegram", 1, 0, "Telegram");
     qmlRegisterType<ProfilesModel>("Cutegram", 1, 0, "ProfilesModel");
@@ -617,6 +618,24 @@ void Cutegram::init_languages()
             setLanguage( lang );
     }
     setLanguage( "English" );
+}
+
+QVariantList Cutegram::intListToVariantList(const QList<qint32> &list)
+{
+    QVariantList res;
+    foreach(const qint32 u, list)
+        res << u;
+
+    return res;
+}
+
+QList<qint32> Cutegram::variantListToIntList(const QVariantList &list)
+{
+    QList<qint32> res;
+    foreach(const QVariant &l, list)
+        res << l.toInt();
+
+    return res;
 }
 
 Cutegram::~Cutegram()

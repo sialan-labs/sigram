@@ -59,7 +59,7 @@ signals:
     void initializingChanged();
 
 private slots:
-    void dialogsChanged();
+    void dialogsChanged(bool cachedData);
     void userDataChanged();
 
     QList<qint64> fixDialogs(QList<qint64> dialogs );

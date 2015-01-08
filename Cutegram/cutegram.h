@@ -55,6 +55,9 @@ public:
     Cutegram(QObject *parent = 0);
     ~Cutegram();
 
+    Q_INVOKABLE static QVariantList intListToVariantList(const QList<qint32> &list);
+    Q_INVOKABLE static QList<qint32> variantListToIntList(const QVariantList &list);
+
     Q_INVOKABLE QSize imageSize( const QString & path );
     Q_INVOKABLE qreal htmlWidth( const QString & txt );
 
@@ -142,5 +145,7 @@ private:
 private:
     CutegramPrivate *p;
 };
+
+Q_DECLARE_METATYPE( QList<qint32> )
 
 #endif // CUTEGRAM_H

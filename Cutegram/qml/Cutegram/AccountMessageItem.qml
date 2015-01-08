@@ -9,7 +9,7 @@ Item {
     height: logicalHeight<minimumHeight? minimumHeight : logicalHeight
     clip: true
 
-    property real logicalHeight: column.height + frameMargins*2 + textMargins*2
+    property real logicalHeight: action_item.hasAction? action_item.height: column.height + frameMargins*2 + textMargins*2
     property real minimumHeight: 48*Devices.density
     property real maximumWidth: 2*width/3
 
@@ -40,7 +40,8 @@ Item {
 
     AccountMessageAction {
         id: action_item
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
         message: msg_item.message
     }
 

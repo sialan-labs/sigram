@@ -9,6 +9,8 @@
 #include "asemanlistobject.h"
 #include "asemancalendarconverter.h"
 #include "asemanimagecoloranalizor.h"
+#include "asemanmimedata.h"
+#include "asemandragobject.h"
 #include "asemanbackhandler.h"
 #include "aseman_macros.h"
 #include "asemancountriesmodel.h"
@@ -49,6 +51,10 @@ SINGLETON_PROVIDER_PRO(AsemanQtLogger, aseman_logger_singleton, new AsemanQtLogg
 
 void AsemanToolsPlugin::registerTypes(const char *uri)
 {
+    qRegisterMetaType<AsemanMimeData*>("AsemanMimeData*");
+
+    qmlRegisterType<AsemanMimeData>(uri, 1, 0, "MimeData");
+    qmlRegisterType<AsemanDragObject>(uri, 1, 0, "DragObject");
     qmlRegisterType<AsemanListObject>(uri, 1, 0, "ListObject");
     qmlRegisterType<AsemanHashObject>(uri, 1, 0, "HashObject");
     qmlRegisterType<AsemanImageColorAnalizor>(uri, 1,0, "ImageColorAnalizor");

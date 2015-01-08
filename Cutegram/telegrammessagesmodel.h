@@ -77,7 +77,7 @@ signals:
     void refreshingChanged();
 
 private slots:
-    void messagesChanged();
+    void messagesChanged(bool cachedData);
     void init();
 
 private:

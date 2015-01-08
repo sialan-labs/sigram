@@ -69,7 +69,7 @@ void TelegramMessagesModel::setTelegram(QObject *tgo)
     if( !p->telegram )
         return;
 
-    connect( p->telegram, SIGNAL(messagesChanged()), SLOT(messagesChanged()) );
+    connect( p->telegram, SIGNAL(messagesChanged(bool)), SLOT(messagesChanged(bool)) );
 
     init();
 }
@@ -111,7 +111,7 @@ void TelegramMessagesModel::init()
     p->load_count = 0;
     p->load_limit = LOAD_STEP_COUNT;
     loadMore(true);
-    messagesChanged();
+    messagesChanged(true);
 
     p->refreshing = true;
     emit refreshingChanged();
@@ -245,10 +245,13 @@ Peer TelegramMessagesModel::peer() const
     return peer;
 }
 
-void TelegramMessagesModel::messagesChanged()
+void TelegramMessagesModel::messagesChanged(bool cachedData)
 {
-    p->refreshing = false;
-    emit refreshingChanged();
+    if(!cachedData)
+    {
+        p->refreshing = false;
+        emit refreshingChanged();
+    }
 
     if( !p->dialog )
         return;

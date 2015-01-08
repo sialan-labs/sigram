@@ -6,11 +6,12 @@ import CutegramTypes 1.0
 Item {
     id: message_action
     width: 100
-    height: 62
+    height: column.height
 
     property Message message
     property MessageAction action: message.action
     property User user: telegramObject.user(action.userId)
+    property FileLocation imgLocation: action.photo.sizes.first? action.photo.sizes.first.location : telegramObject.nullLocation
 
     property real typeMessageActionEmpty: 0xb6aef7b0
     property real typeMessageActionChatDeletePhoto: 0x95e3fbef
@@ -24,50 +25,79 @@ Item {
 
     property bool hasAction: action.classType != typeMessageActionEmpty
 
-    Rectangle {
+    onImgLocationChanged: {
+        if(imgLocation == telegramObject.nullLocation)
+            return
+
+        telegramObject.getFile(imgLocation)
+    }
+
+    Column {
+        id: column
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        height: 30*Devices.density
-        color: "#88000000"
         visible: hasAction
 
         Text {
-            anchors.centerIn: parent
+            anchors.horizontalCenter: parent.horizontalCenter
             font.family: AsemanApp.globalFontFamily
             font.pixelSize: 9*Devices.fontDensity
-            color: "#ffffff"
+            color: "#333333"
             text: {
                 var res = ""
+                var userName
                 switch(action.classType) {
                 case typeMessageActionChatCreate:
-                    res += user.firstName + " " + user.lastName
-                    res = res.trim()
-                    res += " " + qsTr("created group")
+                {
+                    var users = Cutegram.intListToVariantList(action.users)
+                    var userObj = user
+                    if(users.length != 0) {
+                        userObj = telegramObject.user(users[0])
+                    }
+
+                    userName = userObj.firstName + " " + userObj.lastName
+                    userName = userName.trim()
+
+                    res = qsTr("%1 created the group \"%2\"").arg(userName).arg(action.title)
+                }
                     break
 
                 case typeMessageActionChatAddUser:
-                    res += user.firstName + " " + user.lastName
-                    res = res.trim()
-                    res += " " + qsTr("added new user to group")
+                {
+                    userName = user.firstName + " " + user.lastName
+                    userName = userName.trim()
+
+                    res = qsTr("%1 invited someone to group").arg(userName)
+                }
                     break
 
+                case typeMessageActionChatDeleteUser:
+                    userName = user.firstName + " " + user.lastName
+                    userName = userName.trim()
+
+                    res = qsTr("%1 left the group").arg(userName)
+                    break;
+
                 case typeMessageActionChatEditTitle:
-                    res += user.firstName + " " + user.lastName
-                    res = res.trim()
-                    res += " " + qsTr("edited chat title to ") + action.title
+                    userName = user.firstName + " " + user.lastName
+                    userName = userName.trim()
+
+                    res = qsTr("%1 changed group name to \"%2\"").arg(userName).arg(action.title)
                     break
 
                 case typeMessageActionChatEditPhoto:
-                    res += user.firstName + " " + user.lastName
-                    res = res.trim()
-                    res += " " + qsTr("edited chat photo")
+                    userName = user.firstName + " " + user.lastName
+                    userName = userName.trim()
+
+                    res = qsTr("%1 changed group photo.").arg(userName)
                     break
 
                 case typeMessageActionChatDeletePhoto:
-                    res += user.firstName + " " + user.lastName
-                    res = res.trim()
-                    res += " " + qsTr("deleted chat photo")
+                    userName = user.firstName + " " + user.lastName
+                    userName = userName.trim()
+
+                    res = qsTr("%1 deleted group photo").arg(userName)
                     break
 
                 case typeMessageActionEmpty:
@@ -77,6 +107,24 @@ Item {
 
                 return res
             }
+        }
+
+
+        Image {
+            id: img
+            anchors.horizontalCenter: parent.horizontalCenter
+            sourceSize: Qt.size(width,height)
+            source: {
+                if(imgPath.length==0)
+                    return ""
+                else
+                    return "file://" + imgPath
+            }
+            asynchronous: true
+            fillMode: Image.PreserveAspectCrop
+            visible: imgPath.length != 0
+
+            property string imgPath: imgLocation!=telegramObject.nullLocation? imgLocation.download.location : ""
         }
     }
 }

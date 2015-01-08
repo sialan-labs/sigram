@@ -80,7 +80,9 @@ SOURCES += \
     asemanabstractcolorfulllistmodel.cpp \
     asemanimagecoloranalizor.cpp \
     asemancountriesmodel.cpp \
-    asemantoolsplugin.cpp
+    asemantoolsplugin.cpp \
+    asemandragobject.cpp \
+    asemanmimedata.cpp
 
 HEADERS += \
     asemandevices.h \
@@ -99,7 +101,9 @@ HEADERS += \
     asemanabstractcolorfulllistmodel.h \
     asemanimagecoloranalizor.h \
     asemancountriesmodel.h \
-    asemantoolsplugin.h
+    asemantoolsplugin.h \
+    asemandragobject.h \
+    asemanmimedata.h
 
 OTHER_FILES += \
     android-build/src/land/aseman/android/AsemanActivity.java \

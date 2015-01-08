@@ -29,6 +29,9 @@ public slots:
     void readFullDialogs();
     void readMessages(const Peer &peer, int offset, int limit);
 
+    void deleteMessage(qint64 msgId);
+    void deleteDialog(qint64 dlgId);
+
 signals:
     void userFounded(const User &user);
     void chatFounded(const Chat &chat);

@@ -198,7 +198,6 @@ public slots:
     void sendFile( qint64 dialogId, const QString & file );
     void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
     void getFileJustCheck(FileLocationObject *location);
-    void checkFile( FileLocationObject *location );
     void cancelSendGet( qint64 fileId );
 
     void setProfilePhoto( const QString & fileName );
@@ -213,8 +212,8 @@ signals:
     void userDataChanged();
     void onlineChanged();
     void downloadPathChanged();
-    void dialogsChanged();
-    void messagesChanged();
+    void dialogsChanged(bool cachedData);
+    void messagesChanged(bool cachedData);
     void wallpapersChanged();
     void uploadsChanged();
     void chatFullsChanged();
@@ -303,7 +302,7 @@ private slots:
 
 private:
     void insertDialog(const Dialog & dialog , bool encrypted = false, bool fromDb = false);
-    void insertMessage(const Message & message , bool encrypted = false, bool fromDb = false);
+    void insertMessage(const Message & message , bool encrypted = false, bool fromDb = false, bool tempMsg = false);
     void insertUser( const User & user, bool fromDb = false );
     void insertChat( const Chat & chat, bool fromDb = false );
     void insertUpdate( const Update & update );

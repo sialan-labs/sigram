@@ -68,7 +68,7 @@ void DatabaseCore::insertUser(const DbUser &duser)
     query.bindValue(":photoBigDcId",photoBig.dcId() );
     query.bindValue(":photoBigVolumeId",photoBig.volumeId() );
 
-    const FileLocation &photoSmall = photo.photoBig();
+    const FileLocation &photoSmall = photo.photoSmall();
     query.bindValue(":photoSmallLocalId",photoSmall.localId() );
     query.bindValue(":photoSmallSecret",photoSmall.secret() );
     query.bindValue(":photoSmallDcId",photoSmall.dcId() );
@@ -118,7 +118,7 @@ void DatabaseCore::insertChat(const DbChat &dchat)
     query.bindValue(":photoBigDcId",photoBig.dcId() );
     query.bindValue(":photoBigVolumeId",photoBig.volumeId() );
 
-    const FileLocation &photoSmall = photo.photoBig();
+    const FileLocation &photoSmall = photo.photoSmall();
     query.bindValue(":photoSmallLocalId",photoSmall.localId() );
     query.bindValue(":photoSmallSecret",photoSmall.secret() );
     query.bindValue(":photoSmallDcId",photoSmall.dcId() );
@@ -282,6 +282,22 @@ void DatabaseCore::readMessages(const DbPeer &dpeer, int offset, int limit)
 
         emit messageFounded(dmsg);
     }
+}
+
+void DatabaseCore::deleteMessage(qint64 msgId)
+{
+    QSqlQuery query( p->db );
+    query.prepare("DELETE FROM Messages WHERE id=:id" );
+    query.bindValue( ":id" , msgId );
+    query.exec();
+}
+
+void DatabaseCore::deleteDialog(qint64 dlgId)
+{
+    QSqlQuery query( p->db );
+    query.prepare("DELETE FROM Dialogs WHERE peer=:peer" );
+    query.bindValue( ":peer" , dlgId );
+    query.exec();
 }
 
 void DatabaseCore::readDialogs()

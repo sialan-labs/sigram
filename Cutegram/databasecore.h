@@ -30,6 +30,9 @@ public slots:
     void readFullDialogs();
     void readMessages(const DbPeer &peer, int offset, int limit);
 
+    void deleteMessage(qint64 msgId);
+    void deleteDialog(qint64 dlgId);
+
 signals:
     void userFounded(const DbUser &user);
     void chatFounded(const DbChat &chat);

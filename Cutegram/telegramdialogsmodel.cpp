@@ -65,7 +65,7 @@ void TelegramDialogsModel::setTelegram(TelegramQml *tgo)
     if( !p->telegram )
         return;
 
-    connect( p->telegram, SIGNAL(dialogsChanged()), SLOT(dialogsChanged()) );
+    connect( p->telegram, SIGNAL(dialogsChanged(bool)), SLOT(dialogsChanged(bool)) );
 
     connect( p->telegram->userData(), SIGNAL(favoriteChanged(int)) , this, SLOT(userDataChanged()) );
     connect( p->telegram->userData(), SIGNAL(valueChanged(QString)), this, SLOT(userDataChanged()) );
@@ -128,7 +128,7 @@ bool TelegramDialogsModel::initializing() const
     return p->initializing;
 }
 
-void TelegramDialogsModel::dialogsChanged()
+void TelegramDialogsModel::dialogsChanged(bool cachedData)
 {
     p->initializing = false;
     emit initializingChanged();

@@ -26,6 +26,8 @@
 #include "asemanlistobject.h"
 #include "asemancalendarconverter.h"
 #include "asemanimagecoloranalizor.h"
+#include "asemanmimedata.h"
+#include "asemandragobject.h"
 #include "asemanbackhandler.h"
 #include "asemancountriesmodel.h"
 #ifdef Q_OS_ANDROID
@@ -103,6 +105,10 @@ AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
     engine()->rootContext()->setContextProperty( "AsemanApp", AsemanApplication::instance() );
     engine()->rootContext()->setContextProperty( "View", this );
 
+    qRegisterMetaType<AsemanMimeData*>("AsemanMimeData*");
+
+    qmlRegisterType<AsemanMimeData>("AsemanTools", 1, 0, "MimeData");
+    qmlRegisterType<AsemanDragObject>("AsemanTools", 1, 0, "DragObject");
     qmlRegisterType<AsemanHashObject>("AsemanTools", 1,0, "HashObject");
     qmlRegisterType<AsemanListObject>("AsemanTools", 1,0, "ListObject");
     qmlRegisterType<AsemanImageColorAnalizor>("AsemanTools", 1,0, "ImageColorAnalizor");
