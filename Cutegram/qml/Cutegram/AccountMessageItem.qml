@@ -37,6 +37,8 @@ Item {
     property alias hasMedia: msg_media.hasMedia
     property bool encryptMedia: message.message.length==0 && message.encrypted
 
+    property bool modernMode: false
+
     onSentChanged: {
         if( sent )
             indicator.stop()
@@ -75,6 +77,14 @@ Item {
             visible: message.fwdFromId != 0
             user: msg_item.fwdUser
             isChat: false
+        }
+
+        Item {
+            id: spacer
+            height: 10
+            visible: modernMode
+            width: parent.width/2 - (forward_img.width+frameMargins)*forward_img.visible
+                   - (img.width+frameMargins) - back_rect.width/2
         }
 
         Rectangle {

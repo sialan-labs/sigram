@@ -199,10 +199,26 @@ Item {
 
             MouseArea {
                 id: marea
-                hoverEnabled: true
                 anchors.fill: parent
-                onClicked: currentDialog = list_item.dItem
+                hoverEnabled: true
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onContainsMouseChanged: toggleMinimum(containsMouse)
+                onClicked: {
+                    if( mouse.button == Qt.RightButton ) {
+                        if(!dItem.encrypted)
+                            return
+
+                        var actions = ["Delete"]
+                        var res = Cutegram.showMenu(actions)
+                        switch(res) {
+                        case 0:
+                            telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId)
+                            break;
+                        }
+                    } else{
+                        currentDialog = list_item.dItem
+                    }
+                }
             }
 
             DialogItemTools {

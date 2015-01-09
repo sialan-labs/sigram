@@ -21,6 +21,15 @@ Rectangle {
     property bool isActive: View.active && View.visible
     property bool messageDraging: false
 
+    property EncryptedChat enchat: telegramObject.encryptedChat(currentDialog.peer.userId)
+    property int enChatUid: enchat.adminId==telegramObject.me? enchat.participantId : enchat.adminId
+
+    property real typeEncryptedChatWaiting: 0x3bf703dc
+    property real typeEncryptedChatRequested: 0xc878527e
+    property real typeEncryptedChatEmpty: 0xab7ec0a0
+    property real typeEncryptedChatDiscarded: 0x13d6dd27
+    property real typeEncryptedChat: 0xfa56ce36
+
     signal forwardRequest( variant message )
 
     onIsActiveChanged: {
@@ -108,6 +117,7 @@ Rectangle {
                 y: messageFrameY
                 width: messageFrameWidth
                 height: messageFrameHeight
+                z: -1
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 cursorShape: Qt.PointingHandCursor
                 onPositionChanged: {
@@ -160,6 +170,50 @@ Rectangle {
         scrollArea: mlist; height: mlist.height-mlist.bottomMargin-mlist.topMargin; width: 6*Devices.density
         anchors.right: mlist.right; anchors.top: mlist.top; color: textColor0
         anchors.topMargin: mlist.topMargin; forceVisible: true
+    }
+
+    Text {
+        id: acc_rjc_txt
+        anchors.top: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 100*Devices.density
+        font.family: AsemanApp.globalFontFamily
+        font.pixelSize: 12*Devices.fontDensity
+        text: qsTr("Secret chat request. Please Accept or Reject.")
+        visible: enchat.classType == typeEncryptedChatRequested
+    }
+
+    Row {
+        anchors.top: acc_rjc_txt.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 10*Devices.density
+        visible: acc_rjc_txt.visible
+
+        Button {
+            anchors.margins: 20*Devices.density
+            normalColor: "#3FDA3A"
+            highlightColor: Qt.darker(normalColor)
+            textColor: "#ffffff"
+            width: 100*Devices.density
+            height: 36*Devices.density
+            text: qsTr("Accept")
+            onClicked: {
+                telegramObject.messagesAcceptEncryptedChat(currentDialog.peer.userId)
+            }
+        }
+
+        Button {
+            anchors.margins: 20*Devices.density
+            normalColor: "#DA3737"
+            highlightColor: Qt.darker(normalColor)
+            textColor: "#ffffff"
+            width: 100*Devices.density
+            height: 36*Devices.density
+            text: qsTr("Reject")
+            onClicked: {
+                telegramObject.messagesDiscardEncryptedChat(currentDialog.peer.userId)
+            }
+        }
     }
 
     function sendMessage( txt ) {

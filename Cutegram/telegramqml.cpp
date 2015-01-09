@@ -741,6 +741,18 @@ void TelegramQml::messagesDiscardEncryptedChat(qint32 chatId)
         return;
 
     p->telegram->messagesDiscardEncryptedChat(chatId);
+
+    EncryptedChatObject *chat = p->encchats.take(chatId);
+    DialogObject *dlg = p->dialogs.take(chatId);
+    p->dialogs_list.removeOne(chatId);
+
+    p->garbages.insert(chat);
+    p->garbages.insert(dlg);
+    startGarbageChecker();
+
+    p->database->deleteDialog(chatId);
+
+    emit dialogsChanged(false);
 }
 
 bool TelegramQml::sendFile(qint64 dId, const QString &fpath)
@@ -1467,6 +1479,7 @@ void TelegramQml::messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QLi
         if(dobj->encrypted())
             continue;
 
+        p->dialogs_list.removeOne(dId);
         p->dialogs.remove(dId);
         p->garbages.insert(dobj);
         p->database->deleteDialog(dId);
@@ -1748,6 +1761,22 @@ void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessa
     if(!chat)
         return;
 
+    MessageAction action;
+    const DecryptedMessageMedia &dmedia = m.media();
+    const DecryptedMessageAction &daction = m.action();
+    if(m.message().isEmpty() && dmedia.classType()==DecryptedMessageMedia::typeDecryptedMessageMediaEmpty)
+    {
+        switch(static_cast<int>(daction.classType()))
+        {
+        case DecryptedMessageAction::typeDecryptedMessageActionNotifyLayer:
+            action.setClassType(MessageAction::typeMessageActionChatCreate);
+            action.setUserId(chat->adminId());
+            action.setUsers(QList<qint32>()<<chat->adminId());
+            action.setTitle( tr("Secret Chat") );
+            break;
+        }
+    }
+
     Peer peer(Peer::typePeerChat);
     peer.setChatId(chatId);
 
@@ -1756,6 +1785,7 @@ void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessa
     msg.setMessage(m.message());
     msg.setDate(date);
     msg.setId(date);
+    msg.setAction(action);
     msg.setOut(false);
     msg.setFromId(chat->adminId()==me()?chat->participantId():chat->adminId());
 
@@ -2343,7 +2373,7 @@ void TelegramQml::updateEncryptedTopMessage(const Message &message)
     if(dlg->topMessage() && !topMessage)
         return;
 
-    qint64 topMsgDate = topMessage? topMessage->date() : 0;
+    qint32 topMsgDate = topMessage? topMessage->date() : 0;
     if(message.date() < topMsgDate)
         return;
 
@@ -2355,7 +2385,7 @@ void TelegramQml::updateEncryptedTopMessage(const Message &message)
     dialog.setUnreadCount(dlg->unreadCount());
     dialog.setPeer(peer);
 
-    insertDialog(dialog, true, true);
+    insertDialog(dialog, true, false);
 }
 
 qint64 TelegramQml::generateRandomId() const
@@ -2385,7 +2415,20 @@ bool checkDialogLessThan( qint64 a, qint64 b )
     MessageObject *am = telegramp_qml_tmp->messages.value(ao->topMessage());
     MessageObject *bm = telegramp_qml_tmp->messages.value(bo->topMessage());
     if(!am || !bm)
-        return ao->topMessage() > bo->topMessage();
+    {
+        EncryptedChatObject *aec = telegramp_qml_tmp->encchats.value(a);
+        EncryptedChatObject *bec = telegramp_qml_tmp->encchats.value(b);
+        if(aec && bm)
+            return aec->date() > bm->date();
+        else
+        if(am && bec)
+            return am->date() > bec->date();
+        else
+        if(aec && bec)
+            return aec->date() > bec->date();
+        else
+            return ao->topMessage() > bo->topMessage();
+    }
 
     return am->date() > bm->date();
 }
