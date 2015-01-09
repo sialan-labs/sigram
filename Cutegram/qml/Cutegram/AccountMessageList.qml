@@ -53,6 +53,24 @@ Rectangle {
         opacity: 0.7
     }
 
+    Rectangle {
+        anchors.centerIn: parent
+        color: "#ffffff"
+        width: welcome_txt.width + 20*Devices.density
+        height: welcome_txt.height + 10*Devices.density
+        radius: 5*Devices.density
+        visible: currentDialog == telegramObject.nullDialog
+
+        Text {
+            id: welcome_txt
+            anchors.centerIn: parent
+            font.family: AsemanApp.globalFontFamily
+            font.pixelSize: 13*Devices.fontDensity
+            text: qsTr("Welcome :)")
+            color: "#111111"
+        }
+    }
+
     ListView {
         id: mlist
         anchors.fill: parent
@@ -69,9 +87,38 @@ Rectangle {
             maximumMediaWidth: acc_msg_list.maximumMediaWidth
             message: item
 
+            DragObject {
+                id: drag
+                mimeData: mime
+                source: marea
+                image: "files/message.png"
+                hotSpot: Qt.point(22,22)
+            }
+
+            MimeData {
+                id: mime
+                dataMap: {"land.aseman.cutegram/messageId": message.id}
+                text: message.message
+            }
+
             MouseArea {
-                anchors.fill: parent
+                id: marea
+                x: messageFrameX
+                y: messageFrameY
+                width: messageFrameWidth
+                height: messageFrameHeight
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
+                cursorShape: Qt.PointingHandCursor
+                onPositionChanged: {
+                    var destX = mouseX-startPoint.x
+                    var destY = mouseY-startPoint.y
+                    var dest = Math.pow(destX*destX+destY*destY, 0.5)
+                    if(dest < 7)
+                        return
+
+                    drag.start()
+                }
+
                 onPressed: {
                     if( mouse.button == Qt.RightButton ) {
                         var actions = ["Forward","Copy","Delete"]
@@ -89,10 +136,12 @@ Rectangle {
                             telegramObject.deleteMessage(message.id)
                             break;
                         }
-                    } else {
-                        mouse.accepted = false
                     }
+                    else
+                        startPoint = Qt.point(mouseX, mouseY)
                 }
+
+                property point startPoint
             }
         }
     }

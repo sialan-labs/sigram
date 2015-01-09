@@ -61,5 +61,6 @@
         <file>qml/Cutegram/files/lock.png</file>
         <file>qml/Cutegram/files/user-enc.png</file>
         <file>database/database.sqlite</file>
+        <file>qml/Cutegram/files/message.png</file>
     </qresource>
 </RCC>

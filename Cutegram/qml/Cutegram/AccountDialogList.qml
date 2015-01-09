@@ -217,8 +217,9 @@ Item {
 
             DialogDropFile {
                 anchors.fill: parent
-                currentDialog: dItem
+                dialogItem: dItem
                 color: "#dd222222"
+                onDropped: ad_list.currentDialog = dialogItem
                 onContainsDragChanged: toggleMinimum(containsDrag)
             }
 

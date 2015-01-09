@@ -143,6 +143,7 @@ Rectangle {
             anchors.top: header.bottom
             anchors.right: parent.right
             anchors.bottom: send_msg.top
+            dialogItem: dialogs.currentDialog
             currentDialog: dialogs.currentDialog
         }
 

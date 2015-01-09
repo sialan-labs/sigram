@@ -8,13 +8,16 @@ Item {
     width: 100
     height: 62
 
-    property bool containsDrag: drop_area.containsDrag && currentDialog != telegramObject.nullDialog
+    property bool containsDrag: drop_area.containsDrag && dialogItem != telegramObject.nullDialog
 
-    property Dialog currentDialog
-    property bool isChat: currentDialog? currentDialog.peer.chatId != 0 : false
+    property Dialog dialogItem
+    property Dialog currentDialog: telegramObject.nullDialog
+    property bool isChat: dialogItem? dialogItem.peer.chatId != 0 : false
 
     property alias color: back.color
     property real visibleRatio: containsDrag? 1 : 0
+
+    signal dropped()
 
     Behavior on visibleRatio {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -48,18 +51,30 @@ Item {
         id: drop_area
         anchors.fill: parent
         onDropped: {
-            if( currentDialog == telegramObject.nullDialog )
+            if( dialogItem == telegramObject.nullDialog )
                 return
 
-            var dId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
+            var dId = isChat? dialogItem.peer.chatId : dialogItem.peer.userId
+            if( drop.formats.indexOf("land.aseman.cutegram/messageId") != -1 ) {
+                if(currentDialog == dialogItem)
+                    return
+
+                var msgId = drop.getDataAsString("land.aseman.cutegram/messageId")
+                telegramObject.forwardMessage(msgId, dId)
+                am_dropfile.dropped()
+            }
+            else
             if( drop.hasUrls ) {
                 var urls = drop.urls
                 for( var i=0; i<urls.length; i++ )
                     telegramObject.sendFile(dId, urls[i])
+
+                am_dropfile.dropped()
             }
             else
             if( drop.hasText ) {
-
+                telegramObject.sendMessage(dId, drop.text)
+                am_dropfile.dropped()
             }
         }
     }

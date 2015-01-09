@@ -20,6 +20,7 @@
 #define ASEMANDRAGOBJECT_H
 
 #include <QObject>
+#include <QQuickItem>
 
 class AsemanMimeData;
 class AsemanDragObjectPrivate;
@@ -29,6 +30,9 @@ class AsemanDragObject : public QObject
 
     Q_PROPERTY(AsemanMimeData* mimeData READ mimeData WRITE setMimeData NOTIFY mimeDataChanged)
     Q_PROPERTY(int dropAction READ dropAction WRITE setDropAction NOTIFY dropActionChanged)
+    Q_PROPERTY(QQuickItem* source READ source WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY(QUrl image READ image WRITE setImage NOTIFY imageChanged)
+    Q_PROPERTY(QPoint hotSpot READ hotSpot WRITE setHotSpot NOTIFY hotSpotChanged)
 
 public:
     AsemanDragObject(QObject *parent = 0);
@@ -40,12 +44,24 @@ public:
     void setDropAction(int act);
     int dropAction() const;
 
+    void setSource(QQuickItem *item);
+    QQuickItem *source() const;
+
+    void setImage(const QUrl & url);
+    QUrl image() const;
+
+    void setHotSpot(const QPoint &point);
+    QPoint hotSpot() const;
+
 public slots:
     int start();
 
 signals:
     void mimeDataChanged();
     void dropActionChanged();
+    void sourceChanged();
+    void imageChanged();
+    void hotSpotChanged();
 
 private:
     AsemanDragObjectPrivate *p;

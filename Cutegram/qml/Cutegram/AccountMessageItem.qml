@@ -9,6 +9,11 @@ Item {
     height: logicalHeight<minimumHeight? minimumHeight : logicalHeight
     clip: true
 
+    property real messageFrameX: back_rect.x
+    property real messageFrameY: back_rect.y
+    property real messageFrameWidth: back_rect.width
+    property real messageFrameHeight: back_rect.height
+
     property real logicalHeight: action_item.hasAction? action_item.height: column.height + frameMargins*2 + textMargins*2
     property real minimumHeight: 48*Devices.density
     property real maximumWidth: 2*width/3
