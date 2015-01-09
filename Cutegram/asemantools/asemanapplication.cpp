@@ -22,6 +22,7 @@
 #include <QDir>
 #include <QFont>
 #include <QSettings>
+#include <QThread>
 
 static QSettings *app_global_settings = 0;
 
@@ -171,6 +172,11 @@ void AsemanApplication::refreshTranslations()
 void AsemanApplication::back()
 {
     emit backRequest();
+}
+
+void AsemanApplication::sleep(quint64 ms)
+{
+    QThread::msleep(ms);
 }
 
 void AsemanApplication::setSetting(const QString &key, const QVariant &value)

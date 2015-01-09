@@ -4,7 +4,7 @@ import Cutegram 1.0
 import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
 
-Rectangle {
+Item {
     id: msg_media
 
     property MessageMedia media

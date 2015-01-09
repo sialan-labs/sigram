@@ -80,6 +80,8 @@ public slots:
     void refreshTranslations();
     void back();
 
+    void sleep(quint64 ms);
+
     void setSetting( const QString & key, const QVariant & value );
     QVariant readSetting( const QString & key, const QVariant & defaultValue = QVariant() );
 

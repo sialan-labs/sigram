@@ -83,7 +83,7 @@ Item {
             height: column.height + 2*textMargins
             anchors.verticalCenter: parent.verticalCenter
             color: "#ffffff"
-            radius: 6*Devices.density
+            radius: 3*Devices.density
 
             Rectangle {
                 anchors.fill: parent
@@ -181,7 +181,7 @@ Item {
                     width: 8
                     height: width
                     visible: !message.unread && message.out
-                    source: "files/sent.png"
+                    source: hasMedia || encryptMedia? "files/sent-light.png" : "files/sent.png"
                     sourceSize: Qt.size(width,height)
                 }
 
@@ -192,7 +192,7 @@ Item {
                     width: 8
                     height: width
                     visible: message.sent && message.out
-                    source: "files/sent.png"
+                    source: hasMedia || encryptMedia? "files/sent-light.png" : "files/sent.png"
                     sourceSize: Qt.size(width,height)
                 }
             }
