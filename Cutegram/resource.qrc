@@ -66,5 +66,6 @@
         <file>qml/Cutegram/files/trash.png</file>
         <file>qml/Cutegram/ClickableContactImage.qml</file>
         <file>qml/Cutegram/files/sent-light.png</file>
+        <file>qml/Cutegram/files/down.png</file>
     </qresource>
 </RCC>

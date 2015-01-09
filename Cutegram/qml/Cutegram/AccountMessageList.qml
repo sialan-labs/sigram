@@ -12,8 +12,8 @@ Rectangle {
     property alias currentDialog: messages_model.dialog
     property alias refreshing: messages_model.refreshing
 
-    property alias topMargin: mlist.topMargin
-    property alias bottomMargin: mlist.bottomMargin
+    property real topMargin
+    property real bottomMargin
 
     property real maximumMediaHeight: (height-topMargin-bottomMargin)*0.75
     property real maximumMediaWidth: width*0.75
@@ -89,6 +89,8 @@ Rectangle {
                                    currentDialog != telegramObject.nullDialog ) messages_model.loadMore()
         clip: true
         model: messages_model
+        header: Item{ width: 4; height: acc_msg_list.bottomMargin }
+        footer: Item{ width: 4; height: acc_msg_list.topMargin }
         delegate: AccountMessageItem {
             id: msg_item
             x: 8*Devices.density
@@ -167,9 +169,31 @@ Rectangle {
     }
 
     ScrollBar {
-        scrollArea: mlist; height: mlist.height-mlist.bottomMargin-mlist.topMargin; width: 6*Devices.density
+        scrollArea: mlist; height: mlist.height-bottomMargin-topMargin; width: 6*Devices.density
         anchors.right: mlist.right; anchors.top: mlist.top; color: textColor0
-        anchors.topMargin: mlist.topMargin; forceVisible: true
+        anchors.topMargin: topMargin; forceVisible: true
+    }
+
+    Button {
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: bottomMargin + 8*Devices.density
+        anchors.rightMargin: 8*Devices.density
+        width: 64*Devices.density
+        height: width
+        radius: 5*Devices.density
+        normalColor: "#88000000"
+        highlightColor: "#aa000000"
+        icon: "files/down.png"
+        cursorShape: Qt.PointingHandCursor
+        iconHeight: 32*Devices.density
+        visible: opacity != 0
+        opacity: mlist.visibleArea.yPosition+mlist.visibleArea.heightRatio < 0.95? 1 : 0
+        onClicked: mlist.positionViewAtBeginning()
+
+        Behavior on opacity {
+            NumberAnimation{ easing.type: Easing.OutCubic; duration: 300 }
+        }
     }
 
     Text {
