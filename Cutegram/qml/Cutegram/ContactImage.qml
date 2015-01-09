@@ -34,8 +34,8 @@ Item {
     property User user: dialog? telegram.user(dialog.encrypted?enChatUid:dialog.peer.userId) : telegram.nullUser
     property Chat chat: dialog? telegram.chat(dialog.peer.chatId) : telegram.nullChat
 
-    property EncryptedChat enchat: telegramObject.encryptedChat(dialog?dialog.peer.userId:0)
-    property int enChatUid: enchat.adminId==telegramObject.me? enchat.participantId : enchat.adminId
+    property EncryptedChat enchat: telegram.encryptedChat(dialog?dialog.peer.userId:0)
+    property int enChatUid: enchat.adminId==telegram.me? enchat.participantId : enchat.adminId
 
     property real typeUserStatusOffline: 0x8c703f
     property real typeUserStatusEmpty: 0x9d05049

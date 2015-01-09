@@ -143,6 +143,6 @@ Item {
 
     PhysicalScrollBar {
         scrollArea: slist; width: 6*Devices.density; anchors.right: parent.right; anchors.top: slist.top;
-        anchors.bottom: slist.bottom; color: "#ffffff"
+        anchors.bottom: slist.bottom; color: "#333333"
     }
 }

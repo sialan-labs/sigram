@@ -65,7 +65,7 @@ Rectangle {
             id: welcome_txt
             anchors.centerIn: parent
             font.family: AsemanApp.globalFontFamily
-            font.pixelSize: 13*Devices.fontDensity
+            font.pixelSize: 11*Devices.fontDensity
             text: qsTr("Welcome :)")
             color: "#111111"
         }
