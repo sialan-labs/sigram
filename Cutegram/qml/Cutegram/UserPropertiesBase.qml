@@ -123,7 +123,7 @@ Item {
             width: 140*Devices.density
             height: 160*Devices.density
 
-            ContactImage {
+            ClickableContactImage {
                 width: 128*Devices.density
                 height: width
                 anchors.centerIn: parent

@@ -869,7 +869,7 @@ QList<PhotoSize> DatabaseCore::readPhotoSize(qint64 pid)
         psize.setSize( record.value("size").toLongLong() );
         psize.setLocation(location);
 
-        list << psize;
+        list.prepend( psize );
     }
 
     return list;

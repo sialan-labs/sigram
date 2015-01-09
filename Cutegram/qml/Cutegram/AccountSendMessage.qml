@@ -14,8 +14,30 @@ Rectangle {
 
     property bool isChat: currentDialog? currentDialog.peer.chatId != 0 : false
 
+    property alias trash: trash_item.visible
+
     signal accepted( string text )
     signal emojiRequest(real x, real y)
+
+    onCurrentDialogChanged: {
+        temp_hash.remove(privates.lastDialog)
+        temp_hash.insert(privates.lastDialog, txt.text)
+
+        var text = temp_hash.value(currentDialog)
+        txt.text = text? text : ""
+        txt.cursorPosition = txt.length
+
+        privates.lastDialog = currentDialog
+    }
+
+    HashObject {
+        id: temp_hash
+    }
+
+    QtObject {
+        id: privates
+        property Dialog lastDialog: telegramObject.nullDialog
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -36,6 +58,7 @@ Rectangle {
         color: textColor0
         wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
         clip: true
+        visible: !trash
 
         onTextChanged: if( text.trim().length == 0 ) text = ""
         Keys.onPressed: {
@@ -105,6 +128,15 @@ Rectangle {
             var dId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
             telegramObject.sendFile(dId, file)
         }
+    }
+
+    DropTrashArea {
+        id: trash_item
+        anchors.left: attach_btn.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: height
+        dialogItem: currentDialog
     }
 
     Button {

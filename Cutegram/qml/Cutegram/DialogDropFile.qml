@@ -39,17 +39,31 @@ Item {
         }
 
         Text {
+            id: drop_text
             anchors.centerIn: parent
             font.family: AsemanApp.globalFontFamily
             font.pixelSize: 12*Devices.fontDensity
             color: Cutegram.highlightColor
-            text: qsTr("Drop files here to send")
         }
     }
 
     DropArea {
         id: drop_area
         anchors.fill: parent
+        onEntered: {
+            if( drag.formats.indexOf("land.aseman.cutegram/messageId") != -1)
+            {
+                if(currentDialog == dialogItem)
+                    drop_text.text = qsTr("<<< Drop to dialogs list to forward")
+                else
+                    drop_text.text = qsTr("Drop to forward")
+            }
+            else
+            {
+                drop_text.text = qsTr("Drop files to send")
+            }
+        }
+
         onDropped: {
             if( dialogItem == telegramObject.nullDialog )
                 return

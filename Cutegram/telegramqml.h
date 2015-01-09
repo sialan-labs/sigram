@@ -73,6 +73,8 @@ class TelegramQml : public QObject
     Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
     Q_PROPERTY(int unreadCount READ unreadCount NOTIFY unreadCountChanged)
 
+    Q_PROPERTY(bool uploadingProfilePhoto READ uploadingProfilePhoto NOTIFY uploadingProfilePhotoChanged)
+
     Q_PROPERTY(Telegram* telegram READ telegram NOTIFY telegramChanged)
     Q_PROPERTY(UserData* userData READ userData NOTIFY userDataChanged)
     Q_PROPERTY(qint64    me       READ me       NOTIFY meChanged)
@@ -134,6 +136,8 @@ public:
     bool authPhoneRegistered() const;
     bool authPhoneInvited() const;
     bool connected() const;
+
+    bool uploadingProfilePhoto() const;
 
     QString authSignUpError() const;
     QString authSignInError() const;
@@ -220,6 +224,7 @@ signals:
     void contactsChanged();
     void autoUpdateChanged();
     void encryptedChatsChanged();
+    void uploadingProfilePhotoChanged();
 
     void unreadCountChanged();
     void invisibleChanged();

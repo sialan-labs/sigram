@@ -219,8 +219,14 @@ Item {
                 anchors.fill: parent
                 dialogItem: dItem
                 color: "#dd222222"
-                onDropped: ad_list.currentDialog = dialogItem
+                onDropped: switch_dialog_timer.restart()
                 onContainsDragChanged: toggleMinimum(containsDrag)
+            }
+
+            Timer {
+                id: switch_dialog_timer
+                interval: 100
+                onTriggered: ad_list.currentDialog = dItem
             }
 
             Rectangle {

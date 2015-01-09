@@ -91,7 +91,7 @@ Item {
                 radius: parent.radius
                 color: {
                     if(hasMedia || encryptMedia)
-                        return "#333333"
+                        return "#111111"
                     else
                     if(message.out)
                         return Cutegram.highlightColor

@@ -62,5 +62,8 @@
         <file>qml/Cutegram/files/user-enc.png</file>
         <file>database/database.sqlite</file>
         <file>qml/Cutegram/files/message.png</file>
+        <file>qml/Cutegram/DropTrashArea.qml</file>
+        <file>qml/Cutegram/files/trash.png</file>
+        <file>qml/Cutegram/ClickableContactImage.qml</file>
     </qresource>
 </RCC>

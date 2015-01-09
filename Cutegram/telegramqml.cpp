@@ -74,6 +74,7 @@ public:
     qint64 logout_req_id;
     qint64 checkphone_req_id;
     qint64 profile_upload_id;
+    QString upload_photo_path;
 
     QHash<qint64,DialogObject*> dialogs;
     QHash<qint64,MessageObject*> messages;
@@ -315,6 +316,11 @@ bool TelegramQml::connected() const
         return false;
 
     return p->telegram->isConnected();
+}
+
+bool TelegramQml::uploadingProfilePhoto() const
+{
+    return p->profile_upload_id != 0;
 }
 
 QString TelegramQml::authSignUpError() const
@@ -945,6 +951,9 @@ void TelegramQml::setProfilePhoto(const QString &fileName)
     buffer.close();
 
     p->profile_upload_id = p->telegram->photosUploadProfilePhoto(data, file.fileName() );
+    p->upload_photo_path = fileName;
+
+    emit uploadingProfilePhotoChanged();
 }
 
 void TelegramQml::timerUpdateDialogs(bool duration)
@@ -1193,14 +1202,23 @@ void TelegramQml::accountGetWallPapers_slt(qint64 id, const QList<WallPaper> &wa
 
 void TelegramQml::photosUploadProfilePhoto_slt(qint64 id, const Photo &photo, const QList<User> &users)
 {
-    if( p->profile_upload_id != id )
-        return;
+    Q_UNUSED(id)
+
+    p->telegram->photosUpdateProfilePhoto(photo.id(), photo.accessHash());
+
+    UserObject *user = p->users.value(me());
+    if(user)
+    {
+        user->photo()->photoBig()->download()->setLocation("file://" + p->upload_photo_path );
+        user->photo()->photoSmall()->download()->setLocation("file://" + p->upload_photo_path );
+        p->upload_photo_path.clear();
+    }
 
     foreach( const User & user, users )
         insertUser(user);
 
     p->profile_upload_id = 0;
-    p->telegram->photosUpdateProfilePhoto(photo.id(), photo.accessHash());
+    emit uploadingProfilePhotoChanged();
 }
 
 void TelegramQml::photosUpdateProfilePhoto_slt(qint64 id, const UserProfilePhoto &userProfilePhoto)
@@ -1210,6 +1228,8 @@ void TelegramQml::photosUpdateProfilePhoto_slt(qint64 id, const UserProfilePhoto
     UserObject *user = p->users.value(me());
     if(user)
         *(user->photo()) = userProfilePhoto;
+
+    timerUpdateDialogs(100);
 }
 
 void TelegramQml::contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> &contacts, const QList<User> &users)

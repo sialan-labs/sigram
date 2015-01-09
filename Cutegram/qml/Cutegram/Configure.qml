@@ -20,15 +20,56 @@ Rectangle {
 
         Item { width: 10; height: 30*Devices.density }
 
-        ContactImage {
-            id: img
+        Item {
             anchors.left: parent.left
-            anchors.margins: 20*Devices.density
-            width: 148*Devices.density
-            height: 148
-            user: configure.user
-            isChat: false
-            telegram: configure.telegram
+            anchors.right: parent.right
+            height: img.height
+
+            ClickableContactImage {
+                id: img
+                anchors.left: parent.left
+                anchors.margins: 20*Devices.density
+                width: 148*Devices.density
+                height: 148
+                user: configure.user
+                isChat: false
+                telegram: configure.telegram
+            }
+
+            Indicator {
+                anchors.fill: img
+                light: true
+                modern: true
+                indicatorSize: 22*Devices.density
+                property bool active: telegram.uploadingProfilePhoto
+
+                onActiveChanged: {
+                    if( active )
+                        start()
+                    else
+                        stop()
+                }
+            }
+
+            Button {
+                anchors.bottom: parent.bottom
+                anchors.left: img.right
+                anchors.margins: 20*Devices.density
+                normalColor: Cutegram.highlightColor
+                highlightColor: Qt.darker(Cutegram.highlightColor)
+                textColor: masterPalette.highlightedText
+                width: 100*Devices.density
+                height: 36*Devices.density
+                text: qsTr("Change Photo")
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                    var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
+                    if(newImg.length == 0)
+                        return
+
+                    telegram.setProfilePhoto(newImg)
+                }
+            }
         }
 
         Item { width: 10; height: 20*Devices.density }

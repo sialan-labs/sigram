@@ -110,6 +110,7 @@ Rectangle {
             color: framesColor
             currentDialog: dialogs.currentDialog
             onAccepted: messages.sendMessage(text)
+            trash: messages.messageDraging
             onEmojiRequest: {
                 var item = emoticons_component.createObject(message_box)
                 var w = 260*Devices.density

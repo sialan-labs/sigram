@@ -19,6 +19,7 @@ Rectangle {
     property real maximumMediaWidth: width*0.75
 
     property bool isActive: View.active && View.visible
+    property bool messageDraging: false
 
     signal forwardRequest( variant message )
 
@@ -116,9 +117,12 @@ Rectangle {
                     if(dest < 7)
                         return
 
+                    messageDraging = true
                     drag.start()
-                    dragStarted = true
+                    messageDraging = false
                 }
+
+                onReleased: msg_item.click()
 
                 onPressed: {
                     if( mouse.button == Qt.RightButton ) {
@@ -140,19 +144,10 @@ Rectangle {
                     }
                     else {
                         startPoint = Qt.point(mouseX, mouseY)
-                        dragStarted = false
                     }
                 }
 
-                onReleased: {
-                    if(!dragStarted)
-                        msg_item.click()
-
-                    dragStarted = false
-                }
-
                 property point startPoint
-                property bool dragStarted: false
             }
         }
     }
