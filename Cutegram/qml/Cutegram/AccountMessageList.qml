@@ -179,14 +179,14 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: bottomMargin + 8*Devices.density
         anchors.rightMargin: 8*Devices.density
-        width: 64*Devices.density
+        width: 32*Devices.density
         height: width
         radius: 5*Devices.density
         normalColor: "#88000000"
         highlightColor: "#aa000000"
         icon: "files/down.png"
         cursorShape: Qt.PointingHandCursor
-        iconHeight: 32*Devices.density
+        iconHeight: 18*Devices.density
         visible: opacity != 0
         opacity: mlist.visibleArea.yPosition+mlist.visibleArea.heightRatio < 0.95? 1 : 0
         onClicked: mlist.positionViewAtBeginning()

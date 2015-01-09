@@ -21,6 +21,7 @@ import AsemanTools 1.0
 
 Rectangle {
     id: aseman_splash
+    color: "#111111"
 
     Image {
         id: logo
@@ -82,49 +83,5 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             text: qsTr("Home Page")
         }
-    }
-
-    Component {
-        id: img_component
-        Image {
-            id: img
-            width: parent.width
-            height: parent.height
-            source: "files/splash-back.jpg"
-            fillMode: Image.PreserveAspectCrop
-            opacity: 0
-            scale: 1
-
-            Behavior on opacity {
-                NumberAnimation{ easing.type: Easing.Linear; duration: create_timer.first?0:create_timer.interval }
-            }
-            Behavior on scale {
-                NumberAnimation{ easing.type: Easing.Linear; duration: kill_timer.interval }
-            }
-
-            Timer {
-                id: kill_timer
-                interval: create_timer.interval*2
-                onTriggered: img.destroy()
-            }
-
-            Component.onCompleted: {
-                opacity = 1
-                scale = 3
-                kill_timer.start()
-                create_timer.first = false
-            }
-        }
-    }
-
-    Timer {
-        id: create_timer
-        repeat: true
-        interval: 6000
-        triggeredOnStart: true
-        Component.onCompleted: start()
-        onTriggered: img_component.createObject(aseman_splash)
-
-        property bool first: true
     }
 }
