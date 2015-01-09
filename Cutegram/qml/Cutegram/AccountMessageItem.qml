@@ -35,6 +35,7 @@ Item {
     property bool uploading: message.upload.fileId != 0
 
     property alias hasMedia: msg_media.hasMedia
+    property bool encryptMedia: message.message.length==0 && message.encrypted
 
     onSentChanged: {
         if( sent )
@@ -86,9 +87,17 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                color: message.out? Cutegram.highlightColor : "#ffffff"
-                opacity: 0.3
+                opacity: hasMedia || encryptMedia? 1 : 0.3
                 radius: parent.radius
+                color: {
+                    if(hasMedia || encryptMedia)
+                        return "#333333"
+                    else
+                    if(message.out)
+                        return Cutegram.highlightColor
+                    else
+                        return "#ffffff"
+                }
             }
 
             Column {
@@ -132,13 +141,14 @@ Item {
                         width: htmlWidth>maximumWidth? maximumWidth : htmlWidth
                         font.pixelSize: 9*Devices.fontDensity
                         font.family: AsemanApp.globalFontFamily
-                        color: textColor0
+                        color: encryptMedia? "#ffffff" : textColor0
                         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                        text: emojis.bodyTextToEmojiText(message.message)
+                        text: emojis.bodyTextToEmojiText(messageText)
                         onLinkActivated: Qt.openUrlExternally(link)
                         visible: !msg_media.hasMedia && !uploading
 
                         property real htmlWidth: Cutegram.htmlWidth(text)
+                        property string messageText: encryptMedia? qsTr("Media files is not supported on secret chat currently") : message.message
                     }
 
                     Text {
@@ -198,5 +208,9 @@ Item {
                 Component.onCompleted: if(!sent) start()
             }
         }
+    }
+
+    function click() {
+        msg_media.click()
     }
 }

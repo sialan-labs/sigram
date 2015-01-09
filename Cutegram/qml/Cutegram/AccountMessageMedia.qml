@@ -244,38 +244,34 @@ Rectangle {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        onClicked: {
-            if( fileLocation.length != 0 )
-                Qt.openUrlExternally(fileLocation)
-            else
+    function click() {
+        if( fileLocation.length != 0 )
+            Qt.openUrlExternally(fileLocation)
+        else
+        {
+            switch( media.classType )
             {
-                switch( media.classType )
-                {
-                case typeMessageMediaPhoto:
-                    telegramObject.getFile(locationObj)
-                    break;
+            case typeMessageMediaPhoto:
+                telegramObject.getFile(locationObj)
+                break;
 
-                case typeMessageMediaVideo:
-                    telegramObject.getFile(locationObj, typeInputVideoFileLocation, media.video.size)
-                    break;
+            case typeMessageMediaVideo:
+                telegramObject.getFile(locationObj, typeInputVideoFileLocation, media.video.size)
+                break;
 
-                case typeMessageMediaDocument:
-                    telegramObject.getFile(locationObj, typeInputDocumentFileLocation, media.document.size)
-                    break;
+            case typeMessageMediaDocument:
+                telegramObject.getFile(locationObj, typeInputDocumentFileLocation, media.document.size)
+                break;
 
-                case typeMessageMediaAudio:
-                    telegramObject.getFile(locationObj, typeInputAudioFileLocation, media.audio.size)
-                    break;
+            case typeMessageMediaAudio:
+                telegramObject.getFile(locationObj, typeInputAudioFileLocation, media.audio.size)
+                break;
 
-                case typeMessageMediaUnsupported:
-                    break;
+            case typeMessageMediaUnsupported:
+                break;
 
-                default:
-                    break;
-                }
+            default:
+                break;
             }
         }
     }

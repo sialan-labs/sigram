@@ -117,6 +117,7 @@ Rectangle {
                         return
 
                     drag.start()
+                    dragStarted = true
                 }
 
                 onPressed: {
@@ -137,11 +138,21 @@ Rectangle {
                             break;
                         }
                     }
-                    else
+                    else {
                         startPoint = Qt.point(mouseX, mouseY)
+                        dragStarted = false
+                    }
+                }
+
+                onReleased: {
+                    if(!dragStarted)
+                        msg_item.click()
+
+                    dragStarted = false
                 }
 
                 property point startPoint
+                property bool dragStarted: false
             }
         }
     }

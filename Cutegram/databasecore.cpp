@@ -132,18 +132,19 @@ void DatabaseCore::insertChat(const DbChat &dchat)
     }
 }
 
-void DatabaseCore::insertDialog(const DbDialog &ddialog)
+void DatabaseCore::insertDialog(const DbDialog &ddialog, bool encrypted)
 {
     begin();
     const Dialog &dialog = ddialog.dialog;
     QSqlQuery query(p->db);
-    query.prepare("INSERT OR REPLACE INTO Dialogs (peer, peerType, topMessage, unreadCount) "
-                  "VALUES (:peer, :peerType, :topMessage, :unreadCount);");
+    query.prepare("INSERT OR REPLACE INTO Dialogs (peer, peerType, topMessage, unreadCount, encrypted) "
+                  "VALUES (:peer, :peerType, :topMessage, :unreadCount, :encrypted);");
 
     query.bindValue(":peer",dialog.peer().classType()==Peer::typePeerChat?dialog.peer().chatId():dialog.peer().userId() );
     query.bindValue(":peerType",dialog.peer().classType() );
     query.bindValue(":topMessage",dialog.topMessage() );
     query.bindValue(":unreadCount",dialog.unreadCount() );
+    query.bindValue(":encrypted",encrypted );
 
     bool res = query.exec();
     if(!res)
@@ -331,7 +332,7 @@ void DatabaseCore::readDialogs()
         DbDialog ddlg;
         ddlg.dialog = dialog;
 
-        emit dialogFounded(ddlg);
+        emit dialogFounded(ddlg, record.value("encrypted").toBool());
     }
 }
 

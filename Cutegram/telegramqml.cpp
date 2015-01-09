@@ -182,10 +182,10 @@ void TelegramQml::setPhoneNumber(const QString &phone)
 
     p->database = new Database(phone, this);
 
-    connect(p->database, SIGNAL(chatFounded(Chat))      , SLOT(dbChatFounded(Chat))       );
-    connect(p->database, SIGNAL(userFounded(User))      , SLOT(dbUserFounded(User))       );
-    connect(p->database, SIGNAL(dialogFounded(Dialog))  , SLOT(dbDialogFounded(Dialog))   );
-    connect(p->database, SIGNAL(messageFounded(Message)), SLOT(dbMessageFounded(Message)) );
+    connect(p->database, SIGNAL(chatFounded(Chat))         , SLOT(dbChatFounded(Chat))         );
+    connect(p->database, SIGNAL(userFounded(User))         , SLOT(dbUserFounded(User))         );
+    connect(p->database, SIGNAL(dialogFounded(Dialog,bool)), SLOT(dbDialogFounded(Dialog,bool)));
+    connect(p->database, SIGNAL(messageFounded(Message))   , SLOT(dbMessageFounded(Message))   );
 }
 
 QString TelegramQml::downloadPath() const
@@ -737,20 +737,20 @@ void TelegramQml::messagesDiscardEncryptedChat(qint32 chatId)
     p->telegram->messagesDiscardEncryptedChat(chatId);
 }
 
-void TelegramQml::sendFile(qint64 dId, const QString &fpath)
+bool TelegramQml::sendFile(qint64 dId, const QString &fpath)
 {
     QString file = fpath;
     if( file.left(7) == "file://" )
         file = file.mid(7);
 
     if( !QFileInfo::exists(file) )
-        return;
+        return false;
     if( !p->telegram )
-        return;
+        return false;
 
     DialogObject *dlg = dialog(dId);
     if( !dlg )
-        return;
+        return false;
 
     Message message = newMessage(dId);
     InputPeer peer(message.toId().chatId()? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
@@ -761,7 +761,12 @@ void TelegramQml::sendFile(qint64 dId, const QString &fpath)
     p->msg_send_random_id = generateRandomId();
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
     if( t.name().contains("image/") )
-        fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
+    {
+        if(dlg->encrypted())
+            fileId = p->telegram->messagesSendEncryptedPhoto(dId, p->msg_send_random_id, file);
+        else
+            fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
+    }
     else
     if( t.name().contains("video/") )
     {
@@ -779,8 +784,24 @@ void TelegramQml::sendFile(qint64 dId, const QString &fpath)
             height = size.height();
         }
 
-        fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, width, height, thumbnail);
+        if(dlg->encrypted())
+        {
+            QByteArray thumbData;
+            QFile thumbFile(thumbnail);
+            if(thumbFile.open(QFile::ReadOnly))
+            {
+                thumbData = thumbFile.readAll();
+                thumbFile.close();
+            }
+
+            fileId = p->telegram->messagesSendEncryptedVideo(dId, p->msg_send_random_id, file, thumbData);
+        }
+        else
+            fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, width, height, thumbnail);
     }
+    else
+    if( dlg->encrypted() )
+        return false;
     else
     if( t.name().contains("audio/") )
         fileId = p->telegram->messagesSendAudio(peer, p->msg_send_random_id, file, 0);
@@ -799,6 +820,7 @@ void TelegramQml::sendFile(qint64 dId, const QString &fpath)
 
     p->uploads[fileId] = msgObj;
     emit uploadsChanged();
+    return true;
 }
 
 void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
@@ -1837,8 +1859,7 @@ void TelegramQml::insertDialog(const Dialog &d, bool encrypted, bool fromDb)
     else
     {
         *obj = d;
-        if(encrypted)
-            obj->setEncrypted(true);
+        obj->setEncrypted(encrypted);
     }
 
     p->dialogs_list = p->dialogs.keys();
@@ -1851,7 +1872,7 @@ void TelegramQml::insertDialog(const Dialog &d, bool encrypted, bool fromDb)
     refreshUnreadCount();
 
     if(!fromDb)
-        p->database->insertDialog(d);
+        p->database->insertDialog(d, encrypted);
 }
 
 void TelegramQml::insertMessage(const Message &m, bool encrypted, bool fromDb, bool tempMsg)
@@ -1881,12 +1902,17 @@ void TelegramQml::insertMessage(const Message &m, bool encrypted, bool fromDb, b
     if(fromDb && !encrypted)
         return;
     else
+    {
         *obj = m;
+        obj->setEncrypted(encrypted);
+    }
 
     emit messagesChanged(fromDb && !encrypted);
 
     if(!fromDb && !tempMsg)
         p->database->insertMessage(m);
+    if(encrypted)
+        updateEncryptedTopMessage(m);
 }
 
 void TelegramQml::insertUser(const User &u, bool fromDb)
@@ -2172,6 +2198,10 @@ void TelegramQml::insertEncryptedChat(const EncryptedChat &c)
     Dialog dlg;
     dlg.setPeer(peer);
 
+    DialogObject *dobj = p->dialogs.value(c.id());
+    if(dobj)
+        dlg.setTopMessage( dobj->topMessage() );
+
     insertDialog(dlg, true);
 }
 
@@ -2230,9 +2260,9 @@ void TelegramQml::dbChatFounded(const Chat &chat)
     insertChat(chat, true);
 }
 
-void TelegramQml::dbDialogFounded(const Dialog &dialog)
+void TelegramQml::dbDialogFounded(const Dialog &dialog, bool encrypted)
 {
-    insertDialog(dialog, false, true);
+    insertDialog(dialog, encrypted, true);
 }
 
 void TelegramQml::dbMessageFounded(const Message &message)
@@ -2279,6 +2309,35 @@ void TelegramQml::refreshSecretChats()
     }
 }
 
+void TelegramQml::updateEncryptedTopMessage(const Message &message)
+{
+    qint64 dId = message.toId().chatId();
+    if(!dId)
+        return;
+
+    DialogObject *dlg = p->dialogs.value(dId);
+    if(!dlg)
+        return;
+
+    MessageObject *topMessage = p->messages.value(dlg->topMessage());
+    if(dlg->topMessage() && !topMessage)
+        return;
+
+    qint64 topMsgDate = topMessage? topMessage->date() : 0;
+    if(message.date() < topMsgDate)
+        return;
+
+    Peer peer(Peer::typePeerUser);
+    peer.setUserId(dlg->peer()->userId());
+
+    Dialog dialog;
+    dialog.setTopMessage(message.date());
+    dialog.setUnreadCount(dlg->unreadCount());
+    dialog.setPeer(peer);
+
+    insertDialog(dialog, true, true);
+}
+
 qint64 TelegramQml::generateRandomId() const
 {
     qint64 randomId;
@@ -2306,22 +2365,7 @@ bool checkDialogLessThan( qint64 a, qint64 b )
     MessageObject *am = telegramp_qml_tmp->messages.value(ao->topMessage());
     MessageObject *bm = telegramp_qml_tmp->messages.value(bo->topMessage());
     if(!am || !bm)
-    {
-        if(ao->encrypted() || bo->encrypted())
-        {
-            EncryptedChatObject *aec = telegramp_qml_tmp->encchats.value( ao->peer()->chatId()?ao->peer()->chatId():ao->peer()->userId() );
-            EncryptedChatObject *bec = telegramp_qml_tmp->encchats.value( bo->peer()->chatId()?bo->peer()->chatId():bo->peer()->userId() );
-
-            if(aec && bec)
-                return aec->date() > bec->date();
-            if(aec && !bec)
-                return aec->date() > bm->date();
-            if(!aec && bec)
-                return am->date() > bec->date();
-        }
-        else
-            return ao->topMessage() > bo->topMessage();
-    }
+        return ao->topMessage() > bo->topMessage();
 
     return am->date() > bm->date();
 }

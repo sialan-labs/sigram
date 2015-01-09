@@ -105,7 +105,15 @@ Rectangle {
                 sound_notify.play()
             }
 
-            var nid = notification.sendNotify( title, msg.message, user.photo.photoSmall.download.location, 0, 3000, actions )
+            var message = msg.message
+            if(msg.encrypted)
+                message = qsTr("Message!")
+
+            var location = user.photo.photoSmall.download.location
+            if(location && location.slice(0,7) == "file://")
+                location = location.slice(7, location.length)
+
+            var nid = notification.sendNotify( title, message, location, 0, 3000, actions )
 
             notifies_hash.insert(nid, msg)
         }

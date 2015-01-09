@@ -34,10 +34,10 @@ Database::Database(const QString &phoneNumber, QObject *parent) :
 
     p->core->moveToThread(p->thread);
 
-    connect(p->core, SIGNAL(chatFounded(DbChat))      , SLOT(chatFounded_slt(DbChat))      , Qt::QueuedConnection );
-    connect(p->core, SIGNAL(userFounded(DbUser))      , SLOT(userFounded_slt(DbUser))      , Qt::QueuedConnection );
-    connect(p->core, SIGNAL(dialogFounded(DbDialog))  , SLOT(dialogFounded_slt(DbDialog))  , Qt::QueuedConnection );
-    connect(p->core, SIGNAL(messageFounded(DbMessage)), SLOT(messageFounded_slt(DbMessage)), Qt::QueuedConnection );
+    connect(p->core, SIGNAL(chatFounded(DbChat))         , SLOT(chatFounded_slt(DbChat))         , Qt::QueuedConnection );
+    connect(p->core, SIGNAL(userFounded(DbUser))         , SLOT(userFounded_slt(DbUser))         , Qt::QueuedConnection );
+    connect(p->core, SIGNAL(dialogFounded(DbDialog,bool)), SLOT(dialogFounded_slt(DbDialog,bool)), Qt::QueuedConnection );
+    connect(p->core, SIGNAL(messageFounded(DbMessage))   , SLOT(messageFounded_slt(DbMessage))   , Qt::QueuedConnection );
 }
 
 void Database::insertUser(const User &user)
@@ -56,12 +56,12 @@ void Database::insertChat(const Chat &chat)
     QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(DbChat,dchat));
 }
 
-void Database::insertDialog(const Dialog &dialog)
+void Database::insertDialog(const Dialog &dialog, bool encrypted)
 {
     DbDialog ddlg;
     ddlg.dialog = dialog;
 
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(DbDialog,ddlg));
+    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(DbDialog,ddlg), Q_ARG(bool,encrypted));
 }
 
 void Database::insertMessage(const Message &message)
@@ -105,9 +105,9 @@ void Database::chatFounded_slt(const DbChat &chat)
     emit chatFounded(chat.chat);
 }
 
-void Database::dialogFounded_slt(const DbDialog &dialog)
+void Database::dialogFounded_slt(const DbDialog &dialog, bool encrypted)
 {
-    emit dialogFounded(dialog.dialog);
+    emit dialogFounded(dialog.dialog, encrypted);
 }
 
 void Database::messageFounded_slt(const DbMessage &message)

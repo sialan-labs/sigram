@@ -192,7 +192,7 @@ Item {
                 font.pixelSize: 11*Devices.fontDensity
                 verticalAlignment: Text.AlignVCenter
                 color: Desktop.titleBarTextColor
-                text: user.phone
+                text: user.phone + " "
                 visible: !isChat
             }
 

@@ -195,7 +195,7 @@ public slots:
     void messagesAcceptEncryptedChat(qint32 chatId);
     void messagesDiscardEncryptedChat(qint32 chatId);
 
-    void sendFile( qint64 dialogId, const QString & file );
+    bool sendFile( qint64 dialogId, const QString & file );
     void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
     void getFileJustCheck(FileLocationObject *location);
     void cancelSendGet( qint64 fileId );
@@ -320,11 +320,12 @@ protected:
 private slots:
     void dbUserFounded(const User &user);
     void dbChatFounded(const Chat &chat);
-    void dbDialogFounded(const Dialog &dialog);
+    void dbDialogFounded(const Dialog &dialog, bool encrypted);
     void dbMessageFounded(const Message &message);
 
     void refreshUnreadCount();
     void refreshSecretChats();
+    void updateEncryptedTopMessage(const Message &message);
 
     qint64 generateRandomId() const;
 

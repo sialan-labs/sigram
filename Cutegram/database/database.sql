@@ -105,7 +105,8 @@ CREATE TABLE IF NOT EXISTS Dialogs (
     peer BIGINT PRIMARY KEY NOT NULL,
     peerType BIGINT,
     topMessage BIGINT,
-    unreadCount BIGINT
+    unreadCount BIGINT,
+    encrypted BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS Chats (

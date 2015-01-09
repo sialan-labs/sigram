@@ -4911,8 +4911,6 @@ public:
         emit idChanged();
         _sent = true;
         emit sentChanged();
-        _encrypted = false;
-        emit encryptedChanged();
         *_toId = another.toId();
         emit toIdChanged();
         _unread = another.unread();

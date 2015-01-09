@@ -23,7 +23,7 @@ public:
 public slots:
     void insertUser(const User &user);
     void insertChat(const Chat &chat);
-    void insertDialog(const Dialog &dialog);
+    void insertDialog(const Dialog &dialog, bool encrypted);
     void insertMessage(const Message &message);
 
     void readFullDialogs();
@@ -35,13 +35,13 @@ public slots:
 signals:
     void userFounded(const User &user);
     void chatFounded(const Chat &chat);
-    void dialogFounded(const Dialog &dialog);
+    void dialogFounded(const Dialog &dialog, bool encrypted);
     void messageFounded(const Message &message);
 
 private slots:
     void userFounded_slt(const DbUser &user);
     void chatFounded_slt(const DbChat &chat);
-    void dialogFounded_slt(const DbDialog &dialog);
+    void dialogFounded_slt(const DbDialog &dialog, bool encrypted);
     void messageFounded_slt(const DbMessage &message);
 
 private:

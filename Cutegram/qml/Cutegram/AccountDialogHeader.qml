@@ -32,6 +32,7 @@ Rectangle {
     }
 
     Image {
+        id: secret_img
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.margins: 10*Devices.density
@@ -40,6 +41,19 @@ Rectangle {
         visible: currentDialog.encrypted
         width: 14*Devices.density
         height: width
+    }
+
+    Text {
+        id: secret_txt
+        anchors.bottom: secret_img.bottom
+        anchors.left: secret_img.right
+        anchors.leftMargin: 8*Devices.density
+        anchors.bottomMargin: -8*Devices.density
+        font.pixelSize: 10*Devices.fontDensity
+        font.family: AsemanApp.globalFontFamily
+        text: qsTr("Secret chat (experimental)")
+        color: "#ffffff"
+        visible: currentDialog.encrypted
     }
 
     Text {
