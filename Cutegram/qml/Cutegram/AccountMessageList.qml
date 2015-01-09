@@ -136,7 +136,7 @@ Rectangle {
 
                 onPressed: {
                     if( mouse.button == Qt.RightButton ) {
-                        var actions = ["Forward","Copy","Delete"]
+                        var actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
                         var res = Cutegram.showMenu(actions)
                         switch(res) {
                         case 0:

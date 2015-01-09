@@ -2,6 +2,21 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="en_US" sourcelanguage="fa_IR">
 <context>
+    <name>AboutCutegram</name>
+    <message>
+        <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
+        <translation>کیوتگرام یک کلاینت تلگرام است که توسط تیم آسمان طراحی شده. کیوتگرام کاملا آزاد و اپن‌سورس است و تحت مجوز GPLv3 منتشر شده است.</translation>
+    </message>
+    <message>
+        <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
+        <translation>این کلاینت به کمک چهارچوب Qt5، ابزار QML و کتابخانه‌های libqtelegram و AsemanQtTools ساخته شده و همینطور در ساخت آن از آیکن‌های Faenza و شکلک‌های توییتر استفاده شده است.</translation>
+    </message>
+    <message>
+        <source>Home Page</source>
+        <translation>وبسایت آسمان</translation>
+    </message>
+</context>
+<context>
     <name>AccountDialogHeader</name>
     <message>
         <source> participants</source>
@@ -15,12 +30,28 @@
         <source> was online</source>
         <translation>آخرین آنلاین</translation>
     </message>
+    <message>
+        <source>Secret chat (experimental)</source>
+        <translation>چت امن (آزمایشی)</translation>
+    </message>
+    <message>
+        <source>%1 participants</source>
+        <translation>%1 عضو</translation>
+    </message>
+    <message>
+        <source>%1 was online</source>
+        <translation>آخرین تاریخ دیده شده: %1</translation>
+    </message>
 </context>
 <context>
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
         <translation>در حال نوشتن...</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>پاک‌کردن</translation>
     </message>
 </context>
 <context>
@@ -32,6 +63,10 @@
     <message>
         <source>Mute</source>
         <translation>بدون صدا</translation>
+    </message>
+    <message>
+        <source>Message!</source>
+        <translation>پیغام جدید!</translation>
     </message>
 </context>
 <context>
@@ -63,6 +98,68 @@
         <source>deleted chat photo</source>
         <translation>تصویر چت پاک شد</translation>
     </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation>%1 گروه &quot;%2&quot; را ساخت</translation>
+    </message>
+    <message>
+        <source>%1 invited someone to group</source>
+        <translation>%1 یک نفر را به گروه اضافه کرد</translation>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation>%1 گروه را ترک کرد</translation>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation>%1 نام گروه را به &quot;%2&quot; تغییر داد</translation>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation>%1 تصویر گروه را تغییر داد.</translation>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation>%1 تصویر گروه را پاک کرد</translation>
+    </message>
+</context>
+<context>
+    <name>AccountMessageItem</name>
+    <message>
+        <source>Media files is not supported on secret chat currently</source>
+        <translation>کیوتگرام در حال حاضر از دریافت و ارسال فایل در چت امن پشتیبانی نمی‌کند</translation>
+    </message>
+</context>
+<context>
+    <name>AccountMessageList</name>
+    <message>
+        <source>Welcome :)</source>
+        <translation>خوش آمدید :)</translation>
+    </message>
+    <message>
+        <source>Secret chat request. Please Accept or Reject.</source>
+        <translation>درخواست چت امن. لطفا قبول یا رد کنید.</translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation>قبول</translation>
+    </message>
+    <message>
+        <source>Reject</source>
+        <translation>رد</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>ارسال به دیگری</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>کپی</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>پاک‌کردن</translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -76,6 +173,18 @@
     <message>
         <source>Send</source>
         <translation>ارسال</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>کپی</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation>پیست</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>پاک‌کردن</translation>
     </message>
 </context>
 <context>
@@ -131,78 +240,86 @@
         <source>Create</source>
         <translation>ساختن</translation>
     </message>
+    <message>
+        <source>About Cutegram</source>
+        <translation>درباره‌ی کیوتگرام</translation>
+    </message>
+    <message>
+        <source>Add Secret Chat</source>
+        <translation>چت امن جدید</translation>
+    </message>
 </context>
 <context>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation type="unfinished"></translation>
+        <translation>آسمان یک سازمان غیرانتفاعی است که هدف آن پشتیبانی و رهبری پروژه‌ها و تحقیقات آزاد و اپن‌سورس است.</translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>هدف آسمان به وجود آوردن پروژه‌های آزاد و اپن‌سورسی است که از آزادی، امنیت و حریم‌شخصی کاربران دفاع و حمایت می‌کند.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation type="unfinished"></translation>
+        <translation>وبسایت آسمان</translation>
     </message>
 </context>
 <context>
     <name>AsemanCalendarConverter</name>
     <message>
         <source>Gregorian</source>
-        <translation type="unfinished"></translation>
+        <translation>میلادی</translation>
     </message>
     <message>
         <source>Jalali</source>
-        <translation type="unfinished"></translation>
+        <translation>جلالی</translation>
     </message>
     <message>
         <source>Hijri</source>
-        <translation type="unfinished"></translation>
+        <translation>قمری</translation>
     </message>
 </context>
 <context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>۰</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>۱</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>۲</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>۳</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>۴</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>۵</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>۶</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>۷</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>۸</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>۹</translation>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
@@ -272,6 +389,58 @@
     <message>
         <source>About</source>
         <translation>درباره</translation>
+    </message>
+    <message>
+        <source>Change Photo</source>
+        <translation>تغییر تصویر</translation>
+    </message>
+    <message>
+        <source>Select photo</source>
+        <translation>انتخاب تصویر</translation>
+    </message>
+    <message>
+        <source>Detailed List</source>
+        <translation>لیست با جزییات</translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation>تصویر پس‌زمینه</translation>
+    </message>
+    <message>
+        <source>Notify Sound</source>
+        <translation>صدای پیغام‌ها</translation>
+    </message>
+    <message>
+        <source>Master Color</source>
+        <translation>رنگ اصلی</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation>تغییر دادن</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>پاک کردن</translation>
+    </message>
+    <message>
+        <source>Select Image</source>
+        <translation>انتخاب تصویر</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>هیچی</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>پیش‌فرض</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation>انتخاب</translation>
+    </message>
+    <message>
+        <source>Select Sound</source>
+        <translation>انتخاب صدا</translation>
     </message>
 </context>
 <context>
@@ -352,6 +521,18 @@
     <message>
         <source>Drop files here to send</source>
         <translation>فایل‌ها را برای ارسال اینجا رها کنید</translation>
+    </message>
+    <message>
+        <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
+        <translation>برای ارسال به دیگری آن را در لیست دوستان رها کنید &gt;&gt;&gt;</translation>
+    </message>
+    <message>
+        <source>Drop to forward</source>
+        <translation>برای ارسال رها کنید</translation>
+    </message>
+    <message>
+        <source>Drop files to send</source>
+        <translation>برای ارسال رها کنید</translation>
     </message>
 </context>
 <context>
@@ -629,6 +810,13 @@
     <message>
         <source>Select Application</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TelegramQml</name>
+    <message>
+        <source>Secret Chat</source>
+        <translation>چت امن</translation>
     </message>
 </context>
 <context>

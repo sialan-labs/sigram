@@ -38,6 +38,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 20*Devices.density
+        font.family: AsemanApp.globalFontFamily
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         font.pixelSize: 9*Devices.fontDensity
         color: "#ffffff"
@@ -55,6 +56,7 @@ Rectangle {
         anchors.rightMargin: 20*Devices.density
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         font.pixelSize: 9*Devices.fontDensity
+        font.family: AsemanApp.globalFontFamily
         color: "#ffffff"
         horizontalAlignment: Text.AlignHCenter
         z: 10
@@ -74,6 +76,7 @@ Rectangle {
         Text {
             anchors.centerIn: parent
             font.pixelSize: 9*Devices.fontDensity
+            font.family: AsemanApp.globalFontFamily
             font.bold: true
             color: "#ffffff"
             horizontalAlignment: Text.AlignHCenter

@@ -620,7 +620,6 @@ void Cutegram::init_languages()
         if( lang == AsemanApplication::settings()->value("General/Language","English").toString() )
             setLanguage( lang );
     }
-    setLanguage( "English" );
 }
 
 QVariantList Cutegram::intListToVariantList(const QList<qint32> &list)

@@ -85,7 +85,7 @@ Rectangle {
         cursorShape: Qt.IBeamCursor
         onClicked: {
             if( mouse.button == Qt.RightButton ) {
-                var actions = ["Copy","Paste","Delete"]
+                var actions = [qsTr("Copy"),qsTr("Paste"),qsTr("Delete")]
                 var res = Cutegram.showMenu(actions)
                 switch(res) {
                 case 0:

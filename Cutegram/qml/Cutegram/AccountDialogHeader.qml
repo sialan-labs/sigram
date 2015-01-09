@@ -86,10 +86,10 @@ Rectangle {
             var list = currentDialog.typingUsers
             if( list.length == 0 ) {
                 if( isChat ) {
-                    result += chat.participantsCount + qsTr(" participants")
+                    result += qsTr("%1 participants").arg(chat.participantsCount)
                 } else {
                     var isOnline = header.user.status.classType == typeUserStatusOnline
-                    result += isOnline? qsTr("Online") : Cutegram.getTimeString(CalendarConv.fromTime_t(header.user.status.wasOnline)) + qsTr(" was online")
+                    result += isOnline? qsTr("Online") : qsTr("%1 was online").arg(Cutegram.getTimeString(CalendarConv.fromTime_t(header.user.status.wasOnline)))
                 }
 
                 return result

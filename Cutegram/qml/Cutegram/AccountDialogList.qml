@@ -208,7 +208,7 @@ Item {
                         if(!dItem.encrypted)
                             return
 
-                        var actions = ["Delete"]
+                        var actions = [qsTr("Delete")]
                         var res = Cutegram.showMenu(actions)
                         switch(res) {
                         case 0:

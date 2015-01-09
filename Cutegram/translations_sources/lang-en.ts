@@ -2,17 +2,36 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>AccountDialogHeader</name>
+    <name>AboutCutegram</name>
     <message>
-        <source> participants</source>
+        <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountDialogHeader</name>
     <message>
         <source>Online</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> was online</source>
+        <source>Secret chat (experimental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 participants</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 was online</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -20,6 +39,10 @@
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -33,6 +56,10 @@
         <source>Mute</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Message!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountLoading</name>
@@ -44,23 +71,65 @@
 <context>
     <name>AccountMessageAction</name>
     <message>
-        <source>created group</source>
+        <source>%1 created the group &quot;%2&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>added new user to group</source>
+        <source>%1 invited someone to group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>edited chat title to </source>
+        <source>%1 left the group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>edited chat photo</source>
+        <source>%1 changed group name to &quot;%2&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>deleted chat photo</source>
+        <source>%1 changed group photo.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountMessageItem</name>
+    <message>
+        <source>Media files is not supported on secret chat currently</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountMessageList</name>
+    <message>
+        <source>Welcome :)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Secret chat request. Please Accept or Reject.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reject</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -75,6 +144,18 @@
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -129,6 +210,14 @@
     </message>
     <message>
         <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Cutegram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Secret Chat</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -270,7 +359,55 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About</source>
+        <source>Change Photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detailed List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notify Sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Sound</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -312,14 +449,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>License</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Donate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -350,7 +479,15 @@
 <context>
     <name>DialogDropFile</name>
     <message>
-        <source>Drop files here to send</source>
+        <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop to forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop files to send</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -628,6 +765,13 @@
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TelegramQml</name>
+    <message>
+        <source>Secret Chat</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
