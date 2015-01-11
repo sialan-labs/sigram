@@ -23,6 +23,7 @@
 #include <QSize>
 #include <QVariantMap>
 #include <QSystemTrayIcon>
+#include <QFont>
 
 class CutegramPrivate;
 class Cutegram : public QObject
@@ -37,6 +38,7 @@ class Cutegram : public QObject
     Q_PROPERTY(QString messageAudio READ messageAudio WRITE setMessageAudio NOTIFY messageAudioChanged)
     Q_PROPERTY(QString background   READ background   WRITE setBackground   NOTIFY backgroundChanged  )
     Q_PROPERTY(QString masterColor  READ masterColor  WRITE setMasterColor  NOTIFY masterColorChanged )
+    Q_PROPERTY(QFont   font         READ font         WRITE setFont         NOTIFY fontChanged        )
 
     Q_PROPERTY(int  sysTrayCounter  READ sysTrayCounter  WRITE setSysTrayCounter  NOTIFY sysTrayCounterChanged )
     Q_PROPERTY(int  startupOption   READ startupOption   WRITE setStartupOption   NOTIFY startupOptionChanged  )
@@ -97,6 +99,9 @@ public:
     void setMasterColor(const QString &color);
     QString masterColor() const;
 
+    void setFont(const QFont &font);
+    QFont font() const;
+
     QColor highlightColor() const;
 
 public slots:
@@ -126,6 +131,7 @@ signals:
     void masterColorChanged();
     void highlightColorChanged();
     void darkSystemTrayChanged();
+    void fontChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

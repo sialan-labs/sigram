@@ -74,8 +74,8 @@ Rectangle {
         Text {
             id: welcome_txt
             anchors.centerIn: parent
-            font.family: AsemanApp.globalFontFamily
-            font.pixelSize: 11*Devices.fontDensity
+            font.pixelSize: (Cutegram.font.pointSize+1)*Devices.fontDensity
+            font.family: Cutegram.font.family
             text: qsTr("Welcome :)")
             color: "#111111"
         }

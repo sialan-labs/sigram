@@ -88,8 +88,16 @@ Rectangle {
             if( !Cutegram.notification )
                 return
 
+            var dialog = telegram.dialog(dId)
             var user = telegram.user(msg.fromId)
             var title = user.firstName + " " + user.lastName
+
+            var chatObj
+            if( dialog && dialog.peer.chatId != 0 )
+                chatObj = telegramObject.chat(dialog.peer.chatId)
+
+            if(chatObj)
+                title = qsTr("Message on \"%1\" by \"%2\"").arg(chatObj.title).arg(title)
 
             var actions = new Array
             if(Desktop.desktopSession != 3) {
@@ -109,7 +117,7 @@ Rectangle {
             if(msg.encrypted)
                 message = qsTr("Message!")
 
-            var location = user.photo.photoSmall.download.location
+            var location = chatObj? chatObj.photo.photoSmall.download.location : user.photo.photoSmall.download.locatio
             if(location && location.slice(0,7) == "file://")
                 location = location.slice(7, location.length)
 

@@ -21,6 +21,8 @@
 
 #include "aseman_macros.h"
 
+#include <QFont>
+
 #ifdef DESKTOP_DEVICE
 #include "qtsingleapplication/qtsingleapplication.h"
 class INHERIT_QAPP : public QtSingleApplication
@@ -54,6 +56,8 @@ class AsemanApplication : public INHERIT_QAPP
     Q_PROPERTY(QString globalFontFamily READ globalFontFamily WRITE setGlobalFontFamily NOTIFY globalFontFamilyChanged)
     Q_PROPERTY(QString globalMonoFontFamily READ globalMonoFontFamily WRITE setGlobalMonoFontFamily NOTIFY globalMonoFontFamilyChanged)
 
+    Q_PROPERTY(QFont globalFont READ globalFont WRITE setGlobalFont NOTIFY globalFontChanged)
+
 public:
     AsemanApplication(int &argc, char **argv);
     ~AsemanApplication();
@@ -74,6 +78,9 @@ public:
     void setGlobalMonoFontFamily( const QString & fontFamily );
     QString globalMonoFontFamily() const;
 
+    void setGlobalFont(const QFont &font);
+    QFont globalFont() const;
+
     static QSettings *settings();
 
 public slots:
@@ -89,6 +96,7 @@ signals:
     void fakeSignal();
     void globalFontFamilyChanged();
     void globalMonoFontFamilyChanged();
+    void globalFontChanged();
     void languageUpdated();
     void backRequest();
 

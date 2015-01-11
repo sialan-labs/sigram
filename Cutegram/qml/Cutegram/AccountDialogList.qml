@@ -131,8 +131,8 @@ Item {
                     anchors.right: time_txt.left
                     anchors.margins: 4*Devices.density
                     anchors.bottomMargin: 0
-                    font.family: AsemanApp.globalFontFamily
-                    font.pixelSize: 11*Devices.fontDensity
+                    font.pixelSize: (Cutegram.font.pointSize+1)*Devices.fontDensity
+                    font.family: Cutegram.font.family
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignVCenter
                     color: "#ffffff"
@@ -161,8 +161,8 @@ Item {
                     anchors.right: parent.right
                     anchors.margins: 4*Devices.density
                     anchors.topMargin: 0
-                    font.family: AsemanApp.globalFontFamily
-                    font.pixelSize: 9*Devices.fontDensity
+                    font.pixelSize: (Cutegram.font.pointSize-1)*Devices.fontDensity
+                    font.family: Cutegram.font.family
                     color: "#bbbbbb"
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight

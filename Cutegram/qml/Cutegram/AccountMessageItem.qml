@@ -113,13 +113,14 @@ Item {
             Column {
                 id: column
                 anchors.centerIn: parent
-                height: (visibleNames?user_name.height:0) + (uploading?upload_img.height:0) + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_row.height - 20*Devices.density
+                height: (visibleNames?user_name.height:0) + (uploading?upload_img.height:0) + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_row.height - 10*Devices.density
                 clip: true
 
                 Text {
                     id: user_name
-                    font.pixelSize: 10*Devices.fontDensity
-                    font.family: AsemanApp.globalFontFamily
+                    font.pixelSize: (Cutegram.font.pointSize)*Devices.fontDensity
+                    font.family: Cutegram.font.family
+                    lineHeight: 1.3
                     color: Cutegram.highlightColor
                     text: user.firstName + " " + user.lastName
                     visible: visibleNames
@@ -149,8 +150,9 @@ Item {
                     Text {
                         id: msg_txt
                         width: htmlWidth>maximumWidth? maximumWidth : htmlWidth
-                        font.pixelSize: 9*Devices.fontDensity
-                        font.family: AsemanApp.globalFontFamily
+                        font.pixelSize: (Cutegram.font.pointSize-1)*Devices.fontDensity
+                        font.family: Cutegram.font.family
+                        lineHeight: 1.3
                         color: encryptMedia? "#ffffff" : textColor0
                         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                         text: emojis.bodyTextToEmojiText(messageText)

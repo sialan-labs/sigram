@@ -31,6 +31,7 @@ class AsemanApplicationPrivate
 public:
     QString globalFontFamily;
     QString globalMonoFontFamily;
+    QFont globalFont;
 };
 
 AsemanApplication::AsemanApplication(int &argc, char **argv) :
@@ -151,6 +152,20 @@ void AsemanApplication::setGlobalMonoFontFamily(const QString &fontFamily)
 QString AsemanApplication::globalMonoFontFamily() const
 {
     return p->globalMonoFontFamily;
+}
+
+void AsemanApplication::setGlobalFont(const QFont &font)
+{
+    if(p->globalFont == font)
+        return;
+
+    p->globalFont = font;
+    emit globalFontChanged();
+}
+
+QFont AsemanApplication::globalFont() const
+{
+    return p->globalFont;
 }
 
 QSettings *AsemanApplication::settings()

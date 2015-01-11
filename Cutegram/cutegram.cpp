@@ -82,6 +82,7 @@ public:
     QString background;
     QString messageAudio;
     QString masterColor;
+    QFont font;
 
     QPalette mainPalette;
 };
@@ -103,6 +104,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
     p->messageAudio = AsemanApplication::settings()->value("General/messageAudio","files/new_msg.ogg").toString();
+    p->font = AsemanApplication::settings()->value("General/font").value<QFont>();
     p->translator = new QTranslator(this);
 
 #ifdef Q_OS_ANDROID
@@ -589,6 +591,21 @@ void Cutegram::setMasterColor(const QString &color)
 QString Cutegram::masterColor() const
 {
     return p->masterColor;
+}
+
+void Cutegram::setFont(const QFont &font)
+{
+    if(p->font == font)
+        return;
+
+    p->font = font;
+    AsemanApplication::settings()->setValue("General/font", font);
+    emit fontChanged();
+}
+
+QFont Cutegram::font() const
+{
+    return p->font;
 }
 
 QColor Cutegram::highlightColor() const
