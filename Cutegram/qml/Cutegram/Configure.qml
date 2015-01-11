@@ -102,7 +102,7 @@ Rectangle {
                             anchors.right: parent.right
                             anchors.margins: 20*Devices.density
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 18*Devices.fontDensity
                             color: "#333333"
                             text: user.firstName + " " + user.lastName
@@ -115,7 +115,7 @@ Rectangle {
                             anchors.right: parent.right
                             anchors.margins: 20*Devices.density
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 12*Devices.fontDensity
                             color: "#333333"
                             text: user.phone
@@ -137,7 +137,7 @@ Rectangle {
                             id: notify_text
                             height: notify_checkbox.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
                             text: qsTr("Notifications")
@@ -147,7 +147,7 @@ Rectangle {
                             id: startup_text
                             height: startup_combo.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
                             text: qsTr("On Start")
@@ -157,7 +157,7 @@ Rectangle {
                             id: languages_text
                             height: languages_combo.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
                             text: qsTr("Languages")
@@ -167,7 +167,7 @@ Rectangle {
                             id: last_msg_text
                             height: last_msg_checkbox.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
                             text: qsTr("Detailed List")
@@ -177,7 +177,7 @@ Rectangle {
                             id: background_text
                             height: background_btn.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
                             text: qsTr("Background")
@@ -187,7 +187,7 @@ Rectangle {
                             id: notify_sound_text
                             height: notify_sound_combo.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
                             text: qsTr("Notify Sound")
@@ -197,7 +197,7 @@ Rectangle {
                             id: color_text
                             height: color_combo.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
                             text: qsTr("Master Color")
@@ -207,7 +207,7 @@ Rectangle {
                             id: font_text
                             height: font_btn.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFontFamily
+                            font.family: AsemanApp.globalFont.family
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
                             text: qsTr("Font")
@@ -344,7 +344,7 @@ Rectangle {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.margins: 20*Devices.density
-                textFont.family: AsemanApp.globalFontFamily
+                textFont.family: AsemanApp.globalFont.family
                 textFont.pixelSize: 9*Devices.fontDensity
                 highlightColor: Qt.darker(normalColor)
                 normalColor: "#C81414"

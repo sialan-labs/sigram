@@ -41,7 +41,7 @@ Item {
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             font.pixelSize: 9*Devices.fontDensity
             color: "#333333"
             text: {

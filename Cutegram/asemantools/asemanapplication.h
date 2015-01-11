@@ -53,9 +53,6 @@ class AsemanApplication : public INHERIT_QAPP
     Q_PROPERTY(QString backupsPath  READ backupsPath  NOTIFY fakeSignal)
     Q_PROPERTY(QString cameraPath   READ cameraPath   NOTIFY fakeSignal)
 
-    Q_PROPERTY(QString globalFontFamily READ globalFontFamily WRITE setGlobalFontFamily NOTIFY globalFontFamilyChanged)
-    Q_PROPERTY(QString globalMonoFontFamily READ globalMonoFontFamily WRITE setGlobalMonoFontFamily NOTIFY globalMonoFontFamilyChanged)
-
     Q_PROPERTY(QFont globalFont READ globalFont WRITE setGlobalFont NOTIFY globalFontChanged)
 
 public:
@@ -71,12 +68,6 @@ public:
     static QString cameraPath();
 
     static AsemanApplication *instance();
-
-    void setGlobalFontFamily( const QString & fontFamily );
-    QString globalFontFamily() const;
-
-    void setGlobalMonoFontFamily( const QString & fontFamily );
-    QString globalMonoFontFamily() const;
 
     void setGlobalFont(const QFont &font);
     QFont globalFont() const;

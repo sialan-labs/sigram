@@ -40,13 +40,6 @@ Rectangle {
 
     property real panelWidth: width
 
-    FontLoader{
-        source: "fonts/DroidKaqazSans.ttf"
-    }
-    FontLoader{
-        source: "fonts/DroidSansMono.ttf"
-    }
-
     SystemPalette {
         id: palette
         colorGroup: View.active? SystemPalette.Active : SystemPalette.Inactive

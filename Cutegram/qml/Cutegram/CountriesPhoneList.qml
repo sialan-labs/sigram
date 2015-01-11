@@ -31,7 +31,7 @@ Item {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.margins: 8*Devices.density
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 font.pixelSize: 10*Devices.fontDensity
                 color: textColor0
                 text: name

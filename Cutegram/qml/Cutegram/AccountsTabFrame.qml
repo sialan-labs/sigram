@@ -81,7 +81,7 @@ Rectangle {
             icon: "files/telegram.png"
             iconHeight: 26*Devices.density
             tooltipText: qsTr("About Cutegram")
-            tooltipFont.family: AsemanApp.globalFontFamily
+            tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
                 aboutMode = true
@@ -100,7 +100,7 @@ Rectangle {
             icon: "files/lock.png"
             iconHeight: 18*Devices.density
             tooltipText: qsTr("Add Secret Chat")
-            tooltipFont.family: AsemanApp.globalFontFamily
+            tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
                 slide_menu.show(add_secret_chat_component)
@@ -119,7 +119,7 @@ Rectangle {
             icon: "files/add_chat.png"
             iconHeight: 26*Devices.density
             tooltipText: qsTr("New group chat")
-            tooltipFont.family: AsemanApp.globalFontFamily
+            tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
                 slide_menu.show(add_groupchat_component)
@@ -138,7 +138,7 @@ Rectangle {
             icon: "files/add_user.png"
             iconHeight: 22*Devices.density
             tooltipText: qsTr("New chat")
-            tooltipFont.family: AsemanApp.globalFontFamily
+            tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
                 slide_menu.show(add_userchat_component)
@@ -157,7 +157,7 @@ Rectangle {
             icon: "files/configure.png"
             iconHeight: 22*Devices.density
             tooltipText: qsTr("Configure")
-            tooltipFont.family: AsemanApp.globalFontFamily
+            tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
                 slide_menu.show(configure_component)
@@ -281,7 +281,7 @@ Rectangle {
                 normalColor: Cutegram.highlightColor
                 highlightColor: Qt.darker(Cutegram.highlightColor)
                 textColor: masterPalette.highlightedText
-                textFont.family: AsemanApp.globalFontFamily
+                textFont.family: AsemanApp.globalFont.family
                 textFont.pixelSize: 9*Devices.fontDensity
                 textFont.bold: false
                 height: 40*Devices.density

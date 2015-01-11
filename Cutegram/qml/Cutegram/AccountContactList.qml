@@ -70,7 +70,7 @@ Item {
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 elide: Text.ElideRight
                 maximumLineCount: 1
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 font.pixelSize: 9*Devices.fontDensity
                 text: user.firstName + " " + user.lastName
                 color: "#333333"

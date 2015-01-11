@@ -77,7 +77,7 @@ Rectangle {
             y: parent.height/2 - height/2 - textMargin
             color: "#ffffff"
             font.bold: Devices.isWindows? false : true
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             font.pixelSize: 9*Devices.fontDensity
         }
     }

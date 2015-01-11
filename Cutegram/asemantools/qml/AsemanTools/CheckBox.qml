@@ -69,7 +69,7 @@ Item {
             id: on_txt
             anchors.centerIn: parent
             font.pixelSize: 10*Devices.fontDensity
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             color: checkbox.color
         }
     }
@@ -88,7 +88,7 @@ Item {
             id: off_txt
             anchors.centerIn: parent
             font.pixelSize: 10*Devices.fontDensity
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             color: checkbox.color
         }
     }

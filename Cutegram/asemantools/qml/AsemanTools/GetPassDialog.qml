@@ -113,7 +113,7 @@ Item {
             anchors.right: parent.right
             anchors.margins: 40*Devices.density
             font.pixelSize: 15*Devices.fontDensity
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             color: "#ffffff"
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
@@ -137,7 +137,7 @@ Item {
                 id: pass_placeholder
                 color: "#bbbbbb"
                 font.pixelSize: pass.font.pixelSize
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 y: pass.y
                 anchors.left: pass.left
                 anchors.right: pass.right
@@ -149,7 +149,7 @@ Item {
                 id: pass
                 color: "#333333"
                 font.pixelSize: 13*Devices.fontDensity
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 y: pass_frame.height/2-height/2
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -218,7 +218,7 @@ Item {
         Text{
             id: warn_txt
             font.pixelSize: 20*Devices.fontDensity
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             color: "#ffffff"
             wrapMode: Text.WordWrap
             anchors.left: error_frame.horizontalCenter

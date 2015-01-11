@@ -55,8 +55,6 @@
         <file>qml/AsemanTools/AsemanLogo.qml</file>
         <file>qml/AsemanTools/QueueList.qml</file>
         <file>files/countries.csv</file>
-        <file>qml/AsemanTools/fonts/DroidKaqazSans.ttf</file>
-        <file>qml/AsemanTools/fonts/DroidSansMono.ttf</file>
         <file>qml/AsemanTools/files/aseman-logo-dark.png</file>
         <file>qml/AsemanTools/MessageDialog.qml</file>
         <file>qml/AsemanTools/AsemanAbout.qml</file>

@@ -41,7 +41,7 @@ Item {
         Text {
             id: drop_text
             anchors.centerIn: parent
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             font.pixelSize: 12*Devices.fontDensity
             color: Cutegram.highlightColor
         }

@@ -62,7 +62,7 @@ Rectangle {
                 Text {
                     id: txt
                     anchors.centerIn: parent
-                    font.family: AsemanApp.globalFontFamily
+                    font.family: AsemanApp.globalFont.family
                     font.pixelSize: 11*Devices.fontDensity
                     text: Tools.call(nameMethodObject,nameMethodFunction,Qt.DirectConnection,name)
                     color: textsColor

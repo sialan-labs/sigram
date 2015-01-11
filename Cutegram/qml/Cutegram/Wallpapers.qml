@@ -71,7 +71,7 @@ Rectangle {
 
                 Text {
                     anchors.centerIn: parent
-                    font.family: AsemanApp.globalFontFamily
+                    font.family: AsemanApp.globalFont.family
                     font.pixelSize: 12*Devices.fontDensity
                     font.bold: true
                     color: "#ffffff"

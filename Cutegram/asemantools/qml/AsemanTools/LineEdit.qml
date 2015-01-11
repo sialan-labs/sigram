@@ -51,7 +51,7 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: 4*Devices.density
         font.pixelSize: 11*Devices.fontDensity
-        font.family: AsemanApp.globalFontFamily
+        font.family: AsemanApp.globalFont.family
         color: "#333333"
         verticalAlignment: Text.AlignVCenter
         onAccepted: line_edit_frame.accepted()

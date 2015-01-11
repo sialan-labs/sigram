@@ -43,7 +43,7 @@ Rectangle {
         anchors.bottom: column.top
         anchors.left: column.left
         anchors.bottomMargin: 4*Devices.density
-        font.family: AsemanApp.globalFontFamily
+        font.family: AsemanApp.globalFont.family
         font.pixelSize: 10*Devices.fontDensity
         color: textColor0
         visible: time_out_timer.running
@@ -119,7 +119,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: 10*Devices.density
-        font.family: AsemanApp.globalFontFamily
+        font.family: AsemanApp.globalFont.family
         font.underline: true
         font.pixelSize: 10*Devices.fontDensity
         color: callButton? textColor0 : "#aaaaaa"

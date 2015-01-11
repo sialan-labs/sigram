@@ -201,7 +201,7 @@ Rectangle {
         anchors.top: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 100*Devices.density
-        font.family: AsemanApp.globalFontFamily
+        font.family: AsemanApp.globalFont.family
         font.pixelSize: 12*Devices.fontDensity
         text: qsTr("Secret chat request. Please Accept or Reject.")
         visible: enchat.classType == typeEncryptedChatRequested

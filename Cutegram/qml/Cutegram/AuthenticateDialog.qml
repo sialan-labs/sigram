@@ -20,7 +20,7 @@ Rectangle {
             anchors.fill: parent
             anchors.margins: 12*Devices.density
             verticalAlignment: Text.AlignVCenter
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             font.pixelSize: 13*Devices.fontDensity
             text: qsTr("Authenticating")
             color: textColor0
@@ -62,7 +62,7 @@ Rectangle {
             x: column.x + phone_number.x
             anchors.bottom: column.top
             anchors.margins: 8*Devices.density
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             font.pixelSize: 15*Devices.fontDensity
             color: textColor0
             text: "+" + cphones_list.number

@@ -212,7 +212,7 @@ Rectangle {
         id: date_text
         anchors.horizontalCenter: date_line.horizontalCenter
         anchors.top: parent.top
-        font.family: AsemanApp.globalFontFamily
+        font.family: AsemanApp.globalFont.family
         font.pixelSize: 10*Devices.fontDensity
         color: dt_chooser.textsColor
         visible: dateVisible
@@ -223,7 +223,7 @@ Rectangle {
         id: time_text
         anchors.horizontalCenter: time_line.horizontalCenter
         anchors.top: parent.top
-        font.family: AsemanApp.globalFontFamily
+        font.family: AsemanApp.globalFont.family
         font.pixelSize: 10*Devices.fontDensity
         color: dt_chooser.textsColor
         visible: timeVisible

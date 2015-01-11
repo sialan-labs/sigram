@@ -47,7 +47,7 @@ Item {
 
         Button {
             width: parent.width/2
-            textFont.family: AsemanApp.globalFontFamily
+            textFont.family: AsemanApp.globalFont.family
             textFont.pixelSize: 9*Devices.fontDensity
             normalColor: "#00000000"
             highlightColor: "#0f000000"
@@ -59,7 +59,7 @@ Item {
 
         Button {
             width: parent.width/2
-            textFont.family: AsemanApp.globalFontFamily
+            textFont.family: AsemanApp.globalFont.family
             textFont.pixelSize: 9*Devices.fontDensity
             normalColor: "#00000000"
             highlightColor: "#0f000000"

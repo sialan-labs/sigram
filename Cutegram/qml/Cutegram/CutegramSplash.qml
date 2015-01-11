@@ -23,7 +23,7 @@ Rectangle {
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             font.pixelSize: 30*Devices.fontDensity
             text: "Cutegram"
             color: Desktop.titleBarTextColor

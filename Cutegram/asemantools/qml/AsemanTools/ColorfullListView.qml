@@ -216,7 +216,7 @@ Item {
                 id: title_txt
                 anchors.centerIn: parent
                 color: titleBarDefaultTextColor
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
             }
         }
     }

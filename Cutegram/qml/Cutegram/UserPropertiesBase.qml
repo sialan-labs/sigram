@@ -137,10 +137,11 @@ Item {
             id: col1
             anchors.top: parent.top
             anchors.margins: 20*Devices.density
+            spacing: 8*Devices.density
 
             Text {
                 id: phone_lbl
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 font.pixelSize: 11*Devices.fontDensity
                 color: Desktop.titleBarTextColor
                 text: qsTr("Phone Number")
@@ -149,7 +150,7 @@ Item {
 
             Text {
                 id: favorite_lbl
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 font.pixelSize: 11*Devices.fontDensity
                 color: Desktop.titleBarTextColor
                 text: qsTr("Favorite")
@@ -157,7 +158,7 @@ Item {
 
             Text {
                 id: love_lbl
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 font.pixelSize: 11*Devices.fontDensity
                 color: Desktop.titleBarTextColor
                 text: qsTr("Love")
@@ -165,7 +166,7 @@ Item {
 
             Text {
                 id: mute_lbl
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 font.pixelSize: 11*Devices.fontDensity
                 color: Desktop.titleBarTextColor
                 text: qsTr("Mute")
@@ -173,7 +174,7 @@ Item {
 
             Text {
                 id: participants_lbl
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 font.pixelSize: 11*Devices.fontDensity
                 color: Desktop.titleBarTextColor
                 text: qsTr("Participants")
@@ -185,10 +186,11 @@ Item {
             id: col2
             anchors.top: parent.top
             anchors.margins: 20*Devices.density
+            spacing: 8*Devices.density
 
             Text {
                 height: phone_lbl.height
-                font.family: AsemanApp.globalFontFamily
+                font.family: AsemanApp.globalFont.family
                 font.pixelSize: 11*Devices.fontDensity
                 verticalAlignment: Text.AlignVCenter
                 color: Desktop.titleBarTextColor
@@ -271,7 +273,7 @@ Item {
                     id: particians_button
                     anchors.verticalCenter: parent.verticalCenter
                     textColor: press? masterPalette.highlightedText : Desktop.titleBarTextColor
-                    textFont.family: AsemanApp.globalFontFamily
+                    textFont.family: AsemanApp.globalFont.family
                     textFont.pixelSize: 11*Devices.fontDensity
                     textFont.bold: false
                     text: qsTr("Show List")

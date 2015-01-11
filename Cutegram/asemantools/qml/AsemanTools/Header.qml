@@ -52,7 +52,7 @@ Item {
         Text {
             id: back_txt
             font.pixelSize: 14*Devices.fontDensity
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             y: parent.height/2 - height/2 + 2*Devices.density
             color: (!back_row.press && header.light)||(back_row.press && !header.light)? "#ffffff" : "#111111"
         }
@@ -74,7 +74,7 @@ Item {
     Text {
         id: title_txt
         font.pixelSize: 16*Devices.fontDensity
-        font.family: AsemanApp.globalFontFamily
+        font.family: AsemanApp.globalFont.family
         y: parent.height/2 - height/2 + 2*Devices.density
         anchors.horizontalCenter: parent.horizontalCenter
         color: header.light? "#ffffff" : "#333333"

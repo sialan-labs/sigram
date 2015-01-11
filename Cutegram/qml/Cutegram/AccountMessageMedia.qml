@@ -207,7 +207,7 @@ Item {
 
         Text {
             anchors.centerIn: parent
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             font.pixelSize: 9*Devices.fontDensity
             color: "#ffffff"
             text: qsTr("Click to Download")

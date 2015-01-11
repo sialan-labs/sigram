@@ -167,7 +167,7 @@ Item {
                         id: time_txt
                         anchors.bottom: parent.bottom
                         anchors.margins: 18*Devices.density
-                        font.family: AsemanApp.globalFontFamily
+                        font.family: AsemanApp.globalFont.family
                         font.pixelSize: 9*Devices.fontDensity
                         color: textColor2
                         text: Cutegram.getTimeString(msgDate)

@@ -62,7 +62,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
             font.pixelSize: 11*Devices.fontDensity
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             color: "#333333"
             maximumLineCount: 2
             elide: Text.ElideRight
@@ -74,7 +74,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 10*Devices.fontDensity
             font.weight: Font.Normal
-            font.family: AsemanApp.globalFontFamily
+            font.family: AsemanApp.globalFont.family
             color: "#333333"
             text: qsTr("Please select a contact...")
             visible: forwardDialog!=telegramObject.nullDialog? false : true
@@ -107,7 +107,7 @@ Rectangle {
                     wrapMode: Text.WordWrap
                     font.pixelSize: 18*Devices.fontDensity
                     font.weight: Font.Normal
-                    font.family: AsemanApp.globalFontFamily
+                    font.family: AsemanApp.globalFont.family
                     color: "#333333"
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: qsTr("To")
@@ -127,7 +127,7 @@ Rectangle {
                     wrapMode: Text.WordWrap
                     font.pixelSize: 11*Devices.fontDensity
                     font.weight: Font.Normal
-                    font.family: AsemanApp.globalFontFamily
+                    font.family: AsemanApp.globalFont.family
                     color: "#333333"
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: toIsChat? toChat.title : toUser.firstName + " " + toUser.lastName
