@@ -84,6 +84,7 @@ int AsemanDesktopTools::desktopSession() const
 
 QColor AsemanDesktopTools::titleBarColor() const
 {
+#ifdef DESKTOP_DEVICE
     const int dsession = desktopSession();
     switch( dsession )
     {
@@ -135,6 +136,9 @@ QColor AsemanDesktopTools::titleBarColor() const
     }
 
     return QColor("#EDEDED");
+#else
+    return QColor("#111111");
+#endif
 }
 
 QColor AsemanDesktopTools::titleBarTransparentColor() const
@@ -146,6 +150,7 @@ QColor AsemanDesktopTools::titleBarTransparentColor() const
 
 QColor AsemanDesktopTools::titleBarTextColor() const
 {
+#ifdef DESKTOP_DEVICE
     const int dsession = desktopSession();
     switch( dsession )
     {
@@ -197,6 +202,9 @@ QColor AsemanDesktopTools::titleBarTextColor() const
     }
 
     return QColor("#333333");
+#else
+    return QColor("#ffffff");
+#endif
 }
 
 bool AsemanDesktopTools::titleBarIsDark() const

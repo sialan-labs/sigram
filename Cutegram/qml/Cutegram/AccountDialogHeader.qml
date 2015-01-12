@@ -61,8 +61,8 @@ Rectangle {
         anchors.centerIn: parent
         anchors.horizontalCenter: parent.horizontalCenter
         color: currentDialog.encrypted? "#eeeeee" : "#111111"
-        font.pixelSize: (Cutegram.font.pointSize+5)*Devices.fontDensity
-        font.family: Cutegram.font.family
+        font.pixelSize: 15*Devices.fontDensity
+        font.family: AsemanApp.globalFont.family
         text: {
             if( !currentDialog )
                 return ""
@@ -78,8 +78,8 @@ Rectangle {
         anchors.horizontalCenter: title_txt.horizontalCenter
         anchors.bottomMargin: 2*Devices.density
         color: Cutegram.highlightColor
-        font.pixelSize: (Cutegram.font.pointSize-1)*Devices.fontDensity
-        font.family: Cutegram.font.family
+        font.pixelSize: 9*Devices.fontDensity
+        font.family: AsemanApp.globalFont.family
         visible: currentDialog != telegramObject.nullDialog
         text: {
             var result = ""

@@ -118,8 +118,8 @@ Item {
 
                 Text {
                     id: user_name
-                    font.pixelSize: (Cutegram.font.pointSize)*Devices.fontDensity
-                    font.family: Cutegram.font.family
+                    font.pixelSize: 10*Devices.fontDensity
+                    font.family: AsemanApp.globalFont.family
                     lineHeight: 1.3
                     color: Cutegram.highlightColor
                     text: user.firstName + " " + user.lastName

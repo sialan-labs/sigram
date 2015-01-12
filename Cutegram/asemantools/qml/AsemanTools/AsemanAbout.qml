@@ -21,7 +21,7 @@ import AsemanTools 1.0
 
 Rectangle {
     id: aseman_splash
-    color: "#111111"
+    color: Desktop.titleBarColor
 
     Image {
         id: logo
@@ -29,7 +29,7 @@ Rectangle {
         width: 200*Devices.density
         height: 142*Devices.density
         sourceSize: Qt.size(width,height)
-        source: "files/aseman-special.png"
+        source: Desktop.titleBarIsDark? "files/aseman-special.png" : "files/aseman-special-black.png"
         z: 10
     }
 
@@ -42,7 +42,7 @@ Rectangle {
         font.family: AsemanApp.globalFont.family
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         font.pixelSize: 9*Devices.fontDensity
-        color: "#ffffff"
+        color: Desktop.titleBarTextColor
         horizontalAlignment: Text.AlignHCenter
         z: 10
         text: qsTr("Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.")
@@ -55,33 +55,26 @@ Rectangle {
         anchors.right: parent.right
         anchors.leftMargin: 20*Devices.density
         anchors.rightMargin: 20*Devices.density
+        anchors.topMargin: 4*Devices.density
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         font.pixelSize: 9*Devices.fontDensity
         font.family: AsemanApp.globalFont.family
-        color: "#ffffff"
+        color: Desktop.titleBarTextColor
         horizontalAlignment: Text.AlignHCenter
         z: 10
         text: qsTr("The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.")
     }
 
-    MouseArea {
+    Button {
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: View.navigationBarHeight
+        anchors.bottomMargin: View.navigationBarHeight + 10*Devices.density
         anchors.horizontalCenter: parent.horizontalCenter
         height: 40*Devices.density
-        width: 300*Devices.density
-        z: 10
-        cursorShape: Qt.PointingHandCursor
+        width: 120*Devices.density
+        normalColor: Cutegram.highlightColor
+        highlightColor: Qt.darker(Cutegram.highlightColor)
+        textColor: masterPalette.highlightedText
+        text: qsTr("Home Page")
         onClicked: Qt.openUrlExternally("http://aseman.co")
-
-        Text {
-            anchors.centerIn: parent
-            font.pixelSize: 9*Devices.fontDensity
-            font.family: AsemanApp.globalFont.family
-            font.bold: true
-            color: "#ffffff"
-            horizontalAlignment: Text.AlignHCenter
-            text: qsTr("Home Page")
-        }
     }
 }

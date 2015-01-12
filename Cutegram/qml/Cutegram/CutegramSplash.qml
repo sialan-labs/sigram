@@ -46,4 +46,13 @@ Rectangle {
         height: 30*Devices.density
         dark: !Desktop.titleBarIsDark
     }
+
+    Text {
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.margins: 8*Devices.density
+        font: AsemanApp.globalFont
+        color: Desktop.titleBarTextColor
+        text: AsemanApp.applicationVersion
+    }
 }

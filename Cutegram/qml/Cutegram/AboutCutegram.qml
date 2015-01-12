@@ -10,6 +10,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.right: parent.right
+        spacing: 4*Devices.density
 
         Image {
             id: logo_img
@@ -56,6 +57,8 @@ Rectangle {
             text: qsTr("Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.")
         }
 
+        Item { width: 4; height: 10*Devices.density }
+
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("Home Page")
@@ -64,7 +67,7 @@ Rectangle {
             highlightColor: Qt.darker(Cutegram.highlightColor)
             textColor: masterPalette.highlightedText
             width: 120*Devices.density
-            height: 42*Devices.density
+            height: 40*Devices.density
         }
     }
 
@@ -80,6 +83,15 @@ Rectangle {
             cursorShape: Qt.PointingHandCursor
             onClicked: Qt.openUrlExternally("http://aseman.co")
         }
+    }
+
+    Text {
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.margins: 8*Devices.density
+        font: AsemanApp.globalFont
+        color: Desktop.titleBarTextColor
+        text: AsemanApp.applicationVersion
     }
 }
 
