@@ -31,7 +31,8 @@ SOURCES += main.cpp \
     telegramchatparticipantsmodel.cpp \
     telegramcontactsmodel.cpp \
     database.cpp \
-    databasecore.cpp
+    databasecore.cpp \
+    compabilitytools.cpp
 
 RESOURCES += resource.qrc
 
@@ -57,7 +58,8 @@ HEADERS += \
     telegramchatparticipantsmodel.h \
     telegramcontactsmodel.h \
     database.h \
-    databasecore.h
+    databasecore.h \
+    compabilitytools.h
 
 OTHER_FILES += \
     objects/types.sco \

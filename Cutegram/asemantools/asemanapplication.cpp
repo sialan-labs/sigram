@@ -49,9 +49,9 @@ QString AsemanApplication::homePath()
     result = QDir::homePath();
 #else
 #ifdef Q_OS_WIN
-    result = QDir::homePath() + "/AppData/Local/" + QCoreApplication::organizationDomain().toLower() + "." + QCoreApplication::applicationName().toLower();
+    result = QDir::homePath() + "/AppData/Local/" + QCoreApplication::applicationName();
 #else
-    result = QDir::homePath() + "/.config/" + QCoreApplication::organizationDomain().toLower() + "." + QCoreApplication::applicationName().toLower();
+    result = QDir::homePath() + "/.config/" + QCoreApplication::applicationName();
 #endif
 #endif
 #endif
