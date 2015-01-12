@@ -77,4 +77,11 @@ Rectangle {
         text: qsTr("Home Page")
         onClicked: Qt.openUrlExternally("http://aseman.co")
     }
+
+    Header {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        light: Desktop.titleBarIsDark
+    }
 }

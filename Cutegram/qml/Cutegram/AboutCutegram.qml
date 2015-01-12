@@ -93,5 +93,12 @@ Rectangle {
         color: Desktop.titleBarTextColor
         text: AsemanApp.applicationVersion
     }
+
+    Header {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        light: Desktop.titleBarIsDark
+    }
 }
 
