@@ -12,8 +12,8 @@ TEMPLATE = app
 QT += qml quick sql
 linux: QT += dbus
 
-LIBS += -lqtelegram -lssl -lcrypto -lz
-INCLUDEPATH += /usr/include/libqtelegram
+LIBS += -lssl -lcrypto -lz -L$$OUT_PWD/$$DESTDIR -lqtelegram
+INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
 
 SOURCES += main.cpp \
     cutegram.cpp \

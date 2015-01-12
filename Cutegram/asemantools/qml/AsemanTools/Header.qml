@@ -51,9 +51,9 @@ Item {
 
         Text {
             id: back_txt
-            font.pixelSize: 14*Devices.fontDensity
+            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: 12*Devices.fontDensity
             font.family: AsemanApp.globalFont.family
-            y: parent.height/2 - height/2 + 2*Devices.density
             color: (!back_row.press && header.light)||(back_row.press && !header.light)? "#ffffff" : "#111111"
         }
 
