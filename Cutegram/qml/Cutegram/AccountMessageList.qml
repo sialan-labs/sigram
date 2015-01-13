@@ -89,6 +89,11 @@ Rectangle {
                                    currentDialog != telegramObject.nullDialog ) messages_model.loadMore()
         clip: true
         model: messages_model
+
+        displaced: Transition {
+            NumberAnimation { properties: "y"; duration: 300; easing.type: Easing.OutCubic }
+        }
+
         header: Item{ width: 4; height: acc_msg_list.bottomMargin }
         footer: Item{ width: 4; height: acc_msg_list.topMargin }
         delegate: AccountMessageItem {
