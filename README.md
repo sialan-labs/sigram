@@ -31,9 +31,19 @@ First, you should build and install libqtelegtam.
 And:
 
     cd libqtelegram
-    chmod +x ./setup.sh
-    ./setup.sh
-    mkdir build
+    mkdir build && cd build
+
+On Ubuntu 64bit run this cmake command:
+
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu/ ..
+
+And on Ubuntu 32bit run:
+
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib/i386-linux-gnu/ ..
+    
+And then start building:
+
+    make
     sudo make install
 
 #### Get source code from git repository
