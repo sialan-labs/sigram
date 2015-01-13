@@ -2098,10 +2098,16 @@ void TelegramQml::insertUpdate(const Update &update)
 
     case Update::typeUpdateDeleteMessages:
     {
-        quint64 msgId = update.message().id();
-        MessageObject *msg = p->messages.take(msgId);
-        if( msg )
-            msg->deleteLater();
+        const QList<qint32> &messages = update.messages();
+        foreach(quint64 msgId, messages)
+        {
+            MessageObject *msg = p->messages.take(msgId);
+            if( msg )
+                msg->deleteLater();
+
+            p->database->deleteMessage(msgId);
+        }
+
         timerUpdateDialogs();
     }
         break;
