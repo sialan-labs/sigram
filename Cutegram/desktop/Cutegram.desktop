@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Network;Application;
+Comment=A telegram client by Aseman
+Exec=cutegram
+GenericName=Telegram client
+Icon=cutegram
+Name=Cutegram
+StartupNotify=true
+Type=Application
+Version=1.0.0

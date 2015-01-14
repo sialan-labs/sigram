@@ -16,7 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define LIB_PATH QCoreApplication::applicationDirPath() + "/plugins/UnitySystemTray"
+#define LIB_PATH AsemanDevices::libsPath() + "/plugins/UnitySystemTray"
+
+#include "asemantools/asemandevices.h"
 #include "unitysystemtray.h"
 
 #include <QCoreApplication>

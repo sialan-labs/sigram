@@ -43,12 +43,7 @@ contains(BUILD_MODE,opt) {
     BIN_PATH = $$PREFIX/lib/cutegram/plugins
 }
 
-android {
-} else {
-linux {
-    target = $$TARGET
-    target.path = $$BIN_PATH
+target = $$TARGET
+target.path = $$BIN_PATH
 
-    INSTALLS = target
-}
-}
+INSTALLS = target

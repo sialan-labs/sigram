@@ -432,7 +432,26 @@ QString AsemanDevices::documentsLocation()
 QString AsemanDevices::resourcePath()
 {
 #ifndef Q_OS_MAC
-    return QCoreApplication::applicationDirPath() + "/";
+    QString result = QCoreApplication::applicationDirPath() + "/../share/" + QCoreApplication::applicationName().toLower();
+    QFileInfo file(result);
+    if(file.exists() && file.isDir())
+        return file.filePath();
+    else
+        return QCoreApplication::applicationDirPath() + "/";
+#else
+    return QCoreApplication::applicationDirPath() + "/../Resources/";
+#endif
+}
+
+QString AsemanDevices::libsPath()
+{
+#ifndef Q_OS_MAC
+    QString result = QCoreApplication::applicationDirPath() + "/../lib/" + QCoreApplication::applicationName().toLower();
+    QFileInfo file(result);
+    if(file.exists() && file.isDir())
+        return file.filePath();
+    else
+        return QCoreApplication::applicationDirPath() + "/";
 #else
     return QCoreApplication::applicationDirPath() + "/../Resources/";
 #endif

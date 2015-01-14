@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-contains(EXNTESIONS,unity) {
+contains(EXTENSIONS,unity) {
     SUBDIRS += UnitySystemTray
 }

@@ -9,6 +9,7 @@ translations.target = $$DESTDIR/files
 DEPLOYMENTFOLDERS = server emojis translations
 
 TEMPLATE = app
+TARGET = cutegram
 QT += qml quick sql
 linux: QT += dbus
 
@@ -66,3 +67,38 @@ OTHER_FILES += \
     objects/templates/class.template \
     objects/templates/equals.template \
     objects/templates/initialize.template
+
+TRANSLATIONS += \
+    translations/lang-en.qm \
+    translations/lang-fa.qm
+
+isEmpty(PREFIX) {
+    PREFIX = /usr
+}
+
+contains(BUILD_MODE,opt) {
+    BIN_PATH = $$PREFIX/
+    SHARES_PATH = $$PREFIX/
+    APPDESK_PATH = /usr/
+} else {
+    BIN_PATH = $$PREFIX/bin
+    SHARES_PATH = $$PREFIX/share/cutegram/
+    APPDESK_PATH = $$PREFIX/
+}
+
+target = $$TARGET
+target.path = $$BIN_PATH
+translations.files = $$TRANSLATIONS
+translations.path = $$SHARES_PATH/files/translations
+icons.files = icons
+icons.path = $$SHARES_PATH
+pixmaps.files = icons/cutegram.png
+pixmaps.path = $$APPDESK_PATH/share/pixmaps/
+desktopFile.files = desktop/Cutegram.desktop
+desktopFile.path = $$APPDESK_PATH/share/applications
+emojis.files = emojis
+emojis.path = $$SHARES_PATH
+serverPub.files = tg-server.pub
+serverPub.path = $$SHARES_PATH/
+
+INSTALLS = target translations icons desktopFile emojis serverPub pixmaps

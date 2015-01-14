@@ -90,10 +90,6 @@ Rectangle {
         clip: true
         model: messages_model
 
-        displaced: Transition {
-            NumberAnimation { properties: "y"; duration: 300; easing.type: Easing.OutCubic }
-        }
-
         header: Item{ width: 4; height: acc_msg_list.bottomMargin }
         footer: Item{ width: 4; height: acc_msg_list.topMargin }
         delegate: AccountMessageItem {

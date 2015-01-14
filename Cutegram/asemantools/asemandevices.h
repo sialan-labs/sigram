@@ -69,6 +69,7 @@ class AsemanDevices : public QObject
     Q_PROPERTY(QString musicsLocation    READ musicsLocation    NOTIFY musicsLocationChanged    )
     Q_PROPERTY(QString documentsLocation READ documentsLocation NOTIFY documentsLocationChanged )
     Q_PROPERTY(QString resourcePath      READ resourcePath      NOTIFY resourcePathChanged      )
+    Q_PROPERTY(QString libsPath          READ libsPath          NOTIFY libsPathChanged          )
 
 public:
     AsemanDevices(QObject *parent = 0);
@@ -115,6 +116,7 @@ public:
     static QString musicsLocation();
     static QString documentsLocation();
     static QString resourcePath();
+    static QString libsPath();
 
 public slots:
     void hideKeyboard();
@@ -174,6 +176,7 @@ signals:
     void musicsLocationChanged();
     void documentsLocationChanged();
     void resourcePathChanged();
+    void libsPathChanged();
 
 private slots:
     void incoming_share( const QString & title, const QString & msg );
