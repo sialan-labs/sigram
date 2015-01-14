@@ -68,7 +68,7 @@ Item {
                     userName = user.firstName + " " + user.lastName
                     userName = userName.trim()
 
-                    res = qsTr("%1 invited someone to group").arg(userName)
+                    res = qsTr("%1 invited to group").arg(userName)
                 }
                     break
 
