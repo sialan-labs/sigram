@@ -1830,7 +1830,7 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
             {
                 QFileInfo finfo(obj->fileName());
                 if(!finfo.suffix().isEmpty())
-                    sfx.clear();
+                    sfx = finfo.suffix();
             }
 
             if(!sfx.isEmpty())
