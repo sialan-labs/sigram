@@ -199,7 +199,7 @@ public slots:
     void messagesAcceptEncryptedChat(qint32 chatId);
     void messagesDiscardEncryptedChat(qint32 chatId);
 
-    bool sendFile( qint64 dialogId, const QString & file );
+    bool sendFile(qint64 dialogId, const QString & file , bool forceDocument = false);
     void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
     void getFileJustCheck(FileLocationObject *location);
     void cancelSendGet( qint64 fileId );

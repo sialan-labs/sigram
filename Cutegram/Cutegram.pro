@@ -92,6 +92,8 @@ translations.files = $$TRANSLATIONS
 translations.path = $$SHARES_PATH/files/translations
 icons.files = icons
 icons.path = $$SHARES_PATH
+hicolor.files = icons
+hicolor.path = $$APPDESK_PATH/share
 pixmaps.files = icons/cutegram.png
 pixmaps.path = $$APPDESK_PATH/share/pixmaps/
 desktopFile.files = desktop/Cutegram.desktop
@@ -101,4 +103,4 @@ emojis.path = $$SHARES_PATH
 serverPub.files = tg-server.pub
 serverPub.path = $$SHARES_PATH/
 
-INSTALLS = target translations icons desktopFile emojis serverPub pixmaps
+INSTALLS = target translations icons desktopFile emojis serverPub pixmaps hicolor

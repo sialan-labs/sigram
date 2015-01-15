@@ -17,6 +17,9 @@ Item {
     property alias color: back.color
     property real visibleRatio: containsDrag? 1 : 0
 
+    property bool normalDrop: drop_area.drag.y<drop_doc_rect.y
+    property bool forwardDrop: false
+
     signal dropped()
 
     Behavior on visibleRatio {
@@ -29,21 +32,61 @@ Item {
         color: "#66ffffff"
         opacity: visibleRatio
 
+        Behavior on color {
+            ColorAnimation{easing.type: Easing.OutCubic; duration: 400}
+        }
+
         Rectangle {
-            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: forwardDrop? parent.bottom : drop_doc_rect.top
             anchors.margins: 6*Devices.density
             border.color: Cutegram.highlightColor
             border.width: 2*Devices.density
             radius: 3*Devices.density
             color: "#00000000"
+            opacity: normalDrop? 1.0 : 0.4
+
+            Behavior on opacity {
+                NumberAnimation{easing.type: Easing.OutCubic; duration: 400}
+            }
+
+            Text {
+                id: drop_text
+                anchors.centerIn: parent
+                font.family: AsemanApp.globalFont.family
+                font.pixelSize: 12*Devices.fontDensity
+                color: Cutegram.highlightColor
+            }
         }
 
-        Text {
-            id: drop_text
-            anchors.centerIn: parent
-            font.family: AsemanApp.globalFont.family
-            font.pixelSize: 12*Devices.fontDensity
-            color: Cutegram.highlightColor
+        Rectangle {
+            id: drop_doc_rect
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: 6*Devices.density
+            height: am_dropfile.height<100*Devices.density? 0 : 100*Devices.density
+            border.color: Cutegram.highlightColor
+            border.width: 2*Devices.density
+            radius: 3*Devices.density
+            color: "#00000000"
+            opacity: normalDrop? 0.4 : 1.0
+            visible: !forwardDrop
+            clip: true
+
+            Behavior on opacity {
+                NumberAnimation{easing.type: Easing.OutCubic; duration: 400}
+            }
+
+            Text {
+                anchors.centerIn: parent
+                font.family: AsemanApp.globalFont.family
+                font.pixelSize: 12*Devices.fontDensity
+                color: Cutegram.highlightColor
+                text: qsTr("Drop to send as Document")
+            }
         }
     }
 
@@ -53,6 +96,7 @@ Item {
         onEntered: {
             if( drag.formats.indexOf("land.aseman.cutegram/messageId") != -1)
             {
+                forwardDrop = true
                 if(currentDialog == dialogItem)
                     drop_text.text = qsTr("<<< Drop to dialogs list to forward")
                 else
@@ -60,7 +104,8 @@ Item {
             }
             else
             {
-                drop_text.text = qsTr("Drop files to send")
+                forwardDrop = false
+                drop_text.text = qsTr("Drop to send")
             }
         }
 
@@ -81,7 +126,7 @@ Item {
             if( drop.hasUrls ) {
                 var urls = drop.urls
                 for( var i=0; i<urls.length; i++ )
-                    telegramObject.sendFile(dId, urls[i])
+                    telegramObject.sendFile(dId, urls[i], !normalDrop)
 
                 am_dropfile.dropped()
             }

@@ -113,12 +113,12 @@ Item {
             Column {
                 id: column
                 anchors.centerIn: parent
-                height: (visibleNames?user_name.height:0) + (uploading?upload_img.height:0) + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_row.height - 10*Devices.density
+                height: (visibleNames?user_name.height:0) + (uploading?upload_img.height:0) + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_column.height
                 clip: true
 
                 Text {
                     id: user_name
-                    font.pixelSize: 10*Devices.fontDensity
+                    font.pixelSize: 11*Devices.fontDensity
                     font.family: AsemanApp.globalFont.family
                     lineHeight: 1.3
                     color: Cutegram.highlightColor
@@ -129,10 +129,11 @@ Item {
                 Image {
                     id: upload_img
                     visible: uploading
-                    width: height*imageSize.width/imageSize.height
+                    width: height
                     height: 200*Devices.density
                     sourceSize: Qt.size(width,height)
                     smooth: true
+                    fillMode: Image.PreserveAspectCrop
                     source: uploading? "file://" + message.upload.location : ""
 
                     property size imageSize: uploading? Cutegram.imageSize(message.upload.location) : Qt.size(0,0)
@@ -144,80 +145,93 @@ Item {
                     visible: msg_media.hasMedia && !uploading
                 }
 
-                Row {
-                    id: msg_row
+                Column {
+                    id: msg_column
 
-                    Text {
-                        id: msg_txt
-                        width: htmlWidth>maximumWidth? maximumWidth : htmlWidth
-                        font.pixelSize: (Cutegram.font.pointSize-1)*Devices.fontDensity
-                        font.family: Cutegram.font.family
-                        lineHeight: 1.3
-                        color: encryptMedia? "#ffffff" : textColor0
-                        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                        text: emojis.bodyTextToEmojiText(messageText)
-                        onLinkActivated: Qt.openUrlExternally(link)
+                    Item {
+                        id: msg_txt_frame
+                        width: msg_txt.width + 8*Devices.density
+                        height: msg_txt.height + 8*Devices.density
                         visible: !msg_media.hasMedia && !uploading
 
-                        property real htmlWidth: Cutegram.htmlWidth(text)
-                        property string messageText: encryptMedia? qsTr("Media files is not supported on secret chat currently") : message.message
+                        TextEdit {
+                            id: msg_txt
+                            width: htmlWidth>maximumWidth? maximumWidth : htmlWidth
+                            anchors.centerIn: parent
+                            font.pixelSize: Cutegram.font.pointSize*Devices.fontDensity
+                            font.family: Cutegram.font.family
+                            persistentSelection: true
+                            selectByMouse: true
+                            readOnly: true
+                            selectionColor: masterPalette.highlight
+                            selectedTextColor: masterPalette.highlightedText
+                            color: encryptMedia? "#ffffff" : textColor0
+                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                            text: emojis.bodyTextToEmojiText(messageText)
+                            textFormat: Text.RichText
+                            height: contentHeight
+                            onLinkActivated: Qt.openUrlExternally(link)
+
+                            property real htmlWidth: Cutegram.htmlWidth(text)
+                            property string messageText: encryptMedia? qsTr("Media files is not supported on secret chat currently") : message.message
+                        }
                     }
 
-                    Text {
-                        id: time_txt
-                        anchors.bottom: parent.bottom
-                        anchors.margins: 18*Devices.density
-                        font.family: AsemanApp.globalFont.family
-                        font.pixelSize: 9*Devices.fontDensity
-                        color: textColor2
-                        text: Cutegram.getTimeString(msgDate)
+                    Row {
+                        anchors.right: parent.right
+                        spacing: 4*Devices.density
 
-                        property variant msgDate: CalendarConv.fromTime_t(message.date)
+                        Text {
+                            id: time_txt
+                            font.family: AsemanApp.globalFont.family
+                            font.pixelSize: 9*Devices.fontDensity
+                            color: textColor2
+                            text: Cutegram.getTimeString(msgDate)
+                            verticalAlignment: Text.AlignVCenter
+
+                            property variant msgDate: CalendarConv.fromTime_t(message.date)
+                        }
+
+                        Item {
+                            id: state_indict
+                            width: 12*Devices.density
+                            height: 8*Devices.density
+                            visible: message.out
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            Image {
+                                id: seen_indict
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                width: 8*Devices.density
+                                height: width
+                                visible: !message.unread && message.out
+                                source: hasMedia || encryptMedia? "files/sent-light.png" : "files/sent.png"
+                                sourceSize: Qt.size(width,height)
+                            }
+
+                            Image {
+                                id: sent_indict
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.right: parent.right
+                                width: 8*Devices.density
+                                height: width
+                                visible: message.sent && message.out
+                                source: hasMedia || encryptMedia? "files/sent-light.png" : "files/sent.png"
+                                sourceSize: Qt.size(width,height)
+                            }
+
+                            Indicator {
+                                id: indicator
+                                anchors.centerIn: parent
+                                light: false
+                                modern: true
+                                indicatorSize: 10*Devices.density
+                                Component.onCompleted: if(!sent) start()
+                            }
+                        }
                     }
                 }
-            }
-
-            Item {
-                id: state_indict
-                width: 12
-                height: 8
-                anchors.right: back_rect.right
-                anchors.bottom: back_rect.bottom
-                anchors.margins: 2*Devices.density
-                visible: message.out
-
-                Image {
-                    id: seen_indict
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.left
-                    width: 8
-                    height: width
-                    visible: !message.unread && message.out
-                    source: hasMedia || encryptMedia? "files/sent-light.png" : "files/sent.png"
-                    sourceSize: Qt.size(width,height)
-                }
-
-                Image {
-                    id: sent_indict
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.right: parent.right
-                    width: 8
-                    height: width
-                    visible: message.sent && message.out
-                    source: hasMedia || encryptMedia? "files/sent-light.png" : "files/sent.png"
-                    sourceSize: Qt.size(width,height)
-                }
-            }
-
-            Indicator {
-                id: indicator
-                anchors.right: back_rect.right
-                anchors.bottom: back_rect.bottom
-                anchors.margins: 2*Devices.density
-                light: false
-                modern: true
-                indicatorSize: 10*Devices.density
-                Component.onCompleted: if(!sent) start()
             }
         }
     }

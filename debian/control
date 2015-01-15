@@ -1,0 +1,34 @@
+Source: cutegram
+Section: text
+Priority: optional
+Maintainer: Aseman Team <contact@aseman.co>
+Build-Depends:
+ debhelper (>= 8.0.0),
+ g++ (>= 4:4.7),
+ gcc (>= 4:4.7),
+ qtbase5-dev (>= 5.2.0),
+ libqt5sql5-sqlite (>= 5.2.0),
+ libqt5multimediaquick-p5 (>= 5.2.0),
+ libqt5multimedia5-plugins (>= 5.2.0),
+ libqt5multimedia5 (>= 5.2.0),
+ qtchooser,
+ qt5-qmake,
+ qt5-default,
+ libqt5qml5 (>= 5.2.0),
+ libqt5qml-graphicaleffects (>= 5.2.0),
+ libqt5qml-quickcontrols (>= 5.2.0),
+ qtdeclarative5-dev (>= 5.2.0),
+ libqt5quick5 (>= 5.2.0),
+ qtmultimedia5-dev (>= 5.2.0),
+ libappindicator-dev,
+ libssl-dev,
+ libqtelegram-dev
+Standards-Version: 3.9.5
+Homepage: http://aseman.co/cutegram
+Vcs-Git: https://github.com/Aseman-Land/Cutegram
+
+Package: cutegram
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5qml-quickcontrols (>= 5.2.0), libqt5qml-graphicaleffects (>= 5.2.0), libqt5multimedia5 (>= 5.2.0), libqt5multimedia5-plugins (>= 5.2.0), libqt5multimediaquick-p5 (>= 5.2.0), libqt5sql5-sqlite (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), qtdeclarative5-qtsensors-plugin (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), dconf-tools
+Description: Cutegram telegram client
+ Better telegram client from Aseman Team.

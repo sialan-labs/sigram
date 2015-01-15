@@ -87,7 +87,11 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
     while (!skipLinks && (pos = links_rxp.indexIn(res, pos)) != -1)
     {
         QString link = links_rxp.cap(1);
-        QString atag = QString("<a href='%1'>%2</a>").arg(link,link);
+        QString href = link;
+        if(href.left(7) != "html://")
+            href = "http://" + href;
+
+        QString atag = QString("<a href='%1'>%2</a>").arg(href,link);
         res.replace( pos, link.length(), atag );
         pos += atag.size();
     }
@@ -101,15 +105,12 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
                 continue;
 
             QString path = p->emojis.value(emoji);
-            QString in_txt = QString("<img align=\"top\" height=\"%2\" width=\"%3\" src=\"file://%1\" />").arg(path).arg(size).arg(size);
+            QString in_txt = QString(" <img align=absmiddle height=\"%2\" width=\"%3\" src=\"file://%1\" /> ").arg(path).arg(size).arg(size);
             res.replace(i,j,in_txt);
             i += in_txt.size()-1;
             break;
         }
     }
-
-    if( res.contains("<img") )
-        res = "<font size=\"1\">.</font>" + res;
 
 
     res = res.replace("\n","<br />");
@@ -122,7 +123,7 @@ QString Emojis::bodyTextToEmojiText(const QString &txt)
     Qt::LayoutDirection dir = AsemanTools::directionOf(txt);
 
     QString dir_txt = dir==Qt::LeftToRight? "ltr" : "rtl";
-    res = QString("<html><body><p dir='%1'>").arg(dir_txt) + textToEmojiText(txt) + "</p>";
+    res = QString("<html><body><p dir='%1'>").arg(dir_txt) + textToEmojiText(txt, 18) + "</p></body></html>";
     return res;
 }
 
