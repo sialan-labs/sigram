@@ -54,7 +54,7 @@ If you want get source from git repository you should install git on your system
 
 After git installed, get code with this command:
 
-    git clone https://github.com/aseman-labs/cutegram.git
+    git clone https://github.com/Aseman-Land/Cutegram.git
 
 #### Start building
 
@@ -82,5 +82,5 @@ You can use command below after building to clean build directory on the each st
 ##### Fedora
 
     mkdir build && cd build
-    /bin/qmake-qt5 -o Makefile ../AsemanTelegram.pro
+    /bin/qmake-qt5 -o Makefile ..
     make
