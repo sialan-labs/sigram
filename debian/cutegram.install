@@ -1,0 +1,5 @@
+debian/tmp/usr/bin
+debian/tmp/usr/lib
+debian/tmp/usr/share/applications
+debian/tmp/usr/share/icons
+debian/tmp/usr/share/pixmaps

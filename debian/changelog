@@ -1,3 +1,21 @@
+cutegram (1.0.1utopic-aseman1) utopic; urgency=medium
+
+  * Utopic build
+
+ -- Aseman Team <contact@aseman.co>  Thu, 15 Jan 2015 18:03:45 +0330
+ 
+cutegram (1.0.1aseman3) trusty; urgency=medium
+
+  * Split package to data and binary package.
+
+ -- Aseman Team <contact@aseman.co>  Thu, 15 Jan 2015 18:03:45 +0330
+ 
+cutegram (1.0.1aseman2) trusty; urgency=medium
+
+  * Split package to data and binary package.
+
+ -- Aseman Team <contact@aseman.co>  Thu, 15 Jan 2015 18:03:45 +0330
+ 
 cutegram (1.0.1aseman1) trusty; urgency=medium
 
   * Initial Release.
