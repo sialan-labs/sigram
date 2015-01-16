@@ -14,11 +14,25 @@ Rectangle {
     property color framesColor: "#aaffffff"
     property alias currentDialog: dialogs.currentDialog
 
+    LineEdit {
+        id: search_frame
+        anchors.left: dialogs.left
+        anchors.top: parent.top
+        anchors.right: dialogs.right
+        anchors.margins: 8*Devices.density
+        height: 40*Devices.density
+        color: "#333333"
+        textColor: "#ffffff"
+        placeholder: qsTr("Search")
+        pickerEnable: Devices.isTouchDevice
+    }
+
     AccountDialogList {
         id: dialogs
         anchors.left: parent.left
-        anchors.top: parent.top
+        anchors.top: search_frame.bottom
         anchors.bottom: parent.bottom
+        anchors.topMargin: 4*Devices.density
         clip: true
     }
 
