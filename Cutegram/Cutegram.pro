@@ -13,7 +13,7 @@ TARGET = cutegram
 QT += qml quick sql
 linux: QT += dbus
 
-LIBS += -lssl -lcrypto -lz -lqtelegram.so.1
+LIBS += -lssl -lcrypto -lz -lqtelegram
 INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
 
 SOURCES += main.cpp \
