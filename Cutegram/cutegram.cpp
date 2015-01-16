@@ -64,6 +64,7 @@ public:
     bool minimumDialogs;
     bool showLastMessage;
     bool darkSystemTray;
+    bool closingState;
 
     QTextDocument *doc;
 
@@ -96,6 +97,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->sysTray = 0;
     p->unityTray = 0;
     p->sysTrayCounter = 0;
+    p->closingState = false;
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
@@ -240,6 +242,9 @@ void Cutegram::close()
 
 void Cutegram::quit()
 {
+    p->closingState = true;
+    emit closingStateChanged();
+
     QGuiApplication::quit();
 }
 
@@ -410,8 +415,7 @@ void Cutegram::showContextMenu()
     else
     if( res_act == exit_act )
     {
-        p->viewer->close();
-        QGuiApplication::quit();
+        quit();
     }
 }
 
@@ -467,6 +471,11 @@ void Cutegram::setLanguage(const QString &lang)
 QString Cutegram::language() const
 {
     return p->language;
+}
+
+bool Cutegram::closingState() const
+{
+    return p->closingState;
 }
 
 void Cutegram::setStartupOption(int opt)

@@ -47,6 +47,8 @@ class Cutegram : public QObject
     Q_PROPERTY(bool showLastMessage READ showLastMessage WRITE setShowLastMessage NOTIFY showLastMessageChanged)
     Q_PROPERTY(bool darkSystemTray  READ darkSystemTray  WRITE setDarkSystemTray  NOTIFY darkSystemTrayChanged )
 
+    Q_PROPERTY(bool closingState READ closingState NOTIFY closingStateChanged)
+
 public:
     enum StartupOptions {
         StartupAutomatic = 0,
@@ -74,6 +76,8 @@ public:
 
     void setLanguage( const QString & lang );
     QString language() const;
+
+    bool closingState() const;
 
     void setStartupOption( int opt );
     int startupOption() const;
@@ -132,6 +136,7 @@ signals:
     void highlightColorChanged();
     void darkSystemTrayChanged();
     void fontChanged();
+    void closingStateChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

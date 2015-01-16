@@ -38,6 +38,12 @@ AsemanMain {
         AsemanApp.back()
     }
 
+    Keys.onPressed: {
+        if(event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier) {
+            Cutegram.quit()
+        }
+    }
+
     Connections {
         target: Cutegram
         onBackRequest: AsemanApp.back()
@@ -56,6 +62,9 @@ AsemanMain {
     Connections {
         target: View
         onActiveChanged: {
+            if(Cutegram.closingState)
+                return
+
             AsemanApp.setSetting("General/lastWindowState", View.active)
         }
     }
