@@ -161,6 +161,7 @@ Item {
                             font.pixelSize: Cutegram.font.pointSize*Devices.fontDensity
                             font.family: Cutegram.font.family
                             persistentSelection: true
+                            activeFocusOnPress: false
                             selectByMouse: true
                             readOnly: true
                             selectionColor: masterPalette.highlight
