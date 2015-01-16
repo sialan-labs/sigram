@@ -147,7 +147,7 @@ Rectangle {
                             break;
 
                         case 1:
-                            Devices.clipboard = message.message
+                            msg_item.copy()
                             break;
 
                         case 2:

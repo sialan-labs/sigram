@@ -239,4 +239,8 @@ Item {
     function click() {
         msg_media.click()
     }
+
+    function copy() {
+        msg_txt.copy()
+    }
 }
