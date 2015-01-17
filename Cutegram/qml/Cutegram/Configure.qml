@@ -235,8 +235,8 @@ Rectangle {
 
                         QtControls.CheckBox {
                             id: aseman_nl_checkbox
-                            checked: Cutegram.asemanSubscribe
-                            onCheckedChanged: Cutegram.asemanSubscribe = checked
+                            checked: Cutegram.cutegramSubscribe
+                            onCheckedChanged: Cutegram.cutegramSubscribe = checked
                         }
 
                         QtControls.ComboBox {

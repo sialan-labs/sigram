@@ -66,7 +66,7 @@ public:
     bool showLastMessage;
     bool darkSystemTray;
     bool closingState;
-    bool asemanSubscribe;
+    bool cutegramSubscribe;
 
     QTextDocument *doc;
 
@@ -104,7 +104,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
-    p->asemanSubscribe = AsemanApplication::settings()->value("General/asemanSubscribe", false ).toBool();
+    p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
@@ -635,18 +635,18 @@ QFont Cutegram::font() const
 
 void Cutegram::setAsemanSubscribe(bool stt)
 {
-    if(p->asemanSubscribe == stt)
+    if(p->cutegramSubscribe == stt)
         return;
 
-    p->asemanSubscribe = stt;
-    AsemanApplication::settings()->setValue("General/asemanSubscribe", stt);
+    p->cutegramSubscribe = stt;
+    AsemanApplication::settings()->setValue("General/cutegramSubscribe", stt);
 
-    emit asemanSubscribeChanged();
+    emit cutegramSubscribeChanged();
 }
 
-bool Cutegram::asemanSubscribe() const
+bool Cutegram::cutegramSubscribe() const
 {
-    return p->asemanSubscribe;
+    return p->cutegramSubscribe;
 }
 
 QColor Cutegram::highlightColor() const

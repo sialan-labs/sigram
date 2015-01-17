@@ -17,12 +17,12 @@ Rectangle {
     property bool cutegramDialog: telegramObject.cutegramDialog
 
     Component.onCompleted: {
-        telegramObject.cutegramDialog = Cutegram.asemanSubscribe
+        telegramObject.cutegramDialog = Cutegram.cutegramSubscribe
     }
 
     Connections {
         target: telegramObject
-        onCutegramDialogChanged: Cutegram.asemanSubscribe = telegramObject.cutegramDialog
+        onCutegramDialogChanged: Cutegram.cutegramSubscribe = telegramObject.cutegramDialog
     }
 
     AccountDialogList {
