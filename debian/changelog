@@ -1,3 +1,23 @@
+cutegram (1.0.2aseman1-utopic) utopic; urgency=medium
+
+  * Close using Ctrl+Q
+  * Add Cutegram newsletter to notify updates
+  * Links click bugfix
+  * Copy action bugfix
+  * Add contact form to contact with Cutegram Team
+
+ -- Aseman Team <contact@aseman.co>  Sat, 17 Jan 2015 20:34:00 +0330
+ 
+cutegram (1.0.2aseman1-trusty) trusty; urgency=medium
+
+  * Close using Ctrl+Q
+  * Add Cutegram newsletter to notify updates
+  * Links click bugfix
+  * Copy action bugfix
+  * Add contact form to contact with Cutegram Team
+
+ -- Aseman Team <contact@aseman.co>  Sat, 17 Jan 2015 20:30:00 +0330
+ 
 cutegram (1.0.1utopic-aseman1) utopic; urgency=medium
 
   * Utopic build
