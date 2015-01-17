@@ -80,7 +80,7 @@ Rectangle {
         color: Cutegram.highlightColor
         font.pixelSize: 9*Devices.fontDensity
         font.family: AsemanApp.globalFont.family
-        visible: currentDialog != telegramObject.nullDialog
+        visible: currentDialog != telegramObject.nullDialog && user.id != telegramObject.cutegramId
         text: {
             var result = ""
             var list = currentDialog.typingUsers

@@ -14,6 +14,17 @@ Rectangle {
     property color framesColor: "#aaffffff"
     property alias currentDialog: dialogs.currentDialog
 
+    property bool cutegramDialog: telegramObject.cutegramDialog
+
+    Component.onCompleted: {
+        telegramObject.cutegramDialog = Cutegram.asemanSubscribe
+    }
+
+    Connections {
+        target: telegramObject
+        onCutegramDialogChanged: Cutegram.asemanSubscribe = telegramObject.cutegramDialog
+    }
+
     AccountDialogList {
         id: dialogs
         anchors.left: parent.left

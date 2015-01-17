@@ -144,6 +144,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: aseman_nl_text
+                            height: aseman_nl_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: AsemanApp.globalFont.family
+                            font.pixelSize: 9*Devices.fontDensity
+                            color: "#333333"
+                            text: qsTr("Cutegram Newsletter")
+                        }
+
+                        Text {
                             id: startup_text
                             height: startup_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -221,6 +231,12 @@ Rectangle {
                             id: notify_checkbox
                             checked: Cutegram.notification
                             onCheckedChanged: Cutegram.notification = checked
+                        }
+
+                        QtControls.CheckBox {
+                            id: aseman_nl_checkbox
+                            checked: Cutegram.asemanSubscribe
+                            onCheckedChanged: Cutegram.asemanSubscribe = checked
                         }
 
                         QtControls.ComboBox {

@@ -70,6 +70,8 @@ class TelegramQml : public QObject
     Q_PROPERTY(QString publicKeyFile READ publicKeyFile WRITE setPublicKeyFile NOTIFY publicKeyFileChanged)
     Q_PROPERTY(QString downloadPath  READ downloadPath  NOTIFY downloadPathChanged )
 
+    Q_PROPERTY(bool cutegramDialog READ cutegramDialog WRITE setCutegramDialog NOTIFY cutegramDialogChanged)
+
     Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
     Q_PROPERTY(int unreadCount READ unreadCount NOTIFY unreadCountChanged)
 
@@ -78,6 +80,7 @@ class TelegramQml : public QObject
     Q_PROPERTY(Telegram* telegram READ telegram NOTIFY telegramChanged)
     Q_PROPERTY(UserData* userData READ userData NOTIFY userDataChanged)
     Q_PROPERTY(qint64    me       READ me       NOTIFY meChanged)
+    Q_PROPERTY(qint64    cutegramId READ cutegramId NOTIFY fakeSignal)
 
     Q_PROPERTY(bool authNeeded          READ authNeeded          NOTIFY authNeededChanged         )
     Q_PROPERTY(bool authLoggedIn        READ authLoggedIn        NOTIFY authLoggedInChanged       )
@@ -117,10 +120,14 @@ public:
     QString publicKeyFile() const;
     void setPublicKeyFile( const QString & file );
 
+    void setCutegramDialog(bool stt);
+    bool cutegramDialog() const;
+
     UserData *userData() const;
     Database *database() const;
     Telegram *telegram() const;
     qint64 me() const;
+    qint64 cutegramId() const;
 
     bool online() const;
     void setOnline( bool stt );
@@ -193,6 +200,7 @@ public slots:
     void forwardMessage( qint64 msgId, qint64 peerId );
     void deleteMessage( qint64 msgId );
 
+    void deleteCutegramDialog();
     void messagesCreateChat( const QList<qint32> & users, const QString & topic );
 
     void messagesCreateEncryptedChat(qint64 userId);
@@ -225,6 +233,7 @@ signals:
     void autoUpdateChanged();
     void encryptedChatsChanged();
     void uploadingProfilePhotoChanged();
+    void cutegramDialogChanged();
 
     void unreadCountChanged();
     void invisibleChanged();
@@ -304,6 +313,8 @@ private slots:
     void uploadGetFile_slt(qint64 id, const StorageFileType & type, qint32 mtime, const QByteArray & bytes, qint32 partId, qint32 downloaded, qint32 total);
     void uploadSendFile_slt(qint64 fileId, qint32 partId, qint32 uploaded, qint32 totalSize);
     void uploadCancelFile_slt(qint64 fileId, bool cancelled);
+
+    void incomingAsemanMessage(const Message &msg, const Dialog &dialog);
 
 private:
     void insertDialog(const Dialog & dialog , bool encrypted = false, bool fromDb = false);

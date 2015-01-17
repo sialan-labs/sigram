@@ -332,6 +332,10 @@ void DatabaseCore::readDialogs()
         DbDialog ddlg;
         ddlg.dialog = dialog;
 
+        DbPeer dpeer;
+        dpeer.peer = peer;
+
+        readMessages(dpeer, 0, 1);
         emit dialogFounded(ddlg, record.value("encrypted").toBool());
     }
 }

@@ -52,6 +52,7 @@
 #include <QAction>
 #include <QPainter>
 #include <QPainterPath>
+#include <QDesktopServices>
 
 class CutegramPrivate
 {
@@ -65,6 +66,7 @@ public:
     bool showLastMessage;
     bool darkSystemTray;
     bool closingState;
+    bool asemanSubscribe;
 
     QTextDocument *doc;
 
@@ -102,6 +104,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
+    p->asemanSubscribe = AsemanApplication::settings()->value("General/asemanSubscribe", false ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
@@ -248,6 +251,11 @@ void Cutegram::quit()
     QGuiApplication::quit();
 }
 
+void Cutegram::contact()
+{
+    QDesktopServices::openUrl(QUrl("http://aseman.co/en/contact-us/cutegram/"));
+}
+
 void Cutegram::aboutAseman()
 {
     emit aboutAsemanRequest();
@@ -366,6 +374,7 @@ void Cutegram::init_systray()
 
         p->unityTray->addMenu( tr("Show"), this, "active" );
         p->unityTray->addMenu( tr("Configure"), this, "configure" );
+        p->unityTray->addMenu( tr("Contact"), this, "contact" );
         p->unityTray->addMenu( tr("About"), this, "about" );
         p->unityTray->addMenu( tr("About Aseman"), this, "aboutAseman" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
@@ -387,6 +396,8 @@ void Cutegram::showContextMenu()
     QAction *show_act = menu.addAction( tr("Show") );
     menu.addSeparator();
     QAction *conf_act = menu.addAction( tr("Configure") );
+    QAction *cnct_act = menu.addAction( tr("Contact") );
+    menu.addSeparator();
     QAction *abut_act = menu.addAction( tr("About") );
     QAction *sabt_act = menu.addAction( tr("About Aseman") );
     menu.addSeparator();
@@ -401,6 +412,11 @@ void Cutegram::showContextMenu()
     if( res_act == conf_act )
     {
         configure();
+    }
+    else
+    if( res_act == cnct_act )
+    {
+        contact();
     }
     else
     if( res_act == abut_act )
@@ -615,6 +631,22 @@ void Cutegram::setFont(const QFont &font)
 QFont Cutegram::font() const
 {
     return p->font;
+}
+
+void Cutegram::setAsemanSubscribe(bool stt)
+{
+    if(p->asemanSubscribe == stt)
+        return;
+
+    p->asemanSubscribe = stt;
+    AsemanApplication::settings()->setValue("General/asemanSubscribe", stt);
+
+    emit asemanSubscribeChanged();
+}
+
+bool Cutegram::asemanSubscribe() const
+{
+    return p->asemanSubscribe;
 }
 
 QColor Cutegram::highlightColor() const

@@ -28,6 +28,7 @@
 #include "asemanimagecoloranalizor.h"
 #include "asemanmimedata.h"
 #include "asemandragobject.h"
+#include "asemandownloader.h"
 #include "asemanbackhandler.h"
 #include "asemancountriesmodel.h"
 #ifdef Q_OS_ANDROID
@@ -111,6 +112,7 @@ AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
     qmlRegisterType<AsemanDragObject>("AsemanTools", 1, 0, "DragObject");
     qmlRegisterType<AsemanHashObject>("AsemanTools", 1,0, "HashObject");
     qmlRegisterType<AsemanListObject>("AsemanTools", 1,0, "ListObject");
+    qmlRegisterType<AsemanDownloader>("AsemanTools", 1,0, "Downloader");
     qmlRegisterType<AsemanImageColorAnalizor>("AsemanTools", 1,0, "ImageColorAnalizor");
     qmlRegisterType<AsemanCountriesModel>("AsemanTools", 1,0, "CountriesModel");
 #ifdef DESKTOP_LINUX

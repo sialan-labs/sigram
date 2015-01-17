@@ -6,6 +6,7 @@
 #include "asemantools.h"
 #include "asemanapplication.h"
 #include "asemanhashobject.h"
+#include "asemandownloader.h"
 #include "asemanlistobject.h"
 #include "asemancalendarconverter.h"
 #include "asemanimagecoloranalizor.h"
@@ -57,16 +58,17 @@ void AsemanToolsPlugin::registerTypes(const char *uri)
     qmlRegisterType<AsemanDragObject>(uri, 1, 0, "DragObject");
     qmlRegisterType<AsemanListObject>(uri, 1, 0, "ListObject");
     qmlRegisterType<AsemanHashObject>(uri, 1, 0, "HashObject");
+    qmlRegisterType<AsemanDownloader>(uri, 1,0, "Downloader");
     qmlRegisterType<AsemanImageColorAnalizor>(uri, 1,0, "ImageColorAnalizor");
     qmlRegisterType<AsemanCountriesModel>(uri, 1,0, "CountriesModel");
 #ifdef DESKTOP_LINUX
-    qmlRegisterType<AsemanMimeApps>("AsemanTools", 1,0, "MimeApps");
+    qmlRegisterType<AsemanMimeApps>(uri, 1,0, "MimeApps");
 #endif
 #ifdef ASEMAN_SENSORS
-    qmlRegisterType<AsemanSensors>("AsemanTools", 1,0, "AsemanSensors");
+    qmlRegisterType<AsemanSensors>(uri, 1,0, "AsemanSensors");
 #endif
 #ifdef ASEMAN_NOTIFICATION
-    qmlRegisterType<AsemanNotification>("AsemanTools", 1,0, "Notification");
+    qmlRegisterType<AsemanNotification>(uri, 1,0, "Notification");
 #endif
 
     qmlRegisterSingletonType<AsemanDevices>(uri, 1, 0, "Devices", aseman_devices_singleton);

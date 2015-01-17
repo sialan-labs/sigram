@@ -56,6 +56,8 @@ Item {
         anchors.fill: parent
         sourceSize: Qt.size(width,height)
         source: {
+            if(user.id == telegram.cutegramId)
+                return "files/icon-normal.png"
             if(imgPath.length==0 && isChat)
                 return "files/group.png"
             else

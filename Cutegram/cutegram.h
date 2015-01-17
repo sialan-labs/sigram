@@ -46,6 +46,7 @@ class Cutegram : public QObject
     Q_PROPERTY(bool minimumDialogs  READ minimumDialogs  WRITE setMinimumDialogs  NOTIFY minimumDialogsChanged )
     Q_PROPERTY(bool showLastMessage READ showLastMessage WRITE setShowLastMessage NOTIFY showLastMessageChanged)
     Q_PROPERTY(bool darkSystemTray  READ darkSystemTray  WRITE setDarkSystemTray  NOTIFY darkSystemTrayChanged )
+    Q_PROPERTY(bool asemanSubscribe READ asemanSubscribe WRITE setAsemanSubscribe NOTIFY asemanSubscribeChanged)
 
     Q_PROPERTY(bool closingState READ closingState NOTIFY closingStateChanged)
 
@@ -106,6 +107,9 @@ public:
     void setFont(const QFont &font);
     QFont font() const;
 
+    void setAsemanSubscribe(bool stt);
+    bool asemanSubscribe() const;
+
     QColor highlightColor() const;
 
 public slots:
@@ -114,6 +118,7 @@ public slots:
     void logout();
     void close();
     void quit();
+    void contact();
     void aboutAseman();
     void about();
     void configure();
@@ -137,6 +142,7 @@ signals:
     void darkSystemTrayChanged();
     void fontChanged();
     void closingStateChanged();
+    void asemanSubscribeChanged();
 
     void configureRequest();
     void aboutAsemanRequest();
