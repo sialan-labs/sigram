@@ -1,4 +1,4 @@
-### cutegram
+### Cutegram
 
 A different telegram client from Aseman team.
 Cutegram forked from Sigram by Sialan Labs.
@@ -22,9 +22,9 @@ Also you should install AppIndicator and Gtk2 if you want to enable UnitySystemT
 
 For other distributions search for the corresponding packages.
 
-#### Get libqtelegtam
+#### Get libqtelegram
 
-First, you should build and install libqtelegtam.
+First, you should build and install libqtelegram.
 
     bzr branch lp:libqtelegram 
     
