@@ -1,3 +1,15 @@
+cutegram (1.0.2aseman3-utopic) utopic; urgency=medium
+
+  * Build bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 19 Jan 2015 22:50:00 +0330
+ 
+cutegram (1.0.2aseman2-utopic) utopic; urgency=medium
+
+  * Dependencies bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 19 Jan 2015 22:34:00 +0330
+ 
 cutegram (1.0.2aseman1-utopic) utopic; urgency=medium
 
   * Close using Ctrl+Q

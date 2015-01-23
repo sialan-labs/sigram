@@ -242,6 +242,9 @@ Item {
     }
 
     function copy() {
-        msg_txt.copy()
+        if(msg_txt.selectedText.length == 0)
+            Devices.clipboard = msg_txt.text
+        else
+            msg_txt.copy()
     }
 }

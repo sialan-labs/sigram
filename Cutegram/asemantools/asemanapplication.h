@@ -22,7 +22,16 @@
 #include "aseman_macros.h"
 
 #include <QFont>
+#include <QVariant>
 
+#ifdef ASEMAN_QML_PLUGIN
+#include <QObject>
+class INHERIT_QAPP : public QObject
+{
+public:
+    INHERIT_QAPP(QObject *parent = 0): QObject(parent){}
+};
+#else
 #ifdef DESKTOP_DEVICE
 #include "qtsingleapplication/qtsingleapplication.h"
 class INHERIT_QAPP : public QtSingleApplication
@@ -37,6 +46,7 @@ class INHERIT_QAPP : public QGuiApplication
 public:
     INHERIT_QAPP(int &argc, char **argv): QGuiApplication(argc, argv){}
 };
+#endif
 #endif
 
 class QSettings;
@@ -56,7 +66,11 @@ class AsemanApplication : public INHERIT_QAPP
     Q_PROPERTY(QFont globalFont READ globalFont WRITE setGlobalFont NOTIFY globalFontChanged)
 
 public:
+#ifdef ASEMAN_QML_PLUGIN
+    AsemanApplication();
+#else
     AsemanApplication(int &argc, char **argv);
+#endif
     ~AsemanApplication();
 
     static QString homePath();
