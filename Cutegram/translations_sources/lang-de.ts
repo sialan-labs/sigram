@@ -149,7 +149,7 @@
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation type="obsolete">Klicken zum Herunterladen</translation>
+        <translation type="unfinished">Klicken zum Herunterladen</translation>
     </message>
 </context>
 <context>

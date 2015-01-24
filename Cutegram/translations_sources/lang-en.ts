@@ -45,6 +45,10 @@
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Leave</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -58,6 +62,10 @@
     </message>
     <message>
         <source>Message!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -75,10 +83,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 invited someone to group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 left the group</source>
         <translation type="unfinished"></translation>
     </message>
@@ -92,6 +96,10 @@
     </message>
     <message>
         <source>%1 deleted group photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 invited to group</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -156,6 +164,11 @@
     </message>
     <message>
         <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It&apos;s Cutegram news about new releases and solutions.
+It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -410,6 +423,26 @@
         <source>Select Sound</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Visual Effects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram Newsletter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Font</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -456,6 +489,10 @@
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateTimeChooser</name>
@@ -487,7 +524,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Drop files to send</source>
+        <source>Drop to send as Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop to send</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

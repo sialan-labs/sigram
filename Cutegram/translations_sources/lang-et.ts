@@ -45,6 +45,10 @@
         <source>Delete</source>
         <translation>Kustuta</translation>
     </message>
+    <message>
+        <source>Leave</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -59,6 +63,10 @@
     <message>
         <source>Message!</source>
         <translation>Sõnum!</translation>
+    </message>
+    <message>
+        <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -76,7 +84,7 @@
     </message>
     <message>
         <source>%1 invited someone to group</source>
-        <translation>%1 kutsus kedagi gruppi</translation>
+        <translation type="vanished">%1 kutsus kedagi gruppi</translation>
     </message>
     <message>
         <source>%1 left the group</source>
@@ -93,6 +101,10 @@
     <message>
         <source>%1 deleted group photo</source>
         <translation>%1 kustutas grupi pildi</translation>
+    </message>
+    <message>
+        <source>%1 invited to group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -157,6 +169,11 @@
     <message>
         <source>Delete</source>
         <translation>Kustuta</translation>
+    </message>
+    <message>
+        <source>It&apos;s Cutegram news about new releases and solutions.
+It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -410,6 +427,26 @@
         <source>Select Sound</source>
         <translation>Vali helifail</translation>
     </message>
+    <message>
+        <source>Visual Effects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram Newsletter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Font</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -456,6 +493,10 @@
         <source>Exit</source>
         <translation>Välju</translation>
     </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateTimeChooser</name>
@@ -489,7 +530,15 @@
     </message>
     <message>
         <source>Drop files to send</source>
-        <translation>Saatmiseks lohista failid</translation>
+        <translation type="vanished">Saatmiseks lohista failid</translation>
+    </message>
+    <message>
+        <source>Drop to send as Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop to send</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
