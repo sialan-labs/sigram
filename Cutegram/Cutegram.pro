@@ -72,7 +72,8 @@ OTHER_FILES += \
 
 TRANSLATIONS += \
     translations/lang-en.qm \
-    translations/lang-fa.qm
+    translations/lang-fa.qm \
+    translations/lang-de.qm
 
 isEmpty(PREFIX) {
     PREFIX = /usr
