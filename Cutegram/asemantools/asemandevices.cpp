@@ -41,6 +41,7 @@
 #include <QScreen>
 #include <QDateTime>
 #include <QDebug>
+#include <QMimeData>
 
 class AsemanDevicesPrivate
 {
@@ -367,6 +368,19 @@ QString AsemanDevices::clipboard() const
 bool AsemanDevices::keyboard() const
 {
     return p->keyboard_stt;
+}
+
+QList<QUrl> AsemanDevices::clipboardUrl() const
+{
+    return QGuiApplication::clipboard()->mimeData()->urls();
+}
+
+void AsemanDevices::setClipboardUrl(const QList<QUrl> &urls)
+{
+    QMimeData *mime = new QMimeData();
+    mime->setUrls(urls);
+
+    QGuiApplication::clipboard()->setMimeData(mime);
 }
 
 QString AsemanDevices::cameraLocation()

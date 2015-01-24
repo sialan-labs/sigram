@@ -242,8 +242,11 @@ Item {
     }
 
     function copy() {
+        if(hasMedia)
+            Devices.clipboardUrl = [msg_media.locationObj.download.location]
+        else
         if(msg_txt.selectedText.length == 0)
-            Devices.clipboard = msg_txt.text
+            Devices.clipboard = message.message
         else
             msg_txt.copy()
     }

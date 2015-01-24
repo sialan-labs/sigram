@@ -31,6 +31,7 @@ Rectangle {
         var text = temp_hash.value(currentDialog)
         txt.text = text? text : ""
         txt.cursorPosition = txt.length
+        txt.focus = true
 
         privates.lastDialog = currentDialog
     }
