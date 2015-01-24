@@ -29,7 +29,7 @@ Item {
     Rectangle {
         id: back
         anchors.fill: parent
-        color: "#66ffffff"
+        color: Cutegram.visualEffects?"#66ffffff":"#aaffffff"
         opacity: visibleRatio
 
         Behavior on color {

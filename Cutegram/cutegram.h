@@ -40,13 +40,14 @@ class Cutegram : public QObject
     Q_PROPERTY(QString masterColor  READ masterColor  WRITE setMasterColor  NOTIFY masterColorChanged )
     Q_PROPERTY(QFont   font         READ font         WRITE setFont         NOTIFY fontChanged        )
 
-    Q_PROPERTY(int  sysTrayCounter  READ sysTrayCounter  WRITE setSysTrayCounter  NOTIFY sysTrayCounterChanged )
-    Q_PROPERTY(int  startupOption   READ startupOption   WRITE setStartupOption   NOTIFY startupOptionChanged  )
-    Q_PROPERTY(bool notification    READ notification    WRITE setNotification    NOTIFY notificationChanged   )
-    Q_PROPERTY(bool minimumDialogs  READ minimumDialogs  WRITE setMinimumDialogs  NOTIFY minimumDialogsChanged )
-    Q_PROPERTY(bool showLastMessage READ showLastMessage WRITE setShowLastMessage NOTIFY showLastMessageChanged)
-    Q_PROPERTY(bool darkSystemTray  READ darkSystemTray  WRITE setDarkSystemTray  NOTIFY darkSystemTrayChanged )
+    Q_PROPERTY(int  sysTrayCounter    READ sysTrayCounter    WRITE setSysTrayCounter  NOTIFY sysTrayCounterChanged   )
+    Q_PROPERTY(int  startupOption     READ startupOption     WRITE setStartupOption   NOTIFY startupOptionChanged    )
+    Q_PROPERTY(bool notification      READ notification      WRITE setNotification    NOTIFY notificationChanged     )
+    Q_PROPERTY(bool minimumDialogs    READ minimumDialogs    WRITE setMinimumDialogs  NOTIFY minimumDialogsChanged   )
+    Q_PROPERTY(bool showLastMessage   READ showLastMessage   WRITE setShowLastMessage NOTIFY showLastMessageChanged  )
+    Q_PROPERTY(bool darkSystemTray    READ darkSystemTray    WRITE setDarkSystemTray  NOTIFY darkSystemTrayChanged   )
     Q_PROPERTY(bool cutegramSubscribe READ cutegramSubscribe WRITE setAsemanSubscribe NOTIFY cutegramSubscribeChanged)
+    Q_PROPERTY(bool visualEffects     READ visualEffects     WRITE setVisualEffects   NOTIFY visualEffectsChanged    )
 
     Q_PROPERTY(bool closingState READ closingState NOTIFY closingStateChanged)
 
@@ -104,6 +105,9 @@ public:
     void setMasterColor(const QString &color);
     QString masterColor() const;
 
+    void setVisualEffects(bool stt);
+    bool visualEffects() const;
+
     void setFont(const QFont &font);
     QFont font() const;
 
@@ -143,6 +147,7 @@ signals:
     void fontChanged();
     void closingStateChanged();
     void cutegramSubscribeChanged();
+    void visualEffectsChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

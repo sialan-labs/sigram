@@ -144,6 +144,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: veffect_text
+                            height: veffect_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: AsemanApp.globalFont.family
+                            font.pixelSize: 9*Devices.fontDensity
+                            color: "#333333"
+                            text: qsTr("Visual Effects")
+                        }
+
+                        Text {
                             id: aseman_nl_text
                             height: aseman_nl_checkbox.height
                             verticalAlignment: Text.AlignVCenter
@@ -231,6 +241,12 @@ Rectangle {
                             id: notify_checkbox
                             checked: Cutegram.notification
                             onCheckedChanged: Cutegram.notification = checked
+                        }
+
+                        QtControls.CheckBox {
+                            id: veffect_checkbox
+                            checked: Cutegram.visualEffects
+                            onCheckedChanged: Cutegram.visualEffects = checked
                         }
 
                         QtControls.CheckBox {

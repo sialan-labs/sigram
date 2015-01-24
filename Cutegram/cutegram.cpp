@@ -67,6 +67,7 @@ public:
     bool darkSystemTray;
     bool closingState;
     bool cutegramSubscribe;
+    bool visualEffects;
 
     QTextDocument *doc;
 
@@ -105,6 +106,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
+    p->visualEffects = AsemanApplication::settings()->value("General/visualEffects", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
@@ -616,6 +618,21 @@ void Cutegram::setMasterColor(const QString &color)
 QString Cutegram::masterColor() const
 {
     return p->masterColor;
+}
+
+void Cutegram::setVisualEffects(bool stt)
+{
+    if(p->visualEffects == stt)
+        return;
+
+    p->visualEffects = stt;
+    AsemanApplication::settings()->setValue("General/visualEffects", stt);
+    emit visualEffectsChanged();
+}
+
+bool Cutegram::visualEffects() const
+{
+    return p->visualEffects;
 }
 
 void Cutegram::setFont(const QFont &font)
