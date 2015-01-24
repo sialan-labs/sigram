@@ -223,6 +223,14 @@ Item {
                                 telegramObject.deleteCutegramDialog()
                                 break;
                             }
+                        } else if(isChat) {
+                            actions = [qsTr("Leave")]
+                            res = Cutegram.showMenu(actions)
+                            switch(res) {
+                            case 0:
+                                telegramObject.messagesDeleteChatUser(dItem.peer.chatId, telegramObject.me)
+                                break;
+                            }
                         }
                     } else{
                         currentDialog = list_item.dItem

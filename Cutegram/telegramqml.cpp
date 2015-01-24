@@ -699,7 +699,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     }
     else
     {
-        InputPeer peer(message.toId().chatId()? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
+        InputPeer peer(getInputPeer(dId));
         peer.setChatId(message.toId().chatId());
         peer.setUserId(message.toId().userId());
 
@@ -723,7 +723,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
 void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)
 {
     bool isChat = p->chats.contains(peerId);
-    InputPeer peer( isChat? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact );
+    InputPeer peer(getInputPeer(peerId));
     if(isChat)
         peer.setChatId(peerId);
     else
@@ -812,6 +812,47 @@ void TelegramQml::messagesDiscardEncryptedChat(qint32 chatId)
     emit dialogsChanged(false);
 }
 
+void TelegramQml::messagesDeleteChatUser(qint64 chatId, qint64 userId)
+{
+    if(!p->telegram)
+        return;
+
+    UserObject *userObj = p->users.value(userId);
+    if(!userObj)
+        return;
+
+    InputUser::InputUserType inputType;
+    switch(userObj->classType())
+    {
+    case User::typeUserContact:
+        inputType = InputUser::typeInputUserContact;
+        break;
+    case User::typeUserForeign:
+        inputType = InputUser::typeInputUserForeign;
+        break;
+    case User::typeUserSelf:
+        inputType = InputUser::typeInputUserSelf;
+        break;
+    }
+
+    InputUser user(inputType);
+    user.setUserId(userId);
+
+    p->telegram->messagesDeleteChatUser(chatId, user);
+
+    ChatObject *chat = p->chats.take(chatId);
+    DialogObject *dlg = p->dialogs.take(chatId);
+    p->dialogs_list.removeOne(chatId);
+
+    p->garbages.insert(chat);
+    p->garbages.insert(dlg);
+    startGarbageChecker();
+
+    p->database->deleteDialog(chatId);
+
+    emit dialogsChanged(false);
+}
+
 bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
 {
     QString file = fpath;
@@ -828,7 +869,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
         return false;
 
     Message message = newMessage(dId);
-    InputPeer peer(message.toId().chatId()? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
+    InputPeer peer(getInputPeer(dId));
     peer.setChatId(message.toId().chatId());
     peer.setUserId(message.toId().userId());
 
@@ -2466,6 +2507,35 @@ qint64 TelegramQml::generateRandomId() const
     qint64 randomId;
     Utils::randomBytes(&randomId, 8);
     return randomId;
+}
+
+InputPeer::InputPeerType TelegramQml::getInputPeer(qint64 pid)
+{
+    InputPeer::InputPeerType res;
+
+    if(p->users.contains(pid))
+    {
+        UserObject *user = p->users.value(pid);
+        switch(user->classType())
+        {
+        case User::typeUserContact:
+            res = InputPeer::typeInputPeerContact;
+            break;
+        case User::typeUserForeign:
+            res = InputPeer::typeInputPeerForeign;
+            break;
+        case User::typeUserSelf:
+            res = InputPeer::typeInputPeerSelf;
+            break;
+        }
+    }
+    else
+    if(p->chats.contains(pid))
+        res = InputPeer::typeInputPeerChat;
+    else
+        res = InputPeer::typeInputPeerEmpty;
+
+    return res;
 }
 
 TelegramQml::~TelegramQml()

@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include "types/inputfilelocation.h"
+#include "types/inputpeer.h"
 
 class Database;
 class SecretChat;
@@ -207,6 +208,8 @@ public slots:
     void messagesAcceptEncryptedChat(qint32 chatId);
     void messagesDiscardEncryptedChat(qint32 chatId);
 
+    void messagesDeleteChatUser(qint64 chatId, qint64 userId);
+
     bool sendFile(qint64 dialogId, const QString & file , bool forceDocument = false);
     void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
     void getFileJustCheck(FileLocationObject *location);
@@ -344,6 +347,7 @@ private slots:
     void updateEncryptedTopMessage(const Message &message);
 
     qint64 generateRandomId() const;
+    InputPeer::InputPeerType getInputPeer(qint64 pid);
 
 private:
     TelegramQmlPrivate *p;
