@@ -29,6 +29,7 @@ ContactImage {
         id: user_photo_marea
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
+        visible: user.id != telegram.cutegramId
         onClicked: {
             if(filePath.length == 0) {
                 loadingPhoto = true

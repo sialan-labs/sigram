@@ -130,7 +130,6 @@ Item {
                     anchors.left: profile_img.right
                     anchors.right: time_txt.left
                     anchors.margins: 4*Devices.density
-                    anchors.bottomMargin: 0
                     font.pixelSize: 11*Devices.fontDensity
                     font.family: AsemanApp.globalFont.family
                     horizontalAlignment: Text.AlignLeft
@@ -170,11 +169,13 @@ Item {
                     opacity: itemOpacities
                     visible: showLastMessage
                     text: {
+                        if(!visible)
+                            return ""
                         var list = dItem.typingUsers
                         if( list.length )
                             return qsTr("Typing...")
                         else
-                            return emojis.textToEmojiText(message.message,14,true)
+                            return emojis.textToEmojiText(message.message,16,true)
                     }
                 }
 
@@ -205,15 +206,31 @@ Item {
                 onContainsMouseChanged: toggleMinimum(containsMouse)
                 onClicked: {
                     if( mouse.button == Qt.RightButton ) {
-                        if(!dItem.encrypted)
-                            return
-
-                        var actions = [qsTr("Delete")]
-                        var res = Cutegram.showMenu(actions)
-                        switch(res) {
-                        case 0:
-                            telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId)
-                            break;
+                        var actions, res
+                        if(dItem.encrypted) {
+                            actions = [qsTr("Delete")]
+                            res = Cutegram.showMenu(actions)
+                            switch(res) {
+                            case 0:
+                                telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId)
+                                break;
+                            }
+                        } else if(user.id == telegramObject.cutegramId) {
+                            actions = [qsTr("Delete")]
+                            res = Cutegram.showMenu(actions)
+                            switch(res) {
+                            case 0:
+                                telegramObject.deleteCutegramDialog()
+                                break;
+                            }
+                        } else if(isChat) {
+                            actions = [qsTr("Leave")]
+                            res = Cutegram.showMenu(actions)
+                            switch(res) {
+                            case 0:
+                                telegramObject.messagesDeleteChatUser(dItem.peer.chatId, telegramObject.me)
+                                break;
+                            }
                         }
                     } else{
                         currentDialog = list_item.dItem

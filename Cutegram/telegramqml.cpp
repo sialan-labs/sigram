@@ -21,6 +21,7 @@
 #include "telegramqml.h"
 #include "userdata.h"
 #include "database.h"
+#include "cutegramdialog.h"
 #include "objects/types.h"
 
 #include <secret/secretchat.h>
@@ -119,6 +120,8 @@ public:
 
     qint32 msg_send_id_counter;
     qint64 msg_send_random_id;
+
+    CutegramDialog *cutegram_dlg;
 };
 
 TelegramQml::TelegramQml(QObject *parent) :
@@ -132,6 +135,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->invisible = false;
     p->msg_send_id_counter = INT_MAX - 100000;
     p->msg_send_random_id = 0;
+    p->cutegram_dlg = 0;
 
     p->userdata = 0;
     p->telegram = 0;
@@ -224,6 +228,37 @@ void TelegramQml::setPublicKeyFile(const QString &file)
     try_init();
 }
 
+void TelegramQml::setCutegramDialog(bool stt)
+{
+    if(stt && !p->cutegram_dlg)
+    {
+        p->cutegram_dlg = new CutegramDialog(this);
+
+        connect(p->cutegram_dlg, SIGNAL(incomingMessage(Message,Dialog)),
+                SLOT(incomingAsemanMessage(Message,Dialog)) );
+
+        insertUser(p->cutegram_dlg->user());
+//        insertDialog(p->cutegram_dlg->dialog());
+    }
+    else
+    if(!stt && p->cutegram_dlg)
+    {
+        p->database->deleteDialog(p->cutegram_dlg->cutegramId());
+
+        p->cutegram_dlg->deleteLater();
+        p->cutegram_dlg = 0;
+    }
+    else
+        return;
+
+    emit cutegramDialogChanged();
+}
+
+bool TelegramQml::cutegramDialog() const
+{
+    return p->cutegram_dlg;
+}
+
 UserData *TelegramQml::userData() const
 {
     return p->userdata;
@@ -245,6 +280,11 @@ qint64 TelegramQml::me() const
         return p->telegram->ourId();
     else
         return 0;
+}
+
+qint64 TelegramQml::cutegramId() const
+{
+    return CutegramDialog::cutegramId();
 }
 
 bool TelegramQml::online() const
@@ -659,7 +699,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     }
     else
     {
-        InputPeer peer(message.toId().chatId()? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
+        InputPeer peer(getInputPeer(dId));
         peer.setChatId(message.toId().chatId());
         peer.setUserId(message.toId().userId());
 
@@ -683,7 +723,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
 void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)
 {
     bool isChat = p->chats.contains(peerId);
-    InputPeer peer( isChat? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact );
+    InputPeer peer(getInputPeer(peerId));
     if(isChat)
         peer.setChatId(peerId);
     else
@@ -695,6 +735,23 @@ void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)
 void TelegramQml::deleteMessage(qint64 msgId)
 {
     p->telegram->messagesDeleteMessages( QList<qint32>()<<msgId );
+}
+
+void TelegramQml::deleteCutegramDialog()
+{
+    if( !p->telegram )
+        return;
+
+    const qint64 dId = cutegramId();
+    DialogObject *dlg = p->dialogs.take(dId);
+    p->dialogs_list.removeOne(dId);
+
+    p->garbages.insert(dlg);
+    startGarbageChecker();
+
+    p->database->deleteDialog(dId);
+
+    emit dialogsChanged(false);
 }
 
 void TelegramQml::messagesCreateChat(const QList<qint32> &users, const QString &topic)
@@ -755,6 +812,47 @@ void TelegramQml::messagesDiscardEncryptedChat(qint32 chatId)
     emit dialogsChanged(false);
 }
 
+void TelegramQml::messagesDeleteChatUser(qint64 chatId, qint64 userId)
+{
+    if(!p->telegram)
+        return;
+
+    UserObject *userObj = p->users.value(userId);
+    if(!userObj)
+        return;
+
+    InputUser::InputUserType inputType;
+    switch(userObj->classType())
+    {
+    case User::typeUserContact:
+        inputType = InputUser::typeInputUserContact;
+        break;
+    case User::typeUserForeign:
+        inputType = InputUser::typeInputUserForeign;
+        break;
+    case User::typeUserSelf:
+        inputType = InputUser::typeInputUserSelf;
+        break;
+    }
+
+    InputUser user(inputType);
+    user.setUserId(userId);
+
+    p->telegram->messagesDeleteChatUser(chatId, user);
+
+    ChatObject *chat = p->chats.take(chatId);
+    DialogObject *dlg = p->dialogs.take(chatId);
+    p->dialogs_list.removeOne(chatId);
+
+    p->garbages.insert(chat);
+    p->garbages.insert(dlg);
+    startGarbageChecker();
+
+    p->database->deleteDialog(chatId);
+
+    emit dialogsChanged(false);
+}
+
 bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
 {
     QString file = fpath;
@@ -771,7 +869,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
         return false;
 
     Message message = newMessage(dId);
-    InputPeer peer(message.toId().chatId()? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
+    InputPeer peer(getInputPeer(dId));
     peer.setChatId(message.toId().chatId());
     peer.setUserId(message.toId().userId());
 
@@ -1478,6 +1576,8 @@ void TelegramQml::messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QLi
             continue;
         if(dobj->encrypted())
             continue;
+        if(dId == cutegramId())
+            continue;
 
         p->dialogs_list.removeOne(dId);
         p->dialogs.remove(dId);
@@ -1888,6 +1988,14 @@ void TelegramQml::uploadCancelFile_slt(qint64 fileId, bool cancelled)
         locObj->download()->file()->close();
         locObj->download()->file()->remove();
     }
+}
+
+void TelegramQml::incomingAsemanMessage(const Message &msg, const Dialog &dialog)
+{
+    insertMessage(msg);
+    insertDialog(dialog);
+
+    emit incomingMessage( p->messages.value(msg.id()) );
 }
 
 void TelegramQml::insertDialog(const Dialog &d, bool encrypted, bool fromDb)
@@ -2401,6 +2509,35 @@ qint64 TelegramQml::generateRandomId() const
     return randomId;
 }
 
+InputPeer::InputPeerType TelegramQml::getInputPeer(qint64 pid)
+{
+    InputPeer::InputPeerType res;
+
+    if(p->users.contains(pid))
+    {
+        UserObject *user = p->users.value(pid);
+        switch(user->classType())
+        {
+        case User::typeUserContact:
+            res = InputPeer::typeInputPeerContact;
+            break;
+        case User::typeUserForeign:
+            res = InputPeer::typeInputPeerForeign;
+            break;
+        case User::typeUserSelf:
+            res = InputPeer::typeInputPeerSelf;
+            break;
+        }
+    }
+    else
+    if(p->chats.contains(pid))
+        res = InputPeer::typeInputPeerChat;
+    else
+        res = InputPeer::typeInputPeerEmpty;
+
+    return res;
+}
+
 TelegramQml::~TelegramQml()
 {
     if( p->telegram )
@@ -2441,5 +2578,10 @@ bool checkDialogLessThan( qint64 a, qint64 b )
 
 bool checkMessageLessThan( qint64 a, qint64 b )
 {
-    return a > b;
+    MessageObject *am = telegramp_qml_tmp->messages.value(a);
+    MessageObject *bm = telegramp_qml_tmp->messages.value(b);
+    if(am && bm)
+        return a > b;
+    else
+        return am->date() > bm->date();
 }

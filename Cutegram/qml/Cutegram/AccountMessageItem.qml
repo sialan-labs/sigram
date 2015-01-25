@@ -161,6 +161,7 @@ Item {
                             font.pixelSize: Cutegram.font.pointSize*Devices.fontDensity
                             font.family: Cutegram.font.family
                             persistentSelection: true
+                            activeFocusOnPress: false
                             selectByMouse: true
                             readOnly: true
                             selectionColor: masterPalette.highlight
@@ -241,6 +242,12 @@ Item {
     }
 
     function copy() {
-        msg_txt.copy()
+        if(hasMedia)
+            Devices.clipboardUrl = [msg_media.locationObj.download.location]
+        else
+        if(msg_txt.selectedText.length == 0)
+            Devices.clipboard = message.message
+        else
+            msg_txt.copy()
     }
 }

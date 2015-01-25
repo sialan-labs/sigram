@@ -88,7 +88,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
     {
         QString link = links_rxp.cap(1);
         QString href = link;
-        if(href.left(7) != "http://")
+        if(href.indexOf(QRegExp("\\w+\\:\\/\\/")) == -1)
             href = "http://" + href;
 
         QString atag = QString("<a href='%1'>%2</a>").arg(href,link);

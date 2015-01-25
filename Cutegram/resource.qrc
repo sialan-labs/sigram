@@ -67,5 +67,7 @@
         <file>qml/Cutegram/ClickableContactImage.qml</file>
         <file>qml/Cutegram/files/sent-light.png</file>
         <file>qml/Cutegram/files/down.png</file>
+        <file>qml/Cutegram/files/aseman-contact.png</file>
+        <file>qml/Cutegram/files/icon-normal.png</file>
     </qresource>
 </RCC>

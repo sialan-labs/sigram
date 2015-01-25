@@ -124,6 +124,8 @@ Rectangle {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 cursorShape: Qt.PointingHandCursor
                 onPositionChanged: {
+                    if(user.id == telegram.cutegramId)
+                        return
                     var destX = mouseX-startPoint.x
                     var destY = mouseY-startPoint.y
                     var dest = Math.pow(destX*destX+destY*destY, 0.5)
@@ -135,9 +137,16 @@ Rectangle {
                     messageDraging = false
                 }
 
-                onReleased: msg_item.click()
+                onReleased: {
+                    if(user.id == telegram.cutegramId)
+                        return
+
+                    msg_item.click()
+                }
 
                 onPressed: {
+                    if(user.id == telegram.cutegramId)
+                        return
                     if( mouse.button == Qt.RightButton ) {
                         var actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
                         var res = Cutegram.showMenu(actions)

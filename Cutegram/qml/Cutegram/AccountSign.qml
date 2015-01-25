@@ -82,7 +82,6 @@ Rectangle {
             textColor: textColor0
             placeholderColor: "#888888"
             color: backColor1
-            validator: RegExpValidator{regExp: /\d*/}
             visible: !phoneRegistered
             pickerEnable: Devices.isTouchDevice
             onAccepted: lname_text.focus = true
@@ -96,7 +95,6 @@ Rectangle {
             textColor: textColor0
             placeholderColor: "#888888"
             color: backColor1
-            validator: RegExpValidator{regExp: /\d*/}
             visible: !phoneRegistered
             pickerEnable: Devices.isTouchDevice
             onAccepted: accept()

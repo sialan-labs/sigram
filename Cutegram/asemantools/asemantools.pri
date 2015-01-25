@@ -77,7 +77,8 @@ SOURCES += \
     asemantools/asemanimagecoloranalizor.cpp \
     asemantools/asemancountriesmodel.cpp \
     asemantools/asemanmimedata.cpp \
-    asemantools/asemandragobject.cpp
+    asemantools/asemandragobject.cpp \
+    $$PWD/asemandownloader.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -97,7 +98,8 @@ HEADERS += \
     asemantools/asemanimagecoloranalizor.h \
     asemantools/asemancountriesmodel.h \
     asemantools/asemanmimedata.h \
-    asemantools/asemandragobject.h
+    asemantools/asemandragobject.h \
+    $$PWD/asemandownloader.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \

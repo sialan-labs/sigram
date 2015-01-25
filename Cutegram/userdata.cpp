@@ -49,6 +49,7 @@ public:
     QHash<int,bool> mutes;
     QHash<int,bool> favorites;
     QHash<QString,QString> general;
+    QMap<quint64, MessageUpdate> msg_updates;
 };
 
 UserData::UserData(const QString & phoneNumber, QObject *parent) :
@@ -164,6 +165,40 @@ bool UserData::isFavorited(int id)
     return p->favorites.value(id);
 }
 
+void UserData::addMessageUpdate(const MessageUpdate &msg)
+{
+    QSqlQuery mute_query(p->db);
+    mute_query.prepare("INSERT OR REPLACE INTO updatemessages (id, message, date) VALUES (:id, :msg, :date)");
+    mute_query.bindValue(":id"  ,msg.id);
+    mute_query.bindValue(":msg" ,msg.message);
+    mute_query.bindValue(":date",msg.date);
+    mute_query.exec();
+
+    p->msg_updates[msg.id] = msg;
+    emit messageUpdateChanged(msg.id);
+}
+
+void UserData::removeMessageUpdate(int id)
+{
+    QSqlQuery query(p->db);
+    query.prepare("DELETE FROM updatemessages WHERE id=:id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    p->msg_updates.remove(id);
+    emit messageUpdateChanged(id);
+}
+
+QList<quint64> UserData::messageUpdates() const
+{
+    return p->msg_updates.keys();
+}
+
+MessageUpdate UserData::messageUpdateItem(int id)
+{
+    return p->msg_updates.value(id);
+}
+
 void UserData::setValue(const QString &key, const QString &value)
 {
     QSqlQuery mute_query(p->db);
@@ -183,6 +218,11 @@ QString UserData::value(const QString &key)
 
 void UserData::init_buffer()
 {
+    p->mutes.clear();
+    p->favorites.clear();
+    p->msg_updates.clear();
+    p->general.clear();
+
     QSqlQuery mute_query(p->db);
     mute_query.prepare("SELECT id, mute FROM mutes");
     mute_query.exec();
@@ -203,6 +243,21 @@ void UserData::init_buffer()
         p->favorites.insert( record.value(0).toInt(), record.value(1).toInt() );
     }
 
+    QSqlQuery msg_upd_query(p->db);
+    msg_upd_query.prepare("SELECT id, message, date FROM updatemessages");
+    msg_upd_query.exec();
+
+    while( msg_upd_query.next() )
+    {
+        const QSqlRecord & record = msg_upd_query.record();
+        MessageUpdate msg;
+        msg.id = record.value(0).toULongLong();
+        msg.message = record.value(1).toString();
+        msg.date = record.value(2).toLongLong();
+
+        p->msg_updates[msg.id] = msg;
+    }
+
     QSqlQuery general_query(p->db);
     general_query.prepare("SELECT gkey, gvalue FROM general");
     general_query.exec();
@@ -216,6 +271,19 @@ void UserData::init_buffer()
 
 void UserData::update_db()
 {
+    const int version = value("version").toInt();
+    if( version < 3 )
+    {
+        QStringList query_list;
+        query_list << "BEGIN;";
+        query_list << "CREATE  TABLE IF NOT EXISTS UpdateMessages (id BIGINT NOT NULL ,message TEXT NOT NULL, date BIGINT NOT NULL, PRIMARY KEY (id) );";
+        query_list << "COMMIT;";
+
+        foreach( const QString & query_str, query_list )
+            QSqlQuery( query_str, p->db ).exec();
+
+        setValue("version","3");
+    }
 }
 
 UserData::~UserData()

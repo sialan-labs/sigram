@@ -20,6 +20,7 @@
 #define ASEMANDEVICES_H
 
 #include <QObject>
+#include <QUrl>
 #include <QSize>
 
 class QScreen;
@@ -60,7 +61,8 @@ class AsemanDevices : public QObject
     Q_PROPERTY(bool  transparentNavigationBar READ transparentNavigationBar NOTIFY transparentNavigationBarChanged)
     Q_PROPERTY(qreal standardTitleBarHeight   READ standardTitleBarHeight   NOTIFY standardTitleBarHeightChanged  )
 
-    Q_PROPERTY(QString clipboard READ clipboard WRITE setClipboard NOTIFY clipboardChanged)
+    Q_PROPERTY(QString     clipboard    READ clipboard    WRITE setClipboard    NOTIFY clipboardChanged   )
+    Q_PROPERTY(QList<QUrl> clipboardUrl READ clipboardUrl WRITE setClipboardUrl NOTIFY clipboardUrlChanged)
 
     Q_PROPERTY(bool keyboard READ keyboard NOTIFY keyboardChanged)
 
@@ -110,6 +112,9 @@ public:
 
     QString clipboard() const;
     bool keyboard() const;
+
+    QList<QUrl> clipboardUrl() const;
+    void setClipboardUrl(const QList<QUrl> &urls);
 
     static QString cameraLocation();
     static QString picturesLocation();
@@ -169,6 +174,7 @@ signals:
     void fontDensityChanged();
 
     void clipboardChanged();
+    void clipboardUrlChanged();
     void keyboardChanged();
 
     void cameraLocationChanged();

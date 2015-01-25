@@ -21,6 +21,7 @@
 #include "telegrammessagesmodel.h"
 #include "telegramqml.h"
 #include "database.h"
+#include "cutegramdialog.h"
 #include "objects/types.h"
 
 #include <telegram.h>
@@ -113,8 +114,11 @@ void TelegramMessagesModel::init()
     loadMore(true);
     messagesChanged(true);
 
-    p->refreshing = true;
-    emit refreshingChanged();
+    if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
+    {
+        p->refreshing = true;
+        emit refreshingChanged();
+    }
 }
 
 void TelegramMessagesModel::refresh()
@@ -136,7 +140,8 @@ void TelegramMessagesModel::refresh()
     const InputPeer & peer = inputPeer();
 
     Telegram *tgObject = p->telegram->telegram();
-    tgObject->messagesGetHistory(peer, 0, 0, LOAD_STEP_COUNT );
+    if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
+        tgObject->messagesGetHistory(peer, 0, 0, LOAD_STEP_COUNT );
 
     p->telegram->database()->readMessages(TelegramMessagesModel::peer(), 0, LOAD_STEP_COUNT);
 }
@@ -166,11 +171,14 @@ void TelegramMessagesModel::loadMore(bool force)
     const InputPeer & peer = inputPeer();
 
     Telegram *tgObject = p->telegram->telegram();
-    tgObject->messagesGetHistory(peer, p->load_count, 0, p->load_limit );
+    if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
+    {
+        tgObject->messagesGetHistory(peer, p->load_count, 0, p->load_limit );
+        p->refreshing = true;
+    }
 
     p->telegram->database()->readMessages(TelegramMessagesModel::peer(), p->load_count, LOAD_STEP_COUNT);
 
-    p->refreshing = true;
     emit refreshingChanged();
 }
 

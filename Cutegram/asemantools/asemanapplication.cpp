@@ -23,8 +23,10 @@
 #include <QFont>
 #include <QSettings>
 #include <QThread>
+#include <QCoreApplication>
 
 static QSettings *app_global_settings = 0;
+static AsemanApplication *aseman_app_singleton = 0;
 
 class AsemanApplicationPrivate
 {
@@ -32,10 +34,17 @@ public:
     QFont globalFont;
 };
 
+#ifdef ASEMAN_QML_PLUGIN
+AsemanApplication::AsemanApplication() :
+    INHERIT_QAPP ()
+#else
 AsemanApplication::AsemanApplication(int &argc, char **argv) :
     INHERIT_QAPP (argc,argv)
+#endif
 {
     p = new AsemanApplicationPrivate;
+    if(!aseman_app_singleton)
+        aseman_app_singleton = this;
 }
 
 QString AsemanApplication::homePath()
@@ -119,7 +128,7 @@ QString AsemanApplication::cameraPath()
 
 AsemanApplication *AsemanApplication::instance()
 {
-    return static_cast<AsemanApplication*>(QCoreApplication::instance());
+    return aseman_app_singleton;
 }
 
 void AsemanApplication::setGlobalFont(const QFont &font)
@@ -174,5 +183,8 @@ QVariant AsemanApplication::readSetting(const QString &key, const QVariant &defa
 
 AsemanApplication::~AsemanApplication()
 {
+    if(aseman_app_singleton == this)
+        aseman_app_singleton = 0;
+
     delete p;
 }

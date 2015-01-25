@@ -1,4 +1,4 @@
-### cutegram
+### Cutegram
 
 A different telegram client from Aseman team.
 Cutegram forked from Sigram by Sialan Labs.
@@ -22,9 +22,9 @@ Also you should install AppIndicator and Gtk2 if you want to enable UnitySystemT
 
 For other distributions search for the corresponding packages.
 
-#### Get libqtelegtam
+#### Get libqtelegram
 
-First, you should build and install libqtelegtam.
+First, you should build and install libqtelegram.
 
     bzr branch lp:libqtelegram 
     
@@ -54,7 +54,7 @@ If you want get source from git repository you should install git on your system
 
 After git installed, get code with this command:
 
-    git clone https://github.com/aseman-labs/cutegram.git
+    git clone https://github.com/Aseman-Land/Cutegram.git
 
 #### Start building
 
@@ -82,5 +82,5 @@ You can use command below after building to clean build directory on the each st
 ##### Fedora
 
     mkdir build && cd build
-    /bin/qmake-qt5 -o Makefile ../AsemanTelegram.pro
+    /bin/qmake-qt5 -o Makefile ..
     make

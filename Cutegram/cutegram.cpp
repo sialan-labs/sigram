@@ -52,6 +52,7 @@
 #include <QAction>
 #include <QPainter>
 #include <QPainterPath>
+#include <QDesktopServices>
 
 class CutegramPrivate
 {
@@ -64,6 +65,9 @@ public:
     bool minimumDialogs;
     bool showLastMessage;
     bool darkSystemTray;
+    bool closingState;
+    bool cutegramSubscribe;
+    bool visualEffects;
 
     QTextDocument *doc;
 
@@ -96,10 +100,13 @@ Cutegram::Cutegram(QObject *parent) :
     p->sysTray = 0;
     p->unityTray = 0;
     p->sysTrayCounter = 0;
+    p->closingState = false;
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
+    p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
+    p->visualEffects = AsemanApplication::settings()->value("General/visualEffects", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
@@ -240,7 +247,15 @@ void Cutegram::close()
 
 void Cutegram::quit()
 {
+    p->closingState = true;
+    emit closingStateChanged();
+
     QGuiApplication::quit();
+}
+
+void Cutegram::contact()
+{
+    QDesktopServices::openUrl(QUrl("http://aseman.co/en/contact-us/cutegram/"));
 }
 
 void Cutegram::aboutAseman()
@@ -361,6 +376,7 @@ void Cutegram::init_systray()
 
         p->unityTray->addMenu( tr("Show"), this, "active" );
         p->unityTray->addMenu( tr("Configure"), this, "configure" );
+        p->unityTray->addMenu( tr("Contact"), this, "contact" );
         p->unityTray->addMenu( tr("About"), this, "about" );
         p->unityTray->addMenu( tr("About Aseman"), this, "aboutAseman" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
@@ -382,6 +398,8 @@ void Cutegram::showContextMenu()
     QAction *show_act = menu.addAction( tr("Show") );
     menu.addSeparator();
     QAction *conf_act = menu.addAction( tr("Configure") );
+    QAction *cnct_act = menu.addAction( tr("Contact") );
+    menu.addSeparator();
     QAction *abut_act = menu.addAction( tr("About") );
     QAction *sabt_act = menu.addAction( tr("About Aseman") );
     menu.addSeparator();
@@ -398,6 +416,11 @@ void Cutegram::showContextMenu()
         configure();
     }
     else
+    if( res_act == cnct_act )
+    {
+        contact();
+    }
+    else
     if( res_act == abut_act )
     {
         about();
@@ -410,8 +433,7 @@ void Cutegram::showContextMenu()
     else
     if( res_act == exit_act )
     {
-        p->viewer->close();
-        QGuiApplication::quit();
+        quit();
     }
 }
 
@@ -467,6 +489,11 @@ void Cutegram::setLanguage(const QString &lang)
 QString Cutegram::language() const
 {
     return p->language;
+}
+
+bool Cutegram::closingState() const
+{
+    return p->closingState;
 }
 
 void Cutegram::setStartupOption(int opt)
@@ -593,6 +620,21 @@ QString Cutegram::masterColor() const
     return p->masterColor;
 }
 
+void Cutegram::setVisualEffects(bool stt)
+{
+    if(p->visualEffects == stt)
+        return;
+
+    p->visualEffects = stt;
+    AsemanApplication::settings()->setValue("General/visualEffects", stt);
+    emit visualEffectsChanged();
+}
+
+bool Cutegram::visualEffects() const
+{
+    return p->visualEffects;
+}
+
 void Cutegram::setFont(const QFont &font)
 {
     if(p->font == font)
@@ -606,6 +648,22 @@ void Cutegram::setFont(const QFont &font)
 QFont Cutegram::font() const
 {
     return p->font;
+}
+
+void Cutegram::setAsemanSubscribe(bool stt)
+{
+    if(p->cutegramSubscribe == stt)
+        return;
+
+    p->cutegramSubscribe = stt;
+    AsemanApplication::settings()->setValue("General/cutegramSubscribe", stt);
+
+    emit cutegramSubscribeChanged();
+}
+
+bool Cutegram::cutegramSubscribe() const
+{
+    return p->cutegramSubscribe;
 }
 
 QColor Cutegram::highlightColor() const

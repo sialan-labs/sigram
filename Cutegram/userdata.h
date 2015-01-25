@@ -21,6 +21,14 @@
 
 #include <QObject>
 
+class MessageUpdate
+{
+public:
+    int id;
+    QString message;
+    qint64 date;
+};
+
 class UserDataPrivate;
 class UserData : public QObject
 {
@@ -40,6 +48,11 @@ public slots:
     QList<int> favorites() const;
     bool isFavorited(int id);
 
+    void addMessageUpdate(const MessageUpdate &msg);
+    void removeMessageUpdate(int id);
+    QList<quint64> messageUpdates() const;
+    MessageUpdate messageUpdateItem(int id);
+
     void setValue( const QString & key, const QString & value );
     QString value( const QString & key );
 
@@ -50,6 +63,7 @@ signals:
     void muteChanged(int id);
     void favoriteChanged(int id);
     void valueChanged( const QString & key );
+    void messageUpdateChanged(int id);
 
 private:
     void init_buffer();

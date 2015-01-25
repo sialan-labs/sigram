@@ -13,6 +13,16 @@ Rectangle {
     property alias telegramObject: dialogs.telegramObject
     property color framesColor: "#aaffffff"
     property alias currentDialog: dialogs.currentDialog
+    property bool cutegramDialog: telegramObject.cutegramDialog
+
+    Component.onCompleted: {
+        telegramObject.cutegramDialog = Cutegram.cutegramSubscribe
+    }
+
+    Connections {
+        target: telegramObject
+        onCutegramDialogChanged: Cutegram.cutegramSubscribe = telegramObject.cutegramDialog
+    }
 
     LineEdit {
         id: search_frame
@@ -73,13 +83,14 @@ Rectangle {
             id: header_blur
             anchors.fill: header
             clip: true
+            visible: Cutegram.visualEffects
 
             FastBlur {
                 anchors.top: parent.top
                 width: messages.width
                 height: messages.height
                 source: messages
-                radius: 64
+                radius: Cutegram.visualEffects?64:0
             }
         }
 
@@ -87,13 +98,14 @@ Rectangle {
             id: send_msg_blur
             anchors.fill: send_msg
             clip: true
+            visible: Cutegram.visualEffects
 
             FastBlur {
                 anchors.bottom: parent.bottom
                 width: messages.width
                 height: messages.height
                 source: messages
-                radius: 64
+                radius: Cutegram.visualEffects?64:0
             }
         }
 
@@ -102,9 +114,17 @@ Rectangle {
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.right: parent.right
-            color: currentDialog.encrypted? "#aa000000" : framesColor
             currentDialog: dialogs.currentDialog
             refreshing: messages.refreshing
+            color: {
+                if(!Cutegram.visualEffects)
+                    return "#fafafa"
+                else
+                if(currentDialog.encrypted)
+                    return "#aa000000"
+                else
+                    return framesColor
+            }
             onClicked: {
                 if( properties )
                     properties.end()
@@ -121,7 +141,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            color: framesColor
+            color: Cutegram.visualEffects?framesColor:"#fafafa"
             currentDialog: dialogs.currentDialog
             onAccepted: messages.sendMessage(text)
             trash: messages.messageDraging
@@ -140,7 +160,7 @@ Rectangle {
             anchors.fill: drop_file
             clip: true
             opacity: drop_file.visibleRatio
-            visible: opacity != 0
+            visible: opacity != 0 && Cutegram.visualEffects
 
             FastBlur {
                 anchors.top: parent.top
@@ -148,7 +168,7 @@ Rectangle {
                 width: messages.width
                 height: messages.height
                 source: messages
-                radius: 32
+                radius: Cutegram.visualEffects?32:0
             }
         }
 
@@ -218,12 +238,14 @@ Rectangle {
             FastBlur {
                 anchors.fill: parent
                 source: messages
-                radius: 64
+                radius: Cutegram.visualEffects?64:0
+                visible: Cutegram.visualEffects
             }
 
             ForwardPage {
                 id: forward_page
                 anchors.fill: parent
+                color: Cutegram.visualEffects?"#66ffffff":"#ddffffff"
                 onCloseRequest: forward_item.destroy()
             }
 

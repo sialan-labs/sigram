@@ -82,7 +82,8 @@ SOURCES += \
     asemancountriesmodel.cpp \
     asemantoolsplugin.cpp \
     asemandragobject.cpp \
-    asemanmimedata.cpp
+    asemanmimedata.cpp \
+    asemandownloader.cpp
 
 HEADERS += \
     asemandevices.h \
@@ -103,7 +104,8 @@ HEADERS += \
     asemancountriesmodel.h \
     asemantoolsplugin.h \
     asemandragobject.h \
-    asemanmimedata.h
+    asemanmimedata.h \
+    asemandownloader.h
 
 OTHER_FILES += \
     android-build/src/land/aseman/android/AsemanActivity.java \

@@ -10,7 +10,7 @@ DEPLOYMENTFOLDERS = server emojis translations
 
 TEMPLATE = app
 TARGET = cutegram
-QT += qml quick sql
+QT += qml quick sql xml
 linux: QT += dbus
 
 LIBS += -lssl -lcrypto -lz /opt/cutegram/libs/libqtelegram.so.1
@@ -33,7 +33,8 @@ SOURCES += main.cpp \
     telegramcontactsmodel.cpp \
     database.cpp \
     databasecore.cpp \
-    compabilitytools.cpp
+    compabilitytools.cpp \
+    cutegramdialog.cpp
 
 RESOURCES += resource.qrc
 
@@ -60,7 +61,8 @@ HEADERS += \
     telegramcontactsmodel.h \
     database.h \
     databasecore.h \
-    compabilitytools.h
+    compabilitytools.h \
+    cutegramdialog.h
 
 OTHER_FILES += \
     objects/types.sco \
@@ -70,7 +72,9 @@ OTHER_FILES += \
 
 TRANSLATIONS += \
     translations/lang-en.qm \
-    translations/lang-fa.qm
+    translations/lang-fa.qm \
+    translations/lang-de.qm \
+    translations/lang-et.qm
 
 isEmpty(PREFIX) {
     PREFIX = /usr
