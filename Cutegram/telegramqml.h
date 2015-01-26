@@ -208,6 +208,8 @@ public slots:
     void messagesAcceptEncryptedChat(qint32 chatId);
     void messagesDiscardEncryptedChat(qint32 chatId);
 
+    void search(const QString &keyword);
+
     void messagesDeleteChatUser(qint64 chatId, qint64 userId);
 
     bool sendFile(qint64 dialogId, const QString & file , bool forceDocument = false);
@@ -262,6 +264,8 @@ signals:
     void incomingMessage( MessageObject *msg );
     void incomingEncryptedMessage( EncryptedMessageObject *msg );
 
+    void searchDone(const QList<qint64> &messages);
+
 protected:
     void try_init();
 
@@ -293,6 +297,8 @@ private slots:
     void messagesSendDocument_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
     void messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> & dialogs, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
     void messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
+
+    void messagesSearch_slt(qint64 id, qint32 sliceCount, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
 
     void messagesGetFullChat_slt(qint64 id, const ChatFull & chatFull, const QList<Chat> & chats, const QList<User> & users);
     void messagesCreateChat_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);

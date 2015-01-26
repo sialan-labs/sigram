@@ -69,5 +69,6 @@
         <file>qml/Cutegram/files/down.png</file>
         <file>qml/Cutegram/files/aseman-contact.png</file>
         <file>qml/Cutegram/files/icon-normal.png</file>
+        <file>qml/Cutegram/AccountSearchList.qml</file>
     </qresource>
 </RCC>

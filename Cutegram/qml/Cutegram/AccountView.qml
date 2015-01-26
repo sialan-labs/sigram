@@ -33,6 +33,7 @@ Rectangle {
         height: 40*Devices.density
         color: "#333333"
         textColor: "#ffffff"
+        clearButton: true
         placeholder: qsTr("Search")
         pickerEnable: Devices.isTouchDevice
     }
@@ -44,6 +45,15 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.topMargin: 4*Devices.density
         clip: true
+        visible: search_frame.text.length == 0
+    }
+
+    AccountSearchList {
+        id: search_list
+        anchors.fill: dialogs
+        clip: true
+        keyword: search_frame.text
+        telegramObject: dialogs.telegramObject
     }
 
     Item {

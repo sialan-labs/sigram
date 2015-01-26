@@ -61,5 +61,6 @@
         <file>qml/AsemanTools/files/aseman-special.png</file>
         <file>qml/AsemanTools/files/splash-back.jpg</file>
         <file>qml/AsemanTools/files/aseman-special-black.png</file>
+        <file>qml/AsemanTools/files/close.png</file>
     </qresource>
 </RCC>

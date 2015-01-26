@@ -44,7 +44,7 @@ Rectangle {
     property alias textColor: txt.color
 
     property alias cursorShape: marea.cursorShape
-    property real textMargin: 1*Devices.density
+    property real textMargin: 0
 
     property color tooltipColor: "#cc000000"
     property color tooltipTextColor: "#ffffff"
@@ -57,7 +57,6 @@ Rectangle {
         id: row
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.topMargin: 4*Devices.density
         anchors.margins: 3*Devices.density
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: 4*Devices.density

@@ -182,6 +182,8 @@ void TelegramDialogsModel::dialogsChanged(bool cachedData)
         p->dialogs.insert( i, dId );
         endInsertRows();
     }
+
+    emit countChanged();
 }
 
 void TelegramDialogsModel::userDataChanged()

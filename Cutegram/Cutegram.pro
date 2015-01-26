@@ -34,7 +34,8 @@ SOURCES += main.cpp \
     database.cpp \
     databasecore.cpp \
     compabilitytools.cpp \
-    cutegramdialog.cpp
+    cutegramdialog.cpp \
+    telegramsearchmodel.cpp
 
 RESOURCES += resource.qrc
 
@@ -62,7 +63,8 @@ HEADERS += \
     database.h \
     databasecore.h \
     compabilitytools.h \
-    cutegramdialog.h
+    cutegramdialog.h \
+    telegramsearchmodel.h
 
 OTHER_FILES += \
     objects/types.sco \

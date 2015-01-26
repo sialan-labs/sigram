@@ -812,6 +812,17 @@ void TelegramQml::messagesDiscardEncryptedChat(qint32 chatId)
     emit dialogsChanged(false);
 }
 
+void TelegramQml::search(const QString &keyword)
+{
+    if(!p->telegram)
+        return;
+
+    InputPeer peer(InputPeer::typeInputPeerEmpty);
+    MessagesFilter filter(MessagesFilter::typeInputMessagesFilterEmpty);
+
+    p->telegram->messagesSearch(peer, keyword, filter, 0, 0, 0, 0, 50);
+}
+
 void TelegramQml::messagesDeleteChatUser(qint64 chatId, qint64 userId)
 {
     if(!p->telegram)
@@ -1120,6 +1131,9 @@ void TelegramQml::try_init()
              SLOT(messagesForwardMessage_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)) );
     connect( p->telegram, SIGNAL(messagesDeleteMessagesAnswer(qint64,QList<qint32>)),
              SLOT(messagesDeleteMessages_slt(qint64,QList<qint32>)) );
+
+    connect( p->telegram, SIGNAL(messagesSearchAnswer(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)),
+             SLOT(messagesSearch_slt(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)) );
 
     connect( p->telegram, SIGNAL(messagesSendAudioAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)),
              SLOT(messagesSendAudio_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)) );
@@ -1604,6 +1618,26 @@ void TelegramQml::messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QLi
         insertMessage(m);
 
     emit messagesChanged(false);
+}
+
+void TelegramQml::messagesSearch_slt(qint64 id, qint32 sliceCount, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(sliceCount)
+
+    QList<qint64> res;
+
+    foreach( const User & u, users )
+        insertUser(u);
+    foreach( const Chat & c, chats )
+        insertChat(c);
+    foreach( const Message & m, messages )
+    {
+        insertMessage(m);
+        res << m.id();
+    }
+
+    emit searchDone(res);
 }
 
 void TelegramQml::messagesGetFullChat_slt(qint64 id, const ChatFull &chatFull, const QList<Chat> &chats, const QList<User> &users)
