@@ -185,7 +185,7 @@ public:
     Q_INVOKABLE QString fileLocation( FileLocationObject *location );
 
     QList<qint64> dialogs() const;
-    QList<qint64> messages(qint64 did) const;
+    QList<qint64> messages(qint64 did, qint64 maxId = 0) const;
     QList<qint64> wallpapers() const;
     QList<qint64> uploads() const;
     QList<qint64> contacts() const;

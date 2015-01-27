@@ -46,6 +46,7 @@ Rectangle {
         anchors.topMargin: 4*Devices.density
         clip: true
         visible: search_frame.text.length == 0
+        onCurrentDialogChanged: messages.maxId = 0
     }
 
     AccountSearchList {
@@ -54,6 +55,15 @@ Rectangle {
         clip: true
         keyword: search_frame.text
         telegramObject: dialogs.telegramObject
+        onCurrentMessageChanged: {
+            if(currentMessage == telegramObject.nullMessage)
+                return
+
+            var dialogId = telegramObject.messageDialogId(currentMessage.id)
+            currentDialog = telegramObject.dialog(dialogId)
+            messages.maxId = currentMessage.id + 40
+            messages.focusOn(currentMessage.id)
+        }
     }
 
     Item {

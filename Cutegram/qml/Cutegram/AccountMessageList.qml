@@ -21,6 +21,8 @@ Rectangle {
     property bool isActive: View.active && View.visible
     property bool messageDraging: false
 
+    property alias maxId: messages_model.maxId
+
     property EncryptedChat enchat: telegramObject.encryptedChat(currentDialog.peer.userId)
     property int enChatUid: enchat.adminId==telegramObject.me? enchat.participantId : enchat.adminId
 
@@ -42,6 +44,14 @@ Rectangle {
         onCountChanged: {
             if(count>1 && isActive)
                 messages_model.setReaded()
+        }
+        onRefreshingChanged: {
+            if(focus_msg_timer.msgId) {
+                if(refreshing)
+                    focus_msg_timer.stop()
+                else
+                    focus_msg_timer.restart()
+            }
         }
     }
 
@@ -250,7 +260,22 @@ Rectangle {
         }
     }
 
+    Timer {
+        id: focus_msg_timer
+        interval: 300
+        onTriggered: {
+            var idx = messages_model.indexOf(msgId)
+            mlist.positionViewAtIndex(idx, ListView.Center)
+        }
+        property int msgId
+    }
+
     function sendMessage( txt ) {
         messages_model.sendMessage(txt)
+    }
+
+    function focusOn(msgId) {
+        focus_msg_timer.msgId = msgId
+
     }
 }

@@ -602,9 +602,19 @@ QList<qint64> TelegramQml::dialogs() const
     return p->dialogs_list;
 }
 
-QList<qint64> TelegramQml::messages( qint64 did ) const
+QList<qint64> TelegramQml::messages( qint64 did, qint64 maxId ) const
 {
-    return p->messages_list[did];
+    QList<qint64> res = p->messages_list[did];
+    for(int i=0; maxId && i<res.count(); i++)
+    {
+        if(res.at(i) <= maxId)
+            continue;
+
+        res.removeAt(i);
+        i--;
+    }
+
+    return res;
 }
 
 QList<qint64> TelegramQml::wallpapers() const

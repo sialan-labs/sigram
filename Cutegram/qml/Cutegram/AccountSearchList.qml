@@ -6,6 +6,7 @@ import CutegramTypes 1.0
 Item {
     width: 100
     height: 62
+    visible: smodel.count != 0
 
     property alias telegramObject: smodel.telegram
     property alias keyword: smodel.keyword
@@ -37,7 +38,6 @@ Item {
         anchors.fill: parent
         anchors.leftMargin: 6*Devices.density
         model: smodel
-        visible: count != 0
         delegate: Item {
             id: ditem
             width: listv.width
@@ -48,6 +48,8 @@ Item {
             property int dialogId: telegramObject.messageDialogId(message.id)
             property Dialog dialog: telegramObject.dialog(dialogId)
             property User user: telegramObject.user(message.fromId)
+
+            property variant msgDate: CalendarConv.fromTime_t(message.date)
 
             property bool selected: currentMessage==item
 
@@ -86,12 +88,66 @@ Item {
                 }
 
                 Text {
+                    id: time_txt
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    anchors.margins: 4*Devices.density
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: 9*Devices.fontDensity
+                    color: "#999999"
+                    text: Cutegram.getTimeString(msgDate)
+                }
+
+                Text {
+                    id: title_txt
+                    anchors.top: parent.top
                     anchors.left: img.right
                     anchors.right: parent.right
-                    anchors.margins: 8*Devices.density
-                    anchors.verticalCenter: parent.verticalCenter
-                    maximumLineCount: 2
+                    anchors.bottom: parent.verticalCenter
+                    anchors.leftMargin: 8*Devices.density
+                    anchors.rightMargin: 8*Devices.density
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: 10*Devices.fontDensity
+                    maximumLineCount: 1
                     elide: Text.ElideRight
+                    verticalAlignment: Text.AlignVCenter
+                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                    color: "#ffffff"
+                    text: {
+                        var isChat = dialog.peer.chatId != 0
+                        var fromName = user.firstName + " " + user.lastName
+                        fromName = fromName.trim()
+                        if(message.out)
+                            fromName = qsTr("Me")
+
+                        var result
+                        if(isChat) {
+                            var chat = telegramObject.chat(dialogId)
+                            result = qsTr("%1 on %2").arg(fromName).arg(chat.title)
+                        } else {
+                            var toUser = telegramObject.user(dialogId)
+                            var userName = toUser.firstName + " " + toUser.lastName
+                            userName = userName.trim()
+                            if(!message.out)
+                                userName = qsTr("Me")
+
+                            result = qsTr("%1 to %2").arg(fromName).arg(userName)
+                        }
+
+                        return result
+                    }
+                }
+
+                Text {
+                    anchors.left: img.right
+                    anchors.right: parent.right
+                    anchors.top: parent.verticalCenter
+                    anchors.bottom: parent.bottom
+                    anchors.leftMargin: 8*Devices.density
+                    anchors.rightMargin: 8*Devices.density
+                    maximumLineCount: 1
+                    elide: Text.ElideRight
+                    verticalAlignment: Text.AlignVCenter
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     text: message.message
                     font.family: AsemanApp.globalFont.family
