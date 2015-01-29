@@ -75,6 +75,7 @@ OTHER_FILES += \
     objects/templates/initialize.template
 
 TRANSLATIONS += \
+    translations/lang-ast.qm \
     translations/lang-en.qm \
     translations/lang-fa.qm \
     translations/lang-de.qm \
