@@ -163,7 +163,7 @@ public:
     Q_INVOKABLE ContactObject *contact(qint64 id) const;
     Q_INVOKABLE EncryptedChatObject *encryptedChat(qint64 id) const;
 
-    Q_INVOKABLE FileLocationObject *locationOf(qint64 id, qint64 dcId, qint64 accessHash);
+    Q_INVOKABLE FileLocationObject *locationOf(qint64 id, qint64 dcId, qint64 accessHash, QObject *parent);
     Q_INVOKABLE FileLocationObject *locationOfDocument(DocumentObject *doc);
     Q_INVOKABLE FileLocationObject *locationOfVideo(VideoObject *vid);
     Q_INVOKABLE FileLocationObject *locationOfAudio(AudioObject *aud);
@@ -334,6 +334,8 @@ private:
     void insertContact( const Contact & contact );
     void insertEncryptedMessage(const EncryptedMessage & emsg);
     void insertEncryptedChat(const EncryptedChat & c);
+
+    QString fileLocation_old( FileLocationObject *location );
 
 protected:
     void timerEvent(QTimerEvent *e);

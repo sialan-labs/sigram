@@ -70,5 +70,7 @@
         <file>qml/Cutegram/files/aseman-contact.png</file>
         <file>qml/Cutegram/files/icon-normal.png</file>
         <file>qml/Cutegram/AccountSearchList.qml</file>
+        <file>qml/Cutegram/DialogFileViewer.qml</file>
+        <file>qml/Cutegram/files/files.png</file>
     </qresource>
 </RCC>

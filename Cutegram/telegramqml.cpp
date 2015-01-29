@@ -473,13 +473,13 @@ EncryptedChatObject *TelegramQml::encryptedChat(qint64 id) const
     return res;
 }
 
-FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 accessHash)
+FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 accessHash, QObject *parent)
 {
     if( p->accessHashes.contains(accessHash) )
         return p->accessHashes.value(accessHash);
 
     FileLocation location(FileLocation::typeFileLocation);
-    FileLocationObject *obj = new FileLocationObject(location,this);
+    FileLocationObject *obj = new FileLocationObject(location,parent);
     obj->setId(id);
     obj->setDcId(dcId);
     obj->setAccessHash(accessHash);
@@ -490,7 +490,7 @@ FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 acces
 
 FileLocationObject *TelegramQml::locationOfDocument(DocumentObject *doc)
 {
-    FileLocationObject *res = locationOf(doc->id(), doc->dcId(), doc->accessHash());
+    FileLocationObject *res = locationOf(doc->id(), doc->dcId(), doc->accessHash(), doc);
     res->setFileName(doc->fileName());
     res->setMimeType(doc->mimeType());
 
@@ -499,12 +499,12 @@ FileLocationObject *TelegramQml::locationOfDocument(DocumentObject *doc)
 
 FileLocationObject *TelegramQml::locationOfVideo(VideoObject *vid)
 {
-    return locationOf(vid->id(), vid->dcId(), vid->accessHash());
+    return locationOf(vid->id(), vid->dcId(), vid->accessHash(), vid);
 }
 
 FileLocationObject *TelegramQml::locationOfAudio(AudioObject *aud)
 {
-    return locationOf(aud->id(), aud->dcId(), aud->accessHash());
+    return locationOf(aud->id(), aud->dcId(), aud->accessHash(), aud);
 }
 
 DialogObject *TelegramQml::fakeDialogObject(qint64 id, bool isChat)
@@ -582,6 +582,57 @@ EncryptedMessageObject *TelegramQml::nullEncryptedMessage() const
 }
 
 QString TelegramQml::fileLocation(FileLocationObject *l)
+{
+    QObject *obj = l;
+    qint64 dId = 0;
+    while(obj)
+    {
+        const QMetaObject *mobj = obj->metaObject();
+        if(mobj == &ChatObject::staticMetaObject)
+        {
+            dId = static_cast<ChatObject*>(obj)->id();
+            break;
+        }
+        else
+        if(mobj == &UserObject::staticMetaObject)
+        {
+            dId = static_cast<UserObject*>(obj)->id();
+            break;
+        }
+        else
+        if(mobj == &MessageObject::staticMetaObject)
+        {
+            dId = messageDialogId( static_cast<MessageObject*>(obj)->id() );
+            break;
+        }
+        obj = obj->parent();
+    }
+
+    const QString & dpath = downloadPath() + "/" + QString::number(dId);
+    const QString & fname = l->accessHash()!=0? QString::number(l->id()) :
+                                                QString("%1_%2").arg(l->volumeId()).arg(l->localId());
+
+    QDir().mkpath(dpath);
+
+    const QStringList & av_files = QDir(dpath).entryList(QDir::Files);
+    foreach( const QString & f, av_files )
+        if( QFileInfo(f).baseName() == fname )
+            return dpath + "/" + f;
+
+    QString result = dpath + "/" + fname;
+    const QString & old_path = fileLocation_old(l);
+    if(QFileInfo::exists(old_path))
+    {
+        QFileInfo file(old_path);
+        result += "." + file.suffix();
+
+        QFile::rename(old_path, result);
+    }
+
+    return result;
+}
+
+QString TelegramQml::fileLocation_old(FileLocationObject *l)
 {
     const QString & dpath = downloadPath();
     const QString & fname = l->accessHash()!=0? QString::number(l->id()) :

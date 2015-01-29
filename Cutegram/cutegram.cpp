@@ -29,6 +29,7 @@
 #include "telegramqml.h"
 #include "profilesmodel.h"
 #include "telegrammessagesmodel.h"
+#include "dialogfilesmodel.h"
 #include "telegramdialogsmodel.h"
 #include "telegramwallpapersmodel.h"
 #include "telegramsearchmodel.h"
@@ -131,6 +132,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<ProfilesModel>("Cutegram", 1, 0, "ProfilesModel");
     qmlRegisterType<ProfilesModelItem>("Cutegram", 1, 0, "ProfilesModelItem");
     qmlRegisterType<TelegramMessagesModel>("Cutegram", 1, 0, "MessagesModel");
+    qmlRegisterType<DialogFilesModel>("Cutegram", 1, 0, "DialogFilesModel");
     qmlRegisterType<TelegramWallpapersModel>("Cutegram", 1, 0, "WallpapersModel");
     qmlRegisterType<TelegramDialogsModel>("Cutegram", 1, 0, "DialogsModel");
     qmlRegisterType<TelegramContactsModel>("Cutegram", 1, 0, "ContactsModel");
@@ -143,8 +145,12 @@ Cutegram::Cutegram(QObject *parent) :
     init_languages();
 }
 
-QSize Cutegram::imageSize(const QString &path)
+QSize Cutegram::imageSize(const QString &p)
 {
+    QString path = p;
+    if(path.left(7) == "file://")
+        path = path.mid(7);
+
     QImageReader img(path);
     return img.size();
 }

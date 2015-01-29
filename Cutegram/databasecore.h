@@ -30,6 +30,9 @@ public slots:
     void readFullDialogs();
     void readMessages(const DbPeer &peer, int offset, int limit);
 
+    void setValue(const QString &key, const QString &value);
+    QString value(const QString &key) const;
+
     void deleteMessage(qint64 msgId);
     void deleteDialog(qint64 dlgId);
 
@@ -38,6 +41,7 @@ signals:
     void chatFounded(const DbChat &chat);
     void dialogFounded(const DbDialog &dialog, bool encrypted);
     void messageFounded(const DbMessage &message);
+    void valueChanged(const QString &value);
 
 private:
     void readDialogs();
@@ -46,6 +50,11 @@ private:
 
     void init_buffer();
     void update_db();
+    void update_moveFiles();
+    QHash<qint64, QStringList> userFiles();
+    QHash<qint64, QStringList> userFilesOf(const QString &mediaColumn);
+    QHash<qint64, QStringList> userPhotos();
+    QHash<qint64, QStringList> userProfilePhotosOf(const QString &table);
 
     QList<qint32> stringToUsers(const QString &str);
     QString usersToString( const QList<qint32> &users );

@@ -77,8 +77,8 @@ void UserData::disconnect()
 void UserData::reconnect()
 {
     p->db.open();
-    update_db();
     init_buffer();
+    update_db();
 }
 
 void UserData::addMute(int id)

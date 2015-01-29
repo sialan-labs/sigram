@@ -266,6 +266,7 @@ Rectangle {
         onTriggered: {
             var idx = messages_model.indexOf(msgId)
             mlist.positionViewAtIndex(idx, ListView.Center)
+            msgId = 0
         }
         property int msgId
     }

@@ -125,4 +125,25 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
         onClicked: header.clicked()
     }
+
+    Button {
+        id: files_btn
+        anchors.right: parent.right
+        height: parent.height
+        width: height
+        icon: "files/files.png"
+        iconHeight: 18*Devices.density
+        cursorShape: Qt.PointingHandCursor
+        highlightColor: "#1f000000"
+        onClicked: {
+            if(currentDialog == telegramObject.nullDialog)
+                return
+
+            var dId = currentDialog.peer.chatId
+            if(dId == 0)
+                dId = currentDialog.peer.userId
+
+            Qt.openUrlExternally("file://" + telegramObject.downloadPath + "/" + dId)
+        }
+    }
 }
