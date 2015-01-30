@@ -73,13 +73,11 @@ Item {
         property string imgPath: isChat? chat.photo.photoSmall.download.location : user.photo.photoSmall.download.location
     }
 
-    ThresholdMask {
+    OpacityMask {
         id: threshold
         anchors.fill: img
         source: img
         maskSource: mask
-        threshold: circleMode? 0.4 : 0
-        spread: circleMode? 0.6 : 0
         visible: circleMode
     }
 }

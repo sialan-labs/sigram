@@ -12,7 +12,8 @@ Item {
     property Dialog currentDialog: telegramObject.dialog(0)
 
     property bool unminimumForce: false
-    property bool minimum: Cutegram.minimumDialogs && !unminimumForce
+    property bool minimum: Cutegram.minimumDialogs && !unminimumForce && !forceUnminimum
+    property bool forceUnminimum: false
 
     property bool showLastMessage: Cutegram.showLastMessage
 

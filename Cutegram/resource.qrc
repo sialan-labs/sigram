@@ -72,5 +72,6 @@
         <file>qml/Cutegram/AccountSearchList.qml</file>
         <file>qml/Cutegram/DialogFileViewer.qml</file>
         <file>qml/Cutegram/files/files.png</file>
+        <file>qml/Cutegram/AccountsTabList.qml</file>
     </qresource>
 </RCC>

@@ -46,6 +46,7 @@ Rectangle {
         anchors.topMargin: 4*Devices.density
         clip: true
         visible: search_frame.text.length == 0
+        forceUnminimum: search_frame.lineFocus || search_frame.text.length != 0
         onCurrentDialogChanged: messages.maxId = 0
     }
 
