@@ -1044,7 +1044,7 @@ void TelegramQml::getFileJustCheck(FileLocationObject *l)
         return;
 
     const QString & download_file = fileLocation(l);
-    if( QFile::exists(download_file) )
+    if( QFile::exists(download_file) && !l->download()->file()->isOpen() )
         l->download()->setLocation("file://"+download_file);
 }
 
