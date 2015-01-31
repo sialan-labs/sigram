@@ -16,6 +16,8 @@ Rectangle {
 
     property bool isActive: View.active && View.visible
 
+    signal activeRequest()
+
     onIsActiveChanged: {
         telegram.online = isActive
     }
@@ -42,6 +44,7 @@ Rectangle {
                 if( view )
                     view.currentDialog = telegram.messageDialog(msg.id)
 
+                acc_frame.activeRequest()
                 Cutegram.active()
             } else
             if( action == notifyActMute ) {

@@ -60,6 +60,31 @@ Item {
         clip: true
         model: dialogs_model
 
+        currentIndex: -1
+        highlightMoveDuration: 0
+        highlight: Item {
+            width: dlist.width
+            height: showLastMessage? 60*Devices.density : 54*Devices.density
+
+            Rectangle {
+                anchors.fill: parent
+                opacity: 0.2
+                anchors.topMargin: 3*Devices.density
+                anchors.bottomMargin: 3*Devices.density
+                color: Cutegram.highlightColor
+            }
+
+            Rectangle {
+                x: ad_list.width - width/2 - dlist.x
+                anchors.verticalCenter: parent.verticalCenter
+                transformOrigin: Item.Center
+                rotation: 45
+                width: 16*Devices.density
+                height: width
+                color: "#E4E9EC"
+            }
+        }
+
         delegate: Item {
             id: list_item
             width: dlist.width
@@ -87,23 +112,10 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                opacity: marea.pressed? 0.3 : (selected? 0.2 : 0)
+                opacity: marea.pressed && !selected? 0.3 : 0
                 anchors.topMargin: 3*Devices.density
                 anchors.bottomMargin: 3*Devices.density
-                color: {
-                    var result = "#00000000"
-                    if(marea.pressed || selected) {
-                        result = Cutegram.highlightColor
-                        if(dItem.encrypted) {
-                            var r = result.r
-                            var g = result.g
-                            var b = result.b
-                            result = Qt.rgba(1-r, 1-g, 1-b, 1)
-                        }
-                    }
-
-                    return result
-                }
+                color: Cutegram.highlightColor
             }
 
             Item {
@@ -233,8 +245,9 @@ Item {
                                 break;
                             }
                         }
-                    } else{
+                    } else {
                         currentDialog = list_item.dItem
+                        dlist.currentIndex = index
                     }
                 }
             }
@@ -260,18 +273,10 @@ Item {
             Timer {
                 id: switch_dialog_timer
                 interval: 100
-                onTriggered: ad_list.currentDialog = dItem
-            }
-
-            Rectangle {
-                x: ad_list.width - width/2 - dlist.x
-                anchors.verticalCenter: parent.verticalCenter
-                transformOrigin: Item.Center
-                rotation: 45
-                width: 16*Devices.density
-                height: width
-                color: "#E4E9EC"
-                visible: selected
+                onTriggered: {
+                    currentDialog = list_item.dItem
+                    dlist.currentIndex = index
+                }
             }
         }
 

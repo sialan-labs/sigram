@@ -25,9 +25,12 @@ Item {
     height: 62
     clip: true
 
+    property bool active
+
     QtObject {
         id: privates
         property variant menu
+        property variant activeMenu
     }
 
     MouseArea{
@@ -93,6 +96,11 @@ Item {
                 menu.show = true
                 item = itemComponent.createObject(menu_frame)
                 BackHandler.pushHandler(slide_menu, slide_menu.end)
+                active = true
+            }
+            Component.onDestruction: {
+                if(privates.activeMenu == menu)
+                    active = false
             }
 
             function end(){
@@ -115,5 +123,6 @@ Item {
             privates.menu.end()
 
         privates.menu = menu_component.createObject(slide_menu, {"itemComponent":component})
+        privates.activeMenu = privates.menu
     }
 }

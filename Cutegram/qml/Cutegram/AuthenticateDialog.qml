@@ -9,22 +9,17 @@ Rectangle {
     signal accepted( string number )
 
     Rectangle {
+        anchors.fill: header
+        color: backColor1
+    }
+
+    Header {
         id: header
-        anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: View.statusBarHeight + 50*Devices.density
-        color: backColor1
-
-        Text {
-            anchors.fill: parent
-            anchors.margins: 12*Devices.density
-            verticalAlignment: Text.AlignVCenter
-            font.family: AsemanApp.globalFont.family
-            font.pixelSize: 13*Devices.fontDensity
-            text: qsTr("Authenticating")
-            color: textColor0
-        }
+        anchors.top: parent.top
+        text: qsTr("Authenticating")
+        backButton: profiles.count != 0
     }
 
     Item {

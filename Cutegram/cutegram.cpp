@@ -194,13 +194,7 @@ void Cutegram::start()
     if( p->viewer )
         return;
 
-    p->viewer = new AsemanQuickView(
-#ifdef QT_DEBUG
-                AsemanQuickView::AllExceptLogger
-#else
-                AsemanQuickView::AllComponents
-#endif
-                );
+    p->viewer = new AsemanQuickView( AsemanQuickView::AllExceptLogger );
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Cutegram/main.qml")));
 
@@ -228,21 +222,15 @@ void Cutegram::restart()
     quit();
 }
 
-void Cutegram::logout()
+void Cutegram::logout(const QString &phone)
 {
     const QString &home = AsemanApplication::homePath();
-    const QStringList &profiles = QDir(home).entryList(QDir::Dirs|QDir::NoDotAndDotDot);
-    foreach(const QString &profile, profiles)
-    {
-        const QString &ppath = home + "/" + profile;
-        QFile::remove(ppath + "/auth");
-        QFile::remove(ppath + "/config");
-        QFile::remove(ppath + "/secret");
-        QFile::remove(ppath + "/database.db");
-        QFile::remove(ppath + "/database.db-journal");
-//        QFile::remove(ppath + "/userdata.db");
-    }
-    QFile::remove(home + "/profiles.sqlite");
+    const QString &ppath = home + "/" + phone;
+    QFile::remove(ppath + "/auth");
+    QFile::remove(ppath + "/config");
+    QFile::remove(ppath + "/secret");
+    QFile::remove(ppath + "/database.db");
+    QFile::remove(ppath + "/database.db-journal");
 
     restart();
 }

@@ -15,7 +15,7 @@ Rectangle {
     Flickable {
         anchors.fill: parent
         contentWidth: column.width
-        contentHeight: column.height
+        contentHeight: conf_frame.height
         flickableDirection: Flickable.VerticalFlick
 
         Item {
@@ -118,7 +118,7 @@ Rectangle {
                             font.family: AsemanApp.globalFont.family
                             font.pixelSize: 12*Devices.fontDensity
                             color: "#333333"
-                            text: user.phone
+                            text: telegram.phoneNumber
                         }
                     }
                 }
@@ -383,7 +383,10 @@ Rectangle {
                 textColor: "#ffffff"
                 height: 40*Devices.density
                 text: qsTr("Logout")
-                onClicked: Cutegram.logout()
+                onClicked: {
+                    if( profiles.remove(telegram.phoneNumber) )
+                        Cutegram.logout(telegram.phoneNumber)
+                }
             }
         }
     }

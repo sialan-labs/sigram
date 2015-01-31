@@ -75,7 +75,7 @@ Item {
         id: title_txt
         font.pixelSize: 16*Devices.fontDensity
         font.family: AsemanApp.globalFont.family
-        y: parent.height/2 - height/2 + 2*Devices.density
+        y: parent.height/2 - height/2
         anchors.horizontalCenter: parent.horizontalCenter
         color: header.light? "#ffffff" : "#333333"
     }

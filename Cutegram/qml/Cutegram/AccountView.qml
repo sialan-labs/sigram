@@ -29,8 +29,8 @@ Rectangle {
         anchors.left: dialogs.left
         anchors.top: parent.top
         anchors.right: dialogs.right
-        anchors.margins: 8*Devices.density
-        height: 40*Devices.density
+        anchors.margins: 10*Devices.density
+        height: 36*Devices.density
         color: "#333333"
         textColor: "#ffffff"
         clearButton: true

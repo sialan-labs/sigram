@@ -119,7 +119,7 @@ public:
 public slots:
     void start();
     void restart();
-    void logout();
+    void logout(const QString & phone);
     void close();
     void quit();
     void contact();
