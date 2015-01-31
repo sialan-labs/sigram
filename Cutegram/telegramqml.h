@@ -203,6 +203,7 @@ public slots:
 
     void deleteCutegramDialog();
     void messagesCreateChat( const QList<qint32> & users, const QString & topic );
+    void messagesDeleteHistory(qint64 peerId);
 
     void messagesCreateEncryptedChat(qint64 userId);
     void messagesAcceptEncryptedChat(qint32 chatId);
@@ -297,6 +298,7 @@ private slots:
     void messagesSendDocument_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
     void messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> & dialogs, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
     void messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
+    void messagesDeleteHistory_slt(qint64 id, qint32 pts, qint32 seq, qint32 offset);
 
     void messagesSearch_slt(qint64 id, qint32 sliceCount, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
 

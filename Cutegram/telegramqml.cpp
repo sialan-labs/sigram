@@ -96,6 +96,7 @@ public:
     QHash<qint64,FileLocationObject*> downloads;
     QHash<qint64,MessageObject*> uploads;
     QHash<qint64,FileLocationObject*> accessHashes;
+    QHash<qint64,qint64> delete_history_requests;
 
     QSet<QObject*> garbages;
 
@@ -829,6 +830,22 @@ void TelegramQml::messagesCreateChat(const QList<qint32> &users, const QString &
     p->telegram->messagesCreateChat(inputUsers, topic);
 }
 
+void TelegramQml::messagesDeleteHistory(qint64 peerId)
+{
+    if(!p->telegram)
+        return;
+
+    bool isChat = p->chats.contains(peerId);
+    InputPeer peer(getInputPeer(peerId));
+    if(isChat)
+        peer.setChatId(peerId);
+    else
+        peer.setUserId(peerId);
+
+    qint64 request = p->telegram->messagesDeleteHistory(peer);
+    p->delete_history_requests.insert(request, peerId);
+}
+
 void TelegramQml::messagesCreateEncryptedChat(qint64 userId)
 {
     if( !p->telegram )
@@ -1192,6 +1209,8 @@ void TelegramQml::try_init()
              SLOT(messagesForwardMessage_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)) );
     connect( p->telegram, SIGNAL(messagesDeleteMessagesAnswer(qint64,QList<qint32>)),
              SLOT(messagesDeleteMessages_slt(qint64,QList<qint32>)) );
+    connect( p->telegram, SIGNAL(messagesDeleteHistoryAnswer(qint64,qint32,qint32,qint32)),
+             SLOT(messagesDeleteHistory_slt(qint64,qint32,qint32,qint32)) );
 
     connect( p->telegram, SIGNAL(messagesSearchAnswer(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)),
              SLOT(messagesSearch_slt(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)) );
@@ -1679,6 +1698,30 @@ void TelegramQml::messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QLi
         insertMessage(m);
 
     emit messagesChanged(false);
+}
+
+void TelegramQml::messagesDeleteHistory_slt(qint64 id, qint32 pts, qint32 seq, qint32 offset)
+{
+    Q_UNUSED(pts)
+    Q_UNUSED(seq)
+    Q_UNUSED(offset)
+
+    qint64 peerId = p->delete_history_requests.value(id);
+    if(!peerId)
+        return;
+
+    p->database->deleteHistory(peerId);
+
+    const QList<qint64> & messages = p->messages_list.value(id);
+    foreach(qint64 msgId, messages)
+    {
+        p->garbages.insert( p->messages.take(msgId) );
+        p->messages_list[peerId].removeAll(msgId);
+    }
+
+    startGarbageChecker();
+    emit messagesChanged(false);
+    timerUpdateDialogs(3000);
 }
 
 void TelegramQml::messagesSearch_slt(qint64 id, qint32 sliceCount, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users)

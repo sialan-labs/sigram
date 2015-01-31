@@ -31,6 +31,7 @@ public slots:
 
     void deleteMessage(qint64 msgId);
     void deleteDialog(qint64 dlgId);
+    void deleteHistory(qint64 dlgId);
 
 signals:
     void userFounded(const User &user);

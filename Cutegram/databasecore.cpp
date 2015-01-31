@@ -311,18 +311,46 @@ QString DatabaseCore::value(const QString &key) const
 
 void DatabaseCore::deleteMessage(qint64 msgId)
 {
+    begin();
     QSqlQuery query( p->db );
     query.prepare("DELETE FROM Messages WHERE id=:id" );
     query.bindValue( ":id" , msgId );
-    query.exec();
+
+    bool res = query.exec();
+    if(!res)
+        qDebug() << __FUNCTION__ << query.lastError();
+
+    commit();
 }
 
 void DatabaseCore::deleteDialog(qint64 dlgId)
 {
+    begin();
     QSqlQuery query( p->db );
     query.prepare("DELETE FROM Dialogs WHERE peer=:peer" );
     query.bindValue( ":peer" , dlgId );
-    query.exec();
+
+    bool res = query.exec();
+    if(!res)
+        qDebug() << __FUNCTION__ << query.lastError();
+
+    commit();
+}
+
+void DatabaseCore::deleteHistory(qint64 dlgId)
+{
+    begin();
+    QSqlQuery query( p->db );
+    query.prepare("DELETE FROM Messages WHERE (toPeerType=:ctype AND toId=:peer) OR (toPeerType=:utype AND out=1 AND toId=:peer) OR (toPeerType=:utype AND out=0 AND fromId=:peer)" );
+    query.bindValue( ":peer" , dlgId );
+    query.bindValue( ":ctype", static_cast<qint64>(Peer::typePeerChat) );
+    query.bindValue( ":utype", static_cast<qint64>(Peer::typePeerUser) );
+
+    bool res = query.exec();
+    if(!res)
+        qDebug() << __FUNCTION__ << query.lastError();
+
+    commit();
 }
 
 void DatabaseCore::readDialogs()

@@ -37,7 +37,9 @@ class AsemanDesktopTools : public QObject
     Q_PROPERTY(int desktopSession READ desktopSession NOTIFY desktopSessionChanged)
     Q_PROPERTY(QStringList fontFamilies READ fontFamilies NOTIFY fakeSignal)
     Q_PROPERTY(QString menuStyle READ menuStyle WRITE setMenuStyle NOTIFY menuStyleChanged)
+
     Q_ENUMS(DesktopSession)
+    Q_ENUMS(YesOrNoType)
 
     Q_OBJECT
 public:
@@ -52,6 +54,13 @@ public:
         Kde,
         Windows,
         Mac
+    };
+
+    enum YesOrNoType {
+        Warning,
+        Question,
+        Information,
+        Critical
     };
 
     int desktopSession() const;
@@ -73,6 +82,7 @@ public slots:
     QFont getFont(QWindow *window = 0, const QString &title = QString(), const QFont &font = QFont());
     QColor getColor(const QColor &color = QColor()) const;
     int showMenu( const QStringList & actions, QPoint point = QPoint() );
+    bool yesOrNo(QWindow *window, const QString &title, const QString &text, int type = Warning);
 
 signals:
     void titleBarColorChanged();

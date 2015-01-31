@@ -31,6 +31,7 @@
 #include <QFontDialog>
 #include <QMenu>
 #include <QAction>
+#include <QMessageBox>
 #endif
 
 class AsemanDesktopToolsPrivate
@@ -496,6 +497,35 @@ int AsemanDesktopTools::showMenu(const QStringList &actions, QPoint point)
     return pointers.indexOf(res);
 #else
     return -1;
+#endif
+}
+
+bool AsemanDesktopTools::yesOrNo(QWindow *window, const QString &title, const QString &text, int type)
+{
+    Q_UNUSED(window)
+#ifdef DESKTOP_DEVICE
+    switch(type)
+    {
+    case Warning:
+        return QMessageBox::warning(0, title, text, QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes;
+        break;
+
+    case Information:
+        return QMessageBox::information(0, title, text, QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes;
+        break;
+
+    case Question:
+        return QMessageBox::question(0, title, text, QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes;
+        break;
+
+    case Critical:
+        return QMessageBox::critical(0, title, text, QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes;
+        break;
+    }
+
+    return false;
+#else
+    return false;
 #endif
 }
 

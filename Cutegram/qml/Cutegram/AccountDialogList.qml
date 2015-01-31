@@ -225,7 +225,8 @@ Item {
                             res = Cutegram.showMenu(actions)
                             switch(res) {
                             case 0:
-                                telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId)
+                                if( Desktop.yesOrNo(View, qsTr("Delete secret chat"), qsTr("Are you sure about deleting this secret chat?")) )
+                                    telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId)
                                 break;
                             }
                         } else if(user.id == telegramObject.cutegramId) {
@@ -237,11 +238,26 @@ Item {
                                 break;
                             }
                         } else if(isChat) {
-                            actions = [qsTr("Leave")]
+                            actions = [qsTr("Leave"), qsTr("Delete History")]
                             res = Cutegram.showMenu(actions)
                             switch(res) {
                             case 0:
-                                telegramObject.messagesDeleteChatUser(dItem.peer.chatId, telegramObject.me)
+                                if( Desktop.yesOrNo(View, qsTr("Leave the group"), qsTr("Are you sure about leaving this group?")) )
+                                    telegramObject.messagesDeleteChatUser(dItem.peer.chatId, telegramObject.me)
+                                break;
+
+                            case 1:
+                                if( Desktop.yesOrNo(View, qsTr("Delete History"), qsTr("Are you sure about deleting history?")) )
+                                    telegramObject.messagesDeleteHistory(dItem.peer.chatId)
+                                break;
+                            }
+                        } else {
+                            actions = [qsTr("Delete History")]
+                            res = Cutegram.showMenu(actions)
+                            switch(res) {
+                            case 0:
+                                if( Desktop.yesOrNo(View, qsTr("Delete History"), qsTr("Are you sure about deleting history?")) )
+                                    telegramObject.messagesDeleteHistory(dItem.peer.userId)
                                 break;
                             }
                         }

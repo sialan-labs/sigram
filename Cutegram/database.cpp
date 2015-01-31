@@ -95,6 +95,11 @@ void Database::deleteDialog(qint64 dlgId)
     QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(qint64,dlgId));
 }
 
+void Database::deleteHistory(qint64 dlgId)
+{
+    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(qint64,dlgId));
+}
+
 void Database::userFounded_slt(const DbUser &user)
 {
     emit userFounded(user.user);
