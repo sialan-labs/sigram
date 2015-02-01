@@ -45,10 +45,9 @@ Rectangle {
 
     Text {
         id: secret_txt
-        anchors.bottom: secret_img.bottom
+        anchors.verticalCenter: secret_img.verticalCenter
         anchors.left: secret_img.right
         anchors.leftMargin: 8*Devices.density
-        anchors.bottomMargin: -8*Devices.density
         font.pixelSize: 10*Devices.fontDensity
         font.family: AsemanApp.globalFont.family
         text: qsTr("Secret chat (experimental)")
@@ -131,7 +130,7 @@ Rectangle {
         anchors.right: parent.right
         height: parent.height
         width: height
-        icon: "files/files.png"
+        icon: currentDialog.encrypted? "files/files-light.png" : "files/files.png"
         iconHeight: 18*Devices.density
         cursorShape: Qt.PointingHandCursor
         highlightColor: "#1f000000"
@@ -143,6 +142,7 @@ Rectangle {
             if(dId == 0)
                 dId = currentDialog.peer.userId
 
+            Tools.mkDir(telegramObject.downloadPath + "/" + dId)
             Qt.openUrlExternally("file://" + telegramObject.downloadPath + "/" + dId)
         }
     }

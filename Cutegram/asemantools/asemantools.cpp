@@ -120,6 +120,11 @@ qreal AsemanTools::colorSaturation(const QColor &clr)
     return clr.saturation()/255.0;
 }
 
+void AsemanTools::mkDir(const QString &dir)
+{
+    QDir().mkpath(dir);
+}
+
 QVariantMap AsemanTools::colorHsl(const QColor &clr)
 {
     QVariantMap res;

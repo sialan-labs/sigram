@@ -214,6 +214,24 @@ void DatabaseCore::insertMessage(const DbMessage &dmessage)
     insertVideo(media.video());
 }
 
+void DatabaseCore::insertMediaEncryptedKeys(qint64 mediaId, const QByteArray &key, const QByteArray &iv)
+{
+    begin();
+
+    QSqlQuery query(p->db);
+    query.prepare("INSERT OR REPLACE INTO MediaKeys (id, key, iv) VALUES (:id, :key, :iv);");
+    query.bindValue(":id" ,mediaId );
+    query.bindValue(":key",key );
+    query.bindValue(":iv" ,iv );
+
+    bool res = query.exec();
+    if(!res)
+    {
+        qDebug() << __FUNCTION__ << query.lastError();
+        return;
+    }
+}
+
 void DatabaseCore::readFullDialogs()
 {
     readUsers();
@@ -289,6 +307,10 @@ void DatabaseCore::readMessages(const DbPeer &dpeer, int offset, int limit)
         dmsg.message = message;
 
         emit messageFounded(dmsg);
+
+        const QPair<QByteArray, QByteArray> & keys = readMediaKey(message.id());
+        if(!keys.first.isNull())
+            emit mediaKeyFounded(message.id(), keys.first, keys.second);
     }
 }
 
@@ -319,8 +341,6 @@ void DatabaseCore::deleteMessage(qint64 msgId)
     bool res = query.exec();
     if(!res)
         qDebug() << __FUNCTION__ << query.lastError();
-
-    commit();
 }
 
 void DatabaseCore::deleteDialog(qint64 dlgId)
@@ -333,8 +353,6 @@ void DatabaseCore::deleteDialog(qint64 dlgId)
     bool res = query.exec();
     if(!res)
         qDebug() << __FUNCTION__ << query.lastError();
-
-    commit();
 }
 
 void DatabaseCore::deleteHistory(qint64 dlgId)
@@ -349,8 +367,6 @@ void DatabaseCore::deleteHistory(qint64 dlgId)
     bool res = query.exec();
     if(!res)
         qDebug() << __FUNCTION__ << query.lastError();
-
-    commit();
 }
 
 void DatabaseCore::readDialogs()
@@ -386,8 +402,16 @@ void DatabaseCore::readDialogs()
         DbPeer dpeer;
         dpeer.peer = peer;
 
+        bool encrypted = record.value("encrypted").toBool();
+        if(encrypted)
+        {
+            dpeer.peer.setClassType(Peer::typePeerChat);
+            dpeer.peer.setChatId(dpeer.peer.userId());
+            dpeer.peer.setUserId(0);
+        }
+
         readMessages(dpeer, 0, 1);
-        emit dialogFounded(ddlg, record.value("encrypted").toBool());
+        emit dialogFounded(ddlg, encrypted );
     }
 }
 
@@ -545,6 +569,17 @@ void DatabaseCore::update_db()
                       "PRIMARY KEY (gkey))");
         query.exec();
         db_version = 1;
+    }
+    if(db_version == 1)
+    {
+        QSqlQuery query(p->db);
+        query.prepare("CREATE TABLE MediaKeys ("
+                      "id BIGINT PRIMARY KEY NOT NULL,"
+                      "key BLOB NOT NULL,"
+                      "iv BLOB NOT NULL)");
+        query.exec();
+
+        db_version = 2;
     }
 
     setValue("version", QString::number(db_version) );
@@ -1058,6 +1093,31 @@ Photo DatabaseCore::readPhoto(qint64 id)
     photo.setClassType(Photo::typePhoto);
 
     return photo;
+}
+
+QPair<QByteArray, QByteArray> DatabaseCore::readMediaKey(qint64 mediaId)
+{
+    QPair<QByteArray, QByteArray> result;
+
+    QSqlQuery query(p->db);
+    query.prepare("SELECT * FROM MediaKeys WHERE id=:id");
+    query.bindValue(":id", mediaId);
+    bool res = query.exec();
+    if(!res)
+    {
+        qDebug() << __FUNCTION__ << query.lastError();
+        return result;
+    }
+
+    if(!query.next())
+        return result;
+
+    const QSqlRecord &record = query.record();
+
+    result.first = record.value("key").toByteArray();
+    result.second = record.value("iv").toByteArray();
+
+    return result;
 }
 
 QList<PhotoSize> DatabaseCore::readPhotoSize(qint64 pid)

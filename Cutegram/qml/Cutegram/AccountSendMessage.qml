@@ -45,6 +45,30 @@ Rectangle {
         property Dialog lastDialog: telegramObject.nullDialog
     }
 
+    Timer {
+        id: typing_timer
+        interval: 3000
+        onTriggered: finishTyping()
+        function finishTyping() {
+            var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
+            telegramObject.messagesSetTyping(peerId, false)
+        }
+    }
+
+    Timer {
+        id: typing_update_timer
+        interval: 1000
+
+        function startTyping() {
+            typing_timer.restart()
+            if(running)
+                return
+
+            var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
+            telegramObject.messagesSetTyping(peerId, true)
+        }
+    }
+
     Text {
         anchors.centerIn: parent
         visible: currentDialog.peer.userId==telegram.cutegramId
@@ -81,11 +105,21 @@ Rectangle {
             clip: true
             visible: !trash
 
-            onTextChanged: if( text.trim().length == 0 ) text = ""
+            onTextChanged: {
+                if( text.trim().length == 0 )
+                    text = ""
+
+                typing_update_timer.startTyping()
+            }
             Keys.onPressed: {
                 if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
+                {
                     if( event.modifiers == Qt.NoModifier )
                         smsg.send()
+
+                    typing_timer.finishTyping()
+                }
+                else
                 if(event.key == 8204 && event.modifiers == Qt.ShiftModifier)
                 {
                     if(txt.selectedText.length!=0)

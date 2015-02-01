@@ -846,6 +846,32 @@ void TelegramQml::messagesDeleteHistory(qint64 peerId)
     p->delete_history_requests.insert(request, peerId);
 }
 
+void TelegramQml::messagesSetTyping(qint64 peerId, bool stt)
+{
+    if(!p->telegram)
+        return;
+
+    if(p->encchats.contains(peerId))
+    {
+        InputEncryptedChat peer;
+        peer.setChatId(peerId);
+
+//        p->telegram->messagesSetEncryptedTyping(peer, stt);
+    }
+    else
+    {
+        bool isChat = p->chats.contains(peerId);
+        InputPeer peer(getInputPeer(peerId));
+        if(isChat)
+            peer.setChatId(peerId);
+        else
+            peer.setUserId(peerId);
+
+        p->telegram->messagesSetTyping(peer, stt);
+    }
+
+}
+
 void TelegramQml::messagesCreateEncryptedChat(qint64 userId)
 {
     if( !p->telegram )
@@ -1042,6 +1068,19 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
         return;
     }
 
+    QByteArray ekey;
+    QByteArray eiv;
+    QObject *parentObj = l->parent();
+    if(parentObj && parentObj->metaObject() == &DocumentObject::staticMetaObject)
+    {
+        DocumentObject *doc = static_cast<DocumentObject*>(parentObj);
+        if( !doc->encryptKey().isEmpty() )
+        {
+            ekey = doc->encryptKey();
+            eiv  = doc->encryptIv();
+        }
+    }
+
     InputFileLocation input(static_cast<InputFileLocation::InputFileLocationType>(type));
     input.setAccessHash(l->accessHash());
     input.setId(l->id());
@@ -1049,7 +1088,7 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
     input.setSecret(l->secret());
     input.setVolumeId(l->volumeId());
 
-    qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId());
+    qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId(), ekey, eiv);
     p->downloads[fileId] = l;
 
     l->download()->setFileId(fileId);
@@ -2027,7 +2066,31 @@ void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessa
     msg.setOut(false);
     msg.setFromId(chat->adminId()==me()?chat->participantId():chat->adminId());
 
+    bool isMedia = (dmedia.classType() != DecryptedMessageMedia::typeDecryptedMessageMediaEmpty);
+    if(isMedia)
+    {
+        Document doc(Document::typeDocument);
+        doc.setAccessHash(attachment.accessHash());
+        doc.setId(attachment.id());
+        doc.setDcId(attachment.dcId());
+        doc.setSize(attachment.size());
+
+        MessageMedia media(MessageMedia::typeMessageMediaDocument);
+        media.setDocument(doc);
+
+        msg.setMedia(media);
+    }
+
     insertMessage(msg, true);
+
+    MessageObject *msgObj = p->messages.value(msg.id());
+    if(msgObj && isMedia)
+    {
+        msgObj->media()->document()->setEncryptKey(dmedia.key());
+        msgObj->media()->document()->setEncryptIv(dmedia.iv());
+
+        p->database->insertMediaEncryptedKeys(msg.id(), dmedia.key(), dmedia.iv());
+    }
 }
 
 void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint32 mtime, const QByteArray & bytes, qint32 partId, qint32 downloaded, qint32 total)
@@ -2565,6 +2628,27 @@ void TelegramQml::dbChatFounded(const Chat &chat)
 void TelegramQml::dbDialogFounded(const Dialog &dialog, bool encrypted)
 {
     insertDialog(dialog, encrypted, true);
+
+    if(encrypted && p->tsettings)
+    {
+        const QList<SecretChat*> &secrets = p->tsettings->secretChats();
+        foreach(SecretChat *sc, secrets)
+        {
+            if(sc->chatId() != dialog.peer().userId())
+                continue;
+
+            EncryptedChat chat(EncryptedChat::typeEncryptedChat);
+            chat.setAccessHash(sc->accessHash());
+            chat.setAdminId(sc->adminId());
+            chat.setDate(sc->date());
+            chat.setGAOrB(sc->gAOrB());
+            chat.setId(sc->chatId());
+            chat.setKeyFingerprint(sc->keyFingerprint());
+            chat.setParticipantId(sc->participantId());
+
+            insertEncryptedChat(chat);
+        }
+    }
 }
 
 void TelegramQml::dbMessageFounded(const Message &message)

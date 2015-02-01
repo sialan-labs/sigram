@@ -48,6 +48,8 @@ public slots:
     static qreal colorLightness( const QColor & clr );
     static qreal colorSaturation( const QColor & clr );
 
+    static void mkDir(const QString &dir);
+
     static QVariantMap colorHsl( const QColor & clr );
 
     static bool createVideoThumbnail(const QString &video, const QString &output, QString ffmpegPath = QString());

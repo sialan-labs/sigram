@@ -2166,6 +2166,8 @@ class DocumentObject : public QObject
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(qint32 size READ size WRITE setSize NOTIFY sizeChanged)
+    Q_PROPERTY(QByteArray encryptKey READ encryptKey WRITE setEncryptKey NOTIFY encryptKeyChanged)
+    Q_PROPERTY(QByteArray encryptIv READ encryptIv WRITE setEncryptIv NOTIFY encryptIvChanged)
     Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
@@ -2180,6 +2182,8 @@ public:
         _accessHash = another.accessHash();
         _userId = another.userId();
         _size = another.size();
+        _encryptKey = QByteArray();
+        _encryptIv = QByteArray();
         _classType = another.classType();
 
     }
@@ -2294,6 +2298,30 @@ public:
         emit changed();
     }
 
+    QByteArray encryptKey() const {
+        return _encryptKey;
+    }
+
+    void setEncryptKey(QByteArray value) {
+        if( value == _encryptKey )
+            return;
+        _encryptKey = value;
+        emit encryptKeyChanged();
+        emit changed();
+    }
+
+    QByteArray encryptIv() const {
+        return _encryptIv;
+    }
+
+    void setEncryptIv(QByteArray value) {
+        if( value == _encryptIv )
+            return;
+        _encryptIv = value;
+        emit encryptIvChanged();
+        emit changed();
+    }
+
     qint64 classType() const {
         return _classType;
     }
@@ -2328,7 +2356,6 @@ public:
         emit sizeChanged();
         _classType = another.classType();
         emit classTypeChanged();
-
     }
 
 signals:
@@ -2342,6 +2369,8 @@ signals:
     void accessHashChanged();
     void userIdChanged();
     void sizeChanged();
+    void encryptKeyChanged();
+    void encryptIvChanged();
     void classTypeChanged();
 
 private:
@@ -2354,6 +2383,8 @@ private:
     qint64 _accessHash;
     qint32 _userId;
     qint32 _size;
+    QByteArray _encryptKey;
+    QByteArray _encryptIv;
     qint64 _classType;
 
 };

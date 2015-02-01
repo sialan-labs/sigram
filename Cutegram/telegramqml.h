@@ -204,6 +204,7 @@ public slots:
     void deleteCutegramDialog();
     void messagesCreateChat( const QList<qint32> & users, const QString & topic );
     void messagesDeleteHistory(qint64 peerId);
+    void messagesSetTyping(qint64 peerId, bool stt);
 
     void messagesCreateEncryptedChat(qint64 userId);
     void messagesAcceptEncryptedChat(qint32 chatId);

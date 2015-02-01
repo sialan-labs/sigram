@@ -25,6 +25,7 @@ public slots:
     void insertChat(const Chat &chat);
     void insertDialog(const Dialog &dialog, bool encrypted);
     void insertMessage(const Message &message);
+    void insertMediaEncryptedKeys(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
 
     void readFullDialogs();
     void readMessages(const Peer &peer, int offset, int limit);
@@ -38,6 +39,7 @@ signals:
     void chatFounded(const Chat &chat);
     void dialogFounded(const Dialog &dialog, bool encrypted);
     void messageFounded(const Message &message);
+    void mediaKeyFounded(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
 
 private slots:
     void userFounded_slt(const DbUser &user);

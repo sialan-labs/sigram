@@ -26,6 +26,7 @@ public slots:
     void insertChat(const DbChat &chat);
     void insertDialog(const DbDialog &dialog, bool encrypted);
     void insertMessage(const DbMessage &message);
+    void insertMediaEncryptedKeys(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
 
     void readFullDialogs();
     void readMessages(const DbPeer &peer, int offset, int limit);
@@ -42,6 +43,7 @@ signals:
     void chatFounded(const DbChat &chat);
     void dialogFounded(const DbDialog &dialog, bool encrypted);
     void messageFounded(const DbMessage &message);
+    void mediaKeyFounded(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
     void valueChanged(const QString &value);
 
 private:
@@ -72,6 +74,7 @@ private:
     Document readDocument(qint64 id);
     GeoPoint readGeo(qint64 id);
     Photo readPhoto(qint64 id);
+    QPair<QByteArray, QByteArray> readMediaKey(qint64 mediaId);
     QList<PhotoSize> readPhotoSize(qint64 pid);
 
     void begin();

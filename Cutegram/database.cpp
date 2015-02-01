@@ -38,6 +38,8 @@ Database::Database(const QString &phoneNumber, QObject *parent) :
     connect(p->core, SIGNAL(userFounded(DbUser))         , SLOT(userFounded_slt(DbUser))         , Qt::QueuedConnection );
     connect(p->core, SIGNAL(dialogFounded(DbDialog,bool)), SLOT(dialogFounded_slt(DbDialog,bool)), Qt::QueuedConnection );
     connect(p->core, SIGNAL(messageFounded(DbMessage))   , SLOT(messageFounded_slt(DbMessage))   , Qt::QueuedConnection );
+    connect(p->core, SIGNAL(mediaKeyFounded(qint64,QByteArray,QByteArray)),
+            SIGNAL(mediaKeyFounded(qint64,QByteArray,QByteArray)), Qt::QueuedConnection );
 }
 
 void Database::insertUser(const User &user)
@@ -70,6 +72,11 @@ void Database::insertMessage(const Message &message)
     dmsg.message = message;
 
     QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(DbMessage,dmsg));
+}
+
+void Database::insertMediaEncryptedKeys(qint64 mediaId, const QByteArray &key, const QByteArray &iv)
+{
+    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(qint64,mediaId), Q_ARG(QByteArray,key), Q_ARG(QByteArray,iv));
 }
 
 void Database::readFullDialogs()
