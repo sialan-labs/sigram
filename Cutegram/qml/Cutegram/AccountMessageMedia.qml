@@ -154,7 +154,7 @@ Item {
         fillMode: Image.PreserveAspectCrop
         asynchronous: true
         smooth: true
-        visible: media.classType != typeMessageMediaVideo
+        visible: media.classType != typeMessageMediaVideo || fileLocation.length != 0
 
         property size imageSize: Cutegram.imageSize(source)
 
@@ -175,7 +175,10 @@ Item {
                 break;
 
             case typeMessageMediaVideo:
-                result = media.video.thumb.location.download.location;
+                if(fileLocation.length != 0)
+                    result = telegramObject.videoThumbLocation(fileLocation)
+                else
+                    result = media.video.thumb.location.download.location;
                 break;
 
             case typeMessageMediaAudio:
@@ -187,8 +190,8 @@ Item {
                 break;
 
             case typeMessageMediaDocument:
-                if(Cutegram.filsIsImage(locationObj.download.location))
-                    result = locationObj.download.location
+                if(Cutegram.filsIsImage(fileLocation))
+                    result = fileLocation
                 else {
                     result = media.document.thumb.location.download.location
                     if(result.length==0) {
@@ -214,6 +217,21 @@ Item {
     }
 
     Rectangle {
+        id: video_frame
+        color: "#44000000"
+        visible: media.classType == typeMessageMediaVideo && fileLocation.length != 0
+        anchors.fill: media_img
+
+        Image {
+            width: 92*Devices.density
+            height: width
+            sourceSize: Qt.size(width,height)
+            source: video_frame.visible? "files/play.png" : ""
+            anchors.centerIn: parent
+        }
+    }
+
+    Rectangle {
         id: download_frame
         anchors.fill: parent
         color: "#88000000"
@@ -224,8 +242,47 @@ Item {
             font.family: AsemanApp.globalFont.family
             font.pixelSize: 9*Devices.fontDensity
             color: "#ffffff"
-            text: qsTr("Click to Download")
+            text: media.classType==typeMessageMediaUnsupported? qsTr("Unsupported Media") : qsTr("Click to Download")
             visible: !indicator.active
+        }
+
+        Text {
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.margins: 2*Devices.density
+            font.family: AsemanApp.globalFont.family
+            font.pixelSize: 9*Devices.fontDensity
+            color: "#ffffff"
+            text: Math.floor(size/100000)/10 + "KB"
+
+            property int size: {
+                var result = 0
+                switch( media.classType )
+                {
+                case typeMessageMediaPhoto:
+                    break;
+
+                case typeMessageMediaVideo:
+                    result = media.video.size
+                    break;
+
+                case typeMessageMediaDocument:
+                    result = media.document.size
+                    break;
+
+                case typeMessageMediaAudio:
+                    result = media.audio.size
+                    break;
+
+                case typeMessageMediaUnsupported:
+                    break;
+
+                default:
+                    break;
+                }
+
+                return result
+            }
         }
     }
 
@@ -248,7 +305,7 @@ Item {
         light: download_frame.visible
         modern: true
         indicatorSize: 22*Devices.density
-        property bool active: locationObj.download.fileId!=0? locationObj.download.location.length==0 : false
+        property bool active: locationObj.download.fileId!=0? fileLocation.length==0 : false
 
         onActiveChanged: {
             if( active )

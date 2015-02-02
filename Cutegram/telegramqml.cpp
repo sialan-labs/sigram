@@ -635,6 +635,16 @@ QString TelegramQml::fileLocation(FileLocationObject *l)
     return result;
 }
 
+QString TelegramQml::videoThumbLocation(const QString &path)
+{
+    const QString &thumb = path + ".jpg";
+    if(QFileInfo::exists(thumb))
+        return thumb;
+
+    AsemanTools::createVideoThumbnail(path, thumb);
+    return thumb;
+}
+
 QString TelegramQml::fileLocation_old(FileLocationObject *l)
 {
     const QString & dpath = downloadPath();
