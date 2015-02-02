@@ -50,7 +50,7 @@ Rectangle {
         anchors.leftMargin: 8*Devices.density
         font.pixelSize: 10*Devices.fontDensity
         font.family: AsemanApp.globalFont.family
-        text: qsTr("Secret chat (experimental)")
+        text: qsTr("Secret chat")
         color: "#ffffff"
         visible: currentDialog.encrypted
     }

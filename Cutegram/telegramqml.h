@@ -352,6 +352,7 @@ private slots:
     void dbChatFounded(const Chat &chat);
     void dbDialogFounded(const Dialog &dialog, bool encrypted);
     void dbMessageFounded(const Message &message);
+    void dbMediaKeysFounded(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
 
     void refreshUnreadCount();
     void refreshSecretChats();

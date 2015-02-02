@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Secret chat (experimental)</source>
-        <translation>Geheimer Chat (experimentell)</translation>
+        <translation type="vanished">Geheimer Chat (experimentell)</translation>
     </message>
     <message>
         <source>%1 participants</source>
@@ -33,6 +33,10 @@
     <message>
         <source>%1 was online</source>
         <translation>%1 zuletzt online</translation>
+    </message>
+    <message>
+        <source>Secret chat</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -48,6 +52,30 @@
     <message>
         <source>Leave</source>
         <translation>Verlassen</translation>
+    </message>
+    <message>
+        <source>Delete secret chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about deleting this secret chat?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leave the group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about leaving this group?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about deleting history?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -153,6 +181,21 @@
     </message>
 </context>
 <context>
+    <name>AccountSearchList</name>
+    <message>
+        <source>Me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 on %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
@@ -209,6 +252,13 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
 </context>
 <context>
+    <name>AccountView</name>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
@@ -232,11 +282,18 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>Über Cutegram</translation>
+        <translation type="vanished">Über Cutegram</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
         <translation>Geheimen Chat hinzufügen</translation>
+    </message>
+</context>
+<context>
+    <name>AccountsTabList</name>
+    <message>
+        <source>Add Account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

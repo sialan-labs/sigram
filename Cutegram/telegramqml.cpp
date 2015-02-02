@@ -192,6 +192,8 @@ void TelegramQml::setPhoneNumber(const QString &phone)
     connect(p->database, SIGNAL(userFounded(User))         , SLOT(dbUserFounded(User))         );
     connect(p->database, SIGNAL(dialogFounded(Dialog,bool)), SLOT(dbDialogFounded(Dialog,bool)));
     connect(p->database, SIGNAL(messageFounded(Message))   , SLOT(dbMessageFounded(Message))   );
+    connect(p->database, SIGNAL(mediaKeyFounded(qint64,QByteArray,QByteArray)),
+            SLOT(dbMediaKeysFounded(qint64,QByteArray,QByteArray)) );
 }
 
 QString TelegramQml::downloadPath() const
@@ -1068,6 +1070,13 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
         return;
     }
 
+    InputFileLocation input(static_cast<InputFileLocation::InputFileLocationType>(type));
+    input.setAccessHash(l->accessHash());
+    input.setId(l->id());
+    input.setLocalId(l->localId());
+    input.setSecret(l->secret());
+    input.setVolumeId(l->volumeId());
+
     QByteArray ekey;
     QByteArray eiv;
     QObject *parentObj = l->parent();
@@ -1078,15 +1087,9 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
         {
             ekey = doc->encryptKey();
             eiv  = doc->encryptIv();
+            input.setClassType(InputFileLocation::typeInputEncryptedFileLocation);
         }
     }
-
-    InputFileLocation input(static_cast<InputFileLocation::InputFileLocationType>(type));
-    input.setAccessHash(l->accessHash());
-    input.setId(l->id());
-    input.setLocalId(l->localId());
-    input.setSecret(l->secret());
-    input.setVolumeId(l->volumeId());
 
     qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId(), ekey, eiv);
     p->downloads[fileId] = l;
@@ -2066,8 +2069,8 @@ void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessa
     msg.setOut(false);
     msg.setFromId(chat->adminId()==me()?chat->participantId():chat->adminId());
 
-    bool isMedia = (dmedia.classType() != DecryptedMessageMedia::typeDecryptedMessageMediaEmpty);
-    if(isMedia)
+    bool hasMedia = (dmedia.classType() != DecryptedMessageMedia::typeDecryptedMessageMediaEmpty);
+    if(hasMedia)
     {
         Document doc(Document::typeDocument);
         doc.setAccessHash(attachment.accessHash());
@@ -2084,7 +2087,7 @@ void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessa
     insertMessage(msg, true);
 
     MessageObject *msgObj = p->messages.value(msg.id());
-    if(msgObj && isMedia)
+    if(msgObj && hasMedia)
     {
         msgObj->media()->document()->setEncryptKey(dmedia.key());
         msgObj->media()->document()->setEncryptIv(dmedia.iv());
@@ -2659,6 +2662,16 @@ void TelegramQml::dbMessageFounded(const Message &message)
         encrypted = dlg->encrypted();
 
     insertMessage(message, encrypted, true);
+}
+
+void TelegramQml::dbMediaKeysFounded(qint64 mediaId, const QByteArray &key, const QByteArray &iv)
+{
+    MessageObject *msg = p->messages.value(mediaId);
+    if(!msg)
+        return;
+
+    msg->media()->document()->setEncryptKey(key);
+    msg->media()->document()->setEncryptIv(iv);
 }
 
 void TelegramQml::refreshUnreadCount()
