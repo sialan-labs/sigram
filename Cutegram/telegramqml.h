@@ -210,6 +210,8 @@ public slots:
     void messagesAcceptEncryptedChat(qint32 chatId);
     void messagesDiscardEncryptedChat(qint32 chatId);
 
+    void messagesGetFullChat(qint32 chatId);
+
     void search(const QString &keyword);
 
     void messagesDeleteChatUser(qint64 chatId, qint64 userId);

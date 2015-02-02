@@ -152,10 +152,19 @@ Item {
         id: media_img
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
-        sourceSize: Qt.size(width,height)
         asynchronous: true
         smooth: true
         visible: media.classType != typeMessageMediaVideo
+
+        property size imageSize: Cutegram.imageSize(source)
+
+        sourceSize: {
+            var ratio = imageSize.width/imageSize.height
+            if(ratio>1)
+                return Qt.size( height*ratio, height)
+            else
+                return Qt.size( width, width/ratio)
+        }
 
         source: {
             var result
@@ -178,9 +187,14 @@ Item {
                 break;
 
             case typeMessageMediaDocument:
-                result = media.document.thumb.location.download.location
-                if(result.length==0)
-                    result = "files/document.png"
+                if(Cutegram.filsIsImage(locationObj.download.location))
+                    result = locationObj.download.location
+                else {
+                    result = media.document.thumb.location.download.location
+                    if(result.length==0) {
+                        result = "files/document.png"
+                    }
+                }
                 break;
 
             default:

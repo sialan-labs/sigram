@@ -43,6 +43,16 @@ Item {
 
     property bool circleMode: true
 
+    property FileLocation locationObj: {
+        if(isChat) {
+            return chat.photo.photoSmall
+        } else {
+            return user.photo.photoSmall
+        }
+    }
+
+    onLocationObjChanged: telegram.getFile(locationObj)
+
     Rectangle {
         id: mask
         anchors.fill: parent
@@ -55,6 +65,7 @@ Item {
         id: img
         anchors.fill: parent
         sourceSize: Qt.size(width,height)
+        smooth: true
         source: {
             if(user.id == telegram.cutegramId)
                 return "files/icon-normal.png"
@@ -70,7 +81,7 @@ Item {
         fillMode: Image.PreserveAspectCrop
         visible: !circleMode
 
-        property string imgPath: isChat? chat.photo.photoSmall.download.location : user.photo.photoSmall.download.location
+        property string imgPath: locationObj.download.location
     }
 
     OpacityMask {
@@ -79,6 +90,7 @@ Item {
         source: img
         maskSource: mask
         visible: circleMode
+        smooth: true
     }
 }
 

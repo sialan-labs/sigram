@@ -134,6 +134,17 @@ Item {
                     width: height
                     dialog: dItem
                     circleMode: false
+
+                    Image {
+                        anchors.bottom: parent.bottom
+                        anchors.right: parent.right
+                        anchors.margins: -4*Devices.density
+                        source: "files/online.png"
+                        sourceSize: Qt.size(width,height)
+                        width: 14*Devices.density
+                        height: 14*Devices.density
+                        visible: isChat? false : (user.status.classType == profile_img.typeUserStatusOnline)
+                    }
                 }
 
                 Text {

@@ -55,6 +55,7 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QDesktopServices>
+#include <QMimeDatabase>
 
 class CutegramPrivate
 {
@@ -91,6 +92,8 @@ public:
     QFont font;
 
     QPalette mainPalette;
+
+    QMimeDatabase mdb;
 };
 
 Cutegram::Cutegram(QObject *parent) :
@@ -150,9 +153,22 @@ QSize Cutegram::imageSize(const QString &p)
     QString path = p;
     if(path.left(7) == "file://")
         path = path.mid(7);
+    if(path.isEmpty())
+        return QSize();
 
     QImageReader img(path);
     return img.size();
+}
+
+bool Cutegram::filsIsImage(const QString &pt)
+{
+    QString path = pt;
+    if(path.left(7) == "file://")
+        path = path.mid(7);
+    if(path.isEmpty())
+        return false;
+
+    return p->mdb.mimeTypeForFile(path).name().toLower().contains("image");
 }
 
 qreal Cutegram::htmlWidth(const QString &txt)

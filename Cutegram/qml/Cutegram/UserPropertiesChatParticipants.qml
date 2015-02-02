@@ -44,12 +44,23 @@ Item {
             property User user: telegramObject.user(cpItem.userId)
 
             ContactImage {
+                id: contact_img
                 anchors.top: parent.top
                 anchors.bottom: txt.top
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: height
                 user: glist_item.user
                 isChat: false
+
+                Image {
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    source: "files/online.png"
+                    sourceSize: Qt.size(width,height)
+                    width: 14*Devices.density
+                    height: 14*Devices.density
+                    visible: (user.status.classType == contact_img.typeUserStatusOnline)
+                }
             }
 
             Text {

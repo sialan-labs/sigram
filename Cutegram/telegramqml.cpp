@@ -799,6 +799,19 @@ void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)
 void TelegramQml::deleteMessage(qint64 msgId)
 {
     p->telegram->messagesDeleteMessages( QList<qint32>()<<msgId );
+
+    MessageObject *msgObj = p->messages.value(msgId);
+    if(msgObj->encrypted())
+    {
+        qint64 dId = messageDialogId(msgId);
+
+        p->garbages.insert( p->messages.take(msgId) );
+        p->messages_list[dId].removeAll(msgId);
+        p->database->deleteMessage(msgId);
+        startGarbageChecker();
+
+        emit messagesChanged(false);
+    }
 }
 
 void TelegramQml::deleteCutegramDialog()
@@ -916,6 +929,14 @@ void TelegramQml::messagesDiscardEncryptedChat(qint32 chatId)
     p->database->deleteDialog(chatId);
 
     emit dialogsChanged(false);
+}
+
+void TelegramQml::messagesGetFullChat(qint32 chatId)
+{
+    if(!p->telegram)
+        return;
+
+    p->telegram->messagesGetFullChat(chatId);
 }
 
 void TelegramQml::search(const QString &keyword)

@@ -74,5 +74,6 @@
         <file>qml/Cutegram/files/files.png</file>
         <file>qml/Cutegram/AccountsTabList.qml</file>
         <file>qml/Cutegram/files/files-light.png</file>
+        <file>qml/Cutegram/files/online.png</file>
     </qresource>
 </RCC>
