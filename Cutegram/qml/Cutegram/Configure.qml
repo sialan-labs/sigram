@@ -329,7 +329,7 @@ Rectangle {
                                 {
                                     var file = Desktop.getOpenFileName(View, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
                                     if(file.length != 0)
-                                        Cutegram.messageAudio = "file://" + file
+                                        Cutegram.messageAudio = Devices.localFilesPrePath + file
                                     else
                                         Cutegram.messageAudio = ""
                                 }

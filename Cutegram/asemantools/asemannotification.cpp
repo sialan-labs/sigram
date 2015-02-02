@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifdef LINUX_NATIVE_ASEMAN_NOTIFICATION
+
 #define DBUS_SERVICE "org.freedesktop.Notifications"
 #define DBUS_PATH    "/org/freedesktop/Notifications"
 #define DBUS_OBJECT  "org.freedesktop.Notifications"
@@ -144,3 +146,5 @@ AsemanNotification::~AsemanNotification()
 {
     delete p;
 }
+
+#endif

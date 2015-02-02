@@ -54,9 +54,7 @@ contains(QT,sensors) {
 }
 linux {
 contains(QT,dbus) {
-    DEFINES += ASEMAN_NOTIFICATION
-    SOURCES += asemantools/asemannotification.cpp
-    HEADERS += asemantools/asemannotification.h
+    DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION
 }
 }
 
@@ -78,7 +76,8 @@ SOURCES += \
     asemantools/asemancountriesmodel.cpp \
     asemantools/asemanmimedata.cpp \
     asemantools/asemandragobject.cpp \
-    $$PWD/asemandownloader.cpp
+    asemantools/asemandownloader.cpp \
+    asemantools/asemannotification.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -99,7 +98,8 @@ HEADERS += \
     asemantools/asemancountriesmodel.h \
     asemantools/asemanmimedata.h \
     asemantools/asemandragobject.h \
-    $$PWD/asemandownloader.h
+    asemantools/asemandownloader.h \
+    asemantools/asemannotification.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \

@@ -31,6 +31,7 @@
 #include "asemandownloader.h"
 #include "asemanbackhandler.h"
 #include "asemancountriesmodel.h"
+#include "asemannotification.h"
 #ifdef Q_OS_ANDROID
 #include "asemanjavalayer.h"
 #endif
@@ -39,9 +40,6 @@
 #endif
 #ifdef ASEMAN_SENSORS
 #include "asemansensors.h"
-#endif
-#ifdef ASEMAN_NOTIFICATION
-#include "asemannotification.h"
 #endif
 
 #include <QPointer>
@@ -115,14 +113,12 @@ AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
     qmlRegisterType<AsemanDownloader>("AsemanTools", 1,0, "Downloader");
     qmlRegisterType<AsemanImageColorAnalizor>("AsemanTools", 1,0, "ImageColorAnalizor");
     qmlRegisterType<AsemanCountriesModel>("AsemanTools", 1,0, "CountriesModel");
+    qmlRegisterType<AsemanNotification>("AsemanTools", 1,0, "Notification");
 #ifdef DESKTOP_LINUX
     qmlRegisterType<AsemanMimeApps>("AsemanTools", 1,0, "MimeApps");
 #endif
 #ifdef ASEMAN_SENSORS
     qmlRegisterType<AsemanSensors>("AsemanTools", 1,0, "AsemanSensors");
-#endif
-#ifdef ASEMAN_NOTIFICATION
-    qmlRegisterType<AsemanNotification>("AsemanTools", 1,0, "Notification");
 #endif
 
     setResizeMode(QQuickView::SizeRootObjectToView);

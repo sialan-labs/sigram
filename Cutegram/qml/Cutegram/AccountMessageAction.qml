@@ -118,7 +118,7 @@ Item {
                 if(imgPath.length==0)
                     return ""
                 else
-                    return "file://" + imgPath
+                    return Devices.localFilesPrePath + imgPath
             }
             asynchronous: true
             fillMode: Image.PreserveAspectCrop

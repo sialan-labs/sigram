@@ -134,7 +134,7 @@ Item {
                     sourceSize: Qt.size(width,height)
                     smooth: true
                     fillMode: Image.PreserveAspectCrop
-                    source: uploading? "file://" + message.upload.location : ""
+                    source: uploading? Devices.localFilesPrePath + message.upload.location : ""
 
                     property size imageSize: uploading? Cutegram.imageSize(message.upload.location) : Qt.size(0,0)
                 }

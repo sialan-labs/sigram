@@ -121,7 +121,7 @@ Rectangle {
                 message = qsTr("Message!")
 
             var location = chatObj? chatObj.photo.photoSmall.download.location : user.photo.photoSmall.download.locatio
-            if(location && location.slice(0,7) == "file://")
+            if(location && location.slice(0,7) == Devices.localFilesPrePath)
                 location = location.slice(7, location.length)
 
             var nid = notification.sendNotify( title, message, location, 0, 3000, actions )

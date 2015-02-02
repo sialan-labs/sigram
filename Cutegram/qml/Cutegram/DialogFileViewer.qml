@@ -32,7 +32,7 @@ Item {
 
             Image {
                 anchors.fill: parent
-                source: "file://" + path
+                source: Devices.localFilesPrePath + path
                 asynchronous: true
                 fillMode: Image.PreserveAspectCrop
                 sourceSize: {
@@ -48,7 +48,7 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: Qt.openUrlExternally("file://" + path)
+                onClicked: Qt.openUrlExternally(Devices.localFilesPrePath + path)
             }
         }
     }

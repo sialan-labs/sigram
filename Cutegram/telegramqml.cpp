@@ -42,6 +42,13 @@
 #include <QImageWriter>
 #include <QBuffer>
 
+#ifdef Q_OS_WIN
+#define FILES_PRE_STR QString("file:///")
+#else
+#define FILES_PRE_STR QString("file://")
+#endif
+
+
 TelegramQmlPrivate *telegramp_qml_tmp = 0;
 bool checkDialogLessThan( qint64 a, qint64 b );
 bool checkMessageLessThan( qint64 a, qint64 b );
@@ -1097,7 +1104,7 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
     const QString & download_file = fileLocation(l);
     if( QFile::exists(download_file) )
     {
-        l->download()->setLocation("file://"+download_file);
+        l->download()->setLocation(FILES_PRE_STR+download_file);
         return;
     }
 
@@ -1135,7 +1142,7 @@ void TelegramQml::getFileJustCheck(FileLocationObject *l)
 
     const QString & download_file = fileLocation(l);
     if( QFile::exists(download_file) && !l->download()->file()->isOpen() )
-        l->download()->setLocation("file://"+download_file);
+        l->download()->setLocation(FILES_PRE_STR+download_file);
 }
 
 Message TelegramQml::newMessage(qint64 dId)
@@ -1486,8 +1493,8 @@ void TelegramQml::photosUploadProfilePhoto_slt(qint64 id, const Photo &photo, co
     UserObject *user = p->users.value(me());
     if(user)
     {
-        user->photo()->photoBig()->download()->setLocation("file://" + p->upload_photo_path );
-        user->photo()->photoSmall()->download()->setLocation("file://" + p->upload_photo_path );
+        user->photo()->photoBig()->download()->setLocation(FILES_PRE_STR + p->upload_photo_path );
+        user->photo()->photoSmall()->download()->setLocation(FILES_PRE_STR + p->upload_photo_path );
         p->upload_photo_path.clear();
     }
 
@@ -2172,10 +2179,10 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
                 sfx = "."+sfx;
 
             QFile::rename(download_file, download_file+sfx);
-            download->setLocation("file://" + download_file+sfx);
+            download->setLocation(FILES_PRE_STR + download_file+sfx);
         }
         else
-            download->setLocation("file://" + download_file);
+            download->setLocation(FILES_PRE_STR + download_file);
 
         p->downloads.remove(id);
     }

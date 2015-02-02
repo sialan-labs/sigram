@@ -172,7 +172,7 @@ Rectangle {
                 dId = currentDialog.peer.userId
 
             Tools.mkDir(telegramObject.downloadPath + "/" + dId)
-            Qt.openUrlExternally("file://" + telegramObject.downloadPath + "/" + dId)
+            Qt.openUrlExternally(Devices.localFilesPrePath + telegramObject.downloadPath + "/" + dId)
         }
     }
 }
