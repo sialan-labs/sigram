@@ -108,7 +108,7 @@ public:
     qreal density() const;
     qreal fontDensity() const;
 
-    QString localFilesPrePath() const;
+    static QString localFilesPrePath();
 
     bool transparentStatusBar() const;
     bool transparentNavigationBar() const;

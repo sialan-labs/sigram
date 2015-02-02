@@ -360,7 +360,7 @@ qreal AsemanDevices::fontDensity() const
 #endif
 }
 
-QString AsemanDevices::localFilesPrePath() const
+QString AsemanDevices::localFilesPrePath()
 {
 #ifdef Q_OS_WIN
     return "file:///";

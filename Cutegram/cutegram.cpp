@@ -151,8 +151,8 @@ Cutegram::Cutegram(QObject *parent) :
 QSize Cutegram::imageSize(const QString &p)
 {
     QString path = p;
-    if(path.left(7) == "file://")
-        path = path.mid(7);
+    if(path.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath())
+        path = path.mid(AsemanDevices::localFilesPrePath().length());
     if(path.isEmpty())
         return QSize();
 
