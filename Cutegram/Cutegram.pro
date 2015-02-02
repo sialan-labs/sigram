@@ -6,7 +6,7 @@ emojis.source = emojis
 emojis.target = $${DESTDIR}
 translations.source = translations
 translations.target = $$DESTDIR/files
-#DEPLOYMENTFOLDERS = server emojis translations
+DEPLOYMENTFOLDERS = server emojis translations
 
 TEMPLATE = app
 TARGET = cutegram
