@@ -253,7 +253,7 @@ Item {
             font.family: AsemanApp.globalFont.family
             font.pixelSize: 9*Devices.fontDensity
             color: "#ffffff"
-            text: Math.floor(size/100000)/10 + "KB"
+            text: Math.floor(size/(1024*10.24))/100 + "MB"
 
             property int size: {
                 var result = 0
