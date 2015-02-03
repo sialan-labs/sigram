@@ -1,7 +1,7 @@
 <project>
     <shortName>cutegram</shortName>
     <fullName>Cutegram</fullName>
-    <version>1.0.2</version>
+    <version>2.0.0</version>
     <licenseFile>LICENSE</licenseFile>
     <htmlLicenseFile>LICENSE.html</htmlLicenseFile>
     <leftImage>installer/logo.png</leftImage>
@@ -23,10 +23,10 @@
                     <platforms>all</platforms>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec></windowsExec>
+                    <windowsExec>${installdir}/cutegram/cutegram.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
-                    <windowsIcon></windowsIcon>
-                    <windowsPath></windowsPath>
+                    <windowsIcon>${installdir}/cutegram/cutegram.ico</windowsIcon>
+                    <windowsPath>${installdir}/cutegram/</windowsPath>
                 </shortcut>
             </desktopShortcutList>
             <folderList>
@@ -68,6 +68,11 @@
                     <destination>${installdir}</destination>
                     <name>programfileswindows</name>
                     <platforms>windows</platforms>
+                    <distributionFileList>
+                        <distributionDirectory>
+                            <origin>../../../Releases/Cutegram/Windows/cutegram</origin>
+                        </distributionDirectory>
+                    </distributionFileList>
                 </folder>
                 <folder>
                     <description>Program Files</description>
@@ -110,6 +115,7 @@
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Aseman</vendor>
     <width>600</width>
+    <windowsExecutableIcon>Cutegram/extra/windows/cutegram.ico</windowsExecutableIcon>
     <parameterList>
         <directoryParameter>
             <name>installdir</name>

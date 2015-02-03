@@ -819,7 +819,7 @@ void TelegramQml::deleteMessage(qint64 msgId)
     p->telegram->messagesDeleteMessages( QList<qint32>()<<msgId );
 
     MessageObject *msgObj = p->messages.value(msgId);
-    if(msgObj->encrypted())
+    if(msgObj)
     {
         qint64 dId = messageDialogId(msgId);
 
@@ -1587,6 +1587,9 @@ void TelegramQml::messagesDeleteMessages_slt(qint64 id, const QList<qint32> &del
     Q_UNUSED(id)
     foreach( qint32 msgId, deletedMsgIds )
     {
+        if(!p->messages.contains(msgId))
+            continue;
+
         qint64 dId = messageDialogId(msgId);
 
         p->garbages.insert( p->messages.take(msgId) );
@@ -2452,11 +2455,14 @@ void TelegramQml::insertUpdate(const Update &update)
         const QList<qint32> &messages = update.messages();
         foreach(quint64 msgId, messages)
         {
-            MessageObject *msg = p->messages.take(msgId);
-            if( msg )
-                msg->deleteLater();
+            qint64 dId = messageDialogId(msgId);
 
+            p->garbages.insert( p->messages.take(msgId) );
+            p->messages_list[dId].removeAll(msgId);
             p->database->deleteMessage(msgId);
+            startGarbageChecker();
+
+            emit messagesChanged(false);
         }
 
         timerUpdateDialogs();
@@ -2855,7 +2861,7 @@ bool checkMessageLessThan( qint64 a, qint64 b )
     MessageObject *am = telegramp_qml_tmp->messages.value(a);
     MessageObject *bm = telegramp_qml_tmp->messages.value(b);
     if(am && bm)
-        return a > b;
-    else
         return am->date() > bm->date();
+    else
+        return a > b;
 }

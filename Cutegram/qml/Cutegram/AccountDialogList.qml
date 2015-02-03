@@ -106,6 +106,8 @@ Item {
             property bool selected: currentDialog==dItem
             property real itemOpacities: minimum? 0 : 1
 
+            onSelectedChanged: if(selected) dlist.currentIndex = index
+
             Behavior on itemOpacities {
                 NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
             }

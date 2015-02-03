@@ -52,9 +52,20 @@ contains(QT,sensors) {
     SOURCES += asemantools/asemansensors.cpp
     HEADERS += asemantools/asemansensors.h
 }
+contains(QT,widgets) {
+    DEFINES += NATIVE_ASEMAN_NOTIFICATION
+    SOURCES +=  \
+        asemantools/asemannativenotification.cpp \
+        asemantools/asemannativenotificationitem.cpp
+    HEADERS +=  \
+        asemantools/asemannativenotification.h \
+        asemantools/asemannativenotificationitem.h
+}
 linux {
 contains(QT,dbus) {
     DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION
+    SOURCES += asemantools/asemanlinuxnativenotification.cpp
+    HEADERS += asemantools/asemanlinuxnativenotification.h
 }
 }
 

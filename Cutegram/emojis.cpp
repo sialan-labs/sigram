@@ -82,7 +82,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
 {
     QString res = txt.toHtmlEscaped();
 
-    QRegExp links_rxp("((?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w\\/))");
+    QRegExp links_rxp("((?:(?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w))|(?:\\w+\\.(?:com|org|co|net)))");
     int pos = 0;
     while (!skipLinks && (pos = links_rxp.indexIn(res, pos)) != -1)
     {
