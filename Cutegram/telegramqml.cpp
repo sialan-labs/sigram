@@ -18,6 +18,7 @@
 
 #include "asemantools/asemanapplication.h"
 #include "asemantools/asemantools.h"
+#include "asemantools/asemandevices.h"
 #include "telegramqml.h"
 #include "userdata.h"
 #include "database.h"
@@ -1011,8 +1012,8 @@ void TelegramQml::messagesDeleteChatUser(qint64 chatId, qint64 userId)
 bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
 {
     QString file = fpath;
-    if( file.left(7) == "file://" )
-        file = file.mid(7);
+    if( file.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath() )
+        file = file.mid(AsemanDevices::localFilesPrePath().length());
 
     if( !QFileInfo::exists(file) )
         return false;
