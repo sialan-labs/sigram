@@ -146,7 +146,9 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->msg_send_random_id = 0;
     p->cutegram_dlg = 0;
 
-    p->userdata = 0;
+    p->userdata = new UserData(this);
+    p->database = new Database(this);
+
     p->telegram = 0;
     p->tsettings = 0;
     p->authNeeded = false;
@@ -184,17 +186,14 @@ void TelegramQml::setPhoneNumber(const QString &phone)
         return;
 
     p->phoneNumber = phone;
-    emit phoneNumberChanged();
-    emit downloadPathChanged();
+    p->userdata->setPhoneNumber(phone);
+    p->database->setPhoneNumber(phone);
+
     try_init();
 
-    if( p->userdata )
-        delete p->userdata;
-
-    p->userdata = new UserData(phone, this);
+    emit phoneNumberChanged();
+    emit downloadPathChanged();
     emit userDataChanged();
-
-    p->database = new Database(phone, this);
 
     connect(p->database, SIGNAL(chatFounded(Chat))         , SLOT(dbChatFounded(Chat))         );
     connect(p->database, SIGNAL(userFounded(User))         , SLOT(dbUserFounded(User))         );
@@ -2335,7 +2334,7 @@ void TelegramQml::insertUser(const User &u, bool fromDb)
     else
         *obj = u;
 
-    if(!fromDb)
+    if(!fromDb && p->database)
         p->database->insertUser(u);
 }
 

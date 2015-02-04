@@ -46,27 +46,47 @@ public:
     QSqlDatabase db;
     QString path;
 
+    QString phoneNumber;
+
     QHash<int,bool> mutes;
     QHash<int,bool> favorites;
     QHash<QString,QString> general;
     QMap<quint64, MessageUpdate> msg_updates;
 };
 
-UserData::UserData(const QString & phoneNumber, QObject *parent) :
+UserData::UserData(QObject *parent) :
     QObject(parent)
 {
     p = new UserDataPrivate;
-    p->path = AsemanApplication::homePath() + "/" + phoneNumber + "/userdata.db";
+}
+
+void UserData::setPhoneNumber(const QString &phoneNumber)
+{
+    if(p->phoneNumber == phoneNumber)
+        return;
+    if(!p->phoneNumber.isEmpty())
+        disconnect();
+
+    p->phoneNumber = phoneNumber;
+    p->path = AsemanApplication::homePath() + "/" + p->phoneNumber + "/userdata.db";
 
     if( !QFileInfo::exists(p->path) )
         QFile::copy(USERDATA_DB_PATH,p->path);
 
     QFile(p->path).setPermissions(QFileDevice::WriteOwner|QFileDevice::WriteGroup|QFileDevice::ReadUser|QFileDevice::ReadGroup);
 
-    p->db = QSqlDatabase::addDatabase("QSQLITE",USERDATA_DB_CONNECTION+phoneNumber);
+    p->db = QSqlDatabase::addDatabase("QSQLITE",USERDATA_DB_CONNECTION+p->phoneNumber);
     p->db.setDatabaseName(p->path);
 
-    reconnect();
+    if(!p->phoneNumber.isEmpty())
+        reconnect();
+
+    emit phoneNumberChanged();
+}
+
+QString UserData::phoneNumber() const
+{
+    return p->phoneNumber;
 }
 
 void UserData::disconnect()

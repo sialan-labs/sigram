@@ -66,11 +66,12 @@ void TelegramDialogsModel::setTelegram(TelegramQml *tgo)
         return;
 
     connect( p->telegram, SIGNAL(dialogsChanged(bool)), SLOT(dialogsChanged(bool)) );
+    connect( p->telegram, SIGNAL(phoneNumberChanged()), SLOT(refreshDatabase()), Qt::QueuedConnection );
 
     connect( p->telegram->userData(), SIGNAL(favoriteChanged(int)) , this, SLOT(userDataChanged()) );
     connect( p->telegram->userData(), SIGNAL(valueChanged(QString)), this, SLOT(userDataChanged()) );
 
-    p->telegram->database()->readFullDialogs();
+    refreshDatabase();
 
     Telegram *tgObject = p->telegram->telegram();
     tgObject->messagesGetDialogs(0,0,1000);
@@ -126,6 +127,14 @@ int TelegramDialogsModel::count() const
 bool TelegramDialogsModel::initializing() const
 {
     return p->initializing;
+}
+
+void TelegramDialogsModel::refreshDatabase()
+{
+    if(!p->telegram)
+        return;
+
+    p->telegram->database()->readFullDialogs();
 }
 
 void TelegramDialogsModel::dialogsChanged(bool cachedData)
