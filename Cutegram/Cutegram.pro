@@ -15,9 +15,17 @@ TARGET = cutegram
 QT += qml quick sql xml
 linux: QT += dbus
 
+macx: {
+    QT += macextras
+    LIBS += -framework AppKit
+}
+
 win32 {
     LIBS += -L$$OUT_PWD/$$DESTDIR -lssleay32 -lcrypto -lz -lqtelegram
     INCLUDEPATH += $$OUT_PWD/$$DESTDIR/include $$OUT_PWD/$$DESTDIR/include/libqtelegram
+} macx {
+    LIBS += -lssl -lcrypto -lz -L/Users/bardia/Projects/builds/ -lqtelegram
+    INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram /Users/bardia/Projects/libqtelegram/
 } else {
     LIBS += -lssl -lcrypto -lz -lqtelegram
     INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram

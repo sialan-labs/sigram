@@ -127,7 +127,7 @@ public slots:
     void aboutAseman();
     void about();
     void configure();
-    void incomingAppMessage( const QString & msg );
+    void incomingAppMessage( const QString & msg = "show" );
     void active();
 
 signals:

@@ -67,6 +67,11 @@ contains(QT,dbus) {
     HEADERS += asemanlinuxnativenotification.h
 }
 }
+macx {
+    DEFINES += MAC_NATIVE_ASEMAN_NOTIFICATION
+    SOURCES += asemanmacnativenotification.cpp
+    HEADERS += asemanmacnativenotification.h
+}
 
 SOURCES += \
     asemandevices.cpp \

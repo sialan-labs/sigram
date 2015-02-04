@@ -57,6 +57,10 @@
 #include <QDesktopServices>
 #include <QMimeDatabase>
 
+#ifdef Q_OS_MAC
+#include <QtMac>
+#endif
+
 class CutegramPrivate
 {
 public:
@@ -99,6 +103,9 @@ public:
 Cutegram::Cutegram(QObject *parent) :
     QObject(parent)
 {
+    QFont default_font;
+    default_font.setPointSize(9);
+
     p = new CutegramPrivate;
     p->doc = new QTextDocument(this);
     p->desktop = new AsemanDesktopTools(this);
@@ -116,7 +123,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
     p->messageAudio = AsemanApplication::settings()->value("General/messageAudio","files/new_msg.ogg").toString();
-    p->font = AsemanApplication::settings()->value("General/font").value<QFont>();
+    p->font = AsemanApplication::settings()->value("General/font", default_font).value<QFont>();
     p->translator = new QTranslator(this);
 
 #ifdef Q_OS_ANDROID
@@ -323,6 +330,8 @@ void Cutegram::setSysTrayCounter(int count, bool force)
     }
 
     p->sysTrayCounter = count;
+    QtMac::setBadgeLabelText(count?QString::number(count):"");
+
     emit sysTrayCounterChanged();
 }
 
@@ -396,7 +405,9 @@ void Cutegram::init_systray()
     if( !p->unityTray || !p->unityTray->pntr() )
     {
         p->sysTray = new QSystemTrayIcon( QIcon(SYSTRAY_ICON), this );
+#ifndef Q_OS_MAC
         p->sysTray->show();
+#endif
 
         connect( p->sysTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(systray_action(QSystemTrayIcon::ActivationReason)) );
     }

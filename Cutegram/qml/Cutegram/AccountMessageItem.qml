@@ -158,7 +158,7 @@ Item {
                             id: msg_txt
                             width: htmlWidth>maximumWidth? maximumWidth : htmlWidth
                             anchors.centerIn: parent
-                            font.pixelSize: Cutegram.font.pointSize*Devices.fontDensity
+                            font.pixelSize: Cutegram.font.pixelSize*Devices.fontDensity
                             font.family: Cutegram.font.family
                             persistentSelection: true
                             activeFocusOnPress: false

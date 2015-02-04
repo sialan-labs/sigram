@@ -68,6 +68,11 @@ contains(QT,dbus) {
     HEADERS += asemantools/asemanlinuxnativenotification.h
 }
 }
+macx {
+    DEFINES += MAC_NATIVE_ASEMAN_NOTIFICATION
+    SOURCES += asemantools/asemanmacnativenotification.cpp
+    HEADERS += asemantools/asemanmacnativenotification.h
+}
 
 SOURCES += \
     asemantools/asemandevices.cpp \
@@ -110,7 +115,8 @@ HEADERS += \
     asemantools/asemanmimedata.h \
     asemantools/asemandragobject.h \
     asemantools/asemandownloader.h \
-    asemantools/asemannotification.h
+    asemantools/asemannotification.h \
+    $$PWD/asemanmacnativenotificatiocppmm
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \

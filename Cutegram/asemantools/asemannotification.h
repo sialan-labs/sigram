@@ -23,11 +23,16 @@
 #include "asemanlinuxnativenotification.h"
 typedef AsemanLinuxNativeNotification AsemanNotification;
 #else
+#ifdef MAC_NATIVE_ASEMAN_NOTIFICATION
+#include "asemanmacnativenotification.h"
+typedef AsemanMacNativeNotification AsemanNotification;
+#else
 #ifdef NATIVE_ASEMAN_NOTIFICATION
 #include "asemannativenotification.h"
 typedef AsemanNativeNotification AsemanNotification;
 #else
 typedef QObject AsemanNotification
+#endif
 #endif
 #endif
 
