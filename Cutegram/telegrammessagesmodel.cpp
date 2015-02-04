@@ -175,9 +175,9 @@ void TelegramMessagesModel::loadMore(bool force)
         return;
     if( !p->dialog )
         return;
-    if( !force && p->refreshing )
-        return;
     if( !force && p->messages.count() == 0 )
+        return;
+    if( !force && p->load_limit == p->load_count + LOAD_STEP_COUNT)
         return;
 
     p->load_limit = p->load_count + LOAD_STEP_COUNT;
