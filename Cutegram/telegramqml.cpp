@@ -899,7 +899,11 @@ void TelegramQml::messagesSetTyping(qint64 peerId, bool stt)
         else
             peer.setUserId(peerId);
 
-        p->telegram->messagesSetTyping(peer, stt);
+        SendMessageAction action(SendMessageAction::typeSendMessageTypingAction);
+        if(!stt)
+            action.setClassType(SendMessageAction::typeSendMessageCancelAction);
+
+        p->telegram->messagesSetTyping(peer, action);
     }
 
 }
@@ -1311,13 +1315,13 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(messagesCreateChatAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)),
              SLOT(messagesCreateChat_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)) );
 
-    connect( p->telegram, SIGNAL(messagesCreateEncryptedChatAnswer(qint64,qint32,qint64,qint32,qint32,qint32)),
-             SLOT(messagesCreateEncryptedChat_slt(qint64,qint32,qint64,qint32,qint32,qint32)) );
+    connect( p->telegram, SIGNAL(messagesCreateEncryptedChatAnswer(qint32,qint32,qint32,qint64)),
+             SLOT(messagesCreateEncryptedChat_slt(qint32,qint32,qint32,qint64)) );
     connect( p->telegram, SIGNAL(messagesEncryptedChatRequested(qint32,qint32,qint32,qint64)),
              SLOT(messagesEncryptedChatRequested_slt(qint32,qint32,qint32,qint64)) );
     connect( p->telegram, SIGNAL(messagesEncryptedChatDiscarded(qint32)),
              SLOT(messagesEncryptedChatDiscarded_slt(qint32)) );
-    connect( p->telegram, SIGNAL(messagesEncryptedChatCreated(qint32)),
+    connect( p->telegram, SIGNAL(messagesEncryptedChatCreated(qint32,qint32,qint32,qint64)),
              SLOT(messagesEncryptedChatCreated_slt(qint32)) );
     connect( p->telegram, SIGNAL(messagesSendEncryptedAnswer(qint64,qint32,EncryptedFile)),
              SLOT(messagesSendEncrypted_slt(qint64,qint32,EncryptedFile)) );
@@ -1337,8 +1341,8 @@ void TelegramQml::try_init()
              SLOT(updateShortMessage_slt(qint32,qint32,QString,qint32,qint32,qint32)) );
     connect( p->telegram, SIGNAL(updatesTooLong()),
              SLOT(updatesTooLong_slt()) );
-    connect(  p->telegram, SIGNAL(updateDecryptedMessage(qint32,DecryptedMessage,qint32,qint32,EncryptedFile)),
-              SLOT(updateDecryptedMessage_slt(qint32,DecryptedMessage,qint32,qint32,EncryptedFile)) );
+    connect(  p->telegram, SIGNAL(updateSecretChatMessage(SecretChatMessage,qint32)),
+              SLOT(updateSecretChatMessage_slt(SecretChatMessage,qint32)) );
 
     connect( p->telegram, SIGNAL(uploadGetFileAnswer(qint64,StorageFileType,qint32,QByteArray,qint32,qint32,qint32)),
              SLOT(uploadGetFile_slt(qint64,StorageFileType,qint32,QByteArray,qint32,qint32,qint32)) );
@@ -1863,14 +1867,13 @@ void TelegramQml::messagesCreateChat_slt(qint64 id, const Message &message, cons
     timerUpdateDialogs(500);
 }
 
-void TelegramQml::messagesCreateEncryptedChat_slt(qint64 id, qint32 chatId, qint64 accessHash, qint32 date, qint32 adminId, qint32 participantId)
+void TelegramQml::messagesCreateEncryptedChat_slt(qint32 chatId, qint32 date, qint32 peerId, qint64 accessHash)
 {
-    Q_UNUSED(id)
     EncryptedChat c(EncryptedChat::typeEncryptedChatWaiting);
     c.setId(chatId);
     c.setAccessHash(accessHash);
-    c.setAdminId(adminId);
-    c.setParticipantId(participantId);
+    c.setAdminId(me());
+    c.setParticipantId(peerId);
     c.setDate(date);
 
     insertEncryptedChat(c);
@@ -2073,10 +2076,14 @@ void TelegramQml::updates_slt(const QList<Update> & updates, const QList<User> &
         insertChat(c);
 }
 
-void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessage &m, qint32 date, qint32 qts, const EncryptedFile &attachment)
+void TelegramQml::updateSecretChatMessage_slt(const SecretChatMessage &secretChatMessage, qint32 qts)
 {
     Q_UNUSED(qts)
-    Q_UNUSED(attachment)
+
+    const qint32 chatId = secretChatMessage.chatId();
+    const DecryptedMessage &m = secretChatMessage.decryptedMessage();
+    const qint32 date = secretChatMessage.date();
+    const EncryptedFile &attachment = secretChatMessage.attachment();
 
     EncryptedChatObject *chat = p->encchats.value(chatId);
     if(!chat)

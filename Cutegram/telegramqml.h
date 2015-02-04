@@ -35,6 +35,7 @@ class EncryptedMessage;
 class EncryptedMessageObject;
 class DocumentObject;
 class VideoObject;
+class SecretChatMessage;
 class AudioObject;
 class WallPaper;
 class WallPaperObject;
@@ -309,7 +310,7 @@ private slots:
     void messagesGetFullChat_slt(qint64 id, const ChatFull & chatFull, const QList<Chat> & chats, const QList<User> & users);
     void messagesCreateChat_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
 
-    void messagesCreateEncryptedChat_slt(qint64 id, qint32 chatId, qint64 accessHash, qint32 date, qint32 adminId, qint32 participantId);
+    void messagesCreateEncryptedChat_slt(qint32 chatId, qint32 date, qint32 peerId, qint64 accessHash);
     void messagesEncryptedChatRequested_slt(qint32 chatId, qint32 date, qint32 creatorId, qint64 creatorAccessHash);
     void messagesEncryptedChatCreated_slt(qint32 chatId);
     void messagesEncryptedChatDiscarded_slt(qint32 chatId);
@@ -323,7 +324,7 @@ private slots:
     void updateShort_slt(const Update & update, qint32 date);
     void updatesCombined_slt(const QList<Update> & updates, const QList<User> & users, const QList<Chat> & chats, qint32 date, qint32 seqStart, qint32 seq);
     void updates_slt(const QList<Update> & udts, const QList<User> & users, const QList<Chat> & chats, qint32 date, qint32 seq);
-    void updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessage &message, qint32 date, qint32 qts, const EncryptedFile &attachment);
+    void updateSecretChatMessage_slt(const SecretChatMessage &secretChatMessage, qint32 qts);
 
     void uploadGetFile_slt(qint64 id, const StorageFileType & type, qint32 mtime, const QByteArray & bytes, qint32 partId, qint32 downloaded, qint32 total);
     void uploadSendFile_slt(qint64 fileId, qint32 partId, qint32 uploaded, qint32 totalSize);
