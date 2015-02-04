@@ -330,7 +330,10 @@ void Cutegram::setSysTrayCounter(int count, bool force)
     }
 
     p->sysTrayCounter = count;
+
+#ifdef Q_OS_MAC
     QtMac::setBadgeLabelText(count?QString::number(count):"");
+#endif
 
     emit sysTrayCounterChanged();
 }

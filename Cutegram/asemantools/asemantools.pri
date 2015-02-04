@@ -115,8 +115,7 @@ HEADERS += \
     asemantools/asemanmimedata.h \
     asemantools/asemandragobject.h \
     asemantools/asemandownloader.h \
-    asemantools/asemannotification.h \
-    $$PWD/asemanmacnativenotificatiocppmm
+    asemantools/asemannotification.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \
