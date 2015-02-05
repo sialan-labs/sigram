@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>%1 participants</source>
-        <translation>%1 participantes</translation>
+        <translation type="vanished">%1 participantes</translation>
     </message>
     <message>
         <source>%1 was online</source>
@@ -36,6 +36,10 @@
     </message>
     <message>
         <source>Secret chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 participants (%2 online)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -51,7 +55,7 @@
     </message>
     <message>
         <source>Leave</source>
-        <translation>Colar</translation>
+        <translation type="vanished">Colar</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
@@ -63,14 +67,6 @@
     </message>
     <message>
         <source>Delete History</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Leave the group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure about leaving this group?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -175,6 +171,14 @@
         <source>Click to Download</source>
         <translation>Primi pa descargar</translation>
     </message>
+    <message>
+        <source>Unsupported Media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Encaboxar</translation>
+    </message>
 </context>
 <context>
     <name>AccountSearchList</name>
@@ -214,6 +218,10 @@
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Telegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -262,7 +270,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>New chat</source>
-        <translation>Charra nueva</translation>
+        <translation type="vanished">Charra nueva</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -284,11 +292,15 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <source>Add Secret Chat</source>
         <translation>Amestar charra secreta</translation>
     </message>
+    <message>
+        <source>Contact List</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
-        <source>Add Account</source>
+        <source>Add Account (experimental)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -386,6 +398,21 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Login</source>
         <translation>Aniciar sesión</translation>
+    </message>
+</context>
+<context>
+    <name>CameraDialog</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Unviar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Encaboxar</translation>
+    </message>
+    <message>
+        <source>Capture</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -588,6 +615,22 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Drop to send</source>
         <translation>Sueltar pa unviar</translation>
+    </message>
+    <message>
+        <source>Drop to add participant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop to add new chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter new group name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -899,6 +942,22 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Show List</source>
         <translation>Amosar llista</translation>
+    </message>
+    <message>
+        <source>Add Partician</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leave</source>
+        <translation type="unfinished">Colar</translation>
+    </message>
+    <message>
+        <source>Leave the group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about leaving this group?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
