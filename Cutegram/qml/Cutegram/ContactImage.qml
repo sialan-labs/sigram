@@ -55,7 +55,7 @@ Item {
 
     Rectangle {
         id: mask
-        anchors.fill: parent
+        anchors.fill: img
         radius: width/2
         smooth: true
         visible: false
@@ -63,7 +63,9 @@ Item {
 
     Image {
         id: img
-        anchors.fill: parent
+        width: circleMode? parent.width*2 : parent.width
+        height: circleMode? parent.height*2 : parent.height
+        anchors.centerIn: parent
         sourceSize: Qt.size(width,height)
         smooth: true
         source: {
@@ -91,6 +93,8 @@ Item {
         maskSource: mask
         visible: circleMode
         smooth: true
+        scale: circleMode? 0.5 : 1
+        transformOrigin: Item.Center
     }
 }
 

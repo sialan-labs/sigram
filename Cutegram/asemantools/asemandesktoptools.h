@@ -81,6 +81,7 @@ public slots:
     QString getExistingDirectory(QWindow *window = 0, const QString &title = QString(), const QString & startPath = QDir::homePath());
     QFont getFont(QWindow *window = 0, const QString &title = QString(), const QFont &font = QFont());
     QColor getColor(const QColor &color = QColor()) const;
+    QString getText(QWindow *window = 0, const QString &title = QString(), const QString &text = QString(), const QString &defaultText = QString());
     int showMenu( const QStringList & actions, QPoint point = QPoint() );
     bool yesOrNo(QWindow *window, const QString &title, const QString &text, int type = Warning);
 

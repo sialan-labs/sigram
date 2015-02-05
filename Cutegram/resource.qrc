@@ -76,5 +76,8 @@
         <file>qml/Cutegram/files/files-light.png</file>
         <file>qml/Cutegram/files/online.png</file>
         <file>qml/Cutegram/files/play.png</file>
+        <file>qml/Cutegram/AccountMessageUpload.qml</file>
+        <file>qml/Cutegram/CameraDialog.qml</file>
+        <file>qml/Cutegram/files/camera.png</file>
     </qresource>
 </RCC>

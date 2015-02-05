@@ -73,6 +73,7 @@ Rectangle {
                         height: 36*Devices.density
                         text: qsTr("Change Photo")
                         cursorShape: Qt.PointingHandCursor
+                        radius: 4*Devices.density
                         onClicked: {
                             var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                             if(newImg.length == 0)
@@ -383,6 +384,8 @@ Rectangle {
                 textColor: "#ffffff"
                 height: 40*Devices.density
                 text: qsTr("Logout")
+                radius: 4*Devices.density
+                cursorShape: Qt.PointingHandCursor
                 onClicked: {
                     if( profiles.remove(telegram.phoneNumber) )
                         Cutegram.logout(telegram.phoneNumber)

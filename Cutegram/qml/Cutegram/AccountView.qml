@@ -15,6 +15,8 @@ Rectangle {
     property alias currentDialog: dialogs.currentDialog
     property bool cutegramDialog: telegramObject.cutegramDialog
 
+    signal addParticianRequest()
+
     Component.onCompleted: {
         telegramObject.cutegramDialog = Cutegram.cutegramSubscribe
     }
@@ -98,6 +100,8 @@ Rectangle {
             telegramObject: dialogs.telegramObject
             currentDialog: dialogs.currentDialog
             onForwardRequest: forward_component.createObject(message_box, {"forwardMessage":message})
+            onFocusRequest: send_msg.setFocus()
+            onDialogRequest: acc_view.currentDialog = dialogObject
         }
 
         Item {
@@ -243,6 +247,9 @@ Rectangle {
             anchors.right: parent.right
             currentDialog: acc_view.currentDialog
             color: Desktop.titleBarColor
+            onAddParticianRequest: {
+                acc_view.addParticianRequest()
+            }
         }
     }
 

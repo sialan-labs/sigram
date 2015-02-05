@@ -91,6 +91,7 @@ Rectangle {
                 highlightColor: "#3384CC"
                 textColor: textColor0
                 text: qsTr("Login")
+                radius: 4*Devices.density
                 onClicked: phone_number.accepted()
             }
         }

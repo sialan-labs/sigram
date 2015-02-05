@@ -235,7 +235,7 @@ Item {
                         var actions, res
                         if(dItem.encrypted) {
                             actions = [qsTr("Delete")]
-                            res = Cutegram.showMenu(actions)
+                            res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
                                 if( Desktop.yesOrNo(View, qsTr("Delete secret chat"), qsTr("Are you sure about deleting this secret chat?")) )
@@ -244,29 +244,24 @@ Item {
                             }
                         } else if(user.id == telegramObject.cutegramId) {
                             actions = [qsTr("Delete")]
-                            res = Cutegram.showMenu(actions)
+                            res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
                                 telegramObject.deleteCutegramDialog()
                                 break;
                             }
                         } else if(isChat) {
-                            actions = [qsTr("Leave"), qsTr("Delete History")]
-                            res = Cutegram.showMenu(actions)
+                            actions = [qsTr("Delete History")]
+                            res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
-                                if( Desktop.yesOrNo(View, qsTr("Leave the group"), qsTr("Are you sure about leaving this group?")) )
-                                    telegramObject.messagesDeleteChatUser(dItem.peer.chatId, telegramObject.me)
-                                break;
-
-                            case 1:
                                 if( Desktop.yesOrNo(View, qsTr("Delete History"), qsTr("Are you sure about deleting history?")) )
                                     telegramObject.messagesDeleteHistory(dItem.peer.chatId)
                                 break;
                             }
                         } else {
                             actions = [qsTr("Delete History")]
-                            res = Cutegram.showMenu(actions)
+                            res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
                                 if( Desktop.yesOrNo(View, qsTr("Delete History"), qsTr("Are you sure about deleting history?")) )

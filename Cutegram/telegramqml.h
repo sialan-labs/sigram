@@ -23,6 +23,7 @@
 #include "types/inputfilelocation.h"
 #include "types/inputpeer.h"
 
+class DownloadObject;
 class Database;
 class SecretChat;
 class EncryptedFile;
@@ -205,6 +206,10 @@ public slots:
 
     void deleteCutegramDialog();
     void messagesCreateChat( const QList<qint32> & users, const QString & topic );
+    void messagesAddChatUser(qint64 chatId, qint64 userId, qint32 fwdLimit = 0);
+    void messagesDeleteChatUser(qint64 chatId, qint64 userId);
+    void messagesEditChatTitle(qint32 chatId, const QString &title);
+
     void messagesDeleteHistory(qint64 peerId);
     void messagesSetTyping(qint64 peerId, bool stt);
 
@@ -216,11 +221,10 @@ public slots:
 
     void search(const QString &keyword);
 
-    void messagesDeleteChatUser(qint64 chatId, qint64 userId);
-
     bool sendFile(qint64 dialogId, const QString & file , bool forceDocument = false);
     void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
     void getFileJustCheck(FileLocationObject *location);
+    void cancelDownload(DownloadObject *download);
     void cancelSendGet( qint64 fileId );
 
     void setProfilePhoto( const QString & fileName );
@@ -309,6 +313,10 @@ private slots:
 
     void messagesGetFullChat_slt(qint64 id, const ChatFull & chatFull, const QList<Chat> & chats, const QList<User> & users);
     void messagesCreateChat_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
+    void messagesEditChatTitle_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
+    void messagesEditChatPhoto_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
+    void messagesAddChatUser_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
+    void messagesDeleteChatUser_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
 
     void messagesCreateEncryptedChat_slt(qint32 chatId, qint32 date, qint32 peerId, qint64 accessHash);
     void messagesEncryptedChatRequested_slt(qint32 chatId, qint32 date, qint32 creatorId, qint64 creatorAccessHash);

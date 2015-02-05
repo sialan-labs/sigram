@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QStringList>
 #include <QProcess>
+#include <QUuid>
 
 QString aseman_tools_numtranslate_0 = "0";
 QString aseman_tools_numtranslate_1 = "1";
@@ -188,6 +189,11 @@ QString AsemanTools::passToMd5(const QString &pass)
         return QString();
 
     return QCryptographicHash::hash( pass.toUtf8(), QCryptographicHash::Md5 ).toHex();
+}
+
+QString AsemanTools::createUuid()
+{
+    return QUuid::createUuid().toString();
 }
 
 void AsemanTools::copyDirectory(const QString &src, const QString &dst)

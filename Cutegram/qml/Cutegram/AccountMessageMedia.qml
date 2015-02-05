@@ -253,7 +253,13 @@ Item {
             font.family: AsemanApp.globalFont.family
             font.pixelSize: 9*Devices.fontDensity
             color: "#ffffff"
-            text: Math.floor(size/(1024*10.24))/100 + "MB"
+            text: {
+                if(indicator.active)
+                    return Math.floor(locationObj.download.downloaded/(1024*10.24))/100 + "MB/" +
+                           Math.floor(size/(1024*10.24))/100 + "MB"
+                else
+                    Math.floor(size/(1024*10.24))/100 + "MB"
+            }
 
             property int size: {
                 var result = 0
@@ -313,6 +319,24 @@ Item {
             else
                 stop()
         }
+    }
+
+    Button {
+        anchors.top: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 20*Devices.density
+        textFont.family: AsemanApp.globalFont.family
+        textFont.pixelSize: 9*Devices.fontDensity
+        highlightColor: Qt.darker(normalColor)
+        normalColor: "#C81414"
+        textColor: "#ffffff"
+        height: 36*Devices.density
+        width: 2*height
+        text: qsTr("Cancel")
+        radius: 4*Devices.density
+        cursorShape: Qt.PointingHandCursor
+        visible: indicator.active && media.classType != typeMessageMediaPhoto
+        onClicked: telegramObject.cancelDownload(locationObj.download)
     }
 
     function click() {

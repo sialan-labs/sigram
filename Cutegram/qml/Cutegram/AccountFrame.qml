@@ -17,6 +17,7 @@ Rectangle {
     property bool isActive: View.active && View.visible
 
     signal activeRequest()
+    signal addParticianRequest()
 
     onIsActiveChanged: {
         telegram.online = isActive
@@ -155,6 +156,7 @@ Rectangle {
         AccountView {
             anchors.fill: parent
             telegramObject: telegram
+            onAddParticianRequest: acc_frame.addParticianRequest()
         }
     }
 }

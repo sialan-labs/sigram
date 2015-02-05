@@ -92,7 +92,7 @@ Rectangle {
 
         TextAreaCore {
             id: txt
-            anchors.left: attach_btn.right
+            anchors.left: camera_btn.right
             anchors.right: emoji_btn.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 4*Devices.density
@@ -141,7 +141,7 @@ Rectangle {
             onClicked: {
                 if( mouse.button == Qt.RightButton ) {
                     var actions = [qsTr("Copy"),qsTr("Paste"),qsTr("Delete")]
-                    var res = Cutegram.showMenu(actions)
+                    var res = Desktop.showMenu(actions)
                     switch(res) {
                     case 0:
                         txt.copy()
@@ -185,9 +185,24 @@ Rectangle {
             }
         }
 
+        Button {
+            id: camera_btn
+            anchors.left: attach_btn.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            normalColor: "#00000000"
+            highlightColor: "#1f000000"
+            cursorShape: Qt.PointingHandCursor
+            width: 30*Devices.density
+            iconHeight: 20*Devices.density
+            opacity: 0.6
+            icon: "files/camera.png"
+            onClicked: captureImage()
+        }
+
         DropTrashArea {
             id: trash_item
-            anchors.left: attach_btn.right
+            anchors.left: camera_btn.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: height
@@ -245,5 +260,33 @@ Rectangle {
 
         smsg.accepted(msg)
         txt.text = ""
+    }
+
+    function captureImage() {
+        if( currentDialog == telegramObject.nullDialog )
+            return
+
+        camera_camponent.createObject(smsg)
+    }
+
+    function setFocus() {
+        txt.focus = true
+    }
+
+    Component {
+        id: camera_camponent
+        CameraDialog{
+            visible: true
+            onVisibleChanged: if(!visible) destroy()
+            title: qsTr("Camera")
+            onSelected: {
+                var dId = currentDialog.peer.chatId
+                if(dId == 0)
+                    dId = currentDialog.peer.userId
+
+                telegramObject.sendFile(dId, path)
+                visible = false
+            }
+        }
     }
 }

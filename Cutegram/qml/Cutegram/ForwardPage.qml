@@ -146,6 +146,7 @@ Rectangle {
         highlightColor: "#D04528"
         textColor: "#ffffff"
         text: qsTr("Cancel")
+        radius: 4*Devices.density
         onClicked: {
             forward_page.closeRequest()
         }
@@ -157,10 +158,11 @@ Rectangle {
         anchors.margins: 8*Devices.density
         height: 40*Devices.density
         width: 100*Devices.density
-        normalColor: forwardDialog!=telegramObject.nullDialog? "#33ccad" : "#888888"
-        highlightColor: forwardDialog!=telegramObject.nullDialog? "#50ab99" : "#888888"
+        normalColor: forwardDialog!=telegramObject.nullDialog? "#0d80ec" : "#888888"
+        highlightColor: forwardDialog!=telegramObject.nullDialog? Qt.darker(normalColor) : "#888888"
         textColor: "#ffffff"
         text: qsTr("Forward")
+        radius: 4*Devices.density
         onClicked: {
             if( forwardDialog==telegramObject.nullDialog )
                 return

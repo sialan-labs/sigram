@@ -11,10 +11,13 @@ Rectangle {
     property Dialog currentDialog
     property bool inited: false
 
+    signal addParticianRequest()
+
     UserPropertiesBase {
         id: base
         width: parent.width
         currentDialog: up_dlg.currentDialog
+        onAddParticianRequest: acc_view.addParticianRequest()
     }
 
     Timer {

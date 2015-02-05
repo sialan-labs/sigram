@@ -157,9 +157,9 @@ Cutegram::Cutegram(QObject *parent) :
     init_languages();
 }
 
-QSize Cutegram::imageSize(const QString &p)
+QSize Cutegram::imageSize(const QString &pt)
 {
-    QString path = p;
+    QString path = pt;
     if(path.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath())
         path = path.mid(AsemanDevices::localFilesPrePath().length());
     if(path.isEmpty())
@@ -172,8 +172,8 @@ QSize Cutegram::imageSize(const QString &p)
 bool Cutegram::filsIsImage(const QString &pt)
 {
     QString path = pt;
-    if(path.left(7) == "file://")
-        path = path.mid(7);
+    if(path.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath())
+        path = path.mid(AsemanDevices::localFilesPrePath().length());
     if(path.isEmpty())
         return false;
 
@@ -184,6 +184,11 @@ qreal Cutegram::htmlWidth(const QString &txt)
 {
     p->doc->setHtml(txt);
     return p->doc->size().width() + 10;
+}
+
+void Cutegram::deleteFile(const QString &path)
+{
+    QFile::remove(path);
 }
 
 QString Cutegram::getTimeString(const QDateTime &dt)

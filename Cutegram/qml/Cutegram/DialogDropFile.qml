@@ -11,6 +11,7 @@ Item {
     property bool containsDrag: drop_area.containsDrag && dialogItem != telegramObject.nullDialog
 
     property Dialog dialogItem
+
     property Dialog currentDialog: telegramObject.nullDialog
     property bool isChat: dialogItem? dialogItem.peer.chatId != 0 : false
 
@@ -18,7 +19,12 @@ Item {
     property real visibleRatio: containsDrag? 1 : 0
 
     property bool normalDrop: drop_area.drag.y<drop_doc_rect.y
-    property bool forwardDrop: false
+    property int forwardDrop: typeFileSendDrop
+
+    property int typeForwardDrop: 1000
+    property int typeFileSendDrop: 1001
+    property int typeAddPatricipants: 1002
+    property int typeAddChat: 1002
 
     signal dropped()
 
@@ -40,7 +46,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.bottom: forwardDrop? parent.bottom : drop_doc_rect.top
+            anchors.bottom: forwardDrop!=typeFileSendDrop? parent.bottom : drop_doc_rect.top
             anchors.margins: 6*Devices.density
             border.color: Cutegram.highlightColor
             border.width: 2*Devices.density
@@ -73,7 +79,7 @@ Item {
             radius: 3*Devices.density
             color: "#00000000"
             opacity: normalDrop? 0.4 : 1.0
-            visible: !forwardDrop
+            visible: forwardDrop == typeFileSendDrop
             clip: true
 
             Behavior on opacity {
@@ -94,17 +100,28 @@ Item {
         id: drop_area
         anchors.fill: parent
         onEntered: {
-            if( drag.formats.indexOf("land.aseman.cutegram/messageId") != -1)
+            if( drag.formats.indexOf("land.aseman.cutegram/messageId") != -1 )
             {
-                forwardDrop = true
+                forwardDrop = typeForwardDrop
                 if(currentDialog == dialogItem)
                     drop_text.text = qsTr("<<< Drop to dialogs list to forward")
                 else
                     drop_text.text = qsTr("Drop to forward")
             }
             else
+            if( drag.formats.indexOf("land.aseman.cutegram/contactId") != -1 )
             {
-                forwardDrop = false
+                if(isChat) {
+                    forwardDrop = typeAddPatricipants
+                    drop_text.text = qsTr("Drop to add participant")
+                } else {
+                    forwardDrop = typeAddChat
+                    drop_text.text = qsTr("Drop to add new chat")
+                }
+            }
+            else
+            {
+                forwardDrop = typeFileSendDrop
                 drop_text.text = qsTr("Drop to send")
             }
         }
@@ -121,6 +138,23 @@ Item {
                 var msgId = drop.getDataAsString("land.aseman.cutegram/messageId")
                 telegramObject.forwardMessage(msgId, dId)
                 am_dropfile.dropped()
+            }
+            else
+            if( drop.formats.indexOf("land.aseman.cutegram/contactId") != -1 ) {
+                var userId = drop.getDataAsString("land.aseman.cutegram/contactId")
+                if(isChat) {
+                    telegramObject.messagesAddChatUser(dialogItem.peer.chatId, userId)
+                } else {
+                    if(userId == telegramObject.me || userId == dialogItem.peer.userId)
+                        return
+
+                    var newName = Desktop.getText(View, qsTr("New Group"), qsTr("Please enter new group name"))
+                    if(newName.length != 0) {
+                        var usersIds = [telegramObject.me, dialogItem.peer.userId, userId]
+                        telegramObject.messagesCreateChat( Cutegram.variantListToIntList(usersIds), newName)
+                    }
+
+                }
             }
             else
             if( drop.hasUrls ) {

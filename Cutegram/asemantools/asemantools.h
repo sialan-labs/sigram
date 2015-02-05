@@ -56,6 +56,7 @@ public slots:
 
     static QString translateNumbers( QString input );
     static QString passToMd5( const QString & pass );
+    static QString createUuid();
 
     static void copyDirectory( const QString & src, const QString & dst );
 

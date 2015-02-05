@@ -60,6 +60,8 @@ Rectangle {
     SlideMenu {
         id: slide_menu
         anchors.fill: frame
+        textFont.family: AsemanApp.globalFont.family
+        textFont.pixelSize: 13*Devices.fontDensity
     }
 
     Rectangle {
@@ -138,11 +140,12 @@ Rectangle {
             cursorShape: Qt.PointingHandCursor
             icon: "files/add_user.png"
             iconHeight: 22*Devices.density
-            tooltipText: qsTr("New chat")
+            tooltipText: qsTr("Contact List")
             tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
-                slide_menu.show(add_userchat_component)
+                slide_menu.text = ""
+                showContactList()
             }
         }
 
@@ -187,6 +190,10 @@ Rectangle {
             onUnreadCountChanged: refreshUnreadCounts()
             onActiveRequest: {
                 tab_list.currentKey = hash.key(accfr)
+            }
+            onAddParticianRequest: {
+                slide_menu.text = "Just drag and drop contacts here"
+                showContactList()
             }
         }
     }
@@ -311,5 +318,9 @@ Rectangle {
         }
 
         Cutegram.sysTrayCounter = counter
+    }
+
+    function showContactList() {
+        slide_menu.show(add_userchat_component)
     }
 }

@@ -68,6 +68,8 @@ public:
     Q_INVOKABLE bool filsIsImage(const QString & path);
     Q_INVOKABLE qreal htmlWidth( const QString & txt );
 
+    Q_INVOKABLE void deleteFile(const QString &path);
+
     Q_INVOKABLE QString getTimeString( const QDateTime & dt );
 
     Q_INVOKABLE int showMenu( const QStringList & actions, QPoint point = QPoint() );
