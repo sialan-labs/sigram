@@ -116,20 +116,7 @@ Rectangle {
             maximumMediaWidth: acc_msg_list.maximumMediaWidth
             message: item
             width: mlist.width - 2*x
-            height: {
-                if(drag.dragging)
-                    return 0
-                else
-                if(logicalHeight<minimumHeight)
-                    return minimumHeight
-                else
-                    return logicalHeight
-            }
             onDialogRequest: acc_msg_list.dialogRequest(dialogObject)
-
-            Behavior on height {
-                NumberAnimation{ easing.type: Easing.OutCubic; duration: anim_enabler_timer.running?200:0 }
-            }
 
             DragObject {
                 id: drag
