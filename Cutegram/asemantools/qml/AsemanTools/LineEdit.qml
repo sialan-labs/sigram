@@ -34,6 +34,7 @@ Rectangle {
     property alias lineFocus: main_item.focus
     property alias pickerEnable: main_item.pickerEnable
     property alias validator: main_item.validator
+    property bool clearButton: false
 
     signal accepted()
 
@@ -55,6 +56,20 @@ Rectangle {
         color: "#333333"
         verticalAlignment: Text.AlignVCenter
         onAccepted: line_edit_frame.accepted()
+    }
+
+    Button {
+        x: main_item.horizontalAlignment==TextInput.AlignRight? 6*Devices.density : parent.width-6*Devices.density-width
+        anchors.verticalCenter: parent.verticalCenter
+        width: 18*Devices.density
+        height: width
+        normalColor: "#88000000"
+        highlightColor: "#44000000"
+        icon: "files/close.png"
+        iconHeight: 12*Devices.density
+        visible: main_item.text.length != 0 && clearButton
+        cursorShape: Qt.PointingHandCursor
+        onClicked: main_item.text = ""
     }
 
     function paste() {

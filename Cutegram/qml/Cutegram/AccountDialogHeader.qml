@@ -18,6 +18,8 @@ Rectangle {
 
     property bool refreshing: false
 
+    property int onlineCount: 0
+
     property real typeUserStatusOffline: 0x8c703f
     property real typeUserStatusEmpty: 0x9d05049
     property real typeUserStatusOnline: 0xedb93949
@@ -29,6 +31,33 @@ Rectangle {
             indicator.start()
         else
             indicator.stop()
+    }
+
+    onChatChanged: if(chat != telegram.nullChat) telegram.messagesGetFullChat(chat.id)
+    onIsChatChanged: {
+        if(isChat) {
+            online_count_refresher.restart()
+        } else {
+            online_count_refresher.stop()
+        }
+    }
+
+    Timer {
+        id: online_count_refresher
+        interval: 2000
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            onlineCount = 0
+            var chatFull = telegram.chatFull(chat.id)
+            var participants = chatFull.participants.participants
+            for(var i=0; i<participants.count; i++) {
+                var userId = participants.at(i).userId
+                var user = telegram.user(userId)
+                if(user.status.classType == typeUserStatusOnline)
+                    onlineCount++
+            }
+        }
     }
 
     Image {
@@ -45,13 +74,12 @@ Rectangle {
 
     Text {
         id: secret_txt
-        anchors.bottom: secret_img.bottom
+        anchors.verticalCenter: secret_img.verticalCenter
         anchors.left: secret_img.right
         anchors.leftMargin: 8*Devices.density
-        anchors.bottomMargin: -8*Devices.density
         font.pixelSize: 10*Devices.fontDensity
         font.family: AsemanApp.globalFont.family
-        text: qsTr("Secret chat (experimental)")
+        text: qsTr("Secret chat")
         color: "#ffffff"
         visible: currentDialog.encrypted
     }
@@ -86,7 +114,7 @@ Rectangle {
             var list = currentDialog.typingUsers
             if( list.length == 0 ) {
                 if( isChat ) {
-                    result += qsTr("%1 participants").arg(chat.participantsCount)
+                    result += qsTr("%1 participants (%2 online)").arg(chat.participantsCount).arg(onlineCount)
                 } else {
                     var isOnline = header.user.status.classType == typeUserStatusOnline
                     result += isOnline? qsTr("Online") : qsTr("%1 was online").arg(Cutegram.getTimeString(CalendarConv.fromTime_t(header.user.status.wasOnline)))
@@ -124,5 +152,27 @@ Rectangle {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: header.clicked()
+    }
+
+    Button {
+        id: files_btn
+        anchors.right: parent.right
+        height: parent.height
+        width: height
+        icon: currentDialog.encrypted? "files/files-light.png" : "files/files.png"
+        iconHeight: 18*Devices.density
+        cursorShape: Qt.PointingHandCursor
+        highlightColor: "#1f000000"
+        onClicked: {
+            if(currentDialog == telegramObject.nullDialog)
+                return
+
+            var dId = currentDialog.peer.chatId
+            if(dId == 0)
+                dId = currentDialog.peer.userId
+
+            Tools.mkDir(telegramObject.downloadPath + "/" + dId)
+            Qt.openUrlExternally(Devices.localFilesPrePath + telegramObject.downloadPath + "/" + dId)
+        }
     }
 }

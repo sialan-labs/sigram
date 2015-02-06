@@ -34,6 +34,7 @@ class TelegramMessagesModel : public QAbstractListModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(bool initializing READ initializing NOTIFY initializingChanged)
     Q_PROPERTY(bool refreshing  READ refreshing  NOTIFY refreshingChanged)
+    Q_PROPERTY(int maxId READ maxId WRITE setMaxId NOTIFY maxIdChanged)
 
 public:
     enum MessagesRoles {
@@ -48,6 +49,11 @@ public:
 
     DialogObject *dialog() const;
     void setDialog( DialogObject *dlg );
+
+    void setMaxId(int id);
+    int maxId() const;
+
+    Q_INVOKABLE int indexOf(qint64 msgId) const;
 
     qint64 id( const QModelIndex &index ) const;
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
@@ -75,6 +81,8 @@ signals:
     void countChanged();
     void initializingChanged();
     void refreshingChanged();
+    void maxIdChanged();
+    void messageAdded(qint64 msgId);
 
 private slots:
     void messagesChanged(bool cachedData);

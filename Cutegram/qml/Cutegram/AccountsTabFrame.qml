@@ -9,6 +9,9 @@ Rectangle {
     height: 62
     color: backColor0
 
+    property alias hash: tab_list.hash
+    property alias list: tab_list.list
+
     Connections {
         target: profiles
         onKeysChanged: refresh()
@@ -23,6 +26,7 @@ Rectangle {
                 var item = profiles.get(key)
                 var acc = account_component.createObject(frame, {"accountItem": item})
                 hash.insert(key, acc)
+                list.append(key)
             }
 
             var hashKeys = hash.keys()
@@ -35,6 +39,7 @@ Rectangle {
                 acc.destroy()
 
                 hash.remove(key)
+                list.remove(key)
             }
         }
     }
@@ -42,10 +47,6 @@ Rectangle {
     Connections {
         target: Cutegram
         onConfigureRequest: conf_btn.clicked()
-    }
-
-    HashObject {
-        id: hash
     }
 
     Item {
@@ -59,6 +60,8 @@ Rectangle {
     SlideMenu {
         id: slide_menu
         anchors.fill: frame
+        textFont.family: AsemanApp.globalFont.family
+        textFont.pixelSize: 13*Devices.fontDensity
     }
 
     Rectangle {
@@ -69,23 +72,23 @@ Rectangle {
         width: 48*Devices.density
         color: Cutegram.highlightColor
 
-        Button {
-            id: about_btn
-            anchors.top: parent.top
+        AccountsTabList {
+            id: tab_list
             anchors.left: parent.left
-            width: parent.width
-            height: width
-            normalColor: "#00000000"
-            highlightColor: "#88339DCC"
-            cursorShape: Qt.PointingHandCursor
-            icon: "files/telegram.png"
-            iconHeight: 26*Devices.density
-            tooltipText: qsTr("About Cutegram")
-            tooltipFont.family: AsemanApp.globalFont.family
-            tooltipFont.pixelSize: 9*Devices.fontDensity
-            onClicked: {
-                aboutMode = true
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: add_secret_chat_btn.top
+            selectColor: slide_menu.active? "#ffffff" : "#222222"
+            z: 10
+            onCurrentKeyChanged: {
+                if(lastKey.length != 0)
+                    hash.value(lastKey).visible = false
+
+                hash.value(currentKey).visible = true
+                lastKey = currentKey
             }
+
+            property string lastKey
         }
 
         Button {
@@ -137,11 +140,12 @@ Rectangle {
             cursorShape: Qt.PointingHandCursor
             icon: "files/add_user.png"
             iconHeight: 22*Devices.density
-            tooltipText: qsTr("New chat")
+            tooltipText: qsTr("Contact List")
             tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
-                slide_menu.show(add_userchat_component)
+                slide_menu.text = ""
+                showContactList()
             }
         }
 
@@ -181,9 +185,16 @@ Rectangle {
     Component {
         id: account_component
         AccountFrame {
+            id: accfr
             anchors.fill: parent
-            visible: true
             onUnreadCountChanged: refreshUnreadCounts()
+            onActiveRequest: {
+                tab_list.currentKey = hash.key(accfr)
+            }
+            onAddParticianRequest: {
+                slide_menu.text = "Just drag and drop contacts here"
+                showContactList()
+            }
         }
     }
 
@@ -203,7 +214,7 @@ Rectangle {
                     accountView.view.currentDialog = telegram.fakeDialogObject(cid, false)
                 }
 
-                property variant accountView: hash.value(profiles.keys[0])
+                property variant accountView: hash.value(tab_list.currentKey)
             }
         }
     }
@@ -224,7 +235,7 @@ Rectangle {
                     telegram.messagesCreateEncryptedChat(cid)
                 }
 
-                property variant accountView: hash.value(profiles.keys[0])
+                property variant accountView: hash.value(tab_list.currentKey)
             }
         }
     }
@@ -238,7 +249,7 @@ Rectangle {
             width: 357*Devices.density
             telegram: accountView.telegramObject
 
-            property variant accountView: hash.value(profiles.keys[0])
+            property variant accountView: hash.value(tab_list.currentKey)
         }
     }
 
@@ -270,7 +281,7 @@ Rectangle {
                 anchors.bottomMargin: 4*Devices.density
                 telegram: accountView.telegramObject
 
-                property variant accountView: hash.value(profiles.keys[0])
+                property variant accountView: hash.value(tab_list.currentKey)
             }
 
             Button {
@@ -307,5 +318,9 @@ Rectangle {
         }
 
         Cutegram.sysTrayCounter = counter
+    }
+
+    function showContactList() {
+        slide_menu.show(add_userchat_component)
     }
 }

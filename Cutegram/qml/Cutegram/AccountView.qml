@@ -13,8 +13,9 @@ Rectangle {
     property alias telegramObject: dialogs.telegramObject
     property color framesColor: "#aaffffff"
     property alias currentDialog: dialogs.currentDialog
-
     property bool cutegramDialog: telegramObject.cutegramDialog
+
+    signal addParticianRequest()
 
     Component.onCompleted: {
         telegramObject.cutegramDialog = Cutegram.cutegramSubscribe
@@ -25,12 +26,47 @@ Rectangle {
         onCutegramDialogChanged: Cutegram.cutegramSubscribe = telegramObject.cutegramDialog
     }
 
+    LineEdit {
+        id: search_frame
+        anchors.left: dialogs.left
+        anchors.top: parent.top
+        anchors.right: dialogs.right
+        anchors.margins: 10*Devices.density
+        height: 36*Devices.density
+        color: "#333333"
+        textColor: "#ffffff"
+        clearButton: true
+        placeholder: qsTr("Search")
+        pickerEnable: Devices.isTouchDevice
+    }
+
     AccountDialogList {
         id: dialogs
         anchors.left: parent.left
-        anchors.top: parent.top
+        anchors.top: search_frame.bottom
         anchors.bottom: parent.bottom
+        anchors.topMargin: 4*Devices.density
         clip: true
+        visible: search_frame.text.length == 0
+        forceUnminimum: search_frame.lineFocus || search_frame.text.length != 0
+        onCurrentDialogChanged: messages.maxId = 0
+    }
+
+    AccountSearchList {
+        id: search_list
+        anchors.fill: dialogs
+        clip: true
+        keyword: search_frame.text
+        telegramObject: dialogs.telegramObject
+        onCurrentMessageChanged: {
+            if(currentMessage == telegramObject.nullMessage)
+                return
+
+            var dialogId = telegramObject.messageDialogId(currentMessage.id)
+            currentDialog = telegramObject.dialog(dialogId)
+            messages.maxId = currentMessage.id + 40
+            messages.focusOn(currentMessage.id)
+        }
     }
 
     Item {
@@ -64,6 +100,8 @@ Rectangle {
             telegramObject: dialogs.telegramObject
             currentDialog: dialogs.currentDialog
             onForwardRequest: forward_component.createObject(message_box, {"forwardMessage":message})
+            onFocusRequest: send_msg.setFocus()
+            onDialogRequest: acc_view.currentDialog = dialogObject
         }
 
         Item {
@@ -209,6 +247,9 @@ Rectangle {
             anchors.right: parent.right
             currentDialog: acc_view.currentDialog
             color: Desktop.titleBarColor
+            onAddParticianRequest: {
+                acc_view.addParticianRequest()
+            }
         }
     }
 

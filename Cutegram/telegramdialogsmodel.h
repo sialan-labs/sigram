@@ -53,6 +53,9 @@ public:
     int count() const;
     bool initializing() const;
 
+public slots:
+    void refreshDatabase();
+
 signals:
     void telegramChanged();
     void countChanged();

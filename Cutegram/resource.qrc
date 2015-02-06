@@ -69,5 +69,15 @@
         <file>qml/Cutegram/files/down.png</file>
         <file>qml/Cutegram/files/aseman-contact.png</file>
         <file>qml/Cutegram/files/icon-normal.png</file>
+        <file>qml/Cutegram/AccountSearchList.qml</file>
+        <file>qml/Cutegram/DialogFileViewer.qml</file>
+        <file>qml/Cutegram/files/files.png</file>
+        <file>qml/Cutegram/AccountsTabList.qml</file>
+        <file>qml/Cutegram/files/files-light.png</file>
+        <file>qml/Cutegram/files/online.png</file>
+        <file>qml/Cutegram/files/play.png</file>
+        <file>qml/Cutegram/AccountMessageUpload.qml</file>
+        <file>qml/Cutegram/CameraDialog.qml</file>
+        <file>qml/Cutegram/files/camera.png</file>
     </qresource>
 </RCC>

@@ -45,6 +45,30 @@ Rectangle {
         property Dialog lastDialog: telegramObject.nullDialog
     }
 
+    Timer {
+        id: typing_timer
+        interval: 3000
+        onTriggered: finishTyping()
+        function finishTyping() {
+            var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
+            telegramObject.messagesSetTyping(peerId, false)
+        }
+    }
+
+    Timer {
+        id: typing_update_timer
+        interval: 1000
+
+        function startTyping() {
+            typing_timer.restart()
+            if(running)
+                return
+
+            var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
+            telegramObject.messagesSetTyping(peerId, true)
+        }
+    }
+
     Text {
         anchors.centerIn: parent
         visible: currentDialog.peer.userId==telegram.cutegramId
@@ -68,7 +92,7 @@ Rectangle {
 
         TextAreaCore {
             id: txt
-            anchors.left: attach_btn.right
+            anchors.left: camera_btn.right
             anchors.right: emoji_btn.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 4*Devices.density
@@ -81,11 +105,21 @@ Rectangle {
             clip: true
             visible: !trash
 
-            onTextChanged: if( text.trim().length == 0 ) text = ""
+            onTextChanged: {
+                if( text.trim().length == 0 )
+                    text = ""
+
+                typing_update_timer.startTyping()
+            }
             Keys.onPressed: {
                 if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
+                {
                     if( event.modifiers == Qt.NoModifier )
                         smsg.send()
+
+                    typing_timer.finishTyping()
+                }
+                else
                 if(event.key == 8204 && event.modifiers == Qt.ShiftModifier)
                 {
                     if(txt.selectedText.length!=0)
@@ -107,7 +141,7 @@ Rectangle {
             onClicked: {
                 if( mouse.button == Qt.RightButton ) {
                     var actions = [qsTr("Copy"),qsTr("Paste"),qsTr("Delete")]
-                    var res = Cutegram.showMenu(actions)
+                    var res = Desktop.showMenu(actions)
                     switch(res) {
                     case 0:
                         txt.copy()
@@ -151,9 +185,24 @@ Rectangle {
             }
         }
 
+        Button {
+            id: camera_btn
+            anchors.left: attach_btn.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            normalColor: "#00000000"
+            highlightColor: "#1f000000"
+            cursorShape: Qt.PointingHandCursor
+            width: 30*Devices.density
+            iconHeight: 20*Devices.density
+            opacity: 0.6
+            icon: "files/camera.png"
+            onClicked: captureImage()
+        }
+
         DropTrashArea {
             id: trash_item
-            anchors.left: attach_btn.right
+            anchors.left: camera_btn.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: height
@@ -211,5 +260,33 @@ Rectangle {
 
         smsg.accepted(msg)
         txt.text = ""
+    }
+
+    function captureImage() {
+        if( currentDialog == telegramObject.nullDialog )
+            return
+
+        camera_camponent.createObject(smsg)
+    }
+
+    function setFocus() {
+        txt.focus = true
+    }
+
+    Component {
+        id: camera_camponent
+        CameraDialog{
+            visible: true
+            onVisibleChanged: if(!visible) destroy()
+            title: qsTr("Camera")
+            onSelected: {
+                var dId = currentDialog.peer.chatId
+                if(dId == 0)
+                    dId = currentDialog.peer.userId
+
+                telegramObject.sendFile(dId, path)
+                visible = false
+            }
+        }
     }
 }

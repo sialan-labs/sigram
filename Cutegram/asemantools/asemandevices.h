@@ -53,6 +53,8 @@ class AsemanDevices : public QObject
     Q_PROPERTY(QSize screenSize        READ screenSize        NOTIFY geometryChanged          )
     Q_PROPERTY(qreal keyboardHeight    READ keyboardHeight    NOTIFY geometryChanged          )
 
+    Q_PROPERTY(QString localFilesPrePath READ localFilesPrePath NOTIFY localFilesPrePathChanged)
+
     Q_PROPERTY(int   densityDpi  READ densityDpi  NOTIFY densityDpiChanged  )
     Q_PROPERTY(qreal density     READ density     NOTIFY densityChanged     )
     Q_PROPERTY(qreal fontDensity READ fontDensity NOTIFY fontDensityChanged )
@@ -106,6 +108,8 @@ public:
     qreal density() const;
     qreal fontDensity() const;
 
+    static QString localFilesPrePath();
+
     bool transparentStatusBar() const;
     bool transparentNavigationBar() const;
     qreal standardTitleBarHeight() const;
@@ -155,6 +159,7 @@ signals:
     void isWindowsPhoneChanged();
 
     void screenChanged();
+    void localFilesPrePathChanged();
 
     void lcdPhysicalSizeChanged();
     void lcdPhysicalWidthChanged();

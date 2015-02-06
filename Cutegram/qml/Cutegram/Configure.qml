@@ -15,7 +15,7 @@ Rectangle {
     Flickable {
         anchors.fill: parent
         contentWidth: column.width
-        contentHeight: column.height
+        contentHeight: conf_frame.height
         flickableDirection: Flickable.VerticalFlick
 
         Item {
@@ -73,6 +73,7 @@ Rectangle {
                         height: 36*Devices.density
                         text: qsTr("Change Photo")
                         cursorShape: Qt.PointingHandCursor
+                        radius: 4*Devices.density
                         onClicked: {
                             var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                             if(newImg.length == 0)
@@ -118,7 +119,7 @@ Rectangle {
                             font.family: AsemanApp.globalFont.family
                             font.pixelSize: 12*Devices.fontDensity
                             color: "#333333"
-                            text: user.phone
+                            text: telegram.phoneNumber
                         }
                     }
                 }
@@ -329,7 +330,7 @@ Rectangle {
                                 {
                                     var file = Desktop.getOpenFileName(View, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
                                     if(file.length != 0)
-                                        Cutegram.messageAudio = "file://" + file
+                                        Cutegram.messageAudio = Devices.localFilesPrePath + file
                                     else
                                         Cutegram.messageAudio = ""
                                 }
@@ -383,7 +384,12 @@ Rectangle {
                 textColor: "#ffffff"
                 height: 40*Devices.density
                 text: qsTr("Logout")
-                onClicked: Cutegram.logout()
+                radius: 4*Devices.density
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                    if( profiles.remove(telegram.phoneNumber) )
+                        Cutegram.logout(telegram.phoneNumber)
+                }
             }
         }
     }

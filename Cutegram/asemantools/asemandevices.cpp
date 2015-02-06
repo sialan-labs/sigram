@@ -360,6 +360,15 @@ qreal AsemanDevices::fontDensity() const
 #endif
 }
 
+QString AsemanDevices::localFilesPrePath()
+{
+#ifdef Q_OS_WIN
+    return "file:///";
+#else
+    return "file://";
+#endif
+}
+
 QString AsemanDevices::clipboard() const
 {
     return QGuiApplication::clipboard()->text();

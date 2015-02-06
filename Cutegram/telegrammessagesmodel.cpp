@@ -33,6 +33,7 @@ public:
     TelegramQml *telegram;
     bool initializing;
     bool refreshing;
+    int maxId;
 
     QList<qint64> messages;
     QPointer<DialogObject> dialog;
@@ -50,6 +51,7 @@ TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
     p->refreshing = false;
     p->load_count = 0;
     p->load_limit = 0;
+    p->maxId = 0;
 }
 
 QObject *TelegramMessagesModel::telegram() const
@@ -100,6 +102,27 @@ void TelegramMessagesModel::setDialog(DialogObject *dlg)
     init();
 }
 
+void TelegramMessagesModel::setMaxId(int id)
+{
+    if(p->maxId == id)
+        return;
+
+    p->maxId = id;
+    emit maxIdChanged();
+
+    init();
+}
+
+int TelegramMessagesModel::maxId() const
+{
+    return p->maxId;
+}
+
+int TelegramMessagesModel::indexOf(qint64 msgId) const
+{
+    return p->messages.indexOf(msgId);
+}
+
 void TelegramMessagesModel::init()
 {
     if( !p->dialog )
@@ -141,7 +164,7 @@ void TelegramMessagesModel::refresh()
 
     Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
-        tgObject->messagesGetHistory(peer, 0, 0, LOAD_STEP_COUNT );
+        tgObject->messagesGetHistory(peer, 0, p->maxId, LOAD_STEP_COUNT );
 
     p->telegram->database()->readMessages(TelegramMessagesModel::peer(), 0, LOAD_STEP_COUNT);
 }
@@ -152,9 +175,9 @@ void TelegramMessagesModel::loadMore(bool force)
         return;
     if( !p->dialog )
         return;
-    if( !force && p->refreshing )
-        return;
     if( !force && p->messages.count() == 0 )
+        return;
+    if( !force && p->load_limit == p->load_count + LOAD_STEP_COUNT)
         return;
 
     p->load_limit = p->load_count + LOAD_STEP_COUNT;
@@ -173,7 +196,7 @@ void TelegramMessagesModel::loadMore(bool force)
     Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
     {
-        tgObject->messagesGetHistory(peer, p->load_count, 0, p->load_limit );
+        tgObject->messagesGetHistory(peer, p->load_count, p->maxId, p->load_limit );
         p->refreshing = true;
     }
 
@@ -287,12 +310,12 @@ void TelegramMessagesModel::messagesChanged(bool cachedData)
         return;
 
     qint32 did = p->dialog->peer()->classType()==Peer::typePeerChat? p->dialog->peer()->chatId() : p->dialog->peer()->userId();
-    const QList<qint64> & messages = p->telegram->messages(did).mid(0,p->load_limit);
+    const QList<qint64> & messages = p->telegram->messages(did, p->maxId).mid(0,p->load_limit);
 
     for( int i=0 ; i<p->messages.count() ; i++ )
     {
-        const qint64 dId = p->messages.at(i);
-        if( messages.contains(dId) )
+        const qint64 msgId = p->messages.at(i);
+        if( messages.contains(msgId) )
             continue;
 
         beginRemoveRows(QModelIndex(), i, i);
@@ -305,8 +328,8 @@ void TelegramMessagesModel::messagesChanged(bool cachedData)
     QList<qint64> temp_msgs = messages;
     for( int i=0 ; i<temp_msgs.count() ; i++ )
     {
-        const qint64 dId = temp_msgs.at(i);
-        if( p->messages.contains(dId) )
+        const qint64 msgId = temp_msgs.at(i);
+        if( p->messages.contains(msgId) )
             continue;
 
         temp_msgs.removeAt(i);
@@ -315,8 +338,8 @@ void TelegramMessagesModel::messagesChanged(bool cachedData)
     while( p->messages != temp_msgs )
         for( int i=0 ; i<p->messages.count() ; i++ )
         {
-            const qint64 dId = p->messages.at(i);
-            int nw = temp_msgs.indexOf(dId);
+            const qint64 msgId = p->messages.at(i);
+            int nw = temp_msgs.indexOf(msgId);
             if( i == nw )
                 continue;
 
@@ -328,13 +351,15 @@ void TelegramMessagesModel::messagesChanged(bool cachedData)
 
     for( int i=0 ; i<messages.count() ; i++ )
     {
-        const qint64 dId = messages.at(i);
-        if( p->messages.contains(dId) )
+        const qint64 msgId = messages.at(i);
+        if( p->messages.contains(msgId) )
             continue;
 
         beginInsertRows(QModelIndex(), i, i );
-        p->messages.insert( i, dId );
+        p->messages.insert( i, msgId );
         endInsertRows();
+
+        emit messageAdded(msgId);
     }
 
     p->load_count = p->messages.count();

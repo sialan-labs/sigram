@@ -190,7 +190,7 @@ ProfilesModelItem *ProfilesModel::add(const QString &number)
 
 bool ProfilesModel::remove(const QString &number)
 {
-    if( p->data.contains(number) )
+    if( !p->data.contains(number) )
         return false;
 
     const int row = p->numbers.indexOf(number);
@@ -208,9 +208,12 @@ bool ProfilesModel::remove(const QString &number)
     QSqlQuery query(p->db);
     query.prepare("DELETE FROM profiles WHERE number=:number");
     query.bindValue(":number", number);
-    query.exec();
 
-    return true;
+    bool res = query.exec();
+    if(!res)
+        qDebug() << query.lastError().text();
+
+    return res;
 }
 
 bool ProfilesModel::containt(const QString &number)

@@ -83,6 +83,11 @@ QUrl AsemanDragObject::image() const
     return p->image;
 }
 
+bool AsemanDragObject::dragging() const
+{
+    return p->onDrag;
+}
+
 void AsemanDragObject::setHotSpot(const QPoint &point)
 {
     if(p->hotSpot == point)
@@ -108,6 +113,7 @@ int AsemanDragObject::start()
         return -1;
 
     p->onDrag = true;
+    emit draggingChanged();
 
     QMimeData *mime = new QMimeData();
     if(p->mime)
@@ -144,6 +150,8 @@ int AsemanDragObject::start()
     p->source->ungrabTouchPoints();
 
     p->onDrag = false;
+    emit draggingChanged();
+
     return res;
 }
 

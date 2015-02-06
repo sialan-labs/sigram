@@ -104,6 +104,10 @@ signals:
     void globalFontChanged();
     void languageUpdated();
     void backRequest();
+    void clickedOnDock();
+
+protected:
+    bool event(QEvent *e);
 
 private:
     AsemanApplicationPrivate *p;

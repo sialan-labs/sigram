@@ -16,6 +16,9 @@ Rectangle {
 
     property bool isActive: View.active && View.visible
 
+    signal activeRequest()
+    signal addParticianRequest()
+
     onIsActiveChanged: {
         telegram.online = isActive
     }
@@ -42,6 +45,7 @@ Rectangle {
                 if( view )
                     view.currentDialog = telegram.messageDialog(msg.id)
 
+                acc_frame.activeRequest()
                 Cutegram.active()
             } else
             if( action == notifyActMute ) {
@@ -118,7 +122,7 @@ Rectangle {
                 message = qsTr("Message!")
 
             var location = chatObj? chatObj.photo.photoSmall.download.location : user.photo.photoSmall.download.locatio
-            if(location && location.slice(0,7) == "file://")
+            if(location && location.slice(0,7) == Devices.localFilesPrePath)
                 location = location.slice(7, location.length)
 
             var nid = notification.sendNotify( title, message, location, 0, 3000, actions )
@@ -152,6 +156,7 @@ Rectangle {
         AccountView {
             anchors.fill: parent
             telegramObject: telegram
+            onAddParticianRequest: acc_frame.addParticianRequest()
         }
     }
 }

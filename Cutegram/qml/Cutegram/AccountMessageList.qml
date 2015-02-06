@@ -21,6 +21,8 @@ Rectangle {
     property bool isActive: View.active && View.visible
     property bool messageDraging: false
 
+    property alias maxId: messages_model.maxId
+
     property EncryptedChat enchat: telegramObject.encryptedChat(currentDialog.peer.userId)
     property int enChatUid: enchat.adminId==telegramObject.me? enchat.participantId : enchat.adminId
 
@@ -31,6 +33,8 @@ Rectangle {
     property real typeEncryptedChat: 0xfa56ce36
 
     signal forwardRequest( variant message )
+    signal focusRequest()
+    signal dialogRequest(variant dialogObject)
 
     onIsActiveChanged: {
         if( isActive )
@@ -42,6 +46,14 @@ Rectangle {
         onCountChanged: {
             if(count>1 && isActive)
                 messages_model.setReaded()
+        }
+        onRefreshingChanged: {
+            if(focus_msg_timer.msgId) {
+                if(refreshing)
+                    focus_msg_timer.stop()
+                else
+                    focus_msg_timer.restart()
+            }
         }
     }
 
@@ -59,7 +71,7 @@ Rectangle {
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
         sourceSize: Cutegram.background.length==0? Cutegram.imageSize(":/qml/files/telegram_background.png") : Qt.size(width,height)
-        source: Cutegram.background.length==0? "files/telegram_background.png" : "file://" + Cutegram.background
+        source: Cutegram.background.length==0? "files/telegram_background.png" : Devices.localFilesPrePath + Cutegram.background
         opacity: 0.7
     }
 
@@ -81,11 +93,16 @@ Rectangle {
         }
     }
 
+    Timer {
+        id: anim_enabler_timer
+        interval: 400
+    }
+
     ListView {
         id: mlist
         anchors.fill: parent
         verticalLayoutDirection: ListView.BottomToTop
-        onAtYBeginningChanged: if( atYBeginning && !messages_model.refreshing && contentHeight>height &&
+        onAtYBeginningChanged: if( atYBeginning && contentHeight>height &&
                                    currentDialog != telegramObject.nullDialog ) messages_model.loadMore()
         clip: true
         model: messages_model
@@ -95,10 +112,11 @@ Rectangle {
         delegate: AccountMessageItem {
             id: msg_item
             x: 8*Devices.density
-            width: mlist.width - 2*x
             maximumMediaHeight: acc_msg_list.maximumMediaHeight
             maximumMediaWidth: acc_msg_list.maximumMediaWidth
             message: item
+            width: mlist.width - 2*x
+            onDialogRequest: acc_msg_list.dialogRequest(dialogObject)
 
             DragObject {
                 id: drag
@@ -106,6 +124,7 @@ Rectangle {
                 source: marea
                 image: "files/message.png"
                 hotSpot: Qt.point(22,22)
+                onDraggingChanged: anim_enabler_timer.restart()
             }
 
             MimeData {
@@ -149,7 +168,7 @@ Rectangle {
                         return
                     if( mouse.button == Qt.RightButton ) {
                         var actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
-                        var res = Cutegram.showMenu(actions)
+                        var res = Desktop.showMenu(actions)
                         switch(res) {
                         case 0:
                             acc_msg_list.forwardRequest(message)
@@ -171,6 +190,14 @@ Rectangle {
 
                 property point startPoint
             }
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onPressed: {
+            acc_msg_list.focusRequest()
+            mouse.accepted = false
         }
     }
 
@@ -215,6 +242,17 @@ Rectangle {
         font.pixelSize: 12*Devices.fontDensity
         text: qsTr("Secret chat request. Please Accept or Reject.")
         visible: enchat.classType == typeEncryptedChatRequested
+        onVisibleChanged: secret_chat_indicator.stop()
+    }
+
+    Indicator {
+        id: secret_chat_indicator
+        light: false
+        modern: true
+        indicatorSize: 20*Devices.density
+        anchors.top: acc_rjc_txt.bottom
+        anchors.topMargin: 10*Devices.density
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
     Row {
@@ -232,6 +270,7 @@ Rectangle {
             height: 36*Devices.density
             text: qsTr("Accept")
             onClicked: {
+                secret_chat_indicator.start()
                 telegramObject.messagesAcceptEncryptedChat(currentDialog.peer.userId)
             }
         }
@@ -245,12 +284,29 @@ Rectangle {
             height: 36*Devices.density
             text: qsTr("Reject")
             onClicked: {
+                secret_chat_indicator.start()
                 telegramObject.messagesDiscardEncryptedChat(currentDialog.peer.userId)
             }
         }
     }
 
+    Timer {
+        id: focus_msg_timer
+        interval: 300
+        onTriggered: {
+            var idx = messages_model.indexOf(msgId)
+            mlist.positionViewAtIndex(idx, ListView.Center)
+            msgId = 0
+        }
+        property int msgId
+    }
+
     function sendMessage( txt ) {
         messages_model.sendMessage(txt)
+    }
+
+    function focusOn(msgId) {
+        focus_msg_timer.msgId = msgId
+
     }
 }

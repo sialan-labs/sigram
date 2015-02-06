@@ -29,8 +29,10 @@
 #include "telegramqml.h"
 #include "profilesmodel.h"
 #include "telegrammessagesmodel.h"
+#include "dialogfilesmodel.h"
 #include "telegramdialogsmodel.h"
 #include "telegramwallpapersmodel.h"
+#include "telegramsearchmodel.h"
 #include "telegramcontactsmodel.h"
 #include "telegramuploadsmodel.h"
 #include "telegramchatparticipantsmodel.h"
@@ -53,6 +55,11 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QDesktopServices>
+#include <QMimeDatabase>
+
+#ifdef Q_OS_MAC
+#include <QtMac>
+#endif
 
 class CutegramPrivate
 {
@@ -89,11 +96,18 @@ public:
     QFont font;
 
     QPalette mainPalette;
+
+    QMimeDatabase mdb;
 };
 
 Cutegram::Cutegram(QObject *parent) :
     QObject(parent)
 {
+    QFont default_font;
+#ifdef Q_OS_MAC
+    default_font.setPointSize(9);
+#endif
+
     p = new CutegramPrivate;
     p->doc = new QTextDocument(this);
     p->desktop = new AsemanDesktopTools(this);
@@ -111,7 +125,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
     p->messageAudio = AsemanApplication::settings()->value("General/messageAudio","files/new_msg.ogg").toString();
-    p->font = AsemanApplication::settings()->value("General/font").value<QFont>();
+    p->font = AsemanApplication::settings()->value("General/font", default_font).value<QFont>();
     p->translator = new QTranslator(this);
 
 #ifdef Q_OS_ANDROID
@@ -130,10 +144,12 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<ProfilesModel>("Cutegram", 1, 0, "ProfilesModel");
     qmlRegisterType<ProfilesModelItem>("Cutegram", 1, 0, "ProfilesModelItem");
     qmlRegisterType<TelegramMessagesModel>("Cutegram", 1, 0, "MessagesModel");
+    qmlRegisterType<DialogFilesModel>("Cutegram", 1, 0, "DialogFilesModel");
     qmlRegisterType<TelegramWallpapersModel>("Cutegram", 1, 0, "WallpapersModel");
     qmlRegisterType<TelegramDialogsModel>("Cutegram", 1, 0, "DialogsModel");
     qmlRegisterType<TelegramContactsModel>("Cutegram", 1, 0, "ContactsModel");
     qmlRegisterType<TelegramUploadsModel>("Cutegram", 1, 0, "UploadsModel");
+    qmlRegisterType<TelegramSearchModel>("Cutegram", 1, 0, "SearchModel");
     qmlRegisterType<TelegramChatParticipantsModel>("Cutegram", 1, 0, "ChatParticipantsModel");
     qmlRegisterType<Emojis>("Cutegram", 1, 0, "Emojis");
     qmlRegisterUncreatableType<UserData>("Cutegram", 1, 0, "UserData", "");
@@ -141,16 +157,38 @@ Cutegram::Cutegram(QObject *parent) :
     init_languages();
 }
 
-QSize Cutegram::imageSize(const QString &path)
+QSize Cutegram::imageSize(const QString &pt)
 {
+    QString path = pt;
+    if(path.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath())
+        path = path.mid(AsemanDevices::localFilesPrePath().length());
+    if(path.isEmpty())
+        return QSize();
+
     QImageReader img(path);
     return img.size();
+}
+
+bool Cutegram::filsIsImage(const QString &pt)
+{
+    QString path = pt;
+    if(path.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath())
+        path = path.mid(AsemanDevices::localFilesPrePath().length());
+    if(path.isEmpty())
+        return false;
+
+    return p->mdb.mimeTypeForFile(path).name().toLower().contains("image");
 }
 
 qreal Cutegram::htmlWidth(const QString &txt)
 {
     p->doc->setHtml(txt);
     return p->doc->size().width() + 10;
+}
+
+void Cutegram::deleteFile(const QString &path)
+{
+    QFile::remove(path);
 }
 
 QString Cutegram::getTimeString(const QDateTime &dt)
@@ -186,13 +224,7 @@ void Cutegram::start()
     if( p->viewer )
         return;
 
-    p->viewer = new AsemanQuickView(
-#ifdef QT_DEBUG
-                AsemanQuickView::AllExceptLogger
-#else
-                AsemanQuickView::AllComponents
-#endif
-                );
+    p->viewer = new AsemanQuickView( AsemanQuickView::AllExceptLogger );
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Cutegram/main.qml")));
 
@@ -220,21 +252,15 @@ void Cutegram::restart()
     quit();
 }
 
-void Cutegram::logout()
+void Cutegram::logout(const QString &phone)
 {
     const QString &home = AsemanApplication::homePath();
-    const QStringList &profiles = QDir(home).entryList(QDir::Dirs|QDir::NoDotAndDotDot);
-    foreach(const QString &profile, profiles)
-    {
-        const QString &ppath = home + "/" + profile;
-        QFile::remove(ppath + "/auth");
-        QFile::remove(ppath + "/config");
-        QFile::remove(ppath + "/secret");
-        QFile::remove(ppath + "/database.db");
-        QFile::remove(ppath + "/database.db-journal");
-//        QFile::remove(ppath + "/userdata.db");
-    }
-    QFile::remove(home + "/profiles.sqlite");
+    const QString &ppath = home + "/" + phone;
+    QFile::remove(ppath + "/auth");
+    QFile::remove(ppath + "/config");
+    QFile::remove(ppath + "/secret");
+    QFile::remove(ppath + "/database.db");
+    QFile::remove(ppath + "/database.db-journal");
 
     restart();
 }
@@ -311,6 +337,11 @@ void Cutegram::setSysTrayCounter(int count, bool force)
     }
 
     p->sysTrayCounter = count;
+
+#ifdef Q_OS_MAC
+    QtMac::setBadgeLabelText(count?QString::number(count):"");
+#endif
+
     emit sysTrayCounterChanged();
 }
 
@@ -384,7 +415,9 @@ void Cutegram::init_systray()
     if( !p->unityTray || !p->unityTray->pntr() )
     {
         p->sysTray = new QSystemTrayIcon( QIcon(SYSTRAY_ICON), this );
+#ifndef Q_OS_MAC
         p->sysTray->show();
+#endif
 
         connect( p->sysTray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(systray_action(QSystemTrayIcon::ActivationReason)) );
     }

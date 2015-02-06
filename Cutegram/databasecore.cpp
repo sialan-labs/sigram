@@ -1,4 +1,5 @@
 #include "databasecore.h"
+#include "asemantools/asemanapplication.h"
 #include "cutegram_macros.h"
 
 #include <QSqlDatabase>
@@ -8,13 +9,17 @@
 #include <QList>
 #include <QDebug>
 #include <QTimerEvent>
+#include <QFileInfo>
+#include <QDir>
 
 class DatabaseCorePrivate
 {
 public:
     QSqlDatabase db;
     QString path;
+    QString phoneNumber;
 
+    QHash<QString,QString> general;
     int commit_timer;
 };
 
@@ -24,8 +29,9 @@ DatabaseCore::DatabaseCore(const QString &path, const QString &phoneNumber, QObj
     p = new DatabaseCorePrivate;
     p->path = path;
     p->commit_timer = 0;
+    p->phoneNumber = phoneNumber;
 
-    p->db = QSqlDatabase::addDatabase("QSQLITE",DATABASE_DB_CONNECTION+phoneNumber);
+    p->db = QSqlDatabase::addDatabase("QSQLITE",DATABASE_DB_CONNECTION+p->phoneNumber);
     p->db.setDatabaseName(p->path);
 
     reconnect();
@@ -208,6 +214,24 @@ void DatabaseCore::insertMessage(const DbMessage &dmessage)
     insertVideo(media.video());
 }
 
+void DatabaseCore::insertMediaEncryptedKeys(qint64 mediaId, const QByteArray &key, const QByteArray &iv)
+{
+    begin();
+
+    QSqlQuery query(p->db);
+    query.prepare("INSERT OR REPLACE INTO MediaKeys (id, key, iv) VALUES (:id, :key, :iv);");
+    query.bindValue(":id" ,mediaId );
+    query.bindValue(":key",key );
+    query.bindValue(":iv" ,iv );
+
+    bool res = query.exec();
+    if(!res)
+    {
+        qDebug() << __FUNCTION__ << query.lastError();
+        return;
+    }
+}
+
 void DatabaseCore::readFullDialogs()
 {
     readUsers();
@@ -283,23 +307,66 @@ void DatabaseCore::readMessages(const DbPeer &dpeer, int offset, int limit)
         dmsg.message = message;
 
         emit messageFounded(dmsg);
+
+        const QPair<QByteArray, QByteArray> & keys = readMediaKey(message.id());
+        if(!keys.first.isNull())
+            emit mediaKeyFounded(message.id(), keys.first, keys.second);
     }
+}
+
+void DatabaseCore::setValue(const QString &key, const QString &value)
+{
+    QSqlQuery mute_query(p->db);
+    mute_query.prepare("INSERT OR REPLACE INTO general (gkey,gvalue) VALUES (:key,:val)");
+    mute_query.bindValue(":key", key);
+    mute_query.bindValue(":val", value);
+    mute_query.exec();
+
+    p->general[key] = value;
+    emit valueChanged(key);
+}
+
+QString DatabaseCore::value(const QString &key) const
+{
+    return p->general.value(key);
 }
 
 void DatabaseCore::deleteMessage(qint64 msgId)
 {
+    begin();
     QSqlQuery query( p->db );
     query.prepare("DELETE FROM Messages WHERE id=:id" );
     query.bindValue( ":id" , msgId );
-    query.exec();
+
+    bool res = query.exec();
+    if(!res)
+        qDebug() << __FUNCTION__ << query.lastError();
 }
 
 void DatabaseCore::deleteDialog(qint64 dlgId)
 {
+    begin();
     QSqlQuery query( p->db );
     query.prepare("DELETE FROM Dialogs WHERE peer=:peer" );
     query.bindValue( ":peer" , dlgId );
-    query.exec();
+
+    bool res = query.exec();
+    if(!res)
+        qDebug() << __FUNCTION__ << query.lastError();
+}
+
+void DatabaseCore::deleteHistory(qint64 dlgId)
+{
+    begin();
+    QSqlQuery query( p->db );
+    query.prepare("DELETE FROM Messages WHERE (toPeerType=:ctype AND toId=:peer) OR (toPeerType=:utype AND out=1 AND toId=:peer) OR (toPeerType=:utype AND out=0 AND fromId=:peer)" );
+    query.bindValue( ":peer" , dlgId );
+    query.bindValue( ":ctype", static_cast<qint64>(Peer::typePeerChat) );
+    query.bindValue( ":utype", static_cast<qint64>(Peer::typePeerUser) );
+
+    bool res = query.exec();
+    if(!res)
+        qDebug() << __FUNCTION__ << query.lastError();
 }
 
 void DatabaseCore::readDialogs()
@@ -335,8 +402,16 @@ void DatabaseCore::readDialogs()
         DbPeer dpeer;
         dpeer.peer = peer;
 
+        bool encrypted = record.value("encrypted").toBool();
+        if(encrypted)
+        {
+            dpeer.peer.setClassType(Peer::typePeerChat);
+            dpeer.peer.setChatId(dpeer.peer.userId());
+            dpeer.peer.setUserId(0);
+        }
+
         readMessages(dpeer, 0, 1);
-        emit dialogFounded(ddlg, record.value("encrypted").toBool());
+        emit dialogFounded(ddlg, encrypted );
     }
 }
 
@@ -461,16 +536,197 @@ void DatabaseCore::readChats()
 void DatabaseCore::reconnect()
 {
     p->db.open();
-    update_db();
     init_buffer();
+    update_db();
 }
 
 void DatabaseCore::init_buffer()
 {
+    p->general.clear();
+
+    QSqlQuery general_query(p->db);
+    general_query.prepare("SELECT gkey, gvalue FROM general");
+    general_query.exec();
+
+    while( general_query.next() )
+    {
+        const QSqlRecord & record = general_query.record();
+        p->general.insert( record.value(0).toString(), record.value(1).toString() );
+    }
 }
 
 void DatabaseCore::update_db()
 {
+    int db_version = value("version").toInt();
+    if(db_version == 0)
+    {
+        update_moveFiles();
+
+        QSqlQuery query(p->db);
+        query.prepare("CREATE TABLE General ("
+                      "gkey TEXT NOT NULL,"
+                      "gvalue TEXT NOT NULL,"
+                      "PRIMARY KEY (gkey))");
+        query.exec();
+        db_version = 1;
+    }
+    if(db_version == 1)
+    {
+        QSqlQuery query(p->db);
+        query.prepare("CREATE TABLE MediaKeys ("
+                      "id BIGINT PRIMARY KEY NOT NULL,"
+                      "key BLOB NOT NULL,"
+                      "iv BLOB NOT NULL)");
+        query.exec();
+
+        db_version = 2;
+    }
+
+    setValue("version", QString::number(db_version) );
+}
+
+void DatabaseCore::update_moveFiles()
+{
+    const QString & dpath = AsemanApplication::homePath() + "/" + p->phoneNumber + "/downloads";
+    const QHash<qint64, QStringList> & user_files = userFiles();
+
+    QDir().mkpath(dpath);
+
+    const QStringList & av_files = QDir(dpath).entryList(QDir::Files);
+    QHash<QString, QString> baseNames;
+    foreach( const QString & f, av_files )
+    {
+        QString baseName = QFileInfo(f).baseName();
+        int uidx = baseName.indexOf("_");
+        if(uidx != -1)
+            baseNames.insertMulti( baseName.left(uidx), f );
+        else
+            baseNames.insertMulti( baseName, f );
+    }
+
+    QHashIterator<qint64, QStringList> i(user_files);
+    while(i.hasNext())
+    {
+        i.next();
+        const QString & upath = dpath + "/" + QString::number(i.key());
+        QDir().mkpath(upath);
+
+        const QStringList & files = i.value();
+        foreach(const QString &f, files)
+        {
+            if(!baseNames.contains(f))
+                continue;
+
+            const QStringList &fileNames = baseNames.values(f);
+            foreach(const QString &fileName, fileNames)
+                QFile::rename(dpath + "/" + fileName, upath + "/" + fileName );
+        }
+    }
+}
+
+QHash<qint64, QStringList> DatabaseCore::userFiles()
+{
+    QHash<qint64, QStringList> result;
+    result.unite( userPhotos() );
+    result.unite( userProfilePhotosOf("users") );
+    result.unite( userProfilePhotosOf("chats") );
+    result.unite( userFilesOf("mediaAudio") );
+    result.unite( userFilesOf("mediaDocument") );
+    result.unite( userFilesOf("mediaVideo") );
+
+    return result;
+}
+
+QHash<qint64, QStringList> DatabaseCore::userFilesOf(const QString &mediaColumn)
+{
+    QHash<qint64, QStringList> result;
+
+    QSqlQuery query(p->db);
+    query.prepare("SELECT toId,  " + mediaColumn + ", fromId, out, toPeerType FROM messages WHERE "+ mediaColumn + "<>0");
+    if(!query.exec())
+        qDebug() << query.lastError().text();
+
+    while(query.next())
+    {
+        const QSqlRecord & record = query.record();
+
+        const qint64 toId     = record.value(0).toLongLong();
+        const qint64 mediaId  = record.value(1).toLongLong();
+        const qint64 fromId   = record.value(2).toLongLong();
+        const bool   out      = record.value(3).toBool();
+        const qint64 peerType = record.value(4).toLongLong();
+
+        qint64 dId = peerType==Peer::typePeerChat || out? toId : fromId;
+
+        result[dId] << QString::number(mediaId);
+    }
+
+    return result;
+}
+
+QHash<qint64, QStringList> DatabaseCore::userPhotos()
+{
+    QHash<qint64, QStringList> result;
+
+    QHash<qint64, QString> photos;
+    QSqlQuery photos_query(p->db);
+    photos_query.prepare("SELECT id, locationVolumeId FROM photos AS P JOIN photosizes AS S ON S.pid=P.id");
+    if(!photos_query.exec())
+        qDebug() << photos_query.lastError().text();
+
+    while(photos_query.next())
+    {
+        const QSqlRecord & record = photos_query.record();
+
+        const qint64 mediaId  = record.value(0).toLongLong();
+        const qint64 volumeId = record.value(1).toLongLong();
+
+        photos.insertMulti(mediaId, QString::number(volumeId) );
+    }
+
+    const QHash<qint64, QStringList> &userFiles = userFilesOf("mediaPhoto");
+    QHashIterator<qint64, QStringList> i(userFiles);
+    while(i.hasNext())
+    {
+        i.next();
+
+        const QStringList & files = i.value();
+        foreach(const QString &f, files)
+        {
+            const qint64 & mediaId = f.toLongLong();
+            if(!photos.contains(mediaId))
+                continue;
+
+            result[i.key()] << photos.values(mediaId);
+        }
+    }
+
+    return result;
+}
+
+QHash<qint64, QStringList> DatabaseCore::userProfilePhotosOf(const QString &table)
+{
+    QHash<qint64, QStringList> result;
+
+    QSqlQuery query(p->db);
+    query.prepare("SELECT id, photoBigVolumeId, photoSmallVolumeId FROM " + table);
+    if(!query.exec())
+        qDebug() << query.lastError().text();
+
+    while(query.next())
+    {
+        const QSqlRecord & record = query.record();
+
+        const qint64 uid = record.value(0).toLongLong();
+
+        const qint64 photoBigVolumeId   = record.value(1).toLongLong();
+        const qint64 photoSmallVolumeId = record.value(2).toLongLong();
+
+        result[uid] << QString::number(photoBigVolumeId);
+        result[uid] << QString::number(photoSmallVolumeId);
+    }
+
+    return result;
 }
 
 QList<qint32> DatabaseCore::stringToUsers(const QString &str)
@@ -837,6 +1093,31 @@ Photo DatabaseCore::readPhoto(qint64 id)
     photo.setClassType(Photo::typePhoto);
 
     return photo;
+}
+
+QPair<QByteArray, QByteArray> DatabaseCore::readMediaKey(qint64 mediaId)
+{
+    QPair<QByteArray, QByteArray> result;
+
+    QSqlQuery query(p->db);
+    query.prepare("SELECT * FROM MediaKeys WHERE id=:id");
+    query.bindValue(":id", mediaId);
+    bool res = query.exec();
+    if(!res)
+    {
+        qDebug() << __FUNCTION__ << query.lastError();
+        return result;
+    }
+
+    if(!query.next())
+        return result;
+
+    const QSqlRecord &record = query.record();
+
+    result.first = record.value("key").toByteArray();
+    result.second = record.value("iv").toByteArray();
+
+    return result;
 }
 
 QList<PhotoSize> DatabaseCore::readPhotoSize(qint64 pid)

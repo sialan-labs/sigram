@@ -18,6 +18,8 @@ Item {
 
     property bool particianMode: false
 
+    signal addParticianRequest()
+
     onParticianModeChanged: {
         if( particianMode )
             BackHandler.pushHandler(particians_frame, particians_frame.back)
@@ -90,6 +92,7 @@ Item {
             width: 30*Devices.density
             icon: "files/back.png"
             iconHeight: 22*Devices.density
+            radius: 4*Devices.density
             onClicked: BackHandler.back()
         }
 
@@ -176,6 +179,8 @@ Item {
                 id: participants_lbl
                 font.family: AsemanApp.globalFont.family
                 font.pixelSize: 11*Devices.fontDensity
+                verticalAlignment: Text.AlignVCenter
+                height: 40*Devices.density
                 color: Desktop.titleBarTextColor
                 text: qsTr("Participants")
                 visible: isChat
@@ -266,18 +271,55 @@ Item {
 
             Item {
                 height: participants_lbl.height
-                width: particians_button.width
+                width: particians_row.width
                 visible: isChat
 
-                Button {
-                    id: particians_button
+                Row {
+                    id: particians_row
                     anchors.verticalCenter: parent.verticalCenter
-                    textColor: press? masterPalette.highlightedText : Desktop.titleBarTextColor
-                    textFont.family: AsemanApp.globalFont.family
-                    textFont.pixelSize: 11*Devices.fontDensity
-                    textFont.bold: false
-                    text: qsTr("Show List")
-                    onClicked: particianMode = true
+                    spacing: 4*Devices.density
+
+                    Button {
+                        textFont.family: AsemanApp.globalFont.family
+                        textFont.pixelSize: 10*Devices.fontDensity
+                        textFont.bold: false
+                        normalColor: "#0d80ec"
+                        highlightColor: Qt.darker(normalColor)
+                        textColor: "#ffffff"
+                        text: qsTr("Show List")
+                        radius: 4*Devices.density
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: particianMode = true
+                    }
+
+                    Button {
+                        textFont.family: AsemanApp.globalFont.family
+                        textFont.pixelSize: 10*Devices.fontDensity
+                        textFont.bold: false
+                        normalColor: "#5ED479"
+                        highlightColor: Qt.darker(normalColor)
+                        textColor: "#ffffff"
+                        text: qsTr("Add Partician")
+                        radius: 4*Devices.density
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: up_base.addParticianRequest()
+                    }
+
+                    Button {
+                        textFont.family: AsemanApp.globalFont.family
+                        textFont.pixelSize: 10*Devices.fontDensity
+                        textFont.bold: false
+                        highlightColor: Qt.darker(normalColor)
+                        normalColor: "#C81414"
+                        textColor: "#ffffff"
+                        text: qsTr("Leave")
+                        radius: 4*Devices.density
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            if( Desktop.yesOrNo(View, qsTr("Leave the group"), qsTr("Are you sure about leaving this group?")) )
+                                telegramObject.messagesDeleteChatUser(chat.id, telegramObject.me)
+                        }
+                    }
                 }
             }
         }

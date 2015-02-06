@@ -18,7 +18,7 @@ Item {
         sourceSize: Qt.size(width, height)
         smooth: true
         source: "files/trash.png"
-        scale: drop_area.containsDrag? 1 : 0.65
+        scale: drop_area.containsDrag? 0.8 : 0.55
 
         Behavior on scale {
             NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }

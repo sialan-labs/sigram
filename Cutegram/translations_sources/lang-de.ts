@@ -24,15 +24,23 @@
     </message>
     <message>
         <source>Secret chat (experimental)</source>
-        <translation>Geheimer Chat (experimentell)</translation>
+        <translation type="vanished">Geheimer Chat (experimentell)</translation>
     </message>
     <message>
         <source>%1 participants</source>
-        <translation>%1 Teilnehmer</translation>
+        <translation type="vanished">%1 Teilnehmer</translation>
     </message>
     <message>
         <source>%1 was online</source>
         <translation>%1 zuletzt online</translation>
+    </message>
+    <message>
+        <source>Secret chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 participants (%2 online)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -47,7 +55,23 @@
     </message>
     <message>
         <source>Leave</source>
-        <translation>Verlassen</translation>
+        <translation type="vanished">Verlassen</translation>
+    </message>
+    <message>
+        <source>Delete secret chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about deleting this secret chat?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about deleting history?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -151,6 +175,29 @@
         <source>Click to Download</source>
         <translation type="obsolete">Klicken zum Herunterladen</translation>
     </message>
+    <message>
+        <source>Unsupported Media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+</context>
+<context>
+    <name>AccountSearchList</name>
+    <message>
+        <source>Me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 on %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountSendMessage</name>
@@ -175,6 +222,10 @@
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Cutegram-Neuigkeiten über neue Veröffentlichungen und Lösungen.
 Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -209,6 +260,13 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
 </context>
 <context>
+    <name>AccountView</name>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
@@ -216,7 +274,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>New chat</source>
-        <translation>Neuer Chat</translation>
+        <translation type="vanished">Neuer Chat</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -232,11 +290,22 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>Über Cutegram</translation>
+        <translation type="vanished">Über Cutegram</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
         <translation>Geheimen Chat hinzufügen</translation>
+    </message>
+    <message>
+        <source>Contact List</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountsTabList</name>
+    <message>
+        <source>Add Account (experimental)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -333,6 +402,21 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <message>
         <source>Login</source>
         <translation>Anmelden</translation>
+    </message>
+</context>
+<context>
+    <name>CameraDialog</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Senden</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Capture</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -539,6 +623,22 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <message>
         <source>Drop to send</source>
         <translation>Zum Senden loslassen</translation>
+    </message>
+    <message>
+        <source>Drop to add participant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop to add new chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter new group name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -850,6 +950,22 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <message>
         <source>Show List</source>
         <translation>Liste anzeigen</translation>
+    </message>
+    <message>
+        <source>Add Partician</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leave</source>
+        <translation type="unfinished">Verlassen</translation>
+    </message>
+    <message>
+        <source>Leave the group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about leaving this group?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
