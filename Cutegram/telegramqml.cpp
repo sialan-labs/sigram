@@ -711,6 +711,18 @@ QList<qint64> TelegramQml::contacts() const
     return p->contacts.keys();
 }
 
+InputPeer TelegramQml::getInputPeer(qint64 peerId)
+{
+    bool isChat = p->chats.contains(peerId);
+    InputPeer peer(getInputPeerType(peerId));
+    if(isChat)
+        peer.setChatId(peerId);
+    else
+        peer.setUserId(peerId);
+
+    return peer;
+}
+
 void TelegramQml::authLogout()
 {
     if( !p->telegram )
@@ -788,7 +800,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     }
     else
     {
-        InputPeer peer(getInputPeer(dId));
+        InputPeer peer(getInputPeerType(dId));
         peer.setChatId(message.toId().chatId());
         peer.setUserId(message.toId().userId());
 
@@ -809,15 +821,42 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
         messagesSendEncrypted_slt(sendId, message.date(), EncryptedFile());
 }
 
+bool TelegramQml::sendMessageAsDocument(qint64 dId, const QString &msg)
+{
+    if( !p->telegram )
+        return false;
+
+    DialogObject *dlg = dialog(dId);
+    if( !dlg )
+        return false;
+    if( dlg->encrypted() )
+        return false;
+
+    Message message = newMessage(dId);
+    InputPeer peer(getInputPeerType(dId));
+    peer.setChatId(message.toId().chatId());
+    peer.setUserId(message.toId().userId());
+
+    p->msg_send_random_id = generateRandomId();
+    qint64 fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, msg.toUtf8(), "text-message.txt", "text/plain");
+
+    insertMessage(message, false, false, true);
+
+    MessageObject *msgObj = p->messages.value(message.id());
+    msgObj->setSent(false);
+
+    UploadObject *upload = msgObj->upload();
+    upload->setFileId(fileId);
+    upload->setTotalSize(msg.size());
+
+    p->uploads[fileId] = msgObj;
+    emit uploadsChanged();
+    return true;
+}
+
 void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)
 {
-    bool isChat = p->chats.contains(peerId);
-    InputPeer peer(getInputPeer(peerId));
-    if(isChat)
-        peer.setChatId(peerId);
-    else
-        peer.setUserId(peerId);
-
+    const InputPeer & peer = getInputPeer(peerId);
     p->telegram->messagesForwardMessage(peer, msgId);
 }
 
@@ -956,12 +995,7 @@ void TelegramQml::messagesDeleteHistory(qint64 peerId)
     if(!p->telegram)
         return;
 
-    bool isChat = p->chats.contains(peerId);
-    InputPeer peer(getInputPeer(peerId));
-    if(isChat)
-        peer.setChatId(peerId);
-    else
-        peer.setUserId(peerId);
+    const InputPeer & peer = getInputPeer(peerId);
 
     qint64 request = p->telegram->messagesDeleteHistory(peer);
     p->delete_history_requests.insert(request, peerId);
@@ -981,13 +1015,7 @@ void TelegramQml::messagesSetTyping(qint64 peerId, bool stt)
     }
     else
     {
-        bool isChat = p->chats.contains(peerId);
-        InputPeer peer(getInputPeer(peerId));
-        if(isChat)
-            peer.setChatId(peerId);
-        else
-            peer.setUserId(peerId);
-
+        const InputPeer & peer = getInputPeer(peerId);
         SendMessageAction action(SendMessageAction::typeSendMessageTypingAction);
         if(!stt)
             action.setClassType(SendMessageAction::typeSendMessageCancelAction);
@@ -995,6 +1023,15 @@ void TelegramQml::messagesSetTyping(qint64 peerId, bool stt)
         p->telegram->messagesSetTyping(peer, action);
     }
 
+}
+
+void TelegramQml::messagesReadHistory(qint64 peerId)
+{
+    if(!p->telegram)
+        return;
+
+    const InputPeer & peer = getInputPeer(peerId);
+    p->telegram->messagesReadHistory(peer);
 }
 
 void TelegramQml::messagesCreateEncryptedChat(qint64 userId)
@@ -1076,7 +1113,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
         return false;
 
     Message message = newMessage(dId);
-    InputPeer peer(getInputPeer(dId));
+    InputPeer peer(getInputPeerType(dId));
     peer.setChatId(message.toId().chatId());
     peer.setUserId(message.toId().userId());
 
@@ -2923,7 +2960,7 @@ qint64 TelegramQml::generateRandomId() const
     return randomId;
 }
 
-InputPeer::InputPeerType TelegramQml::getInputPeer(qint64 pid)
+InputPeer::InputPeerType TelegramQml::getInputPeerType(qint64 pid)
 {
     InputPeer::InputPeerType res;
 

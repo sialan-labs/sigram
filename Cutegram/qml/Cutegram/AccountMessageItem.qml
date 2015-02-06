@@ -36,6 +36,7 @@ Item {
 
     property alias hasMedia: msg_media.hasMedia
     property bool encryptMedia: message.message.length==0 && message.encrypted
+    property alias mediaLOcation: msg_media.locationObj
 
     property bool modernMode: false
 

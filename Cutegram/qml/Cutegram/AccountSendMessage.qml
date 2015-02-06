@@ -222,7 +222,7 @@ Rectangle {
             opacity: 0.6
             icon: "files/emoji.png"
             onClicked: {
-                var pnt = main.mapFromItem(emoji_btn,0,0)
+                var pnt = smsg.mapFromItem(emoji_btn,0,0)
                 smsg.emojiRequest(pnt.x + width/2, pnt.y + height*0.2)
             }
         }

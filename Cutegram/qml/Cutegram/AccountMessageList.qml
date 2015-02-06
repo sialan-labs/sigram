@@ -124,12 +124,14 @@ Rectangle {
                 source: marea
                 image: "files/message.png"
                 hotSpot: Qt.point(22,22)
+                dropAction: Qt.CopyAction
                 onDraggingChanged: anim_enabler_timer.restart()
             }
 
             MimeData {
                 id: mime
                 dataMap: {"land.aseman.cutegram/messageId": message.id}
+                urls: msg_item.hasMedia? [msg_item.mediaLOcation.download.location] : []
                 text: message.message
             }
 

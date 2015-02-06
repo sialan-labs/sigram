@@ -54,12 +54,12 @@ TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
     p->maxId = 0;
 }
 
-QObject *TelegramMessagesModel::telegram() const
+TelegramQml *TelegramMessagesModel::telegram() const
 {
     return p->telegram;
 }
 
-void TelegramMessagesModel::setTelegram(QObject *tgo)
+void TelegramMessagesModel::setTelegram(TelegramQml *tgo)
 {
     TelegramQml *tg = static_cast<TelegramQml*>(tgo);
     if( p->telegram == tg )
@@ -160,7 +160,7 @@ void TelegramMessagesModel::refresh()
         return;
     }
 
-    const InputPeer & peer = inputPeer();
+    const InputPeer & peer = p->telegram->getInputPeer(peerId());
 
     Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
@@ -191,7 +191,7 @@ void TelegramMessagesModel::loadMore(bool force)
         return;
     }
 
-    const InputPeer & peer = inputPeer();
+    const InputPeer & peer = p->telegram->getInputPeer(peerId());
 
     Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
@@ -225,7 +225,7 @@ void TelegramMessagesModel::setReaded()
     if( p->telegram->invisible() )
         return;
 
-    p->telegram->telegram()->messagesReadHistory(inputPeer());
+    p->telegram->messagesReadHistory(peerId());
     p->dialog->setUnreadCount(0);
 }
 
@@ -281,13 +281,13 @@ bool TelegramMessagesModel::refreshing() const
     return p->refreshing;
 }
 
-InputPeer TelegramMessagesModel::inputPeer() const
+qint64 TelegramMessagesModel::peerId() const
 {
     bool isChat = p->dialog->peer()->classType()==Peer::typePeerChat;
-    InputPeer peer(isChat? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
-    peer.setChatId(p->dialog->peer()->chatId());
-    peer.setUserId(p->dialog->peer()->userId());
-    return peer;
+    if(isChat)
+        return p->dialog->peer()->chatId();
+    else
+        return p->dialog->peer()->userId();
 }
 
 Peer TelegramMessagesModel::peer() const

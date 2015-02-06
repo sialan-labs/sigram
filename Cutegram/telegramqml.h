@@ -193,6 +193,8 @@ public:
     QList<qint64> uploads() const;
     QList<qint64> contacts() const;
 
+    InputPeer getInputPeer(qint64 pid);
+
 public slots:
     void authLogout();
     void authSendCall();
@@ -201,6 +203,8 @@ public slots:
     void authSignUp(const QString &code, const QString &firstName, const QString &lastName);
 
     void sendMessage( qint64 dialogId, const QString & msg );
+    bool sendMessageAsDocument( qint64 dialogId, const QString & msg );
+
     void forwardMessage( qint64 msgId, qint64 peerId );
     void deleteMessage( qint64 msgId );
 
@@ -212,6 +216,7 @@ public slots:
 
     void messagesDeleteHistory(qint64 peerId);
     void messagesSetTyping(qint64 peerId, bool stt);
+    void messagesReadHistory(qint64 peerId);
 
     void messagesCreateEncryptedChat(qint64 userId);
     void messagesAcceptEncryptedChat(qint32 chatId);
@@ -371,7 +376,7 @@ private slots:
     void updateEncryptedTopMessage(const Message &message);
 
     qint64 generateRandomId() const;
-    InputPeer::InputPeerType getInputPeer(qint64 pid);
+    InputPeer::InputPeerType getInputPeerType(qint64 pid);
 
 private:
     TelegramQmlPrivate *p;

@@ -141,6 +141,9 @@ Item {
             }
             else
             if( drop.formats.indexOf("land.aseman.cutegram/contactId") != -1 ) {
+                if(currentDialog == telegramObject.nullDialog)
+                    return
+
                 var userId = drop.getDataAsString("land.aseman.cutegram/contactId")
                 if(isChat) {
                     telegramObject.messagesAddChatUser(dialogItem.peer.chatId, userId)
@@ -159,14 +162,23 @@ Item {
             else
             if( drop.hasUrls ) {
                 var urls = drop.urls
-                for( var i=0; i<urls.length; i++ )
-                    telegramObject.sendFile(dId, urls[i], !normalDrop)
+                for( var i=0; i<urls.length; i++ ) {
+                    var url = urls[i]
+                    if(url.slice(0,7) == "file://")
+                        telegramObject.sendFile(dId, url, !normalDrop)
+                    else
+                        telegramObject.sendMessage(dId, url)
+                }
 
                 am_dropfile.dropped()
             }
             else
             if( drop.hasText ) {
-                telegramObject.sendMessage(dId, drop.text)
+                if(normalDrop)
+                    telegramObject.sendMessage(dId, drop.text)
+                else
+                    telegramObject.sendMessageAsDocument(dId, drop.text)
+
                 am_dropfile.dropped()
             }
         }

@@ -13,6 +13,8 @@ Window {
     minimumHeight: height
     flags: Qt.Dialog
     modality: Qt.ApplicationModal
+    x: View.x + View.width/2 - width/2
+    y: View.y + View.height/2 - height/2
 
     property string currentPath
 
@@ -36,7 +38,6 @@ Window {
 
         imageCapture {
             onImageSaved: {
-                console.debug(":D")
                 img.source = Devices.localFilesPrePath + currentPath
                 img.visible = true
                 camera.stop()
@@ -120,11 +121,6 @@ Window {
             currentPath = cameraPhotos + "/" + guid + ".jpg"
             camera.imageCapture.captureToLocation(currentPath)
         }
-    }
-
-    Component.onCompleted: {
-        x = View.x + View.width/2 - width/2
-        y = View.y + View.height/2 - height/2
     }
 }
 

@@ -43,10 +43,7 @@ Rectangle {
             var msg = notifies_hash.value(id)
             if( action == notifyActShow ) {
                 if( view )
-                    view.currentDialog = telegram.messageDialog(msg.id)
-
-                acc_frame.activeRequest()
-                Cutegram.active()
+                    view.showDialog( telegram.messageDialog(msg.id) )
             } else
             if( action == notifyActMute ) {
                 if( !view )
@@ -79,14 +76,23 @@ Rectangle {
                 view.destroy()
         }
         onIncomingMessage: {
-            if( view && isActive ) {
-                if( view.currentDialog.peer.chatId && view.currentDialog.peer.chatId == msg.toId.chatId )
+            var dId = telegram.messageDialogId(msg.id)
+
+            var window = view? view.windowOf(dId) : 0
+            var windowIsActive = window? window.active && window.visible : false
+            if( (view && isActive) || windowIsActive ) {
+                var cDialog = windowIsActive? window.currentDialog : view.currentDialog
+
+                if( cDialog.peer.chatId && cDialog.peer.chatId == msg.toId.chatId ) {
+                    telegramObject.messagesReadHistory(cDialog.peer.chatId)
                     return
-                if( view.currentDialog.peer.userId && view.currentDialog.peer.userId == msg.fromId )
+                }
+                if( cDialog.peer.userId && cDialog.peer.userId == msg.fromId ) {
+                    telegramObject.messagesReadHistory(cDialog.peer.userId)
                     return
+                }
             }
 
-            var dId = telegram.messageDialogId(msg.id)
             if( telegram.userData.isMuted(dId) )
                 return
             if( !Cutegram.notification )
