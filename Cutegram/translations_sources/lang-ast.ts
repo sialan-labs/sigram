@@ -73,6 +73,10 @@
         <source>Are you sure about deleting history?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -944,10 +948,6 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <translation>Amosar llista</translation>
     </message>
     <message>
-        <source>Add Partician</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Leave</source>
         <translation type="unfinished">Colar</translation>
     </message>
@@ -957,6 +957,10 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Participant</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

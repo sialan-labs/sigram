@@ -299,7 +299,7 @@ Item {
                         normalColor: Cutegram.highlightColor
                         highlightColor: Qt.darker(normalColor)
                         textColor: "#ffffff"
-                        text: qsTr("Add Partician")
+                        text: qsTr("Add Participant")
                         radius: 4*Devices.density
                         cursorShape: Qt.PointingHandCursor
                         onClicked: up_base.addParticianRequest()

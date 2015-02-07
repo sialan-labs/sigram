@@ -61,6 +61,10 @@
         <source>Are you sure about deleting history?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -923,10 +927,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add Partician</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Leave</source>
         <translation type="unfinished"></translation>
     </message>
@@ -936,6 +936,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Participant</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
