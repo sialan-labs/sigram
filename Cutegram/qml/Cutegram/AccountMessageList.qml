@@ -98,6 +98,14 @@ Rectangle {
         interval: 400
     }
 
+    Timer {
+        id: file_delete_timer
+        interval: 1000
+        onTriggered: Cutegram.deleteFile(filePath)
+
+        property string filePath
+    }
+
     ListView {
         id: mlist
         anchors.fill: parent
@@ -118,6 +126,8 @@ Rectangle {
             width: mlist.width - 2*x
             onDialogRequest: acc_msg_list.dialogRequest(dialogObject)
 
+            property string messageFile
+
             DragObject {
                 id: drag
                 mimeData: mime
@@ -131,7 +141,7 @@ Rectangle {
             MimeData {
                 id: mime
                 dataMap: {"land.aseman.cutegram/messageId": message.id}
-                urls: msg_item.hasMedia? [msg_item.mediaLOcation.download.location] : []
+                urls: msg_item.hasMedia? [msg_item.mediaLOcation.download.location] : [msg_item.messageFile]
                 text: message.message
             }
 
@@ -153,9 +163,17 @@ Rectangle {
                     if(dest < 7)
                         return
 
+                    if(!msg_item.hasMedia)
+                        msg_item.messageFile = Devices.localFilesPrePath + Cutegram.storeMessage(msg_item.message.message)
+                    else
+                        msg_item.messageFile = ""
+
                     messageDraging = true
                     drag.start()
                     messageDraging = false
+
+                    file_delete_timer.filePath = msg_item.messageFile
+                    file_delete_timer.restart()
                 }
 
                 onReleased: {

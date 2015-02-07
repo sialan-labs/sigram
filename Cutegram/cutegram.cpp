@@ -186,9 +186,28 @@ qreal Cutegram::htmlWidth(const QString &txt)
     return p->doc->size().width() + 10;
 }
 
-void Cutegram::deleteFile(const QString &path)
+void Cutegram::deleteFile(const QString &pt)
 {
+    QString path = pt;
+    if(path.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath())
+        path = path.mid(AsemanDevices::localFilesPrePath().length());
+    if(path.isEmpty())
+        return;
+
     QFile::remove(path);
+}
+
+QString Cutegram::storeMessage(const QString &msg)
+{
+    const QString &path = AsemanApplication::tempPath() + "/" + QDateTime::currentDateTime().toString("ddd MMMM d yy - hh mm") + ".txt";
+    QFile file(path);
+    if(!file.open(QFile::WriteOnly))
+        return QString();
+
+    file.write(msg.toUtf8());
+    file.close();
+
+    return path;
 }
 
 QString Cutegram::getTimeString(const QDateTime &dt)

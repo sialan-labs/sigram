@@ -69,6 +69,7 @@ public:
     Q_INVOKABLE qreal htmlWidth( const QString & txt );
 
     Q_INVOKABLE void deleteFile(const QString &path);
+    Q_INVOKABLE QString storeMessage(const QString &msg);
 
     Q_INVOKABLE QString getTimeString( const QDateTime & dt );
 
