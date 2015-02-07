@@ -283,7 +283,7 @@ Item {
                         textFont.family: AsemanApp.globalFont.family
                         textFont.pixelSize: 10*Devices.fontDensity
                         textFont.bold: false
-                        normalColor: "#0d80ec"
+                        normalColor: Cutegram.highlightColor
                         highlightColor: Qt.darker(normalColor)
                         textColor: "#ffffff"
                         text: qsTr("Show List")
@@ -296,7 +296,7 @@ Item {
                         textFont.family: AsemanApp.globalFont.family
                         textFont.pixelSize: 10*Devices.fontDensity
                         textFont.bold: false
-                        normalColor: "#5ED479"
+                        normalColor: Cutegram.highlightColor
                         highlightColor: Qt.darker(normalColor)
                         textColor: "#ffffff"
                         text: qsTr("Add Partician")

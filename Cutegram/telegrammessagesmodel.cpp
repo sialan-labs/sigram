@@ -40,6 +40,7 @@ public:
 
     int load_count;
     int load_limit;
+    int refresh_timer;
 };
 
 TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
@@ -51,6 +52,7 @@ TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
     p->refreshing = false;
     p->load_count = 0;
     p->load_limit = 0;
+    p->refresh_timer = 0;
     p->maxId = 0;
 }
 
@@ -300,12 +302,20 @@ Peer TelegramMessagesModel::peer() const
 
 void TelegramMessagesModel::messagesChanged(bool cachedData)
 {
-    if(!cachedData)
+    if(!cachedData && p->refreshing)
     {
         p->refreshing = false;
         emit refreshingChanged();
     }
 
+    if(p->refresh_timer)
+        killTimer(p->refresh_timer);
+
+    p->refresh_timer = startTimer(100);
+}
+
+void TelegramMessagesModel::messagesChanged_priv()
+{
     if( !p->dialog )
         return;
 
@@ -364,6 +374,18 @@ void TelegramMessagesModel::messagesChanged(bool cachedData)
 
     p->load_count = p->messages.count();
     emit countChanged();
+}
+
+void TelegramMessagesModel::timerEvent(QTimerEvent *e)
+{
+    if(e->timerId() == p->refresh_timer)
+    {
+        killTimer(p->refresh_timer);
+        p->refresh_timer = 0;
+        messagesChanged_priv();
+    }
+
+    QAbstractListModel::timerEvent(e);
 }
 
 TelegramMessagesModel::~TelegramMessagesModel()

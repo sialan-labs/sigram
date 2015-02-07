@@ -208,6 +208,11 @@ QString TelegramQml::downloadPath() const
     return AsemanApplication::homePath() + "/" + phoneNumber() + "/downloads";
 }
 
+QString TelegramQml::tempPath() const
+{
+    return AsemanApplication::homePath() + "/" + phoneNumber() + "/temp";
+}
+
 QString TelegramQml::configPath() const
 {
     return p->configPath;
@@ -823,35 +828,18 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
 
 bool TelegramQml::sendMessageAsDocument(qint64 dId, const QString &msg)
 {
-    if( !p->telegram )
+    QDir().mkpath(tempPath());
+    const QString &path = tempPath() + "/message-text.txt";
+
+    QFile::remove(path);
+    QFile file(path);
+    if(!file.open(QFile::WriteOnly))
         return false;
 
-    DialogObject *dlg = dialog(dId);
-    if( !dlg )
-        return false;
-    if( dlg->encrypted() )
-        return false;
+    file.write(msg.toUtf8());
+    file.close();
 
-    Message message = newMessage(dId);
-    InputPeer peer(getInputPeerType(dId));
-    peer.setChatId(message.toId().chatId());
-    peer.setUserId(message.toId().userId());
-
-    p->msg_send_random_id = generateRandomId();
-    qint64 fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, msg.toUtf8(), "text-message.txt", "text/plain");
-
-    insertMessage(message, false, false, true);
-
-    MessageObject *msgObj = p->messages.value(message.id());
-    msgObj->setSent(false);
-
-    UploadObject *upload = msgObj->upload();
-    upload->setFileId(fileId);
-    upload->setTotalSize(msg.size());
-
-    p->uploads[fileId] = msgObj;
-    emit uploadsChanged();
-    return true;
+    return sendFile(dId, path, true);
 }
 
 void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)

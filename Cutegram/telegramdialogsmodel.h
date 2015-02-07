@@ -63,9 +63,13 @@ signals:
 
 private slots:
     void dialogsChanged(bool cachedData);
+    void dialogsChanged_priv();
     void userDataChanged();
 
     QList<qint64> fixDialogs(QList<qint64> dialogs );
+
+protected:
+    void timerEvent(QTimerEvent *e);
 
 private:
     TelegramDialogsModelPrivate *p;

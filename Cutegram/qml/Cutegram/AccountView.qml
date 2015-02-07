@@ -53,7 +53,20 @@ Rectangle {
         clip: true
         visible: search_frame.text.length == 0
         forceUnminimum: search_frame.lineFocus || search_frame.text.length != 0
-        onWindowRequest: windowed_msg_box.createObject(acc_view, {"currentDialog": dialog})
+        onWindowRequest: {
+            var dId = dialog.peer.chatId
+            if(dId == 0)
+                dId = dialog.peer.userId
+            if(windoweds_hash.containt(dId)) {
+                var window = windoweds_hash.value(dId)
+                window.visible = true
+                window.show()
+                window.requestActivate()
+                return
+            }
+
+            windowed_msg_box.createObject(acc_view, {"currentDialog": dialog})
+        }
         onCurrentDialogChanged: {
             msg_box.maxId = 0
             View.visible = true
@@ -113,8 +126,8 @@ Rectangle {
         id: windowed_msg_box
         Window {
             id: msg_window
-            width: msg_box.width
-            height: msg_box.width/1.61
+            width: 800*Devices.density
+            height: 500*Devices.density
             x: View.x + View.width/2 - width/2
             y: View.y + View.height/2 - height/2
             visible: true
@@ -146,7 +159,13 @@ Rectangle {
                 telegramObject: dialogs.telegramObject
             }
 
-            Component.onCompleted: windoweds_hash.insert(dId, msg_window )
+            Component.onCompleted: {
+                windoweds_hash.insert(dId, msg_window )
+                x = View.x + View.width/2 - width/2
+                y = View.y + View.height/2 - height/2
+                width = 800*Devices.density
+                height = 500*Devices.density
+            }
         }
     }
 }

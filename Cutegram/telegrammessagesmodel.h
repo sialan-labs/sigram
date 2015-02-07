@@ -87,7 +87,11 @@ signals:
 
 private slots:
     void messagesChanged(bool cachedData);
+    void messagesChanged_priv();
     void init();
+
+protected:
+    void timerEvent(QTimerEvent *e);
 
 private:
     TelegramMessagesModelPrivate *p;

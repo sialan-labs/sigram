@@ -232,6 +232,7 @@ Item {
                 hoverEnabled: true
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onContainsMouseChanged: toggleMinimum(containsMouse)
+                onDoubleClicked: ad_list.windowRequest(list_item.dItem)
                 onClicked: {
                     if( mouse.button == Qt.RightButton ) {
                         var actions, res

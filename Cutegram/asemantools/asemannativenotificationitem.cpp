@@ -121,11 +121,13 @@ AsemanNativeNotificationItem::AsemanNativeNotificationItem(QWidget *parent) :
     p->scene = new DialogScene( this );
 
     p->title_lbl = new QLabel();
-    p->title_lbl->setAlignment(Qt::AlignHCenter);
+    p->title_lbl->setAlignment(Qt::AlignCenter);
+    p->title_lbl->setFixedHeight(26);
 
     p->close_btn = new QToolButton();
     p->close_btn->setText("X");
     p->close_btn->setFixedSize(26, 26);
+    p->close_btn->setAutoRaise(true);
 
     p->ttle_layout = new QHBoxLayout();
     p->ttle_layout->addWidget(p->title_lbl);
@@ -149,12 +151,12 @@ AsemanNativeNotificationItem::AsemanNativeNotificationItem(QWidget *parent) :
     p->body_layout->addWidget(p->body_lbl, 10000);
     p->body_layout->addLayout(p->btns_layout);
     p->body_layout->setContentsMargins(0,0,0,0);
-    p->body_layout->setSpacing(1);
+    p->body_layout->setSpacing(8);
 
     p->layout = new QVBoxLayout(this);
     p->layout->addLayout(p->ttle_layout);
     p->layout->addLayout(p->body_layout);
-    p->layout->setContentsMargins(SHADOW_SIZE+6,SHADOW_SIZE+4,SHADOW_SIZE+6,SHADOW_SIZE+4);
+    p->layout->setContentsMargins(SHADOW_SIZE+10,SHADOW_SIZE+8,SHADOW_SIZE+10,SHADOW_SIZE+8);
     p->layout->setSpacing(1);
 
     setWindowFlags( Qt::Window | Qt::FramelessWindowHint );
@@ -162,6 +164,7 @@ AsemanNativeNotificationItem::AsemanNativeNotificationItem(QWidget *parent) :
     setAttribute(Qt::WA_NoSystemBackground);
     setAttribute(Qt::WA_DeleteOnClose);
     setMouseTracking( true );
+    setWindowOpacity(0.9);
 
     refreshSize();
 
@@ -199,7 +202,7 @@ void AsemanNativeNotificationItem::setTitle(const QString &title)
 
 void AsemanNativeNotificationItem::setBody(const QString &body)
 {
-    p->body_lbl->setText(body);
+    p->body_lbl->setText(body.left(100) + "...");
 }
 
 void AsemanNativeNotificationItem::setIcon(const QString &icon)
@@ -221,6 +224,12 @@ void AsemanNativeNotificationItem::resizeEvent(QResizeEvent *e)
     QWidget::resizeEvent(e);
 }
 
+void AsemanNativeNotificationItem::mouseReleaseEvent(QMouseEvent *e)
+{
+    Q_UNUSED(e)
+    close();
+}
+
 void AsemanNativeNotificationItem::refreshSize()
 {
     QRect rect( SHADOW_SIZE, SHADOW_SIZE, width()-2*SHADOW_SIZE, height()-2*SHADOW_SIZE );
@@ -230,7 +239,7 @@ void AsemanNativeNotificationItem::refreshSize()
     p->back->setGeometry( rect );
     p->scene->setGeometry( rect );
 
-    move(scr.x()+scr.width()-width(), scr.y()+scr.height()-height());
+    move(scr.x()+scr.width()-width()+SHADOW_SIZE*0.7, scr.y()+scr.height()-height()+SHADOW_SIZE*0.7);
 }
 
 void AsemanNativeNotificationItem::setRaised()

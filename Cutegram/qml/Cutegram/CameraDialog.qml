@@ -122,5 +122,10 @@ Window {
             camera.imageCapture.captureToLocation(currentPath)
         }
     }
+
+    Component.onCompleted: {
+        x = View.x + View.width/2 - width/2
+        y = View.y + View.height/2 - height/2
+    }
 }
 

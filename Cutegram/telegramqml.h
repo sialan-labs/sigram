@@ -72,6 +72,7 @@ class TelegramQml : public QObject
     Q_PROPERTY(QString configPath    READ configPath    WRITE setConfigPath    NOTIFY configPathChanged   )
     Q_PROPERTY(QString publicKeyFile READ publicKeyFile WRITE setPublicKeyFile NOTIFY publicKeyFileChanged)
     Q_PROPERTY(QString downloadPath  READ downloadPath  NOTIFY downloadPathChanged )
+    Q_PROPERTY(QString tempPath      READ tempPath      NOTIFY tempPathChanged     )
 
     Q_PROPERTY(bool cutegramDialog READ cutegramDialog WRITE setCutegramDialog NOTIFY cutegramDialogChanged)
 
@@ -116,6 +117,7 @@ public:
     void setPhoneNumber( const QString & phone );
 
     QString downloadPath() const;
+    QString tempPath() const;
 
     QString configPath() const;
     void setConfigPath( const QString & conf );
@@ -244,6 +246,7 @@ signals:
     void userDataChanged();
     void onlineChanged();
     void downloadPathChanged();
+    void tempPathChanged();
     void dialogsChanged(bool cachedData);
     void messagesChanged(bool cachedData);
     void wallpapersChanged();
