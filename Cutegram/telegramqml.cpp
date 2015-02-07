@@ -1177,6 +1177,8 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
         return;
     if(l->accessHash()==0 && l->volumeId()==0 && l->localId()==0)
         return;
+    if(l->download()->fileId() != 0)
+        return;
 
     const QString & download_file = fileLocation(l);
     if( QFile::exists(download_file) )

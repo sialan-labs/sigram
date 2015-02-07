@@ -53,6 +53,11 @@ Item {
 
     onLocationObjChanged: telegram.getFile(locationObj)
 
+    Connections {
+        target: locationObj
+        onDownloadChanged: telegram.getFile(locationObj)
+    }
+
     Rectangle {
         id: mask
         anchors.fill: img
