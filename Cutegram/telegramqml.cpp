@@ -1416,6 +1416,8 @@ void TelegramQml::try_init()
              SLOT(messagesEncryptedChatCreated_slt(qint32)) );
     connect( p->telegram, SIGNAL(messagesSendEncryptedAnswer(qint64,qint32,EncryptedFile)),
              SLOT(messagesSendEncrypted_slt(qint64,qint32,EncryptedFile)) );
+    connect( p->telegram, SIGNAL(messagesSendEncryptedFileAnswer(qint64,qint32,EncryptedFile)),
+             SLOT(messagesSendEncryptedFile_slt(qint64,qint32,EncryptedFile)) );
 
     connect( p->telegram, SIGNAL(contactsGetContactsAnswer(qint64,bool,QList<Contact>,QList<User>)),
              SLOT(contactsGetContacts_slt(qint64,bool,QList<Contact>,QList<User>)) );
@@ -2092,6 +2094,67 @@ void TelegramQml::messagesSendEncrypted_slt(qint64 id, qint32 date, const Encryp
     msg.setId(date);
     msg.setDate(date);
     msg.setOut(msgObj->out());
+    msg.setToId(peer);
+    msg.setUnread(msgObj->unread());
+    msg.setMessage(msgObj->message());
+
+    qint64 did = msg.toId().chatId();
+    if( !did )
+        did = msg.out()? msg.toId().userId() : msg.fromId();
+
+    p->garbages.insert( p->messages.take(old_msgId) );
+    p->messages_list[did].removeAll(old_msgId);
+
+    startGarbageChecker();
+    insertMessage(msg);
+    timerUpdateDialogs(3000);
+}
+
+void TelegramQml::messagesSendEncryptedFile_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile)
+{
+    MessageObject *msgObj = p->uploads.take(id);
+    if(!msgObj)
+        return;
+
+    UploadObject *upload = msgObj->upload();
+    FileLocation location(FileLocation::typeFileLocation);
+    FileLocationObject locationObj(location, msgObj);
+    locationObj.setId(encryptedFile.id());
+    locationObj.setDcId(encryptedFile.dcId());
+    locationObj.setAccessHash(encryptedFile.accessHash());
+
+    const QString &srcFile = upload->location();
+    const QString &dstFile = fileLocation(&locationObj);
+    QString srcSuffix = QFileInfo(srcFile).suffix();
+    if(!srcSuffix.isEmpty())
+        srcSuffix = "." + srcSuffix;
+
+    QFile::copy(srcFile, dstFile + srcSuffix);
+
+    msgObj->setSent(true);
+
+    qint64 old_msgId = msgObj->id();
+
+    Peer peer(static_cast<Peer::PeerType>(msgObj->toId()->classType()));
+    peer.setChatId(msgObj->toId()->chatId());
+    peer.setUserId(msgObj->toId()->userId());
+
+    Document document(Document::typeDocument);
+    document.setAccessHash(encryptedFile.accessHash());
+    document.setId(encryptedFile.id());
+    document.setDate(date);
+    document.setSize(encryptedFile.size());
+    document.setDcId(encryptedFile.dcId());
+
+    MessageMedia media(MessageMedia::typeMessageMediaDocument);
+    media.setDocument(document);
+
+    Message msg(Message::typeMessage);
+    msg.setFromId(msgObj->fromId());
+    msg.setId(date);
+    msg.setDate(date);
+    msg.setOut(msgObj->out());
+    msg.setMedia(media);
     msg.setToId(peer);
     msg.setUnread(msgObj->unread());
     msg.setMessage(msgObj->message());

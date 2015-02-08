@@ -331,6 +331,7 @@ private slots:
     void messagesEncryptedChatCreated_slt(qint32 chatId);
     void messagesEncryptedChatDiscarded_slt(qint32 chatId);
     void messagesSendEncrypted_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile);
+    void messagesSendEncryptedFile_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile);
 
     void error(qint64 id, qint32 errorCode, QString errorText);
 
