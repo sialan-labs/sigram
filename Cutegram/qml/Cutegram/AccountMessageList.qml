@@ -140,7 +140,7 @@ Rectangle {
 
             MimeData {
                 id: mime
-                dataMap: {"land.aseman.cutegram/messageId": message.id}
+                dataMap: message.encrypted? {} : {"land.aseman.cutegram/messageId": message.id}
                 urls: msg_item.hasMedia? [msg_item.mediaLOcation.download.location] : [msg_item.messageFile]
                 text: message.message
             }
@@ -187,20 +187,36 @@ Rectangle {
                     if(user.id == telegram.cutegramId)
                         return
                     if( mouse.button == Qt.RightButton ) {
-                        var actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
-                        var res = Desktop.showMenu(actions)
-                        switch(res) {
-                        case 0:
-                            acc_msg_list.forwardRequest(message)
-                            break;
+                        var actions
+                        var res
+                        if(message.encrypted) {
+                            actions = [qsTr("Copy"),qsTr("Delete")]
+                            res = Desktop.showMenu(actions)
+                            switch(res) {
+                            case 0:
+                                msg_item.copy()
+                                break;
 
-                        case 1:
-                            msg_item.copy()
-                            break;
+                            case 1:
+                                telegramObject.deleteMessage(message.id)
+                                break;
+                            }
+                        } else {
+                            actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
+                            res = Desktop.showMenu(actions)
+                            switch(res) {
+                            case 0:
+                                acc_msg_list.forwardRequest(message)
+                                break;
 
-                        case 2:
-                            telegramObject.deleteMessage(message.id)
-                            break;
+                            case 1:
+                                msg_item.copy()
+                                break;
+
+                            case 2:
+                                telegramObject.deleteMessage(message.id)
+                                break;
+                            }
                         }
                     }
                     else {
