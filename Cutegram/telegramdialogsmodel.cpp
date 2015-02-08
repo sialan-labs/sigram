@@ -132,6 +132,18 @@ bool TelegramDialogsModel::initializing() const
     return p->initializing;
 }
 
+int TelegramDialogsModel::indexOf(DialogObject *dialog)
+{
+    if(!dialog)
+        return -1;
+
+    qint64 dId = dialog->peer()->chatId();
+    if(!dId)
+        dId = dialog->peer()->userId();
+
+    return p->dialogs.indexOf(dId);
+}
+
 void TelegramDialogsModel::refreshDatabase()
 {
     if(!p->telegram)

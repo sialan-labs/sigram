@@ -124,9 +124,13 @@ Rectangle {
             maximumMediaWidth: acc_msg_list.maximumMediaWidth
             message: item
             width: mlist.width - 2*x
+            onSelectedTextChanged: if(selectedText.length != 0) mlist.currentIndex = index
             onDialogRequest: acc_msg_list.dialogRequest(dialogObject)
 
             property string messageFile
+            property bool selected: mlist.currentIndex == index
+
+            onSelectedChanged: if(!selected) discardSelection()
 
             DragObject {
                 id: drag

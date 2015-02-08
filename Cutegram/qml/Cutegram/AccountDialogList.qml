@@ -19,6 +19,10 @@ Item {
 
     signal windowRequest(variant dialog)
 
+    onCurrentDialogChanged: {
+        dlist.currentIndex = dialogs_model.indexOf(currentDialog)
+    }
+
     Behavior on width {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
     }
@@ -283,7 +287,6 @@ Item {
                         }
                     } else {
                         currentDialog = list_item.dItem
-                        dlist.currentIndex = index
                     }
                 }
             }
