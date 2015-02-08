@@ -2139,6 +2139,11 @@ void TelegramQml::messagesSendEncryptedFile_slt(qint64 id, qint32 date, const En
     peer.setChatId(msgObj->toId()->chatId());
     peer.setUserId(msgObj->toId()->userId());
 
+    Dialog dialog;
+    dialog.setPeer(peer);
+    dialog.setTopMessage(date);
+    dialog.setUnreadCount(0);
+
     Document document(Document::typeDocument);
     document.setAccessHash(encryptedFile.accessHash());
     document.setId(encryptedFile.id());
@@ -2167,7 +2172,8 @@ void TelegramQml::messagesSendEncryptedFile_slt(qint64 id, qint32 date, const En
     p->messages_list[did].removeAll(old_msgId);
 
     startGarbageChecker();
-    insertMessage(msg);
+    insertMessage(msg, true);
+    insertDialog(dialog, true);
     timerUpdateDialogs(3000);
 }
 
