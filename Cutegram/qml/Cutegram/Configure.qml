@@ -172,6 +172,7 @@ Rectangle {
                             font.family: AsemanApp.globalFont.family
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
+                            visible: Devices.isLinux
                             text: qsTr("Auto Start")
                         }
 
@@ -269,6 +270,7 @@ Rectangle {
 
                         QtControls.CheckBox {
                             id: autostart_checkbox
+                            visible: Devices.isLinux
                             checked: autostart_mngr.active
                             onCheckedChanged: autostart_mngr.active = checked
                         }
