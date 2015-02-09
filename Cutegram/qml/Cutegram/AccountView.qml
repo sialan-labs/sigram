@@ -15,6 +15,8 @@ Rectangle {
     property alias currentDialog: dialogs.currentDialog
     property bool cutegramDialog: telegramObject.cutegramDialog
 
+    property alias windowsCount: windoweds_hash.count
+
     signal addParticianRequest()
 
     Component.onCompleted: {

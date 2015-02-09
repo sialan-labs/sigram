@@ -14,13 +14,23 @@ Rectangle {
     property alias telegramObject: telegram
     property alias unreadCount: telegram.unreadCount
 
-    property bool isActive: View.active && View.visible
+    property bool isActive: {
+        if(view && view.windowsCount!=0)
+            return true
+        else
+            return View.active && View.visible
+    }
 
     signal activeRequest()
     signal addParticianRequest()
 
     onIsActiveChanged: {
-        telegram.online = View.visible
+        var status = View.visible
+        if(view && view.windowsCount!=0) {
+            status = true
+        }
+
+        telegram.online = status
     }
 
     QtObject {
