@@ -532,6 +532,10 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <source>Select Font</source>
         <translation>Esbillar fonte</translation>
     </message>
+    <message>
+        <source>Auto Start</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>

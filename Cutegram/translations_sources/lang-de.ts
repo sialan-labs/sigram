@@ -536,6 +536,10 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <source>Select Font</source>
         <translation>Wähle Schriftart</translation>
     </message>
+    <message>
+        <source>Auto Start</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>

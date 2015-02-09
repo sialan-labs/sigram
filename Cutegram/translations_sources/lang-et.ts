@@ -531,6 +531,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Select Font</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Auto Start</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
