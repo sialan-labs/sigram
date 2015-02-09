@@ -801,7 +801,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     p->msg_send_random_id = generateRandomId();
     if(dlg->encrypted())
     {
-        sendId = p->telegram->messagesSendEncrypted(dId, p->msg_send_random_id, msg);
+        sendId = p->telegram->messagesSendEncrypted(dId, p->msg_send_random_id, 0, msg);
     }
     else
     {
@@ -1111,7 +1111,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
     if( t.name().contains("image/") && !forceDocument )
     {
         if(dlg->encrypted())
-            fileId = p->telegram->messagesSendEncryptedPhoto(dId, p->msg_send_random_id, file);
+            fileId = p->telegram->messagesSendEncryptedPhoto(dId, p->msg_send_random_id, 0, file);
         else
             fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
     }
@@ -1142,7 +1142,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
                 thumbFile.close();
             }
 
-            fileId = p->telegram->messagesSendEncryptedVideo(dId, p->msg_send_random_id, file, thumbData);
+            fileId = p->telegram->messagesSendEncryptedVideo(dId, p->msg_send_random_id, 0, file, 0, width, height, thumbData);
         }
         else
             fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, width, height, thumbnail);
