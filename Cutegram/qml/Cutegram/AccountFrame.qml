@@ -20,7 +20,7 @@ Rectangle {
     signal addParticianRequest()
 
     onIsActiveChanged: {
-        telegram.online = isActive
+        telegram.online = View.visible
     }
 
     QtObject {
