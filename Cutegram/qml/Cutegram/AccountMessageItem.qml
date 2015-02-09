@@ -157,6 +157,7 @@ Item {
 
                 Column {
                     id: msg_column
+                    anchors.right: parent.right
 
                     Item {
                         id: msg_txt_frame
