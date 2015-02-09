@@ -24,11 +24,11 @@
     </message>
     <message>
         <source>Secret chat (experimental)</source>
-        <translation type="vanished">Geheimer Chat (experimentell)</translation>
+        <translation type="obsolete">Geheimer Chat (experimentell)</translation>
     </message>
     <message>
         <source>%1 participants</source>
-        <translation type="vanished">%1 Teilnehmer</translation>
+        <translation type="obsolete">%1 Teilnehmer</translation>
     </message>
     <message>
         <source>%1 was online</source>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>Leave</source>
-        <translation type="vanished">Verlassen</translation>
+        <translation type="obsolete">Verlassen</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
@@ -180,12 +180,8 @@
         <translation type="obsolete">Klicken zum Herunterladen</translation>
     </message>
     <message>
-        <source>Unsupported Media</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation type="obsolete">Abbrechen</translation>
     </message>
 </context>
 <context>
@@ -264,13 +260,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
 </context>
 <context>
-    <name>AccountView</name>
-    <message>
-        <source>Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
@@ -278,7 +267,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>New chat</source>
-        <translation type="vanished">Neuer Chat</translation>
+        <translation type="obsolete">Neuer Chat</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -294,7 +283,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation type="vanished">Über Cutegram</translation>
+        <translation type="obsolete">Über Cutegram</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
