@@ -51,6 +51,7 @@ Item {
                 source: marea
                 image: "files/message.png"
                 hotSpot: Qt.point(22,22)
+                dropAction: Qt.CopyAction
             }
 
             MimeData {

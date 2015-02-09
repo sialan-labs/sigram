@@ -36,6 +36,9 @@ Item {
 
     property alias hasMedia: msg_media.hasMedia
     property bool encryptMedia: message.message.length==0 && message.encrypted
+    property alias mediaLOcation: msg_media.locationObj
+
+    property alias selectedText: msg_txt.selectedText
 
     property bool modernMode: false
 
@@ -256,5 +259,9 @@ Item {
             Devices.clipboard = message.message
         else
             msg_txt.copy()
+    }
+
+    function discardSelection() {
+        msg_txt.deselect()
     }
 }

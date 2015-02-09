@@ -21,6 +21,7 @@
 
 #include <QAbstractListModel>
 
+class TelegramQml;
 class Peer;
 class InputPeer;
 class DialogObject;
@@ -29,7 +30,7 @@ class TelegramMessagesModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(QObject* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
+    Q_PROPERTY(TelegramQml* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
     Q_PROPERTY(DialogObject* dialog READ dialog WRITE setDialog NOTIFY dialogChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(bool initializing READ initializing NOTIFY initializingChanged)
@@ -44,8 +45,8 @@ public:
     TelegramMessagesModel(QObject *parent = 0);
     ~TelegramMessagesModel();
 
-    QObject *telegram() const;
-    void setTelegram( QObject *tg );
+    TelegramQml *telegram() const;
+    void setTelegram( TelegramQml *tg );
 
     DialogObject *dialog() const;
     void setDialog( DialogObject *dlg );
@@ -66,7 +67,7 @@ public:
     bool initializing() const;
     bool refreshing() const;
 
-    InputPeer inputPeer() const;
+    qint64 peerId() const;
     Peer peer() const;
 
 public slots:
@@ -86,7 +87,11 @@ signals:
 
 private slots:
     void messagesChanged(bool cachedData);
+    void messagesChanged_priv();
     void init();
+
+protected:
+    void timerEvent(QTimerEvent *e);
 
 private:
     TelegramMessagesModelPrivate *p;

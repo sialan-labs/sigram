@@ -79,5 +79,6 @@
         <file>qml/Cutegram/AccountMessageUpload.qml</file>
         <file>qml/Cutegram/CameraDialog.qml</file>
         <file>qml/Cutegram/files/camera.png</file>
+        <file>qml/Cutegram/AccountMessageBox.qml</file>
     </qresource>
 </RCC>

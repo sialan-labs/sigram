@@ -72,6 +72,7 @@ class TelegramQml : public QObject
     Q_PROPERTY(QString configPath    READ configPath    WRITE setConfigPath    NOTIFY configPathChanged   )
     Q_PROPERTY(QString publicKeyFile READ publicKeyFile WRITE setPublicKeyFile NOTIFY publicKeyFileChanged)
     Q_PROPERTY(QString downloadPath  READ downloadPath  NOTIFY downloadPathChanged )
+    Q_PROPERTY(QString tempPath      READ tempPath      NOTIFY tempPathChanged     )
 
     Q_PROPERTY(bool cutegramDialog READ cutegramDialog WRITE setCutegramDialog NOTIFY cutegramDialogChanged)
 
@@ -116,6 +117,7 @@ public:
     void setPhoneNumber( const QString & phone );
 
     QString downloadPath() const;
+    QString tempPath() const;
 
     QString configPath() const;
     void setConfigPath( const QString & conf );
@@ -193,6 +195,8 @@ public:
     QList<qint64> uploads() const;
     QList<qint64> contacts() const;
 
+    InputPeer getInputPeer(qint64 pid);
+
 public slots:
     void authLogout();
     void authSendCall();
@@ -201,6 +205,8 @@ public slots:
     void authSignUp(const QString &code, const QString &firstName, const QString &lastName);
 
     void sendMessage( qint64 dialogId, const QString & msg );
+    bool sendMessageAsDocument( qint64 dialogId, const QString & msg );
+
     void forwardMessage( qint64 msgId, qint64 peerId );
     void deleteMessage( qint64 msgId );
 
@@ -212,6 +218,7 @@ public slots:
 
     void messagesDeleteHistory(qint64 peerId);
     void messagesSetTyping(qint64 peerId, bool stt);
+    void messagesReadHistory(qint64 peerId);
 
     void messagesCreateEncryptedChat(qint64 userId);
     void messagesAcceptEncryptedChat(qint32 chatId);
@@ -239,6 +246,7 @@ signals:
     void userDataChanged();
     void onlineChanged();
     void downloadPathChanged();
+    void tempPathChanged();
     void dialogsChanged(bool cachedData);
     void messagesChanged(bool cachedData);
     void wallpapersChanged();
@@ -323,6 +331,7 @@ private slots:
     void messagesEncryptedChatCreated_slt(qint32 chatId);
     void messagesEncryptedChatDiscarded_slt(qint32 chatId);
     void messagesSendEncrypted_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile);
+    void messagesSendEncryptedFile_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile);
 
     void error(qint64 id, qint32 errorCode, QString errorText);
 
@@ -371,7 +380,7 @@ private slots:
     void updateEncryptedTopMessage(const Message &message);
 
     qint64 generateRandomId() const;
-    InputPeer::InputPeerType getInputPeer(qint64 pid);
+    InputPeer::InputPeerType getInputPeerType(qint64 pid);
 
 private:
     TelegramQmlPrivate *p;

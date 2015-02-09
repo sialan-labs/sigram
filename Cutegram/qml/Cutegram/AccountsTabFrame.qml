@@ -106,6 +106,7 @@ Rectangle {
             tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
+                slide_menu.text = ""
                 slide_menu.show(add_secret_chat_component)
             }
         }
@@ -125,6 +126,7 @@ Rectangle {
             tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
+                slide_menu.text = ""
                 slide_menu.show(add_groupchat_component)
             }
         }
@@ -164,6 +166,7 @@ Rectangle {
             tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: 9*Devices.fontDensity
             onClicked: {
+                slide_menu.text = ""
                 slide_menu.show(configure_component)
             }
         }

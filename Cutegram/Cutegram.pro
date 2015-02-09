@@ -18,13 +18,15 @@ linux: QT += dbus
 win32 {
     LIBS += -L$$OUT_PWD/$$DESTDIR -lssleay32 -lcrypto -lz -lqtelegram
     INCLUDEPATH += $$OUT_PWD/$$DESTDIR/include $$OUT_PWD/$$DESTDIR/include/libqtelegram
-} macx {
+} else {
+macx {
     QT += macextras
-    LIBS += -lssl -lcrypto -lz -L/Users/bardia/Projects/builds/ -lqtelegram
+    LIBS += -lssl -lcrypto -lz -lqtelegram
     INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
 } else {
     LIBS += -lssl -lcrypto -lz -lqtelegram
     INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
+}
 }
 
 SOURCES += main.cpp \

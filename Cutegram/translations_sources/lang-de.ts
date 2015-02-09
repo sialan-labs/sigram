@@ -73,6 +73,10 @@
         <source>Are you sure about deleting history?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -952,10 +956,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <translation>Liste anzeigen</translation>
     </message>
     <message>
-        <source>Add Partician</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Leave</source>
         <translation type="unfinished">Verlassen</translation>
     </message>
@@ -965,6 +965,10 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Participant</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

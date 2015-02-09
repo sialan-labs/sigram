@@ -23,6 +23,7 @@ signals:
 
 protected:
     void resizeEvent(QResizeEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
 
 private slots:
     void refreshSize();

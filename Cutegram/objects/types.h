@@ -392,6 +392,15 @@ public:
 
 
     void operator= ( const FileLocation & another) {
+        if(_localId != another.localId()) {
+            _download->setFileId(0);
+            _download->setMtime(0);
+            _download->setPartId(0);
+            _download->setDownloaded(0);
+            _download->setTotal(0);
+            emit downloadChanged();
+        }
+
         _id = 0;
         emit idChanged();
         _fileName.clear();

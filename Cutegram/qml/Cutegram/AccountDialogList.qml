@@ -17,6 +17,12 @@ Item {
 
     property bool showLastMessage: Cutegram.showLastMessage
 
+    signal windowRequest(variant dialog)
+
+    onCurrentDialogChanged: {
+        dlist.currentIndex = dialogs_model.indexOf(currentDialog)
+    }
+
     Behavior on width {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
     }
@@ -230,14 +236,18 @@ Item {
                 hoverEnabled: true
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onContainsMouseChanged: toggleMinimum(containsMouse)
+                onDoubleClicked: ad_list.windowRequest(list_item.dItem)
                 onClicked: {
                     if( mouse.button == Qt.RightButton ) {
                         var actions, res
                         if(dItem.encrypted) {
-                            actions = [qsTr("Delete")]
+                            actions = [qsTr("Open in New Window"), qsTr("Delete")]
                             res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
+                                ad_list.windowRequest(list_item.dItem)
+                                break;
+                            case 1:
                                 if( Desktop.yesOrNo(View, qsTr("Delete secret chat"), qsTr("Are you sure about deleting this secret chat?")) )
                                     telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId)
                                 break;
@@ -251,19 +261,25 @@ Item {
                                 break;
                             }
                         } else if(isChat) {
-                            actions = [qsTr("Delete History")]
+                            actions = [qsTr("Open in New Window"), qsTr("Delete History")]
                             res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
+                                ad_list.windowRequest(list_item.dItem)
+                                break;
+                            case 1:
                                 if( Desktop.yesOrNo(View, qsTr("Delete History"), qsTr("Are you sure about deleting history?")) )
                                     telegramObject.messagesDeleteHistory(dItem.peer.chatId)
                                 break;
                             }
                         } else {
-                            actions = [qsTr("Delete History")]
+                            actions = [qsTr("Open in New Window"), qsTr("Delete History")]
                             res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
+                                ad_list.windowRequest(list_item.dItem)
+                                break;
+                            case 1:
                                 if( Desktop.yesOrNo(View, qsTr("Delete History"), qsTr("Are you sure about deleting history?")) )
                                     telegramObject.messagesDeleteHistory(dItem.peer.userId)
                                 break;
@@ -271,7 +287,6 @@ Item {
                         }
                     } else {
                         currentDialog = list_item.dItem
-                        dlist.currentIndex = index
                     }
                 }
             }

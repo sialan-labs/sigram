@@ -21,6 +21,7 @@
 
 #include <QAbstractListModel>
 
+class DialogObject;
 class TelegramQml;
 class TelegramDialogsModelPrivate;
 class TelegramDialogsModel : public QAbstractListModel
@@ -53,6 +54,8 @@ public:
     int count() const;
     bool initializing() const;
 
+    Q_INVOKABLE int indexOf(DialogObject *dialog);
+
 public slots:
     void refreshDatabase();
 
@@ -63,9 +66,13 @@ signals:
 
 private slots:
     void dialogsChanged(bool cachedData);
+    void dialogsChanged_priv();
     void userDataChanged();
 
     QList<qint64> fixDialogs(QList<qint64> dialogs );
+
+protected:
+    void timerEvent(QTimerEvent *e);
 
 private:
     TelegramDialogsModelPrivate *p;
