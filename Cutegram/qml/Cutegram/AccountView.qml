@@ -69,7 +69,8 @@ Rectangle {
         }
         onCurrentDialogChanged: {
             msg_box.maxId = 0
-            View.visible = true
+            if(currentDialog != telegramObject.nullDialog )
+                View.visible = true
         }
     }
 

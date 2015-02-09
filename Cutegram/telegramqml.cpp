@@ -2630,7 +2630,7 @@ void TelegramQml::insertUpdate(const Update &update)
             dlg->setTypingUsers( tusers );
         }
 
-        int timer_id = startTimer(5000);
+        int timer_id = startTimer(6000);
         p->typing_timers.insert(timer_id, timer_pair);
     }
         break;
@@ -2722,7 +2722,7 @@ void TelegramQml::insertUpdate(const Update &update)
             dlg->setTypingUsers( tusers );
         }
 
-        int timer_id = startTimer(5000);
+        int timer_id = startTimer(6000);
         p->typing_timers.insert(timer_id, timer_pair);
     }
         break;
@@ -2750,7 +2750,7 @@ void TelegramQml::insertUpdate(const Update &update)
             dlg->setTypingUsers( tusers );
         }
 
-        int timer_id = startTimer(5000);
+        int timer_id = startTimer(6000);
         p->typing_timers.insert(timer_id, timer_pair);
     }
         break;
