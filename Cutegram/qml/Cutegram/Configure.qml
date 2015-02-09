@@ -13,6 +13,7 @@ Rectangle {
     property User user: telegram.user(telegram.me)
 
     Flickable {
+        id: flickable
         anchors.fill: parent
         contentWidth: column.width
         contentHeight: conf_frame.height
@@ -165,6 +166,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: autostart_text
+                            height: autostart_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: AsemanApp.globalFont.family
+                            font.pixelSize: 9*Devices.fontDensity
+                            color: "#333333"
+                            text: qsTr("Auto Start")
+                        }
+
+                        Text {
                             id: startup_text
                             height: startup_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -254,6 +265,12 @@ Rectangle {
                             id: aseman_nl_checkbox
                             checked: Cutegram.cutegramSubscribe
                             onCheckedChanged: Cutegram.cutegramSubscribe = checked
+                        }
+
+                        QtControls.CheckBox {
+                            id: autostart_checkbox
+                            checked: autostart_mngr.active
+                            onCheckedChanged: autostart_mngr.active = checked
                         }
 
                         QtControls.ComboBox {
@@ -394,6 +411,11 @@ Rectangle {
         }
     }
 
+    PhysicalScrollBar {
+        scrollArea: flickable; height: flickable.height; width: 6*Devices.density
+        anchors.right: flickable.right; anchors.top: flickable.top; color: "#777777"
+    }
+
     Timer {
         id: init_timer
         interval: 500
@@ -401,5 +423,13 @@ Rectangle {
         onTriggered: inited = true
 
         property bool inited: false
+    }
+
+    AutoStartManager {
+        id: autostart_mngr
+        source: "cutegram"
+        command: AsemanApp.appFilePath
+        comment: "Cutegram auto-start item"
+        name: "Cutegram"
     }
 }

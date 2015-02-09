@@ -74,6 +74,11 @@ QString AsemanApplication::appPath()
     return QCoreApplication::applicationDirPath();
 }
 
+QString AsemanApplication::appFilePath()
+{
+    return QCoreApplication::applicationFilePath();
+}
+
 QString AsemanApplication::logPath()
 {
 #ifdef Q_OS_ANDROID

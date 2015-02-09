@@ -93,7 +93,8 @@ SOURCES += \
     asemandragobject.cpp \
     asemanmimedata.cpp \
     asemandownloader.cpp \
-    asemannotification.cpp
+    asemannotification.cpp \
+    asemanautostartmanager.cpp
 
 HEADERS += \
     asemandevices.h \
@@ -116,7 +117,8 @@ HEADERS += \
     asemandragobject.h \
     asemanmimedata.h \
     asemandownloader.h \
-    asemannotification.h
+    asemannotification.h \
+    asemanautostartmanager.h
 
 OTHER_FILES += \
     android-build/src/land/aseman/android/AsemanActivity.java \

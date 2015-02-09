@@ -32,6 +32,7 @@
 #include "asemanbackhandler.h"
 #include "asemancountriesmodel.h"
 #include "asemannotification.h"
+#include "asemanautostartmanager.h"
 #ifdef Q_OS_ANDROID
 #include "asemanjavalayer.h"
 #endif
@@ -114,6 +115,7 @@ AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
     qmlRegisterType<AsemanImageColorAnalizor>("AsemanTools", 1,0, "ImageColorAnalizor");
     qmlRegisterType<AsemanCountriesModel>("AsemanTools", 1,0, "CountriesModel");
     qmlRegisterType<AsemanNotification>("AsemanTools", 1,0, "Notification");
+    qmlRegisterType<AsemanAutoStartManager>("AsemanTools", 1,0, "AutoStartManager");
 #ifdef DESKTOP_LINUX
     qmlRegisterType<AsemanMimeApps>("AsemanTools", 1,0, "MimeApps");
 #endif

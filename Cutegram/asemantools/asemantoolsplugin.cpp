@@ -15,6 +15,7 @@
 #include "asemanbackhandler.h"
 #include "aseman_macros.h"
 #include "asemancountriesmodel.h"
+#include "asemanautostartmanager.h"
 #ifdef Q_OS_ANDROID
 #include "asemanjavalayer.h"
 #endif
@@ -61,6 +62,7 @@ void AsemanToolsPlugin::registerTypes(const char *uri)
     qmlRegisterType<AsemanDownloader>(uri, 1,0, "Downloader");
     qmlRegisterType<AsemanImageColorAnalizor>(uri, 1,0, "ImageColorAnalizor");
     qmlRegisterType<AsemanCountriesModel>(uri, 1,0, "CountriesModel");
+    qmlRegisterType<AsemanAutoStartManager>(uri, 1,0, "AutoStartManager");
 #ifdef DESKTOP_LINUX
     qmlRegisterType<AsemanMimeApps>(uri, 1,0, "MimeApps");
 #endif

@@ -57,6 +57,7 @@ class AsemanApplication : public INHERIT_QAPP
 
     Q_PROPERTY(QString homePath     READ homePath     NOTIFY fakeSignal)
     Q_PROPERTY(QString appPath      READ appPath      NOTIFY fakeSignal)
+    Q_PROPERTY(QString appFilePath  READ appFilePath  NOTIFY fakeSignal)
     Q_PROPERTY(QString logPath      READ logPath      NOTIFY fakeSignal)
     Q_PROPERTY(QString confsPath    READ confsPath    NOTIFY fakeSignal)
     Q_PROPERTY(QString tempPath     READ tempPath     NOTIFY fakeSignal)
@@ -75,6 +76,7 @@ public:
 
     static QString homePath();
     static QString appPath();
+    static QString appFilePath();
     static QString logPath();
     static QString confsPath();
     static QString tempPath();
