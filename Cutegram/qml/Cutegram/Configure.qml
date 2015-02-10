@@ -24,7 +24,7 @@ Rectangle {
             width: configure.width
             height: logicalHeight>configure.height? logicalHeight : configure.height
 
-            property real logicalHeight: column.height + logout_btn.height + 30*Devices.density
+            property real logicalHeight: column.height + buttons_column.height + 30*Devices.density
 
             Column {
                 id: column
@@ -390,24 +390,57 @@ Rectangle {
                 }
             }
 
-            Button {
-                id: logout_btn
+            Column {
+                id: buttons_column
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.margins: 20*Devices.density
-                textFont.family: AsemanApp.globalFont.family
-                textFont.pixelSize: 9*Devices.fontDensity
-                highlightColor: Qt.darker(normalColor)
-                normalColor: "#C81414"
-                textColor: "#ffffff"
-                height: 40*Devices.density
-                text: qsTr("Logout")
-                radius: 4*Devices.density
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    if( profiles.remove(telegram.phoneNumber) )
-                        Cutegram.logout(telegram.phoneNumber)
+                spacing: 4*Devices.density
+
+                Button {
+                    width: parent.width
+                    textFont.family: AsemanApp.globalFont.family
+                    textFont.pixelSize: 9*Devices.fontDensity
+                    highlightColor: Qt.darker(normalColor)
+                    normalColor: "#C81414"
+                    textColor: "#ffffff"
+                    height: 40*Devices.density
+                    text: qsTr("Logout")
+                    radius: 4*Devices.density
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if( profiles.remove(telegram.phoneNumber) )
+                            Cutegram.logout(telegram.phoneNumber)
+                    }
+                }
+
+                Button {
+                    width: parent.width
+                    textFont.family: AsemanApp.globalFont.family
+                    textFont.pixelSize: 9*Devices.fontDensity
+                    highlightColor: Qt.darker(normalColor)
+                    normalColor: "#333333"
+                    textColor: "#ffffff"
+                    height: 40*Devices.density
+                    text: qsTr("About Cutegram")
+                    radius: 4*Devices.density
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Cutegram.about()
+                }
+
+                Button {
+                    width: parent.width
+                    textFont.family: AsemanApp.globalFont.family
+                    textFont.pixelSize: 9*Devices.fontDensity
+                    highlightColor: Qt.darker(normalColor)
+                    normalColor: "#26263E"
+                    textColor: "#ffffff"
+                    height: 40*Devices.density
+                    text: qsTr("About Aseman")
+                    radius: 4*Devices.density
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Cutegram.aboutAseman()
                 }
             }
         }
