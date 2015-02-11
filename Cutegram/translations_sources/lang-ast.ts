@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ast">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -22,15 +24,23 @@
     </message>
     <message>
         <source>Secret chat (experimental)</source>
-        <translation>Charra secreta (esperimental)</translation>
+        <translation type="vanished">Charra secreta (esperimental)</translation>
     </message>
     <message>
         <source>%1 participants</source>
-        <translation>%1 participantes</translation>
+        <translation type="vanished">%1 participantes</translation>
     </message>
     <message>
         <source>%1 was online</source>
         <translation>%1 tuvo en llinia</translation>
+    </message>
+    <message>
+        <source>Secret chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 participants (%2 online)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -45,7 +55,27 @@
     </message>
     <message>
         <source>Leave</source>
-        <translation>Colar</translation>
+        <translation type="vanished">Colar</translation>
+    </message>
+    <message>
+        <source>Delete secret chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about deleting this secret chat?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about deleting history?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in New Window</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -145,6 +175,29 @@
         <source>Click to Download</source>
         <translation>Primi pa descargar</translation>
     </message>
+    <message>
+        <source>Unsupported Media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Encaboxar</translation>
+    </message>
+</context>
+<context>
+    <name>AccountSearchList</name>
+    <message>
+        <source>Me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 on %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountSendMessage</name>
@@ -165,10 +218,14 @@
         <translation>Desaniciar</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Telegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -203,6 +260,13 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
 </context>
 <context>
+    <name>AccountView</name>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
@@ -210,7 +274,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>New chat</source>
-        <translation>Charra nueva</translation>
+        <translation type="vanished">Charra nueva</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -226,11 +290,22 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>Tocante a Cutegram</translation>
+        <translation type="vanished">Tocante a Cutegram</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
         <translation>Amestar charra secreta</translation>
+    </message>
+    <message>
+        <source>Contact List</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AccountsTabList</name>
+    <message>
+        <source>Add Account (experimental)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -330,14 +405,29 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
 </context>
 <context>
+    <name>CameraDialog</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Unviar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Encaboxar</translation>
+    </message>
+    <message>
+        <source>Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -442,6 +532,10 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <source>Select Font</source>
         <translation>Esbillar fonte</translation>
     </message>
+    <message>
+        <source>Auto Start</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -529,6 +623,22 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Drop to send</source>
         <translation>Sueltar pa unviar</translation>
+    </message>
+    <message>
+        <source>Drop to add participant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop to add new chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter new group name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -678,127 +788,127 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Farvardin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Moharram</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safar</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rabiol Avval</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rabio Sani</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jamadiol Aval</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jamadio Sani</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rajab</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shaban</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ramadan</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shaval</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Zighade</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Zihaje</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -840,6 +950,22 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Show List</source>
         <translation>Amosar llista</translation>
+    </message>
+    <message>
+        <source>Leave</source>
+        <translation type="unfinished">Colar</translation>
+    </message>
+    <message>
+        <source>Leave the group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about leaving this group?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Participant</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

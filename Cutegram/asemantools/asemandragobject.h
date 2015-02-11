@@ -34,6 +34,8 @@ class AsemanDragObject : public QObject
     Q_PROPERTY(QUrl image READ image WRITE setImage NOTIFY imageChanged)
     Q_PROPERTY(QPoint hotSpot READ hotSpot WRITE setHotSpot NOTIFY hotSpotChanged)
 
+    Q_PROPERTY(bool dragging READ dragging NOTIFY draggingChanged)
+
 public:
     AsemanDragObject(QObject *parent = 0);
     ~AsemanDragObject();
@@ -50,6 +52,8 @@ public:
     void setImage(const QUrl & url);
     QUrl image() const;
 
+    bool dragging() const;
+
     void setHotSpot(const QPoint &point);
     QPoint hotSpot() const;
 
@@ -62,6 +66,7 @@ signals:
     void sourceChanged();
     void imageChanged();
     void hotSpotChanged();
+    void draggingChanged();
 
 private:
     AsemanDragObjectPrivate *p;

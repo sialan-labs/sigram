@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QStringList>
 #include <QProcess>
+#include <QUuid>
 
 QString aseman_tools_numtranslate_0 = "0";
 QString aseman_tools_numtranslate_1 = "1";
@@ -120,6 +121,11 @@ qreal AsemanTools::colorSaturation(const QColor &clr)
     return clr.saturation()/255.0;
 }
 
+void AsemanTools::mkDir(const QString &dir)
+{
+    QDir().mkpath(dir);
+}
+
 QVariantMap AsemanTools::colorHsl(const QColor &clr)
 {
     QVariantMap res;
@@ -183,6 +189,11 @@ QString AsemanTools::passToMd5(const QString &pass)
         return QString();
 
     return QCryptographicHash::hash( pass.toUtf8(), QCryptographicHash::Md5 ).toHex();
+}
+
+QString AsemanTools::createUuid()
+{
+    return QUuid::createUuid().toString();
 }
 
 void AsemanTools::copyDirectory(const QString &src, const QString &dst)

@@ -91,7 +91,7 @@ Item {
                 anchors.fill: parent
                 anchors.margins: 5*Devices.density
                 sourceSize: Qt.size(width,height)
-                source: emoti.length==0? "" : "file://" + emojis.pathOf(key)
+                source: emoti.length==0? "" : Devices.localFilesPrePath + emojis.pathOf(key)
                 smooth: true
                 fillMode: Image.PreserveAspectFit
                 asynchronous: true

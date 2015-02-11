@@ -23,6 +23,7 @@
 #include <QPalette>
 #include <QEventLoop>
 #include <QFontDatabase>
+#include <QInputDialog>
 #include <QDebug>
 
 #ifdef DESKTOP_DEVICE
@@ -31,6 +32,7 @@
 #include <QFontDialog>
 #include <QMenu>
 #include <QAction>
+#include <QMessageBox>
 #endif
 
 class AsemanDesktopToolsPrivate
@@ -479,6 +481,18 @@ QColor AsemanDesktopTools::getColor(const QColor &color) const
 #endif
 }
 
+QString AsemanDesktopTools::getText(QWindow *window, const QString &title, const QString &text, const QString &defaultText)
+{
+    Q_UNUSED(window)
+
+    bool ok = false;
+    const QString &result = QInputDialog::getText(0, title, text, QLineEdit::Normal, defaultText, &ok);
+    if(!ok)
+        return QString();
+
+    return result;
+}
+
 int AsemanDesktopTools::showMenu(const QStringList &actions, QPoint point)
 {
 #ifdef DESKTOP_DEVICE
@@ -496,6 +510,35 @@ int AsemanDesktopTools::showMenu(const QStringList &actions, QPoint point)
     return pointers.indexOf(res);
 #else
     return -1;
+#endif
+}
+
+bool AsemanDesktopTools::yesOrNo(QWindow *window, const QString &title, const QString &text, int type)
+{
+    Q_UNUSED(window)
+#ifdef DESKTOP_DEVICE
+    switch(type)
+    {
+    case Warning:
+        return QMessageBox::warning(0, title, text, QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes;
+        break;
+
+    case Information:
+        return QMessageBox::information(0, title, text, QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes;
+        break;
+
+    case Question:
+        return QMessageBox::question(0, title, text, QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes;
+        break;
+
+    case Critical:
+        return QMessageBox::critical(0, title, text, QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes;
+        break;
+    }
+
+    return false;
+#else
+    return false;
 #endif
 }
 

@@ -24,6 +24,7 @@
 #include <QSettings>
 #include <QThread>
 #include <QCoreApplication>
+#include <QDebug>
 
 static QSettings *app_global_settings = 0;
 static AsemanApplication *aseman_app_singleton = 0;
@@ -37,10 +38,10 @@ public:
 #ifdef ASEMAN_QML_PLUGIN
 AsemanApplication::AsemanApplication() :
     INHERIT_QAPP ()
-#else
+  #else
 AsemanApplication::AsemanApplication(int &argc, char **argv) :
     INHERIT_QAPP (argc,argv)
-#endif
+  #endif
 {
     p = new AsemanApplicationPrivate;
     if(!aseman_app_singleton)
@@ -71,6 +72,11 @@ QString AsemanApplication::homePath()
 QString AsemanApplication::appPath()
 {
     return QCoreApplication::applicationDirPath();
+}
+
+QString AsemanApplication::appFilePath()
+{
+    return QCoreApplication::applicationFilePath();
 }
 
 QString AsemanApplication::logPath()
@@ -179,6 +185,23 @@ void AsemanApplication::setSetting(const QString &key, const QVariant &value)
 QVariant AsemanApplication::readSetting(const QString &key, const QVariant &defaultValue)
 {
     return settings()->value(key, defaultValue);
+}
+
+bool AsemanApplication::event(QEvent *e)
+{
+#ifdef Q_OS_MAC
+    switch(e->type())
+    {
+    case QEvent::ApplicationActivate:
+        clickedOnDock();
+        break;
+
+    default:
+        break;
+    }
+#endif
+
+    return INHERIT_QAPP::event(e);
 }
 
 AsemanApplication::~AsemanApplication()

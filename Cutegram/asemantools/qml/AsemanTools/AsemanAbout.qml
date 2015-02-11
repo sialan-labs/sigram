@@ -71,9 +71,10 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         height: 40*Devices.density
         width: 120*Devices.density
-        normalColor: Cutegram.highlightColor
-        highlightColor: Qt.darker(Cutegram.highlightColor)
+        normalColor: masterPalette.highlight
+        highlightColor: Qt.darker(masterPalette.highlight)
         textColor: masterPalette.highlightedText
+        radius: 4*Devices.density
         text: qsTr("Home Page")
         onClicked: Qt.openUrlExternally("http://aseman.co")
     }

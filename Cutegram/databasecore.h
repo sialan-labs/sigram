@@ -26,18 +26,25 @@ public slots:
     void insertChat(const DbChat &chat);
     void insertDialog(const DbDialog &dialog, bool encrypted);
     void insertMessage(const DbMessage &message);
+    void insertMediaEncryptedKeys(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
 
     void readFullDialogs();
     void readMessages(const DbPeer &peer, int offset, int limit);
 
+    void setValue(const QString &key, const QString &value);
+    QString value(const QString &key) const;
+
     void deleteMessage(qint64 msgId);
     void deleteDialog(qint64 dlgId);
+    void deleteHistory(qint64 dlgId);
 
 signals:
     void userFounded(const DbUser &user);
     void chatFounded(const DbChat &chat);
     void dialogFounded(const DbDialog &dialog, bool encrypted);
     void messageFounded(const DbMessage &message);
+    void mediaKeyFounded(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
+    void valueChanged(const QString &value);
 
 private:
     void readDialogs();
@@ -46,6 +53,11 @@ private:
 
     void init_buffer();
     void update_db();
+    void update_moveFiles();
+    QHash<qint64, QStringList> userFiles();
+    QHash<qint64, QStringList> userFilesOf(const QString &mediaColumn);
+    QHash<qint64, QStringList> userPhotos();
+    QHash<qint64, QStringList> userProfilePhotosOf(const QString &table);
 
     QList<qint32> stringToUsers(const QString &str);
     QString usersToString( const QList<qint32> &users );
@@ -62,6 +74,7 @@ private:
     Document readDocument(qint64 id);
     GeoPoint readGeo(qint64 id);
     Photo readPhoto(qint64 id);
+    QPair<QByteArray, QByteArray> readMediaKey(qint64 mediaId);
     QList<PhotoSize> readPhotoSize(qint64 pid);
 
     void begin();

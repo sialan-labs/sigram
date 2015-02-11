@@ -18,6 +18,7 @@
 
 #include "asemantools/asemanapplication.h"
 #include "asemantools/asemantools.h"
+#include "asemantools/asemandevices.h"
 #include "telegramqml.h"
 #include "userdata.h"
 #include "database.h"
@@ -41,6 +42,13 @@
 #include <QImageReader>
 #include <QImageWriter>
 #include <QBuffer>
+
+#ifdef Q_OS_WIN
+#define FILES_PRE_STR QString("file:///")
+#else
+#define FILES_PRE_STR QString("file://")
+#endif
+
 
 TelegramQmlPrivate *telegramp_qml_tmp = 0;
 bool checkDialogLessThan( qint64 a, qint64 b );
@@ -96,6 +104,7 @@ public:
     QHash<qint64,FileLocationObject*> downloads;
     QHash<qint64,MessageObject*> uploads;
     QHash<qint64,FileLocationObject*> accessHashes;
+    QHash<qint64,qint64> delete_history_requests;
 
     QSet<QObject*> garbages;
 
@@ -137,7 +146,9 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->msg_send_random_id = 0;
     p->cutegram_dlg = 0;
 
-    p->userdata = 0;
+    p->userdata = new UserData(this);
+    p->database = new Database(this);
+
     p->telegram = 0;
     p->tsettings = 0;
     p->authNeeded = false;
@@ -175,27 +186,31 @@ void TelegramQml::setPhoneNumber(const QString &phone)
         return;
 
     p->phoneNumber = phone;
-    emit phoneNumberChanged();
-    emit downloadPathChanged();
+    p->userdata->setPhoneNumber(phone);
+    p->database->setPhoneNumber(phone);
+
     try_init();
 
-    if( p->userdata )
-        delete p->userdata;
-
-    p->userdata = new UserData(phone, this);
+    emit phoneNumberChanged();
+    emit downloadPathChanged();
     emit userDataChanged();
-
-    p->database = new Database(phone, this);
 
     connect(p->database, SIGNAL(chatFounded(Chat))         , SLOT(dbChatFounded(Chat))         );
     connect(p->database, SIGNAL(userFounded(User))         , SLOT(dbUserFounded(User))         );
     connect(p->database, SIGNAL(dialogFounded(Dialog,bool)), SLOT(dbDialogFounded(Dialog,bool)));
     connect(p->database, SIGNAL(messageFounded(Message))   , SLOT(dbMessageFounded(Message))   );
+    connect(p->database, SIGNAL(mediaKeyFounded(qint64,QByteArray,QByteArray)),
+            SLOT(dbMediaKeysFounded(qint64,QByteArray,QByteArray)) );
 }
 
 QString TelegramQml::downloadPath() const
 {
     return AsemanApplication::homePath() + "/" + phoneNumber() + "/downloads";
+}
+
+QString TelegramQml::tempPath() const
+{
+    return AsemanApplication::homePath() + "/" + phoneNumber() + "/temp";
 }
 
 QString TelegramQml::configPath() const
@@ -473,13 +488,13 @@ EncryptedChatObject *TelegramQml::encryptedChat(qint64 id) const
     return res;
 }
 
-FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 accessHash)
+FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 accessHash, QObject *parent)
 {
     if( p->accessHashes.contains(accessHash) )
         return p->accessHashes.value(accessHash);
 
     FileLocation location(FileLocation::typeFileLocation);
-    FileLocationObject *obj = new FileLocationObject(location,this);
+    FileLocationObject *obj = new FileLocationObject(location,parent);
     obj->setId(id);
     obj->setDcId(dcId);
     obj->setAccessHash(accessHash);
@@ -490,7 +505,7 @@ FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 acces
 
 FileLocationObject *TelegramQml::locationOfDocument(DocumentObject *doc)
 {
-    FileLocationObject *res = locationOf(doc->id(), doc->dcId(), doc->accessHash());
+    FileLocationObject *res = locationOf(doc->id(), doc->dcId(), doc->accessHash(), doc);
     res->setFileName(doc->fileName());
     res->setMimeType(doc->mimeType());
 
@@ -499,16 +514,18 @@ FileLocationObject *TelegramQml::locationOfDocument(DocumentObject *doc)
 
 FileLocationObject *TelegramQml::locationOfVideo(VideoObject *vid)
 {
-    return locationOf(vid->id(), vid->dcId(), vid->accessHash());
+    return locationOf(vid->id(), vid->dcId(), vid->accessHash(), vid);
 }
 
 FileLocationObject *TelegramQml::locationOfAudio(AudioObject *aud)
 {
-    return locationOf(aud->id(), aud->dcId(), aud->accessHash());
+    return locationOf(aud->id(), aud->dcId(), aud->accessHash(), aud);
 }
 
 DialogObject *TelegramQml::fakeDialogObject(qint64 id, bool isChat)
 {
+    if( p->dialogs.contains(id) )
+        return p->dialogs.value(id);
     if( p->fakeDialogs.contains(id) )
         return p->fakeDialogs.value(id);
 
@@ -583,6 +600,73 @@ EncryptedMessageObject *TelegramQml::nullEncryptedMessage() const
 
 QString TelegramQml::fileLocation(FileLocationObject *l)
 {
+    QObject *obj = l;
+    qint64 dId = 0;
+    while(obj)
+    {
+        const QMetaObject *mobj = obj->metaObject();
+        if(mobj == &ChatObject::staticMetaObject)
+        {
+            dId = static_cast<ChatObject*>(obj)->id();
+            break;
+        }
+        else
+        if(mobj == &UserObject::staticMetaObject)
+        {
+            dId = static_cast<UserObject*>(obj)->id();
+            break;
+        }
+        else
+        if(mobj == &MessageObject::staticMetaObject)
+        {
+            dId = messageDialogId( static_cast<MessageObject*>(obj)->id() );
+            break;
+        }
+        obj = obj->parent();
+    }
+
+    const QString & dpath = downloadPath() + "/" + QString::number(dId);
+    const QString & fname = l->accessHash()!=0? QString::number(l->id()) :
+                                                QString("%1_%2").arg(l->volumeId()).arg(l->localId());
+
+    QDir().mkpath(dpath);
+
+    const QStringList & av_files = QDir(dpath).entryList(QDir::Files);
+    foreach( const QString & f, av_files )
+        if( QFileInfo(f).baseName() == fname )
+            return dpath + "/" + f;
+
+    QString result = dpath + "/" + fname;
+    const QString & old_path = fileLocation_old(l);
+    if(QFileInfo::exists(old_path))
+    {
+        QFileInfo file(old_path);
+        result += "." + file.suffix();
+
+        QFile::rename(old_path, result);
+    }
+
+    return result;
+}
+
+QString TelegramQml::videoThumbLocation(const QString &pt)
+{
+    QString path = pt;
+    if(path.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath())
+        path = path.mid(AsemanDevices::localFilesPrePath().length());
+    if(path.isEmpty())
+        return QString();
+
+    const QString &thumb = path + ".jpg";
+    if(QFileInfo::exists(thumb))
+        return AsemanDevices::localFilesPrePath() + thumb;
+
+    AsemanTools::createVideoThumbnail(path, thumb);
+    return AsemanDevices::localFilesPrePath() + thumb;
+}
+
+QString TelegramQml::fileLocation_old(FileLocationObject *l)
+{
     const QString & dpath = downloadPath();
     const QString & fname = l->accessHash()!=0? QString::number(l->id()) :
                                                 QString("%1_%2").arg(l->volumeId()).arg(l->localId());
@@ -602,9 +686,19 @@ QList<qint64> TelegramQml::dialogs() const
     return p->dialogs_list;
 }
 
-QList<qint64> TelegramQml::messages( qint64 did ) const
+QList<qint64> TelegramQml::messages( qint64 did, qint64 maxId ) const
 {
-    return p->messages_list[did];
+    QList<qint64> res = p->messages_list[did];
+    for(int i=0; maxId && i<res.count(); i++)
+    {
+        if(res.at(i) <= maxId)
+            continue;
+
+        res.removeAt(i);
+        i--;
+    }
+
+    return res;
 }
 
 QList<qint64> TelegramQml::wallpapers() const
@@ -620,6 +714,18 @@ QList<qint64> TelegramQml::uploads() const
 QList<qint64> TelegramQml::contacts() const
 {
     return p->contacts.keys();
+}
+
+InputPeer TelegramQml::getInputPeer(qint64 peerId)
+{
+    bool isChat = p->chats.contains(peerId);
+    InputPeer peer(getInputPeerType(peerId));
+    if(isChat)
+        peer.setChatId(peerId);
+    else
+        peer.setUserId(peerId);
+
+    return peer;
 }
 
 void TelegramQml::authLogout()
@@ -695,11 +801,11 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     p->msg_send_random_id = generateRandomId();
     if(dlg->encrypted())
     {
-        sendId = p->telegram->messagesSendEncrypted(dId, p->msg_send_random_id, msg);
+        sendId = p->telegram->messagesSendEncrypted(dId, p->msg_send_random_id, 0, msg);
     }
     else
     {
-        InputPeer peer(getInputPeer(dId));
+        InputPeer peer(getInputPeerType(dId));
         peer.setChatId(message.toId().chatId());
         peer.setUserId(message.toId().userId());
 
@@ -720,21 +826,44 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
         messagesSendEncrypted_slt(sendId, message.date(), EncryptedFile());
 }
 
+bool TelegramQml::sendMessageAsDocument(qint64 dId, const QString &msg)
+{
+    QDir().mkpath(tempPath());
+    const QString &path = tempPath() + "/message-text.txt";
+
+    QFile::remove(path);
+    QFile file(path);
+    if(!file.open(QFile::WriteOnly))
+        return false;
+
+    file.write(msg.toUtf8());
+    file.close();
+
+    return sendFile(dId, path, true);
+}
+
 void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)
 {
-    bool isChat = p->chats.contains(peerId);
-    InputPeer peer(getInputPeer(peerId));
-    if(isChat)
-        peer.setChatId(peerId);
-    else
-        peer.setUserId(peerId);
-
+    const InputPeer & peer = getInputPeer(peerId);
     p->telegram->messagesForwardMessage(peer, msgId);
 }
 
 void TelegramQml::deleteMessage(qint64 msgId)
 {
     p->telegram->messagesDeleteMessages( QList<qint32>()<<msgId );
+
+    MessageObject *msgObj = p->messages.value(msgId);
+    if(msgObj)
+    {
+        qint64 dId = messageDialogId(msgId);
+
+        p->garbages.insert( p->messages.take(msgId) );
+        p->messages_list[dId].removeAll(msgId);
+        p->database->deleteMessage(msgId);
+        startGarbageChecker();
+
+        emit messagesChanged(false);
+    }
 }
 
 void TelegramQml::deleteCutegramDialog()
@@ -766,6 +895,131 @@ void TelegramQml::messagesCreateChat(const QList<qint32> &users, const QString &
     }
 
     p->telegram->messagesCreateChat(inputUsers, topic);
+}
+
+void TelegramQml::messagesAddChatUser(qint64 chatId, qint64 userId, qint32 fwdLimit)
+{
+    if(!p->telegram)
+        return;
+
+    UserObject *userObj = p->users.value(userId);
+    if(!userObj)
+        return;
+
+    InputUser::InputUserType inputType;
+    switch(userObj->classType())
+    {
+    case User::typeUserContact:
+        inputType = InputUser::typeInputUserContact;
+        break;
+    case User::typeUserForeign:
+        inputType = InputUser::typeInputUserForeign;
+        break;
+    case User::typeUserSelf:
+        inputType = InputUser::typeInputUserSelf;
+        break;
+    }
+
+    InputUser user(inputType);
+    user.setUserId(userId);
+
+    p->telegram->messagesAddChatUser(chatId, user, fwdLimit);
+}
+
+void TelegramQml::messagesDeleteChatUser(qint64 chatId, qint64 userId)
+{
+    if(!p->telegram)
+        return;
+
+    UserObject *userObj = p->users.value(userId);
+    if(!userObj)
+        return;
+
+    InputUser::InputUserType inputType;
+    switch(userObj->classType())
+    {
+    case User::typeUserContact:
+        inputType = InputUser::typeInputUserContact;
+        break;
+    case User::typeUserForeign:
+        inputType = InputUser::typeInputUserForeign;
+        break;
+    case User::typeUserSelf:
+        inputType = InputUser::typeInputUserSelf;
+        break;
+    }
+
+    InputUser user(inputType);
+    user.setUserId(userId);
+
+    p->telegram->messagesDeleteChatUser(chatId, user);
+
+    if(userId == me())
+    {
+        ChatObject *chat = p->chats.take(chatId);
+        DialogObject *dlg = p->dialogs.take(chatId);
+        p->dialogs_list.removeOne(chatId);
+
+        p->garbages.insert(chat);
+        p->garbages.insert(dlg);
+        startGarbageChecker();
+
+        p->database->deleteDialog(chatId);
+
+        emit dialogsChanged(false);
+    }
+}
+
+void TelegramQml::messagesEditChatTitle(qint32 chatId, const QString &title)
+{
+    if(!p->telegram)
+        return;
+
+    p->telegram->messagesEditChatTitle(chatId, title);
+}
+
+void TelegramQml::messagesDeleteHistory(qint64 peerId)
+{
+    if(!p->telegram)
+        return;
+
+    const InputPeer & peer = getInputPeer(peerId);
+
+    qint64 request = p->telegram->messagesDeleteHistory(peer);
+    p->delete_history_requests.insert(request, peerId);
+}
+
+void TelegramQml::messagesSetTyping(qint64 peerId, bool stt)
+{
+    if(!p->telegram)
+        return;
+
+    if(p->encchats.contains(peerId))
+    {
+        InputEncryptedChat peer;
+        peer.setChatId(peerId);
+
+//        p->telegram->messagesSetEncryptedTyping(peer, stt);
+    }
+    else
+    {
+        const InputPeer & peer = getInputPeer(peerId);
+        SendMessageAction action(SendMessageAction::typeSendMessageTypingAction);
+        if(!stt)
+            action.setClassType(SendMessageAction::typeSendMessageCancelAction);
+
+        p->telegram->messagesSetTyping(peer, action);
+    }
+
+}
+
+void TelegramQml::messagesReadHistory(qint64 peerId)
+{
+    if(!p->telegram)
+        return;
+
+    const InputPeer & peer = getInputPeer(peerId);
+    p->telegram->messagesReadHistory(peer);
 }
 
 void TelegramQml::messagesCreateEncryptedChat(qint64 userId)
@@ -812,52 +1066,30 @@ void TelegramQml::messagesDiscardEncryptedChat(qint32 chatId)
     emit dialogsChanged(false);
 }
 
-void TelegramQml::messagesDeleteChatUser(qint64 chatId, qint64 userId)
+void TelegramQml::messagesGetFullChat(qint32 chatId)
 {
     if(!p->telegram)
         return;
 
-    UserObject *userObj = p->users.value(userId);
-    if(!userObj)
+    p->telegram->messagesGetFullChat(chatId);
+}
+
+void TelegramQml::search(const QString &keyword)
+{
+    if(!p->telegram)
         return;
 
-    InputUser::InputUserType inputType;
-    switch(userObj->classType())
-    {
-    case User::typeUserContact:
-        inputType = InputUser::typeInputUserContact;
-        break;
-    case User::typeUserForeign:
-        inputType = InputUser::typeInputUserForeign;
-        break;
-    case User::typeUserSelf:
-        inputType = InputUser::typeInputUserSelf;
-        break;
-    }
+    InputPeer peer(InputPeer::typeInputPeerEmpty);
+    MessagesFilter filter(MessagesFilter::typeInputMessagesFilterEmpty);
 
-    InputUser user(inputType);
-    user.setUserId(userId);
-
-    p->telegram->messagesDeleteChatUser(chatId, user);
-
-    ChatObject *chat = p->chats.take(chatId);
-    DialogObject *dlg = p->dialogs.take(chatId);
-    p->dialogs_list.removeOne(chatId);
-
-    p->garbages.insert(chat);
-    p->garbages.insert(dlg);
-    startGarbageChecker();
-
-    p->database->deleteDialog(chatId);
-
-    emit dialogsChanged(false);
+    p->telegram->messagesSearch(peer, keyword, filter, 0, 0, 0, 0, 50);
 }
 
 bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
 {
     QString file = fpath;
-    if( file.left(7) == "file://" )
-        file = file.mid(7);
+    if( file.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath() )
+        file = file.mid(AsemanDevices::localFilesPrePath().length());
 
     if( !QFileInfo::exists(file) )
         return false;
@@ -869,7 +1101,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
         return false;
 
     Message message = newMessage(dId);
-    InputPeer peer(getInputPeer(dId));
+    InputPeer peer(getInputPeerType(dId));
     peer.setChatId(message.toId().chatId());
     peer.setUserId(message.toId().userId());
 
@@ -879,7 +1111,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
     if( t.name().contains("image/") && !forceDocument )
     {
         if(dlg->encrypted())
-            fileId = p->telegram->messagesSendEncryptedPhoto(dId, p->msg_send_random_id, file);
+            fileId = p->telegram->messagesSendEncryptedPhoto(dId, p->msg_send_random_id, 0, file);
         else
             fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
     }
@@ -910,7 +1142,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
                 thumbFile.close();
             }
 
-            fileId = p->telegram->messagesSendEncryptedVideo(dId, p->msg_send_random_id, file, thumbData);
+            fileId = p->telegram->messagesSendEncryptedVideo(dId, p->msg_send_random_id, 0, file, 0, width, height, thumbData);
         }
         else
             fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, width, height, thumbnail);
@@ -945,11 +1177,13 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
         return;
     if(l->accessHash()==0 && l->volumeId()==0 && l->localId()==0)
         return;
+    if(l->download()->fileId() != 0)
+        return;
 
     const QString & download_file = fileLocation(l);
     if( QFile::exists(download_file) )
     {
-        l->download()->setLocation("file://"+download_file);
+        l->download()->setLocation(FILES_PRE_STR+download_file);
         return;
     }
 
@@ -960,7 +1194,21 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
     input.setSecret(l->secret());
     input.setVolumeId(l->volumeId());
 
-    qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId());
+    QByteArray ekey;
+    QByteArray eiv;
+    QObject *parentObj = l->parent();
+    if(parentObj && parentObj->metaObject() == &DocumentObject::staticMetaObject)
+    {
+        DocumentObject *doc = static_cast<DocumentObject*>(parentObj);
+        if( !doc->encryptKey().isEmpty() )
+        {
+            ekey = doc->encryptKey();
+            eiv  = doc->encryptIv();
+            input.setClassType(InputFileLocation::typeInputEncryptedFileLocation);
+        }
+    }
+
+    qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId(), ekey, eiv);
     p->downloads[fileId] = l;
 
     l->download()->setFileId(fileId);
@@ -972,8 +1220,13 @@ void TelegramQml::getFileJustCheck(FileLocationObject *l)
         return;
 
     const QString & download_file = fileLocation(l);
-    if( QFile::exists(download_file) )
-        l->download()->setLocation("file://"+download_file);
+    if( QFile::exists(download_file) && !l->download()->file()->isOpen() )
+        l->download()->setLocation(FILES_PRE_STR+download_file);
+}
+
+void TelegramQml::cancelDownload(DownloadObject *download)
+{
+    cancelSendGet(download->fileId());
 }
 
 Message TelegramQml::newMessage(qint64 dId)
@@ -1021,6 +1274,9 @@ void TelegramQml::cancelSendGet(qint64 fileId)
 {
     if( !p->telegram )
         return;
+
+    if(p->downloads.contains(fileId))
+        p->downloads.value(fileId)->download()->setFileId(0);
 
     p->telegram->uploadCancelFile(fileId);
 }
@@ -1120,6 +1376,11 @@ void TelegramQml::try_init()
              SLOT(messagesForwardMessage_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)) );
     connect( p->telegram, SIGNAL(messagesDeleteMessagesAnswer(qint64,QList<qint32>)),
              SLOT(messagesDeleteMessages_slt(qint64,QList<qint32>)) );
+    connect( p->telegram, SIGNAL(messagesDeleteHistoryAnswer(qint64,qint32,qint32,qint32)),
+             SLOT(messagesDeleteHistory_slt(qint64,qint32,qint32,qint32)) );
+
+    connect( p->telegram, SIGNAL(messagesSearchAnswer(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)),
+             SLOT(messagesSearch_slt(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)) );
 
     connect( p->telegram, SIGNAL(messagesSendAudioAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)),
              SLOT(messagesSendAudio_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)) );
@@ -1136,17 +1397,27 @@ void TelegramQml::try_init()
              SLOT(messagesGetFullChat_slt(qint64,ChatFull,QList<Chat>,QList<User>)) );
     connect( p->telegram, SIGNAL(messagesCreateChatAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)),
              SLOT(messagesCreateChat_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)) );
+    connect( p->telegram, SIGNAL(messagesEditChatTitleAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)),
+             SLOT(messagesEditChatTitle_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)));
+    connect( p->telegram, SIGNAL(messagesEditChatPhotoAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)),
+             SLOT(messagesEditChatPhoto_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)));
+    connect( p->telegram, SIGNAL(messagesAddChatUserAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)),
+             SLOT(messagesAddChatUser_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)));
+    connect( p->telegram, SIGNAL(messagesDeleteChatUserAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)),
+             SLOT(messagesDeleteChatUser_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32)));
 
-    connect( p->telegram, SIGNAL(messagesCreateEncryptedChatAnswer(qint64,qint32,qint64,qint32,qint32,qint32)),
-             SLOT(messagesCreateEncryptedChat_slt(qint64,qint32,qint64,qint32,qint32,qint32)) );
+    connect( p->telegram, SIGNAL(messagesCreateEncryptedChatAnswer(qint32,qint32,qint32,qint64)),
+             SLOT(messagesCreateEncryptedChat_slt(qint32,qint32,qint32,qint64)) );
     connect( p->telegram, SIGNAL(messagesEncryptedChatRequested(qint32,qint32,qint32,qint64)),
              SLOT(messagesEncryptedChatRequested_slt(qint32,qint32,qint32,qint64)) );
     connect( p->telegram, SIGNAL(messagesEncryptedChatDiscarded(qint32)),
              SLOT(messagesEncryptedChatDiscarded_slt(qint32)) );
-    connect( p->telegram, SIGNAL(messagesEncryptedChatCreated(qint32)),
+    connect( p->telegram, SIGNAL(messagesEncryptedChatCreated(qint32,qint32,qint32,qint64)),
              SLOT(messagesEncryptedChatCreated_slt(qint32)) );
     connect( p->telegram, SIGNAL(messagesSendEncryptedAnswer(qint64,qint32,EncryptedFile)),
              SLOT(messagesSendEncrypted_slt(qint64,qint32,EncryptedFile)) );
+    connect( p->telegram, SIGNAL(messagesSendEncryptedFileAnswer(qint64,qint32,EncryptedFile)),
+             SLOT(messagesSendEncryptedFile_slt(qint64,qint32,EncryptedFile)) );
 
     connect( p->telegram, SIGNAL(contactsGetContactsAnswer(qint64,bool,QList<Contact>,QList<User>)),
              SLOT(contactsGetContacts_slt(qint64,bool,QList<Contact>,QList<User>)) );
@@ -1163,8 +1434,8 @@ void TelegramQml::try_init()
              SLOT(updateShortMessage_slt(qint32,qint32,QString,qint32,qint32,qint32)) );
     connect( p->telegram, SIGNAL(updatesTooLong()),
              SLOT(updatesTooLong_slt()) );
-    connect(  p->telegram, SIGNAL(updateDecryptedMessage(qint32,DecryptedMessage,qint32,qint32,EncryptedFile)),
-              SLOT(updateDecryptedMessage_slt(qint32,DecryptedMessage,qint32,qint32,EncryptedFile)) );
+    connect(  p->telegram, SIGNAL(updateSecretChatMessage(SecretChatMessage,qint32)),
+              SLOT(updateSecretChatMessage_slt(SecretChatMessage,qint32)) );
 
     connect( p->telegram, SIGNAL(uploadGetFileAnswer(qint64,StorageFileType,qint32,QByteArray,qint32,qint32,qint32)),
              SLOT(uploadGetFile_slt(qint64,StorageFileType,qint32,QByteArray,qint32,qint32,qint32)) );
@@ -1319,8 +1590,8 @@ void TelegramQml::photosUploadProfilePhoto_slt(qint64 id, const Photo &photo, co
     UserObject *user = p->users.value(me());
     if(user)
     {
-        user->photo()->photoBig()->download()->setLocation("file://" + p->upload_photo_path );
-        user->photo()->photoSmall()->download()->setLocation("file://" + p->upload_photo_path );
+        user->photo()->photoBig()->download()->setLocation(FILES_PRE_STR + p->upload_photo_path );
+        user->photo()->photoSmall()->download()->setLocation(FILES_PRE_STR + p->upload_photo_path );
         p->upload_photo_path.clear();
     }
 
@@ -1412,6 +1683,9 @@ void TelegramQml::messagesDeleteMessages_slt(qint64 id, const QList<qint32> &del
     Q_UNUSED(id)
     foreach( qint32 msgId, deletedMsgIds )
     {
+        if(!p->messages.contains(msgId))
+            continue;
+
         qint64 dId = messageDialogId(msgId);
 
         p->garbages.insert( p->messages.take(msgId) );
@@ -1606,6 +1880,50 @@ void TelegramQml::messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QLi
     emit messagesChanged(false);
 }
 
+void TelegramQml::messagesDeleteHistory_slt(qint64 id, qint32 pts, qint32 seq, qint32 offset)
+{
+    Q_UNUSED(pts)
+    Q_UNUSED(seq)
+    Q_UNUSED(offset)
+
+    qint64 peerId = p->delete_history_requests.value(id);
+    if(!peerId)
+        return;
+
+    p->database->deleteHistory(peerId);
+
+    const QList<qint64> & messages = p->messages_list.value(id);
+    foreach(qint64 msgId, messages)
+    {
+        p->garbages.insert( p->messages.take(msgId) );
+        p->messages_list[peerId].removeAll(msgId);
+    }
+
+    startGarbageChecker();
+    emit messagesChanged(false);
+    timerUpdateDialogs(3000);
+}
+
+void TelegramQml::messagesSearch_slt(qint64 id, qint32 sliceCount, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(sliceCount)
+
+    QList<qint64> res;
+
+    foreach( const User & u, users )
+        insertUser(u);
+    foreach( const Chat & c, chats )
+        insertChat(c);
+    foreach( const Message & m, messages )
+    {
+        insertMessage(m);
+        res << m.id();
+    }
+
+    emit searchDone(res);
+}
+
 void TelegramQml::messagesGetFullChat_slt(qint64 id, const ChatFull &chatFull, const QList<Chat> &chats, const QList<User> &users)
 {
     Q_UNUSED(id)
@@ -1642,14 +1960,77 @@ void TelegramQml::messagesCreateChat_slt(qint64 id, const Message &message, cons
     timerUpdateDialogs(500);
 }
 
-void TelegramQml::messagesCreateEncryptedChat_slt(qint64 id, qint32 chatId, qint64 accessHash, qint32 date, qint32 adminId, qint32 participantId)
+void TelegramQml::messagesEditChatTitle_slt(qint64 id, const Message &message, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 seq)
 {
     Q_UNUSED(id)
+    Q_UNUSED(links)
+    Q_UNUSED(pts)
+    Q_UNUSED(seq)
+
+    foreach( const User & u, users )
+        insertUser(u);
+    foreach( const Chat & c, chats )
+        insertChat(c);
+
+    insertMessage(message);
+    timerUpdateDialogs(500);
+}
+
+void TelegramQml::messagesEditChatPhoto_slt(qint64 id, const Message &message, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 seq)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(links)
+    Q_UNUSED(pts)
+    Q_UNUSED(seq)
+
+    foreach( const User & u, users )
+        insertUser(u);
+    foreach( const Chat & c, chats )
+        insertChat(c);
+
+    insertMessage(message);
+    timerUpdateDialogs(500);
+}
+
+void TelegramQml::messagesAddChatUser_slt(qint64 id, const Message &message, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 seq)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(links)
+    Q_UNUSED(pts)
+    Q_UNUSED(seq)
+
+    foreach( const User & u, users )
+        insertUser(u);
+    foreach( const Chat & c, chats )
+        insertChat(c);
+
+    insertMessage(message);
+    timerUpdateDialogs(500);
+}
+
+void TelegramQml::messagesDeleteChatUser_slt(qint64 id, const Message &message, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 seq)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(links)
+    Q_UNUSED(pts)
+    Q_UNUSED(seq)
+
+    foreach( const User & u, users )
+        insertUser(u);
+    foreach( const Chat & c, chats )
+        insertChat(c);
+
+    insertMessage(message);
+    timerUpdateDialogs(500);
+}
+
+void TelegramQml::messagesCreateEncryptedChat_slt(qint32 chatId, qint32 date, qint32 peerId, qint64 accessHash)
+{
     EncryptedChat c(EncryptedChat::typeEncryptedChatWaiting);
     c.setId(chatId);
     c.setAccessHash(accessHash);
-    c.setAdminId(adminId);
-    c.setParticipantId(participantId);
+    c.setAdminId(me());
+    c.setParticipantId(peerId);
     c.setDate(date);
 
     insertEncryptedChat(c);
@@ -1726,6 +2107,73 @@ void TelegramQml::messagesSendEncrypted_slt(qint64 id, qint32 date, const Encryp
 
     startGarbageChecker();
     insertMessage(msg);
+    timerUpdateDialogs(3000);
+}
+
+void TelegramQml::messagesSendEncryptedFile_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile)
+{
+    MessageObject *msgObj = p->uploads.take(id);
+    if(!msgObj)
+        return;
+
+    UploadObject *upload = msgObj->upload();
+    FileLocation location(FileLocation::typeFileLocation);
+    FileLocationObject locationObj(location, msgObj);
+    locationObj.setId(encryptedFile.id());
+    locationObj.setDcId(encryptedFile.dcId());
+    locationObj.setAccessHash(encryptedFile.accessHash());
+
+    const QString &srcFile = upload->location();
+    const QString &dstFile = fileLocation(&locationObj);
+    QString srcSuffix = QFileInfo(srcFile).suffix();
+    if(!srcSuffix.isEmpty())
+        srcSuffix = "." + srcSuffix;
+
+    QFile::copy(srcFile, dstFile + srcSuffix);
+
+    msgObj->setSent(true);
+
+    qint64 old_msgId = msgObj->id();
+
+    Peer peer(static_cast<Peer::PeerType>(msgObj->toId()->classType()));
+    peer.setChatId(msgObj->toId()->chatId());
+    peer.setUserId(msgObj->toId()->userId());
+
+    Dialog dialog;
+    dialog.setPeer(peer);
+    dialog.setTopMessage(date);
+    dialog.setUnreadCount(0);
+
+    Document document(Document::typeDocument);
+    document.setAccessHash(encryptedFile.accessHash());
+    document.setId(encryptedFile.id());
+    document.setDate(date);
+    document.setSize(encryptedFile.size());
+    document.setDcId(encryptedFile.dcId());
+
+    MessageMedia media(MessageMedia::typeMessageMediaDocument);
+    media.setDocument(document);
+
+    Message msg(Message::typeMessage);
+    msg.setFromId(msgObj->fromId());
+    msg.setId(date);
+    msg.setDate(date);
+    msg.setOut(msgObj->out());
+    msg.setMedia(media);
+    msg.setToId(peer);
+    msg.setUnread(msgObj->unread());
+    msg.setMessage(msgObj->message());
+
+    qint64 did = msg.toId().chatId();
+    if( !did )
+        did = msg.out()? msg.toId().userId() : msg.fromId();
+
+    p->garbages.insert( p->messages.take(old_msgId) );
+    p->messages_list[did].removeAll(old_msgId);
+
+    startGarbageChecker();
+    insertMessage(msg, true);
+    insertDialog(dialog, true);
     timerUpdateDialogs(3000);
 }
 
@@ -1852,10 +2300,14 @@ void TelegramQml::updates_slt(const QList<Update> & updates, const QList<User> &
         insertChat(c);
 }
 
-void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessage &m, qint32 date, qint32 qts, const EncryptedFile &attachment)
+void TelegramQml::updateSecretChatMessage_slt(const SecretChatMessage &secretChatMessage, qint32 qts)
 {
     Q_UNUSED(qts)
-    Q_UNUSED(attachment)
+
+    const qint32 chatId = secretChatMessage.chatId();
+    const DecryptedMessage &m = secretChatMessage.decryptedMessage();
+    const qint32 date = secretChatMessage.date();
+    const EncryptedFile &attachment = secretChatMessage.attachment();
 
     EncryptedChatObject *chat = p->encchats.value(chatId);
     if(!chat)
@@ -1889,7 +2341,31 @@ void TelegramQml::updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessa
     msg.setOut(false);
     msg.setFromId(chat->adminId()==me()?chat->participantId():chat->adminId());
 
+    bool hasMedia = (dmedia.classType() != DecryptedMessageMedia::typeDecryptedMessageMediaEmpty);
+    if(hasMedia)
+    {
+        Document doc(Document::typeDocument);
+        doc.setAccessHash(attachment.accessHash());
+        doc.setId(attachment.id());
+        doc.setDcId(attachment.dcId());
+        doc.setSize(attachment.size());
+
+        MessageMedia media(MessageMedia::typeMessageMediaDocument);
+        media.setDocument(doc);
+
+        msg.setMedia(media);
+    }
+
     insertMessage(msg, true);
+
+    MessageObject *msgObj = p->messages.value(msg.id());
+    if(msgObj && hasMedia)
+    {
+        msgObj->media()->document()->setEncryptKey(dmedia.key());
+        msgObj->media()->document()->setEncryptIv(dmedia.iv());
+
+        p->database->insertMediaEncryptedKeys(msg.id(), dmedia.key(), dmedia.iv());
+    }
 }
 
 void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint32 mtime, const QByteArray & bytes, qint32 partId, qint32 downloaded, qint32 total)
@@ -1937,10 +2413,10 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
                 sfx = "."+sfx;
 
             QFile::rename(download_file, download_file+sfx);
-            download->setLocation("file://" + download_file+sfx);
+            download->setLocation(FILES_PRE_STR + download_file+sfx);
         }
         else
-            download->setLocation("file://" + download_file);
+            download->setLocation(FILES_PRE_STR + download_file);
 
         p->downloads.remove(id);
     }
@@ -2089,7 +2565,7 @@ void TelegramQml::insertUser(const User &u, bool fromDb)
     else
         *obj = u;
 
-    if(!fromDb)
+    if(!fromDb && p->database)
         p->database->insertUser(u);
 }
 
@@ -2154,7 +2630,7 @@ void TelegramQml::insertUpdate(const Update &update)
             dlg->setTypingUsers( tusers );
         }
 
-        int timer_id = startTimer(5000);
+        int timer_id = startTimer(6000);
         p->typing_timers.insert(timer_id, timer_pair);
     }
         break;
@@ -2209,11 +2685,14 @@ void TelegramQml::insertUpdate(const Update &update)
         const QList<qint32> &messages = update.messages();
         foreach(quint64 msgId, messages)
         {
-            MessageObject *msg = p->messages.take(msgId);
-            if( msg )
-                msg->deleteLater();
+            qint64 dId = messageDialogId(msgId);
 
+            p->garbages.insert( p->messages.take(msgId) );
+            p->messages_list[dId].removeAll(msgId);
             p->database->deleteMessage(msgId);
+            startGarbageChecker();
+
+            emit messagesChanged(false);
         }
 
         timerUpdateDialogs();
@@ -2243,7 +2722,7 @@ void TelegramQml::insertUpdate(const Update &update)
             dlg->setTypingUsers( tusers );
         }
 
-        int timer_id = startTimer(5000);
+        int timer_id = startTimer(6000);
         p->typing_timers.insert(timer_id, timer_pair);
     }
         break;
@@ -2271,7 +2750,7 @@ void TelegramQml::insertUpdate(const Update &update)
             dlg->setTypingUsers( tusers );
         }
 
-        int timer_id = startTimer(5000);
+        int timer_id = startTimer(6000);
         p->typing_timers.insert(timer_id, timer_pair);
     }
         break;
@@ -2427,6 +2906,27 @@ void TelegramQml::dbChatFounded(const Chat &chat)
 void TelegramQml::dbDialogFounded(const Dialog &dialog, bool encrypted)
 {
     insertDialog(dialog, encrypted, true);
+
+    if(encrypted && p->tsettings)
+    {
+        const QList<SecretChat*> &secrets = p->tsettings->secretChats();
+        foreach(SecretChat *sc, secrets)
+        {
+            if(sc->chatId() != dialog.peer().userId())
+                continue;
+
+            EncryptedChat chat(EncryptedChat::typeEncryptedChat);
+            chat.setAccessHash(sc->accessHash());
+            chat.setAdminId(sc->adminId());
+            chat.setDate(sc->date());
+            chat.setGAOrB(sc->gAOrB());
+            chat.setId(sc->chatId());
+            chat.setKeyFingerprint(sc->keyFingerprint());
+            chat.setParticipantId(sc->participantId());
+
+            insertEncryptedChat(chat);
+        }
+    }
 }
 
 void TelegramQml::dbMessageFounded(const Message &message)
@@ -2437,6 +2937,16 @@ void TelegramQml::dbMessageFounded(const Message &message)
         encrypted = dlg->encrypted();
 
     insertMessage(message, encrypted, true);
+}
+
+void TelegramQml::dbMediaKeysFounded(qint64 mediaId, const QByteArray &key, const QByteArray &iv)
+{
+    MessageObject *msg = p->messages.value(mediaId);
+    if(!msg)
+        return;
+
+    msg->media()->document()->setEncryptKey(key);
+    msg->media()->document()->setEncryptIv(iv);
 }
 
 void TelegramQml::refreshUnreadCount()
@@ -2509,7 +3019,7 @@ qint64 TelegramQml::generateRandomId() const
     return randomId;
 }
 
-InputPeer::InputPeerType TelegramQml::getInputPeer(qint64 pid)
+InputPeer::InputPeerType TelegramQml::getInputPeerType(qint64 pid)
 {
     InputPeer::InputPeerType res;
 
@@ -2581,7 +3091,7 @@ bool checkMessageLessThan( qint64 a, qint64 b )
     MessageObject *am = telegramp_qml_tmp->messages.value(a);
     MessageObject *bm = telegramp_qml_tmp->messages.value(b);
     if(am && bm)
-        return a > b;
-    else
         return am->date() > bm->date();
+    else
+        return a > b;
 }

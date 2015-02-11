@@ -16,27 +16,36 @@ class DatabasePrivate;
 class Database : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString phoneNumber READ phoneNumber WRITE setPhoneNumber NOTIFY phoneNumberChanged)
+
 public:
-    Database(const QString & phoneNumber, QObject *parent = 0);
+    Database(QObject *parent = 0);
     ~Database();
+
+    void setPhoneNumber(const QString &phoneNumber);
+    QString phoneNumber() const;
 
 public slots:
     void insertUser(const User &user);
     void insertChat(const Chat &chat);
     void insertDialog(const Dialog &dialog, bool encrypted);
     void insertMessage(const Message &message);
+    void insertMediaEncryptedKeys(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
 
     void readFullDialogs();
     void readMessages(const Peer &peer, int offset, int limit);
 
     void deleteMessage(qint64 msgId);
     void deleteDialog(qint64 dlgId);
+    void deleteHistory(qint64 dlgId);
 
 signals:
     void userFounded(const User &user);
     void chatFounded(const Chat &chat);
     void dialogFounded(const Dialog &dialog, bool encrypted);
     void messageFounded(const Message &message);
+    void mediaKeyFounded(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
+    void phoneNumberChanged();
 
 private slots:
     void userFounded_slt(const DbUser &user);

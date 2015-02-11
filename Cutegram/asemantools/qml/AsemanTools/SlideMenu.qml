@@ -25,9 +25,15 @@ Item {
     height: 62
     clip: true
 
+    property bool active
+    property alias text: txt.text
+    property alias textFont: txt.font
+    property alias textColor: txt.color
+
     QtObject {
         id: privates
         property variant menu
+        property variant activeMenu
     }
 
     MouseArea{
@@ -39,6 +45,7 @@ Item {
     }
 
     Rectangle {
+        id: back_frame
         anchors.fill: parent
         color: "#000000"
         opacity: privates.menu? 0.5 : 0
@@ -46,6 +53,16 @@ Item {
         Behavior on opacity {
             NumberAnimation { easing.type: Easing.OutCubic; duration: 400 }
         }
+    }
+
+    Text {
+        id: txt
+        x: privates.activeMenu? (parent.width+privates.activeMenu.width-width)/2 : (parent.width-width)/2
+        anchors.verticalCenter: parent.verticalCenter
+        color: "#ffffff"
+        opacity: back_frame.opacity*2
+        font.family: AsemanApp.globalFont.family
+        font.pixelSize: 9*Devices.fontDensity
     }
 
     Component {
@@ -93,6 +110,11 @@ Item {
                 menu.show = true
                 item = itemComponent.createObject(menu_frame)
                 BackHandler.pushHandler(slide_menu, slide_menu.end)
+                active = true
+            }
+            Component.onDestruction: {
+                if(privates.activeMenu == menu)
+                    active = false
             }
 
             function end(){
@@ -115,5 +137,6 @@ Item {
             privates.menu.end()
 
         privates.menu = menu_component.createObject(slide_menu, {"itemComponent":component})
+        privates.activeMenu = privates.menu
     }
 }

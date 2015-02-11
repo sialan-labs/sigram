@@ -13,9 +13,10 @@ Rectangle {
     property User user: telegram.user(telegram.me)
 
     Flickable {
+        id: flickable
         anchors.fill: parent
         contentWidth: column.width
-        contentHeight: column.height
+        contentHeight: conf_frame.height
         flickableDirection: Flickable.VerticalFlick
 
         Item {
@@ -23,7 +24,7 @@ Rectangle {
             width: configure.width
             height: logicalHeight>configure.height? logicalHeight : configure.height
 
-            property real logicalHeight: column.height + logout_btn.height + 30*Devices.density
+            property real logicalHeight: column.height + buttons_column.height + 30*Devices.density
 
             Column {
                 id: column
@@ -73,6 +74,7 @@ Rectangle {
                         height: 36*Devices.density
                         text: qsTr("Change Photo")
                         cursorShape: Qt.PointingHandCursor
+                        radius: 4*Devices.density
                         onClicked: {
                             var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                             if(newImg.length == 0)
@@ -118,7 +120,7 @@ Rectangle {
                             font.family: AsemanApp.globalFont.family
                             font.pixelSize: 12*Devices.fontDensity
                             color: "#333333"
-                            text: user.phone
+                            text: telegram.phoneNumber
                         }
                     }
                 }
@@ -164,6 +166,17 @@ Rectangle {
                         }
 
                         Text {
+                            id: autostart_text
+                            height: autostart_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: AsemanApp.globalFont.family
+                            font.pixelSize: 9*Devices.fontDensity
+                            color: "#333333"
+                            visible: Devices.isLinux
+                            text: qsTr("Auto Start")
+                        }
+
+                        Text {
                             id: startup_text
                             height: startup_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -201,6 +214,16 @@ Rectangle {
                             font.pixelSize: 9*Devices.fontDensity
                             color: "#333333"
                             text: qsTr("Background")
+                        }
+
+                        Text {
+                            id: proxy_text
+                            height: proxy_btn.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: AsemanApp.globalFont.family
+                            font.pixelSize: 9*Devices.fontDensity
+                            color: "#333333"
+                            text: qsTr("Proxy Settings")
                         }
 
                         Text {
@@ -255,6 +278,13 @@ Rectangle {
                             onCheckedChanged: Cutegram.cutegramSubscribe = checked
                         }
 
+                        QtControls.CheckBox {
+                            id: autostart_checkbox
+                            visible: Devices.isLinux
+                            checked: autostart_mngr.active
+                            onCheckedChanged: autostart_mngr.active = checked
+                        }
+
                         QtControls.ComboBox {
                             id: startup_combo
                             model: [ qsTr("Automatic"), qsTr("Always visible"), qsTr("Minimize to system tray") ]
@@ -299,6 +329,14 @@ Rectangle {
                             }
                         }
 
+                        QtControls.Button {
+                            id: proxy_btn
+                            text: qsTr("Change")
+                            onClicked: {
+                                proxy_component.createObject(configure)
+                            }
+                        }
+
                         QtControls.ComboBox {
                             id: notify_sound_combo
                             model: [qsTr("None"), qsTr("Default"), qsTr("Custom")]
@@ -329,7 +367,7 @@ Rectangle {
                                 {
                                     var file = Desktop.getOpenFileName(View, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
                                     if(file.length != 0)
-                                        Cutegram.messageAudio = "file://" + file
+                                        Cutegram.messageAudio = Devices.localFilesPrePath + file
                                     else
                                         Cutegram.messageAudio = ""
                                 }
@@ -370,22 +408,65 @@ Rectangle {
                 }
             }
 
-            Button {
-                id: logout_btn
+            Column {
+                id: buttons_column
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.margins: 20*Devices.density
-                textFont.family: AsemanApp.globalFont.family
-                textFont.pixelSize: 9*Devices.fontDensity
-                highlightColor: Qt.darker(normalColor)
-                normalColor: "#C81414"
-                textColor: "#ffffff"
-                height: 40*Devices.density
-                text: qsTr("Logout")
-                onClicked: Cutegram.logout()
+                spacing: 4*Devices.density
+
+                Button {
+                    width: parent.width
+                    textFont.family: AsemanApp.globalFont.family
+                    textFont.pixelSize: 9*Devices.fontDensity
+                    highlightColor: Qt.darker(normalColor)
+                    normalColor: "#C81414"
+                    textColor: "#ffffff"
+                    height: 40*Devices.density
+                    text: qsTr("Logout")
+                    radius: 4*Devices.density
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if( profiles.remove(telegram.phoneNumber) )
+                            Cutegram.logout(telegram.phoneNumber)
+                    }
+                }
+
+                Button {
+                    width: parent.width
+                    textFont.family: AsemanApp.globalFont.family
+                    textFont.pixelSize: 9*Devices.fontDensity
+                    highlightColor: Qt.darker(normalColor)
+                    normalColor: "#333333"
+                    textColor: "#ffffff"
+                    height: 40*Devices.density
+                    text: qsTr("About Cutegram")
+                    radius: 4*Devices.density
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Cutegram.about()
+                }
+
+                Button {
+                    width: parent.width
+                    textFont.family: AsemanApp.globalFont.family
+                    textFont.pixelSize: 9*Devices.fontDensity
+                    highlightColor: Qt.darker(normalColor)
+                    normalColor: "#26263E"
+                    textColor: "#ffffff"
+                    height: 40*Devices.density
+                    text: qsTr("About Aseman")
+                    radius: 4*Devices.density
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Cutegram.aboutAseman()
+                }
             }
         }
+    }
+
+    PhysicalScrollBar {
+        scrollArea: flickable; height: flickable.height; width: 6*Devices.density
+        anchors.right: flickable.right; anchors.top: flickable.top; color: "#777777"
     }
 
     Timer {
@@ -395,5 +476,21 @@ Rectangle {
         onTriggered: inited = true
 
         property bool inited: false
+    }
+
+    AutoStartManager {
+        id: autostart_mngr
+        source: "cutegram"
+        command: AsemanApp.appFilePath
+        comment: "Cutegram auto-start item"
+        name: "Cutegram"
+    }
+
+    Component {
+        id: proxy_component
+        ProxySettings {
+            visible: true
+            onVisibleChanged: if(!visible) destroy()
+        }
     }
 }

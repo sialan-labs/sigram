@@ -23,6 +23,7 @@
 #include "types/inputfilelocation.h"
 #include "types/inputpeer.h"
 
+class DownloadObject;
 class Database;
 class SecretChat;
 class EncryptedFile;
@@ -35,6 +36,7 @@ class EncryptedMessage;
 class EncryptedMessageObject;
 class DocumentObject;
 class VideoObject;
+class SecretChatMessage;
 class AudioObject;
 class WallPaper;
 class WallPaperObject;
@@ -70,6 +72,7 @@ class TelegramQml : public QObject
     Q_PROPERTY(QString configPath    READ configPath    WRITE setConfigPath    NOTIFY configPathChanged   )
     Q_PROPERTY(QString publicKeyFile READ publicKeyFile WRITE setPublicKeyFile NOTIFY publicKeyFileChanged)
     Q_PROPERTY(QString downloadPath  READ downloadPath  NOTIFY downloadPathChanged )
+    Q_PROPERTY(QString tempPath      READ tempPath      NOTIFY tempPathChanged     )
 
     Q_PROPERTY(bool cutegramDialog READ cutegramDialog WRITE setCutegramDialog NOTIFY cutegramDialogChanged)
 
@@ -114,6 +117,7 @@ public:
     void setPhoneNumber( const QString & phone );
 
     QString downloadPath() const;
+    QString tempPath() const;
 
     QString configPath() const;
     void setConfigPath( const QString & conf );
@@ -163,7 +167,7 @@ public:
     Q_INVOKABLE ContactObject *contact(qint64 id) const;
     Q_INVOKABLE EncryptedChatObject *encryptedChat(qint64 id) const;
 
-    Q_INVOKABLE FileLocationObject *locationOf(qint64 id, qint64 dcId, qint64 accessHash);
+    Q_INVOKABLE FileLocationObject *locationOf(qint64 id, qint64 dcId, qint64 accessHash, QObject *parent);
     Q_INVOKABLE FileLocationObject *locationOfDocument(DocumentObject *doc);
     Q_INVOKABLE FileLocationObject *locationOfVideo(VideoObject *vid);
     Q_INVOKABLE FileLocationObject *locationOfAudio(AudioObject *aud);
@@ -183,12 +187,15 @@ public:
     EncryptedMessageObject *nullEncryptedMessage() const;
 
     Q_INVOKABLE QString fileLocation( FileLocationObject *location );
+    Q_INVOKABLE QString videoThumbLocation( const QString &path );
 
     QList<qint64> dialogs() const;
-    QList<qint64> messages(qint64 did) const;
+    QList<qint64> messages(qint64 did, qint64 maxId = 0) const;
     QList<qint64> wallpapers() const;
     QList<qint64> uploads() const;
     QList<qint64> contacts() const;
+
+    InputPeer getInputPeer(qint64 pid);
 
 public slots:
     void authLogout();
@@ -198,21 +205,33 @@ public slots:
     void authSignUp(const QString &code, const QString &firstName, const QString &lastName);
 
     void sendMessage( qint64 dialogId, const QString & msg );
+    bool sendMessageAsDocument( qint64 dialogId, const QString & msg );
+
     void forwardMessage( qint64 msgId, qint64 peerId );
     void deleteMessage( qint64 msgId );
 
     void deleteCutegramDialog();
     void messagesCreateChat( const QList<qint32> & users, const QString & topic );
+    void messagesAddChatUser(qint64 chatId, qint64 userId, qint32 fwdLimit = 0);
+    void messagesDeleteChatUser(qint64 chatId, qint64 userId);
+    void messagesEditChatTitle(qint32 chatId, const QString &title);
+
+    void messagesDeleteHistory(qint64 peerId);
+    void messagesSetTyping(qint64 peerId, bool stt);
+    void messagesReadHistory(qint64 peerId);
 
     void messagesCreateEncryptedChat(qint64 userId);
     void messagesAcceptEncryptedChat(qint32 chatId);
     void messagesDiscardEncryptedChat(qint32 chatId);
 
-    void messagesDeleteChatUser(qint64 chatId, qint64 userId);
+    void messagesGetFullChat(qint32 chatId);
+
+    void search(const QString &keyword);
 
     bool sendFile(qint64 dialogId, const QString & file , bool forceDocument = false);
     void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
     void getFileJustCheck(FileLocationObject *location);
+    void cancelDownload(DownloadObject *download);
     void cancelSendGet( qint64 fileId );
 
     void setProfilePhoto( const QString & fileName );
@@ -227,6 +246,7 @@ signals:
     void userDataChanged();
     void onlineChanged();
     void downloadPathChanged();
+    void tempPathChanged();
     void dialogsChanged(bool cachedData);
     void messagesChanged(bool cachedData);
     void wallpapersChanged();
@@ -262,6 +282,8 @@ signals:
     void incomingMessage( MessageObject *msg );
     void incomingEncryptedMessage( EncryptedMessageObject *msg );
 
+    void searchDone(const QList<qint64> &messages);
+
 protected:
     void try_init();
 
@@ -293,15 +315,23 @@ private slots:
     void messagesSendDocument_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
     void messagesGetDialogs_slt(qint64 id, qint32 sliceCount, const QList<Dialog> & dialogs, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
     void messagesGetHistory_slt(qint64 id, qint32 sliceCount, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
+    void messagesDeleteHistory_slt(qint64 id, qint32 pts, qint32 seq, qint32 offset);
+
+    void messagesSearch_slt(qint64 id, qint32 sliceCount, const QList<Message> & messages, const QList<Chat> & chats, const QList<User> & users);
 
     void messagesGetFullChat_slt(qint64 id, const ChatFull & chatFull, const QList<Chat> & chats, const QList<User> & users);
     void messagesCreateChat_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
+    void messagesEditChatTitle_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
+    void messagesEditChatPhoto_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
+    void messagesAddChatUser_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
+    void messagesDeleteChatUser_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);
 
-    void messagesCreateEncryptedChat_slt(qint64 id, qint32 chatId, qint64 accessHash, qint32 date, qint32 adminId, qint32 participantId);
+    void messagesCreateEncryptedChat_slt(qint32 chatId, qint32 date, qint32 peerId, qint64 accessHash);
     void messagesEncryptedChatRequested_slt(qint32 chatId, qint32 date, qint32 creatorId, qint64 creatorAccessHash);
     void messagesEncryptedChatCreated_slt(qint32 chatId);
     void messagesEncryptedChatDiscarded_slt(qint32 chatId);
     void messagesSendEncrypted_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile);
+    void messagesSendEncryptedFile_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile);
 
     void error(qint64 id, qint32 errorCode, QString errorText);
 
@@ -311,7 +341,7 @@ private slots:
     void updateShort_slt(const Update & update, qint32 date);
     void updatesCombined_slt(const QList<Update> & updates, const QList<User> & users, const QList<Chat> & chats, qint32 date, qint32 seqStart, qint32 seq);
     void updates_slt(const QList<Update> & udts, const QList<User> & users, const QList<Chat> & chats, qint32 date, qint32 seq);
-    void updateDecryptedMessage_slt(qint32 chatId, const DecryptedMessage &message, qint32 date, qint32 qts, const EncryptedFile &attachment);
+    void updateSecretChatMessage_slt(const SecretChatMessage &secretChatMessage, qint32 qts);
 
     void uploadGetFile_slt(qint64 id, const StorageFileType & type, qint32 mtime, const QByteArray & bytes, qint32 partId, qint32 downloaded, qint32 total);
     void uploadSendFile_slt(qint64 fileId, qint32 partId, qint32 uploaded, qint32 totalSize);
@@ -329,6 +359,8 @@ private:
     void insertEncryptedMessage(const EncryptedMessage & emsg);
     void insertEncryptedChat(const EncryptedChat & c);
 
+    QString fileLocation_old( FileLocationObject *location );
+
 protected:
     void timerEvent(QTimerEvent *e);
     Message newMessage(qint64 dId);
@@ -341,13 +373,14 @@ private slots:
     void dbChatFounded(const Chat &chat);
     void dbDialogFounded(const Dialog &dialog, bool encrypted);
     void dbMessageFounded(const Message &message);
+    void dbMediaKeysFounded(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
 
     void refreshUnreadCount();
     void refreshSecretChats();
     void updateEncryptedTopMessage(const Message &message);
 
     qint64 generateRandomId() const;
-    InputPeer::InputPeerType getInputPeer(qint64 pid);
+    InputPeer::InputPeerType getInputPeerType(qint64 pid);
 
 private:
     TelegramQmlPrivate *p;

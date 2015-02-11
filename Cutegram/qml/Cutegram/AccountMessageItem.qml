@@ -36,8 +36,13 @@ Item {
 
     property alias hasMedia: msg_media.hasMedia
     property bool encryptMedia: message.message.length==0 && message.encrypted
+    property alias mediaLOcation: msg_media.locationObj
+
+    property alias selectedText: msg_txt.selectedText
 
     property bool modernMode: false
+
+    signal dialogRequest(variant dialogObject)
 
     onSentChanged: {
         if( sent )
@@ -67,6 +72,12 @@ Item {
             height: width
             user: msg_item.user
             isChat: false
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(img.user.id, false) )
+            }
         }
 
         ContactImage {
@@ -77,6 +88,12 @@ Item {
             visible: message.fwdFromId != 0
             user: msg_item.fwdUser
             isChat: false
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(forward_img.user.id, false) )
+            }
         }
 
         Item {
@@ -113,7 +130,7 @@ Item {
             Column {
                 id: column
                 anchors.centerIn: parent
-                height: (visibleNames?user_name.height:0) + (uploading?upload_img.height:0) + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_column.height
+                height: (visibleNames?user_name.height:0) + (uploading?uploadItem.height:0) + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_column.height
                 clip: true
 
                 Text {
@@ -126,17 +143,10 @@ Item {
                     visible: visibleNames
                 }
 
-                Image {
-                    id: upload_img
-                    visible: uploading
-                    width: height
-                    height: 200*Devices.density
-                    sourceSize: Qt.size(width,height)
-                    smooth: true
-                    fillMode: Image.PreserveAspectCrop
-                    source: uploading? "file://" + message.upload.location : ""
-
-                    property size imageSize: uploading? Cutegram.imageSize(message.upload.location) : Qt.size(0,0)
+                AccountMessageUpload {
+                    id: uploadItem
+                    telegram: telegramObject
+                    message: msg_item.message
                 }
 
                 AccountMessageMedia {
@@ -147,6 +157,7 @@ Item {
 
                 Column {
                     id: msg_column
+                    anchors.right: parent.right
 
                     Item {
                         id: msg_txt_frame
@@ -249,5 +260,9 @@ Item {
             Devices.clipboard = message.message
         else
             msg_txt.copy()
+    }
+
+    function discardSelection() {
+        msg_txt.deselect()
     }
 }

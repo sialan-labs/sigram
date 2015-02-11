@@ -12,9 +12,16 @@ Item {
     property Dialog currentDialog: telegramObject.dialog(0)
 
     property bool unminimumForce: false
-    property bool minimum: Cutegram.minimumDialogs && !unminimumForce
+    property bool minimum: Cutegram.minimumDialogs && !unminimumForce && !forceUnminimum
+    property bool forceUnminimum: false
 
     property bool showLastMessage: Cutegram.showLastMessage
+
+    signal windowRequest(variant dialog)
+
+    onCurrentDialogChanged: {
+        dlist.currentIndex = dialogs_model.indexOf(currentDialog)
+    }
 
     Behavior on width {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -59,6 +66,31 @@ Item {
         clip: true
         model: dialogs_model
 
+        currentIndex: -1
+        highlightMoveDuration: 0
+        highlight: Item {
+            width: dlist.width
+            height: showLastMessage? 60*Devices.density : 54*Devices.density
+
+            Rectangle {
+                anchors.fill: parent
+                opacity: 0.2
+                anchors.topMargin: 3*Devices.density
+                anchors.bottomMargin: 3*Devices.density
+                color: Cutegram.highlightColor
+            }
+
+            Rectangle {
+                x: ad_list.width - width/2 - dlist.x
+                anchors.verticalCenter: parent.verticalCenter
+                transformOrigin: Item.Center
+                rotation: 45
+                width: 16*Devices.density
+                height: width
+                color: "#E4E9EC"
+            }
+        }
+
         delegate: Item {
             id: list_item
             width: dlist.width
@@ -80,29 +112,18 @@ Item {
             property bool selected: currentDialog==dItem
             property real itemOpacities: minimum? 0 : 1
 
+            onSelectedChanged: if(selected) dlist.currentIndex = index
+
             Behavior on itemOpacities {
                 NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
             }
 
             Rectangle {
                 anchors.fill: parent
-                opacity: marea.pressed? 0.3 : (selected? 0.2 : 0)
+                opacity: marea.pressed && !selected? 0.3 : 0
                 anchors.topMargin: 3*Devices.density
                 anchors.bottomMargin: 3*Devices.density
-                color: {
-                    var result = "#00000000"
-                    if(marea.pressed || selected) {
-                        result = Cutegram.highlightColor
-                        if(dItem.encrypted) {
-                            var r = result.r
-                            var g = result.g
-                            var b = result.b
-                            result = Qt.rgba(1-r, 1-g, 1-b, 1)
-                        }
-                    }
-
-                    return result
-                }
+                color: Cutegram.highlightColor
             }
 
             Item {
@@ -121,6 +142,17 @@ Item {
                     width: height
                     dialog: dItem
                     circleMode: false
+
+                    Image {
+                        anchors.bottom: parent.bottom
+                        anchors.right: parent.right
+                        anchors.margins: -4*Devices.density
+                        source: "files/online.png"
+                        sourceSize: Qt.size(width,height)
+                        width: 14*Devices.density
+                        height: 14*Devices.density
+                        visible: isChat? false : (user.status.classType == profile_img.typeUserStatusOnline)
+                    }
                 }
 
                 Text {
@@ -204,35 +236,56 @@ Item {
                 hoverEnabled: true
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onContainsMouseChanged: toggleMinimum(containsMouse)
+                onDoubleClicked: ad_list.windowRequest(list_item.dItem)
                 onClicked: {
                     if( mouse.button == Qt.RightButton ) {
                         var actions, res
                         if(dItem.encrypted) {
-                            actions = [qsTr("Delete")]
-                            res = Cutegram.showMenu(actions)
+                            actions = [qsTr("Open in New Window"), qsTr("Delete")]
+                            res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
-                                telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId)
+                                ad_list.windowRequest(list_item.dItem)
+                                break;
+                            case 1:
+                                if( Desktop.yesOrNo(View, qsTr("Delete secret chat"), qsTr("Are you sure about deleting this secret chat?")) )
+                                    telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId)
                                 break;
                             }
                         } else if(user.id == telegramObject.cutegramId) {
                             actions = [qsTr("Delete")]
-                            res = Cutegram.showMenu(actions)
+                            res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
                                 telegramObject.deleteCutegramDialog()
                                 break;
                             }
                         } else if(isChat) {
-                            actions = [qsTr("Leave")]
-                            res = Cutegram.showMenu(actions)
+                            actions = [qsTr("Open in New Window"), qsTr("Delete History")]
+                            res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
-                                telegramObject.messagesDeleteChatUser(dItem.peer.chatId, telegramObject.me)
+                                ad_list.windowRequest(list_item.dItem)
+                                break;
+                            case 1:
+                                if( Desktop.yesOrNo(View, qsTr("Delete History"), qsTr("Are you sure about deleting history?")) )
+                                    telegramObject.messagesDeleteHistory(dItem.peer.chatId)
+                                break;
+                            }
+                        } else {
+                            actions = [qsTr("Open in New Window"), qsTr("Delete History")]
+                            res = Desktop.showMenu(actions)
+                            switch(res) {
+                            case 0:
+                                ad_list.windowRequest(list_item.dItem)
+                                break;
+                            case 1:
+                                if( Desktop.yesOrNo(View, qsTr("Delete History"), qsTr("Are you sure about deleting history?")) )
+                                    telegramObject.messagesDeleteHistory(dItem.peer.userId)
                                 break;
                             }
                         }
-                    } else{
+                    } else {
                         currentDialog = list_item.dItem
                     }
                 }
@@ -259,18 +312,10 @@ Item {
             Timer {
                 id: switch_dialog_timer
                 interval: 100
-                onTriggered: ad_list.currentDialog = dItem
-            }
-
-            Rectangle {
-                x: ad_list.width - width/2 - dlist.x
-                anchors.verticalCenter: parent.verticalCenter
-                transformOrigin: Item.Center
-                rotation: 45
-                width: 16*Devices.density
-                height: width
-                color: "#E4E9EC"
-                visible: selected
+                onTriggered: {
+                    currentDialog = list_item.dItem
+                    dlist.currentIndex = index
+                }
             }
         }
 

@@ -1,20 +1,33 @@
 DESTDIR=../build
 
-server.source = tg-server.pub
-server.target = $${DESTDIR}
-emojis.source = emojis
-emojis.target = $${DESTDIR}
-translations.source = translations
-translations.target = $$DESTDIR/files
-DEPLOYMENTFOLDERS = server emojis translations
+linux {
+    server.source = tg-server.pub
+    server.target = $${DESTDIR}
+    emojis.source = emojis
+    emojis.target = $${DESTDIR}
+    translations.source = translations
+    translations.target = $$DESTDIR/files
+    DEPLOYMENTFOLDERS = server emojis translations
+}
 
 TEMPLATE = app
 TARGET = cutegram
 QT += qml quick sql xml
-linux: QT += dbus
 
-LIBS += -lssl -lcrypto -lz -lqtelegram
-INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
+linux: QT += dbus
+win32 {
+    LIBS += -L$$OUT_PWD/$$DESTDIR -lssleay32 -lcrypto -lz -lqtelegram
+    INCLUDEPATH += $$OUT_PWD/$$DESTDIR/include $$OUT_PWD/$$DESTDIR/include/libqtelegram
+} else {
+macx {
+    QT += macextras
+    LIBS += -lssl -lcrypto -lz -lqtelegram
+    INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
+} else {
+    LIBS += -lssl -lcrypto -lz -lqtelegram
+    INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
+}
+}
 
 SOURCES += main.cpp \
     cutegram.cpp \
@@ -34,7 +47,10 @@ SOURCES += main.cpp \
     database.cpp \
     databasecore.cpp \
     compabilitytools.cpp \
-    cutegramdialog.cpp
+    cutegramdialog.cpp \
+    telegramsearchmodel.cpp \
+    dialogfilesmodel.cpp \
+    cutegramenums.cpp
 
 RESOURCES += resource.qrc
 
@@ -62,7 +78,10 @@ HEADERS += \
     database.h \
     databasecore.h \
     compabilitytools.h \
-    cutegramdialog.h
+    cutegramdialog.h \
+    telegramsearchmodel.h \
+    dialogfilesmodel.h \
+    cutegramenums.h
 
 OTHER_FILES += \
     objects/types.sco \
@@ -109,3 +128,7 @@ serverPub.files = tg-server.pub
 serverPub.path = $$SHARES_PATH/
 
 INSTALLS = target translations icons desktopFile emojis serverPub pixmaps hicolor
+
+win32 {
+    RC_FILE = extra/windows/cutegram.rc
+}

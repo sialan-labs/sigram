@@ -41,7 +41,10 @@ Item {
 
     MouseArea {
         anchors.fill: parent
+        hoverEnabled: true
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked: p_dialog.hide()
+        onWheel: wheel.accepted = true
     }
 
     QtObject {

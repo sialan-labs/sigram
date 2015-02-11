@@ -26,6 +26,8 @@ class AsemanHashObjectPrivate;
 class AsemanHashObject : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
+
 public:
     AsemanHashObject(QObject *parent = 0);
     ~AsemanHashObject();
@@ -47,6 +49,9 @@ public:
     Q_INVOKABLE void clear();
 
     Q_INVOKABLE int count();
+
+signals:
+    void countChanged();
 
 private:
     AsemanHashObjectPrivate *p;

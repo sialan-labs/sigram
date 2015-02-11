@@ -27,6 +27,7 @@ class ChatParticipantListPrivate;
 class ChatParticipantList : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 public:
     ChatParticipantList(QObject *parent = 0);
     ChatParticipantList(const QList<ChatParticipant> & another, QObject *parent = 0);

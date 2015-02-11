@@ -33,9 +33,14 @@ class UserDataPrivate;
 class UserData : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString phoneNumber READ phoneNumber WRITE setPhoneNumber NOTIFY phoneNumberChanged)
+
 public:
-    UserData(const QString &phoneNumber, QObject *parent = 0);
+    UserData(QObject *parent = 0);
     ~UserData();
+
+    void setPhoneNumber(const QString &phoneNumber);
+    QString phoneNumber() const;
 
 public slots:
     void addMute( int id );
@@ -64,6 +69,7 @@ signals:
     void favoriteChanged(int id);
     void valueChanged( const QString & key );
     void messageUpdateChanged(int id);
+    void phoneNumberChanged();
 
 private:
     void init_buffer();

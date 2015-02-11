@@ -152,10 +152,19 @@ Item {
         id: media_img
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
-        sourceSize: Qt.size(width,height)
         asynchronous: true
         smooth: true
-        visible: media.classType != typeMessageMediaVideo
+        visible: media.classType != typeMessageMediaVideo || fileLocation.length != 0
+
+        property size imageSize: Cutegram.imageSize(source)
+
+        sourceSize: {
+            var ratio = imageSize.width/imageSize.height
+            if(ratio>1)
+                return Qt.size( height*ratio, height)
+            else
+                return Qt.size( width, width/ratio)
+        }
 
         source: {
             var result
@@ -166,7 +175,10 @@ Item {
                 break;
 
             case typeMessageMediaVideo:
-                result = media.video.thumb.location.download.location;
+                if(fileLocation.length != 0)
+                    result = telegramObject.videoThumbLocation(fileLocation)
+                else
+                    result = media.video.thumb.location.download.location;
                 break;
 
             case typeMessageMediaAudio:
@@ -178,9 +190,14 @@ Item {
                 break;
 
             case typeMessageMediaDocument:
-                result = media.document.thumb.location.download.location
-                if(result.length==0)
-                    result = "files/document.png"
+                if(Cutegram.filsIsImage(fileLocation))
+                    result = fileLocation
+                else {
+                    result = media.document.thumb.location.download.location
+                    if(result.length==0) {
+                        result = "files/document.png"
+                    }
+                }
                 break;
 
             default:
@@ -200,6 +217,21 @@ Item {
     }
 
     Rectangle {
+        id: video_frame
+        color: "#44000000"
+        visible: media.classType == typeMessageMediaVideo && fileLocation.length != 0
+        anchors.fill: media_img
+
+        Image {
+            width: 92*Devices.density
+            height: width
+            sourceSize: Qt.size(width,height)
+            source: video_frame.visible? "files/play.png" : ""
+            anchors.centerIn: parent
+        }
+    }
+
+    Rectangle {
         id: download_frame
         anchors.fill: parent
         color: "#88000000"
@@ -210,8 +242,53 @@ Item {
             font.family: AsemanApp.globalFont.family
             font.pixelSize: 9*Devices.fontDensity
             color: "#ffffff"
-            text: qsTr("Click to Download")
+            text: media.classType==typeMessageMediaUnsupported? qsTr("Unsupported Media") : qsTr("Click to Download")
             visible: !indicator.active
+        }
+
+        Text {
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.margins: 2*Devices.density
+            font.family: AsemanApp.globalFont.family
+            font.pixelSize: 9*Devices.fontDensity
+            color: "#ffffff"
+            text: {
+                if(indicator.active)
+                    return Math.floor(locationObj.download.downloaded/(1024*10.24))/100 + "MB/" +
+                           Math.floor(size/(1024*10.24))/100 + "MB"
+                else
+                    Math.floor(size/(1024*10.24))/100 + "MB"
+            }
+
+            property int size: {
+                var result = 0
+                switch( media.classType )
+                {
+                case typeMessageMediaPhoto:
+                    break;
+
+                case typeMessageMediaVideo:
+                    result = media.video.size
+                    break;
+
+                case typeMessageMediaDocument:
+                    result = media.document.size
+                    break;
+
+                case typeMessageMediaAudio:
+                    result = media.audio.size
+                    break;
+
+                case typeMessageMediaUnsupported:
+                    break;
+
+                default:
+                    break;
+                }
+
+                return result
+            }
         }
     }
 
@@ -231,10 +308,10 @@ Item {
     Indicator {
         id: indicator
         anchors.centerIn: parent
-        light: download_frame.visible
+        light: true
         modern: true
         indicatorSize: 22*Devices.density
-        property bool active: locationObj.download.fileId!=0? locationObj.download.location.length==0 : false
+        property bool active: locationObj.download.fileId!=0? fileLocation.length==0 : false
 
         onActiveChanged: {
             if( active )
@@ -242,6 +319,24 @@ Item {
             else
                 stop()
         }
+    }
+
+    Button {
+        anchors.top: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 20*Devices.density
+        textFont.family: AsemanApp.globalFont.family
+        textFont.pixelSize: 9*Devices.fontDensity
+        highlightColor: Qt.darker(normalColor)
+        normalColor: "#C81414"
+        textColor: "#ffffff"
+        height: 36*Devices.density
+        width: 2*height
+        text: qsTr("Cancel")
+        radius: 4*Devices.density
+        cursorShape: Qt.PointingHandCursor
+        visible: indicator.active && media.classType != typeMessageMediaPhoto
+        onClicked: telegramObject.cancelDownload(locationObj.download)
     }
 
     function click() {

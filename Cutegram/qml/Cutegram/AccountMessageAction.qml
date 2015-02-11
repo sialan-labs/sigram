@@ -109,19 +109,20 @@ Item {
             }
         }
 
-
         Image {
             id: img
             anchors.horizontalCenter: parent.horizontalCenter
-            sourceSize: Qt.size(width,height)
+            width: 64*Devices.density
+            height: 80*Devices.density
+            sourceSize: Qt.size(width,width)
             source: {
                 if(imgPath.length==0)
                     return ""
                 else
-                    return "file://" + imgPath
+                    return imgPath
             }
             asynchronous: true
-            fillMode: Image.PreserveAspectCrop
+            fillMode: Image.PreserveAspectFit
             visible: imgPath.length != 0
 
             property string imgPath: imgLocation!=telegramObject.nullLocation? imgLocation.download.location : ""

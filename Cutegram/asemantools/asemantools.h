@@ -48,12 +48,15 @@ public slots:
     static qreal colorLightness( const QColor & clr );
     static qreal colorSaturation( const QColor & clr );
 
+    static void mkDir(const QString &dir);
+
     static QVariantMap colorHsl( const QColor & clr );
 
     static bool createVideoThumbnail(const QString &video, const QString &output, QString ffmpegPath = QString());
 
     static QString translateNumbers( QString input );
     static QString passToMd5( const QString & pass );
+    static QString createUuid();
 
     static void copyDirectory( const QString & src, const QString & dst );
 

@@ -171,6 +171,8 @@ object Document {
     qint64 accessHash rw = another.%name();
     qint32 userId rw = another.%name();
     qint32 size rw = another.%name();
+    QByteArray encryptKey rw = QByteArray();
+    QByteArray encryptIv rw = QByteArray();
     qint64 classType rw = another.%name();
 }
 

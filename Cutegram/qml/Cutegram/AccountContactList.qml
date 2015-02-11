@@ -11,6 +11,8 @@ Item {
     property alias telegram: cmodel.telegram
     property alias selecteds: list.list
 
+    property bool messageDraging: false
+
     signal selected(variant cid)
 
     ContactsModel {
@@ -43,9 +45,24 @@ Item {
 
             property bool itemSelected: list.contains(citem.userId)
 
+            DragObject {
+                id: drag
+                mimeData: mime
+                source: marea
+                image: "files/message.png"
+                hotSpot: Qt.point(22,22)
+                dropAction: Qt.CopyAction
+            }
+
+            MimeData {
+                id: mime
+                dataMap: {"land.aseman.cutegram/contactId": citem.userId}
+                text: txt.text
+            }
+
             Rectangle {
                 anchors.fill: parent
-                color: itemSelected || area.pressed? Cutegram.highlightColor : "#00000000"
+                color: itemSelected || marea.pressed? Cutegram.highlightColor : "#00000000"
                 opacity: 0.5
             }
 
@@ -62,6 +79,7 @@ Item {
             }
 
             Text {
+                id: txt
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: profile_img.right
                 anchors.right: parent.right
@@ -77,7 +95,7 @@ Item {
             }
 
             MouseArea {
-                id: area
+                id: marea
                 anchors.fill: parent
                 onClicked: {
                     var uid = citem.userId
@@ -89,6 +107,20 @@ Item {
                     itemSelected = !itemSelected
                     ac_list.selected(uid)
                 }
+                onPressed: {
+                    startPoint = Qt.point(mouseX, mouseY)
+                }
+                onPositionChanged: {
+                    var destX = mouseX-startPoint.x
+                    if(destX < 7)
+                        return
+
+                    messageDraging = true
+                    drag.start()
+                    messageDraging = false
+                }
+
+                property point startPoint
             }
         }
     }

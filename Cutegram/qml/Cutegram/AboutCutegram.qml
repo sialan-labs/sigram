@@ -62,6 +62,7 @@ Rectangle {
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("Home Page")
+            radius: 4*Devices.density
             onClicked: Qt.openUrlExternally("http://aseman.co/en/projects/cutegram")
             normalColor: Cutegram.highlightColor
             highlightColor: Qt.darker(Cutegram.highlightColor)

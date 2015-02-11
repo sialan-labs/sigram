@@ -33,12 +33,14 @@ public:
     TelegramQml *telegram;
     bool initializing;
     bool refreshing;
+    int maxId;
 
     QList<qint64> messages;
     QPointer<DialogObject> dialog;
 
     int load_count;
     int load_limit;
+    int refresh_timer;
 };
 
 TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
@@ -50,14 +52,16 @@ TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
     p->refreshing = false;
     p->load_count = 0;
     p->load_limit = 0;
+    p->refresh_timer = 0;
+    p->maxId = 0;
 }
 
-QObject *TelegramMessagesModel::telegram() const
+TelegramQml *TelegramMessagesModel::telegram() const
 {
     return p->telegram;
 }
 
-void TelegramMessagesModel::setTelegram(QObject *tgo)
+void TelegramMessagesModel::setTelegram(TelegramQml *tgo)
 {
     TelegramQml *tg = static_cast<TelegramQml*>(tgo);
     if( p->telegram == tg )
@@ -100,6 +104,27 @@ void TelegramMessagesModel::setDialog(DialogObject *dlg)
     init();
 }
 
+void TelegramMessagesModel::setMaxId(int id)
+{
+    if(p->maxId == id)
+        return;
+
+    p->maxId = id;
+    emit maxIdChanged();
+
+    init();
+}
+
+int TelegramMessagesModel::maxId() const
+{
+    return p->maxId;
+}
+
+int TelegramMessagesModel::indexOf(qint64 msgId) const
+{
+    return p->messages.indexOf(msgId);
+}
+
 void TelegramMessagesModel::init()
 {
     if( !p->dialog )
@@ -137,11 +162,11 @@ void TelegramMessagesModel::refresh()
         return;
     }
 
-    const InputPeer & peer = inputPeer();
+    const InputPeer & peer = p->telegram->getInputPeer(peerId());
 
     Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
-        tgObject->messagesGetHistory(peer, 0, 0, LOAD_STEP_COUNT );
+        tgObject->messagesGetHistory(peer, 0, p->maxId, LOAD_STEP_COUNT );
 
     p->telegram->database()->readMessages(TelegramMessagesModel::peer(), 0, LOAD_STEP_COUNT);
 }
@@ -152,9 +177,9 @@ void TelegramMessagesModel::loadMore(bool force)
         return;
     if( !p->dialog )
         return;
-    if( !force && p->refreshing )
-        return;
     if( !force && p->messages.count() == 0 )
+        return;
+    if( !force && p->load_limit == p->load_count + LOAD_STEP_COUNT)
         return;
 
     p->load_limit = p->load_count + LOAD_STEP_COUNT;
@@ -168,12 +193,12 @@ void TelegramMessagesModel::loadMore(bool force)
         return;
     }
 
-    const InputPeer & peer = inputPeer();
+    const InputPeer & peer = p->telegram->getInputPeer(peerId());
 
     Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
     {
-        tgObject->messagesGetHistory(peer, p->load_count, 0, p->load_limit );
+        tgObject->messagesGetHistory(peer, p->load_count, p->maxId, p->load_limit );
         p->refreshing = true;
     }
 
@@ -202,7 +227,7 @@ void TelegramMessagesModel::setReaded()
     if( p->telegram->invisible() )
         return;
 
-    p->telegram->telegram()->messagesReadHistory(inputPeer());
+    p->telegram->messagesReadHistory(peerId());
     p->dialog->setUnreadCount(0);
 }
 
@@ -258,13 +283,13 @@ bool TelegramMessagesModel::refreshing() const
     return p->refreshing;
 }
 
-InputPeer TelegramMessagesModel::inputPeer() const
+qint64 TelegramMessagesModel::peerId() const
 {
     bool isChat = p->dialog->peer()->classType()==Peer::typePeerChat;
-    InputPeer peer(isChat? InputPeer::typeInputPeerChat : InputPeer::typeInputPeerContact);
-    peer.setChatId(p->dialog->peer()->chatId());
-    peer.setUserId(p->dialog->peer()->userId());
-    return peer;
+    if(isChat)
+        return p->dialog->peer()->chatId();
+    else
+        return p->dialog->peer()->userId();
 }
 
 Peer TelegramMessagesModel::peer() const
@@ -277,22 +302,30 @@ Peer TelegramMessagesModel::peer() const
 
 void TelegramMessagesModel::messagesChanged(bool cachedData)
 {
-    if(!cachedData)
+    if(!cachedData && p->refreshing)
     {
         p->refreshing = false;
         emit refreshingChanged();
     }
 
+    if(p->refresh_timer)
+        killTimer(p->refresh_timer);
+
+    p->refresh_timer = startTimer(100);
+}
+
+void TelegramMessagesModel::messagesChanged_priv()
+{
     if( !p->dialog )
         return;
 
     qint32 did = p->dialog->peer()->classType()==Peer::typePeerChat? p->dialog->peer()->chatId() : p->dialog->peer()->userId();
-    const QList<qint64> & messages = p->telegram->messages(did).mid(0,p->load_limit);
+    const QList<qint64> & messages = p->telegram->messages(did, p->maxId).mid(0,p->load_limit);
 
     for( int i=0 ; i<p->messages.count() ; i++ )
     {
-        const qint64 dId = p->messages.at(i);
-        if( messages.contains(dId) )
+        const qint64 msgId = p->messages.at(i);
+        if( messages.contains(msgId) )
             continue;
 
         beginRemoveRows(QModelIndex(), i, i);
@@ -305,8 +338,8 @@ void TelegramMessagesModel::messagesChanged(bool cachedData)
     QList<qint64> temp_msgs = messages;
     for( int i=0 ; i<temp_msgs.count() ; i++ )
     {
-        const qint64 dId = temp_msgs.at(i);
-        if( p->messages.contains(dId) )
+        const qint64 msgId = temp_msgs.at(i);
+        if( p->messages.contains(msgId) )
             continue;
 
         temp_msgs.removeAt(i);
@@ -315,8 +348,8 @@ void TelegramMessagesModel::messagesChanged(bool cachedData)
     while( p->messages != temp_msgs )
         for( int i=0 ; i<p->messages.count() ; i++ )
         {
-            const qint64 dId = p->messages.at(i);
-            int nw = temp_msgs.indexOf(dId);
+            const qint64 msgId = p->messages.at(i);
+            int nw = temp_msgs.indexOf(msgId);
             if( i == nw )
                 continue;
 
@@ -328,17 +361,31 @@ void TelegramMessagesModel::messagesChanged(bool cachedData)
 
     for( int i=0 ; i<messages.count() ; i++ )
     {
-        const qint64 dId = messages.at(i);
-        if( p->messages.contains(dId) )
+        const qint64 msgId = messages.at(i);
+        if( p->messages.contains(msgId) )
             continue;
 
         beginInsertRows(QModelIndex(), i, i );
-        p->messages.insert( i, dId );
+        p->messages.insert( i, msgId );
         endInsertRows();
+
+        emit messageAdded(msgId);
     }
 
     p->load_count = p->messages.count();
     emit countChanged();
+}
+
+void TelegramMessagesModel::timerEvent(QTimerEvent *e)
+{
+    if(e->timerId() == p->refresh_timer)
+    {
+        killTimer(p->refresh_timer);
+        p->refresh_timer = 0;
+        messagesChanged_priv();
+    }
+
+    QAbstractListModel::timerEvent(e);
 }
 
 TelegramMessagesModel::~TelegramMessagesModel()
