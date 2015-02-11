@@ -131,20 +131,24 @@ int AsemanDragObject::start()
         }
     }
 
-    QDrag drag(p->source);
-    drag.setMimeData(mime);
+    QDrag *drag = new QDrag(p->source);
+    drag->setMimeData(mime);
     if(p->image.isValid())
     {
         QString path = p->image.toString();
         if(path.left(4) == "qrc:")
             path = path.mid(3);
 
-        drag.setPixmap( QPixmap(path) );
+        drag->setPixmap( QPixmap(path) );
     }
     if(!p->hotSpot.isNull())
-        drag.setHotSpot(p->hotSpot);
+        drag->setHotSpot(p->hotSpot);
 
-    int res = drag.exec( static_cast<Qt::DropAction>(p->dropAction) );
+    int res = drag->exec( static_cast<Qt::DropAction>(p->dropAction) );
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
+    drag->deleteLater();
+#endif
 
     p->source->ungrabMouse();
     p->source->ungrabTouchPoints();
