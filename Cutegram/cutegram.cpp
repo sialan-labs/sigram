@@ -39,6 +39,7 @@
 #include "emojis.h"
 #include "unitysystemtray.h"
 #include "userdata.h"
+#include "cutegramenums.h"
 
 #include <QPointer>
 #include <QQmlContext>
@@ -150,6 +151,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<TelegramContactsModel>("Cutegram", 1, 0, "ContactsModel");
     qmlRegisterType<TelegramUploadsModel>("Cutegram", 1, 0, "UploadsModel");
     qmlRegisterType<TelegramSearchModel>("Cutegram", 1, 0, "SearchModel");
+    qmlRegisterType<CutegramEnums>("Cutegram", 1, 0, "CutegramEnums");
     qmlRegisterType<TelegramChatParticipantsModel>("Cutegram", 1, 0, "ChatParticipantsModel");
     qmlRegisterType<Emojis>("Cutegram", 1, 0, "Emojis");
     qmlRegisterUncreatableType<UserData>("Cutegram", 1, 0, "UserData", "");

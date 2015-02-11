@@ -6,6 +6,7 @@
 
 #include <QMainWindow>
 #include <QPalette>
+#include <QNetworkProxy>
 
 int main(int argc, char *argv[])
 {
@@ -19,6 +20,23 @@ int main(int argc, char *argv[])
     app.setOrganizationName("Aseman");
     app.setWindowIcon(QIcon(":/qml/Cutegram/files/icon.png"));
     app.setQuitOnLastWindowClosed(false);
+
+    if(app.readSetting("Proxy/enable",false).toBool())
+    {
+        const int type = app.readSetting("Proxy/type",QNetworkProxy::HttpProxy).toInt();
+        const QString host = app.readSetting("Proxy/host").toString();
+        const quint16 port = app.readSetting("Proxy/port").toInt();
+        const QString user = app.readSetting("Proxy/user").toString();
+        const QString pass = app.readSetting("Proxy/pass").toString();
+
+        QNetworkProxy proxy;
+        proxy.setType( static_cast<QNetworkProxy::ProxyType>(type) );
+        proxy.setHostName(host);
+        proxy.setPort(port);
+        proxy.setUser(user);
+        proxy.setPassword(pass);
+        QNetworkProxy::setApplicationProxy(proxy);
+    }
 
 #ifdef Q_OS_MAC
     QPalette palette;

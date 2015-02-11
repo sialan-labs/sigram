@@ -217,6 +217,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: proxy_text
+                            height: proxy_btn.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: AsemanApp.globalFont.family
+                            font.pixelSize: 9*Devices.fontDensity
+                            color: "#333333"
+                            text: qsTr("Proxy Settings")
+                        }
+
+                        Text {
                             id: notify_sound_text
                             height: notify_sound_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -316,6 +326,14 @@ Rectangle {
                                 } else {
                                     Cutegram.background = ""
                                 }
+                            }
+                        }
+
+                        QtControls.Button {
+                            id: proxy_btn
+                            text: qsTr("Change")
+                            onClicked: {
+                                proxy_component.createObject(configure)
                             }
                         }
 
@@ -466,5 +484,13 @@ Rectangle {
         command: AsemanApp.appFilePath
         comment: "Cutegram auto-start item"
         name: "Cutegram"
+    }
+
+    Component {
+        id: proxy_component
+        ProxySettings {
+            visible: true
+            onVisibleChanged: if(!visible) destroy()
+        }
     }
 }

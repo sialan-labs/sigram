@@ -81,5 +81,6 @@
         <file>qml/Cutegram/files/camera.png</file>
         <file>qml/Cutegram/AccountMessageBox.qml</file>
         <file>qml/Cutegram/files/aseman-abstract.png</file>
+        <file>qml/Cutegram/ProxySettings.qml</file>
     </qresource>
 </RCC>

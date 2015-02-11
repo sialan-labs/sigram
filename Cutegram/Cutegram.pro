@@ -49,7 +49,8 @@ SOURCES += main.cpp \
     compabilitytools.cpp \
     cutegramdialog.cpp \
     telegramsearchmodel.cpp \
-    dialogfilesmodel.cpp
+    dialogfilesmodel.cpp \
+    cutegramenums.cpp
 
 RESOURCES += resource.qrc
 
@@ -79,7 +80,8 @@ HEADERS += \
     compabilitytools.h \
     cutegramdialog.h \
     telegramsearchmodel.h \
-    dialogfilesmodel.h
+    dialogfilesmodel.h \
+    cutegramenums.h
 
 OTHER_FILES += \
     objects/types.sco \
