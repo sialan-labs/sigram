@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
+import QtQuick.Controls 1.3
 
 AsemanMain {
     id: main
@@ -174,6 +175,17 @@ AsemanMain {
         }
     }
 
+    Component {
+        id: menubar_component
+        MenuBar {
+            Menu {
+                title: "About"
+                MenuItem { text: "About"; onTriggered: Cutegram.about() }
+                MenuItem { text: "Preferences"; onTriggered: Cutegram.configure() }
+            }
+        }
+    }
+
     function addAccount() {
         qlist.currentIndex = 3
         BackHandler.pushHandler(main, main.backToAccounts )
@@ -185,6 +197,8 @@ AsemanMain {
     }
 
     Component.onCompleted: {
+        if(Devices.isMacX)
+            menubar_component.createObject(main)
         Desktop.menuStyle = "QMenu{border: 0px solid black; border-radius: 7; background-color: #333333; padding: 5; }" +
                 "QMenu::item{border: 0px solid black; padding: 5px; border-radius: 3; color: white; padding-right: 30px; padding-left: 30px; }" +
                 "QMenu::item:hover{background-color: palette(highlight); color: white; }" +
