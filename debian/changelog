@@ -1,3 +1,29 @@
+cutegram (2.0.0aseman1-trusty) trusty; urgency=medium
+
+  * Search
+  * Secret Chat
+  * Online status icon on contact avatars
+  * Send messages as document
+  * Proxy Support
+  * Offline mode
+  * Camera Button
+  * Autostart option on Configure menu
+  * Multi Account login (experimental)
+  * Windowed Mode
+  * ProgressBar for file sending
+  * Cancel button for file downloading
+  * Shared Medias location
+  * Many improvements on UserInterface
+  * Better drag and drop and Copy/Paste actions
+  * Leave and Add person to chats
+  * Delete History action
+  * Chat with non-contact users
+  * Contact us menu to send suggestions to us
+  * Linux, Windows and Mac support
+  * Many other improvement and Bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 Feb 2015 15:30:00 +0330
+ 
 cutegram (1.0.2aseman3-utopic) utopic; urgency=medium
 
   * Build bugfix
