@@ -528,6 +528,10 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <source>About Aseman</source>
         <translation type="unfinished">Tocante a Aseman</translation>
     </message>
+    <message>
+        <source>System Color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>

@@ -378,7 +378,7 @@ Rectangle {
 
                         QtControls.ComboBox {
                             id: color_combo
-                            model: ["System Color", "Custom"]
+                            model: [qsTr("System Color"), qsTr("Custom")]
                             currentIndex: {
                                 if(Cutegram.masterColor.length == 0)
                                     return 0

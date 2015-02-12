@@ -579,6 +579,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>About Aseman</source>
         <translation type="unfinished">درباره‌ی آسمان</translation>
     </message>
+    <message>
+        <source>System Color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>

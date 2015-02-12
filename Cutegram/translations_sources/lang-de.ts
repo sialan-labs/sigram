@@ -552,6 +552,10 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <source>About Aseman</source>
         <translation type="unfinished">Über Aseman</translation>
     </message>
+    <message>
+        <source>System Color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
