@@ -540,6 +540,18 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <source>Auto Start</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Proxy Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Cutegram</source>
+        <translation type="unfinished">Über Cutegram</translation>
+    </message>
+    <message>
+        <source>About Aseman</source>
+        <translation type="unfinished">Über Aseman</translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -714,6 +726,49 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <message>
         <source>Paste</source>
         <translation>Einfügen</translation>
+    </message>
+</context>
+<context>
+    <name>ProxySettings</name>
+    <message>
+        <source>Proxy Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This changes needs to restart application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hostname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ex: 127.0.0.1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ast">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -204,7 +206,7 @@
         <translation>Desaniciar</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Telegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
@@ -401,11 +403,11 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -513,6 +515,18 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Auto Start</source>
         <translation>Aniciu automáticu</translation>
+    </message>
+    <message>
+        <source>Proxy Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Cutegram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Aseman</source>
+        <translation type="unfinished">Tocante a Aseman</translation>
     </message>
 </context>
 <context>
@@ -687,6 +701,49 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
 </context>
 <context>
+    <name>ProxySettings</name>
+    <message>
+        <source>Proxy Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This changes needs to restart application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hostname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ex: 127.0.0.1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Encaboxar</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>January</source>
@@ -766,127 +823,127 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Farvardin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Moharram</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safar</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rabiol Avval</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rabio Sani</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jamadiol Aval</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jamadio Sani</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rajab</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shaban</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ramadan</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shaval</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Zighade</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Zihaje</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
