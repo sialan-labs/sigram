@@ -132,3 +132,10 @@ INSTALLS = target translations icons desktopFile emojis serverPub pixmaps hicolo
 win32 {
     RC_FILE = extra/windows/cutegram.rc
 }
+
+DISTFILES += \
+    translations_sources/lang-ast.ts \
+    translations_sources/lang-de.ts \
+    translations_sources/lang-en.ts \
+    translations_sources/lang-et.ts \
+    translations_sources/lang-fa.ts

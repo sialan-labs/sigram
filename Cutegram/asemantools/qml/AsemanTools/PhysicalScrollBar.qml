@@ -66,6 +66,7 @@ Item {
     property variant scrollArea
     property variant orientation: Qt.Vertical
     property alias color: bilbilak.color
+    property alias pressed: marea.pressed
 
     opacity: 1
 
