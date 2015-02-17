@@ -3037,6 +3037,9 @@ InputPeer::InputPeerType TelegramQml::getInputPeerType(qint64 pid)
         case User::typeUserSelf:
             res = InputPeer::typeInputPeerSelf;
             break;
+        case User::typeUserRequest:
+            res = InputPeer::typeInputPeerForeign;
+            break;
         }
     }
     else

@@ -327,6 +327,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Contact List</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Just drag and drop contacts here</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountsTabList</name>

@@ -195,7 +195,7 @@ Rectangle {
                 tab_list.currentKey = hash.key(accfr)
             }
             onAddParticianRequest: {
-                slide_menu.text = "Just drag and drop contacts here"
+                slide_menu.text = qsTr("Just drag and drop contacts here")
                 showContactList()
             }
         }

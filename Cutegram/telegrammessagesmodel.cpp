@@ -153,6 +153,7 @@ void TelegramMessagesModel::refresh()
     if( !p->dialog )
         return;
 
+    Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->encrypted())
     {
         Peer peer(Peer::typePeerChat);
@@ -164,7 +165,6 @@ void TelegramMessagesModel::refresh()
 
     const InputPeer & peer = p->telegram->getInputPeer(peerId());
 
-    Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
         tgObject->messagesGetHistory(peer, 0, p->maxId, LOAD_STEP_COUNT );
 
@@ -184,6 +184,7 @@ void TelegramMessagesModel::loadMore(bool force)
 
     p->load_limit = p->load_count + LOAD_STEP_COUNT;
 
+    Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->encrypted())
     {
         Peer peer(Peer::typePeerChat);
@@ -195,7 +196,6 @@ void TelegramMessagesModel::loadMore(bool force)
 
     const InputPeer & peer = p->telegram->getInputPeer(peerId());
 
-    Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->peer()->userId() != CutegramDialog::cutegramId())
     {
         tgObject->messagesGetHistory(peer, p->load_count, p->maxId, p->load_limit );

@@ -304,6 +304,10 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <source>Contact List</source>
         <translation>Kontaktliste</translation>
     </message>
+    <message>
+        <source>Just drag and drop contacts here</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountsTabList</name>

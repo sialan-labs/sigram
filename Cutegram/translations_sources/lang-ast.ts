@@ -280,6 +280,10 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <source>Contact List</source>
         <translation>Llista de contautos</translation>
     </message>
+    <message>
+        <source>Just drag and drop contacts here</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountsTabList</name>
