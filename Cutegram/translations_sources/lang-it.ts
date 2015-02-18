@@ -1,184 +1,184 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="it_IT" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation>Cutegram ye un veceru Telegram por Aseman. Ye llibre y ta llanzáu baxo la llicencia GPLv3.</translation>
+        <translation>Cutegram è un client telegram di Aseman. È gratuito e opensource e rilasciato sotto licenza GPLv3</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation>Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools,  delles ferramientes de KDE, iconos Faenza y Emojis de Twitter.</translation>
+        <translation>Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, alcuni tool KDE, icone Faenza e emoticon Twitter.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Páxina d&apos;aniciu</translation>
+        <translation>Home Page</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogHeader</name>
     <message>
         <source>Online</source>
-        <translation>En llinia</translation>
+        <translation>Online</translation>
     </message>
     <message>
         <source>%1 was online</source>
-        <translation>%1 tuvo en llinia</translation>
+        <translation>%1 era online</translation>
     </message>
     <message>
         <source>Secret chat</source>
-        <translation>Charra secreta</translation>
+        <translation>Chat segreta</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation>%1 participantes (%2 en llinia)</translation>
+        <translation>%1 partecipanti (%2 online)</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
-        <translation>Escribiendo...</translation>
+        <translation>Scrivendo...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Desaniciar</translation>
+        <translation>Cancella</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation>Desaniciar charra secreta</translation>
+        <translation>Cancella chat segreta</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation>¿De xuru que quies desaniciar esta charra secreta?</translation>
+        <translation>Sei sicuro di voler cancellare questa chat segreta?</translation>
     </message>
     <message>
         <source>Delete History</source>
-        <translation>Desaniciar historia</translation>
+        <translation>Cancella Conversazione</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation>¿De xuru que quies desaniciar la historia?</translation>
+        <translation>Sei sicuro di voler cancellare la conversazione?</translation>
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation>Abrir nuna ventana nueva</translation>
+        <translation>Apri in una nuova finestra</translation>
     </message>
 </context>
 <context>
     <name>AccountFrame</name>
     <message>
         <source>Show</source>
-        <translation>Amosar</translation>
+        <translation>Mostra</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Silenciar</translation>
+        <translation>Silenzia</translation>
     </message>
     <message>
         <source>Message!</source>
-        <translation>¡Mensaxe!</translation>
+        <translation>Messaggio!</translation>
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation>Mensaxe en &quot;%1&quot; por &quot;%2&quot;</translation>
+        <translation>Messaggio in &quot;%1&quot; da &quot;%2&quot;</translation>
     </message>
 </context>
 <context>
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation>Cargando...</translation>
+        <translation>Caricamento...</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageAction</name>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation>%1 creó&apos;l grupu &quot;%2&quot;</translation>
+        <translation>%1 ha creato il gruppo &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation>%1 dexó&apos;l grupu</translation>
+        <translation>%1 ha lasciato il gruppo</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation>%1 cambió&apos;l nome del grupu a &quot;%2&quot;</translation>
+        <translation>%1 ha cambiato il nome del gruppo in &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation>%1 cambió la semeya del grupu.</translation>
+        <translation>%1 ha cambiato la foto del gruppo.</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation>%1 desanició la semeya del grupu</translation>
+        <translation>%1 ha cancellato la foto del gruppo</translation>
     </message>
     <message>
         <source>%1 invited to group</source>
-        <translation>Convidóse a %1 al grupu</translation>
+        <translation>%1 è stato invitato nel gruppo</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation>Anguaño los ficheros multimedia nun tan sofitaos na charra secreta</translation>
+        <translation>I file multimediali non sono al momento supportati nelle chat segrete</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageList</name>
     <message>
         <source>Welcome :)</source>
-        <translation>BIenllegáu :)</translation>
+        <translation>Benvenuto/a :)</translation>
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>Pidimientu de charra secreta. Por favor, acéutala o refúgala.</translation>
+        <translation>Richiesta di chat segreta. Per favore Accetta o Rifiuta.</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation>Aceutar</translation>
+        <translation>Accetta</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation>Refugar</translation>
+        <translation>Rifiuta</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Reunviar</translation>
+        <translation>Inoltra</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copiar</translation>
+        <translation>Copia</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Desaniciar</translation>
+        <translation>Cancella</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>Primi pa descargar</translation>
+        <translation>Clicca per scaricare</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation>Multimedia ensin sofitu</translation>
+        <translation>Media non supportato</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Encaboxar</translation>
+        <translation>Annulla</translation>
     </message>
 </context>
 <context>
     <name>AccountSearchList</name>
     <message>
         <source>Me</source>
-        <translation>Yo</translation>
+        <translation>Io</translation>
     </message>
     <message>
         <source>%1 on %2</source>
-        <translation>%1 en %2</translation>
+        <translation>%1 su %2</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -189,36 +189,36 @@
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
-        <translation>Unviar</translation>
+        <translation>Invia</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copiar</translation>
+        <translation>Copia</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Apegar</translation>
+        <translation>Incolla</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Desaniciar</translation>
+        <translation>Cancella</translation>
     </message>
     <message>
         <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation>Son les anuncies de Cutegram tocante a los llanzamientos y soluciones nuevos.
-Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
+        <translation>È una notizia di Cutegram riguardo nuovi aggiornamenti e soluzioni.
+Non è un contatto telegram. È solo un contatto virtuale.</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Cámara</translation>
+        <translation>Camera</translation>
     </message>
 </context>
 <context>
     <name>AccountSign</name>
     <message>
         <source>Code</source>
-        <translation>Códigu</translation>
+        <translation>Codice</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -226,83 +226,83 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Apellíos</translation>
+        <translation>Cognome</translation>
     </message>
     <message>
         <source>Sign In</source>
-        <translation>Aniciar sesión</translation>
+        <translation>Accedi</translation>
     </message>
     <message>
         <source>Sign Up</source>
-        <translation>Rexistrase</translation>
+        <translation>Registrati</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>Pidimientu de llamada</translation>
+        <translation>Richiedi una telefonata</translation>
     </message>
     <message>
         <source>Requested</source>
-        <translation>Pidida</translation>
+        <translation>Richiesto</translation>
     </message>
 </context>
 <context>
     <name>AccountView</name>
     <message>
         <source>Search</source>
-        <translation>Guetar</translation>
+        <translation>Cerca</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation>Charra de grupu nueva</translation>
+        <translation>Nuova chat di gruppo</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configurar</translation>
+        <translation>Configura</translation>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation>Tema del grupu</translation>
+        <translation>Argomento del gruppo</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation>Crear</translation>
+        <translation>Crea</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>Amestar charra secreta</translation>
+        <translation>Aggiungi Chat Segreta</translation>
     </message>
     <message>
         <source>Contact List</source>
-        <translation>Llista de contautos</translation>
+        <translation>Lista Contatti</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation type="unfinished"/>
+        <translation>Trascina e rilascia i contatti qui</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation>Amestar cuenta (experimental)</translation>
+        <translation>Aggiungi Account (sperimentale)</translation>
     </message>
 </context>
 <context>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation>Aseman ye una organización ensin ánimu llucru, qu&apos;esiste pa sofitar y lliderar los proyeutos ya investigaciones llibres y multi-plataforma</translation>
+        <translation>Aseman è un&apos;organizzazione no-profit, esiste per supportare e gestire i progetti e le ricerche gratuite, open source e multi piattaforma.</translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation>La meta d&apos;Aseman ye apurrir productos llibres y seguros pa caltener la llibertá de la xente y la so privacidá.</translation>
+        <translation>L&apos;obbiettivo di Aseman e di fornire prodotti gratuiti e sicuri per garantire la libertà e la privacy degli utenti.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Páxina d&apos;aniciu</translation>
+        <translation>Home Page</translation>
     </message>
 </context>
 <context>
@@ -349,225 +349,225 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>Aseman ye un equipu de desendolcu ya investigación ensin ánimu de llucru llanzáu en febreru de 2014 enfocándose nel desendolcu de productos, teunoloxíes y soluciones pa espublizales como proyeutos de códigu abiertu accesibles a tol mundiu nel universu. Anguaño, tamos enfocaos nel diseñu y desendolcu d&apos;aplicaciones y ferramientes de software que tienen conexón direuta colos usuarios finales.</translation>
+        <translation>Aseman è un team no-profit di ricerca e sviluppo software partito nel Febbraio 2014 che si concentra sullo sviluppo di prodotti, tecnologie e soluzioni sotto forma di progetti open-source accessibili a ogni persona nell&apos;universo. Al momento, ci stiamo concentrando sul design e lo sviluppo di software, applicazioni e strumenti a diretto contatto con il consumatore.</translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation>Habilitando la innovación de proyeutos y distribución de software a millones d&apos;usuarios nel mundiu, el llaboratoriu ta trabayando pa entainar el crecimientu del impautu altu de proyeutos de códigu abiertu y promoción d&apos;una cultura llibre d&apos;accesibilidá y productividá aumentada pel mundiu. Los patrociandores del llaboratoriu colos llíderes de la industria y políticos darán teunoloxíes de códigu abiertu a sectores nuevos, incluyendo educación, salú y gobiernu.</translation>
+        <translation>Abilitando innovativi progetti e distribuendo software a milioni di utenti globalmente, il lab lavora per incrementare la crescita di progetti software open source ad alto impatto e a promuovere una cultura di accessibilità e aumentata produttività open source in tutto il mondo. Il lab collabora con leader di industrie e responsabili politici per portare tecnologie open source in nuovi settori, includendo l&apos;educazione, la salute e il governo.</translation>
     </message>
 </context>
 <context>
     <name>AuthenticateDialog</name>
     <message>
         <source>Authenticating</source>
-        <translation>Autenticación</translation>
+        <translation>Accesso</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>Númberu teléfonu</translation>
+        <translation>Numero di telefono</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>Aniciar sesión</translation>
+        <translation>Accedi</translation>
     </message>
 </context>
 <context>
     <name>CameraDialog</name>
     <message>
         <source>Send</source>
-        <translation>Unviar</translation>
+        <translation>Invia</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Encaboxar</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation>Capturar</translation>
+        <translation>Cattura</translation>
     </message>
 </context>
 <context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation>Sí</translation>
+        <translation>On</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation>Non</translation>
+        <translation>Off</translation>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Notifications</source>
-        <translation>Notificaciones</translation>
+        <translation>Notifiche</translation>
     </message>
     <message>
         <source>On Start</source>
-        <translation>Nel aniciu</translation>
+        <translation>All&apos;avvio</translation>
     </message>
     <message>
         <source>Languages</source>
-        <translation>Llingües</translation>
+        <translation>Lingue</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automáticu</translation>
+        <translation>Automatico</translation>
     </message>
     <message>
         <source>Always visible</source>
-        <translation>Siempres visible</translation>
+        <translation>Sempre visibile</translation>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation>Minimizar a la bandexa del sistema</translation>
+        <translation>Minimizza nella barra di sistema</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Zarrar sesión</translation>
+        <translation>Disconnetti</translation>
     </message>
     <message>
         <source>Change Photo</source>
-        <translation>Cambiar semeya</translation>
+        <translation>Cambia foto</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation>Esbillar semeya</translation>
+        <translation>Seleziona foto</translation>
     </message>
     <message>
         <source>Detailed List</source>
-        <translation>Llista detallada</translation>
+        <translation>Lista dettagliata</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>Fondu</translation>
+        <translation>Sfondo</translation>
     </message>
     <message>
         <source>Notify Sound</source>
-        <translation>Soníu de notificación</translation>
+        <translation>Suono Notifiche</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation>Color maestra</translation>
+        <translation>Colore Principale</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation>Camudar</translation>
+        <translation>Cambia</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Desaniciar</translation>
+        <translation>Rimuovi</translation>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>Esbilla imaxe</translation>
+        <translation>Seleziona immagine</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Dengún</translation>
+        <translation>Nessuno</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Por defeutu</translation>
+        <translation>Default</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalizáu</translation>
+        <translation>Personalizzato</translation>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation>Esbillar soníu</translation>
+        <translation>Seleziona suono</translation>
     </message>
     <message>
         <source>Visual Effects</source>
-        <translation>Efeutos visuales</translation>
+        <translation>Effetti visivi</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation>Anuncies de Cutegram</translation>
+        <translation>Cutegram Newsletter</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Fonte</translation>
+        <translation>Carattere</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation>Esbillar</translation>
+        <translation>Seleziona</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Esbillar fonte</translation>
+        <translation>Seleziona Carattere</translation>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation>Aniciu automáticu</translation>
+        <translation>Avvia automaticamente</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation>Axustes del proxy</translation>
+        <translation>Impostazioni proxy</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>Tocante a Cutegram</translation>
+        <translation>Riguardo Cutegram</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>Tocante a Aseman</translation>
+        <translation>Riguardo Aseman</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation>Color del sistema</translation>
+        <translation>Colori di Sistema</translation>
     </message>
 </context>
 <context>
     <name>CursorPicker</name>
     <message>
         <source>Copy</source>
-        <translation>Copiar</translation>
+        <translation>Copia</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Cortar</translation>
+        <translation>Taglia</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Apegar</translation>
+        <translation>Incolla</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Desaniciar</translation>
+        <translation>Cancella</translation>
     </message>
 </context>
 <context>
     <name>Cutegram</name>
     <message>
         <source>Show</source>
-        <translation>Amosar</translation>
+        <translation>Mostra</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configurar</translation>
+        <translation>Configura</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Tocante a Cutegram</translation>
+        <translation>Riguardo</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>Tocante a Aseman</translation>
+        <translation>Riguardo Aseman</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Colar</translation>
+        <translation>Esci</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Colar</translation>
+        <translation>Esci</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contautu</translation>
+        <translation>Contatta</translation>
     </message>
 </context>
 <context>
@@ -586,209 +586,209 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Hora</translation>
+        <translation>Ora</translation>
     </message>
 </context>
 <context>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>&lt;&lt;&lt; Suelta a la llista de diálogos pa reunviar</translation>
+        <translation>&lt;&lt;&lt; Trascina nella lista delle conversazioni per inoltrare</translation>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation>Suelta pa reunviar</translation>
+        <translation>Rilascia per inoltrare</translation>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation>Suelta pa unviar como documentu</translation>
+        <translation>Rilascia per inviare come documento</translation>
     </message>
     <message>
         <source>Drop to send</source>
-        <translation>Sueltar pa unviar</translation>
+        <translation>Rilascia per inviare</translation>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation>Suelta p&apos;amestar al participante</translation>
+        <translation>Rilascia per aggiungere un partecipante</translation>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation>Suelta p&apos;amestar una charra nueva</translation>
+        <translation>Rilascia per aggiungere una nuova chat</translation>
     </message>
     <message>
         <source>New Group</source>
-        <translation>Grupu nuevu</translation>
+        <translation>Nuovo Gruppo</translation>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation>Por favor, introduz el nome del grupu nuevu</translation>
+        <translation>Inserire il nome del nuovo gruppo</translation>
     </message>
 </context>
 <context>
     <name>Emoticons</name>
     <message>
         <source>Recent</source>
-        <translation>Recién</translation>
+        <translation>Recenti</translation>
     </message>
     <message>
         <source>All Emoji</source>
-        <translation>Tolos Emoji</translation>
+        <translation>Tutte le emoticon</translation>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>Por favor, esbilla un contautu...</translation>
+        <translation>Selezionare un contatto...</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>A</translation>
+        <translation>Per</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Encaboxar</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Reunviar</translation>
+        <translation>Inoltra</translation>
     </message>
 </context>
 <context>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation>Apegar</translation>
+        <translation>Incolla</translation>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation>Por favor, introduz la contraseña</translation>
+        <translation>Inserire la password</translation>
     </message>
     <message>
         <source>password</source>
-        <translation>contraseña</translation>
+        <translation>password</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Fecho</translation>
+        <translation>Fatto</translation>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation>¡Incorreuta!</translation>
+        <translation>Sbagliata!</translation>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation>Tornar</translation>
+        <translation>Indietro</translation>
     </message>
 </context>
 <context>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation>Apegar</translation>
+        <translation>Incolla</translation>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation>Axustes del proxy</translation>
+        <translation>Impostazioni Proxy</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation>Estos cambeos necesiten reaniciar l&apos;aplicación.</translation>
+        <translation>Queste modifiche richiedono il riavvio dell&apos;applicazione.</translation>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation>Triba de proxy</translation>
+        <translation>Tipo di Proxy</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation>Agospiu</translation>
+        <translation>Hostname</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation>Puertu</translation>
+        <translation>Porta</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Nome d&apos;usuariu</translation>
+        <translation>Username</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Contraseña</translation>
+        <translation>Password</translation>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation>Exem: 127.0.0.1</translation>
+        <translation>Ex: 127.0.0.1</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Encaboxar</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Aceutar</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation>Esbillar aplicación</translation>
+        <translation>Seleziona Applicazione</translation>
     </message>
 </context>
 <context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation>Charra secreta</translation>
+        <translation>Chat Segreta</translation>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation>Númberu teléfonu</translation>
+        <translation>Numero di Telefono</translation>
     </message>
     <message>
         <source>Favorite</source>
-        <translation>Favoritu</translation>
+        <translation>Preferito</translation>
     </message>
     <message>
         <source>Love</source>
-        <translation>Queríu</translation>
+        <translation>Love</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Silenciar</translation>
+        <translation>Silenzia</translation>
     </message>
     <message>
         <source>Participants</source>
-        <translation>Participantes</translation>
+        <translation>Partecipanti</translation>
     </message>
     <message>
         <source>Show List</source>
-        <translation>Amosar llista</translation>
+        <translation>Mostra Lista</translation>
     </message>
     <message>
         <source>Leave</source>
-        <translation>Colar</translation>
+        <translation>Abbandona</translation>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation>Colar del grupu</translation>
+        <translation>Abbandona il gruppo</translation>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
-        <translation>¿De xuru que quies colar del grupu?</translation>
+        <translation>Sei sicuro di voler lasciare questo gruppo?</translation>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation>Amestar participante</translation>
+        <translation>Aggiungi partecipanti</translation>
     </message>
 </context>
 </TS>

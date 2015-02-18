@@ -740,13 +740,13 @@ void Cutegram::init_languages()
 
         QLocale locale(locale_str);
 
-        QString  lang = QLocale::languageToString(locale.language());
+        QString  lang = QString("%1 (%2)").arg(QLocale::languageToString(locale.language()), QLocale::countryToString(locale.country()));
         QVariant data = p->translationsPath + "/" + languages[i];
 
         p->languages.insert( lang, data );
         p->locales.insert( lang , locale );
 
-        if( lang == AsemanApplication::settings()->value("General/Language","English").toString() )
+        if( lang == AsemanApplication::settings()->value("General/Language","English (UnitedStates)").toString() )
             setLanguage( lang );
     }
 }

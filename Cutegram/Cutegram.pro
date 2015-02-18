@@ -94,7 +94,9 @@ TRANSLATIONS += \
     translations/lang-en.qm \
     translations/lang-fa.qm \
     translations/lang-de.qm \
-    translations/lang-et.qm
+    translations/lang-et.qm \
+    translations/lang-it.qm \
+    translations/lang-en_GB.qm
 
 isEmpty(PREFIX) {
     PREFIX = /usr
@@ -138,4 +140,6 @@ DISTFILES += \
     translations_sources/lang-de.ts \
     translations_sources/lang-en.ts \
     translations_sources/lang-et.ts \
-    translations_sources/lang-fa.ts
+    translations_sources/lang-fa.ts \
+    translations_sources/lang-it.ts \
+    translations_sources/lang-en_GB.ts
