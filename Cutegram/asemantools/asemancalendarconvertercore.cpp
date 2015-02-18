@@ -234,40 +234,40 @@ QString AsemanCalendarConverterCore::monthNamesGregorian(int m)
     switch( m )
     {
     case 1:
-        return QObject::tr("January");
+        return "January";
         break;
     case 2:
-        return QObject::tr("February");
+        return "February";
         break;
     case 3:
-        return QObject::tr("March");
+        return "March";
         break;
     case 4:
-        return QObject::tr("April");
+        return "April";
         break;
     case 5:
-        return QObject::tr("May");
+        return "May";
         break;
     case 6:
-        return QObject::tr("June");
+        return "June";
         break;
     case 7:
-        return QObject::tr("July");
+        return "July";
         break;
     case 8:
-        return QObject::tr("August");
+        return "August";
         break;
     case 9:
-        return QObject::tr("September");
+        return "September";
         break;
     case 10:
-        return QObject::tr("October");
+        return "October";
         break;
     case 11:
-        return QObject::tr("November");
+        return "November";
         break;
     case 12:
-        return QObject::tr("December");
+        return "December";
         break;
     }
 
@@ -279,25 +279,25 @@ QString AsemanCalendarConverterCore::dayNameGregorian(int d)
     switch( d )
     {
     case 1:
-        return QObject::tr("Sunday");
+        return "Sunday";
         break;
     case 2:
-        return QObject::tr("Monday");
+        return "Monday";
         break;
     case 3:
-        return QObject::tr("Tuesday");
+        return "Tuesday";
         break;
     case 4:
-        return QObject::tr("Wednesday");
+        return "Wednesday";
         break;
     case 5:
-        return QObject::tr("Thuresday");
+        return "Thuresday";
         break;
     case 6:
-        return QObject::tr("Friday");
+        return "Friday";
         break;
     case 7:
-        return QObject::tr("Saturday");
+        return "Saturday";
         break;
     }
 
@@ -411,40 +411,40 @@ QString AsemanCalendarConverterCore::monthNamesJalali(int m)
     switch( m )
     {
     case 1:
-        return QObject::tr("Farvardin");
+        return "Farvardin";
         break;
     case 2:
-        return QObject::tr("Ordibehesht");
+        return "Ordibehesht";
         break;
     case 3:
-        return QObject::tr("Khordad");
+        return "Khordad";
         break;
     case 4:
-        return QObject::tr("Tir");
+        return "Tir";
         break;
     case 5:
-        return QObject::tr("Mordad");
+        return "Mordad";
         break;
     case 6:
-        return QObject::tr("Shahrivar");
+        return "Shahrivar";
         break;
     case 7:
-        return QObject::tr("Mehr");
+        return "Mehr";
         break;
     case 8:
-        return QObject::tr("Abaan");
+        return "Abaan";
         break;
     case 9:
-        return QObject::tr("Aazar");
+        return "Aazar";
         break;
     case 10:
-        return QObject::tr("Dey");
+        return "Dey";
         break;
     case 11:
-        return QObject::tr("Bahman");
+        return "Bahman";
         break;
     case 12:
-        return QObject::tr("Esfand");
+        return "Esfand";
         break;
     }
 
@@ -456,25 +456,25 @@ QString AsemanCalendarConverterCore::dayNameJalali(int d)
     switch( d )
     {
     case 1:
-        return QObject::tr("Shanbe");
+        return "Shanbe";
         break;
     case 2:
-        return QObject::tr("1Shanbe");
+        return "1Shanbe";
         break;
     case 3:
-        return QObject::tr("2Shanbe");
+        return "2Shanbe";
         break;
     case 4:
-        return QObject::tr("3Shanbe");
+        return "3Shanbe";
         break;
     case 5:
-        return QObject::tr("4Shanbe");
+        return "4Shanbe";
         break;
     case 6:
-        return QObject::tr("5Shanbe");
+        return "5Shanbe";
         break;
     case 7:
-        return QObject::tr("Jome");
+        return "Jome";
         break;
     }
 
@@ -593,40 +593,40 @@ QString AsemanCalendarConverterCore::monthNamesHijri( int m )
     switch( m )
     {
     case 1:
-        return QObject::tr("Moharram");
+        return "Moharram";
         break;
     case 2:
-        return QObject::tr("Safar");
+        return "Safar";
         break;
     case 3:
-        return QObject::tr("Rabiol Avval");
+        return "Rabiol Avval";
         break;
     case 4:
-        return QObject::tr("Rabio Sani");
+        return "Rabio Sani";
         break;
     case 5:
-        return QObject::tr("Jamadiol Aval");
+        return "Jamadiol Aval";
         break;
     case 6:
-        return QObject::tr("Jamadio Sani");
+        return "Jamadio Sani";
         break;
     case 7:
-        return QObject::tr("Rajab");
+        return "Rajab";
         break;
     case 8:
-        return QObject::tr("Shaban");
+        return "Shaban";
         break;
     case 9:
-        return QObject::tr("Ramadan");
+        return "Ramadan";
         break;
     case 10:
-        return QObject::tr("Shaval");
+        return "Shaval";
         break;
     case 11:
-        return QObject::tr("Zighade");
+        return "Zighade";
         break;
     case 12:
-        return QObject::tr("Zihaje");
+        return "Zihaje";
         break;
     }
 
@@ -638,25 +638,25 @@ QString AsemanCalendarConverterCore::dayNameHijri(int d)
     switch( d )
     {
     case 1:
-        return QObject::tr("Saturday");
+        return "Saturday";
         break;
     case 2:
-        return QObject::tr("Sunday");
+        return "Sunday";
         break;
     case 3:
-        return QObject::tr("Monday");
+        return "Monday";
         break;
     case 4:
-        return QObject::tr("Tuesday");
+        return "Tuesday";
         break;
     case 5:
-        return QObject::tr("Wednesday");
+        return "Wednesday";
         break;
     case 6:
-        return QObject::tr("Thuresday");
+        return "Thuresday";
         break;
     case 7:
-        return QObject::tr("Friday");
+        return "Friday";
         break;
     }
 

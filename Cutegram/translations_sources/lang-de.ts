@@ -783,203 +783,79 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>QObject</name>
     <message>
         <source>January</source>
-        <translation>Januar</translation>
+        <translation type="vanished">Januar</translation>
     </message>
     <message>
         <source>February</source>
-        <translation>Februar</translation>
+        <translation type="vanished">Februar</translation>
     </message>
     <message>
         <source>March</source>
-        <translation>März</translation>
+        <translation type="vanished">März</translation>
     </message>
     <message>
         <source>April</source>
-        <translation>April</translation>
+        <translation type="vanished">April</translation>
     </message>
     <message>
         <source>May</source>
-        <translation>Mai</translation>
+        <translation type="vanished">Mai</translation>
     </message>
     <message>
         <source>June</source>
-        <translation>Juni</translation>
+        <translation type="vanished">Juni</translation>
     </message>
     <message>
         <source>July</source>
-        <translation>Juli</translation>
+        <translation type="vanished">Juli</translation>
     </message>
     <message>
         <source>August</source>
-        <translation>August</translation>
+        <translation type="vanished">August</translation>
     </message>
     <message>
         <source>September</source>
-        <translation>September</translation>
+        <translation type="vanished">September</translation>
     </message>
     <message>
         <source>October</source>
-        <translation>Oktober</translation>
+        <translation type="vanished">Oktober</translation>
     </message>
     <message>
         <source>November</source>
-        <translation>November</translation>
+        <translation type="vanished">November</translation>
     </message>
     <message>
         <source>December</source>
-        <translation>Dezember</translation>
+        <translation type="vanished">Dezember</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation>Sonntag</translation>
+        <translation type="vanished">Sonntag</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>Montag</translation>
+        <translation type="vanished">Montag</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation>Dienstag</translation>
+        <translation type="vanished">Dienstag</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation>Mittwoch</translation>
+        <translation type="vanished">Mittwoch</translation>
     </message>
     <message>
         <source>Thuresday</source>
-        <translation>Donnerstag</translation>
+        <translation type="vanished">Donnerstag</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation>Freitag</translation>
+        <translation type="vanished">Freitag</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation>Samstag</translation>
-    </message>
-    <message>
-        <source>Farvardin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ordibehesht</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Khordad</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tir</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mordad</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shahrivar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mehr</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abaan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Aazar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dey</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bahman</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Esfand</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shanbe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1Shanbe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>2Shanbe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>3Shanbe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>4Shanbe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>5Shanbe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jome</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Moharram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Safar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rabiol Avval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rabio Sani</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jamadiol Aval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jamadio Sani</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rajab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shaban</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ramadan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shaval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zighade</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zihaje</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Samstag</translation>
     </message>
 </context>
 <context>

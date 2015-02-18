@@ -779,203 +779,79 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>QObject</name>
     <message>
         <source>January</source>
-        <translation>Jaanuar</translation>
+        <translation type="vanished">Jaanuar</translation>
     </message>
     <message>
         <source>February</source>
-        <translation>Veebruar</translation>
+        <translation type="vanished">Veebruar</translation>
     </message>
     <message>
         <source>March</source>
-        <translation>Märts</translation>
+        <translation type="vanished">Märts</translation>
     </message>
     <message>
         <source>April</source>
-        <translation>Aprill</translation>
+        <translation type="vanished">Aprill</translation>
     </message>
     <message>
         <source>May</source>
-        <translation>Mai</translation>
+        <translation type="vanished">Mai</translation>
     </message>
     <message>
         <source>June</source>
-        <translation>Juuni</translation>
+        <translation type="vanished">Juuni</translation>
     </message>
     <message>
         <source>July</source>
-        <translation>Juuli</translation>
+        <translation type="vanished">Juuli</translation>
     </message>
     <message>
         <source>August</source>
-        <translation>August</translation>
+        <translation type="vanished">August</translation>
     </message>
     <message>
         <source>September</source>
-        <translation>September</translation>
+        <translation type="vanished">September</translation>
     </message>
     <message>
         <source>October</source>
-        <translation>Oktoober</translation>
+        <translation type="vanished">Oktoober</translation>
     </message>
     <message>
         <source>November</source>
-        <translation>November</translation>
+        <translation type="vanished">November</translation>
     </message>
     <message>
         <source>December</source>
-        <translation>Detsember</translation>
+        <translation type="vanished">Detsember</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation>Pühapäev</translation>
+        <translation type="vanished">Pühapäev</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>Esmaspäev</translation>
+        <translation type="vanished">Esmaspäev</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation>Teisipäev</translation>
+        <translation type="vanished">Teisipäev</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation>Kolmapäev</translation>
+        <translation type="vanished">Kolmapäev</translation>
     </message>
     <message>
         <source>Thuresday</source>
-        <translation>Neljapäev</translation>
+        <translation type="vanished">Neljapäev</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation>Reede</translation>
+        <translation type="vanished">Reede</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation>Laupäev</translation>
-    </message>
-    <message>
-        <source>Farvardin</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ordibehesht</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Khordad</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Tir</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mordad</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Shahrivar</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mehr</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Abaan</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Aazar</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Dey</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Bahman</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Esfand</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Shanbe</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>1Shanbe</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>2Shanbe</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>3Shanbe</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>4Shanbe</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>5Shanbe</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Jome</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Moharram</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Safar</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rabiol Avval</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rabio Sani</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Jamadiol Aval</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Jamadio Sani</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rajab</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Shaban</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ramadan</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Shaval</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Zighade</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Zihaje</source>
-        <translation></translation>
+        <translation type="vanished">Laupäev</translation>
     </message>
 </context>
 <context>
