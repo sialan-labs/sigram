@@ -330,15 +330,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>AsemanCalendarConverter</name>
     <message>
         <source>Gregorian</source>
-        <translation>Gregoriaani</translation>
-    </message>
-    <message>
-        <source>Jalali</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hijri</source>
-        <translation></translation>
+        <translation type="vanished">Gregoriaani</translation>
     </message>
 </context>
 <context>

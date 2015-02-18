@@ -307,21 +307,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
-    <name>AsemanCalendarConverter</name>
-    <message>
-        <source>Gregorian</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jalali</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hijri</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>

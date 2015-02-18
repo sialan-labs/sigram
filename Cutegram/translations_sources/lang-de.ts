@@ -335,15 +335,15 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>AsemanCalendarConverter</name>
     <message>
         <source>Gregorian</source>
-        <translation>Gregorianisch</translation>
+        <translation type="vanished">Gregorianisch</translation>
     </message>
     <message>
         <source>Jalali</source>
-        <translation>Persisch</translation>
+        <translation type="vanished">Persisch</translation>
     </message>
     <message>
         <source>Hijri</source>
-        <translation>Islamisch</translation>
+        <translation type="vanished">Islamisch</translation>
     </message>
 </context>
 <context>

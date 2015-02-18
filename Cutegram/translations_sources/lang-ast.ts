@@ -311,15 +311,15 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <name>AsemanCalendarConverter</name>
     <message>
         <source>Gregorian</source>
-        <translation>Gregorianu</translation>
+        <translation type="vanished">Gregorianu</translation>
     </message>
     <message>
         <source>Jalali</source>
-        <translation>Jalali</translation>
+        <translation type="vanished">Jalali</translation>
     </message>
     <message>
         <source>Hijri</source>
-        <translation>Hijri</translation>
+        <translation type="vanished">Hijri</translation>
     </message>
 </context>
 <context>

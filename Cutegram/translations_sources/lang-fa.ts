@@ -358,15 +358,15 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>AsemanCalendarConverter</name>
     <message>
         <source>Gregorian</source>
-        <translation>میلادی</translation>
+        <translation type="vanished">میلادی</translation>
     </message>
     <message>
         <source>Jalali</source>
-        <translation>جلالی</translation>
+        <translation type="vanished">جلالی</translation>
     </message>
     <message>
         <source>Hijri</source>
-        <translation>قمری</translation>
+        <translation type="vanished">قمری</translation>
     </message>
 </context>
 <context>
