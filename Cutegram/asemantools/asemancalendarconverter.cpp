@@ -58,13 +58,13 @@ QString AsemanCalendarConverter::calendarName(int t)
     switch( t )
     {
     case AsemanCalendarConverterCore::Gregorian:
-        return tr("Gregorian");
+        return "Gregorian";
         break;
     case AsemanCalendarConverterCore::Jalali:
-        return tr("Jalali");
+        return "Jalali";
         break;
     case AsemanCalendarConverterCore::Hijri:
-        return tr("Hijri");
+        return "Hijri";
         break;
     }
 
