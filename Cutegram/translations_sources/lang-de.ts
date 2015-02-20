@@ -306,7 +306,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfach Kontakte hierher ziehen und ablegen</translation>
     </message>
 </context>
 <context>
@@ -542,23 +542,23 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Autostart</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy-Einstellungen</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation type="unfinished">Über Cutegram</translation>
+        <translation>Über Cutegram</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation type="unfinished">Über Aseman</translation>
+        <translation>Über Aseman</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Systemfarbe</translation>
     </message>
 </context>
 <context>
@@ -740,43 +740,43 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy-Einstellungen</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Änderungen verlangen einen Anwendungsneustart.</translation>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy-Typ</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation type="unfinished"></translation>
+        <translation>Host-Name</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzername</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bspw.: 127.0.0.1</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
