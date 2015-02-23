@@ -112,7 +112,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 40*Devices.density
-            font.pixelSize: 15*Devices.fontDensity
+            font.pixelSize: Math.floor(15*Devices.fontDensity)
             font.family: AsemanApp.globalFont.family
             color: "#ffffff"
             wrapMode: Text.WordWrap
@@ -148,7 +148,7 @@ Item {
             STextInput{
                 id: pass
                 color: "#333333"
-                font.pixelSize: 13*Devices.fontDensity
+                font.pixelSize: Math.floor(13*Devices.fontDensity)
                 font.family: AsemanApp.globalFont.family
                 y: pass_frame.height/2-height/2
                 anchors.left: parent.left
@@ -187,7 +187,7 @@ Item {
             anchors.topMargin: 10*Devices.density
             anchors.leftMargin: 40*Devices.density
             anchors.rightMargin: 40*Devices.density
-            fontSize: 9*Devices.fontDensity
+            fontSize: Math.floor(9*Devices.fontDensity)
             normalColor: "#3B97EC"
             highlightColor: masterPalette.highlight
             textColor: "#333333"
@@ -217,7 +217,7 @@ Item {
 
         Text{
             id: warn_txt
-            font.pixelSize: 20*Devices.fontDensity
+            font.pixelSize: Math.floor(20*Devices.fontDensity)
             font.family: AsemanApp.globalFont.family
             color: "#ffffff"
             wrapMode: Text.WordWrap

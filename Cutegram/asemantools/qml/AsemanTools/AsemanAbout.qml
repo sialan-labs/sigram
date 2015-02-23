@@ -41,7 +41,7 @@ Rectangle {
         anchors.margins: 20*Devices.density
         font.family: AsemanApp.globalFont.family
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        font.pixelSize: 9*Devices.fontDensity
+        font.pixelSize: Math.floor(9*Devices.fontDensity)
         color: Desktop.titleBarTextColor
         horizontalAlignment: Text.AlignHCenter
         z: 10
@@ -57,7 +57,7 @@ Rectangle {
         anchors.rightMargin: 20*Devices.density
         anchors.topMargin: 4*Devices.density
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        font.pixelSize: 9*Devices.fontDensity
+        font.pixelSize: Math.floor(9*Devices.fontDensity)
         font.family: AsemanApp.globalFont.family
         color: Desktop.titleBarTextColor
         horizontalAlignment: Text.AlignHCenter

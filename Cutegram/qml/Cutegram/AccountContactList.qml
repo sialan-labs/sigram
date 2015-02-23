@@ -89,7 +89,7 @@ Item {
                 elide: Text.ElideRight
                 maximumLineCount: 1
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 9*Devices.fontDensity
+                font.pixelSize: Math.floor(9*Devices.fontDensity)
                 text: user.firstName + " " + user.lastName
                 color: "#333333"
             }

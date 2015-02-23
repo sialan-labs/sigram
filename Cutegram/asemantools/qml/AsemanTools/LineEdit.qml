@@ -54,7 +54,7 @@ Rectangle {
         anchors.margins: 4*Devices.density
         anchors.leftMargin: textSideMargins
         anchors.rightMargin: textSideMargins
-        font.pixelSize: 11*Devices.fontDensity
+        font.pixelSize: Math.floor(11*Devices.fontDensity)
         font.family: AsemanApp.globalFont.family
         color: "#333333"
         verticalAlignment: Text.AlignVCenter
@@ -70,6 +70,7 @@ Rectangle {
         highlightColor: "#44000000"
         icon: "files/close.png"
         iconHeight: 12*Devices.density
+        radius: parent.radius
         visible: main_item.text.length != 0 && clearButton
         cursorShape: Qt.PointingHandCursor
         onClicked: main_item.text = ""

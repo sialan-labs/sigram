@@ -72,7 +72,7 @@ Rectangle {
                 Text {
                     anchors.centerIn: parent
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 12*Devices.fontDensity
+                    font.pixelSize: Math.floor(12*Devices.fontDensity)
                     font.bold: true
                     color: "#ffffff"
                     text: "Download"

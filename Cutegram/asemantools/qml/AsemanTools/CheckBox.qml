@@ -68,7 +68,7 @@ Item {
         Text {
             id: on_txt
             anchors.centerIn: parent
-            font.pixelSize: 10*Devices.fontDensity
+            font.pixelSize: Math.floor(10*Devices.fontDensity)
             font.family: AsemanApp.globalFont.family
             color: checkbox.color
         }
@@ -87,7 +87,7 @@ Item {
         Text {
             id: off_txt
             anchors.centerIn: parent
-            font.pixelSize: 10*Devices.fontDensity
+            font.pixelSize: Math.floor(10*Devices.fontDensity)
             font.family: AsemanApp.globalFont.family
             color: checkbox.color
         }

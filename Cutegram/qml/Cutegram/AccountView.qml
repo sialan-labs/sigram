@@ -8,7 +8,7 @@ Rectangle {
     id: acc_view
     width: 100
     height: 62
-    color: "#222222"
+    color: Cutegram.lightUi? "#cccccc" :"#222222"
 
     property alias telegramObject: dialogs.telegramObject
     property color framesColor: "#aaffffff"
@@ -32,6 +32,20 @@ Rectangle {
         onCutegramDialogChanged: Cutegram.cutegramSubscribe = telegramObject.cutegramDialog
     }
 
+    Rectangle {
+        anchors.bottom: parent.top
+        anchors.right: dialogs.right
+        transformOrigin: Item.BottomRight
+        rotation: -90
+        width: parent.height
+        height: 5*Devices.density
+        opacity: Cutegram.lightUi? 0.2 : 1
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#00000000" }
+            GradientStop { position: 1.0; color: "#000000" }
+        }
+    }
+
     LineEdit {
         id: search_frame
         anchors.left: dialogs.left
@@ -39,8 +53,9 @@ Rectangle {
         anchors.right: dialogs.right
         anchors.margins: 10*Devices.density
         height: 36*Devices.density
-        color: "#333333"
-        textColor: "#ffffff"
+        radius: 4*Devices.density
+        color: Cutegram.lightUi? "#dddddd" : "#333333"
+        textColor: Cutegram.lightUi? "#333333" : "#ffffff"
         clearButton: true
         placeholder: qsTr("Search")
         pickerEnable: Devices.isTouchDevice

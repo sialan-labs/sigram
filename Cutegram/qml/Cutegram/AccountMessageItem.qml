@@ -135,7 +135,7 @@ Item {
 
                 Text {
                     id: user_name
-                    font.pixelSize: 11*Devices.fontDensity
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
                     font.family: AsemanApp.globalFont.family
                     lineHeight: 1.3
                     color: Cutegram.highlightColor
@@ -169,7 +169,7 @@ Item {
                             id: msg_txt
                             width: htmlWidth>maximumWidth? maximumWidth : htmlWidth
                             anchors.centerIn: parent
-                            font.pixelSize: Cutegram.font.pointSize*Devices.fontDensity
+                            font.pixelSize: Math.floor(Cutegram.font.pointSize*Devices.fontDensity)
                             font.family: Cutegram.font.family
                             persistentSelection: true
                             activeFocusOnPress: false
@@ -196,7 +196,7 @@ Item {
                         Text {
                             id: time_txt
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: textColor2
                             text: Cutegram.getTimeString(msgDate)
                             verticalAlignment: Text.AlignVCenter

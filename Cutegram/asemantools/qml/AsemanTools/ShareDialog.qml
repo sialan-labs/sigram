@@ -53,7 +53,7 @@ Item {
         x: 40*Devices.density
         y: 60*Devices.density
         text: qsTr("Select Application")
-        font.pixelSize: 25*Devices.fontDensity
+        font.pixelSize: Math.floor(25*Devices.fontDensity)
         font.weight: Font.Light
         font.family: AsemanApp.globalFont.family
         color: "#333333"
@@ -92,7 +92,7 @@ Item {
                 anchors.leftMargin: 10*Devices.density
                 anchors.verticalCenter: parent.verticalCenter
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 9*Devices.fontDensity
+                font.pixelSize: Math.floor(9*Devices.fontDensity)
                 text: mime_apps.appName(appId)
             }
 

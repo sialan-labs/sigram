@@ -19,7 +19,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 
-Rectangle {
+AsemanMainQt {
     id: smain
 
     property bool portrait: width<height
@@ -72,7 +72,7 @@ Rectangle {
         z: 10
     }
 
-    Tooltip{
+    Tooltip {
         id: tool_tip
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter

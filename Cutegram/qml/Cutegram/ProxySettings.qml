@@ -41,7 +41,7 @@ Window {
                     height: proxy_type_combo.height
                     verticalAlignment: Text.AlignVCenter
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 9*Devices.fontDensity
+                    font.pixelSize: Math.floor(9*Devices.fontDensity)
                     color: "#333333"
                     text: qsTr("Proxy Type")
                 }
@@ -51,7 +51,7 @@ Window {
                     height: proxy_host_line.height
                     verticalAlignment: Text.AlignVCenter
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 9*Devices.fontDensity
+                    font.pixelSize: Math.floor(9*Devices.fontDensity)
                     color: "#333333"
                     text: qsTr("Hostname")
                 }
@@ -61,7 +61,7 @@ Window {
                     height: proxy_port_spin.height
                     verticalAlignment: Text.AlignVCenter
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 9*Devices.fontDensity
+                    font.pixelSize: Math.floor(9*Devices.fontDensity)
                     color: "#333333"
                     text: qsTr("Port")
                 }
@@ -71,7 +71,7 @@ Window {
                     height: proxy_user_line.height
                     verticalAlignment: Text.AlignVCenter
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 9*Devices.fontDensity
+                    font.pixelSize: Math.floor(9*Devices.fontDensity)
                     color: "#333333"
                     visible: Devices.isLinux
                     text: qsTr("Username")
@@ -82,7 +82,7 @@ Window {
                     height: proxy_pass_line.height
                     verticalAlignment: Text.AlignVCenter
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 9*Devices.fontDensity
+                    font.pixelSize: Math.floor(9*Devices.fontDensity)
                     color: "#333333"
                     text: qsTr("Password")
                 }

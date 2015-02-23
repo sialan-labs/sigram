@@ -32,7 +32,7 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.margins: 8*Devices.density
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 10*Devices.fontDensity
+                font.pixelSize: Math.floor(10*Devices.fontDensity)
                 color: textColor0
                 text: name
             }

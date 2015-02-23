@@ -61,7 +61,7 @@ Rectangle {
             anchors.right: parent.right
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
-            font.pixelSize: 11*Devices.fontDensity
+            font.pixelSize: Math.floor(11*Devices.fontDensity)
             font.family: AsemanApp.globalFont.family
             color: "#333333"
             maximumLineCount: 2
@@ -72,7 +72,7 @@ Rectangle {
         Text {
             id: fwd_info
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 10*Devices.fontDensity
+            font.pixelSize: Math.floor(10*Devices.fontDensity)
             font.weight: Font.Normal
             font.family: AsemanApp.globalFont.family
             color: "#333333"
@@ -105,7 +105,7 @@ Rectangle {
 
                 Text {
                     wrapMode: Text.WordWrap
-                    font.pixelSize: 18*Devices.fontDensity
+                    font.pixelSize: Math.floor(18*Devices.fontDensity)
                     font.weight: Font.Normal
                     font.family: AsemanApp.globalFont.family
                     color: "#333333"
@@ -125,7 +125,7 @@ Rectangle {
 
                 Text {
                     wrapMode: Text.WordWrap
-                    font.pixelSize: 11*Devices.fontDensity
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
                     font.weight: Font.Normal
                     font.family: AsemanApp.globalFont.family
                     color: "#333333"

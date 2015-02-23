@@ -45,19 +45,6 @@ Item {
         indicatorSize: 20*Devices.density
     }
 
-    Rectangle {
-        anchors.bottom: parent.top
-        anchors.right: parent.right
-        transformOrigin: Item.BottomRight
-        rotation: -90
-        width: parent.height
-        height: 5*Devices.density
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "#00000000" }
-            GradientStop { position: 1.0; color: "#000000" }
-        }
-    }
-
     ListView {
         id: dlist
         width: 275*Devices.density - ad_list.x
@@ -162,11 +149,11 @@ Item {
                     anchors.left: profile_img.right
                     anchors.right: time_txt.left
                     anchors.margins: 4*Devices.density
-                    font.pixelSize: 11*Devices.fontDensity
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
                     font.family: AsemanApp.globalFont.family
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignVCenter
-                    color: "#ffffff"
+                    color: Cutegram.lightUi? "#222222" : "#ffffff"
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     maximumLineCount: 1
@@ -192,9 +179,9 @@ Item {
                     anchors.right: parent.right
                     anchors.margins: 4*Devices.density
                     anchors.topMargin: 0
-                    font.pixelSize: 9*Devices.fontDensity
+                    font.pixelSize: Math.floor(9*Devices.fontDensity)
                     font.family: AsemanApp.globalFont.family
-                    color: "#bbbbbb"
+                    color: Cutegram.lightUi? "#444444" : "#bbbbbb"
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     clip: true
@@ -217,8 +204,8 @@ Item {
                     anchors.right: parent.right
                     anchors.margins: 4*Devices.density
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 9*Devices.fontDensity
-                    color: "#999999"
+                    font.pixelSize: Math.floor(9*Devices.fontDensity)
+                    color: Cutegram.lightUi? "#777777" : "#999999"
                     text: Cutegram.getTimeString(msgDate)
                     opacity: itemOpacities
                     visible: showLastMessage

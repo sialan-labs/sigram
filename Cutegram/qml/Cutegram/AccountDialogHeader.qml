@@ -77,7 +77,7 @@ Rectangle {
         anchors.verticalCenter: secret_img.verticalCenter
         anchors.left: secret_img.right
         anchors.leftMargin: 8*Devices.density
-        font.pixelSize: 10*Devices.fontDensity
+        font.pixelSize: Math.floor(10*Devices.fontDensity)
         font.family: AsemanApp.globalFont.family
         text: qsTr("Secret chat")
         color: "#ffffff"
@@ -89,7 +89,7 @@ Rectangle {
         anchors.centerIn: parent
         anchors.horizontalCenter: parent.horizontalCenter
         color: currentDialog.encrypted? "#eeeeee" : "#111111"
-        font.pixelSize: 15*Devices.fontDensity
+        font.pixelSize: Math.floor(15*Devices.fontDensity)
         font.family: AsemanApp.globalFont.family
         text: {
             if( !currentDialog )
@@ -106,7 +106,7 @@ Rectangle {
         anchors.horizontalCenter: title_txt.horizontalCenter
         anchors.bottomMargin: 2*Devices.density
         color: Cutegram.highlightColor
-        font.pixelSize: 9*Devices.fontDensity
+        font.pixelSize: Math.floor(9*Devices.fontDensity)
         font.family: AsemanApp.globalFont.family
         visible: currentDialog != telegramObject.nullDialog && user.id != telegramObject.cutegramId
         text: {

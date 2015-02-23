@@ -240,7 +240,7 @@ Item {
         Text {
             anchors.centerIn: parent
             font.family: AsemanApp.globalFont.family
-            font.pixelSize: 9*Devices.fontDensity
+            font.pixelSize: Math.floor(9*Devices.fontDensity)
             color: "#ffffff"
             text: media.classType==typeMessageMediaUnsupported? qsTr("Unsupported Media") : qsTr("Click to Download")
             visible: !indicator.active
@@ -251,7 +251,7 @@ Item {
             anchors.left: parent.left
             anchors.margins: 2*Devices.density
             font.family: AsemanApp.globalFont.family
-            font.pixelSize: 9*Devices.fontDensity
+            font.pixelSize: Math.floor(9*Devices.fontDensity)
             color: "#ffffff"
             text: {
                 if(indicator.active)
@@ -326,7 +326,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 20*Devices.density
         textFont.family: AsemanApp.globalFont.family
-        textFont.pixelSize: 9*Devices.fontDensity
+        textFont.pixelSize: Math.floor(9*Devices.fontDensity)
         highlightColor: Qt.darker(normalColor)
         normalColor: "#C81414"
         textColor: "#ffffff"

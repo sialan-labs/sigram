@@ -25,7 +25,7 @@ Rectangle {
             id: cutegram_txt
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: AsemanApp.globalFont.family
-            font.pixelSize: 30*Devices.fontDensity
+            font.pixelSize: Math.floor(30*Devices.fontDensity)
             color: Desktop.titleBarTextColor
             text: "Cutegram"
         }
@@ -36,7 +36,7 @@ Rectangle {
             anchors.leftMargin: 40*Devices.density
             anchors.rightMargin: 40*Devices.density
             font.family: AsemanApp.globalFont.family
-            font.pixelSize: 9*Devices.fontDensity
+            font.pixelSize: Math.floor(9*Devices.fontDensity)
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             color: Desktop.titleBarTextColor
@@ -50,7 +50,7 @@ Rectangle {
             anchors.leftMargin: 40*Devices.density
             anchors.rightMargin: 40*Devices.density
             font.family: AsemanApp.globalFont.family
-            font.pixelSize: 9*Devices.fontDensity
+            font.pixelSize: Math.floor(9*Devices.fontDensity)
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             color: Desktop.titleBarTextColor

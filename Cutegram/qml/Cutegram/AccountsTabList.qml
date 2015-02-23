@@ -59,7 +59,7 @@ Item {
                 iconHeight: isAddBtn? 18*Devices.density : 26*Devices.density
                 tooltipText: isAddBtn? qsTr("Add Account (experimental)") : key
                 tooltipFont.family: AsemanApp.globalFont.family
-                tooltipFont.pixelSize: 9*Devices.fontDensity
+                tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
                 onClicked: {
                     if(isAddBtn) {
                         main.addAccount()

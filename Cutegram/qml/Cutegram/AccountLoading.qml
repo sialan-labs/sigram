@@ -36,7 +36,7 @@ Rectangle {
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: AsemanApp.globalFont.family
-            font.pixelSize: 11*Devices.fontDensity
+            font.pixelSize: Math.floor(11*Devices.fontDensity)
             color: textColor0
             text: qsTr("Loading...")
         }

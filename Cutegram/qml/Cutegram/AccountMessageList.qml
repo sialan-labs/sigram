@@ -86,7 +86,7 @@ Rectangle {
         Text {
             id: welcome_txt
             anchors.centerIn: parent
-            font.pixelSize: (Cutegram.font.pointSize+1)*Devices.fontDensity
+            font.pixelSize: Math.floor((Cutegram.font.pointSize+1)*Devices.fontDensity)
             font.family: Cutegram.font.family
             text: qsTr("Welcome :)")
             color: "#111111"
@@ -279,7 +279,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 100*Devices.density
         font.family: AsemanApp.globalFont.family
-        font.pixelSize: 12*Devices.fontDensity
+        font.pixelSize: Math.floor(12*Devices.fontDensity)
         text: qsTr("Secret chat request. Please Accept or Reject.")
         visible: enchat.classType == typeEncryptedChatRequested
         onVisibleChanged: secret_chat_indicator.stop()

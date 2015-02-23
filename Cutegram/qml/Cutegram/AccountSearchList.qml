@@ -93,7 +93,7 @@ Item {
                     anchors.right: parent.right
                     anchors.margins: 4*Devices.density
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 9*Devices.fontDensity
+                    font.pixelSize: Math.floor(9*Devices.fontDensity)
                     color: "#999999"
                     text: Cutegram.getTimeString(msgDate)
                 }
@@ -107,7 +107,7 @@ Item {
                     anchors.leftMargin: 8*Devices.density
                     anchors.rightMargin: 8*Devices.density
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 10*Devices.fontDensity
+                    font.pixelSize: Math.floor(10*Devices.fontDensity)
                     maximumLineCount: 1
                     elide: Text.ElideRight
                     verticalAlignment: Text.AlignVCenter
@@ -151,7 +151,7 @@ Item {
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     text: message.message
                     font.family: AsemanApp.globalFont.family
-                    font.pixelSize: 10*Devices.fontDensity
+                    font.pixelSize: Math.floor(10*Devices.fontDensity)
                     color: "#eeeeee"
                 }
             }

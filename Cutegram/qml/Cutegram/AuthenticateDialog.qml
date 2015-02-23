@@ -58,7 +58,7 @@ Rectangle {
             anchors.bottom: column.top
             anchors.margins: 8*Devices.density
             font.family: AsemanApp.globalFont.family
-            font.pixelSize: 15*Devices.fontDensity
+            font.pixelSize: Math.floor(15*Devices.fontDensity)
             color: textColor0
             text: "+" + cphones_list.number
             visible: column.visible

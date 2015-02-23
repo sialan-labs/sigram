@@ -213,7 +213,7 @@ Rectangle {
         anchors.horizontalCenter: date_line.horizontalCenter
         anchors.top: parent.top
         font.family: AsemanApp.globalFont.family
-        font.pixelSize: 10*Devices.fontDensity
+        font.pixelSize: Math.floor(10*Devices.fontDensity)
         color: dt_chooser.textsColor
         visible: dateVisible
         text: qsTr("Date")
@@ -224,7 +224,7 @@ Rectangle {
         anchors.horizontalCenter: time_line.horizontalCenter
         anchors.top: parent.top
         font.family: AsemanApp.globalFont.family
-        font.pixelSize: 10*Devices.fontDensity
+        font.pixelSize: Math.floor(10*Devices.fontDensity)
         color: dt_chooser.textsColor
         visible: timeVisible
         text: qsTr("Time")

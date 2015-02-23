@@ -48,6 +48,7 @@ class Cutegram : public QObject
     Q_PROPERTY(bool darkSystemTray    READ darkSystemTray    WRITE setDarkSystemTray  NOTIFY darkSystemTrayChanged   )
     Q_PROPERTY(bool cutegramSubscribe READ cutegramSubscribe WRITE setAsemanSubscribe NOTIFY cutegramSubscribeChanged)
     Q_PROPERTY(bool visualEffects     READ visualEffects     WRITE setVisualEffects   NOTIFY visualEffectsChanged    )
+    Q_PROPERTY(bool lightUi           READ lightUi           WRITE setLightUi         NOTIFY lightUiChanged)
 
     Q_PROPERTY(bool closingState READ closingState NOTIFY closingStateChanged)
 
@@ -112,6 +113,9 @@ public:
     void setVisualEffects(bool stt);
     bool visualEffects() const;
 
+    void setLightUi(bool stt);
+    bool lightUi() const;
+
     void setFont(const QFont &font);
     QFont font() const;
 
@@ -152,6 +156,7 @@ signals:
     void closingStateChanged();
     void cutegramSubscribeChanged();
     void visualEffectsChanged();
+    void lightUiChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

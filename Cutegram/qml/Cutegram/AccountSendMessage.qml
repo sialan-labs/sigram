@@ -237,7 +237,7 @@ Rectangle {
             highlightColor: "#0f000000"
             width: 70*Devices.density
             cursorShape: Qt.PointingHandCursor
-            textFont.pixelSize: 12*Devices.fontDensity
+            textFont.pixelSize: Math.floor(12*Devices.fontDensity)
             textMargin: -2*Devices.density
             text: qsTr("Send")
             onClicked: smsg.send()

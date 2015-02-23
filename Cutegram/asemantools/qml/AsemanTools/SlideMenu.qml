@@ -62,7 +62,7 @@ Item {
         color: "#ffffff"
         opacity: back_frame.opacity*2
         font.family: AsemanApp.globalFont.family
-        font.pixelSize: 9*Devices.fontDensity
+        font.pixelSize: Math.floor(9*Devices.fontDensity)
     }
 
     Component {

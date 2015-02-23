@@ -44,7 +44,7 @@ Rectangle {
         anchors.left: column.left
         anchors.bottomMargin: 4*Devices.density
         font.family: AsemanApp.globalFont.family
-        font.pixelSize: 10*Devices.fontDensity
+        font.pixelSize: Math.floor(10*Devices.fontDensity)
         color: textColor0
         visible: time_out_timer.running
         text: Math.floor(time_out_timer.countDown/60).toString() + ":" + time_out_timer.countDown%60
@@ -119,7 +119,7 @@ Rectangle {
         anchors.margins: 10*Devices.density
         font.family: AsemanApp.globalFont.family
         font.underline: true
-        font.pixelSize: 10*Devices.fontDensity
+        font.pixelSize: Math.floor(10*Devices.fontDensity)
         color: callButton? textColor0 : "#aaaaaa"
         text: callButton? qsTr("Call Request") : qsTr("Requested")
         visible: false

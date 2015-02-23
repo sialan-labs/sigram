@@ -40,7 +40,7 @@ Rectangle {
         id: txt
         x: tooltip.padding
         y: tooltip.padding*0.75
-        font.pixelSize: 10*Devices.fontDensity
+        font.pixelSize: Math.floor(10*Devices.fontDensity)
         font.family: AsemanApp.globalFont.family
         color: "#ffffff"
     }

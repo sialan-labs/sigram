@@ -61,7 +61,7 @@ Rectangle {
         id: slide_menu
         anchors.fill: frame
         textFont.family: AsemanApp.globalFont.family
-        textFont.pixelSize: 13*Devices.fontDensity
+        textFont.pixelSize: Math.floor(13*Devices.fontDensity)
     }
 
     Rectangle {
@@ -78,7 +78,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: add_secret_chat_btn.top
-            selectColor: slide_menu.active? "#ffffff" : "#222222"
+            selectColor: slide_menu.active? "#ffffff" : (Cutegram.lightUi? "#cccccc" :"#222222")
             z: 10
             onCurrentKeyChanged: {
                 if(lastKey.length != 0)
@@ -104,7 +104,7 @@ Rectangle {
             iconHeight: 18*Devices.density
             tooltipText: qsTr("Add Secret Chat")
             tooltipFont.family: AsemanApp.globalFont.family
-            tooltipFont.pixelSize: 9*Devices.fontDensity
+            tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
             onClicked: {
                 slide_menu.text = ""
                 slide_menu.show(add_secret_chat_component)
@@ -124,7 +124,7 @@ Rectangle {
             iconHeight: 26*Devices.density
             tooltipText: qsTr("New group chat")
             tooltipFont.family: AsemanApp.globalFont.family
-            tooltipFont.pixelSize: 9*Devices.fontDensity
+            tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
             onClicked: {
                 slide_menu.text = ""
                 slide_menu.show(add_groupchat_component)
@@ -144,7 +144,7 @@ Rectangle {
             iconHeight: 22*Devices.density
             tooltipText: qsTr("Contact List")
             tooltipFont.family: AsemanApp.globalFont.family
-            tooltipFont.pixelSize: 9*Devices.fontDensity
+            tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
             onClicked: {
                 slide_menu.text = ""
                 showContactList()
@@ -164,7 +164,7 @@ Rectangle {
             iconHeight: 22*Devices.density
             tooltipText: qsTr("Configure")
             tooltipFont.family: AsemanApp.globalFont.family
-            tooltipFont.pixelSize: 9*Devices.fontDensity
+            tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
             onClicked: {
                 slide_menu.text = ""
                 slide_menu.show(configure_component)
@@ -178,6 +178,7 @@ Rectangle {
             rotation: -90
             width: parent.height
             height: 5*Devices.density
+            opacity: 0.6
             gradient: Gradient {
                 GradientStop { position: 0.0; color: "#00000000" }
                 GradientStop { position: 1.0; color: "#88111111" }
@@ -296,7 +297,7 @@ Rectangle {
                 highlightColor: Qt.darker(Cutegram.highlightColor)
                 textColor: masterPalette.highlightedText
                 textFont.family: AsemanApp.globalFont.family
-                textFont.pixelSize: 9*Devices.fontDensity
+                textFont.pixelSize: Math.floor(9*Devices.fontDensity)
                 textFont.bold: false
                 height: 40*Devices.density
                 text: qsTr("Create")

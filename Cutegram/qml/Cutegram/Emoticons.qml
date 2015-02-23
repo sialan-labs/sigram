@@ -48,7 +48,7 @@ Item {
         Button {
             width: parent.width/2
             textFont.family: AsemanApp.globalFont.family
-            textFont.pixelSize: 9*Devices.fontDensity
+            textFont.pixelSize: Math.floor(9*Devices.fontDensity)
             normalColor: "#00000000"
             highlightColor: "#0f000000"
             textColor: recent? Cutegram.highlightColor : "#333333"
@@ -60,7 +60,7 @@ Item {
         Button {
             width: parent.width/2
             textFont.family: AsemanApp.globalFont.family
-            textFont.pixelSize: 9*Devices.fontDensity
+            textFont.pixelSize: Math.floor(9*Devices.fontDensity)
             normalColor: "#00000000"
             highlightColor: "#0f000000"
             textColor: recent? "#333333" : Cutegram.highlightColor

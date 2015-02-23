@@ -2,7 +2,7 @@ import QtQuick 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
-import QtQuick.Controls 1.0 as QtControls
+import QtQuick.Controls 1.1 as QtControls
 
 Rectangle {
     id: configure
@@ -105,7 +105,7 @@ Rectangle {
                             anchors.margins: 20*Devices.density
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 18*Devices.fontDensity
+                            font.pixelSize: Math.floor(18*Devices.fontDensity)
                             color: "#333333"
                             text: user.firstName + " " + user.lastName
                         }
@@ -118,7 +118,7 @@ Rectangle {
                             anchors.margins: 20*Devices.density
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 12*Devices.fontDensity
+                            font.pixelSize: Math.floor(12*Devices.fontDensity)
                             color: "#333333"
                             text: telegram.phoneNumber
                         }
@@ -140,7 +140,7 @@ Rectangle {
                             height: notify_checkbox.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Notifications")
                         }
@@ -150,7 +150,7 @@ Rectangle {
                             height: veffect_checkbox.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Visual Effects")
                         }
@@ -160,7 +160,7 @@ Rectangle {
                             height: aseman_nl_checkbox.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Cutegram Newsletter")
                         }
@@ -170,7 +170,7 @@ Rectangle {
                             height: autostart_checkbox.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             visible: Devices.isLinux
                             text: qsTr("Auto Start")
@@ -181,7 +181,7 @@ Rectangle {
                             height: startup_combo.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("On Start")
                         }
@@ -191,7 +191,7 @@ Rectangle {
                             height: languages_combo.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Languages")
                         }
@@ -201,7 +201,7 @@ Rectangle {
                             height: last_msg_checkbox.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Detailed List")
                         }
@@ -211,7 +211,7 @@ Rectangle {
                             height: background_btn.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Background")
                         }
@@ -221,7 +221,7 @@ Rectangle {
                             height: proxy_btn.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Proxy Settings")
                         }
@@ -231,7 +231,7 @@ Rectangle {
                             height: notify_sound_combo.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Notify Sound")
                         }
@@ -241,7 +241,7 @@ Rectangle {
                             height: color_combo.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Master Color")
                         }
@@ -251,7 +251,7 @@ Rectangle {
                             height: font_btn.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: AsemanApp.globalFont.family
-                            font.pixelSize: 9*Devices.fontDensity
+                            font.pixelSize: Math.floor(9*Devices.fontDensity)
                             color: "#333333"
                             text: qsTr("Font")
                         }
@@ -260,25 +260,25 @@ Rectangle {
                     Column {
                         spacing: 6*Devices.density
 
-                        QtControls.CheckBox {
+                        QtControls.Switch {
                             id: notify_checkbox
                             checked: Cutegram.notification
                             onCheckedChanged: Cutegram.notification = checked
                         }
 
-                        QtControls.CheckBox {
+                        QtControls.Switch {
                             id: veffect_checkbox
                             checked: Cutegram.visualEffects
                             onCheckedChanged: Cutegram.visualEffects = checked
                         }
 
-                        QtControls.CheckBox {
+                        QtControls.Switch {
                             id: aseman_nl_checkbox
                             checked: Cutegram.cutegramSubscribe
                             onCheckedChanged: Cutegram.cutegramSubscribe = checked
                         }
 
-                        QtControls.CheckBox {
+                        QtControls.Switch {
                             id: autostart_checkbox
                             visible: Devices.isLinux
                             checked: autostart_mngr.active
@@ -307,7 +307,7 @@ Rectangle {
                             onCurrentTextChanged: if(init_timer.inited) Cutegram.language = currentText
                         }
 
-                        QtControls.CheckBox {
+                        QtControls.Switch {
                             id: last_msg_checkbox
                             checked: Cutegram.showLastMessage
                             onCheckedChanged: Cutegram.showLastMessage = checked
@@ -419,7 +419,7 @@ Rectangle {
                 Button {
                     width: parent.width
                     textFont.family: AsemanApp.globalFont.family
-                    textFont.pixelSize: 9*Devices.fontDensity
+                    textFont.pixelSize: Math.floor(9*Devices.fontDensity)
                     highlightColor: Qt.darker(normalColor)
                     normalColor: "#C81414"
                     textColor: "#ffffff"
@@ -436,7 +436,7 @@ Rectangle {
                 Button {
                     width: parent.width
                     textFont.family: AsemanApp.globalFont.family
-                    textFont.pixelSize: 9*Devices.fontDensity
+                    textFont.pixelSize: Math.floor(9*Devices.fontDensity)
                     highlightColor: Qt.darker(normalColor)
                     normalColor: "#333333"
                     textColor: "#ffffff"
@@ -450,7 +450,7 @@ Rectangle {
                 Button {
                     width: parent.width
                     textFont.family: AsemanApp.globalFont.family
-                    textFont.pixelSize: 9*Devices.fontDensity
+                    textFont.pixelSize: Math.floor(9*Devices.fontDensity)
                     highlightColor: Qt.darker(normalColor)
                     normalColor: "#26263E"
                     textColor: "#ffffff"

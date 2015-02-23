@@ -54,7 +54,6 @@
         <file>qml/AsemanTools/files/aseman-logo.png</file>
         <file>qml/AsemanTools/AsemanLogo.qml</file>
         <file>qml/AsemanTools/QueueList.qml</file>
-        <file>files/countries.csv</file>
         <file>qml/AsemanTools/files/aseman-logo-dark.png</file>
         <file>qml/AsemanTools/MessageDialog.qml</file>
         <file>qml/AsemanTools/AsemanAbout.qml</file>
@@ -62,5 +61,61 @@
         <file>qml/AsemanTools/files/splash-back.jpg</file>
         <file>qml/AsemanTools/files/aseman-special-black.png</file>
         <file>qml/AsemanTools/files/close.png</file>
+        <file>qml/AsemanTools/Controls/ApplicationWindow.qml</file>
+        <file>qml/AsemanTools/Controls/BusyIndicator.qml</file>
+        <file>qml/AsemanTools/Controls/Button.qml</file>
+        <file>qml/AsemanTools/Controls/Calendar.qml</file>
+        <file>qml/AsemanTools/Controls/CheckBox.qml</file>
+        <file>qml/AsemanTools/Controls/ComboBox.qml</file>
+        <file>qml/AsemanTools/Controls/GroupBox.qml</file>
+        <file>qml/AsemanTools/Controls/Menu.qml</file>
+        <file>qml/AsemanTools/Controls/MenuBar.qml</file>
+        <file>qml/AsemanTools/Controls/ProgressBar.qml</file>
+        <file>qml/AsemanTools/Controls/qmldir</file>
+        <file>qml/AsemanTools/Controls/RadioButton.qml</file>
+        <file>qml/AsemanTools/Controls/ScrollView.qml</file>
+        <file>qml/AsemanTools/Controls/Slider.qml</file>
+        <file>qml/AsemanTools/Controls/SpinBox.qml</file>
+        <file>qml/AsemanTools/Controls/StatusBar.qml</file>
+        <file>qml/AsemanTools/Controls/Switch.qml</file>
+        <file>qml/AsemanTools/Controls/TableView.qml</file>
+        <file>qml/AsemanTools/Controls/TabView.qml</file>
+        <file>qml/AsemanTools/Controls/TextArea.qml</file>
+        <file>qml/AsemanTools/Controls/TextField.qml</file>
+        <file>qml/AsemanTools/Controls/ToolBar.qml</file>
+        <file>qml/AsemanTools/Controls/ToolButton.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/ApplicationWindowStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/BusyIndicatorStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/ButtonStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/CalendarStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/CheckBoxStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/ComboBoxStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/FocusFrameStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/GroupBoxStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/MenuBarStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/MenuStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/ProgressBarStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/qmldir</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/RadioButtonStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/RowItemSingleton.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/ScrollViewStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/SliderStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/SpinBoxStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/StatusBarStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/SwitchStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/TableViewStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/TabViewStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/TextAreaStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/TextFieldStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/ToolBarStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/ToolButtonStyle.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/images/indicator_light.png</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/images/indicator.png</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/images/no_light.png</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/images/no.png</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/images/yes_light.png</file>
+        <file>qml/AsemanTools/Controls/Styles/Desktop/images/yes.png</file>
+        <file>files/countries.csv</file>
+        <file>qml/AsemanTools/AsemanMainQt.qml</file>
     </qresource>
 </RCC>

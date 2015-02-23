@@ -52,7 +52,7 @@ Item {
         Text {
             id: back_txt
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: 12*Devices.fontDensity
+            font.pixelSize: Math.floor(12*Devices.fontDensity)
             font.family: AsemanApp.globalFont.family
             color: (!back_row.press && header.light)||(back_row.press && !header.light)? "#ffffff" : "#111111"
         }
@@ -73,7 +73,7 @@ Item {
 
     Text {
         id: title_txt
-        font.pixelSize: 16*Devices.fontDensity
+        font.pixelSize: Math.floor(16*Devices.fontDensity)
         font.family: AsemanApp.globalFont.family
         y: parent.height/2 - height/2
         anchors.horizontalCenter: parent.horizontalCenter

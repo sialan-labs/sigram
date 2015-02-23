@@ -76,6 +76,7 @@ public:
     bool closingState;
     bool cutegramSubscribe;
     bool visualEffects;
+    bool lightUi;
 
     QTextDocument *doc;
 
@@ -123,6 +124,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
     p->visualEffects = AsemanApplication::settings()->value("General/visualEffects", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
+    p->lightUi = AsemanApplication::settings()->value("General/lightUi", false ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
     p->messageAudio = AsemanApplication::settings()->value("General/messageAudio","files/new_msg.ogg").toString();
@@ -687,6 +689,20 @@ void Cutegram::setVisualEffects(bool stt)
 bool Cutegram::visualEffects() const
 {
     return p->visualEffects;
+}
+
+void Cutegram::setLightUi(bool stt)
+{
+    if(p->lightUi == stt)
+        return;
+
+    p->lightUi = stt;
+    emit lightUiChanged();
+}
+
+bool Cutegram::lightUi() const
+{
+    return p->lightUi;
 }
 
 void Cutegram::setFont(const QFont &font)

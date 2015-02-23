@@ -77,7 +77,7 @@ Rectangle {
             color: "#ffffff"
             font.bold: Devices.isWindows? false : true
             font.family: AsemanApp.globalFont.family
-            font.pixelSize: 9*Devices.fontDensity
+            font.pixelSize: Math.floor(9*Devices.fontDensity)
         }
     }
 

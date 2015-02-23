@@ -145,7 +145,7 @@ Item {
             Text {
                 id: phone_lbl
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 11*Devices.fontDensity
+                font.pixelSize: Math.floor(11*Devices.fontDensity)
                 color: Desktop.titleBarTextColor
                 text: qsTr("Phone Number")
                 visible: !isChat
@@ -154,7 +154,7 @@ Item {
             Text {
                 id: favorite_lbl
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 11*Devices.fontDensity
+                font.pixelSize: Math.floor(11*Devices.fontDensity)
                 color: Desktop.titleBarTextColor
                 text: qsTr("Favorite")
             }
@@ -162,7 +162,7 @@ Item {
             Text {
                 id: love_lbl
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 11*Devices.fontDensity
+                font.pixelSize: Math.floor(11*Devices.fontDensity)
                 color: Desktop.titleBarTextColor
                 text: qsTr("Love")
             }
@@ -170,7 +170,7 @@ Item {
             Text {
                 id: mute_lbl
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 11*Devices.fontDensity
+                font.pixelSize: Math.floor(11*Devices.fontDensity)
                 color: Desktop.titleBarTextColor
                 text: qsTr("Mute")
             }
@@ -178,7 +178,7 @@ Item {
             Text {
                 id: participants_lbl
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 11*Devices.fontDensity
+                font.pixelSize: Math.floor(11*Devices.fontDensity)
                 verticalAlignment: Text.AlignVCenter
                 height: 40*Devices.density
                 color: Desktop.titleBarTextColor
@@ -196,7 +196,7 @@ Item {
             Text {
                 height: phone_lbl.height
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 11*Devices.fontDensity
+                font.pixelSize: Math.floor(11*Devices.fontDensity)
                 verticalAlignment: Text.AlignVCenter
                 color: Desktop.titleBarTextColor
                 text: user.phone + " "
@@ -281,7 +281,7 @@ Item {
 
                     Button {
                         textFont.family: AsemanApp.globalFont.family
-                        textFont.pixelSize: 10*Devices.fontDensity
+                        textFont.pixelSize: Math.floor(10*Devices.fontDensity)
                         textFont.bold: false
                         normalColor: Cutegram.highlightColor
                         highlightColor: Qt.darker(normalColor)
@@ -294,7 +294,7 @@ Item {
 
                     Button {
                         textFont.family: AsemanApp.globalFont.family
-                        textFont.pixelSize: 10*Devices.fontDensity
+                        textFont.pixelSize: Math.floor(10*Devices.fontDensity)
                         textFont.bold: false
                         normalColor: Cutegram.highlightColor
                         highlightColor: Qt.darker(normalColor)
@@ -307,7 +307,7 @@ Item {
 
                     Button {
                         textFont.family: AsemanApp.globalFont.family
-                        textFont.pixelSize: 10*Devices.fontDensity
+                        textFont.pixelSize: Math.floor(10*Devices.fontDensity)
                         textFont.bold: false
                         highlightColor: Qt.darker(normalColor)
                         normalColor: "#C81414"

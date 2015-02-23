@@ -82,5 +82,7 @@
         <file>qml/Cutegram/AccountMessageBox.qml</file>
         <file>qml/Cutegram/files/aseman-abstract.png</file>
         <file>qml/Cutegram/ProxySettings.qml</file>
+        <file>qml/Cutegram/files/mute-dark.png</file>
+        <file>qml/Cutegram/files/unmute-dark.png</file>
     </qresource>
 </RCC>

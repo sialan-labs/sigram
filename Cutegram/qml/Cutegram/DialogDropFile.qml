@@ -62,7 +62,7 @@ Item {
                 id: drop_text
                 anchors.centerIn: parent
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 12*Devices.fontDensity
+                font.pixelSize: Math.floor(12*Devices.fontDensity)
                 color: Cutegram.highlightColor
             }
         }
@@ -89,7 +89,7 @@ Item {
             Text {
                 anchors.centerIn: parent
                 font.family: AsemanApp.globalFont.family
-                font.pixelSize: 12*Devices.fontDensity
+                font.pixelSize: Math.floor(12*Devices.fontDensity)
                 color: Cutegram.highlightColor
                 text: qsTr("Drop to send as Document")
             }
