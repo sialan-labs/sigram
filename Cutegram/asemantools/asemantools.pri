@@ -94,7 +94,8 @@ SOURCES += \
     asemantools/asemandragobject.cpp \
     asemantools/asemandownloader.cpp \
     asemantools/asemannotification.cpp \
-    asemantools/asemanautostartmanager.cpp
+    asemantools/asemanautostartmanager.cpp \
+    $$PWD/asemanquickitemimagegrabber.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -117,7 +118,8 @@ HEADERS += \
     asemantools/asemandragobject.h \
     asemantools/asemandownloader.h \
     asemantools/asemannotification.h \
-    asemantools/asemanautostartmanager.h
+    asemantools/asemanautostartmanager.h \
+    $$PWD/asemanquickitemimagegrabber.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \

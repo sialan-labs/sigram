@@ -21,7 +21,7 @@ ButtonStyle {
                 radius: 5
                 color: control.pressed? masterPalette.window : "#00000000"
                 border.width: control.hovered && !control.pressed? 1 : 0
-                border.color: control.hovered && !control.pressed? Qt.darker(masterPalette.window, 1.2) : "#00000000"
+                border.color: control.hovered && !control.pressed? Qt.lighter(masterPalette.highlight, 1.2) : "#00000000"
             }
         }
 
@@ -42,7 +42,7 @@ ButtonStyle {
             anchors.centerIn: parent
 
             Image {
-                height: control.height-10
+                height: control.height/2
                 width: height
                 source: control.iconSource
                 sourceSize: Qt.size(width,height)

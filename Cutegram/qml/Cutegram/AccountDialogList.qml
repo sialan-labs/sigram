@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import AsemanTools.Controls 1.0
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
@@ -61,20 +62,39 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                opacity: 0.2
+                opacity: 0.3
                 anchors.topMargin: 3*Devices.density
                 anchors.bottomMargin: 3*Devices.density
+                anchors.rightMargin: -5*Devices.density
                 color: Cutegram.highlightColor
+                radius: 5*Devices.density
             }
 
-            Rectangle {
+            Item {
+                id: pointer_frame
+                width: pointer_rct.width*Math.pow(2,0.5)*2
+                height: width
                 x: ad_list.width - width/2 - dlist.x
                 anchors.verticalCenter: parent.verticalCenter
-                transformOrigin: Item.Center
-                rotation: 45
-                width: 16*Devices.density
-                height: width
-                color: "#E4E9EC"
+                visible: false
+
+                Rectangle {
+                    id: pointer_rct
+                    anchors.centerIn: parent
+                    transformOrigin: Item.Center
+                    rotation: 45
+                    width: 16*Devices.density
+                    height: width
+                    color: "#E4E9EC"
+                }
+            }
+
+            DropShadow {
+                anchors.fill: pointer_frame
+                radius: 8.0
+                samples: 16
+                color: "#80000000"
+                source: pointer_frame
             }
         }
 
@@ -120,25 +140,30 @@ Item {
                 anchors.leftMargin: 5*Devices.density
                 anchors.rightMargin: 12*Devices.density
 
-                ContactImage {
+                Frame {
                     id: profile_img
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.left: parent.left
                     anchors.margins: 4*Devices.density
                     width: height
-                    dialog: dItem
-                    circleMode: false
+                    backgroundColor: selected || marea.pressed? Qt.lighter(Cutegram.highlightColor, 1.6) : "#eeeeee"
 
-                    Image {
-                        anchors.bottom: parent.bottom
-                        anchors.right: parent.right
-                        anchors.margins: -4*Devices.density
-                        source: "files/online.png"
-                        sourceSize: Qt.size(width,height)
-                        width: 14*Devices.density
-                        height: 14*Devices.density
-                        visible: isChat? false : (user.status.classType == profile_img.typeUserStatusOnline)
+                    ContactImage {
+                        anchors.fill: parent
+                        dialog: dItem
+                        circleMode: false
+
+                        Image {
+                            anchors.bottom: parent.bottom
+                            anchors.right: parent.right
+                            anchors.margins: -4*Devices.density
+                            source: "files/online.png"
+                            sourceSize: Qt.size(width,height)
+                            width: 14*Devices.density
+                            height: 14*Devices.density
+                            visible: isChat? false : (user.status.classType == profile_img.typeUserStatusOnline)
+                        }
                     }
                 }
 
@@ -153,7 +178,7 @@ Item {
                     font.family: AsemanApp.globalFont.family
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignVCenter
-                    color: Cutegram.lightUi? "#222222" : "#ffffff"
+                    color: "#222222"
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     maximumLineCount: 1
@@ -181,7 +206,7 @@ Item {
                     anchors.topMargin: 0
                     font.pixelSize: Math.floor(9*Devices.fontDensity)
                     font.family: AsemanApp.globalFont.family
-                    color: Cutegram.lightUi? "#444444" : "#bbbbbb"
+                    color: "#444444"
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     clip: true
@@ -205,7 +230,7 @@ Item {
                     anchors.margins: 4*Devices.density
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(9*Devices.fontDensity)
-                    color: Cutegram.lightUi? "#777777" : "#999999"
+                    color: "#777777"
                     text: Cutegram.getTimeString(msgDate)
                     opacity: itemOpacities
                     visible: showLastMessage

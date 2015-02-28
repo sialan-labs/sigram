@@ -124,7 +124,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
     p->visualEffects = AsemanApplication::settings()->value("General/visualEffects", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
-    p->lightUi = AsemanApplication::settings()->value("General/lightUi", false ).toBool();
+    p->lightUi = AsemanApplication::settings()->value("General/lightUi", true ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
     p->messageAudio = AsemanApplication::settings()->value("General/messageAudio","files/new_msg.ogg").toString();

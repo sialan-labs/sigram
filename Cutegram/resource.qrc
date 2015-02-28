@@ -84,5 +84,6 @@
         <file>qml/Cutegram/ProxySettings.qml</file>
         <file>qml/Cutegram/files/mute-dark.png</file>
         <file>qml/Cutegram/files/unmute-dark.png</file>
+        <file>qml/Cutegram/files/close.png</file>
     </qresource>
 </RCC>

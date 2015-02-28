@@ -21,7 +21,7 @@ TextFieldStyle {
                 anchors.fill: parent
                 anchors.margins: 1
                 radius: 5
-                color: masterPalette.base
+                color: backgroundColor
             }
         }
 

@@ -13,8 +13,8 @@ SwitchStyle {
     }
 
     groove: Item {
-        implicitWidth: 48
-        implicitHeight: 28
+        implicitWidth: 40
+        implicitHeight: 24
 
         Item {
             id: frame
@@ -63,8 +63,8 @@ SwitchStyle {
     }
 
     handle: Item {
-        implicitWidth: 28
-        implicitHeight: 28
+        implicitWidth: 24
+        implicitHeight: 24
 
         Item {
             id: hframe

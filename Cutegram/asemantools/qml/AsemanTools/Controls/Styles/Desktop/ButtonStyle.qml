@@ -23,7 +23,12 @@ ButtonStyle {
                 anchors.fill: parent
                 anchors.margins: 1*Devices.density
                 radius: 5*Devices.density
-                color: control.pressed? Qt.darker(buttonColor,1.02) : buttonColor
+                color: {
+                    if(control.enabled)
+                        return control.pressed? Qt.darker(buttonColor,1.02) : buttonColor
+                    else
+                        return Qt.darker(masterPalette.window, 1.1)
+                }
             }
         }
 
@@ -44,7 +49,7 @@ ButtonStyle {
             anchors.centerIn: parent
 
             Image {
-                height: control.height-10*Devices.density
+                height: control.height/2
                 width: height
                 source: control.iconSource
                 sourceSize: Qt.size(width,height)
@@ -52,7 +57,7 @@ ButtonStyle {
             }
 
             Text {
-                color: buttonTextColor
+                color: control.enabled? buttonTextColor : Qt.lighter(masterPalette.windowText, 5)
                 text: control.text
             }
         }

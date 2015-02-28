@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
+import AsemanTools.Controls 1.0 as Controls
 import Cutegram 1.0
 import CutegramTypes 1.0
 
@@ -8,10 +9,10 @@ Rectangle {
     clip: true
     color: backColor2
     height: {
-        if(txt.height<minimumHeight)
+        if(txt_frame.height+4*Devices.density<minimumHeight)
             return minimumHeight
         else
-            return txt.height
+            return txt_frame.height+4*Devices.density
     }
 
     property Dialog currentDialog
@@ -86,56 +87,66 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
-            cursorShape: Qt.IBeamCursor
             onClicked: txt.focus = true
         }
 
-        TextAreaCore {
-            id: txt
+        Controls.Frame {
+            id: txt_frame
             anchors.left: camera_btn.right
-            anchors.right: emoji_btn.left
+            anchors.right: send_btn.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 4*Devices.density
-            selectByMouse: true
-            selectionColor: Cutegram.highlightColor
-            selectedTextColor: masterPalette.highlightedText
-            pickerEnable: Devices.isTouchDevice
-            color: textColor0
-            wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
-            clip: true
-            visible: !trash
+            height: txt.height+8*Devices.density<34*Devices.density? 34*Devices.density : txt.height+8*Devices.density
+            backgroundColor: "#f5f5f5"
 
-            onTextChanged: {
-                if( text.trim().length == 0 )
-                    text = ""
+            TextAreaCore {
+                id: txt
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 10*Devices.density
+                anchors.rightMargin: 5*Devices.density+emoji_btn.width
+                anchors.verticalCenter: parent.verticalCenter
+                selectByMouse: true
+                selectionColor: Cutegram.highlightColor
+                selectedTextColor: masterPalette.highlightedText
+                pickerEnable: Devices.isTouchDevice
+                color: textColor0
+                wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
+                clip: true
+                visible: !trash
 
-                typing_update_timer.startTyping()
-            }
-            Keys.onPressed: {
-                if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
-                {
-                    if( event.modifiers == Qt.NoModifier )
-                        smsg.send()
+                onTextChanged: {
+                    if( text.trim().length == 0 )
+                        text = ""
 
-                    typing_timer.finishTyping()
+                    typing_update_timer.startTyping()
                 }
-                else
-                if(event.key == 8204 && event.modifiers == Qt.ShiftModifier)
-                {
-                    if(txt.selectedText.length!=0)
-                        txt.remove(txt.selectionStart, txt.selectionEnd)
+                Keys.onPressed: {
+                    if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
+                    {
+                        if( event.modifiers == Qt.NoModifier )
+                            smsg.send()
 
-                    var npos = txt.cursorPosition+1
-                    txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
-                    txt.cursorPosition = npos
+                        typing_timer.finishTyping()
+                    }
+                    else
+                    if(event.key == 8204 && event.modifiers == Qt.ShiftModifier)
+                    {
+                        if(txt.selectedText.length!=0)
+                            txt.remove(txt.selectionStart, txt.selectionEnd)
 
-                    event.accepted = false
+                        var npos = txt.cursorPosition+1
+                        txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
+                        txt.cursorPosition = npos
+
+                        event.accepted = false
+                    }
                 }
             }
         }
 
         MouseArea {
-            anchors.fill: parent
+            anchors.fill: txt_frame
             acceptedButtons: Qt.RightButton
             cursorShape: Qt.IBeamCursor
             onClicked: {
@@ -164,14 +175,14 @@ Rectangle {
         Button {
             id: attach_btn
             anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            normalColor: "#00000000"
-            highlightColor: "#1f000000"
-            cursorShape: Qt.PointingHandCursor
+            anchors.verticalCenter: txt_frame.verticalCenter
+            height: 40*Devices.density
             width: 40*Devices.density
-            iconHeight: 20*Devices.density
             opacity: 0.6
+            highlightColor: "#220d80ec"
+            normalColor: "#00000000"
+            cursorShape: Qt.PointingHandCursor
+            iconHeight: height*0.5
             icon: "files/attach.png"
             onClicked: {
                 if( currentDialog == telegramObject.nullDialog )
@@ -188,14 +199,14 @@ Rectangle {
         Button {
             id: camera_btn
             anchors.left: attach_btn.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            normalColor: "#00000000"
-            highlightColor: "#1f000000"
-            cursorShape: Qt.PointingHandCursor
+            anchors.verticalCenter: txt_frame.verticalCenter
+            height: 40*Devices.density
             width: 30*Devices.density
-            iconHeight: 20*Devices.density
             opacity: 0.6
+            highlightColor: "#220d80ec"
+            normalColor: "#00000000"
+            cursorShape: Qt.PointingHandCursor
+            iconHeight: height*0.5
             icon: "files/camera.png"
             onClicked: captureImage()
         }
@@ -203,23 +214,23 @@ Rectangle {
         DropTrashArea {
             id: trash_item
             anchors.left: camera_btn.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            anchors.verticalCenter: txt_frame.verticalCenter
+            height: 30*Devices.density
             width: height
             dialogItem: currentDialog
         }
 
         Button {
             id: emoji_btn
-            anchors.right: send_btn.left
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            normalColor: "#00000000"
-            highlightColor: "#1f000000"
-            cursorShape: Qt.PointingHandCursor
-            width: 26*Devices.density
-            iconHeight: 20*Devices.density
+            anchors.right: txt_frame.right
+            anchors.verticalCenter: txt_frame.verticalCenter
+            height: 30*Devices.density
+            width: height
             opacity: 0.6
+            highlightColor: "#220d80ec"
+            normalColor: "#00000000"
+            cursorShape: Qt.PointingHandCursor
+            iconHeight: height*0.55
             icon: "files/emoji.png"
             onClicked: {
                 var pnt = smsg.mapFromItem(emoji_btn,0,0)
@@ -227,19 +238,14 @@ Rectangle {
             }
         }
 
-        Button {
+        Controls.Button {
             id: send_btn
             anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            textColor: Cutegram.highlightColor
-            normalColor: "#00000000"
-            highlightColor: "#0f000000"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 4*Devices.density
             width: 70*Devices.density
-            cursorShape: Qt.PointingHandCursor
-            textFont.pixelSize: Math.floor(12*Devices.fontDensity)
-            textMargin: -2*Devices.density
             text: qsTr("Send")
+//            enabled: txt.length != 0
             onClicked: smsg.send()
         }
     }

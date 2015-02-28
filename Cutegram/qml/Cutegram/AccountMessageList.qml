@@ -137,9 +137,22 @@ Rectangle {
                 mimeData: mime
                 source: marea
                 image: "files/message.png"
-                hotSpot: Qt.point(22,22)
+                hotSpot: Qt.point(12,12)
                 dropAction: Qt.CopyAction
                 onDraggingChanged: anim_enabler_timer.restart()
+            }
+
+            ItemImageGrabber {
+                id: grabber
+                item: msg_item.messageRect
+                onImageChanged: {
+                    drag.imageData = image
+                    drag.start()
+                    messageDraging = false
+
+                    file_delete_timer.filePath = msg_item.messageFile
+                    file_delete_timer.restart()
+                }
             }
 
             MimeData {
@@ -173,11 +186,7 @@ Rectangle {
                         msg_item.messageFile = ""
 
                     messageDraging = true
-                    drag.start()
-                    messageDraging = false
-
-                    file_delete_timer.filePath = msg_item.messageFile
-                    file_delete_timer.restart()
+                    grabber.start()
                 }
 
                 onReleased: {

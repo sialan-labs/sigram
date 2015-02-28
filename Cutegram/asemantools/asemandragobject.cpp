@@ -12,9 +12,14 @@ class AsemanDragObjectPrivate
 public:
     QPointer<AsemanMimeData> mime;
     QPointer<QQuickItem> source;
+
     QUrl image;
+    QImage imageData;
+
     int dropAction;
     QPoint hotSpot;
+
+    QPointer<QDrag> drag;
 
     bool onDrag;
 };
@@ -83,6 +88,20 @@ QUrl AsemanDragObject::image() const
     return p->image;
 }
 
+void AsemanDragObject::setImageData(const QImage &img)
+{
+    if(p->imageData == img)
+        return;
+
+    p->imageData = img;
+    emit imageDataChanged();
+}
+
+QImage AsemanDragObject::imageData() const
+{
+    return p->imageData;
+}
+
 bool AsemanDragObject::dragging() const
 {
     return p->onDrag;
@@ -131,23 +150,28 @@ int AsemanDragObject::start()
         }
     }
 
-    QDrag *drag = new QDrag(p->source);
-    drag->setMimeData(mime);
+    p->drag = new QDrag(p->source);
+    p->drag->setMimeData(mime);
+    if(!p->imageData.isNull())
+    {
+        p->drag->setPixmap(QPixmap::fromImage(p->imageData));
+    }
+    else
     if(p->image.isValid())
     {
         QString path = p->image.toString();
         if(path.left(4) == "qrc:")
             path = path.mid(3);
 
-        drag->setPixmap( QPixmap(path) );
+        p->drag->setPixmap( QPixmap(path) );
     }
     if(!p->hotSpot.isNull())
-        drag->setHotSpot(p->hotSpot);
+        p->drag->setHotSpot(p->hotSpot);
 
-    int res = drag->exec( static_cast<Qt::DropAction>(p->dropAction) );
+    int res = p->drag->exec( static_cast<Qt::DropAction>(p->dropAction) );
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
-    drag->deleteLater();
+    p->drag->deleteLater();
 #endif
 
     p->source->ungrabMouse();

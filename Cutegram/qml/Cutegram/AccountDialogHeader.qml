@@ -84,57 +84,58 @@ Rectangle {
         visible: currentDialog.encrypted
     }
 
-    Text {
-        id: title_txt
+    Column {
         anchors.centerIn: parent
-        anchors.horizontalCenter: parent.horizontalCenter
-        color: currentDialog.encrypted? "#eeeeee" : "#111111"
-        font.pixelSize: Math.floor(15*Devices.fontDensity)
-        font.family: AsemanApp.globalFont.family
-        text: {
-            if( !currentDialog )
-                return ""
-            if( isChat )
-                return chat? chat.title : ""
-            else
-                return user? user.firstName + " " + user.lastName : ""
-        }
-    }
 
-    Text {
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: title_txt.horizontalCenter
-        anchors.bottomMargin: 2*Devices.density
-        color: Cutegram.highlightColor
-        font.pixelSize: Math.floor(9*Devices.fontDensity)
-        font.family: AsemanApp.globalFont.family
-        visible: currentDialog != telegramObject.nullDialog && user.id != telegramObject.cutegramId
-        text: {
-            var result = ""
-            var list = currentDialog.typingUsers
-            if( list.length == 0 ) {
-                if( isChat ) {
-                    result += qsTr("%1 participants (%2 online)").arg(chat.participantsCount).arg(onlineCount)
-                } else {
-                    var isOnline = header.user.status.classType == typeUserStatusOnline
-                    result += isOnline? qsTr("Online") : qsTr("%1 was online").arg(Cutegram.getTimeString(CalendarConv.fromTime_t(header.user.status.wasOnline)))
+        Text {
+            id: title_txt
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: currentDialog.encrypted? "#eeeeee" : "#111111"
+            font.pixelSize: Math.floor(15*Devices.fontDensity)
+            font.family: AsemanApp.globalFont.family
+            text: {
+                if( !currentDialog )
+                    return ""
+                if( isChat )
+                    return chat? chat.title : ""
+                else
+                    return user? user.firstName + " " + user.lastName : ""
+            }
+        }
+
+        Text {
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Cutegram.highlightColor
+            font.pixelSize: Math.floor(9*Devices.fontDensity)
+            font.family: AsemanApp.globalFont.family
+            visible: currentDialog != telegramObject.nullDialog && user.id != telegramObject.cutegramId
+            text: {
+                var result = ""
+                var list = currentDialog.typingUsers
+                if( list.length == 0 ) {
+                    if( isChat ) {
+                        result += qsTr("%1 participants (%2 online)").arg(chat.participantsCount).arg(onlineCount)
+                    } else {
+                        var isOnline = header.user.status.classType == typeUserStatusOnline
+                        result += isOnline? qsTr("Online") : qsTr("%1 was online").arg(Cutegram.getTimeString(CalendarConv.fromTime_t(header.user.status.wasOnline)))
+                    }
+
+                    return result
                 }
 
+                for( var i=0; i<list.length; i++ ) {
+                    var uid = list[i]
+                    var user = telegramObject.user(list[i])
+                    var uname = user.firstName + " " + user.lastName
+                    result += uname.trim()
+
+                    if( i < list.length-1 )
+                        result += ", "
+                }
+
+                result = result.trim() + " typing..."
                 return result
             }
-
-            for( var i=0; i<list.length; i++ ) {
-                var uid = list[i]
-                var user = telegramObject.user(list[i])
-                var uname = user.firstName + " " + user.lastName
-                result += uname.trim()
-
-                if( i < list.length-1 )
-                    result += ", "
-            }
-
-            result = result.trim() + " typing..."
-            return result
         }
     }
 

@@ -58,7 +58,7 @@ Item {
             anchors.top: row.top
             anchors.bottom: row.bottom
             width: height
-            icon: cl_tools.mute? "files/" + (Cutegram.lightUi?"mute-dark.png":"mute.png") : "files/" + (Cutegram.lightUi?"unmute-dark.png":"unmute.png")
+            icon: cl_tools.mute? "files/mute-dark.png" : "files/unmute-dark.png"
             normalColor: "#00000000"
             highlightColor: "#00000000"
             iconHeight: height - 10

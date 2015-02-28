@@ -31,7 +31,8 @@ typedef AsemanMacNativeNotification AsemanNotification;
 #include "asemannativenotification.h"
 typedef AsemanNativeNotification AsemanNotification;
 #else
-typedef QObject AsemanNotification
+#include <QObject>
+typedef QObject AsemanNotification;
 #endif
 #endif
 #endif

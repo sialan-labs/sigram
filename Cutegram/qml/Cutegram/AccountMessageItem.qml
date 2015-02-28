@@ -1,7 +1,9 @@
 import QtQuick 2.0
+import AsemanTools.Controls 1.0
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: msg_item
@@ -39,6 +41,7 @@ Item {
     property alias mediaLOcation: msg_media.locationObj
 
     property alias selectedText: msg_txt.selectedText
+    property alias messageRect: back_rect
 
     property bool modernMode: false
 
@@ -65,34 +68,46 @@ Item {
         visible: !action_item.hasAction
         spacing: frameMargins
 
-        ContactImage {
-            id: img
+        Frame {
             anchors.verticalCenter: parent.verticalCenter
             width: 40*Devices.density
             height: width
-            user: msg_item.user
-            isChat: false
+            backgroundColor: "#E4E9EC"
 
-            MouseArea {
+            ContactImage {
+                id: img
                 anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(img.user.id, false) )
+                user: msg_item.user
+                isChat: false
+                circleMode: false
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(img.user.id, false) )
+                }
             }
         }
 
-        ContactImage {
-            id: forward_img
+        Frame {
             anchors.verticalCenter: parent.verticalCenter
             width: img.width
             height: img.height
             visible: message.fwdFromId != 0
-            user: msg_item.fwdUser
-            isChat: false
+            backgroundColor: "#E4E9EC"
 
-            MouseArea {
+            ContactImage {
+                id: forward_img
                 anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(forward_img.user.id, false) )
+                user: msg_item.fwdUser
+                isChat: false
+                circleMode: false
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(forward_img.user.id, false) )
+                }
             }
         }
 
@@ -104,27 +119,77 @@ Item {
                    - (img.width+frameMargins) - back_rect.width/2
         }
 
-        Rectangle {
+        Item {
+            height: 10
+            width: 10*Devices.density
+        }
+
+        Item {
             id: back_rect
             width: column.width + 2*textMargins
             height: column.height + 2*textMargins
             anchors.verticalCenter: parent.verticalCenter
-            color: "#ffffff"
-            radius: 3*Devices.density
 
-            Rectangle {
+            Item {
+                id: msg_frame_box
                 anchors.fill: parent
-                opacity: hasMedia || encryptMedia? 1 : 0.3
-                radius: parent.radius
-                color: {
-                    if(hasMedia || encryptMedia)
-                        return "#111111"
-                    else
-                    if(message.out)
-                        return Cutegram.highlightColor
-                    else
-                        return "#ffffff"
+                anchors.margins: -20*Devices.density
+                visible: false
+
+                Item {
+                    anchors.fill: parent
+                    anchors.margins: 20*Devices.density
+
+                    Rectangle {
+                        id: pointer_rect
+                        height: 15*Devices.density
+                        width: height
+                        anchors.horizontalCenter: message.out? parent.right : parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: back_frame.color
+                        transformOrigin: Item.Center
+                        rotation: 45
+
+                        Rectangle {
+                            anchors.fill: parent
+                            color: back_rect_layer.color
+                            opacity: back_rect_layer.opacity
+                        }
+                    }
+
+                    Rectangle {
+                        id: back_frame
+                        anchors.fill: parent
+                        color: "#ffffff"
+                        radius: 5*Devices.density
+                    }
+
+                    Rectangle {
+                        id: back_rect_layer
+                        anchors.fill: parent
+                        opacity: hasMedia || encryptMedia? 1 : 0.3
+                        radius: back_frame.radius
+                        color: {
+                            if(hasMedia || encryptMedia)
+                                return "#111111"
+                            else
+                            if(message.out)
+                                return Cutegram.highlightColor
+                            else
+                                return "#ffffff"
+                        }
+                    }
                 }
+            }
+
+            DropShadow {
+                anchors.fill: source
+                source: msg_frame_box
+                radius: 2*Devices.density
+                samples: 16
+                horizontalOffset: 0
+                verticalOffset: 1*Devices.density
+                color: "#66000000"
             }
 
             Column {

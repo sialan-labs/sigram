@@ -3,35 +3,19 @@ import QtQuick.Controls.Styles 1.3
 import QtGraphicalEffects 1.0
 
 ScrollViewStyle {
-    property color backgroundColor: masterPalette.window
-
-    SystemPalette {
-        id: masterPalette
+    handle: Rectangle {
+        implicitHeight: 5
+        implicitWidth: 5
+        color: "#888888"
+        opacity: styleData.hovered? 1 : 0.5
+        radius: 5
     }
 
-    frame: Item {
-
-        Item {
-            id: fframe
-            anchors.fill: parent
-
-            Rectangle {
-                anchors.fill: parent
-                anchors.margins: 1
-                radius: 5
-                color: backgroundColor
-            }
-        }
-
-        InnerShadow {
-            anchors.fill: source
-            source: fframe
-            radius: 4.0
-            samples: 16
-            horizontalOffset: 0
-            verticalOffset: 1
-            opacity: 0.3
-            color: control.focus? masterPalette.highlight : "#000000"
-        }
+    scrollBarBackground: Item {
+        implicitHeight: 5
+        implicitWidth: 5
     }
+
+    incrementControl: Item{}
+    decrementControl: Item{}
 }

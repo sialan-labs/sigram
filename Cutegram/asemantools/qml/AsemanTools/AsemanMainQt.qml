@@ -7,7 +7,8 @@ Rectangle {
     height: 62
 
     Component.onCompleted: {
-        Settings.stylePath = "qrc:/asemantools/qml/AsemanTools/Controls/Styles/"
+        if(Devices.isDesktop)
+            Settings.stylePath = "qrc:/asemantools/qml/AsemanTools/Controls/Styles/"
     }
 }
 

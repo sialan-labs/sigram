@@ -22,3 +22,7 @@ TextArea 1.0 TextArea.qml
 TextField 1.0 TextField.qml
 ToolBar 1.0 ToolBar.qml
 ToolButton 1.0 ToolButton.qml
+Frame 1.0 Frame.qml
+StackView 1.0 StackView.qml
+Tab 1.0 Tab.qml
+FrameItem 1.0 FrameItem.qml

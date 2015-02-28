@@ -23,10 +23,10 @@
 #include <QPalette>
 #include <QEventLoop>
 #include <QFontDatabase>
-#include <QInputDialog>
 #include <QDebug>
 
 #ifdef DESKTOP_DEVICE
+#include <QInputDialog>
 #include <QColorDialog>
 #include <QFileDialog>
 #include <QFontDialog>
@@ -484,13 +484,20 @@ QColor AsemanDesktopTools::getColor(const QColor &color) const
 QString AsemanDesktopTools::getText(QWindow *window, const QString &title, const QString &text, const QString &defaultText)
 {
     Q_UNUSED(window)
+    Q_UNUSED(title)
+    Q_UNUSED(text)
+    Q_UNUSED(defaultText)
 
+#ifdef DESKTOP_DEVICE
     bool ok = false;
     const QString &result = QInputDialog::getText(0, title, text, QLineEdit::Normal, defaultText, &ok);
     if(!ok)
         return QString();
 
     return result;
+#else
+    return QString();
+#endif
 }
 
 int AsemanDesktopTools::showMenu(const QStringList &actions, QPoint point)

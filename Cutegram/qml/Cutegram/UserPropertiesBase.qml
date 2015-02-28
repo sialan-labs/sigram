@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import AsemanTools.Controls 1.0
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
@@ -140,7 +141,7 @@ Item {
             id: col1
             anchors.top: parent.top
             anchors.margins: 20*Devices.density
-            spacing: 8*Devices.density
+            spacing: 12*Devices.density
 
             Text {
                 id: phone_lbl
@@ -191,7 +192,7 @@ Item {
             id: col2
             anchors.top: parent.top
             anchors.margins: 20*Devices.density
-            spacing: 8*Devices.density
+            spacing: 12*Devices.density
 
             Text {
                 height: phone_lbl.height
@@ -207,14 +208,9 @@ Item {
                 height: favorite_lbl.height
                 width: favorite_check.width
 
-                CheckBox {
+                Switch {
                     id: favorite_check
-                    height: 20*Devices.density
-                    width: 30*Devices.density
-                    color: checked? Cutegram.highlightColor : "#666666"
                     anchors.verticalCenter: parent.verticalCenter
-                    cursorShape: Qt.PointingHandCursor
-                    labels: false
                     onCheckedChanged: {
                         if( signalBlocker )
                             return
@@ -230,14 +226,9 @@ Item {
                 height: love_lbl.height
                 width: love_check.width
 
-                CheckBox {
+                Switch {
                     id: love_check
-                    height: 20*Devices.density
-                    width: 30*Devices.density
-                    color: checked? Cutegram.highlightColor : "#666666"
                     anchors.verticalCenter: parent.verticalCenter
-                    cursorShape: Qt.PointingHandCursor
-                    labels: false
                     onCheckedChanged: {
                         if( signalBlocker )
                             return
@@ -250,14 +241,9 @@ Item {
                 height: mute_lbl.height
                 width: mute_check.width
 
-                CheckBox {
+                Switch {
                     id: mute_check
-                    height: 20*Devices.density
-                    width: 30*Devices.density
-                    color: checked? Cutegram.highlightColor : "#666666"
                     anchors.verticalCenter: parent.verticalCenter
-                    cursorShape: Qt.PointingHandCursor
-                    labels: false
                     onCheckedChanged: {
                         if( signalBlocker )
                             return

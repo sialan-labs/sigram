@@ -1,8 +1,8 @@
 import QtQuick 2.0
 import AsemanTools 1.0
+import AsemanTools.Controls 1.0 as Controls
 import Cutegram 1.0
 import CutegramTypes 1.0
-import QtQuick.Controls 1.1 as QtControls
 
 Rectangle {
     id: configure
@@ -63,18 +63,13 @@ Rectangle {
                         }
                     }
 
-                    Button {
+                    Controls.Button {
                         anchors.bottom: parent.bottom
                         anchors.left: img.right
                         anchors.margins: 20*Devices.density
-                        normalColor: Cutegram.highlightColor
-                        highlightColor: Qt.darker(Cutegram.highlightColor)
-                        textColor: masterPalette.highlightedText
                         width: 100*Devices.density
                         height: 36*Devices.density
                         text: qsTr("Change Photo")
-                        cursorShape: Qt.PointingHandCursor
-                        radius: 4*Devices.density
                         onClicked: {
                             var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                             if(newImg.length == 0)
@@ -260,39 +255,39 @@ Rectangle {
                     Column {
                         spacing: 6*Devices.density
 
-                        QtControls.Switch {
+                        Controls.Switch {
                             id: notify_checkbox
                             checked: Cutegram.notification
                             onCheckedChanged: Cutegram.notification = checked
                         }
 
-                        QtControls.Switch {
+                        Controls.Switch {
                             id: veffect_checkbox
                             checked: Cutegram.visualEffects
                             onCheckedChanged: Cutegram.visualEffects = checked
                         }
 
-                        QtControls.Switch {
+                        Controls.Switch {
                             id: aseman_nl_checkbox
                             checked: Cutegram.cutegramSubscribe
                             onCheckedChanged: Cutegram.cutegramSubscribe = checked
                         }
 
-                        QtControls.Switch {
+                        Controls.Switch {
                             id: autostart_checkbox
                             visible: Devices.isLinux
                             checked: autostart_mngr.active
                             onCheckedChanged: autostart_mngr.active = checked
                         }
 
-                        QtControls.ComboBox {
+                        Controls.ComboBox {
                             id: startup_combo
                             model: [ qsTr("Automatic"), qsTr("Always visible"), qsTr("Minimize to system tray") ]
                             currentIndex: Cutegram.startupOption
                             onCurrentIndexChanged: if(init_timer.inited) Cutegram.startupOption = currentIndex
                         }
 
-                        QtControls.ComboBox {
+                        Controls.ComboBox {
                             id: languages_combo
                             model: Cutegram.languages
                             currentIndex: {
@@ -307,13 +302,13 @@ Rectangle {
                             onCurrentTextChanged: if(init_timer.inited) Cutegram.language = currentText
                         }
 
-                        QtControls.Switch {
+                        Controls.Switch {
                             id: last_msg_checkbox
                             checked: Cutegram.showLastMessage
                             onCheckedChanged: Cutegram.showLastMessage = checked
                         }
 
-                        QtControls.Button {
+                        Controls.Button {
                             id: background_btn
                             text: Cutegram.background.length==0? qsTr("Change") : qsTr("Remove")
                             onClicked: {
@@ -329,7 +324,7 @@ Rectangle {
                             }
                         }
 
-                        QtControls.Button {
+                        Controls.Button {
                             id: proxy_btn
                             text: qsTr("Change")
                             onClicked: {
@@ -337,7 +332,7 @@ Rectangle {
                             }
                         }
 
-                        QtControls.ComboBox {
+                        Controls.ComboBox {
                             id: notify_sound_combo
                             model: [qsTr("None"), qsTr("Default"), qsTr("Custom")]
                             currentIndex: {
@@ -376,7 +371,7 @@ Rectangle {
                             }
                         }
 
-                        QtControls.ComboBox {
+                        Controls.ComboBox {
                             id: color_combo
                             model: [qsTr("System Color"), qsTr("Custom")]
                             currentIndex: {
@@ -397,7 +392,7 @@ Rectangle {
                             }
                         }
 
-                        QtControls.Button {
+                        Controls.Button {
                             id: font_btn
                             text: qsTr("Select")
                             onClicked: {

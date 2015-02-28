@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import AsemanTools.Controls 1.0
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
@@ -75,16 +76,21 @@ Item {
                 anchors.leftMargin: 5*Devices.density
                 anchors.rightMargin: 12*Devices.density
 
-                ContactImage {
+                Frame {
                     id: img
                     anchors.left: parent.left
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     width: height
                     anchors.margins: 4*Devices.density
-                    circleMode: false
-                    user: ditem.user
-                    isChat: false
+                    backgroundColor: selected || marea.pressed? Qt.lighter(Cutegram.highlightColor, 1.7) : "#eeeeee"
+
+                    ContactImage {
+                        anchors.fill: parent
+                        user: ditem.user
+                        isChat: false
+                        circleMode: false
+                    }
                 }
 
                 Text {
@@ -94,7 +100,7 @@ Item {
                     anchors.margins: 4*Devices.density
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(9*Devices.fontDensity)
-                    color: "#999999"
+                    color: "#777777"
                     text: Cutegram.getTimeString(msgDate)
                 }
 
@@ -112,7 +118,7 @@ Item {
                     elide: Text.ElideRight
                     verticalAlignment: Text.AlignVCenter
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                    color: "#ffffff"
+                    color: "#222222"
                     text: {
                         var isChat = dialog.peer.chatId != 0
                         var fromName = user.firstName + " " + user.lastName
@@ -152,7 +158,7 @@ Item {
                     text: message.message
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(10*Devices.fontDensity)
-                    color: "#eeeeee"
+                    color: "#444444"
                 }
             }
 

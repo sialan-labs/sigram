@@ -78,7 +78,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: add_secret_chat_btn.top
-            selectColor: slide_menu.active? "#ffffff" : (Cutegram.lightUi? "#cccccc" :"#222222")
+            selectColor: slide_menu.active? "#ffffff" : "#eeeeee"
             z: 10
             onCurrentKeyChanged: {
                 if(lastKey.length != 0)

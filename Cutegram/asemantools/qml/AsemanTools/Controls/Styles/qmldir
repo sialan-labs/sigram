@@ -1,0 +1,25 @@
+module AsemanTools.Controls.Styles
+ApplicationWindowStyle 1.0 Desktop/ApplicationWindowStyle.qml
+BusyIndicatorStyle 1.0 Desktop/BusyIndicatorStyle.qml
+ButtonStyle 1.0 Desktop/ButtonStyle.qml
+CalendarStyle 1.0 Desktop/CalendarStyle.qml
+CheckBoxStyle 1.0 Desktop/CheckBoxStyle.qml
+ComboBoxStyle 1.0 Desktop/ComboBoxStyle.qml
+FocusFrameStyle 1.0 Desktop/FocusFrameStyle.qml
+GroupBoxStyle 1.0 Desktop/GroupBoxStyle.qml
+MenuBarStyle 1.0 Desktop/MenuBarStyle.qml
+MenuStyle 1.0 Desktop/MenuStyle.qml
+ProgressBarStyle 1.0 Desktop/ProgressBarStyle.qml
+RadioButtonStyle 1.0 Desktop/RadioButtonStyle.qml
+RowItemSingleton 1.0 Desktop/RowItemSingleton.qml
+ScrollViewStyle 1.0 Desktop/ScrollViewStyle.qml
+SliderStyle 1.0 Desktop/SliderStyle.qml
+SpinBoxStyle 1.0 Desktop/SpinBoxStyle.qml
+StatusBarStyle 1.0 Desktop/StatusBarStyle.qml
+SwitchStyle 1.0 Desktop/SwitchStyle.qml
+TableViewStyle 1.0 Desktop/TableViewStyle.qml
+TabViewStyle 1.0 Desktop/TabViewStyle.qml
+TextAreaStyle 1.0 Desktop/TextAreaStyle.qml
+TextFieldStyle 1.0 Desktop/TextFieldStyle.qml
+ToolBarStyle 1.0 Desktop/ToolBarStyle.qml
+ToolButtonStyle 1.0 Desktop/ToolButtonStyle.qml

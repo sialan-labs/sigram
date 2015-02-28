@@ -95,7 +95,6 @@
         <file>qml/AsemanTools/Controls/Styles/Desktop/MenuBarStyle.qml</file>
         <file>qml/AsemanTools/Controls/Styles/Desktop/MenuStyle.qml</file>
         <file>qml/AsemanTools/Controls/Styles/Desktop/ProgressBarStyle.qml</file>
-        <file>qml/AsemanTools/Controls/Styles/Desktop/qmldir</file>
         <file>qml/AsemanTools/Controls/Styles/Desktop/RadioButtonStyle.qml</file>
         <file>qml/AsemanTools/Controls/Styles/Desktop/RowItemSingleton.qml</file>
         <file>qml/AsemanTools/Controls/Styles/Desktop/ScrollViewStyle.qml</file>
@@ -117,5 +116,10 @@
         <file>qml/AsemanTools/Controls/Styles/Desktop/images/yes.png</file>
         <file>files/countries.csv</file>
         <file>qml/AsemanTools/AsemanMainQt.qml</file>
+        <file>qml/AsemanTools/Controls/Frame.qml</file>
+        <file>qml/AsemanTools/Controls/StackView.qml</file>
+        <file>qml/AsemanTools/Controls/Tab.qml</file>
+        <file>qml/AsemanTools/Controls/FrameItem.qml</file>
+        <file>qml/AsemanTools/Controls/Styles/qmldir</file>
     </qresource>
 </RCC>

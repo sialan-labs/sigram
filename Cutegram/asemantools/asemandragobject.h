@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QQuickItem>
+#include <QImage>
 
 class AsemanMimeData;
 class AsemanDragObjectPrivate;
@@ -33,6 +34,7 @@ class AsemanDragObject : public QObject
     Q_PROPERTY(QQuickItem* source READ source WRITE setSource NOTIFY sourceChanged)
     Q_PROPERTY(QUrl image READ image WRITE setImage NOTIFY imageChanged)
     Q_PROPERTY(QPoint hotSpot READ hotSpot WRITE setHotSpot NOTIFY hotSpotChanged)
+    Q_PROPERTY(QImage imageData READ imageData WRITE setImageData NOTIFY imageDataChanged)
 
     Q_PROPERTY(bool dragging READ dragging NOTIFY draggingChanged)
 
@@ -52,6 +54,9 @@ public:
     void setImage(const QUrl & url);
     QUrl image() const;
 
+    void setImageData(const QImage &img);
+    QImage imageData() const;
+
     bool dragging() const;
 
     void setHotSpot(const QPoint &point);
@@ -67,6 +72,7 @@ signals:
     void imageChanged();
     void hotSpotChanged();
     void draggingChanged();
+    void imageDataChanged();
 
 private:
     AsemanDragObjectPrivate *p;

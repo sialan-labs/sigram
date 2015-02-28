@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
+import AsemanTools.Controls 1.0
+import AsemanTools.Controls.Styles 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
 import QtQuick.Window 2.0
@@ -8,7 +10,7 @@ Rectangle {
     id: acc_view
     width: 100
     height: 62
-    color: Cutegram.lightUi? "#cccccc" :"#222222"
+    color: "#eeeeee"
 
     property alias telegramObject: dialogs.telegramObject
     property color framesColor: "#aaffffff"
@@ -39,26 +41,33 @@ Rectangle {
         rotation: -90
         width: parent.height
         height: 5*Devices.density
-        opacity: Cutegram.lightUi? 0.2 : 1
+        opacity: 0.2
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#00000000" }
             GradientStop { position: 1.0; color: "#000000" }
         }
     }
 
-    LineEdit {
+    TextField {
         id: search_frame
         anchors.left: dialogs.left
         anchors.top: parent.top
         anchors.right: dialogs.right
         anchors.margins: 10*Devices.density
-        height: 36*Devices.density
-        radius: 4*Devices.density
-        color: Cutegram.lightUi? "#dddddd" : "#333333"
-        textColor: Cutegram.lightUi? "#333333" : "#ffffff"
-        clearButton: true
-        placeholder: qsTr("Search")
-        pickerEnable: Devices.isTouchDevice
+        placeholderText: qsTr("Search")
+        style: TextFieldStyle {
+            backgroundColor: search_frame.focus? "#ffffff" : acc_view.color
+        }
+
+        Button {
+            x: search_frame.horizontalAlignment==TextInput.AlignRight? 6*Devices.density : parent.width-6*Devices.density-width
+            anchors.verticalCenter: parent.verticalCenter
+            width: 22*Devices.density
+            height: width
+            iconSource: "files/close.png"
+            visible: search_frame.text.length != 0
+            onClicked: search_frame.text = ""
+        }
     }
 
     AccountDialogList {
