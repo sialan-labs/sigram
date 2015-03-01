@@ -24,7 +24,7 @@ Rectangle {
     smooth: true
     width: row.width + 20*Devices.density
     height: 30*Devices.density
-    color: press? highlightColor : normalColor
+    color: press? highlightColor : (enter?hoverColor:normalColor)
 
     property alias text: txt.text
     property alias icon: icn.source
@@ -41,6 +41,8 @@ Rectangle {
 
     property string highlightColor: masterPalette.highlight
     property string normalColor: "#00000000"
+    property string hoverColor: normalColor
+
     property alias textColor: txt.color
 
     property alias cursorShape: marea.cursorShape
