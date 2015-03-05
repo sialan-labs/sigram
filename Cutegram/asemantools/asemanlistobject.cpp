@@ -81,6 +81,12 @@ QVariant AsemanListObject::takeAt(int index)
     return res;
 }
 
+void AsemanListObject::clear()
+{
+    p->list.clear();
+    emit countChanged();
+}
+
 QVariant AsemanListObject::last() const
 {
     if( p->list.isEmpty() )
@@ -127,6 +133,9 @@ bool AsemanListObject::isEmpty() const
 
 QVariant AsemanListObject::at(int index) const
 {
+    if(index == -1)
+        return QVariant();
+
     return p->list.at(index);
 }
 

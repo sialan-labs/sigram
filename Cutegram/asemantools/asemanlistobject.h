@@ -33,30 +33,33 @@ public:
     AsemanListObject(QObject *parent = 0);
     ~AsemanListObject();
 
-    Q_INVOKABLE void removeAll( const QVariant & v );
-    Q_INVOKABLE void removeOne( const QVariant & v );
-    Q_INVOKABLE void removeAt( int index );
-    Q_INVOKABLE QVariant takeLast();
-    Q_INVOKABLE QVariant takeFirst();
-    Q_INVOKABLE QVariant takeAt( int index );
+public slots:
+    void removeAll( const QVariant & v );
+    void removeOne( const QVariant & v );
+    void removeAt( int index );
+    QVariant takeLast();
+    QVariant takeFirst();
+    QVariant takeAt( int index );
 
-    Q_INVOKABLE QVariant last() const;
-    Q_INVOKABLE QVariant first() const;
+    void clear();
 
-    Q_INVOKABLE void insert( int index, const QVariant & v );
-    Q_INVOKABLE void append( const QVariant & v );
-    Q_INVOKABLE void prepend( const QVariant & v );
+    QVariant last() const;
+    QVariant first() const;
 
-    Q_INVOKABLE int count() const;
-    Q_INVOKABLE bool isEmpty() const;
+    void insert( int index, const QVariant & v );
+    void append( const QVariant & v );
+    void prepend( const QVariant & v );
 
-    Q_INVOKABLE QVariant at( int index ) const;
-    Q_INVOKABLE int indexOf( const QVariant & v ) const;
+    int count() const;
+    bool isEmpty() const;
 
-    Q_INVOKABLE void fromList( const QVariantList & list );
-    Q_INVOKABLE QVariantList toList() const;
+    QVariant at( int index ) const;
+    int indexOf( const QVariant & v ) const;
 
-    Q_INVOKABLE bool contains( const QVariant & v ) const;
+    void fromList( const QVariantList & list );
+    QVariantList toList() const;
+
+    bool contains( const QVariant & v ) const;
 
 signals:
     void countChanged();

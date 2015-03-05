@@ -150,21 +150,22 @@ Item {
                     backgroundColor: selected || marea.pressed? Qt.lighter(Cutegram.highlightColor, 1.6) : "#eeeeee"
 
                     ContactImage {
+                        id: contact_img
                         anchors.fill: parent
                         dialog: dItem
                         circleMode: false
-
-                        Image {
-                            anchors.bottom: parent.bottom
-                            anchors.right: parent.right
-                            anchors.margins: -4*Devices.density
-                            source: "files/online.png"
-                            sourceSize: Qt.size(width,height)
-                            width: 14*Devices.density
-                            height: 14*Devices.density
-                            visible: isChat? false : (user.status.classType == profile_img.typeUserStatusOnline)
-                        }
                     }
+                }
+
+                Image {
+                    anchors.bottom: profile_img.bottom
+                    anchors.right: profile_img.right
+                    anchors.margins: -4*Devices.density
+                    source: "files/online.png"
+                    sourceSize: Qt.size(width,height)
+                    width: 14*Devices.density
+                    height: 14*Devices.density
+                    visible: isChat? false : (user.status.classType == contact_img.typeUserStatusOnline)
                 }
 
                 Text {

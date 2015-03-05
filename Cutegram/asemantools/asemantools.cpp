@@ -28,6 +28,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QStringList>
+#include <QTextDocument>
 #include <QProcess>
 #include <QUuid>
 
@@ -194,6 +195,13 @@ QString AsemanTools::passToMd5(const QString &pass)
 QString AsemanTools::createUuid()
 {
     return QUuid::createUuid().toString();
+}
+
+QString AsemanTools::htmlToPlaintText(const QString &html)
+{
+    QTextDocument doc;
+    doc.setHtml(html);
+    return doc.toPlainText();
 }
 
 void AsemanTools::copyDirectory(const QString &src, const QString &dst)

@@ -58,6 +58,8 @@ public slots:
     static QString passToMd5( const QString & pass );
     static QString createUuid();
 
+    static QString htmlToPlaintText(const QString &html);
+
     static void copyDirectory( const QString & src, const QString & dst );
 
     static void setProperty( QObject *obj, const QString & property, const QVariant & v );
