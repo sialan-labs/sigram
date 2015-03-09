@@ -1204,6 +1204,25 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
             eiv  = doc->encryptIv();
             input.setClassType(InputFileLocation::typeInputEncryptedFileLocation);
         }
+        l->download()->setTotal(doc->size());
+    }
+    else
+    if(parentObj && parentObj->metaObject() == &PhotoSizeObject::staticMetaObject)
+    {
+        PhotoSizeObject *psz = static_cast<PhotoSizeObject*>(parentObj);
+        l->download()->setTotal(psz->size());
+    }
+    else
+    if(parentObj && parentObj->metaObject() == &AudioObject::staticMetaObject)
+    {
+        AudioObject *aud = static_cast<AudioObject*>(parentObj);
+        l->download()->setTotal(aud->size());
+    }
+    else
+    if(parentObj && parentObj->metaObject() == &VideoObject::staticMetaObject)
+    {
+        VideoObject *vid = static_cast<VideoObject*>(parentObj);
+        l->download()->setTotal(vid->size());
     }
 
     qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId(), ekey, eiv);
@@ -2377,8 +2396,9 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
     DownloadObject *download = obj->download();
     download->setMtime(mtime);
     download->setPartId(partId);
-    download->setTotal(total);
     download->setDownloaded(downloaded);
+    if(total)
+        download->setTotal(total);
 
     if( !download->file()->isOpen() )
     {
@@ -2389,7 +2409,7 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
 
     download->file()->write(bytes);
 
-    if( downloaded >= total )
+    if( downloaded >= download->total() )
     {
         download->file()->flush();
         download->file()->close();
