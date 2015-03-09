@@ -449,10 +449,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Master Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
@@ -478,10 +474,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Visual Effects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -517,7 +509,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>System Color</source>
+        <source>Minimum List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Theme</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

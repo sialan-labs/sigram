@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_GB">
+<TS version="2.1" language="nl_NL">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation>Cutegram is a Telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 licence.</translation>
+        <translation>Cutegram is een telegram-applicatie van Aseman. Het is gratis met verspreiding van broncode (open source) en uitgebracht onder de GPLv3-licentie.</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</translation>
+        <translation>Cutegram gebruikt Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, enkele KDE-hulpmiddelen, de Faenza-pictogrammen en Twitter-emoticons.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation>Website</translation>
     </message>
 </context>
 <context>
@@ -28,188 +28,188 @@
     </message>
     <message>
         <source>Secret chat</source>
-        <translation>Secret chat</translation>
+        <translation>Geheim chatgesprek</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation>%1 participants (%2 online)</translation>
+        <translation>%1 deelnemers (%2 online)</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
-        <translation>Typing...</translation>
+        <translation>Aan het typen...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation>Delete secret chat</translation>
+        <translation>Geheim chatgesprek verwijderen</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation>Are you sure about deleting this secret chat?</translation>
+        <translation>Weet u zeker dat dit geheime chatgesprek wilt verwijderen?</translation>
     </message>
     <message>
         <source>Delete History</source>
-        <translation>Delete History</translation>
+        <translation>Geschiedenis verwijderen</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation>Are you sure about deleting history?</translation>
+        <translation>Weet u zeker dat u de geschiedenis wilt verwijderen?</translation>
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation>Open in New Window</translation>
+        <translation>Openen in een nieuw venster</translation>
     </message>
 </context>
 <context>
     <name>AccountFrame</name>
     <message>
         <source>Show</source>
-        <translation>Show</translation>
+        <translation>Weergeven</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Mute</translation>
+        <translation>Dempen</translation>
     </message>
     <message>
         <source>Message!</source>
-        <translation>Message!</translation>
+        <translation>Bericht!</translation>
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation>Message on &quot;%1&quot; by &quot;%2&quot;</translation>
+        <translation>Bericht op &quot;%1&quot; door &quot;%2&quot;</translation>
     </message>
 </context>
 <context>
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation>Loading...</translation>
+        <translation>Bezig met laden...</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageAction</name>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation>%1 created the group &quot;%2&quot;</translation>
+        <translation>%1 heeft de groep &quot;%2&quot; gecreëerd</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation>%1 left the group</translation>
+        <translation>%1 heeft de groep verlaten</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation>%1 changed group name to &quot;%2&quot;</translation>
+        <translation>%1 heeft de groepsnaam gewijzigd in &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation>%1 changed group photo.</translation>
+        <translation>%1 heeft de groepsfoto gewijzigd.</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation>%1 deleted group photo</translation>
+        <translation>%1 heeft de groepsfoto verwijderd</translation>
     </message>
     <message>
         <source>%1 invited to group</source>
-        <translation>%1 invited to group</translation>
+        <translation>%1 is uitgenodigd voor de groep</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation>Media files are not supported on secret chat currently</translation>
+        <translation>Mediabestanden worden momenteen niet ondersteund in geheime gesprekken</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageList</name>
     <message>
         <source>Welcome :)</source>
-        <translation>Welcome :)</translation>
+        <translation>Welkom :)</translation>
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>Secret chat request. Please Accept or Reject.</translation>
+        <translation>Een aanvraag voor een geheim chatgesprek. U kunt dit accepteren of weigeren.</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation>Accept</translation>
+        <translation>Accepteren</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation>Reject</translation>
+        <translation>Weigeren</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Forward</translation>
+        <translation>Vooruit</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Kopiëren</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>Click to Download</translation>
+        <translation>Klik om te downloaden</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation>Unsupported Media</translation>
+        <translation>Niet-ondersteunde media</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Annuleren</translation>
     </message>
 </context>
 <context>
     <name>AccountSearchList</name>
     <message>
         <source>Me</source>
-        <translation>Me</translation>
+        <translation>Ik</translation>
     </message>
     <message>
         <source>%1 on %2</source>
-        <translation>%1 on %2</translation>
+        <translation>%1 op %2</translation>
     </message>
     <message>
         <source>%1 to %2</source>
-        <translation>%1 to %2</translation>
+        <translation>%1 aan %2</translation>
     </message>
 </context>
 <context>
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
-        <translation>Send</translation>
+        <translation>Verzenden</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Kopiëren</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Plakken</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation>It&apos;s Cutegram news about new releases and solutions.
-It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translation>
+        <translation>Het bevat Curegram-nieuws met informatie over nieuwe versies en oplossingen.
+Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Camera</source>
@@ -224,87 +224,87 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     </message>
     <message>
         <source>First Name</source>
-        <translation>First Name</translation>
+        <translation>Voornaam</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Last Name</translation>
+        <translation>Achternaam</translation>
     </message>
     <message>
         <source>Sign In</source>
-        <translation>Sign In</translation>
+        <translation>Inloggen</translation>
     </message>
     <message>
         <source>Sign Up</source>
-        <translation>Sign Up</translation>
+        <translation>Registreren</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>Call Request</translation>
+        <translation>Gespreksaanvraag</translation>
     </message>
     <message>
         <source>Requested</source>
-        <translation>Requested</translation>
+        <translation>Aangevraagd</translation>
     </message>
 </context>
 <context>
     <name>AccountView</name>
     <message>
         <source>Search</source>
-        <translation>Search</translation>
+        <translation>Zoeken</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation>New group chat</translation>
+        <translation>Nieuwe groepschat</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configure</translation>
+        <translation>Instellen</translation>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation>Group Topic</translation>
+        <translation>Groepsonderwerp</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation>Create</translation>
+        <translation>Creëren</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>Add Secret Chat</translation>
+        <translation>Geheim chatgesprek toevoegen</translation>
     </message>
     <message>
         <source>Contact List</source>
-        <translation>Contact List</translation>
+        <translation>Contactpersonenlijst</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation>Just drag and drop contacts here</translation>
+        <translation>Versleep contactpersonen hier naartoe</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation>Add Account (experimental)</translation>
+        <translation>Account toevoegen (experimenteel)</translation>
     </message>
 </context>
 <context>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation>Aseman is a non-profit organisation. It exists to support and lead the free, open source and cross-platform projects and researches.</translation>
+        <translation>Aseman is een organisatie zonder winstkeurmerk en bestaat om te ondersteunen en de weg te leiden naar vrije, open bron- en multiplatform-projecten en -onderzoeken.</translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</translation>
+        <translation>Het doel van Aseman is om gratis en beveiligde producten aan te bieden die de vrijheid en privacy van de mensen waarborgt.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation>Website</translation>
     </message>
 </context>
 <context>
@@ -351,175 +351,175 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the Universe. Currently, we are focusing on design and development of software applications and tools which have a direct connection with end users.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the World. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AuthenticateDialog</name>
     <message>
         <source>Authenticating</source>
-        <translation>Authenticating</translation>
+        <translation>Bezig met authentificeren</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>Phone Number</translation>
+        <translation>Telefoonnummer</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>Login</translation>
+        <translation>Inloggen</translation>
     </message>
 </context>
 <context>
     <name>CameraDialog</name>
     <message>
         <source>Send</source>
-        <translation>Send</translation>
+        <translation>Verzenden</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation>Capture</translation>
+        <translation>Vastleggen</translation>
     </message>
 </context>
 <context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation>On</translation>
+        <translation>Aan</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation>Off</translation>
+        <translation>Uit</translation>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Notifications</source>
-        <translation>Notifications</translation>
+        <translation>Meldingen</translation>
     </message>
     <message>
         <source>On Start</source>
-        <translation>On Start</translation>
+        <translation>Bij opstarten</translation>
     </message>
     <message>
         <source>Languages</source>
-        <translation>Languages</translation>
+        <translation>Talen</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automatic</translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>Always visible</source>
-        <translation>Always visible</translation>
+        <translation>Altijd zichtbaar</translation>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation>Minimise to system tray</translation>
+        <translation>Minimaliseren naar systeemvak</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Logout</translation>
+        <translation>Uitloggen</translation>
     </message>
     <message>
         <source>Change Photo</source>
-        <translation>Change Photo</translation>
+        <translation>Foto wijzigen</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation>Select photo</translation>
+        <translation>Foto selecteren</translation>
     </message>
     <message>
         <source>Detailed List</source>
-        <translation>Detailed List</translation>
+        <translation>Gedetailleerde lijst</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>Background</translation>
+        <translation>Achtergrond</translation>
     </message>
     <message>
         <source>Notify Sound</source>
-        <translation>Notify Sound</translation>
+        <translation>Meldingsgeluid</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="vanished">Master Colour</translation>
+        <translation type="vanished">Hoofdkleur</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation>Change</translation>
+        <translation>Wijzigen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>Select Image</translation>
+        <translation>Selecteer afbeelding</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>None</translation>
+        <translation>Geen</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Default</translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Custom</translation>
+        <translation>Aangepast</translation>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation>Select Sound</translation>
+        <translation>Selecteer geluid</translation>
     </message>
     <message>
         <source>Visual Effects</source>
-        <translation type="vanished">Visual Effects</translation>
+        <translation type="vanished">Visuele effecten</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation>Cutegram Newsletter</translation>
+        <translation>Cutegram-nieuwsbrief</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Font</translation>
+        <translation>Lettertype</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation>Select</translation>
+        <translation>Selecteren</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Select Font</translation>
+        <translation>Selecteer lettertype</translation>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation>Auto Start</translation>
+        <translation>Automatisch opstarten</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation>Proxy Settings</translation>
+        <translation>Proxy-instellingen</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>About Cutegram</translation>
+        <translation>Over Cutegram</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>About Aseman</translation>
+        <translation>Over Aseman</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="vanished">System Colour</translation>
+        <translation type="vanished">Systeemkleur</translation>
     </message>
     <message>
         <source>Minimum List</source>
@@ -534,50 +534,50 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     <name>CursorPicker</name>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Kopiëren</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Cut</translation>
+        <translation>Knippen</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Plakken</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 <context>
     <name>Cutegram</name>
     <message>
         <source>Show</source>
-        <translation>Show</translation>
+        <translation>Weergeven</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configure</translation>
+        <translation>Instellen</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>About</translation>
+        <translation>Over</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>About Aseman</translation>
+        <translation>Over Aseman</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quit</translation>
+        <translation>Afsluiten</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Exit</translation>
+        <translation>Afsluiten</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contact</translation>
+        <translation>Contactpersoon</translation>
     </message>
 </context>
 <context>
@@ -592,46 +592,46 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     </message>
     <message>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation>Datu</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Time</translation>
+        <translation>Tijd</translation>
     </message>
 </context>
 <context>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>&lt;&lt;&lt; Drop to dialogues list to forward</translation>
+        <translation>&lt;&lt;&lt; Laat vallen op de dialooglijst om door te sturen</translation>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation>Drop to forward</translation>
+        <translation>Laat vallen om door te sturen</translation>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation>Drop to send as Document</translation>
+        <translation>Laat vallen om te versturen als document</translation>
     </message>
     <message>
         <source>Drop to send</source>
-        <translation>Drop to send</translation>
+        <translation>Laat vallen om te verzenden</translation>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation>Drop to add participant</translation>
+        <translation>Laat vallen om een deelnemer toe te voegen</translation>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation>Drop to add new chat</translation>
+        <translation>Laat vallen om een nieuw chatgesprek toe te voegen</translation>
     </message>
     <message>
         <source>New Group</source>
-        <translation>New Group</translation>
+        <translation>Nieuwe groep</translation>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation>Please enter new group name</translation>
+        <translation>Vul de nieuwe groepsnaam in</translation>
     </message>
 </context>
 <context>
@@ -642,163 +642,163 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     </message>
     <message>
         <source>All Emoji</source>
-        <translation>All Emoji</translation>
+        <translation>Alle emoticons</translation>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>Please select a contact...</translation>
+        <translation>Selecteer een contactpersoon...</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>To</translation>
+        <translation>Aan</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Forward</translation>
+        <translation>Doorsturen</translation>
     </message>
 </context>
 <context>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Plakken</translation>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation>Please enter the password</translation>
+        <translation>Vul het wachtwoord in</translation>
     </message>
     <message>
         <source>password</source>
-        <translation>password</translation>
+        <translation>wachtwoord</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Done</translation>
+        <translation>Afgerond</translation>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation>Incorrect!</translation>
+        <translation>Onjuist!</translation>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation>Back</translation>
+        <translation>Terug</translation>
     </message>
 </context>
 <context>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Plakken</translation>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation>Proxy Settings</translation>
+        <translation>Proxy-instellingen</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation>This changes needs to restart application.</translation>
+        <translation>Deze wijzigingen worden toegepast nadat de applicatie is herstart.</translation>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation>Proxy Type</translation>
+        <translation>Proxy-type:</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation>Hostname</translation>
+        <translation>Hostnaam</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation>Port</translation>
+        <translation>Poort</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Username</translation>
+        <translation>Gebruikersnaam</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Password</translation>
+        <translation>Wachtwoord</translation>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation>Ex: 127.0.0.1</translation>
+        <translation>Bijv.: 127.0.0.1</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation>Select Application</translation>
+        <translation>Selecteer applicatie</translation>
     </message>
 </context>
 <context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation>Secret Chat</translation>
+        <translation>Geheim chatgesprek</translation>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation>Phone Number</translation>
+        <translation>Telefoonnummer</translation>
     </message>
     <message>
         <source>Favorite</source>
-        <translation>Favourite</translation>
+        <translation>Favoriet</translation>
     </message>
     <message>
         <source>Love</source>
-        <translation>Love</translation>
+        <translation>Leuk vinden</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Mute</translation>
+        <translation>Dempen</translation>
     </message>
     <message>
         <source>Participants</source>
-        <translation>Participants</translation>
+        <translation>Deelnemers</translation>
     </message>
     <message>
         <source>Show List</source>
-        <translation>Show List</translation>
+        <translation>Lijst weergeven</translation>
     </message>
     <message>
         <source>Leave</source>
-        <translation>Leave</translation>
+        <translation>Verlaten</translation>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation>Leave the group</translation>
+        <translation>De groep verlaten</translation>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
-        <translation>Are you sure about leaving this group?</translation>
+        <translation>Weet u zeker dat u de groep wilt verlaten?</translation>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation>Add Participant</translation>
+        <translation>Deelnemer toevoegen</translation>
     </message>
 </context>
 </TS>

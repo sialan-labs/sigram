@@ -1,308 +1,310 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="it_IT" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sr">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation>Cutegram è un client telegram di Aseman. È gratuito e opensource e rilasciato sotto licenza GPLv3</translation>
+        <translation>Cutegram је телеграм клијент аутора Асемана. Он је бесплатан и отвореног кода и издат је под ГПЛв3 лиценцом.</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation>Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, alcuni tool KDE, icone Faenza e emoticon Twitter.</translation>
+        <translation>Cutegram користи Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, неке КДЕ алате, Faenza иконе и Twitter emoji.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation>Почетна страна</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogHeader</name>
     <message>
         <source>Online</source>
-        <translation>Online</translation>
+        <translation>На вези</translation>
     </message>
     <message>
         <source>%1 was online</source>
-        <translation>%1 era online</translation>
+        <translation>%1 је био на вези</translation>
     </message>
     <message>
         <source>Secret chat</source>
-        <translation>Chat segreta</translation>
+        <translation>Тајно ћаскање</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation>%1 partecipanti (%2 online)</translation>
+        <translation>%1 учесник (%2 на вези)</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
-        <translation>Scrivendo...</translation>
+        <translation>Куца...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Обриши</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation>Cancella chat segreta</translation>
+        <translation>Обриши тајно ћаскање</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation>Sei sicuro di voler cancellare questa chat segreta?</translation>
+        <translation>Да ли сте сигурни да желите да обришете тајно ћаскање?</translation>
     </message>
     <message>
         <source>Delete History</source>
-        <translation>Cancella Conversazione</translation>
+        <translation>Обриши историју</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation>Sei sicuro di voler cancellare la conversazione?</translation>
+        <translation>Да ли сте сигурни да желите да обришете историју?</translation>
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation>Apri in una nuova finestra</translation>
+        <translation>Отвори у новом прозору</translation>
     </message>
 </context>
 <context>
     <name>AccountFrame</name>
     <message>
         <source>Show</source>
-        <translation>Mostra</translation>
+        <translation>Прикажи</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Silenzia</translation>
+        <translation>Искључи звук</translation>
     </message>
     <message>
         <source>Message!</source>
-        <translation>Messaggio!</translation>
+        <translation>Порука!</translation>
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation>Messaggio in &quot;%1&quot; da &quot;%2&quot;</translation>
+        <translation>Порука на &quot;%1&quot; од &quot;%2&quot;</translation>
     </message>
 </context>
 <context>
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation>Caricamento...</translation>
+        <translation>Учитавање...</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageAction</name>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation>%1 ha creato il gruppo &quot;%2&quot;</translation>
+        <translation>%1 је креирао групу &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation>%1 ha lasciato il gruppo</translation>
+        <translation>%1 је напустио групу</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation>%1 ha cambiato il nome del gruppo in &quot;%2&quot;</translation>
+        <translation>%1 је променио име групе у &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation>%1 ha cambiato la foto del gruppo.</translation>
+        <translation>%1 је променио слику групе.</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation>%1 ha cancellato la foto del gruppo</translation>
+        <translation>%1 је обрисао слику групе</translation>
     </message>
     <message>
         <source>%1 invited to group</source>
-        <translation>%1 è stato invitato nel gruppo</translation>
+        <translation>%1 је позван у групу.</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation>I file multimediali non sono al momento supportati nelle chat segrete</translation>
+        <translation>Тренутно документа медија нису подржана у тајном ћаскању</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageList</name>
     <message>
         <source>Welcome :)</source>
-        <translation>Benvenuto/a :)</translation>
+        <translation>Добродошли :)</translation>
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>Richiesta di chat segreta. Per favore Accetta o Rifiuta.</translation>
+        <translation>Захтев за тајним ћаскањем. Молимо да Прихватите или Одбијете.</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation>Accetta</translation>
+        <translation>Прихвати</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation>Rifiuta</translation>
+        <translation>Одбиј</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Inoltra</translation>
+        <translation>Проследи</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Обриши</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>Clicca per scaricare</translation>
+        <translation>Притисни за преузимање</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation>Media non supportato</translation>
+        <translation>Неподржани медиј</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation>Откажи</translation>
     </message>
 </context>
 <context>
     <name>AccountSearchList</name>
     <message>
         <source>Me</source>
-        <translation>Io</translation>
+        <translation>Ја</translation>
     </message>
     <message>
         <source>%1 on %2</source>
-        <translation>%1 su %2</translation>
+        <translation>%1 од %2</translation>
     </message>
     <message>
         <source>%1 to %2</source>
-        <translation>%1 a %2</translation>
+        <translation>%1 до %2</translation>
     </message>
 </context>
 <context>
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
-        <translation>Invia</translation>
+        <translation>Пошаљи</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Incolla</translation>
+        <translation>Налепи</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Обриши</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation>È una notizia di Cutegram riguardo nuovi aggiornamenti e soluzioni.
-Non è un contatto telegram. È solo un contatto virtuale.</translation>
+        <translation>Ово су Cutegram вести о новим издањима и решењима.
+Ово није телеграм контакт. Ово је само виртуелни контакт. </translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Camera</translation>
+        <translation>Камера</translation>
     </message>
 </context>
 <context>
     <name>AccountSign</name>
     <message>
         <source>Code</source>
-        <translation>Codice</translation>
+        <translation>Код</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Nome</translation>
+        <translation>Име</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Cognome</translation>
+        <translation>Презиме</translation>
     </message>
     <message>
         <source>Sign In</source>
-        <translation>Accedi</translation>
+        <translation>Пријави се</translation>
     </message>
     <message>
         <source>Sign Up</source>
-        <translation>Registrati</translation>
+        <translation>Отовори налог</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>Richiedi una telefonata</translation>
+        <translation>Захтев позива</translation>
     </message>
     <message>
         <source>Requested</source>
-        <translation>Richiesto</translation>
+        <translation>Захтевано</translation>
     </message>
 </context>
 <context>
     <name>AccountView</name>
     <message>
         <source>Search</source>
-        <translation>Cerca</translation>
+        <translation>Претражи</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation>Nuova chat di gruppo</translation>
+        <translation>Ново групно ћаскање</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configura</translation>
+        <translation>Подеси</translation>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation>Argomento del gruppo</translation>
+        <translation>Тема групе</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation>Crea</translation>
+        <translation>Креирај</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>Aggiungi Chat Segreta</translation>
+        <translation>Додај тајно ћаскање</translation>
     </message>
     <message>
         <source>Contact List</source>
-        <translation>Lista Contatti</translation>
+        <translation>Листа контаката</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation>Trascina e rilascia i contatti qui</translation>
+        <translation>Само превуци и пусти контакте овде</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation>Aggiungi Account (sperimentale)</translation>
+        <translation>Додај налог (експериментално)</translation>
     </message>
 </context>
 <context>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation>Aseman è un&apos;organizzazione no-profit, esiste per supportare e gestire i progetti e le ricerche gratuite, open source e multi piattaforma.</translation>
+        <translation>Aseman је непрофитна организација, постоји да би подржала и водила бесплатне, отвореног кода и међуплатформске пројекте и истраживања.</translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation>L&apos;obbiettivo di Aseman e di fornire prodotti gratuiti e sicuri per garantire la libertà e la privacy degli utenti.</translation>
+        <translation>Циљ Aseman-а је да пружи бесплатне и сигурне производе да сачува слободу људи и њихову приватност.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation>Матична страница</translation>
     </message>
 </context>
 <context>
@@ -349,446 +351,454 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>Aseman è un team no-profit di ricerca e sviluppo software partito nel Febbraio 2014 che si concentra sullo sviluppo di prodotti, tecnologie e soluzioni sotto forma di progetti open-source accessibili a ogni persona nell&apos;universo. Al momento, ci stiamo concentrando sul design e lo sviluppo di software, applicazioni e strumenti a diretto contatto con il consumatore.</translation>
+        <translation>Aseman је непрофитни тим за истраживање и развој покренут у фебруару 2014. године фокусиран на развој производа, технологија и решења у циљу њиховог објављивања као пројекат отвореног кода доступан свим људима у универзуму. Тренутно, фокусирани смо на дизајн и развој програма и алата који имају директан контакт са крајњим корисницима.</translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation>Abilitando innovativi progetti e distribuendo software a milioni di utenti globalmente, il lab lavora per incrementare la crescita di progetti software open source ad alto impatto e a promuovere una cultura di accessibilità e aumentata produttività open source in tutto il mondo. Il lab collabora con leader di industrie e responsabili politici per portare tecnologie open source in nuovi settori, includendo l&apos;educazione, la salute e il governo.</translation>
+        <translation>Омогућавањем иновативних пројеката и дистрибуцијом програма милионима људи глобално, лабараторија ради на убрзању раста високо утицајних пројеката отвореног кода и промоцији културе доступности отвореног кода и повећане продуктивности широм света. Лабараторија сарађује са лидерима индустрије и креаторима политике како би донела технологије отвореног кода новим секторима, укључујући образовање, здравство и владе.</translation>
     </message>
 </context>
 <context>
     <name>AuthenticateDialog</name>
     <message>
         <source>Authenticating</source>
-        <translation>Accesso</translation>
+        <translation>Аутентификација</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>Numero di telefono</translation>
+        <translation>Број телефона</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>Accedi</translation>
+        <translation>Пријава</translation>
     </message>
 </context>
 <context>
     <name>CameraDialog</name>
     <message>
         <source>Send</source>
-        <translation>Invia</translation>
+        <translation>Пошаљи</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation>Откажи</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation>Cattura</translation>
+        <translation>Ухвати</translation>
     </message>
 </context>
 <context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation>On</translation>
+        <translation>Укључено</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation>Off</translation>
+        <translation>Искључено</translation>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Notifications</source>
-        <translation>Notifiche</translation>
+        <translation>Обавештења</translation>
     </message>
     <message>
         <source>On Start</source>
-        <translation>All&apos;avvio</translation>
+        <translation>При покретању</translation>
     </message>
     <message>
         <source>Languages</source>
-        <translation>Lingue</translation>
+        <translation>Језици</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automatico</translation>
+        <translation>Аутоматски</translation>
     </message>
     <message>
         <source>Always visible</source>
-        <translation>Sempre visibile</translation>
+        <translation>Увек видљиво</translation>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation>Minimizza nella barra di sistema</translation>
+        <translation>Смањи у системску касету</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Disconnetti</translation>
+        <translation>Одјава</translation>
     </message>
     <message>
         <source>Change Photo</source>
-        <translation>Cambia foto</translation>
+        <translation>Промени слику</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation>Seleziona foto</translation>
+        <translation>Одабери слику</translation>
     </message>
     <message>
         <source>Detailed List</source>
-        <translation>Lista dettagliata</translation>
+        <translation>Датаљна листа</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>Sfondo</translation>
+        <translation>Позадина</translation>
     </message>
     <message>
         <source>Notify Sound</source>
-        <translation>Suono Notifiche</translation>
+        <translation>Звук обавештења</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation>Colore Principale</translation>
+        <translation type="vanished">Главна боја</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation>Cambia</translation>
+        <translation>Промени</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Rimuovi</translation>
+        <translation>Уклони</translation>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>Seleziona immagine</translation>
+        <translation>Одабери слику</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Nessuno</translation>
+        <translation>Ниједна</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Default</translation>
+        <translation>Подразумевано</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalizzato</translation>
+        <translation>Прилагођено</translation>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation>Seleziona suono</translation>
+        <translation>Одабери звук</translation>
     </message>
     <message>
         <source>Visual Effects</source>
-        <translation>Effetti visivi</translation>
+        <translation type="vanished">Визуелни ефекти</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation>Cutegram Newsletter</translation>
+        <translation>Cutegram билтен</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Carattere</translation>
+        <translation>Фонт</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation>Seleziona</translation>
+        <translation>Одабери</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Seleziona Carattere</translation>
+        <translation>Одабери фонт</translation>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation>Avvia automaticamente</translation>
+        <translation>Аутоматско покретање</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation>Impostazioni proxy</translation>
+        <translation>Подешавање Прокси-ја</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>Riguardo Cutegram</translation>
+        <translation>О Cutegram-у</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>Riguardo Aseman</translation>
+        <translation>О Aseman-у</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation>Colori di Sistema</translation>
+        <translation type="vanished">Системска боја</translation>
+    </message>
+    <message>
+        <source>Minimum List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CursorPicker</name>
     <message>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Taglia</translation>
+        <translation>Исеци</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Incolla</translation>
+        <translation>Налепи</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Обриши</translation>
     </message>
 </context>
 <context>
     <name>Cutegram</name>
     <message>
         <source>Show</source>
-        <translation>Mostra</translation>
+        <translation>Прикажи</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configura</translation>
+        <translation>Подеси</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Riguardo</translation>
+        <translation>О програму</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>Riguardo Aseman</translation>
+        <translation>О Aseman-у</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Esci</translation>
+        <translation>Изађи</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Esci</translation>
+        <translation>Изађи</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contatta</translation>
+        <translation>Контакт</translation>
     </message>
 </context>
 <context>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation>AM</translation>
+        <translation>АМ</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation>ПМ</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation>Датум</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Ora</translation>
+        <translation>Време</translation>
     </message>
 </context>
 <context>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>&lt;&lt;&lt; Trascina nella lista delle conversazioni per inoltrare</translation>
+        <translation>&lt;&lt;&lt; Пусти у листу дијалога за прослеђивање</translation>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation>Rilascia per inoltrare</translation>
+        <translation>Пусти за прослеђивање</translation>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation>Rilascia per inviare come documento</translation>
+        <translation>Пусти да пошаљеш као документ</translation>
     </message>
     <message>
         <source>Drop to send</source>
-        <translation>Rilascia per inviare</translation>
+        <translation>Пусти да пошаљеш</translation>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation>Rilascia per aggiungere un partecipante</translation>
+        <translation>Пусти да додаш учесника</translation>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation>Rilascia per aggiungere una nuova chat</translation>
+        <translation>Пусти да додаш ново ћаскање</translation>
     </message>
     <message>
         <source>New Group</source>
-        <translation>Nuovo Gruppo</translation>
+        <translation>Нова група</translation>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation>Inserire il nome del nuovo gruppo</translation>
+        <translation>Молимо да унесете ново име групе</translation>
     </message>
 </context>
 <context>
     <name>Emoticons</name>
     <message>
         <source>Recent</source>
-        <translation>Recenti</translation>
+        <translation>Недавно</translation>
     </message>
     <message>
         <source>All Emoji</source>
-        <translation>Tutte le emoticon</translation>
+        <translation>Сви емоџи</translation>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>Selezionare un contatto...</translation>
+        <translation>Молимо одаберите контакт...</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>Per</translation>
+        <translation>Коме</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation>Откажи</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Inoltra</translation>
+        <translation>Проследи</translation>
     </message>
 </context>
 <context>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation>Incolla</translation>
+        <translation>Налепи</translation>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation>Inserire la password</translation>
+        <translation>Молимо да унесете лозинку</translation>
     </message>
     <message>
         <source>password</source>
-        <translation>password</translation>
+        <translation>лозинка</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Fatto</translation>
+        <translation>Урађено</translation>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation>Sbagliata!</translation>
+        <translation>Нетачно!</translation>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation>Indietro</translation>
+        <translation>Назад</translation>
     </message>
 </context>
 <context>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation>Incolla</translation>
+        <translation>Налепи</translation>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation>Impostazioni Proxy</translation>
+        <translation>Подешавање Прокси-ја</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation>Queste modifiche richiedono il riavvio dell&apos;applicazione.</translation>
+        <translation>Ова промена захтева поновно покретање програма.</translation>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation>Tipo di Proxy</translation>
+        <translation>Тип Прокси-ја</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation>Hostname</translation>
+        <translation>Име домаћина</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation>Porta</translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Username</translation>
+        <translation>Корисничко име</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Password</translation>
+        <translation>Лозинка</translation>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation>Ex: 127.0.0.1</translation>
+        <translation>Нпр.: 127.0.0.1</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation>Откажи</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>Ок</translation>
     </message>
 </context>
 <context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation>Seleziona Applicazione</translation>
+        <translation>Одабери програм</translation>
     </message>
 </context>
 <context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation>Chat Segreta</translation>
+        <translation>Тајно ћаскање</translation>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation>Numero di Telefono</translation>
+        <translation>Број телефона</translation>
     </message>
     <message>
         <source>Favorite</source>
-        <translation>Preferito</translation>
+        <translation>Омиљен</translation>
     </message>
     <message>
         <source>Love</source>
-        <translation>Love</translation>
+        <translation>Љубав</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Silenzia</translation>
+        <translation>Пригуши</translation>
     </message>
     <message>
         <source>Participants</source>
-        <translation>Partecipanti</translation>
+        <translation>Учесници</translation>
     </message>
     <message>
         <source>Show List</source>
-        <translation>Mostra Lista</translation>
+        <translation>Прикажи листу</translation>
     </message>
     <message>
         <source>Leave</source>
-        <translation>Abbandona</translation>
+        <translation>Напусти</translation>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation>Abbandona il gruppo</translation>
+        <translation>Напусти групу</translation>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
-        <translation>Sei sicuro di voler lasciare questo gruppo?</translation>
+        <translation>Јесте ли сигурни да желите да напустите групу?</translation>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation>Aggiungi partecipanti</translation>
+        <translation>Додај учесника</translation>
     </message>
 </context>
 </TS>

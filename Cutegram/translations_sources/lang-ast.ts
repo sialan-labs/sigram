@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ast">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -204,7 +206,7 @@
         <translation>Desaniciar</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Cutegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
@@ -280,7 +282,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation type="unfinished"/>
+        <translation>Namái arrastra y suelta los contautos equí</translation>
     </message>
 </context>
 <context>
@@ -449,7 +451,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation>Color maestra</translation>
+        <translation type="vanished">Color maestra</translation>
     </message>
     <message>
         <source>Change</source>
@@ -481,7 +483,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Visual Effects</source>
-        <translation>Efeutos visuales</translation>
+        <translation type="vanished">Efeutos visuales</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
@@ -517,7 +519,15 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation>Color del sistema</translation>
+        <translation type="vanished">Color del sistema</translation>
+    </message>
+    <message>
+        <source>Minimum List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

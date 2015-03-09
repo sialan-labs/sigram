@@ -477,7 +477,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Master Color</source>
-        <translation>Põhivärv</translation>
+        <translation type="vanished">Põhivärv</translation>
     </message>
     <message>
         <source>Change</source>
@@ -506,10 +506,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Select Sound</source>
         <translation>Vali helifail</translation>
-    </message>
-    <message>
-        <source>Visual Effects</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
@@ -544,7 +540,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation type="unfinished">Asemani info</translation>
     </message>
     <message>
-        <source>System Color</source>
+        <source>Minimum List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Theme</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

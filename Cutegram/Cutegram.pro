@@ -149,8 +149,12 @@ DISTFILES += \
     translations_sources/lang-ast.ts \
     translations_sources/lang-de.ts \
     translations_sources/lang-en.ts \
+    translations_sources/lang-en_GB.ts \
     translations_sources/lang-et.ts \
     translations_sources/lang-fa.ts \
+    translations_sources/lang-fr_FR.ts \
     translations_sources/lang-it.ts \
-    translations_sources/lang-en_GB.ts \
+    translations_sources/lang-nl_NL.ts \
+    translations_sources/lang-pt_BR.ts \
+    translations_sources/lang-sr.ts \
     objects/themeitem.sco

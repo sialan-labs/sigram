@@ -490,7 +490,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation>Hauptfarbe</translation>
+        <translation type="vanished">Hauptfarbe</translation>
     </message>
     <message>
         <source>Change</source>
@@ -522,7 +522,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Visual Effects</source>
-        <translation>Visuelle Effekte</translation>
+        <translation type="vanished">Visuelle Effekte</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
@@ -557,7 +557,11 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <translation type="unfinished">Über Aseman</translation>
     </message>
     <message>
-        <source>System Color</source>
+        <source>Minimum List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Theme</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
