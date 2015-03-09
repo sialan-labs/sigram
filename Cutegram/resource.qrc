@@ -85,5 +85,16 @@
         <file>qml/Cutegram/files/mute-dark.png</file>
         <file>qml/Cutegram/files/unmute-dark.png</file>
         <file>qml/Cutegram/files/close.png</file>
+        <file>qml/Cutegram/files/add_chat-dark.png</file>
+        <file>qml/Cutegram/files/add_dialog-dark.png</file>
+        <file>qml/Cutegram/files/add_user-dark.png</file>
+        <file>qml/Cutegram/files/attach-light.png</file>
+        <file>qml/Cutegram/files/camera-light.png</file>
+        <file>qml/Cutegram/files/configure-dark.png</file>
+        <file>qml/Cutegram/files/contact-light.png</file>
+        <file>qml/Cutegram/files/emoji-light.png</file>
+        <file>qml/Cutegram/files/favorite-light.png</file>
+        <file>qml/Cutegram/files/lock-dark.png</file>
+        <file>qml/Cutegram/files/telegram-dark.png</file>
     </qresource>
 </RCC>

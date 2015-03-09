@@ -134,7 +134,7 @@ Item {
                 id: msg_frame_box
                 anchors.fill: parent
                 anchors.margins: -20*Devices.density
-                visible: false
+                visible: !Cutegram.currentTheme.messageShadow
 
                 Item {
                     anchors.fill: parent
@@ -142,41 +142,27 @@ Item {
 
                     Rectangle {
                         id: pointer_rect
-                        height: 15*Devices.density
+                        height: Cutegram.currentTheme.messagePointerHeight*Devices.density
                         width: height
                         anchors.horizontalCenter: message.out? parent.right : parent.left
                         anchors.verticalCenter: parent.verticalCenter
-                        color: back_frame.color
+                        color: back_rect_layer.color
                         transformOrigin: Item.Center
                         rotation: 45
-
-                        Rectangle {
-                            anchors.fill: parent
-                            color: back_rect_layer.color
-                            opacity: back_rect_layer.opacity
-                        }
-                    }
-
-                    Rectangle {
-                        id: back_frame
-                        anchors.fill: parent
-                        color: "#ffffff"
-                        radius: 5*Devices.density
                     }
 
                     Rectangle {
                         id: back_rect_layer
                         anchors.fill: parent
-                        opacity: hasMedia || encryptMedia? 1 : 0.3
-                        radius: back_frame.radius
+                        radius: Cutegram.currentTheme.messageRadius*Devices.density
                         color: {
                             if(hasMedia || encryptMedia)
-                                return "#111111"
+                                return Cutegram.currentTheme.messageMediaColor
                             else
                             if(message.out)
-                                return Cutegram.highlightColor
+                                return Cutegram.currentTheme.messageOutgoingColor
                             else
-                                return "#ffffff"
+                                return Cutegram.currentTheme.messageIncomingColor
                         }
                     }
                 }
@@ -185,11 +171,12 @@ Item {
             DropShadow {
                 anchors.fill: source
                 source: msg_frame_box
-                radius: 2*Devices.density
+                radius: Cutegram.currentTheme.messageShadowSize*Devices.density
                 samples: 16
                 horizontalOffset: 0
                 verticalOffset: 1*Devices.density
-                color: "#66000000"
+                visible: Cutegram.currentTheme.messageShadow
+                color: Cutegram.currentTheme.messageShadowColor
             }
 
             Column {
@@ -203,9 +190,17 @@ Item {
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
                     font.family: AsemanApp.globalFont.family
                     lineHeight: 1.3
-                    color: Cutegram.highlightColor
                     text: user.firstName + " " + user.lastName
                     visible: visibleNames
+                    color: {
+                        if(hasMedia || encryptMedia)
+                            return Cutegram.currentTheme.messageMediaNameColor
+                        else
+                        if(message.out)
+                            return Cutegram.currentTheme.messageOutgoingNameColor
+                        else
+                            return Cutegram.currentTheme.messageIncomingNameColor
+                    }
                 }
 
                 AccountMessageUpload {
@@ -242,12 +237,20 @@ Item {
                             readOnly: true
                             selectionColor: masterPalette.highlight
                             selectedTextColor: masterPalette.highlightedText
-                            color: encryptMedia? "#ffffff" : textColor0
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             text: emojis.bodyTextToEmojiText(messageText)
                             textFormat: Text.RichText
                             height: contentHeight
                             onLinkActivated: Qt.openUrlExternally(link)
+                            color: {
+                                if(hasMedia || encryptMedia)
+                                    return Cutegram.currentTheme.messageMediaDateColor
+                                else
+                                if(message.out)
+                                    return Cutegram.currentTheme.messageOutgoingFontColor
+                                else
+                                    return Cutegram.currentTheme.messageIncomingFontColor
+                            }
 
                             property real htmlWidth: Cutegram.htmlWidth(text)
                             property string messageText: encryptMedia? qsTr("Media files is not supported on secret chat currently") : message.message
@@ -262,9 +265,17 @@ Item {
                             id: time_txt
                             font.family: AsemanApp.globalFont.family
                             font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: textColor2
                             text: Cutegram.getTimeString(msgDate)
                             verticalAlignment: Text.AlignVCenter
+                            color: {
+                                if(hasMedia || encryptMedia)
+                                    return Cutegram.currentTheme.messageMediaDateColor
+                                else
+                                if(message.out)
+                                    return Cutegram.currentTheme.messageOutgoingDateColor
+                                else
+                                    return Cutegram.currentTheme.messageIncomingDateColor
+                            }
 
                             property variant msgDate: CalendarConv.fromTime_t(message.date)
                         }
@@ -283,8 +294,8 @@ Item {
                                 width: 8*Devices.density
                                 height: width
                                 visible: !message.unread && message.out
-                                source: hasMedia || encryptMedia? "files/sent-light.png" : "files/sent.png"
                                 sourceSize: Qt.size(width,height)
+                                source: indicator.light? "files/sent-light.png" : "files/sent.png"
                             }
 
                             Image {
@@ -294,17 +305,25 @@ Item {
                                 width: 8*Devices.density
                                 height: width
                                 visible: message.sent && message.out
-                                source: hasMedia || encryptMedia? "files/sent-light.png" : "files/sent.png"
                                 sourceSize: Qt.size(width,height)
+                                source: indicator.light? "files/sent-light.png" : "files/sent.png"
                             }
 
                             Indicator {
                                 id: indicator
                                 anchors.centerIn: parent
-                                light: false
                                 modern: true
                                 indicatorSize: 10*Devices.density
                                 Component.onCompleted: if(!sent) start()
+                                light: {
+                                    if(hasMedia || encryptMedia) {
+                                        return Cutegram.currentTheme.messageMediaLightIcon
+                                    } else if(message.out) {
+                                        return Cutegram.currentTheme.messageOutgoingLightIcon
+                                    } else {
+                                        return Cutegram.currentTheme.messageIncomingLightIcon
+                                    }
+                                }
                             }
                         }
                     }

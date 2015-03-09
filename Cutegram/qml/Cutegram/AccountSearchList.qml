@@ -62,7 +62,7 @@ Item {
                 color: {
                     var result = "#00000000"
                     if(marea.pressed || selected) {
-                        result = Cutegram.highlightColor
+                        result = Cutegram.currentTheme.masterColor
                     }
 
                     return result
@@ -83,7 +83,7 @@ Item {
                     anchors.bottom: parent.bottom
                     width: height
                     anchors.margins: 4*Devices.density
-                    backgroundColor: selected || marea.pressed? Qt.lighter(Cutegram.highlightColor, 1.7) : "#eeeeee"
+                    backgroundColor: selected || marea.pressed? Qt.lighter(Cutegram.currentTheme.masterColor, 1.7) : "#eeeeee"
 
                     ContactImage {
                         anchors.fill: parent

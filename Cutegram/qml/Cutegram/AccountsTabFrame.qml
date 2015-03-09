@@ -70,7 +70,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: 48*Devices.density
-        color: Cutegram.highlightColor
+        color: Cutegram.currentTheme.panelColor
 
         AccountsTabList {
             id: tab_list
@@ -78,7 +78,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: add_secret_chat_btn.top
-            selectColor: slide_menu.active? "#ffffff" : "#eeeeee"
+            selectColor: slide_menu.active? Cutegram.currentTheme.sidebarColor : Cutegram.currentTheme.dialogListBackground
             z: 10
             onCurrentKeyChanged: {
                 if(lastKey.length != 0)
@@ -100,11 +100,13 @@ Rectangle {
             normalColor: "#00000000"
             highlightColor: "#88339DCC"
             cursorShape: Qt.PointingHandCursor
-            icon: "files/lock.png"
+            icon: Cutegram.currentTheme.panelLightIcon? "files/lock.png" : "files/lock-dark.png"
             iconHeight: 18*Devices.density
             tooltipText: qsTr("Add Secret Chat")
             tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
+            tooltipColor: Cutegram.currentTheme.panelTooltipBackground
+            tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
             onClicked: {
                 slide_menu.text = ""
                 slide_menu.show(add_secret_chat_component)
@@ -120,11 +122,13 @@ Rectangle {
             normalColor: "#00000000"
             highlightColor: "#88339DCC"
             cursorShape: Qt.PointingHandCursor
-            icon: "files/add_chat.png"
+            icon: Cutegram.currentTheme.panelLightIcon? "files/add_chat.png" : "files/add_chat-dark.png"
             iconHeight: 26*Devices.density
             tooltipText: qsTr("New group chat")
             tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
+            tooltipColor: Cutegram.currentTheme.panelTooltipBackground
+            tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
             onClicked: {
                 slide_menu.text = ""
                 slide_menu.show(add_groupchat_component)
@@ -140,11 +144,13 @@ Rectangle {
             normalColor: "#00000000"
             highlightColor: "#88339DCC"
             cursorShape: Qt.PointingHandCursor
-            icon: "files/add_user.png"
+            icon: Cutegram.currentTheme.panelLightIcon? "files/add_user.png" : "files/add_user-dark.png"
             iconHeight: 22*Devices.density
             tooltipText: qsTr("Contact List")
             tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
+            tooltipColor: Cutegram.currentTheme.panelTooltipBackground
+            tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
             onClicked: {
                 slide_menu.text = ""
                 showContactList()
@@ -160,11 +166,13 @@ Rectangle {
             normalColor: "#00000000"
             highlightColor: "#88339DCC"
             cursorShape: Qt.PointingHandCursor
-            icon: "files/configure.png"
+            icon: Cutegram.currentTheme.panelLightIcon? "files/configure.png" : "files/configure-dark.png"
             iconHeight: 22*Devices.density
             tooltipText: qsTr("Configure")
             tooltipFont.family: AsemanApp.globalFont.family
             tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
+            tooltipColor: Cutegram.currentTheme.panelTooltipBackground
+            tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
             onClicked: {
                 slide_menu.text = ""
                 slide_menu.show(configure_component)
@@ -177,11 +185,10 @@ Rectangle {
             transformOrigin: Item.BottomRight
             rotation: -90
             width: parent.height
-            height: 5*Devices.density
-            opacity: 0.6
+            height: Cutegram.currentTheme.panelShadowWidth*Devices.density
             gradient: Gradient {
                 GradientStop { position: 0.0; color: "#00000000" }
-                GradientStop { position: 1.0; color: "#88111111" }
+                GradientStop { position: 1.0; color: Cutegram.currentTheme.panelShadowColor }
             }
         }
     }
@@ -209,6 +216,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 237*Devices.density
+            color: Cutegram.currentTheme.sidebarColor
 
             AccountContactList {
                 anchors.fill: parent
@@ -230,6 +238,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 237*Devices.density
+            color: Cutegram.currentTheme.sidebarColor
 
             AccountContactList {
                 anchors.fill: parent
@@ -252,6 +261,7 @@ Rectangle {
             anchors.bottom: parent.bottom
             width: 357*Devices.density
             telegram: accountView.telegramObject
+            color: Cutegram.currentTheme.sidebarColor
 
             property variant accountView: hash.value(tab_list.currentKey)
         }
@@ -264,6 +274,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 237*Devices.density
+            color: Cutegram.currentTheme.sidebarColor
 
             LineEdit {
                 id: topic_txt
@@ -293,8 +304,8 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
-                normalColor: Cutegram.highlightColor
-                highlightColor: Qt.darker(Cutegram.highlightColor)
+                normalColor: Cutegram.currentTheme.masterColor
+                highlightColor: Qt.darker(Cutegram.currentTheme.masterColor)
                 textColor: masterPalette.highlightedText
                 textFont.family: AsemanApp.globalFont.family
                 textFont.pixelSize: Math.floor(9*Devices.fontDensity)

@@ -36,5 +36,15 @@ ComboBoxStyle {
             opacity: control.pressed? 0.5 : 0.2
             color: "#000000"
         }
+
+        Image {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 4*Devices.density
+            width: 12*Devices.density
+            height: width
+            sourceSize: Qt.size(width,height)
+            source: "images/arrow-down.png"
+        }
     }
 }

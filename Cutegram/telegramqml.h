@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include "types/inputfilelocation.h"
+#include "types/peer.h"
 #include "types/inputpeer.h"
 
 class DownloadObject;
@@ -381,6 +382,7 @@ private slots:
 
     qint64 generateRandomId() const;
     InputPeer::InputPeerType getInputPeerType(qint64 pid);
+    Peer::PeerType getPeerType(qint64 pid);
 
 private:
     TelegramQmlPrivate *p;

@@ -30,6 +30,7 @@
 #include "asemandragobject.h"
 #include "asemandownloader.h"
 #include "asemanbackhandler.h"
+#include "asemanquickobject.h"
 #include "asemancountriesmodel.h"
 #include "asemanquickitemimagegrabber.h"
 #include "asemannotification.h"
@@ -113,6 +114,7 @@ AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
     qmlRegisterType<AsemanHashObject>("AsemanTools", 1,0, "HashObject");
     qmlRegisterType<AsemanListObject>("AsemanTools", 1,0, "ListObject");
     qmlRegisterType<AsemanDownloader>("AsemanTools", 1,0, "Downloader");
+    qmlRegisterType<AsemanQuickObject>("AsemanTools", 1,0, "AsemanObject");
     qmlRegisterType<AsemanImageColorAnalizor>("AsemanTools", 1,0, "ImageColorAnalizor");
     qmlRegisterType<AsemanCountriesModel>("AsemanTools", 1,0, "CountriesModel");
     qmlRegisterType<AsemanNotification>("AsemanTools", 1,0, "Notification");

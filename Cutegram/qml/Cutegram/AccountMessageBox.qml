@@ -52,14 +52,14 @@ Item {
             id: header_blur
             anchors.fill: header
             clip: true
-            visible: Cutegram.visualEffects
+            visible: Cutegram.currentTheme.visualEffects
 
             FastBlur {
                 anchors.top: parent.top
                 width: messages.width
                 height: messages.height
                 source: messages
-                radius: Cutegram.visualEffects?64:0
+                radius: Cutegram.currentTheme.visualEffects?64:0
             }
         }
 
@@ -67,14 +67,14 @@ Item {
             id: send_msg_blur
             anchors.fill: send_msg
             clip: true
-            visible: Cutegram.visualEffects
+            visible: Cutegram.currentTheme.visualEffects
 
             FastBlur {
                 anchors.bottom: parent.bottom
                 width: messages.width
                 height: messages.height
                 source: messages
-                radius: Cutegram.visualEffects?64:0
+                radius: Cutegram.currentTheme.visualEffects?64:0
             }
         }
 
@@ -86,13 +86,10 @@ Item {
             currentDialog: msg_box.currentDialog
             refreshing: messages.refreshing
             color: {
-                if(!Cutegram.visualEffects)
-                    return "#fafafa"
-                else
                 if(currentDialog.encrypted)
-                    return "#aa000000"
+                    return Cutegram.currentTheme.headerSecretColor
                 else
-                    return framesColor
+                    return Cutegram.currentTheme.headerColor
             }
             onClicked: {
                 if( properties )
@@ -110,7 +107,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            color: Cutegram.visualEffects?framesColor:"#fafafa"
+            color: Cutegram.currentTheme.sendFrameColor
             currentDialog: msg_box.currentDialog
             onAccepted: messages.sendMessage(text)
             trash: messages.messageDraging
@@ -134,7 +131,7 @@ Item {
             anchors.fill: drop_file
             clip: true
             opacity: drop_file.visibleRatio
-            visible: opacity != 0 && Cutegram.visualEffects
+            visible: opacity != 0 && Cutegram.currentTheme.visualEffects
 
             FastBlur {
                 anchors.top: parent.top
@@ -142,7 +139,7 @@ Item {
                 width: messages.width
                 height: messages.height
                 source: messages
-                radius: Cutegram.visualEffects?32:0
+                radius: Cutegram.currentTheme.visualEffects?32:0
             }
         }
 
@@ -220,14 +217,14 @@ Item {
             FastBlur {
                 anchors.fill: parent
                 source: messages
-                radius: Cutegram.visualEffects?64:0
-                visible: Cutegram.visualEffects
+                radius: Cutegram.currentTheme.visualEffects?64:0
+                visible: Cutegram.currentTheme.visualEffects
             }
 
             ForwardPage {
                 id: forward_page
                 anchors.fill: parent
-                color: Cutegram.visualEffects?"#66ffffff":"#ddffffff"
+                color: Cutegram.currentTheme.visualEffects?"#66ffffff":"#ddffffff"
                 onCloseRequest: forward_item.destroy()
             }
 

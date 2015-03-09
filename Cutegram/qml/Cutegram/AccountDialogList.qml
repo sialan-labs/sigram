@@ -7,7 +7,7 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: ad_list
-    width: minimum? 80*Devices.density : 275*Devices.density
+    width: minimum? 80*Devices.density : Cutegram.currentTheme.dialogListWidth*Devices.density
 
     property alias telegramObject: dialogs_model.telegram
     property Dialog currentDialog: telegramObject.dialog(0)
@@ -48,9 +48,9 @@ Item {
 
     ListView {
         id: dlist
-        width: 275*Devices.density - ad_list.x
+        width: Cutegram.currentTheme.dialogListWidth*Devices.density - x
         height: parent.height
-        x: 6*Devices.density
+        x: Cutegram.currentTheme.dialogListScrollWidth*Devices.density
         clip: true
         model: dialogs_model
 
@@ -62,12 +62,26 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                opacity: 0.3
                 anchors.topMargin: 3*Devices.density
                 anchors.bottomMargin: 3*Devices.density
-                anchors.rightMargin: -5*Devices.density
-                color: Cutegram.highlightColor
+                anchors.rightMargin: -radius
+                color: Cutegram.currentTheme.dialogListHighlightColor
                 radius: 5*Devices.density
+
+                Rectangle {
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.right
+                    anchors.leftMargin: -parent.radius
+                    transformOrigin: Item.BottomLeft
+                    rotation: -90
+                    width: parent.height
+                    height: Cutegram.currentTheme.dialogListShadowWidth*Devices.density
+                    opacity: 0.4
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: "#00000000" }
+                        GradientStop { position: 1.0; color: Cutegram.currentTheme.dialogListShadowColor }
+                    }
+                }
             }
 
             Item {
@@ -83,17 +97,17 @@ Item {
                     anchors.centerIn: parent
                     transformOrigin: Item.Center
                     rotation: 45
-                    width: 16*Devices.density
+                    width: Cutegram.currentTheme.dialogPointerHeight*Devices.density
                     height: width
-                    color: "#E4E9EC"
+                    color: Cutegram.currentTheme.dialogPointerColor
                 }
             }
 
             DropShadow {
                 anchors.fill: pointer_frame
-                radius: 8.0
+                radius: Cutegram.currentTheme.dialogListShadowWidth
                 samples: 16
-                color: "#80000000"
+                color: Cutegram.currentTheme.dialogListShadowColor
                 source: pointer_frame
             }
         }
@@ -127,10 +141,11 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                opacity: marea.pressed && !selected? 0.3 : 0
+                opacity: marea.pressed && !selected? 1 : 0
                 anchors.topMargin: 3*Devices.density
                 anchors.bottomMargin: 3*Devices.density
-                color: Cutegram.highlightColor
+                color: Cutegram.currentTheme.dialogListHighlightColor
+                radius: 5*Devices.density
             }
 
             Item {
@@ -147,7 +162,7 @@ Item {
                     anchors.left: parent.left
                     anchors.margins: 4*Devices.density
                     width: height
-                    backgroundColor: selected || marea.pressed? Qt.lighter(Cutegram.highlightColor, 1.6) : "#eeeeee"
+                    backgroundColor: selected || marea.pressed? Cutegram.currentTheme.dialogListHighlightColor : Cutegram.currentTheme.dialogListBackground
 
                     ContactImage {
                         id: contact_img
@@ -176,10 +191,10 @@ Item {
                     anchors.right: time_txt.left
                     anchors.margins: 4*Devices.density
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
-                    font.family: AsemanApp.globalFont.family
+                    font.family: Cutegram.currentTheme.dialogListFont.family
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignVCenter
-                    color: "#222222"
+                    color: selected || marea.pressed? Cutegram.currentTheme.dialogListHighlightTextColor : Cutegram.currentTheme.dialogListFontColor
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     maximumLineCount: 1
@@ -190,7 +205,7 @@ Item {
                 Image {
                     x: title_txt.x + title_txt.paintedWidth + 4*Devices.density
                     anchors.verticalCenter: parent.verticalCenter
-                    source: "files/lock.png"
+                    source: Cutegram.currentTheme.dialogListLightIcon? "files/lock.png" : "files/lock-dark.png"
                     sourceSize: Qt.size(width, height)
                     visible: dItem.encrypted
                     width: 14*Devices.density
@@ -205,9 +220,9 @@ Item {
                     anchors.right: parent.right
                     anchors.margins: 4*Devices.density
                     anchors.topMargin: 0
-                    font.pixelSize: Math.floor(9*Devices.fontDensity)
-                    font.family: AsemanApp.globalFont.family
-                    color: "#444444"
+                    font.pixelSize: Math.floor(Cutegram.currentTheme.dialogListMessageFont.pointSize*Devices.fontDensity)
+                    font.family: Cutegram.currentTheme.dialogListMessageFont.family
+                    color: selected || marea.pressed? Cutegram.currentTheme.dialogListHighlightMessageColor : Cutegram.currentTheme.dialogListMessageColor
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     clip: true
@@ -229,9 +244,9 @@ Item {
                     anchors.top: parent.top
                     anchors.right: parent.right
                     anchors.margins: 4*Devices.density
-                    font.family: AsemanApp.globalFont.family
-                    font.pixelSize: Math.floor(9*Devices.fontDensity)
-                    color: "#777777"
+                    font.family: Cutegram.currentTheme.dialogListDateFont.family
+                    font.pixelSize: Math.floor(Cutegram.currentTheme.dialogListDateFont.pointSize*Devices.fontDensity)
+                    color: selected || marea.pressed? Cutegram.currentTheme.dialogListHighlightDateColor : Cutegram.currentTheme.dialogListDateColor
                     text: Cutegram.getTimeString(msgDate)
                     opacity: itemOpacities
                     visible: showLastMessage
@@ -349,10 +364,10 @@ Item {
                 smooth: true
                 source: {
                     if( section == 0 )
-                        return "files/contact.png"
+                        return Cutegram.currentTheme.dialogListLightIcon? "files/contact-light.png" : "files/contact.png"
                     else
                     if( section == 1 )
-                        return "files/favorite.png"
+                        return Cutegram.currentTheme.dialogListLightIcon? "files/favorite-light.png" : "files/favorite.png"
                     else
                     if( section == 2 )
                         return "files/love.png"
@@ -388,8 +403,8 @@ Item {
     }
 
     PhysicalScrollBar {
-        scrollArea: dlist; height: dlist.height; width: 6*Devices.density
-        anchors.right: dlist.left; anchors.top: dlist.top; color: "#777777"
+        scrollArea: dlist; height: dlist.height; width: Cutegram.currentTheme.dialogListScrollWidth*Devices.density
+        anchors.right: dlist.left; anchors.top: dlist.top; color: Cutegram.currentTheme.dialogListScrollColor
     }
 
     Button {
@@ -403,6 +418,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
         icon: Cutegram.minimumDialogs? "files/arrow-right.png" : "files/arrow-left.png"
         iconHeight: 8*Devices.density
+        visible: false
 
         Behavior on color {
             ColorAnimation{ easing.type: Easing.OutCubic; duration: 400 }

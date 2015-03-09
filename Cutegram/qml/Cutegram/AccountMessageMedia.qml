@@ -298,7 +298,7 @@ Item {
         anchors.right: parent.right
         anchors.margins: 4*Devices.density
         height: 3*Devices.density
-        topColor: Cutegram.highlightColor
+        topColor: Cutegram.currentTheme.masterColor
         color: masterPalette.highlightedText
         radius: 0
         percent: 100*locationObj.download.downloaded/locationObj.download.total

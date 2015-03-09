@@ -86,7 +86,7 @@ Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     height: name_column.height + 10*Devices.density
-                    color: "#dddddd"
+                    color: Cutegram.currentTheme.sidebarPhoneBackground
 
                     Column {
                         id: name_column
@@ -99,9 +99,9 @@ Rectangle {
                             anchors.right: parent.right
                             anchors.margins: 20*Devices.density
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(18*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarPhoneFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarPhoneFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarPhoneColor
                             text: user.firstName + " " + user.lastName
                         }
 
@@ -114,7 +114,7 @@ Rectangle {
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.family: AsemanApp.globalFont.family
                             font.pixelSize: Math.floor(12*Devices.fontDensity)
-                            color: "#333333"
+                            color: Cutegram.currentTheme.sidebarPhoneColor
                             text: telegram.phoneNumber
                         }
                     }
@@ -134,29 +134,19 @@ Rectangle {
                             id: notify_text
                             height: notify_checkbox.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Notifications")
-                        }
-
-                        Text {
-                            id: veffect_text
-                            height: veffect_checkbox.height
-                            verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
-                            text: qsTr("Visual Effects")
                         }
 
                         Text {
                             id: aseman_nl_text
                             height: aseman_nl_checkbox.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Cutegram Newsletter")
                         }
 
@@ -164,9 +154,9 @@ Rectangle {
                             id: autostart_text
                             height: autostart_checkbox.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             visible: Devices.isLinux
                             text: qsTr("Auto Start")
                         }
@@ -175,9 +165,9 @@ Rectangle {
                             id: startup_text
                             height: startup_combo.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("On Start")
                         }
 
@@ -185,29 +175,49 @@ Rectangle {
                             id: languages_text
                             height: languages_combo.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Languages")
+                        }
+
+                        Text {
+                            id: minimum_list_text
+                            height: minimum_list_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Minimum List")
                         }
 
                         Text {
                             id: last_msg_text
                             height: last_msg_checkbox.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Detailed List")
+                        }
+
+                        Text {
+                            id: theme_text
+                            height: theme_combo.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Theme")
                         }
 
                         Text {
                             id: background_text
                             height: background_btn.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Background")
                         }
 
@@ -215,9 +225,9 @@ Rectangle {
                             id: proxy_text
                             height: proxy_btn.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Proxy Settings")
                         }
 
@@ -225,29 +235,19 @@ Rectangle {
                             id: notify_sound_text
                             height: notify_sound_combo.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Notify Sound")
-                        }
-
-                        Text {
-                            id: color_text
-                            height: color_combo.height
-                            verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
-                            text: qsTr("Master Color")
                         }
 
                         Text {
                             id: font_text
                             height: font_btn.height
                             verticalAlignment: Text.AlignVCenter
-                            font.family: AsemanApp.globalFont.family
-                            font.pixelSize: Math.floor(9*Devices.fontDensity)
-                            color: "#333333"
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Font")
                         }
                     }
@@ -259,12 +259,6 @@ Rectangle {
                             id: notify_checkbox
                             checked: Cutegram.notification
                             onCheckedChanged: Cutegram.notification = checked
-                        }
-
-                        Controls.Switch {
-                            id: veffect_checkbox
-                            checked: Cutegram.visualEffects
-                            onCheckedChanged: Cutegram.visualEffects = checked
                         }
 
                         Controls.Switch {
@@ -303,9 +297,36 @@ Rectangle {
                         }
 
                         Controls.Switch {
+                            id: minimum_list_checkbox
+                            checked: Cutegram.minimumDialogs
+                            onCheckedChanged: Cutegram.minimumDialogs = checked
+                        }
+
+                        Controls.Switch {
                             id: last_msg_checkbox
                             checked: Cutegram.showLastMessage
                             onCheckedChanged: Cutegram.showLastMessage = checked
+                        }
+
+                        Controls.ComboBox {
+                            id: theme_combo
+                            model: {
+                                var result = new Array
+                                var themes = Cutegram.themes
+                                for(var i=0; i<themes.length; i++)
+                                    result[i] = Tools.fileName(themes[i])
+                                return result
+                            }
+                            currentIndex: {
+                                var themes = Cutegram.themes
+                                for(var i=0; i<themes.length; i++)
+                                    if(themes[i] == Cutegram.theme)
+                                        return i
+
+                                return 0
+                            }
+
+                            onCurrentIndexChanged: if(init_timer.inited) Cutegram.theme = currentText + ".qml"
                         }
 
                         Controls.Button {
@@ -368,27 +389,6 @@ Rectangle {
                                 }
                                     break;
                                 }
-                            }
-                        }
-
-                        Controls.ComboBox {
-                            id: color_combo
-                            model: [qsTr("System Color"), qsTr("Custom")]
-                            currentIndex: {
-                                if(Cutegram.masterColor.length == 0)
-                                    return 0
-                                else
-                                    return 1
-                            }
-                            onCurrentIndexChanged: {
-                                if(!init_timer.inited)
-                                    return
-
-                                var color = ""
-                                if(currentIndex != 0)
-                                    color = Desktop.getColor(Cutegram.highlightColor)
-
-                                Cutegram.masterColor = color
                             }
                         }
 

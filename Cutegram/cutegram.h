@@ -25,6 +25,7 @@
 #include <QSystemTrayIcon>
 #include <QFont>
 
+class ThemeItem;
 class CutegramPrivate;
 class Cutegram : public QObject
 {
@@ -32,12 +33,10 @@ class Cutegram : public QObject
     Q_ENUMS(StartupOptions)
 
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
-    Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY highlightColorChanged)
 
     Q_PROPERTY(QString language     READ language     WRITE setLanguage     NOTIFY languageChanged    )
     Q_PROPERTY(QString messageAudio READ messageAudio WRITE setMessageAudio NOTIFY messageAudioChanged)
     Q_PROPERTY(QString background   READ background   WRITE setBackground   NOTIFY backgroundChanged  )
-    Q_PROPERTY(QString masterColor  READ masterColor  WRITE setMasterColor  NOTIFY masterColorChanged )
     Q_PROPERTY(QFont   font         READ font         WRITE setFont         NOTIFY fontChanged        )
 
     Q_PROPERTY(int  sysTrayCounter    READ sysTrayCounter    WRITE setSysTrayCounter  NOTIFY sysTrayCounterChanged   )
@@ -47,8 +46,10 @@ class Cutegram : public QObject
     Q_PROPERTY(bool showLastMessage   READ showLastMessage   WRITE setShowLastMessage NOTIFY showLastMessageChanged  )
     Q_PROPERTY(bool darkSystemTray    READ darkSystemTray    WRITE setDarkSystemTray  NOTIFY darkSystemTrayChanged   )
     Q_PROPERTY(bool cutegramSubscribe READ cutegramSubscribe WRITE setAsemanSubscribe NOTIFY cutegramSubscribeChanged)
-    Q_PROPERTY(bool visualEffects     READ visualEffects     WRITE setVisualEffects   NOTIFY visualEffectsChanged    )
-    Q_PROPERTY(bool lightUi           READ lightUi           WRITE setLightUi         NOTIFY lightUiChanged)
+
+    Q_PROPERTY(ThemeItem* currentTheme READ currentTheme NOTIFY currentThemeChanged)
+    Q_PROPERTY(QStringList themes READ themes NOTIFY themesChanged)
+    Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
 
     Q_PROPERTY(bool closingState READ closingState NOTIFY closingStateChanged)
 
@@ -107,14 +108,8 @@ public:
     void setMessageAudio(const QString &file);
     QString messageAudio() const;
 
-    void setMasterColor(const QString &color);
-    QString masterColor() const;
-
     void setVisualEffects(bool stt);
     bool visualEffects() const;
-
-    void setLightUi(bool stt);
-    bool lightUi() const;
 
     void setFont(const QFont &font);
     QFont font() const;
@@ -122,7 +117,10 @@ public:
     void setAsemanSubscribe(bool stt);
     bool cutegramSubscribe() const;
 
-    QColor highlightColor() const;
+    QStringList themes() const;
+    void setTheme(const QString &theme);
+    QString theme() const;
+    ThemeItem *currentTheme();
 
 public slots:
     void start();
@@ -149,14 +147,14 @@ signals:
     void showLastMessageChanged();
     void backgroundChanged();
     void messageAudioChanged();
-    void masterColorChanged();
-    void highlightColorChanged();
     void darkSystemTrayChanged();
     void fontChanged();
     void closingStateChanged();
     void cutegramSubscribeChanged();
-    void visualEffectsChanged();
-    void lightUiChanged();
+
+    void themesChanged();
+    void currentThemeChanged();
+    void themeChanged();
 
     void configureRequest();
     void aboutAsemanRequest();
@@ -172,6 +170,7 @@ private:
     void showContextMenu();
     QImage generateIcon( const QImage & img, int count );
     void init_languages();
+    void init_theme();
 
 private:
     CutegramPrivate *p;

@@ -62,7 +62,7 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                color: itemSelected || marea.pressed? Cutegram.highlightColor : "#00000000"
+                color: itemSelected || marea.pressed? Cutegram.currentTheme.masterColor : "#00000000"
                 opacity: 0.5
             }
 

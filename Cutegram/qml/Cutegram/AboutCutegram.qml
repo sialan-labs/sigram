@@ -64,8 +64,8 @@ Rectangle {
             text: qsTr("Home Page")
             radius: 4*Devices.density
             onClicked: Qt.openUrlExternally("http://aseman.co/en/projects/cutegram")
-            normalColor: Cutegram.highlightColor
-            highlightColor: Qt.darker(Cutegram.highlightColor)
+            normalColor: Cutegram.currentTheme.masterColor
+            highlightColor: Qt.darker(Cutegram.currentTheme.masterColor)
             textColor: masterPalette.highlightedText
             width: 120*Devices.density
             height: 40*Devices.density

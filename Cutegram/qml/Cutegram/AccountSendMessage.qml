@@ -4,10 +4,9 @@ import AsemanTools.Controls 1.0 as Controls
 import Cutegram 1.0
 import CutegramTypes 1.0
 
-Rectangle {
+Item {
     id: smsg
     clip: true
-    color: backColor2
     height: {
         if(txt_frame.height+4*Devices.density<minimumHeight)
             return minimumHeight
@@ -16,8 +15,9 @@ Rectangle {
     }
 
     property Dialog currentDialog
-    property real minimumHeight: 40*Devices.density
+    property real minimumHeight: Cutegram.currentTheme.sendFrameHeight*Devices.density
 
+    property color color: "#ffffff"
     property bool isChat: currentDialog? currentDialog.peer.chatId != 0 : false
 
     property alias trash: trash_item.visible
@@ -90,6 +90,45 @@ Rectangle {
             onClicked: txt.focus = true
         }
 
+        Rectangle {
+            anchors.top: parent.top
+            anchors.bottom: txt_frame.top
+            anchors.left: txt_frame.left
+            anchors.right: txt_frame.right
+            color: smsg.color
+        }
+
+        Rectangle {
+            anchors.top: txt_frame.bottom
+            anchors.bottom: parent.bottom
+            anchors.left: txt_frame.left
+            anchors.right: txt_frame.right
+            color: smsg.color
+        }
+
+        Rectangle {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: txt_frame.left
+            color: smsg.color
+        }
+
+        Rectangle {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.left: txt_frame.right
+            anchors.right: parent.right
+            color: smsg.color
+        }
+
+        Rectangle {
+            anchors.fill: txt_frame
+            anchors.margins: 1
+            color: smsg.color
+            radius: txt_frame.radius
+        }
+
         Controls.Frame {
             id: txt_frame
             anchors.left: camera_btn.right
@@ -97,7 +136,9 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 4*Devices.density
             height: txt.height+8*Devices.density<34*Devices.density? 34*Devices.density : txt.height+8*Devices.density
-            backgroundColor: "#f5f5f5"
+            backgroundColor: smsg.color
+            shadowColor: Cutegram.currentTheme.sendFrameShadowColor
+            shadowSize: Cutegram.currentTheme.sendFrameShadowSize
 
             TextAreaCore {
                 id: txt
@@ -107,10 +148,12 @@ Rectangle {
                 anchors.rightMargin: 5*Devices.density+emoji_btn.width
                 anchors.verticalCenter: parent.verticalCenter
                 selectByMouse: true
-                selectionColor: Cutegram.highlightColor
+                selectionColor: Cutegram.currentTheme.masterColor
                 selectedTextColor: masterPalette.highlightedText
                 pickerEnable: Devices.isTouchDevice
-                color: textColor0
+                color: Cutegram.currentTheme.sendFrameFontColor
+                font.family: Cutegram.currentTheme.sendFrameFont.family
+                font.pixelSize: Cutegram.currentTheme.sendFrameFont.pointSize*Devices.fontDensity
                 wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
                 clip: true
                 visible: !trash
@@ -136,7 +179,7 @@ Rectangle {
                             txt.remove(txt.selectionStart, txt.selectionEnd)
 
                         var npos = txt.cursorPosition+1
-                        txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
+                        txt.insert(txt.cursorPosition,"") //! Persian mid space character. you can't see it
                         txt.cursorPosition = npos
 
                         event.accepted = false
@@ -178,12 +221,12 @@ Rectangle {
             anchors.verticalCenter: txt_frame.verticalCenter
             height: 40*Devices.density
             width: 40*Devices.density
-            opacity: 0.6
+            opacity: Cutegram.currentTheme.sendFrameLightIcon? 1 : 0.6
             highlightColor: "#220d80ec"
             normalColor: "#00000000"
             cursorShape: Qt.PointingHandCursor
             iconHeight: height*0.5
-            icon: "files/attach.png"
+            icon: Cutegram.currentTheme.sendFrameLightIcon? "files/attach-light.png" : "files/attach.png"
             onClicked: {
                 if( currentDialog == telegramObject.nullDialog )
                     return
@@ -202,12 +245,12 @@ Rectangle {
             anchors.verticalCenter: txt_frame.verticalCenter
             height: 40*Devices.density
             width: 30*Devices.density
-            opacity: 0.6
+            opacity: Cutegram.currentTheme.sendFrameLightIcon? 1 : 0.6
             highlightColor: "#220d80ec"
             normalColor: "#00000000"
             cursorShape: Qt.PointingHandCursor
             iconHeight: height*0.5
-            icon: "files/camera.png"
+            icon: Cutegram.currentTheme.sendFrameLightIcon? "files/camera-light.png" : "files/camera.png"
             onClicked: captureImage()
         }
 
@@ -226,12 +269,12 @@ Rectangle {
             anchors.verticalCenter: txt_frame.verticalCenter
             height: 30*Devices.density
             width: height
-            opacity: 0.6
+            opacity: Cutegram.currentTheme.sendFrameLightIcon? 1 : 0.6
             highlightColor: "#220d80ec"
             normalColor: "#00000000"
             cursorShape: Qt.PointingHandCursor
             iconHeight: height*0.55
-            icon: "files/emoji.png"
+            icon: Cutegram.currentTheme.sendFrameLightIcon? "files/emoji-light.png" : "files/emoji.png"
             onClicked: {
                 var pnt = smsg.mapFromItem(emoji_btn,0,0)
                 smsg.emojiRequest(pnt.x + width/2, pnt.y + height*0.2)

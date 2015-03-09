@@ -5,7 +5,7 @@ import CutegramTypes 1.0
 
 Rectangle {
     id: header
-    height: 60*Devices.density
+    height: Cutegram.currentTheme.headerHeight*Devices.density
 
     property Dialog currentDialog
 
@@ -23,6 +23,13 @@ Rectangle {
     property real typeUserStatusOffline: 0x8c703f
     property real typeUserStatusEmpty: 0x9d05049
     property real typeUserStatusOnline: 0xedb93949
+
+    property bool lightIcons: {
+        if(currentDialog.encrypted)
+            return Cutegram.currentTheme.headerSecretLightIcon
+        else
+            return Cutegram.currentTheme.headerLightIcon
+    }
 
     signal clicked()
 
@@ -65,7 +72,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.margins: 10*Devices.density
-        source: "files/lock.png"
+        source: lightIcons? "files/lock.png" : "files/lock-dark.png"
         sourceSize: Qt.size(width, height)
         visible: currentDialog.encrypted
         width: 14*Devices.density
@@ -80,7 +87,7 @@ Rectangle {
         font.pixelSize: Math.floor(10*Devices.fontDensity)
         font.family: AsemanApp.globalFont.family
         text: qsTr("Secret chat")
-        color: "#ffffff"
+        color: Cutegram.currentTheme.headerSecretTitleColor
         visible: currentDialog.encrypted
     }
 
@@ -90,9 +97,9 @@ Rectangle {
         Text {
             id: title_txt
             anchors.horizontalCenter: parent.horizontalCenter
-            color: currentDialog.encrypted? "#eeeeee" : "#111111"
-            font.pixelSize: Math.floor(15*Devices.fontDensity)
-            font.family: AsemanApp.globalFont.family
+            color: currentDialog.encrypted? Cutegram.currentTheme.headerSecretTitleColor : Cutegram.currentTheme.headerTitleColor
+            font.pixelSize: Math.floor( (currentDialog.encrypted? Cutegram.currentTheme.headerSecretTitleFont.pointSize : Cutegram.currentTheme.headerTitleFont.pointSize)*Devices.fontDensity)
+            font.family: currentDialog.encrypted? Cutegram.currentTheme.headerSecretTitleFont.family : Cutegram.currentTheme.headerTitleFont.family
             text: {
                 if( !currentDialog )
                     return ""
@@ -105,9 +112,9 @@ Rectangle {
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
-            color: Cutegram.highlightColor
-            font.pixelSize: Math.floor(9*Devices.fontDensity)
-            font.family: AsemanApp.globalFont.family
+            color: currentDialog.encrypted? Cutegram.currentTheme.headerSecretDateColor : Cutegram.currentTheme.headerDateColor
+            font.pixelSize: Math.floor( (currentDialog.encrypted? Cutegram.currentTheme.headerSecretDateFont.pointSize : Cutegram.currentTheme.headerDateFont.pointSize)*Devices.fontDensity)
+            font.family: currentDialog.encrypted? Cutegram.currentTheme.headerSecretDateFont.family : Cutegram.currentTheme.headerDateFont.family
             visible: currentDialog != telegramObject.nullDialog && user.id != telegramObject.cutegramId
             text: {
                 var result = ""
@@ -160,7 +167,7 @@ Rectangle {
         anchors.right: parent.right
         height: parent.height
         width: height
-        icon: currentDialog.encrypted? "files/files-light.png" : "files/files.png"
+        icon: lightIcons? "files/files-light.png" : "files/files.png"
         iconHeight: 18*Devices.density
         cursorShape: Qt.PointingHandCursor
         highlightColor: "#1f000000"

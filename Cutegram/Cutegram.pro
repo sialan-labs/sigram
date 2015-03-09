@@ -7,7 +7,9 @@ linux {
     emojis.target = $${DESTDIR}
     translations.source = translations
     translations.target = $$DESTDIR/files
-    DEPLOYMENTFOLDERS = server emojis translations
+    themes.source = themes
+    themes.target = $${DESTDIR}
+    DEPLOYMENTFOLDERS = server emojis translations themes
 }
 
 TEMPLATE = app
@@ -81,7 +83,8 @@ HEADERS += \
     cutegramdialog.h \
     telegramsearchmodel.h \
     dialogfilesmodel.h \
-    cutegramenums.h
+    cutegramenums.h \
+    themeitem.h
 
 OTHER_FILES += \
     objects/types.sco \
@@ -89,14 +92,19 @@ OTHER_FILES += \
     objects/templates/equals.template \
     objects/templates/initialize.template
 
+
 TRANSLATIONS += \
     translations/lang-ast.qm \
-    translations/lang-en.qm \
-    translations/lang-fa.qm \
     translations/lang-de.qm \
+    translations/lang-en.qm \
+    translations/lang-en_GB.qm \
     translations/lang-et.qm \
+    translations/lang-fa.qm \
+    translations/lang-fr_FR.qm \
     translations/lang-it.qm \
-    translations/lang-en_GB.qm
+    translations/lang-nl_NL.qm \
+    translations/lang-pt_BR.qm \
+    translations/lang-sr.qm
 
 isEmpty(PREFIX) {
     PREFIX = /usr
@@ -126,10 +134,12 @@ desktopFile.files = desktop/Cutegram.desktop
 desktopFile.path = $$APPDESK_PATH/share/applications
 emojis.files = emojis
 emojis.path = $$SHARES_PATH
+themesFiles.files = themes
+themesFiles.path = $$SHARES_PATH
 serverPub.files = tg-server.pub
 serverPub.path = $$SHARES_PATH/
 
-INSTALLS = target translations icons desktopFile emojis serverPub pixmaps hicolor
+INSTALLS = target translations icons desktopFile emojis serverPub pixmaps hicolor themesFiles
 
 win32 {
     RC_FILE = extra/windows/cutegram.rc
@@ -142,4 +152,5 @@ DISTFILES += \
     translations_sources/lang-et.ts \
     translations_sources/lang-fa.ts \
     translations_sources/lang-it.ts \
-    translations_sources/lang-en_GB.ts
+    translations_sources/lang-en_GB.ts \
+    objects/themeitem.sco

@@ -269,7 +269,7 @@ Item {
                         textFont.family: AsemanApp.globalFont.family
                         textFont.pixelSize: Math.floor(10*Devices.fontDensity)
                         textFont.bold: false
-                        normalColor: Cutegram.highlightColor
+                        normalColor: Cutegram.currentTheme.masterColor
                         highlightColor: Qt.darker(normalColor)
                         textColor: "#ffffff"
                         text: qsTr("Show List")
@@ -282,7 +282,7 @@ Item {
                         textFont.family: AsemanApp.globalFont.family
                         textFont.pixelSize: Math.floor(10*Devices.fontDensity)
                         textFont.bold: false
-                        normalColor: Cutegram.highlightColor
+                        normalColor: Cutegram.currentTheme.masterColor
                         highlightColor: Qt.darker(normalColor)
                         textColor: "#ffffff"
                         text: qsTr("Add Participant")

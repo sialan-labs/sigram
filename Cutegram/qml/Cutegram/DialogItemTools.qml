@@ -1,21 +1,3 @@
-/*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
-
-    Cutegram is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Cutegram is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 import QtQuick 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
@@ -58,7 +40,7 @@ Item {
             anchors.top: row.top
             anchors.bottom: row.bottom
             width: height
-            icon: cl_tools.mute? "files/mute-dark.png" : "files/unmute-dark.png"
+            icon: cl_tools.mute? (Cutegram.currentTheme.dialogListLightIcon? "files/mute.png" : "files/mute-dark.png") : (Cutegram.currentTheme.dialogListLightIcon? "files/unmute.png" : "files/unmute-dark.png")
             normalColor: "#00000000"
             highlightColor: "#00000000"
             iconHeight: height - 10

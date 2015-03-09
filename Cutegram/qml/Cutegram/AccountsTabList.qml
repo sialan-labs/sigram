@@ -44,7 +44,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     transformOrigin: Item.Center
                     rotation: 45
-                    width: 12*Devices.density
+                    width: Cutegram.currentTheme.panelPointerHeight*Devices.density
                     height: width
                     color: selectColor
                 }
@@ -55,11 +55,18 @@ Item {
                 normalColor: "#00000000"
                 highlightColor: selected? normalColor : "#88339DCC"
                 cursorShape: Qt.PointingHandCursor
-                icon: isAddBtn? "files/add_dialog.png" : "files/telegram.png"
+                icon: {
+                    if(isAddBtn)
+                        return Cutegram.currentTheme.panelLightIcon? "files/add_dialog.png" : "files/add_dialog-dark.png"
+                    else
+                        return Cutegram.currentTheme.panelLightIcon? "files/telegram.png" : "files/telegram-dark.png"
+                }
                 iconHeight: isAddBtn? 18*Devices.density : 26*Devices.density
                 tooltipText: isAddBtn? qsTr("Add Account (experimental)") : key
                 tooltipFont.family: AsemanApp.globalFont.family
                 tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
+                tooltipColor: Cutegram.currentTheme.panelTooltipBackground
+                tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
                 onClicked: {
                     if(isAddBtn) {
                         main.addAccount()

@@ -7,7 +7,9 @@ Item {
     height: 150
 
     property color backgroundColor: masterPalette.window
+    property alias shadowColor: shadow.color
     property alias shadowSize: shadow.opacity
+    property alias radius: canvas.radius
 
     onBackgroundColorChanged: canvas.requestPaint()
 

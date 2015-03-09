@@ -94,7 +94,8 @@ SOURCES += \
     asemanmimedata.cpp \
     asemandownloader.cpp \
     asemannotification.cpp \
-    asemanautostartmanager.cpp
+    asemanautostartmanager.cpp \
+    asemanquickobject.cpp
 
 HEADERS += \
     asemandevices.h \
@@ -118,7 +119,8 @@ HEADERS += \
     asemanmimedata.h \
     asemandownloader.h \
     asemannotification.h \
-    asemanautostartmanager.h
+    asemanautostartmanager.h \
+    asemanquickobject.h
 
 OTHER_FILES += \
     android-build/src/land/aseman/android/AsemanActivity.java \

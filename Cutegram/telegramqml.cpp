@@ -790,8 +790,6 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
         return;
 
     DialogObject *dlg = p->dialogs.value(dId);
-    if(!dlg)
-        return;
 
     qint64 sendId;
 
@@ -799,7 +797,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     message.setMessage(msg);
 
     p->msg_send_random_id = generateRandomId();
-    if(dlg->encrypted())
+    if(dlg && dlg->encrypted())
     {
         sendId = p->telegram->messagesSendEncrypted(dId, p->msg_send_random_id, 0, msg);
     }
@@ -813,7 +811,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
 
     }
 
-    insertMessage(message, dlg->encrypted(), false, true);
+    insertMessage(message, (dlg && dlg->encrypted()), false, true);
 
     MessageObject *msgObj = p->messages.value(message.id());
     msgObj->setSent(false);
@@ -822,7 +820,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
 
     timerUpdateDialogs();
 
-    if(dlg->encrypted())
+    if(dlg && dlg->encrypted())
         messagesSendEncrypted_slt(sendId, message.date(), EncryptedFile());
 }
 
@@ -1231,15 +1229,14 @@ void TelegramQml::cancelDownload(DownloadObject *download)
 
 Message TelegramQml::newMessage(qint64 dId)
 {
+    bool isChat = p->chats.contains(dId);
+
+    Peer to_peer(getPeerType(dId));
+    to_peer.setChatId(isChat?dId:0);
+    to_peer.setUserId(isChat?0:dId);
+
     DialogObject *dlg = dialog(dId);
-    if( !dlg )
-        return Message(Message::typeMessageEmpty);
-
-    Peer to_peer(static_cast<Peer::PeerType>(dlg->peer()->classType()));
-    to_peer.setChatId(dlg->peer()->chatId());
-    to_peer.setUserId(dlg->peer()->userId());
-
-    if(dlg->encrypted())
+    if(dlg && dlg->encrypted())
     {
         Peer encPeer(Peer::typePeerChat);
         encPeer.setChatId(dId);
@@ -3047,6 +3044,18 @@ InputPeer::InputPeerType TelegramQml::getInputPeerType(qint64 pid)
         res = InputPeer::typeInputPeerChat;
     else
         res = InputPeer::typeInputPeerEmpty;
+
+    return res;
+}
+
+Peer::PeerType TelegramQml::getPeerType(qint64 pid)
+{
+    Peer::PeerType res;
+
+    if(p->users.contains(pid))
+        res = Peer::typePeerUser;
+    else
+        res = Peer::typePeerChat;
 
     return res;
 }

@@ -10,7 +10,7 @@ Rectangle {
     id: acc_view
     width: 100
     height: 62
-    color: "#eeeeee"
+    color: Cutegram.currentTheme.dialogListBackground
 
     property alias telegramObject: dialogs.telegramObject
     property color framesColor: "#aaffffff"
@@ -40,11 +40,11 @@ Rectangle {
         transformOrigin: Item.BottomRight
         rotation: -90
         width: parent.height
-        height: 5*Devices.density
-        opacity: 0.2
+        height: Cutegram.currentTheme.dialogListShadowWidth*Devices.density
+        opacity: 0.4
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#00000000" }
-            GradientStop { position: 1.0; color: "#000000" }
+            GradientStop { position: 1.0; color: Cutegram.currentTheme.dialogListShadowColor }
         }
     }
 
@@ -55,8 +55,12 @@ Rectangle {
         anchors.right: dialogs.right
         anchors.margins: 10*Devices.density
         placeholderText: qsTr("Search")
+        textColor: Cutegram.currentTheme.searchBarTextColor
+        font.family: Cutegram.currentTheme.searchBarFont.family
+        font.pixelSize: Cutegram.currentTheme.searchBarFont.pointSize*Devices.fontDensity
         style: TextFieldStyle {
-            backgroundColor: search_frame.focus? "#ffffff" : acc_view.color
+            backgroundColor: search_frame.focus? Cutegram.currentTheme.searchBarFocusedColor : Cutegram.currentTheme.searchBarColor
+            placeholderTextColor: Cutegram.currentTheme.searchBarPlaceholderColor
         }
 
         Button {

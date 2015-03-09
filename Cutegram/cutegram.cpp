@@ -36,6 +36,7 @@
 #include "telegramcontactsmodel.h"
 #include "telegramuploadsmodel.h"
 #include "telegramchatparticipantsmodel.h"
+#include "themeitem.h"
 #include "emojis.h"
 #include "unitysystemtray.h"
 #include "userdata.h"
@@ -75,8 +76,6 @@ public:
     bool darkSystemTray;
     bool closingState;
     bool cutegramSubscribe;
-    bool visualEffects;
-    bool lightUi;
 
     QTextDocument *doc;
 
@@ -87,6 +86,7 @@ public:
 
     QTranslator *translator;
     QString translationsPath;
+    QString themesPath;
 
     QHash<QString,QVariant> languages;
     QHash<QString,QLocale> locales;
@@ -94,12 +94,16 @@ public:
 
     QString background;
     QString messageAudio;
-    QString masterColor;
     QFont font;
 
     QPalette mainPalette;
 
     QMimeDatabase mdb;
+
+    QStringList themes;
+    QString theme;
+    QPointer<QQmlComponent> currentThemeComponent;
+    QPointer<ThemeItem> currentTheme;
 };
 
 Cutegram::Cutegram(QObject *parent) :
@@ -122,22 +126,24 @@ Cutegram::Cutegram(QObject *parent) :
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
-    p->visualEffects = AsemanApplication::settings()->value("General/visualEffects", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
-    p->lightUi = AsemanApplication::settings()->value("General/lightUi", true ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
-    p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
     p->messageAudio = AsemanApplication::settings()->value("General/messageAudio","files/new_msg.ogg").toString();
     p->font = AsemanApplication::settings()->value("General/font", default_font).value<QFont>();
     p->translator = new QTranslator(this);
+    p->theme = AsemanApplication::settings()->value("General/theme","Abrisham.qml").toString();
 
 #ifdef Q_OS_ANDROID
     p->close_blocker = true;
     p->translationsPath = "assets:/files/translations";
+    p->themesPath = "assets:/themes";
 #else
     p->close_blocker = false;
     p->translationsPath = AsemanDevices::resourcePath() + "/files/translations/";
+    p->themesPath = AsemanDevices::resourcePath() + "/themes/";
 #endif
+
+    p->themes = QDir(p->themesPath).entryList( QStringList()<<"*.qml" ,QDir::Files, QDir::Name);
 
     qRegisterMetaType<TelegramQml*>("TelegramQml*");
     qRegisterMetaType<UserData*>("UserData*");
@@ -154,6 +160,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<TelegramUploadsModel>("Cutegram", 1, 0, "UploadsModel");
     qmlRegisterType<TelegramSearchModel>("Cutegram", 1, 0, "SearchModel");
     qmlRegisterType<CutegramEnums>("Cutegram", 1, 0, "CutegramEnums");
+    qmlRegisterType<ThemeItem>("Cutegram", 1, 0, "CutegramTheme");
     qmlRegisterType<TelegramChatParticipantsModel>("Cutegram", 1, 0, "ChatParticipantsModel");
     qmlRegisterType<Emojis>("Cutegram", 1, 0, "Emojis");
     qmlRegisterUncreatableType<UserData>("Cutegram", 1, 0, "UserData", "");
@@ -249,6 +256,8 @@ void Cutegram::start()
 
     p->viewer = new AsemanQuickView( AsemanQuickView::AllExceptLogger );
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
+    init_theme();
+
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Cutegram/main.qml")));
 
     switch(startupOption())
@@ -659,52 +668,6 @@ QString Cutegram::messageAudio() const
     return p->messageAudio;
 }
 
-void Cutegram::setMasterColor(const QString &color)
-{
-    if(p->masterColor == color)
-        return;
-
-    p->masterColor = color;
-    AsemanApplication::settings()->setValue("General/masterColor", color);
-
-    emit masterColorChanged();
-    emit highlightColorChanged();
-}
-
-QString Cutegram::masterColor() const
-{
-    return p->masterColor;
-}
-
-void Cutegram::setVisualEffects(bool stt)
-{
-    if(p->visualEffects == stt)
-        return;
-
-    p->visualEffects = stt;
-    AsemanApplication::settings()->setValue("General/visualEffects", stt);
-    emit visualEffectsChanged();
-}
-
-bool Cutegram::visualEffects() const
-{
-    return p->visualEffects;
-}
-
-void Cutegram::setLightUi(bool stt)
-{
-    if(p->lightUi == stt)
-        return;
-
-    p->lightUi = stt;
-    emit lightUiChanged();
-}
-
-bool Cutegram::lightUi() const
-{
-    return p->lightUi;
-}
-
 void Cutegram::setFont(const QFont &font)
 {
     if(p->font == font)
@@ -736,9 +699,31 @@ bool Cutegram::cutegramSubscribe() const
     return p->cutegramSubscribe;
 }
 
-QColor Cutegram::highlightColor() const
+QStringList Cutegram::themes() const
 {
-    return p->masterColor.isEmpty()? p->mainPalette.highlight().color() : QColor(p->masterColor);
+    return p->themes;
+}
+
+void Cutegram::setTheme(const QString &theme)
+{
+    if(p->theme == theme)
+        return;
+
+    p->theme = theme;
+    AsemanApplication::settings()->setValue("General/theme",p->theme);
+    init_theme();
+
+    emit themeChanged();
+}
+
+QString Cutegram::theme() const
+{
+    return p->theme;
+}
+
+ThemeItem *Cutegram::currentTheme()
+{
+    return p->currentTheme;
 }
 
 void Cutegram::init_languages()
@@ -765,6 +750,19 @@ void Cutegram::init_languages()
         if( lang == AsemanApplication::settings()->value("General/Language","English (UnitedStates)").toString() )
             setLanguage( lang );
     }
+}
+
+void Cutegram::init_theme()
+{
+    if(p->currentThemeComponent)
+        p->currentThemeComponent->deleteLater();
+    if(p->currentTheme)
+        p->currentTheme->deleteLater();
+
+    p->currentThemeComponent = new QQmlComponent(p->viewer->engine(), p->themesPath + "/" + p->theme);
+    p->currentTheme = static_cast<ThemeItem*>(p->currentThemeComponent->create());
+
+    emit currentThemeChanged();
 }
 
 QVariantList Cutegram::intListToVariantList(const QList<qint32> &list)

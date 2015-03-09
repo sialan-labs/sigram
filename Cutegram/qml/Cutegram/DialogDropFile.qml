@@ -48,7 +48,7 @@ Item {
             anchors.top: parent.top
             anchors.bottom: forwardDrop!=typeFileSendDrop? parent.bottom : drop_doc_rect.top
             anchors.margins: 6*Devices.density
-            border.color: Cutegram.highlightColor
+            border.color: Cutegram.currentTheme.masterColor
             border.width: 2*Devices.density
             radius: 3*Devices.density
             color: "#00000000"
@@ -63,7 +63,7 @@ Item {
                 anchors.centerIn: parent
                 font.family: AsemanApp.globalFont.family
                 font.pixelSize: Math.floor(12*Devices.fontDensity)
-                color: Cutegram.highlightColor
+                color: Cutegram.currentTheme.masterColor
             }
         }
 
@@ -74,7 +74,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.margins: 6*Devices.density
             height: am_dropfile.height<100*Devices.density? 0 : 100*Devices.density
-            border.color: Cutegram.highlightColor
+            border.color: Cutegram.currentTheme.masterColor
             border.width: 2*Devices.density
             radius: 3*Devices.density
             color: "#00000000"
@@ -90,7 +90,7 @@ Item {
                 anchors.centerIn: parent
                 font.family: AsemanApp.globalFont.family
                 font.pixelSize: Math.floor(12*Devices.fontDensity)
-                color: Cutegram.highlightColor
+                color: Cutegram.currentTheme.masterColor
                 text: qsTr("Drop to send as Document")
             }
         }
