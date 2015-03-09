@@ -179,7 +179,7 @@ Item {
                             txt.remove(txt.selectionStart, txt.selectionEnd)
 
                         var npos = txt.cursorPosition+1
-                        txt.insert(txt.cursorPosition,"") //! Persian mid space character. you can't see it
+                        txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
                         txt.cursorPosition = npos
 
                         event.accepted = false
