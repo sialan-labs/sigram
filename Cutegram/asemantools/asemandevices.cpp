@@ -386,8 +386,14 @@ QList<QUrl> AsemanDevices::clipboardUrl() const
 
 void AsemanDevices::setClipboardUrl(const QList<QUrl> &urls)
 {
+    QString data = "copy";
+
+    foreach( const QUrl &url, urls )
+        data += "\nfile://" + url.toLocalFile();
+
     QMimeData *mime = new QMimeData();
     mime->setUrls(urls);
+    mime->setData( "x-special/gnome-copied-files", data.toUtf8() );
 
     QGuiApplication::clipboard()->setMimeData(mime);
 }

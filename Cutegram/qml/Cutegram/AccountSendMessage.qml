@@ -24,6 +24,7 @@ Item {
 
     signal accepted( string text )
     signal emojiRequest(real x, real y)
+    signal copyRequest()
 
     onCurrentDialogChanged: {
         temp_hash.remove(privates.lastDialog)
@@ -135,56 +136,95 @@ Item {
             anchors.right: send_btn.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 4*Devices.density
-            height: txt.height+8*Devices.density<34*Devices.density? 34*Devices.density : txt.height+8*Devices.density
+            height: logicalHeight>300*Devices.density? 300*Devices.density : logicalHeight
             backgroundColor: smsg.color
             shadowColor: Cutegram.currentTheme.sendFrameShadowColor
             shadowSize: Cutegram.currentTheme.sendFrameShadowSize
 
-            TextAreaCore {
-                id: txt
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 10*Devices.density
-                anchors.rightMargin: 5*Devices.density+emoji_btn.width
-                anchors.verticalCenter: parent.verticalCenter
-                selectByMouse: true
-                selectionColor: Cutegram.currentTheme.masterColor
-                selectedTextColor: masterPalette.highlightedText
-                pickerEnable: Devices.isTouchDevice
-                color: Cutegram.currentTheme.sendFrameFontColor
-                font.family: Cutegram.currentTheme.sendFrameFont.family
-                font.pixelSize: Cutegram.currentTheme.sendFrameFont.pointSize*Devices.fontDensity
-                wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
+            property real logicalHeight: txt.height+8*Devices.density<34*Devices.density? 34*Devices.density : txt.height+8*Devices.density
+
+            Flickable {
+                id: flick
+                anchors.fill: parent
+                contentWidth: width
+                contentHeight: txt.height
+                flickableDirection: Flickable.VerticalFlick
+                topMargin: txt.height<height? (height-txt.height)/2 : 8*Devices.density
+                bottomMargin: topMargin
                 clip: true
-                visible: !trash
 
-                onTextChanged: {
-                    if( text.trim().length == 0 )
-                        text = ""
-
-                    typing_update_timer.startTyping()
+                function ensureVisible(r)
+                {
+                    if (contentX >= r.x)
+                        contentX = r.x;
+                    else if (contentX+width <= r.x+r.width)
+                        contentX = r.x+r.width-width;
+                    if (contentY >= r.y)
+                        contentY = r.y;
+                    else if (contentY+height <= r.y+r.height)
+                        contentY = r.y+r.height-height;
                 }
-                Keys.onPressed: {
-                    if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
-                    {
-                        if( event.modifiers == Qt.NoModifier )
-                            smsg.send()
 
-                        typing_timer.finishTyping()
+                TextAreaCore {
+                    id: txt
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.leftMargin: 10*Devices.density
+                    anchors.rightMargin: 5*Devices.density+emoji_btn.width
+                    anchors.verticalCenter: parent.verticalCenter
+                    selectByMouse: true
+                    selectionColor: Cutegram.currentTheme.masterColor
+                    selectedTextColor: masterPalette.highlightedText
+                    pickerEnable: Devices.isTouchDevice
+                    color: Cutegram.currentTheme.sendFrameFontColor
+                    font.family: Cutegram.currentTheme.sendFrameFont.family
+                    font.pixelSize: Cutegram.currentTheme.sendFrameFont.pointSize*Devices.fontDensity
+                    wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
+                    clip: true
+                    visible: !trash
+
+                    onCursorRectangleChanged: flick.ensureVisible(cursorRectangle)
+                    onTextChanged: {
+                        if( text.trim().length == 0 )
+                            text = ""
+
+                        typing_update_timer.startTyping()
                     }
-                    else
-                    if(event.key == 8204 && event.modifiers == Qt.ShiftModifier)
-                    {
-                        if(txt.selectedText.length!=0)
-                            txt.remove(txt.selectionStart, txt.selectionEnd)
+                    Keys.onPressed: {
+                        if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
+                        {
+                            if( event.modifiers == Qt.NoModifier )
+                                smsg.send()
 
-                        var npos = txt.cursorPosition+1
-                        txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
-                        txt.cursorPosition = npos
+                            typing_timer.finishTyping()
+                        }
+                        else
+                        if(event.key == 8204 && event.modifiers == Qt.ShiftModifier)
+                        {
+                            if(txt.selectedText.length!=0)
+                                txt.remove(txt.selectionStart, txt.selectionEnd)
 
-                        event.accepted = false
+                            var npos = txt.cursorPosition+1
+                            txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
+                            txt.cursorPosition = npos
+
+                            event.accepted = false
+                        }
+                        else
+                        if(event.modifiers == Qt.ControlModifier && event.key == Qt.Key_C)
+                        {
+                            if(txt.selectedText.length == 0) {
+                                smsg.copyRequest()
+                                event.accepted = false
+                            }
+                        }
                     }
                 }
+            }
+
+            PhysicalScrollBar {
+                scrollArea: flick; height: flick.height; width: 6*Devices.density
+                anchors.right: flick.right; anchors.top: flick.top; color: "#888888"
             }
         }
 

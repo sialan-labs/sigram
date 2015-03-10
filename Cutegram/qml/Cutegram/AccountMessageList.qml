@@ -21,6 +21,8 @@ Rectangle {
     property bool isActive: View.active && View.visible
     property bool messageDraging: false
 
+    property string selectedText
+
     property alias maxId: messages_model.maxId
 
     property EncryptedChat enchat: telegramObject.encryptedChat(currentDialog.peer.userId)
@@ -124,7 +126,13 @@ Rectangle {
             maximumMediaWidth: acc_msg_list.maximumMediaWidth
             message: item
             width: mlist.width - 2*x
-            onSelectedTextChanged: if(selectedText.length != 0) mlist.currentIndex = index
+            onSelectedTextChanged: {
+                if(selectedText.length = 0)
+                    return
+
+                acc_msg_list.selectedText = selectedText
+                mlist.currentIndex = index
+            }
             onDialogRequest: acc_msg_list.dialogRequest(dialogObject)
 
             property string messageFile
@@ -356,6 +364,12 @@ Rectangle {
 
     function focusOn(msgId) {
         focus_msg_timer.msgId = msgId
+    }
 
+    function copy() {
+        if(selectedText.length == 0)
+            return
+
+        Devices.clipboard = selectedText
     }
 }

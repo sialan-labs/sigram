@@ -111,6 +111,7 @@ Item {
             currentDialog: msg_box.currentDialog
             onAccepted: messages.sendMessage(text)
             trash: messages.messageDraging
+            onCopyRequest: messages.copy()
             onEmojiRequest: {
                 var item = emoticons_component.createObject(message_box)
                 var w = 260*Devices.density
