@@ -7,7 +7,7 @@ import CutegramTypes 1.0
 Item {
     width: 100
     height: 62
-    visible: smodel.count != 0
+    visible: smodel.count != 0 || smodel.initializing
 
     property alias telegramObject: smodel.telegram
     property alias keyword: smodel.keyword
@@ -21,7 +21,7 @@ Item {
 
     Indicator {
         anchors.fill: parent
-        light: true
+        light: Cutegram.currentTheme.dialogListLightIcon
         modern: true
         indicatorSize: 22*Devices.density
         property bool active: smodel.initializing
