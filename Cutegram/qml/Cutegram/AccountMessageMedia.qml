@@ -88,6 +88,7 @@ Item {
 
     width: {
         var result
+
         switch( media.classType )
         {
         case typeMessageMediaPhoto:

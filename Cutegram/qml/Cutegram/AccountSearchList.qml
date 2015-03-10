@@ -56,13 +56,14 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                opacity: marea.pressed? 0.3 : (selected? 0.2 : 0)
                 anchors.topMargin: 3*Devices.density
                 anchors.bottomMargin: 3*Devices.density
+                anchors.rightMargin: -radius
+                radius: 5*Devices.density
                 color: {
                     var result = "#00000000"
                     if(marea.pressed || selected) {
-                        result = Cutegram.currentTheme.masterColor
+                        result = Cutegram.currentTheme.dialogListHighlightColor
                     }
 
                     return result
@@ -83,7 +84,7 @@ Item {
                     anchors.bottom: parent.bottom
                     width: height
                     anchors.margins: 4*Devices.density
-                    backgroundColor: selected || marea.pressed? Qt.lighter(Cutegram.currentTheme.masterColor, 1.7) : "#eeeeee"
+                    backgroundColor: selected || marea.pressed? Cutegram.currentTheme.dialogListHighlightColor : Cutegram.currentTheme.dialogListBackground
 
                     ContactImage {
                         anchors.fill: parent
@@ -98,9 +99,9 @@ Item {
                     anchors.top: parent.top
                     anchors.right: parent.right
                     anchors.margins: 4*Devices.density
-                    font.family: AsemanApp.globalFont.family
-                    font.pixelSize: Math.floor(9*Devices.fontDensity)
-                    color: "#777777"
+                    font.family: Cutegram.currentTheme.dialogListDateFont.family
+                    font.pixelSize: Math.floor(Cutegram.currentTheme.dialogListDateFont.pointSize*Devices.fontDensity)
+                    color: marea.pressed || selected? Cutegram.currentTheme.dialogListHighlightDateColor : Cutegram.currentTheme.dialogListDateColor
                     text: Cutegram.getTimeString(msgDate)
                 }
 
@@ -112,13 +113,13 @@ Item {
                     anchors.bottom: parent.verticalCenter
                     anchors.leftMargin: 8*Devices.density
                     anchors.rightMargin: 8*Devices.density
-                    font.family: AsemanApp.globalFont.family
-                    font.pixelSize: Math.floor(10*Devices.fontDensity)
+                    font.family: Cutegram.currentTheme.dialogListFont.family
+                    font.pixelSize: Math.floor(Cutegram.currentTheme.dialogListFont.pointSize*Devices.fontDensity)
                     maximumLineCount: 1
                     elide: Text.ElideRight
                     verticalAlignment: Text.AlignVCenter
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                    color: "#222222"
+                    color: marea.pressed || selected? Cutegram.currentTheme.dialogListHighlightTextColor : Cutegram.currentTheme.dialogListFontColor
                     text: {
                         var isChat = dialog.peer.chatId != 0
                         var fromName = user.firstName + " " + user.lastName
@@ -156,9 +157,9 @@ Item {
                     verticalAlignment: Text.AlignVCenter
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     text: message.message
-                    font.family: AsemanApp.globalFont.family
-                    font.pixelSize: Math.floor(10*Devices.fontDensity)
-                    color: "#444444"
+                    font.family: Cutegram.currentTheme.dialogListMessageFont.family
+                    font.pixelSize: Math.floor(Cutegram.currentTheme.dialogListMessageFont.pointSize*Devices.fontDensity)
+                    color: marea.pressed || selected? Cutegram.currentTheme.dialogListHighlightMessageColor : Cutegram.currentTheme.dialogListMessageColor
                 }
             }
 
@@ -175,9 +176,9 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 transformOrigin: Item.Center
                 rotation: 45
-                width: 16*Devices.density
+                width: Cutegram.currentTheme.dialogPointerHeight*Devices.density
                 height: width
-                color: "#E4E9EC"
+                color: Cutegram.currentTheme.dialogPointerColor
                 visible: selected
             }
         }
