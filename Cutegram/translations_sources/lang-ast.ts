@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ast">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -206,7 +204,7 @@
         <translation>Desaniciar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Cutegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
@@ -450,10 +448,6 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <translation>Soníu de notificación</translation>
     </message>
     <message>
-        <source>Master Color</source>
-        <translation type="vanished">Color maestra</translation>
-    </message>
-    <message>
         <source>Change</source>
         <translation>Camudar</translation>
     </message>
@@ -480,10 +474,6 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Select Sound</source>
         <translation>Esbillar soníu</translation>
-    </message>
-    <message>
-        <source>Visual Effects</source>
-        <translation type="vanished">Efeutos visuales</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
@@ -518,16 +508,12 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <translation>Tocante a Aseman</translation>
     </message>
     <message>
-        <source>System Color</source>
-        <translation type="vanished">Color del sistema</translation>
-    </message>
-    <message>
         <source>Minimum List</source>
-        <translation type="unfinished"></translation>
+        <translation>Llista mínima</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema</translation>
     </message>
 </context>
 <context>

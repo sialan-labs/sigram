@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -206,7 +204,7 @@
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Het bevat Curegram-nieuws met informatie over nieuwe versies en oplossingen.
 Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
@@ -351,11 +349,11 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aseman is een onderzoeks- en softwareontwikkelingsteam (R&amp;D) zonder winstoogmerk en is begonnen in Februari 2014 met het ontwikkelen van producten, technologieën en oplossingen met het doel ze te publiceren als open bron-projecten die voor iedereen op de wereld toegankelijk zijn. Momenteel focussen we ons op het ontwerpen en ontwikkelen van applicaties en hulpmiddelen die een directe link met eindgebruikers hebben.</translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation type="unfinished"></translation>
+        <translation>Door het beginnen van innovatieve projecten en het distribueren van software aan miljoenen gebruikers wereldwijd is het lab aan het werken aan de groei van open bron-projecten met hoge impact en het promoten van de open bron-cultuur van toegankelijkheid en verhoogde productiviteit op deze wereld. Het lab werkt nauw samen met industriële leiders en overeenkomstmakers om open bron-technologieën te stimuleren in nieuwe sectoren, inclusief educatieve sectoren, gezondheidssectoren en overheden.</translation>
     </message>
 </context>
 <context>
@@ -450,10 +448,6 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
         <translation>Meldingsgeluid</translation>
     </message>
     <message>
-        <source>Master Color</source>
-        <translation type="vanished">Hoofdkleur</translation>
-    </message>
-    <message>
         <source>Change</source>
         <translation>Wijzigen</translation>
     </message>
@@ -480,10 +474,6 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     <message>
         <source>Select Sound</source>
         <translation>Selecteer geluid</translation>
-    </message>
-    <message>
-        <source>Visual Effects</source>
-        <translation type="vanished">Visuele effecten</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
@@ -518,16 +508,12 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
         <translation>Over Aseman</translation>
     </message>
     <message>
-        <source>System Color</source>
-        <translation type="vanished">Systeemkleur</translation>
-    </message>
-    <message>
         <source>Minimum List</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimale lijst</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Thema</translation>
     </message>
 </context>
 <context>
