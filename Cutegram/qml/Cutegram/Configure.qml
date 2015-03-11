@@ -242,6 +242,17 @@ Rectangle {
                         }
 
                         Text {
+                            id: color_text
+                            height: color_combo.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Master Color")
+                            visible: false
+                        }
+
+                        Text {
                             id: font_text
                             height: font_btn.height
                             verticalAlignment: Text.AlignVCenter
@@ -389,6 +400,28 @@ Rectangle {
                                 }
                                     break;
                                 }
+                            }
+                        }
+
+                        Controls.ComboBox {
+                            id: color_combo
+                            visible: false
+                            model: [qsTr("System Color"), qsTr("Custom")]
+                            currentIndex: {
+                                if(Cutegram.masterColor.length == 0)
+                                    return 0
+                                else
+                                    return 1
+                            }
+                            onCurrentIndexChanged: {
+                                if(!init_timer.inited)
+                                    return
+
+                                var color = ""
+                                if(currentIndex != 0)
+                                    color = Desktop.getColor(Cutegram.highlightColor)
+
+                                Cutegram.masterColor = color
                             }
                         }
 
