@@ -1,3 +1,21 @@
+cutegram (2.1.0aseman1-utopic) utopic; urgency=medium
+
+  * Theme Support (Master Color feature temporary disabled)
+  * Many improvements on user interface
+  * Update translations and add French, UK English, Italian, Netherland dutch, Brazil  Portuguese and Serbian.
+  * Many improvements and Bug fixes
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.0aseman1-trusty) trusty; urgency=medium
+
+  * Theme Support (Master Color feature temporary disabled)
+  * Many improvements on user interface
+  * Update translations and add French, UK English, Italian, Netherland dutch, Brazil  Portuguese and Serbian.
+  * Many improvements and Bug fixes
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 11:00:00 +0330
+ 
 cutegram (2.0.0aseman4-trusty) trusty; urgency=medium
 
   * Search

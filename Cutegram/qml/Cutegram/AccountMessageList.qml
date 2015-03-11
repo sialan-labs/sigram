@@ -153,6 +153,7 @@ Rectangle {
             ItemImageGrabber {
                 id: grabber
                 item: msg_item.messageRect
+                defaultImage: "files/message.png"
                 onImageChanged: {
                     drag.imageData = image
                     drag.start()
