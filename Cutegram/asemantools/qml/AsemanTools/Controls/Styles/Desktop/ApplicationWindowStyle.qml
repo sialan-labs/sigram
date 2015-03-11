@@ -1,4 +1,4 @@
-import QtQuick.Controls.Styles 1.3
+import QtQuick.Controls.Styles 1.1
 import QtQuick 2.0
 
 ApplicationWindowStyle {

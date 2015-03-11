@@ -71,6 +71,29 @@ void AsemanTools::debug(const QVariant &var)
     qDebug() << var;
 }
 
+QDateTime AsemanTools::currentDate()
+{
+    return QDateTime::currentDateTime();
+}
+
+QString AsemanTools::dateToMSec(const QDateTime &dt)
+{
+    return QString::number(dt.toMSecsSinceEpoch());
+}
+
+QDateTime AsemanTools::mSecToDate(const QString &ms)
+{
+    return QDateTime::fromMSecsSinceEpoch(ms.toLongLong());
+}
+
+QString AsemanTools::dateToString(const QDateTime &dt, const QString & format)
+{
+    if(format.isEmpty())
+        return dt.toString();
+    else
+        return dt.toString(format);
+}
+
 QString AsemanTools::fileName(const QString &path)
 {
     return QFileInfo(path).baseName();

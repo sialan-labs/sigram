@@ -1,3 +1,3 @@
-import QtQuick.Controls 1.2
+import QtQuick.Controls 1.1
 
 Calendar {}

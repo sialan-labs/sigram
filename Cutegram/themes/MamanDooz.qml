@@ -1,5 +1,5 @@
 import Cutegram 1.0
-import QtQuick 2.1
+import QtQuick 2.0
 
 CutegramTheme {
     themeName: "Maman Dooz"

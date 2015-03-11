@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QVariant>
 #include <QVariantMap>
+#include <QDateTime>
 #include <QSize>
 
 class AsemanToolsPrivate;
@@ -34,6 +35,11 @@ public:
 
 public slots:
     static void debug( const QVariant & var );
+
+    static QDateTime currentDate();
+    static QString dateToMSec(const QDateTime &dt);
+    static QDateTime mSecToDate(const QString &ms);
+    static QString dateToString(const QDateTime &dt, const QString &format = QString());
 
     static QString fileName( const QString & path );
     static QString fileSuffix( const QString & path );
