@@ -104,6 +104,9 @@ public:
     QString theme;
     QPointer<QQmlComponent> currentThemeComponent;
     QPointer<ThemeItem> currentTheme;
+
+    QStringList searchEngines;
+    QString searchEngine;
 };
 
 Cutegram::Cutegram(QObject *parent) :
@@ -132,6 +135,9 @@ Cutegram::Cutegram(QObject *parent) :
     p->font = AsemanApplication::settings()->value("General/font", default_font).value<QFont>();
     p->translator = new QTranslator(this);
     p->theme = AsemanApplication::settings()->value("General/theme","Abrisham.qml").toString();
+    p->searchEngine = AsemanApplication::settings()->value("General/searchEngine","https://duckduckgo.com/?q=").toString();
+
+    p->searchEngines = QStringList() << "https://duckduckgo.com/?q=" << "https://google.com/?q=" << "https://bing.com/?q=";
 
 #ifdef Q_OS_ANDROID
     p->close_blocker = true;
@@ -724,6 +730,28 @@ QString Cutegram::theme() const
 ThemeItem *Cutegram::currentTheme()
 {
     return p->currentTheme;
+}
+
+QStringList Cutegram::searchEngines() const
+{
+    return p->searchEngines;
+}
+
+void Cutegram::setSearchEngine(const QString &se)
+{
+    if(p->searchEngine == se)
+        return;
+
+    p->searchEngine = se;
+    AsemanApplication::settings()->setValue("General/searchEngine",p->searchEngine);
+    init_theme();
+
+    emit searchEngineChanged();
+}
+
+QString Cutegram::searchEngine() const
+{
+    return p->searchEngine;
 }
 
 void Cutegram::init_languages()

@@ -51,6 +51,9 @@ class Cutegram : public QObject
     Q_PROPERTY(QStringList themes READ themes NOTIFY themesChanged)
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
 
+    Q_PROPERTY(QStringList searchEngines READ searchEngines NOTIFY searchEnginesChanged)
+    Q_PROPERTY(QString searchEngine READ searchEngine WRITE setSearchEngine NOTIFY searchEngineChanged)
+
     Q_PROPERTY(bool closingState READ closingState NOTIFY closingStateChanged)
 
 public:
@@ -122,6 +125,10 @@ public:
     QString theme() const;
     ThemeItem *currentTheme();
 
+    QStringList searchEngines() const;
+    void setSearchEngine(const QString &se);
+    QString searchEngine() const;
+
 public slots:
     void start();
     void restart();
@@ -155,6 +162,9 @@ signals:
     void themesChanged();
     void currentThemeChanged();
     void themeChanged();
+
+    void searchEngineChanged();
+    void searchEnginesChanged();
 
     void configureRequest();
     void aboutAsemanRequest();

@@ -1,3 +1,15 @@
+cutegram (2.1.0aseman3-utopic) utopic; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 21:00:00 +0330
+ 
+cutegram (2.1.0aseman3-trusty) trusty; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 21:00:00 +0330
+ 
 cutegram (2.1.0aseman2-utopic) utopic; urgency=medium
 
   * Compability with Qt5.2 and Qt5.3

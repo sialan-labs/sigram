@@ -224,7 +224,8 @@ Rectangle {
                                 break;
                             }
                         } else {
-                            actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
+                            actions = msg_item.selectedText.length == 0? [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
+                                                                       : [qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Search on the Web")]
                             res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
@@ -237,6 +238,10 @@ Rectangle {
 
                             case 2:
                                 telegramObject.deleteMessage(message.id)
+                                break;
+
+                            case 3:
+                                Qt.openUrlExternally(Cutegram.searchEngine + msg_item.selectedText.replace(" ","+"))
                                 break;
                             }
                         }

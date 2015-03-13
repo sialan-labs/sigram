@@ -1224,6 +1224,14 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
         VideoObject *vid = static_cast<VideoObject*>(parentObj);
         l->download()->setTotal(vid->size());
     }
+    else
+    if(parentObj && parentObj->metaObject() == &UserProfilePhotoObject::staticMetaObject)
+    {
+        UserProfilePhotoObject *upp = static_cast<UserProfilePhotoObject*>(parentObj);
+        Q_UNUSED(upp)
+    }
+    else
+        qDebug() << __FUNCTION__ << ": Can't detect size of: " << parentObj;
 
     qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId(), ekey, eiv);
     p->downloads[fileId] = l;
@@ -2409,7 +2417,7 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
 
     download->file()->write(bytes);
 
-    if( downloaded >= download->total() )
+    if( downloaded >= download->total() && total == downloaded )
     {
         download->file()->flush();
         download->file()->close();

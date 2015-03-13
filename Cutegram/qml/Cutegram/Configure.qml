@@ -222,6 +222,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: search_text
+                            height: search_combo.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Search Engine")
+                        }
+
+                        Text {
                             id: proxy_text
                             height: proxy_btn.height
                             verticalAlignment: Text.AlignVCenter
@@ -343,6 +353,20 @@ Rectangle {
                                     Cutegram.background = ""
                                 }
                             }
+                        }
+
+                        Controls.ComboBox {
+                            id: search_combo
+                            model: Cutegram.searchEngines
+                            currentIndex: {
+                                var engines = Cutegram.searchEngines
+                                for(var i=0; i<engines.length; i++)
+                                    if(engines[i] == Cutegram.searchEngine)
+                                        return i
+
+                                return 0
+                            }
+                            onCurrentIndexChanged: if(init_timer.inited) Cutegram.searchEngine = currentText
                         }
 
                         Controls.Button {
