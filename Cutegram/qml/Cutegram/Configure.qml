@@ -259,7 +259,6 @@ Rectangle {
                             font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
                             color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Master Color")
-                            visible: false
                         }
 
                         Text {
@@ -429,7 +428,6 @@ Rectangle {
 
                         Controls.ComboBox {
                             id: color_combo
-                            visible: false
                             model: [qsTr("System Color"), qsTr("Custom")]
                             currentIndex: {
                                 if(Cutegram.masterColor.length == 0)

@@ -11,7 +11,7 @@ CutegramTheme {
         colorGroup: SystemPalette.Active
     }
 
-    masterColor: palette.highlight
+    masterColor: Cutegram.highlightColor
     visualEffects: true
 
     dialogListBackground: "#eeeeee"

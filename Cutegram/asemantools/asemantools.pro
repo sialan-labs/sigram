@@ -130,9 +130,7 @@ OTHER_FILES += \
     android-build/src/land/aseman/android/AsemanBootBroadcast.java \
     android-build/src/land/aseman/android/AsemanServiceDelegate.java
 
-SOURCE_FILES = $$files(qml/AsemanTools/*)
-
-qmlFiles.source = $$SOURCE_FILES
+qmlFiles.source = qml/AsemanTools/
 qmlFiles.target = $$DESTDIR/../..
 COPYFOLDERS += qmlFiles
 

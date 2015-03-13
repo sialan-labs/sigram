@@ -83,6 +83,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
+        anchors.topMargin: View.statusBarHeight
         light: Desktop.titleBarIsDark
     }
 }
