@@ -94,6 +94,7 @@ public:
 
     QString background;
     QString messageAudio;
+    QString masterColor;
     QFont font;
 
     QPalette mainPalette;
@@ -131,6 +132,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
+    p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
     p->messageAudio = AsemanApplication::settings()->value("General/messageAudio","files/new_msg.ogg").toString();
     p->font = AsemanApplication::settings()->value("General/font", default_font).value<QFont>();
     p->translator = new QTranslator(this);
@@ -672,6 +674,28 @@ void Cutegram::setMessageAudio(const QString &file)
 QString Cutegram::messageAudio() const
 {
     return p->messageAudio;
+}
+
+void Cutegram::setMasterColor(const QString &color)
+{
+    if(p->masterColor == color)
+        return;
+
+    p->masterColor = color;
+    AsemanApplication::settings()->setValue("General/masterColor", color);
+
+    emit masterColorChanged();
+    emit highlightColorChanged();
+}
+
+QString Cutegram::masterColor() const
+{
+    return p->masterColor;
+}
+
+QColor Cutegram::highlightColor() const
+{
+    return p->masterColor.isEmpty()? p->mainPalette.highlight().color() : QColor(p->masterColor);
 }
 
 void Cutegram::setFont(const QFont &font)
