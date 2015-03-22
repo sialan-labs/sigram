@@ -20,6 +20,7 @@
 #define TELEGRAMQML_H
 
 #include <QObject>
+#include <QStringList>
 #include "types/inputfilelocation.h"
 #include "types/peer.h"
 #include "types/inputpeer.h"
@@ -197,6 +198,8 @@ public:
     QList<qint64> contacts() const;
 
     InputPeer getInputPeer(qint64 pid);
+
+    QList<qint64> userIndex(const QString &keyword);
 
 public slots:
     void authLogout();
@@ -383,6 +386,8 @@ private slots:
     qint64 generateRandomId() const;
     InputPeer::InputPeerType getInputPeerType(qint64 pid);
     Peer::PeerType getPeerType(qint64 pid);
+
+    QStringList stringToIndex(const QString & str);
 
 private:
     TelegramQmlPrivate *p;

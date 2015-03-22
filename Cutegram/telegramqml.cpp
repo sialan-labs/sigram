@@ -94,6 +94,8 @@ public:
     QHash<qint64,EncryptedMessageObject*> encmessages;
     QHash<qint64,EncryptedChatObject*> encchats;
 
+    QMultiMap<QString, qint64> userNameIndexes;
+
     QHash<qint64,DialogObject*> fakeDialogs;
 
     QList<qint64> dialogs_list;
@@ -726,6 +728,31 @@ InputPeer TelegramQml::getInputPeer(qint64 peerId)
         peer.setUserId(peerId);
 
     return peer;
+}
+
+QList<qint64> TelegramQml::userIndex(const QString &kw)
+{
+    const QString & keyword = kw.toLower();
+
+    QList<qint64> result;
+    QSet<qint64> addeds;
+
+    QMapIterator<QString, qint64> i(p->userNameIndexes);
+    while(i.hasNext())
+    {
+        i.next();
+        qint64 uid = i.value();
+        if(addeds.contains(uid))
+            continue;
+        else
+        if(!i.key().contains(keyword.toLower()))
+            continue;
+
+        result << uid;
+        addeds.insert(uid);
+    }
+
+    return result;
 }
 
 void TelegramQml::authLogout()
@@ -2583,6 +2610,14 @@ void TelegramQml::insertUser(const User &u, bool fromDb)
         p->users.insert(u.id(), obj);
 
         getFile(obj->photo()->photoSmall());
+
+        QStringList userNameKeys;
+        userNameKeys << stringToIndex(u.firstName());
+        userNameKeys << stringToIndex(u.lastName());
+        userNameKeys << stringToIndex(u.username());
+
+        foreach(const QString &key, userNameKeys)
+            p->userNameIndexes.insertMulti(key.toLower(), u.id());
     }
     else
     if(fromDb)
@@ -3086,6 +3121,11 @@ Peer::PeerType TelegramQml::getPeerType(qint64 pid)
         res = Peer::typePeerChat;
 
     return res;
+}
+
+QStringList TelegramQml::stringToIndex(const QString &str)
+{
+    return QStringList() << str.toLower();
 }
 
 TelegramQml::~TelegramQml()

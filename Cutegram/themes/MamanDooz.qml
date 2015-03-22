@@ -12,7 +12,7 @@ CutegramTheme {
     }
 
     masterColor: palette.highlight
-    visualEffects: true
+    visualEffects: false
 
     dialogListBackground: "#333333"
     dialogListDateColor: "#999999"
@@ -45,7 +45,7 @@ CutegramTheme {
     searchBarPlaceholderColor: "#888888"
     searchBarFont.pointSize: 9
 
-    sendFrameColor: "#aaffffff"
+    sendFrameColor: "#f0f0f0"
     sendFrameFontColor: "#333333"
     sendFrameShadowColor: "#000000"
     sendFrameShadowSize: 0.4
@@ -78,14 +78,14 @@ CutegramTheme {
     messageShadowColor: "#66000000"
     messagePointerHeight: 15
 
-    headerColor: "#aaffffff"
+    headerColor: "#f0f0f0"
     headerTitleColor: "#111111"
     headerTitleFont.pointSize: 15
     headerDateColor: masterColor
     headerDateFont.pointSize: 9
     headerLightIcon: false
     headerSecretColor: "#aa000000"
-    headerSecretTitleColor: "#eeeeee"
+    headerSecretTitleColor: "#101010"
     headerSecretTitleFont.pointSize: 15
     headerSecretDateColor: masterColor
     headerSecretDateFont.pointSize: 9

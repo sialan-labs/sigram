@@ -33,6 +33,7 @@
 #include "telegramdialogsmodel.h"
 #include "telegramwallpapersmodel.h"
 #include "telegramsearchmodel.h"
+#include "usernamefiltermodel.h"
 #include "telegramcontactsmodel.h"
 #include "telegramuploadsmodel.h"
 #include "telegramchatparticipantsmodel.h"
@@ -167,6 +168,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<TelegramContactsModel>("Cutegram", 1, 0, "ContactsModel");
     qmlRegisterType<TelegramUploadsModel>("Cutegram", 1, 0, "UploadsModel");
     qmlRegisterType<TelegramSearchModel>("Cutegram", 1, 0, "SearchModel");
+    qmlRegisterType<UserNameFilterModel>("Cutegram", 1, 0, "UserNameFilterModel");
     qmlRegisterType<CutegramEnums>("Cutegram", 1, 0, "CutegramEnums");
     qmlRegisterType<ThemeItem>("Cutegram", 1, 0, "CutegramTheme");
     qmlRegisterType<TelegramChatParticipantsModel>("Cutegram", 1, 0, "ChatParticipantsModel");

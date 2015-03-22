@@ -5196,6 +5196,7 @@ class UserObject : public QObject
     Q_PROPERTY(UserProfilePhotoObject* photo READ photo WRITE setPhoto NOTIFY photoChanged)
     Q_PROPERTY(UserStatusObject* status READ status WRITE setStatus NOTIFY statusChanged)
     Q_PROPERTY(QString lastName READ lastName WRITE setLastName NOTIFY lastNameChanged)
+    Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
     Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
@@ -5209,6 +5210,7 @@ public:
         _photo = new UserProfilePhotoObject(another.photo(), this);
         _status = new UserStatusObject(another.status(), this);
         _lastName = another.lastName();
+        _username = another.username();
         _classType = another.classType();
 
     }
@@ -5311,6 +5313,18 @@ public:
         emit changed();
     }
 
+    QString username() const {
+        return _username;
+    }
+
+    void setUsername(QString value) {
+        if( value == _username )
+            return;
+        _username = value;
+        emit usernameChanged();
+        emit changed();
+    }
+
     qint64 classType() const {
         return _classType;
     }
@@ -5341,6 +5355,8 @@ public:
         emit statusChanged();
         _lastName = another.lastName();
         emit lastNameChanged();
+        _username = another.username();
+        emit usernameChanged();
         _classType = another.classType();
         emit classTypeChanged();
 
@@ -5356,6 +5372,7 @@ signals:
     void photoChanged();
     void statusChanged();
     void lastNameChanged();
+    void usernameChanged();
     void classTypeChanged();
 
 private:
@@ -5367,6 +5384,7 @@ private:
     UserProfilePhotoObject* _photo;
     UserStatusObject* _status;
     QString _lastName;
+    QString _username;
     qint64 _classType;
 
 };

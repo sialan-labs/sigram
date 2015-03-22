@@ -365,5 +365,6 @@ object User {
     UserProfilePhotoObject* photo rw = new UserProfilePhotoObject(another.%name(), this);
     UserStatusObject* status rw = new UserStatusObject(another.%name(), this);
     QString lastName rw = another.%name();
+    QString username rw = another.%name();
     qint64 classType rw = another.%name();
 }
