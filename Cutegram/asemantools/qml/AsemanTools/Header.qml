@@ -28,6 +28,7 @@ Item {
     property alias titleFont: title_txt.font
     property bool light: false
     property bool backButton: !Devices.isAndroid && !View.fullscreen
+    property real backScale: 1
 
     signal beginBack()
 
@@ -42,7 +43,7 @@ Item {
 
         Image {
             anchors.verticalCenter: parent.verticalCenter
-            height: 20*Devices.density
+            height: 20*Devices.density*backScale
             source: (!back_row.press && header.light)||(back_row.press && !header.light)? (height>48? "files/back_light_64.png" : "files/back_light_32.png") : (height>48? "files/back_64.png" : "files/back_32.png")
             fillMode: Image.PreserveAspectFit
             smooth: true
@@ -52,7 +53,7 @@ Item {
         Text {
             id: back_txt
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: Math.floor(12*Devices.fontDensity)
+            font.pixelSize: Math.floor(12*Devices.fontDensity*backScale)
             font.family: AsemanApp.globalFont.family
             color: (!back_row.press && header.light)||(back_row.press && !header.light)? "#ffffff" : "#111111"
         }
@@ -67,7 +68,7 @@ Item {
         visible: back_row.visible
         onClicked: {
             header.beginBack()
-            BackHandler.back()
+            AsemanApp.back()
         }
     }
 

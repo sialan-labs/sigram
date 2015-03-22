@@ -110,7 +110,7 @@ Item {
         smooth: true
         radius: width/2
         x: container.orientation == Qt.Vertical ? 2 : position()
-        width: container.orientation == Qt.Vertical ? container.width - 4 : diagonal
+        width: container.orientation == Qt.Vertical ? (marea.containsMouse||marea.pressed? 2*(container.width-3) : container.width - 4) : diagonal
         y: container.orientation == Qt.Vertical ? position() : 2
         height: container.orientation == Qt.Vertical ? diagonal : container.height - 4
         opacity: marea.containsMouse? 1 : 0.5
@@ -118,9 +118,17 @@ Item {
 
         property real diagonal: size()<20*Devices.density? 20*Devices.density : size()
 
+        Behavior on width {
+            NumberAnimation{easing.type: Easing.OutCubic; duration: 300}
+        }
+
         MouseArea {
             id: marea
             anchors.fill: parent
+            anchors.leftMargin: container.orientation == Qt.Vertical? -4 : 0
+            anchors.rightMargin: anchors.leftMargin
+            anchors.topMargin: container.orientation == Qt.Vertical? 0 : -4
+            anchors.bottomMargin: anchors.topMargin
             hoverEnabled: true
             onPressed: pinY = mouseY
             onMouseYChanged: {

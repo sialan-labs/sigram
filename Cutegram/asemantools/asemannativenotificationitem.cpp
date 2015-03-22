@@ -80,9 +80,6 @@ protected:
         painter.setRenderHint( QPainter::Antialiasing , true );
         painter.fillPath( dialogPath(rect(),0), QColor(255,255,255) );
     }
-
-private:
-    QGraphicsBlurEffect *effect;
 };
 
 class AsemanNativeNotificationItemPrivate

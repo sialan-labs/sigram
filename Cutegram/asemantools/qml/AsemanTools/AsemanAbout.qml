@@ -23,6 +23,8 @@ Rectangle {
     id: aseman_splash
     color: Desktop.titleBarColor
 
+    property alias backButtonScale: header.backScale
+
     Image {
         id: logo
         anchors.centerIn: parent
@@ -80,6 +82,7 @@ Rectangle {
     }
 
     Header {
+        id: header
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
