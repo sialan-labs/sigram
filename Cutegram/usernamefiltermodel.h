@@ -36,6 +36,10 @@ public:
     void setKeyword(const QString &keyword);
     QString keyword() const;
 
+public slots:
+    void refresh();
+    qint64 get(int idx);
+
 signals:
     void telegramChanged();
     void countChanged();

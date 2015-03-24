@@ -37,6 +37,7 @@ Rectangle {
     signal forwardRequest( variant message )
     signal focusRequest()
     signal dialogRequest(variant dialogObject)
+    signal tagSearchRequest(string tag)
 
     onIsActiveChanged: {
         if( isActive )
@@ -134,6 +135,7 @@ Rectangle {
                 mlist.currentIndex = index
             }
             onDialogRequest: acc_msg_list.dialogRequest(dialogObject)
+            onTagSearchRequest: acc_msg_list.tagSearchRequest(tag)
 
             property string messageFile
             property bool selected: mlist.currentIndex == index

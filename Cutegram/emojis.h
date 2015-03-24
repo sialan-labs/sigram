@@ -22,10 +22,13 @@
 #include <QObject>
 #include <QList>
 
+class UserData;
 class EmojisPrivate;
 class Emojis : public QObject
 {
     Q_PROPERTY( QString currentTheme READ currentTheme WRITE setCurrentTheme NOTIFY currentThemeChanged)
+    Q_PROPERTY( UserData* userData READ userData WRITE setUserData NOTIFY userDataChanged)
+
     Q_OBJECT
 public:
     Emojis(QObject *parent = 0);
@@ -33,6 +36,9 @@ public:
 
     void setCurrentTheme( const QString & theme );
     QString currentTheme() const;
+
+    UserData *userData() const;
+    void setUserData(UserData *userData);
 
     Q_INVOKABLE QString textToEmojiText(const QString & txt , int size = 16, bool skipLinks = false);
     Q_INVOKABLE QString bodyTextToEmojiText( const QString & txt );
@@ -42,6 +48,7 @@ public:
 
 signals:
     void currentThemeChanged();
+    void userDataChanged();
 
 private:
     EmojisPrivate *p;

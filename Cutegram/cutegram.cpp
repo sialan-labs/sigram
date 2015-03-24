@@ -29,6 +29,7 @@
 #include "telegramqml.h"
 #include "profilesmodel.h"
 #include "telegrammessagesmodel.h"
+#include "tagfiltermodel.h"
 #include "dialogfilesmodel.h"
 #include "telegramdialogsmodel.h"
 #include "telegramwallpapersmodel.h"
@@ -165,6 +166,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<DialogFilesModel>("Cutegram", 1, 0, "DialogFilesModel");
     qmlRegisterType<TelegramWallpapersModel>("Cutegram", 1, 0, "WallpapersModel");
     qmlRegisterType<TelegramDialogsModel>("Cutegram", 1, 0, "DialogsModel");
+    qmlRegisterType<TagFilterModel>("Cutegram", 1, 0, "TagFilterModel");
     qmlRegisterType<TelegramContactsModel>("Cutegram", 1, 0, "ContactsModel");
     qmlRegisterType<TelegramUploadsModel>("Cutegram", 1, 0, "UploadsModel");
     qmlRegisterType<TelegramSearchModel>("Cutegram", 1, 0, "SearchModel");

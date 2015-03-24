@@ -26,7 +26,7 @@ AsemanAbstractColorfullListModel::AsemanAbstractColorfullListModel(QObject *pare
 
 QHash<qint32, QByteArray> AsemanAbstractColorfullListModel::roleNames() const
 {
-    QHash<qint32, QByteArray> *res = 0;
+    static QHash<qint32, QByteArray> *res = 0;
     if( res )
         return *res;
 

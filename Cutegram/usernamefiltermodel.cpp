@@ -60,7 +60,7 @@ QVariant UserNameFilterModel::data(const QModelIndex &index, int role) const
 
 QHash<qint32, QByteArray> UserNameFilterModel::roleNames() const
 {
-    QHash<qint32, QByteArray> *res = 0;
+    static QHash<qint32, QByteArray> *res = 0;
     if( res )
         return *res;
 
@@ -88,6 +88,19 @@ void UserNameFilterModel::setKeyword(const QString &keyword)
 QString UserNameFilterModel::keyword() const
 {
     return p->keyword;
+}
+
+void UserNameFilterModel::refresh()
+{
+    listChanged();
+}
+
+qint64 UserNameFilterModel::get(int idx)
+{
+    if(idx < 0 || idx >= p->list.count())
+        return 0;
+
+    return p->list.at(idx);
 }
 
 void UserNameFilterModel::listChanged()

@@ -142,7 +142,7 @@ QVariant AsemanCountriesModel::data(const QModelIndex &index, int role) const
 
 QHash<qint32, QByteArray> AsemanCountriesModel::roleNames() const
 {
-    QHash<qint32, QByteArray> *res = 0;
+    static QHash<qint32, QByteArray> *res = 0;
     if( res )
         return *res;
 

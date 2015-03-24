@@ -18,11 +18,18 @@ Rectangle {
     property bool cutegramDialog: telegramObject.cutegramDialog
 
     property alias windowsCount: windoweds_hash.count
+    property alias emojis: emojis_obj
 
     signal addParticianRequest()
 
     Component.onCompleted: {
         telegramObject.cutegramDialog = Cutegram.cutegramSubscribe
+    }
+
+    Emojis {
+        id: emojis_obj
+        currentTheme: "twitter"
+        userData: telegramObject.userData
     }
 
     HashObject {
@@ -128,6 +135,7 @@ Rectangle {
         anchors.right: parent.right
         currentDialog: dialogs.currentDialog
         telegramObject: dialogs.telegramObject
+        onTagSearchRequest: search_frame.text = "#" + tag
     }
 
     function showDialog(dialog) {
@@ -188,6 +196,11 @@ Rectangle {
                 id: wmbox
                 anchors.fill: parent
                 telegramObject: dialogs.telegramObject
+                onTagSearchRequest: {
+                    search_frame.text = "#" + tag
+                    View.show()
+                    View.requestActivate()
+                }
             }
 
             Component.onCompleted: {

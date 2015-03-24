@@ -46,6 +46,7 @@ Item {
     property bool modernMode: false
 
     signal dialogRequest(variant dialogObject)
+    signal tagSearchRequest(string tag)
 
     onSentChanged: {
         if( sent )
@@ -241,7 +242,6 @@ Item {
                             text: emojis.bodyTextToEmojiText(messageText)
                             textFormat: Text.RichText
                             height: contentHeight
-                            onLinkActivated: Qt.openUrlExternally(link)
                             color: {
                                 if(hasMedia || encryptMedia)
                                     return Cutegram.currentTheme.messageMediaDateColor
@@ -250,6 +250,12 @@ Item {
                                     return Cutegram.currentTheme.messageOutgoingFontColor
                                 else
                                     return Cutegram.currentTheme.messageIncomingFontColor
+                            }
+                            onLinkActivated: {
+                                if(link.slice(0,6) == "tag://")
+                                    msg_item.tagSearchRequest(link.slice(6, link.length))
+                                else
+                                    Qt.openUrlExternally(link)
                             }
 
                             property real htmlWidth: Cutegram.htmlWidth(text)

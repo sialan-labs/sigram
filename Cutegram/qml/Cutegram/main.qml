@@ -14,7 +14,6 @@ AsemanMain {
 
     property variant authDialog
     property alias profiles: profile_model
-    property alias emojis: emojis_obj
 
     property bool aboutMode: false
 
@@ -77,11 +76,6 @@ AsemanMain {
             AsemanApp.setSetting("General/width", width)
             AsemanApp.setSetting("General/height", height)
         }
-    }
-
-    Emojis {
-        id: emojis_obj
-        currentTheme: "twitter"
     }
 
     ProfilesModel {

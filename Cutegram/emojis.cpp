@@ -18,6 +18,7 @@
 
 #include "emojis.h"
 #include "cutegram.h"
+#include "userdata.h"
 #include "asemantools/asemandevices.h"
 #include "asemantools/asemantools.h"
 
@@ -26,6 +27,7 @@
 #include <QHash>
 #include <QFile>
 #include <QDebug>
+#include <QPointer>
 
 class EmojisPrivate
 {
@@ -33,6 +35,7 @@ public:
     QHash<QString,QString> emojis;
     QStringList keys;
     QString theme;
+    QPointer<UserData> userData;
 };
 
 Emojis::Emojis(QObject *parent) :
@@ -78,6 +81,20 @@ QString Emojis::currentTheme() const
     return p->theme;
 }
 
+UserData *Emojis::userData() const
+{
+    return p->userData;
+}
+
+void Emojis::setUserData(UserData *userData)
+{
+    if(p->userData == userData)
+        return;
+
+    p->userData = userData;
+    emit userDataChanged();
+}
+
 QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
 {
     QString res = txt.toHtmlEscaped();
@@ -93,6 +110,19 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
 
         QString atag = QString("<a href='%1'>%2</a>").arg(href,link);
         res.replace( pos, link.length(), atag );
+        pos += atag.size();
+    }
+
+    QRegExp tags_rxp("\\#(\\w+)");
+    pos = 0;
+    while (!skipLinks && (pos = tags_rxp.indexIn(res, pos)) != -1)
+    {
+        QString tag = tags_rxp.cap(1);
+        if(p->userData)
+            p->userData->addTag(tag);
+
+        QString atag = QString("<a href='tag://%1'>%2</a>").arg(tag,"#"+tag);
+        res.replace( pos, tag.length()+1, atag );
         pos += atag.size();
     }
 

@@ -45,6 +45,7 @@ Item {
     QtObject {
         id: privates
         property Dialog lastDialog: telegramObject.nullDialog
+        property variant suggestionItem
     }
 
     Timer {
@@ -191,6 +192,35 @@ Item {
                         typing_update_timer.startTyping()
                     }
                     Keys.onPressed: {
+                        if((event.key == Qt.Key_Enter || event.key == Qt.Key_Return) && privates.suggestionItem)
+                        {
+                            var result
+                            if(privates.suggestionItem.isTagSuggestion) {
+                                result = privates.suggestionItem.currentTag()
+                            } else {
+                                var uId = privates.suggestionItem.currentUserId()
+                                if(!uId) {
+                                    if( event.modifiers == Qt.NoModifier )
+                                        smsg.send()
+
+                                    typing_timer.finishTyping()
+                                    return
+                                }
+
+                                var userObj = telegramObject.user(uId)
+                                var userName = userObj.username
+                                result = userName
+                            }
+
+                            txt.selectWord()
+                            txt.remove(txt.selectionStart, txt.selectionEnd)
+                            txt.insert(txt.cursorPosition, result)
+
+                            last_line_remover.restart()
+                            privates.suggestionItem.destroy()
+                            event.accepted = false
+                        }
+                        else
                         if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
                         {
                             if( event.modifiers == Qt.NoModifier )
@@ -217,6 +247,59 @@ Item {
                                 smsg.copyRequest()
                                 event.accepted = false
                             }
+                        }
+                        else
+                        if(event.key == Qt.Key_At || event.key == Qt.Key_NumberSign)
+                        {
+                            if(!privates.suggestionItem) {
+                                if(event.key == Qt.Key_At)
+                                    privates.suggestionItem = username_sgs_component.createObject(mainFrame)
+                                else
+                                if(event.key == Qt.Key_NumberSign)
+                                    privates.suggestionItem = tags_sgs_component.createObject(mainFrame)
+
+                                var pnt = smsg.mapToItem(mainFrame, 0, 0)
+                                var pntY = pnt.y
+                                var pntX = pnt.x + txt.positionToRectangle(txt.cursorPosition).x + txt_frame.x
+
+                                privates.suggestionItem.x = pntX
+                                privates.suggestionItem.y = pntY - privates.suggestionItem.height
+                            } else {
+                                privates.suggestionItem.keyword = ""
+                            }
+                        }
+                        else
+                        if(event.key == Qt.Key_Space || event.key == Qt.Key_Escape || event.key == Qt.Key_Delete)
+                        {
+                            if(privates.suggestionItem)
+                                privates.suggestionItem.destroy()
+                        }
+                        else
+                        if(event.key == Qt.Key_Up && privates.suggestionItem)
+                        {
+                            privates.suggestionItem.up()
+                            event.accepted = false
+                        }
+                        else
+                        if(event.key == Qt.Key_Down && privates.suggestionItem)
+                        {
+                            privates.suggestionItem.down()
+                            event.accepted = false
+                        }
+                        else
+                        if((event.modifiers == Qt.NoModifier || event.modifiers == Qt.ShiftModifier) && privates.suggestionItem)
+                        {
+                            check_suggestion.restart()
+                        }
+                    }
+
+                    Timer {
+                        id: last_line_remover
+                        interval: 1
+                        onTriggered: {
+                            var cpos = txt.cursorPosition
+                            txt.text = txt.text.slice(0, cpos-1) + " " + txt.text.slice(cpos+1, txt.length)
+                            txt.cursorPosition = cpos
                         }
                     }
                 }
@@ -362,6 +445,16 @@ Item {
         txt.focus = true
     }
 
+    Timer {
+        id: check_suggestion
+        interval: 20
+        onTriggered: {
+            txt.selectWord()
+            privates.suggestionItem.keyword = txt.selectedText
+            txt.deselect()
+        }
+    }
+
     Component {
         id: camera_camponent
         CameraDialog{
@@ -376,6 +469,22 @@ Item {
                 telegramObject.sendFile(dId, path)
                 visible = false
             }
+        }
+    }
+
+    Component {
+        id: username_sgs_component
+        UserNameSuggestionMenu {
+            telegram: telegramObject
+            property bool isTagSuggestion: false
+        }
+    }
+
+    Component {
+        id: tags_sgs_component
+        TagSuggestionMenu {
+            telegram: telegramObject
+            property bool isTagSuggestion: true
         }
     }
 }

@@ -52,6 +52,7 @@ public:
     QHash<int,bool> favorites;
     QHash<QString,QString> general;
     QMap<quint64, MessageUpdate> msg_updates;
+    QMap<QString,bool> tags;
 };
 
 UserData::UserData(QObject *parent) :
@@ -185,6 +186,26 @@ bool UserData::isFavorited(int id)
     return p->favorites.value(id);
 }
 
+void UserData::addTag(const QString &t)
+{
+    const QString &tag = t.toLower();
+    if(p->tags.contains(tag))
+        return;
+
+    QSqlQuery mute_query(p->db);
+    mute_query.prepare("INSERT OR REPLACE INTO tags (tag) VALUES (:tag)");
+    mute_query.bindValue(":tag",tag);
+    mute_query.exec();
+
+    p->tags.insert(tag, true);
+    emit tagsChanged(tag);
+}
+
+QStringList UserData::tags() const
+{
+    return p->tags.keys();
+}
+
 void UserData::addMessageUpdate(const MessageUpdate &msg)
 {
     QSqlQuery mute_query(p->db);
@@ -263,6 +284,16 @@ void UserData::init_buffer()
         p->favorites.insert( record.value(0).toInt(), record.value(1).toInt() );
     }
 
+    QSqlQuery tags_query(p->db);
+    tags_query.prepare("SELECT tag FROM tags");
+    tags_query.exec();
+
+    while( tags_query.next() )
+    {
+        const QSqlRecord & record = tags_query.record();
+        p->tags.insert( record.value(0).toString(), true );
+    }
+
     QSqlQuery msg_upd_query(p->db);
     msg_upd_query.prepare("SELECT id, message, date FROM updatemessages");
     msg_upd_query.exec();
@@ -303,6 +334,18 @@ void UserData::update_db()
             QSqlQuery( query_str, p->db ).exec();
 
         setValue("version","3");
+    }
+    if( version < 4 )
+    {
+        QStringList query_list;
+        query_list << "BEGIN;";
+        query_list << "CREATE  TABLE IF NOT EXISTS Tags (tag TEXT NOT NULL, PRIMARY KEY (tag) );";
+        query_list << "COMMIT;";
+
+        foreach( const QString & query_str, query_list )
+            QSqlQuery( query_str, p->db ).exec();
+
+        setValue("version","4");
     }
 }
 

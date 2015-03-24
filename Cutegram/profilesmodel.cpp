@@ -136,7 +136,7 @@ bool ProfilesModel::setData(const QModelIndex &index, const QVariant &value, int
 
 QHash<qint32, QByteArray> ProfilesModel::roleNames() const
 {
-    QHash<qint32, QByteArray> *res = 0;
+    static QHash<qint32, QByteArray> *res = 0;
     if( res )
         return *res;
 

@@ -32,6 +32,7 @@ class EncryptedFile;
 class EncryptedFileObject;
 class DecryptedMessage;
 class DecryptedMessageObject;
+class PeerNotifySettings;
 class EncryptedChat;
 class EncryptedChatObject;
 class EncryptedMessage;
@@ -307,6 +308,7 @@ private slots:
     void photosUpdateProfilePhoto_slt(qint64 id, const UserProfilePhoto & userProfilePhoto);
 
     void contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> & contacts, const QList<User> & users);
+    void usersGetFullUser_slt(qint64 id, const User &user, const ContactsLink &link, const Photo &profilePhoto, const PeerNotifySettings &notifySettings, bool blocked, const QString &realFirstName, const QString &realLastName);
 
     void messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, qint32 pts, qint32 seq, const QList<ContactsLink> & links);
     void messagesForwardMessage_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);

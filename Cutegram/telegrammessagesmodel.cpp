@@ -259,7 +259,7 @@ QVariant TelegramMessagesModel::data(const QModelIndex &index, int role) const
 
 QHash<qint32, QByteArray> TelegramMessagesModel::roleNames() const
 {
-    QHash<qint32, QByteArray> *res = 0;
+    static QHash<qint32, QByteArray> *res = 0;
     if( res )
         return *res;
 

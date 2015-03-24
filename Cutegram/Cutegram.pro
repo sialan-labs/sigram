@@ -53,7 +53,8 @@ SOURCES += main.cpp \
     telegramsearchmodel.cpp \
     dialogfilesmodel.cpp \
     cutegramenums.cpp \
-    usernamefiltermodel.cpp
+    usernamefiltermodel.cpp \
+    tagfiltermodel.cpp
 
 RESOURCES += resource.qrc
 
@@ -86,7 +87,8 @@ HEADERS += \
     dialogfilesmodel.h \
     cutegramenums.h \
     themeitem.h \
-    usernamefiltermodel.h
+    usernamefiltermodel.h \
+    tagfiltermodel.h
 
 OTHER_FILES += \
     objects/types.sco \

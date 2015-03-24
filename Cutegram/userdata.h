@@ -20,6 +20,7 @@
 #define USERDATA_H
 
 #include <QObject>
+#include <QStringList>
 
 class MessageUpdate
 {
@@ -53,6 +54,9 @@ public slots:
     QList<int> favorites() const;
     bool isFavorited(int id);
 
+    void addTag(const QString &tag);
+    QStringList tags() const;
+
     void addMessageUpdate(const MessageUpdate &msg);
     void removeMessageUpdate(int id);
     QList<quint64> messageUpdates() const;
@@ -67,6 +71,7 @@ public slots:
 signals:
     void muteChanged(int id);
     void favoriteChanged(int id);
+    void tagsChanged(const QString &tag);
     void valueChanged( const QString & key );
     void messageUpdateChanged(int id);
     void phoneNumberChanged();

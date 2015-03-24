@@ -14,6 +14,8 @@ Item {
 
     property alias maxId: messages.maxId
 
+    signal tagSearchRequest(string tag)
+
     Item {
         id: properties_frame
         anchors.left: parent.left
@@ -46,6 +48,7 @@ Item {
             onForwardRequest: forward_component.createObject(message_box, {"forwardMessage":message})
             onFocusRequest: send_msg.setFocus()
             onDialogRequest: acc_view.currentDialog = dialogObject
+            onTagSearchRequest: msg_box.tagSearchRequest(tag)
         }
 
         Item {

@@ -1416,6 +1416,9 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(photosUpdateProfilePhotoAnswer(qint64,UserProfilePhoto)),
              SLOT(photosUpdateProfilePhoto_slt(qint64,UserProfilePhoto)) );
 
+    connect( p->telegram, SIGNAL(usersGetFullUserAnswer(qint64,User,ContactsLink,Photo,PeerNotifySettings,bool,QString,QString)),
+             SLOT(usersGetFullUser_slt(qint64,User,ContactsLink,Photo,PeerNotifySettings,bool,QString,QString)) );
+
     connect( p->telegram, SIGNAL(messagesGetDialogsAnswer(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
              SLOT(messagesGetDialogs_slt(qint64,qint32,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)) );
     connect( p->telegram, SIGNAL(messagesGetHistoryAnswer(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)),
@@ -1673,6 +1676,18 @@ void TelegramQml::contactsGetContacts_slt(qint64 id, bool modified, const QList<
         insertUser(user);
     foreach( const Contact & contact, contacts )
         insertContact(contact);
+}
+
+void TelegramQml::usersGetFullUser_slt(qint64 id, const User &user, const ContactsLink &link, const Photo &profilePhoto, const PeerNotifySettings &notifySettings, bool blocked, const QString &realFirstName, const QString &realLastName)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(link)
+    Q_UNUSED(profilePhoto)
+    Q_UNUSED(notifySettings)
+    Q_UNUSED(blocked)
+    Q_UNUSED(realFirstName)
+    Q_UNUSED(realLastName)
+    insertUser(user);
 }
 
 void TelegramQml::messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, qint32 pts, qint32 seq, const QList<ContactsLink> &links)
@@ -2612,9 +2627,12 @@ void TelegramQml::insertUser(const User &u, bool fromDb)
         getFile(obj->photo()->photoSmall());
 
         QStringList userNameKeys;
-        userNameKeys << stringToIndex(u.firstName());
-        userNameKeys << stringToIndex(u.lastName());
-        userNameKeys << stringToIndex(u.username());
+        if(!u.username().isEmpty())
+        {
+            userNameKeys << stringToIndex(u.firstName());
+            userNameKeys << stringToIndex(u.lastName());
+            userNameKeys << stringToIndex(u.username());
+        }
 
         foreach(const QString &key, userNameKeys)
             p->userNameIndexes.insertMulti(key.toLower(), u.id());
