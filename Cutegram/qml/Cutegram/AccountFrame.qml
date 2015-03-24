@@ -103,13 +103,15 @@ Rectangle {
                 }
             }
 
-            if( telegram.userData.isMuted(dId) )
+            var user = telegram.user(msg.fromId)
+            var message = msg.message
+
+            if( telegram.userData.isMuted(dId) && (user.username=="" || message.indexOf("@"+user.username)!=-1) )
                 return
             if( !Cutegram.notification )
                 return
 
             var dialog = telegram.dialog(dId)
-            var user = telegram.user(msg.fromId)
             var title = user.firstName + " " + user.lastName
 
             var chatObj
@@ -133,7 +135,6 @@ Rectangle {
                 sound_notify.play()
             }
 
-            var message = msg.message
             if(msg.encrypted)
                 message = qsTr("Message!")
 
