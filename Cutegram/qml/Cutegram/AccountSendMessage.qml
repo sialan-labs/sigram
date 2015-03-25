@@ -287,7 +287,8 @@ Item {
                             event.accepted = false
                         }
                         else
-                        if((event.modifiers == Qt.NoModifier || event.modifiers == Qt.ShiftModifier) && privates.suggestionItem)
+                        if((event.modifiers == Qt.NoModifier || event.modifiers == Qt.ShiftModifier) && privates.suggestionItem &&
+                           event.key != Qt.Key_Left && event.key != Qt.Key_Right)
                         {
                             check_suggestion.restart()
                         }
