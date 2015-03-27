@@ -53,6 +53,7 @@ public:
     QHash<QString,QString> general;
     QMap<quint64, MessageUpdate> msg_updates;
     QMap<QString,bool> tags;
+    QHash<int,int> notifies;
 };
 
 UserData::UserData(QObject *parent) :
@@ -186,6 +187,23 @@ bool UserData::isFavorited(int id)
     return p->favorites.value(id);
 }
 
+void UserData::setNotify(int id, int value)
+{
+    QSqlQuery notify_query(p->db);
+    notify_query.prepare("INSERT OR REPLACE INTO notifysettings (id,value) VALUES (:id,:val)");
+    notify_query.bindValue(":id",id);
+    notify_query.bindValue(":val",value);
+    notify_query.exec();
+
+    p->notifies.insert(id,value);
+    emit notifyChanged(id, value);
+}
+
+int UserData::notify(int id)
+{
+    return p->notifies.value(id);
+}
+
 void UserData::addTag(const QString &t)
 {
     const QString &tag = t.toLower();
@@ -284,6 +302,16 @@ void UserData::init_buffer()
         p->favorites.insert( record.value(0).toInt(), record.value(1).toInt() );
     }
 
+    QSqlQuery notifies_query(p->db);
+    notifies_query.prepare("SELECT id, value FROM notifysettings");
+    notifies_query.exec();
+
+    while( notifies_query.next() )
+    {
+        const QSqlRecord & record = notifies_query.record();
+        p->notifies.insert( record.value(0).toInt(), record.value(1).toInt() );
+    }
+
     QSqlQuery tags_query(p->db);
     tags_query.prepare("SELECT tag FROM tags");
     tags_query.exec();
@@ -346,6 +374,18 @@ void UserData::update_db()
             QSqlQuery( query_str, p->db ).exec();
 
         setValue("version","4");
+    }
+    if( version < 5 )
+    {
+        QStringList query_list;
+        query_list << "BEGIN;";
+        query_list << "CREATE  TABLE IF NOT EXISTS NotifySettings (id INT NOT NULL ,value INT NOT NULL, PRIMARY KEY (id) );";
+        query_list << "COMMIT;";
+
+        foreach( const QString & query_str, query_list )
+            QSqlQuery( query_str, p->db ).exec();
+
+        setValue("version","5");
     }
 }
 

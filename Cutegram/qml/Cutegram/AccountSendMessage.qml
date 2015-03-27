@@ -431,6 +431,9 @@ Item {
         if( msg == "" )
             return
 
+        if(privates.suggestionItem)
+            privates.suggestionItem.destroy()
+
         smsg.accepted(msg)
         txt.text = ""
     }

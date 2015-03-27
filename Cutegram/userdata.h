@@ -34,9 +34,16 @@ class UserDataPrivate;
 class UserData : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(NotifyTypes)
     Q_PROPERTY(QString phoneNumber READ phoneNumber WRITE setPhoneNumber NOTIFY phoneNumberChanged)
 
 public:
+    enum NotifyTypes {
+        NotifyDisabled = 0,
+        NotifyOnline = 1,
+        NotifyTyping = 2,
+    };
+
     UserData(QObject *parent = 0);
     ~UserData();
 
@@ -53,6 +60,9 @@ public slots:
     void removeFavorite( int id );
     QList<int> favorites() const;
     bool isFavorited(int id);
+
+    void setNotify(int id, int value);
+    int notify(int id);
 
     void addTag(const QString &tag);
     QStringList tags() const;
@@ -74,6 +84,7 @@ signals:
     void tagsChanged(const QString &tag);
     void valueChanged( const QString & key );
     void messageUpdateChanged(int id);
+    void notifyChanged(int id, int value);
     void phoneNumberChanged();
 
 private:

@@ -280,6 +280,9 @@ signals:
     void authCallRequested( bool ok );
     void authInvitesSent( bool ok );
 
+    void userBecomeOnline(qint64 userId);
+    void userStartTyping(qint64 userId, qint64 dId);
+
     void errorChanged();
     void meChanged();
     void fakeSignal();

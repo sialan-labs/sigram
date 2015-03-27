@@ -81,6 +81,14 @@
         <source>Open in New Window</source>
         <translation>باز کردن در پنجره‌ی جدید</translation>
     </message>
+    <message>
+        <source>Notify when</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Become online</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -99,6 +107,18 @@
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
         <translation>پیغام از &quot;%2&quot; در &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <source>%1 is online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 start typing on &quot;%2&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 start typing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -500,23 +500,75 @@ QString AsemanDesktopTools::getText(QWindow *window, const QString &title, const
 #endif
 }
 
-int AsemanDesktopTools::showMenu(const QStringList &actions, QPoint point)
+int AsemanDesktopTools::showMenu(const QVariantList &actions, QPoint point)
 {
 #ifdef DESKTOP_DEVICE
     if( point.isNull() )
         point = QCursor::pos();
 
-    QMenu menu;
-    menu.setStyleSheet(p->style);
-
     QList<QAction*> pointers;
-    foreach(const QString &act, actions)
-        pointers << (act.isEmpty()? menu.addSeparator() : menu.addAction(act));
+    QMenu *menu = menuOf(actions, &pointers);
+    menu->setStyleSheet(p->style);
 
-    QAction *res = menu.exec(point);
+    QAction *res = menu->exec(point);
+    menu->deleteLater();
+
     return pointers.indexOf(res);
 #else
     return -1;
+#endif
+}
+
+QMenu *AsemanDesktopTools::menuOf(const QVariantList &list, QList<QAction *> *actions, QMenu *parent)
+{
+#ifdef DESKTOP_DEVICE
+    QMenu *result = new QMenu(parent);
+    foreach(const QVariant &var, list)
+    {
+        QString txt;
+        bool checkable = false;
+        bool checked = false;
+        QVariantList list;
+
+        switch(static_cast<int>(var.type()))
+        {
+        case QVariant::Map:
+        {
+            const QVariantMap &map = var.toMap();
+            checkable = map["checkable"].toBool();
+            checked = map["checked"].toBool();
+            txt = map["text"].toString();
+            list = map["list"].toList();
+        }
+            break;
+
+        default:
+            txt = var.toString();
+            break;
+        }
+
+        QAction *act;
+        if(list.isEmpty())
+        {
+            act = (txt.isEmpty()? result->addSeparator() : result->addAction(txt));
+            act->setCheckable(checkable);
+            if(checkable)
+                act->setChecked(checked);
+        }
+        else
+        {
+            QMenu *menu = menuOf(list, actions, result);
+            menu->setTitle(txt);
+
+            act = result->addMenu(menu);
+        }
+
+        (*actions) << act;
+    }
+
+    return result;
+#else
+    return 0;
 #endif
 }
 

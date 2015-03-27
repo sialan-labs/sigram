@@ -65,6 +65,14 @@
         <source>Open in New Window</source>
         <translation>Abrir em uma Nova Janela</translation>
     </message>
+    <message>
+        <source>Notify when</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Become online</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -83,6 +91,18 @@
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
         <translation>Mensagem em &quot;%1&quot; por &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 is online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 start typing on &quot;%2&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 start typing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

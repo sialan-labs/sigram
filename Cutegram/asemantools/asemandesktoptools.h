@@ -26,7 +26,10 @@
 #include <QDir>
 #include <QFont>
 #include <QWindow>
+#include <QVariant>
 
+class QAction;
+class QMenu;
 class AsemanDesktopToolsPrivate;
 class AsemanDesktopTools : public QObject
 {
@@ -82,7 +85,7 @@ public slots:
     QFont getFont(QWindow *window = 0, const QString &title = QString(), const QFont &font = QFont());
     QColor getColor(const QColor &color = QColor()) const;
     QString getText(QWindow *window = 0, const QString &title = QString(), const QString &text = QString(), const QString &defaultText = QString());
-    int showMenu( const QStringList & actions, QPoint point = QPoint() );
+    int showMenu( const QVariantList & actions, QPoint point = QPoint() );
     bool yesOrNo(QWindow *window, const QString &title, const QString &text, int type = Warning);
 
 signals:
@@ -93,6 +96,9 @@ signals:
     void desktopSessionChanged();
     void menuStyleChanged();
     void fakeSignal();
+
+private:
+    QMenu *menuOf(const QVariantList &list, QList<QAction*> *actions = 0, QMenu *parent = 0);
 
 private:
     AsemanDesktopToolsPrivate *p;

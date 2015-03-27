@@ -2618,7 +2618,12 @@ void TelegramQml::insertMessage(const Message &m, bool encrypted, bool fromDb, b
 
 void TelegramQml::insertUser(const User &u, bool fromDb)
 {
+    bool become_online = false;
     UserObject *obj = p->users.value(u.id());
+    if(!fromDb && obj && obj->status()->classType() == UserStatus::typeUserStatusOffline &&
+            u.status().classType() == UserStatus::typeUserStatusOnline )
+        become_online = true;
+
     if( !obj )
     {
         obj = new UserObject(u, this);
@@ -2645,6 +2650,9 @@ void TelegramQml::insertUser(const User &u, bool fromDb)
 
     if(!fromDb && p->database)
         p->database->insertUser(u);
+
+    if(become_online)
+        emit userBecomeOnline(u.id());
 }
 
 void TelegramQml::insertChat(const Chat &c, bool fromDb)
@@ -2676,7 +2684,14 @@ void TelegramQml::insertUpdate(const Update &update)
     {
     case Update::typeUpdateUserStatus:
         if( user )
+        {
+            bool become_online = (user->status()->classType() == UserStatus::typeUserStatusOffline &&
+                    update.status().classType() == UserStatus::typeUserStatusOnline);
+
             *(user->status()) = update.status();
+            if(become_online)
+                emit userBecomeOnline(user->id());
+        }
         break;
 
     case Update::typeUpdateNotifySettings:
@@ -2696,6 +2711,7 @@ void TelegramQml::insertUpdate(const Update &update)
         const QString & id_str = QString::number(user->id());
         const QPair<qint64,qint64> & timer_pair = QPair<qint64,qint64>(chat->id(), user->id());
         QStringList tusers = dlg->typingUsers();
+
         if( tusers.contains(id_str) )
         {
             const int timer_id = p->typing_timers.key(timer_pair);
@@ -2706,6 +2722,7 @@ void TelegramQml::insertUpdate(const Update &update)
         {
             tusers << id_str;
             dlg->setTypingUsers( tusers );
+            emit userStartTyping(user->id(), chat->id());
         }
 
         int timer_id = startTimer(6000);
@@ -2798,6 +2815,7 @@ void TelegramQml::insertUpdate(const Update &update)
         {
             tusers << id_str;
             dlg->setTypingUsers( tusers );
+            emit userStartTyping(user->id(), user->id());
         }
 
         int timer_id = startTimer(6000);
@@ -2826,6 +2844,7 @@ void TelegramQml::insertUpdate(const Update &update)
         {
             tusers << id_str;
             dlg->setTypingUsers( tusers );
+            emit userStartTyping(userId, userId);
         }
 
         int timer_id = startTimer(6000);

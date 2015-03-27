@@ -301,7 +301,14 @@ Item {
                                 break;
                             }
                         } else {
-                            actions = [qsTr("Open in New Window"), qsTr("Delete History")]
+                            var notifyValue = telegramObject.userData.notify(dItem.peer.userId)
+                            var notifyOnline = notifyValue & UserData.NotifyOnline
+                            var notifyTyping = notifyValue & UserData.NotifyTyping
+                            var notifyMenu = {"text": qsTr("Notify when"),
+                                "list":[{"text": qsTr("Become online"), "checkable": true, "checked": notifyOnline}]}
+//                                        {"text": qsTr("Start typing"), "checkable": true, "checked": notifyTyping}]}
+
+                            actions = [qsTr("Open in New Window"), qsTr("Delete History"), notifyMenu]
                             res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
@@ -310,6 +317,14 @@ Item {
                             case 1:
                                 if( Desktop.yesOrNo(View, qsTr("Delete History"), qsTr("Are you sure about deleting history?")) )
                                     telegramObject.messagesDeleteHistory(dItem.peer.userId)
+                                break;
+                            case 2:
+                                notifyOnline = notifyOnline? 0 : UserData.NotifyOnline
+                                telegramObject.userData.setNotify(dItem.peer.userId, notifyOnline|notifyTyping)
+                                break;
+                            case 3:
+                                notifyTyping = notifyTyping? 0 : UserData.NotifyTyping
+                                telegramObject.userData.setNotify(dItem.peer.userId, notifyOnline|notifyTyping)
                                 break;
                             }
                         }

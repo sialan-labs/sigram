@@ -50,16 +50,16 @@ Rectangle {
         id: notification
         onNotifyClosed: notifies_hash.remove(id)
         onNotifyAction: {
-            var msg = notifies_hash.value(id)
+            var notifyData = notifies_hash.value(id)
             if( action == notifyActShow ) {
                 if( view )
-                    view.showDialog( telegram.messageDialog(msg.id) )
+                    view.showDialog( notifyData.id? telegram.messageDialog(notifyData.id) : telegram.dialog(notifyData) )
             } else
             if( action == notifyActMute ) {
                 if( !view )
                     return
 
-                var dId = telegram.messageDialogId(msg.id)
+                var dId = notifyData.id? telegram.messageDialogId(notifyData.id) : notifyData
                 telegram.userData.addMute(dId)
             }
         }
@@ -114,6 +114,7 @@ Rectangle {
             var user = telegram.user(msg.fromId)
             var dialog = telegram.dialog(dId)
             var title = user.firstName + " " + user.lastName
+            title = title.trim()
 
             var chatObj
             if( dialog && dialog.peer.chatId != 0 )
@@ -146,6 +147,96 @@ Rectangle {
             var nid = notification.sendNotify( title, message, location, 0, 3000, actions )
 
             notifies_hash.insert(nid, msg)
+        }
+        onUserBecomeOnline: {
+            var notifyValue = telegramObject.userData.notify(userId)
+            var notifyOnline = notifyValue & UserData.NotifyOnline
+            if(!notifyOnline)
+                return
+            if( !Cutegram.notification )
+                return
+
+            var window = view? view.windowOf(userId) : 0
+            var windowIsActive = window? window.active && window.visible : false
+            if( (view && isActive) || windowIsActive ) {
+                var cDialog = windowIsActive? window.currentDialog : view.currentDialog
+
+                if( cDialog.peer.userId && cDialog.peer.userId == userId ) {
+                    telegramObject.messagesReadHistory(cDialog.peer.userId)
+                    return
+                }
+            }
+
+            var user = telegram.user(userId)
+            var dialog = telegram.dialog(userId)
+            var title = user.firstName + " " + user.lastName
+            title = title.trim()
+
+            var actions = new Array
+            if(Desktop.desktopSession != 3) {
+                actions[0] = notification.notifyActShow
+                actions[1] = qsTr("Show")
+            }
+
+            var location = user.photo.photoSmall.download.location
+            if(location && location.slice(0,Devices.localFilesPrePath.length) == Devices.localFilesPrePath)
+                location = location.slice(Devices.localFilesPrePath.length, location.length)
+
+            var message = qsTr("%1 is online").arg(title)
+
+            var nid = notification.sendNotify( title, message, location, 0, 3000, actions )
+            notifies_hash.insert(nid, userId)
+        }
+        onUserStartTyping: {
+            var notifyValue = telegramObject.userData.notify(userId)
+            var notifyTyping = notifyValue & UserData.NotifyTyping
+            if(!notifyTyping)
+                return
+            if( !Cutegram.notification )
+                return
+
+            var window = view? view.windowOf(userId) : 0
+            var windowIsActive = window? window.active && window.visible : false
+            if( (view && isActive) || windowIsActive ) {
+                var cDialog = windowIsActive? window.currentDialog : view.currentDialog
+
+                if( cDialog.peer.chatId && cDialog.peer.chatId == dId ) {
+                    telegramObject.messagesReadHistory(cDialog.peer.chatId)
+                    return
+                }
+                if( cDialog.peer.userId && cDialog.peer.userId == dId ) {
+                    telegramObject.messagesReadHistory(cDialog.peer.userId)
+                    return
+                }
+            }
+
+            var user = telegram.user(userId)
+            var dialog = telegram.dialog(dId)
+            var title = user.firstName + " " + user.lastName
+            title = title.trim()
+
+            var chatObj
+            if( dialog && dialog.peer.chatId != 0 )
+                chatObj = telegramObject.chat(dialog.peer.chatId)
+
+            var actions = new Array
+            if(Desktop.desktopSession != 3) {
+                actions[0] = notification.notifyActShow
+                actions[1] = qsTr("Show")
+            }
+
+            var location = chatObj? chatObj.photo.photoSmall.download.location : user.photo.photoSmall.download.location
+            if(location && location.slice(0,Devices.localFilesPrePath.length) == Devices.localFilesPrePath)
+                location = location.slice(Devices.localFilesPrePath.length, location.length)
+
+            var message
+            if(chatObj)
+                message = qsTr("%1 start typing on \"%2\"").arg(title).arg(chatObj.title)
+            else
+                message = qsTr("%1 start typing").arg(title)
+
+            var nid = notification.sendNotify( title, message, location, 0, 3000, actions )
+            notifies_hash.insert(nid, dId)
         }
     }
 
