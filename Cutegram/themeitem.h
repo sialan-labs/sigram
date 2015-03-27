@@ -48,6 +48,7 @@ class ThemeItem : public AsemanQuickObject
     Q_PROPERTY(qreal sendFrameShadowSize READ sendFrameShadowSize WRITE setSendFrameShadowSize NOTIFY sendFrameShadowSizeChanged)
     Q_PROPERTY(bool sendFrameLightIcon READ sendFrameLightIcon WRITE setSendFrameLightIcon NOTIFY sendFrameLightIconChanged)
     Q_PROPERTY(QColor sendFrameFontColor READ sendFrameFontColor WRITE setSendFrameFontColor NOTIFY sendFrameFontColorChanged)
+    Q_PROPERTY(QColor sendFrameFontHighlightColor READ sendFrameFontHighlightColor WRITE setSendFrameFontHighlightColor NOTIFY sendFrameFontHighlightColorChanged)
     Q_PROPERTY(QFont sendFrameFont READ sendFrameFont WRITE setSendFrameFont NOTIFY sendFrameFontChanged)
     Q_PROPERTY(qreal sendFrameHeight READ sendFrameHeight WRITE setSendFrameHeight NOTIFY sendFrameHeightChanged)
     Q_PROPERTY(QColor messageIncomingColor READ messageIncomingColor WRITE setMessageIncomingColor NOTIFY messageIncomingColorChanged)
@@ -540,6 +541,18 @@ public:
             return;
         _sendFrameFontColor = value;
         emit sendFrameFontColorChanged();
+        emit changed();
+    }
+
+    QColor sendFrameFontHighlightColor() const {
+        return _sendFrameFontHighlightColor;
+    }
+
+    void setSendFrameFontHighlightColor(QColor value) {
+        if( value == _sendFrameFontHighlightColor )
+            return;
+        _sendFrameFontHighlightColor = value;
+        emit sendFrameFontHighlightColorChanged();
         emit changed();
     }
 
@@ -1143,6 +1156,7 @@ public:
         _sendFrameShadowSize = another->sendFrameShadowSize();
         _sendFrameLightIcon = another->sendFrameLightIcon();
         _sendFrameFontColor = another->sendFrameFontColor();
+        _sendFrameFontHighlightColor = another->sendFrameFontHighlightColor();
         _sendFrameFont = another->sendFrameFont();
         _sendFrameHeight = another->sendFrameHeight();
         _messageIncomingColor = another->messageIncomingColor();
@@ -1229,6 +1243,7 @@ signals:
     void sendFrameShadowSizeChanged();
     void sendFrameLightIconChanged();
     void sendFrameFontColorChanged();
+    void sendFrameFontHighlightColorChanged();
     void sendFrameFontChanged();
     void sendFrameHeightChanged();
     void messageIncomingColorChanged();
@@ -1313,6 +1328,7 @@ private:
     qreal _sendFrameShadowSize;
     bool _sendFrameLightIcon;
     QColor _sendFrameFontColor;
+    QColor _sendFrameFontHighlightColor;
     QFont _sendFrameFont;
     qreal _sendFrameHeight;
     QColor _messageIncomingColor;

@@ -45,6 +45,7 @@ object ThemeItem {
     qreal sendFrameShadowSize rw;
     bool sendFrameLightIcon rw = false;
     QColor sendFrameFontColor rw;
+    QColor sendFrameFontHighlightColor rw;
     QFont sendFrameFont rw;
     qreal sendFrameHeight rw = 40;
 

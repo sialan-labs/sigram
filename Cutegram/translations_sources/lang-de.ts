@@ -172,6 +172,10 @@
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
+    <message>
+        <source>Search on the Web</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -490,7 +494,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="vanished">Hauptfarbe</translation>
+        <translation>Hauptfarbe</translation>
     </message>
     <message>
         <source>Change</source>
@@ -562,6 +566,14 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Engine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Color</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

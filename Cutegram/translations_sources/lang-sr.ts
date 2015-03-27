@@ -156,6 +156,10 @@
         <source>Delete</source>
         <translation>Обриши</translation>
     </message>
+    <message>
+        <source>Search on the Web</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -451,7 +455,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="vanished">Главна боја</translation>
+        <translation>Главна боја</translation>
     </message>
     <message>
         <source>Change</source>
@@ -519,7 +523,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="vanished">Системска боја</translation>
+        <translation>Системска боја</translation>
     </message>
     <message>
         <source>Minimum List</source>
@@ -527,6 +531,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Engine</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -5,12 +5,14 @@ import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
 
 Item {
+    id: uname_sgs_menu
     width: 200
     height: 200
     visible: fmodel.count != 0
     clip: true
 
     property alias telegram: fmodel.telegram
+    property alias dialog: fmodel.dialog
     property alias keyword: fmodel.keyword
 
     UserNameFilterModel {
@@ -67,13 +69,26 @@ Item {
         }
 
         delegate: Item {
+            id: listv_item
             width: listv.width
             height: 32*Devices.density
 
             property User user: telegram.user(userId)
 
-            Text {
+            ContactImage {
+                id: profile_img
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
                 anchors.left: parent.left
+                anchors.margins: 4*Devices.density
+                width: height
+                user: listv_item.user
+                isChat: false
+                telegram: uname_sgs_menu.telegram
+            }
+
+            Text {
+                anchors.left: profile_img.right
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.margins: 4*Devices.density
@@ -81,7 +96,7 @@ Item {
                 elide: Text.ElideRight
                 maximumLineCount: 1
                 text: user.firstName + " " + user.lastName
-                color: Cutegram.currentTheme.sendFrameFontColor
+                color: listv.currentIndex==index? Cutegram.currentTheme.sendFrameFontHighlightColor : Cutegram.currentTheme.sendFrameFontColor
             }
         }
     }

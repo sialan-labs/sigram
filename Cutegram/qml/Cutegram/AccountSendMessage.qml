@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 import AsemanTools.Controls 1.0 as Controls
+import AsemanTools.Controls.Styles 1.0 as Styles
 import Cutegram 1.0
 import CutegramTypes 1.0
 
@@ -412,7 +413,6 @@ Item {
             anchors.rightMargin: 4*Devices.density
             width: 70*Devices.density
             text: qsTr("Send")
-//            enabled: txt.length != 0
             onClicked: smsg.send()
         }
     }
@@ -477,6 +477,7 @@ Item {
         id: username_sgs_component
         UserNameSuggestionMenu {
             telegram: telegramObject
+            dialog: currentDialog
             property bool isTagSuggestion: false
         }
     }

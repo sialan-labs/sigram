@@ -34,6 +34,7 @@ public:
     ~ChatParticipantList();
 
     void operator =( const QList<ChatParticipant> & another );
+    QList<qint64> userIds() const;
 
     ChatParticipantObject *first() const;
     ChatParticipantObject *last() const;

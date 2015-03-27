@@ -56,6 +56,15 @@ void ChatParticipantList::operator =(const QList<ChatParticipant> &another)
     emit countChanged();
 }
 
+QList<qint64> ChatParticipantList::userIds() const
+{
+    QList<qint64> results;
+    foreach( ChatParticipantObject *obj, p->list )
+        results << obj->userId();
+
+    return results;
+}
+
 ChatParticipantObject *ChatParticipantList::first() const
 {
     if( p->list.isEmpty() )

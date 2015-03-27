@@ -141,7 +141,7 @@ void TelegramChatParticipantsModel::refresh()
     if( !p->dialog->peer()->chatId() )
         return;
 
-    p->telegram->telegram()->messagesGetFullChat(p->dialog->peer()->chatId());
+    p->telegram->messagesGetFullChat(p->dialog->peer()->chatId());
 
     p->refreshing = true;
     emit refreshingChanged();

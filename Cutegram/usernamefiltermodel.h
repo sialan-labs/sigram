@@ -3,6 +3,7 @@
 
 #include <QAbstractListModel>
 
+class DialogObject;
 class TelegramQml;
 class UserNameFilterModelPrivate;
 class UserNameFilterModel : public QAbstractListModel
@@ -10,6 +11,7 @@ class UserNameFilterModel : public QAbstractListModel
     Q_OBJECT
 
     Q_PROPERTY(TelegramQml* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
+    Q_PROPERTY(DialogObject* dialog READ dialog WRITE setDialog NOTIFY dialogChanged)
     Q_PROPERTY(QString keyword READ keyword WRITE setKeyword NOTIFY keywordChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
@@ -23,6 +25,9 @@ public:
 
     TelegramQml *telegram() const;
     void setTelegram(TelegramQml *tg );
+
+    DialogObject *dialog() const;
+    void setDialog(DialogObject *dialog);
 
     qint64 id( const QModelIndex &index ) const;
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
@@ -44,6 +49,7 @@ signals:
     void telegramChanged();
     void countChanged();
     void keywordChanged();
+    void dialogChanged();
 
 private slots:
     void listChanged();

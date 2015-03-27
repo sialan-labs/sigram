@@ -156,6 +156,10 @@
         <source>Delete</source>
         <translation>Apagar</translation>
     </message>
+    <message>
+        <source>Search on the Web</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -451,7 +455,7 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="vanished">Cor Principal</translation>
+        <translation>Cor Principal</translation>
     </message>
     <message>
         <source>Change</source>
@@ -519,7 +523,7 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="vanished">Cor do Sistema</translation>
+        <translation>Cor do Sistema</translation>
     </message>
     <message>
         <source>Minimum List</source>
@@ -527,6 +531,10 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Engine</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

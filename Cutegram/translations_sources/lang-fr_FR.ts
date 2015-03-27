@@ -156,6 +156,10 @@
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
+    <message>
+        <source>Search on the Web</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -451,7 +455,7 @@ Il ne s&apos;agit pas d&apos;un contact telegram. C&apos;est juste une contact v
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="vanished">Couleur Principale</translation>
+        <translation>Couleur Principale</translation>
     </message>
     <message>
         <source>Change</source>
@@ -519,7 +523,7 @@ Il ne s&apos;agit pas d&apos;un contact telegram. C&apos;est juste une contact v
     </message>
     <message>
         <source>System Color</source>
-        <translation type="vanished">Couleur Système</translation>
+        <translation>Couleur Système</translation>
     </message>
     <message>
         <source>Minimum List</source>
@@ -527,6 +531,10 @@ Il ne s&apos;agit pas d&apos;un contact telegram. C&apos;est juste une contact v
     </message>
     <message>
         <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Engine</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

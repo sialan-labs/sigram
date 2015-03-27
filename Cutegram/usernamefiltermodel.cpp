@@ -1,10 +1,15 @@
 #include "usernamefiltermodel.h"
 #include "telegramqml.h"
+#include "objects/types.h"
+
+#include <QPointer>
 
 class UserNameFilterModelPrivate
 {
 public:
-    TelegramQml *telegram;
+    QPointer<TelegramQml> telegram;
+    QPointer<DialogObject> dialog;
+
     QList<qint64> list;
     QString keyword;
 };
@@ -26,8 +31,29 @@ void UserNameFilterModel::setTelegram(TelegramQml *tgo)
     if( p->telegram == tg )
         return;
 
+    if(p->telegram)
+        disconnect(p->telegram, SIGNAL(chatFullsChanged()), this, SLOT(refresh()));
+
     p->telegram = tg;
+    if(p->telegram)
+        connect(p->telegram, SIGNAL(chatFullsChanged()), this, SLOT(refresh()));
+
     emit telegramChanged();
+    listChanged();
+}
+
+DialogObject *UserNameFilterModel::dialog() const
+{
+    return p->dialog;
+}
+
+void UserNameFilterModel::setDialog(DialogObject *dialog)
+{
+    if(p->dialog == dialog)
+        return;
+
+    p->dialog = dialog;
+    emit dialogChanged();
 
     listChanged();
 }
@@ -108,6 +134,33 @@ void UserNameFilterModel::listChanged()
     QList<qint64> list;
     if(p->telegram)
         list = p->telegram->userIndex(p->keyword);
+
+    QList<qint64> dialogList;
+    if(p->telegram && p->dialog)
+    {
+        qint64 chatId = p->dialog->peer()->chatId();
+        if(chatId)
+        {
+            ChatFullObject *chatFull = p->telegram->chatFull(chatId);
+            if(chatFull)
+                dialogList = chatFull->participants()->participants()->userIds();
+            else
+                p->telegram->messagesGetFullChat(chatId);
+        }
+        else
+            dialogList << p->dialog->peer()->userId();
+    }
+
+    if(!dialogList.isEmpty())
+        for( int i=0 ; i<list.count() ; i++ )
+        {
+            const qint64 uId = list.at(i);
+            if( dialogList.contains(uId) )
+                continue;
+
+            list.removeAt(i);
+            i--;
+        }
 
     for( int i=0 ; i<p->list.count() ; i++ )
     {

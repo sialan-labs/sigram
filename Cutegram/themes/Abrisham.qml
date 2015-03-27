@@ -47,6 +47,7 @@ CutegramTheme {
 
     sendFrameColor: "#f6f6f6"
     sendFrameFontColor: "#333333"
+    sendFrameFontHighlightColor: "#ffffff"
     sendFrameShadowColor: "#000000"
     sendFrameShadowSize: 0.4
     sendFrameFont.pointSize: 10

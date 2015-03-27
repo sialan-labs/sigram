@@ -817,6 +817,8 @@ void Cutegram::init_theme()
 
     p->currentThemeComponent = new QQmlComponent(p->viewer->engine(), p->themesPath + "/" + p->theme);
     p->currentTheme = static_cast<ThemeItem*>(p->currentThemeComponent->create());
+    if(!p->currentTheme)
+        qDebug() << p->currentThemeComponent->errorString();
 
     emit currentThemeChanged();
 }

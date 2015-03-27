@@ -168,6 +168,10 @@
         <source>Delete</source>
         <translation>Kustuta</translation>
     </message>
+    <message>
+        <source>Search on the Web</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -477,7 +481,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="vanished">Põhivärv</translation>
+        <translation>Põhivärv</translation>
     </message>
     <message>
         <source>Change</source>
@@ -545,6 +549,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Engine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Color</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

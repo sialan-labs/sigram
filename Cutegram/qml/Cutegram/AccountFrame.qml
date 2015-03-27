@@ -106,7 +106,7 @@ Rectangle {
             var message = msg.message
             var myUser = telegram.user(telegram.me)
 
-            if( telegram.userData.isMuted(dId) && (myUser.username=="" || message.indexOf("@"+myUser.username)!=-1) )
+            if( telegram.userData.isMuted(dId) && (myUser.username=="" || message.indexOf("@"+myUser.username)==-1) )
                 return
             if( !Cutegram.notification )
                 return
