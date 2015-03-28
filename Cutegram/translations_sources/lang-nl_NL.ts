@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -67,11 +65,11 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"></translation>
+        <translation>Een melding weergeven wanneer</translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"></translation>
+        <translation>Iemand online komt</translation>
     </message>
 </context>
 <context>
@@ -94,15 +92,15 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is online</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is begonnen met typen op &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is begonnen met typen</translation>
     </message>
 </context>
 <context>
@@ -178,7 +176,7 @@
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken op het internet</translation>
     </message>
 </context>
 <context>
@@ -230,7 +228,7 @@
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Het bevat Curegram-nieuws met informatie over nieuwe versies en oplossingen.
 Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
@@ -543,15 +541,15 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoekmachine</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdkleur</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Systeemkleur</translation>
     </message>
 </context>
 <context>

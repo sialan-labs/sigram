@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de" sourcelanguage="en">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -21,14 +19,6 @@
     <message>
         <source>Online</source>
         <translation>Online</translation>
-    </message>
-    <message>
-        <source>Secret chat (experimental)</source>
-        <translation type="obsolete">Geheimer Chat (experimentell)</translation>
-    </message>
-    <message>
-        <source>%1 participants</source>
-        <translation type="obsolete">%1 Teilnehmer</translation>
     </message>
     <message>
         <source>%1 was online</source>
@@ -54,10 +44,6 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <source>Leave</source>
-        <translation type="obsolete">Verlassen</translation>
-    </message>
-    <message>
         <source>Delete secret chat</source>
         <translation>Geheimen Chat löschen</translation>
     </message>
@@ -79,11 +65,11 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -106,15 +92,15 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -129,10 +115,6 @@
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
         <translation>%1 hat die Gruppe &quot;%2&quot; erstellt</translation>
-    </message>
-    <message>
-        <source>%1 invited someone to group</source>
-        <translation type="obsolete">%1 hat jemanden zur Gruppe eingeladen</translation>
     </message>
     <message>
         <source>%1 left the group</source>
@@ -194,7 +176,7 @@
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -204,12 +186,12 @@
         <translation>Klicken zum Herunterladen</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
-    <message>
         <source>Unsupported Media</source>
         <translation>Nicht unterstützte Mediendatei</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
@@ -246,7 +228,7 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Cutegram-Nachrichten über neue Veröffentlichungen und Lösungen.
 Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
@@ -301,10 +283,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <translation>Neuer Gruppen-Chat</translation>
     </message>
     <message>
-        <source>New chat</source>
-        <translation type="obsolete">Neuer Chat</translation>
-    </message>
-    <message>
         <source>Configure</source>
         <translation>Konfigurieren</translation>
     </message>
@@ -317,10 +295,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <translation>Erstellen</translation>
     </message>
     <message>
-        <source>About Cutegram</source>
-        <translation type="obsolete">Über Cutegram</translation>
-    </message>
-    <message>
         <source>Add Secret Chat</source>
         <translation>Geheimen Chat hinzufügen</translation>
     </message>
@@ -330,7 +304,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakte einfach hier hin ziehen und los lassen</translation>
     </message>
 </context>
 <context>
@@ -353,21 +327,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <message>
         <source>Home Page</source>
         <translation>Internetpräsenz</translation>
-    </message>
-</context>
-<context>
-    <name>AsemanCalendarConverter</name>
-    <message>
-        <source>Gregorian</source>
-        <translation type="vanished">Gregorianisch</translation>
-    </message>
-    <message>
-        <source>Jalali</source>
-        <translation type="vanished">Persisch</translation>
-    </message>
-    <message>
-        <source>Hijri</source>
-        <translation type="vanished">Islamisch</translation>
     </message>
 </context>
 <context>
@@ -513,10 +472,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <translation>Benachrichtigungston</translation>
     </message>
     <message>
-        <source>Master Color</source>
-        <translation>Hauptfarbe</translation>
-    </message>
-    <message>
         <source>Change</source>
         <translation>Ändern</translation>
     </message>
@@ -545,10 +500,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <translation>Ton auswählen</translation>
     </message>
     <message>
-        <source>Visual Effects</source>
-        <translation type="vanished">Visuelle Effekte</translation>
-    </message>
-    <message>
         <source>Cutegram Newsletter</source>
         <translation>Cutegram-Nachrichten</translation>
     </message>
@@ -566,35 +517,39 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch starten</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy-Einstellungen</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation type="unfinished">Über Cutegram</translation>
+        <translation>Über Cutegram</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation type="unfinished">Über Aseman</translation>
+        <translation>Über Aseman</translation>
     </message>
     <message>
         <source>Minimum List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste minimieren</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestaltung</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Master Color</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -675,10 +630,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <message>
         <source>Drop to forward</source>
         <translation>Zum Weiterleiten loslassen</translation>
-    </message>
-    <message>
-        <source>Drop files to send</source>
-        <translation type="obsolete">Zum Senden loslassen</translation>
     </message>
     <message>
         <source>Drop to send as Document</source>
@@ -776,122 +727,43 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy-Einstellungen</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Änderungen benötigen einen Neustart der Anwendung.</translation>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy-Typ</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzername</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bspw.: 127.0.0.1</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>January</source>
-        <translation type="vanished">Januar</translation>
-    </message>
-    <message>
-        <source>February</source>
-        <translation type="vanished">Februar</translation>
-    </message>
-    <message>
-        <source>March</source>
-        <translation type="vanished">März</translation>
-    </message>
-    <message>
-        <source>April</source>
-        <translation type="vanished">April</translation>
-    </message>
-    <message>
-        <source>May</source>
-        <translation type="vanished">Mai</translation>
-    </message>
-    <message>
-        <source>June</source>
-        <translation type="vanished">Juni</translation>
-    </message>
-    <message>
-        <source>July</source>
-        <translation type="vanished">Juli</translation>
-    </message>
-    <message>
-        <source>August</source>
-        <translation type="vanished">August</translation>
-    </message>
-    <message>
-        <source>September</source>
-        <translation type="vanished">September</translation>
-    </message>
-    <message>
-        <source>October</source>
-        <translation type="vanished">Oktober</translation>
-    </message>
-    <message>
-        <source>November</source>
-        <translation type="vanished">November</translation>
-    </message>
-    <message>
-        <source>December</source>
-        <translation type="vanished">Dezember</translation>
-    </message>
-    <message>
-        <source>Sunday</source>
-        <translation type="vanished">Sonntag</translation>
-    </message>
-    <message>
-        <source>Monday</source>
-        <translation type="vanished">Montag</translation>
-    </message>
-    <message>
-        <source>Tuesday</source>
-        <translation type="vanished">Dienstag</translation>
-    </message>
-    <message>
-        <source>Wednesday</source>
-        <translation type="vanished">Mittwoch</translation>
-    </message>
-    <message>
-        <source>Thuresday</source>
-        <translation type="vanished">Donnerstag</translation>
-    </message>
-    <message>
-        <source>Friday</source>
-        <translation type="vanished">Freitag</translation>
-    </message>
-    <message>
-        <source>Saturday</source>
-        <translation type="vanished">Samstag</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>

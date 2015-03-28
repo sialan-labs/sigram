@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -67,11 +65,11 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -94,15 +92,15 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -178,7 +176,7 @@
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -230,7 +228,7 @@
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>São as novidades do Cutegram, lançamentos e soluções.
 Não é o contato do Telegram, somente um contato virtual.</translation>
@@ -474,10 +472,6 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
         <translation>Sons de Notificações</translation>
     </message>
     <message>
-        <source>Master Color</source>
-        <translation>Cor Principal</translation>
-    </message>
-    <message>
         <source>Change</source>
         <translation>Alterar</translation>
     </message>
@@ -504,10 +498,6 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <message>
         <source>Select Sound</source>
         <translation>Selecionar Som</translation>
-    </message>
-    <message>
-        <source>Visual Effects</source>
-        <translation type="vanished">Efeitos Visuais</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
@@ -542,20 +532,24 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
         <translation>Sobre Aseman</translation>
     </message>
     <message>
-        <source>System Color</source>
-        <translation>Cor do Sistema</translation>
-    </message>
-    <message>
         <source>Minimum List</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Master Color</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>System Color</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

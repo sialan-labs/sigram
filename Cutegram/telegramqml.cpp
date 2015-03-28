@@ -1147,7 +1147,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
         int width = 0;
         int height = 0;
 
-        if( !AsemanTools::createVideoThumbnail(fpath, thumbnail) )
+        if( !AsemanTools::createVideoThumbnail(file, thumbnail) )
             thumbnail.clear();
         else
         {

@@ -102,13 +102,15 @@ TRANSLATIONS += \
     translations/lang-de.qm \
     translations/lang-en.qm \
     translations/lang-en_GB.qm \
+    translations/lang-es.qm \
     translations/lang-et.qm \
     translations/lang-fa.qm \
     translations/lang-fr_FR.qm \
-    translations/lang-it.qm \
+    translations/lang-it_IT.qm \
     translations/lang-nl_NL.qm \
     translations/lang-pt_BR.qm \
-    translations/lang-sr.qm
+    translations/lang-sr.qm \
+    translations/lang-zh_TW.qm
 
 isEmpty(PREFIX) {
     PREFIX = /usr
@@ -154,11 +156,13 @@ DISTFILES += \
     translations_sources/lang-de.ts \
     translations_sources/lang-en.ts \
     translations_sources/lang-en_GB.ts \
+    translations_sources/lang-es.ts \
     translations_sources/lang-et.ts \
     translations_sources/lang-fa.ts \
     translations_sources/lang-fr_FR.ts \
-    translations_sources/lang-it.ts \
+    translations_sources/lang-it_IT.ts \
     translations_sources/lang-nl_NL.ts \
     translations_sources/lang-pt_BR.ts \
     translations_sources/lang-sr.ts \
+    translations_sources/lang-zh_TW.ts \
     objects/themeitem.sco

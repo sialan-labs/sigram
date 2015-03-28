@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sr" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -67,11 +65,11 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -94,15 +92,15 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -178,7 +176,7 @@
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -230,7 +228,7 @@
         <translation>Обриши</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Ово су Cutegram вести о новим издањима и решењима.
 Ово није телеграм контакт. Ово је само виртуелни контакт. </translation>
@@ -474,10 +472,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Звук обавештења</translation>
     </message>
     <message>
-        <source>Master Color</source>
-        <translation>Главна боја</translation>
-    </message>
-    <message>
         <source>Change</source>
         <translation>Промени</translation>
     </message>
@@ -504,10 +498,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Select Sound</source>
         <translation>Одабери звук</translation>
-    </message>
-    <message>
-        <source>Visual Effects</source>
-        <translation type="vanished">Визуелни ефекти</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
@@ -542,20 +532,24 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>О Aseman-у</translation>
     </message>
     <message>
-        <source>System Color</source>
-        <translation>Системска боја</translation>
-    </message>
-    <message>
         <source>Minimum List</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимална листа</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Тема</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Master Color</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>System Color</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
