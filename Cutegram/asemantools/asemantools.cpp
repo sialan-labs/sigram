@@ -170,7 +170,12 @@ bool AsemanTools::createVideoThumbnail(const QString &video, const QString &outp
 #ifdef Q_OS_MAC
         ffmpegPath = QCoreApplication::applicationDirPath() + "/ffmpeg";
 #else
-        ffmpegPath = "ffmpeg";
+    {
+        if(QFileInfo::exists("/usr/bin/avconv"))
+            ffmpegPath = "/usr/bin/avconv";
+        else
+            ffmpegPath = "ffmpeg";
+    }
 #endif
 #endif
 

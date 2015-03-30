@@ -190,6 +190,8 @@ Rectangle {
                     var dest = Math.pow(destX*destX+destY*destY, 0.5)
                     if(dest < 7)
                         return
+                    if(messageDraging)
+                        return
 
                     if(!msg_item.hasMedia)
                         msg_item.messageFile = Devices.localFilesPrePath + Cutegram.storeMessage(msg_item.message.message)

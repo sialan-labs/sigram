@@ -114,6 +114,8 @@ Item {
                     var destX = mouseX-startPoint.x
                     if(destX < 7)
                         return
+                    if(messageDraging)
+                        return
 
                     messageDraging = true
                     drag.start()

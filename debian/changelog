@@ -1,3 +1,39 @@
+cutegram (2.1.1aseman4-utopic) utopic; urgency=medium
+
+  * Fix Dependencies problem
+
+ -- Aseman Team <contact@aseman.co>  Sat, 30 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman4-trusty) trusty; urgency=medium
+
+  * Fix Dependencies problem
+
+ -- Aseman Team <contact@aseman.co>  Sat, 30 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman3-utopic) utopic; urgency=medium
+
+  * Rebuild using new libqtelegram to support Layer18.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 29 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman3-trusty) trusty; urgency=medium
+
+  * Rebuild using new libqtelegram to support Layer18.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 29 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman1-trusty) trusty; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 29 March 2015 10:00:00 +0330
+ 
+cutegram (2.1.1aseman1-utopic) utopic; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 29 March 2015 10:00:00 +0330
+ 
 cutegram (2.1.0aseman3-utopic) utopic; urgency=medium
 
   * Compability with Qt5.2 and Qt5.3
