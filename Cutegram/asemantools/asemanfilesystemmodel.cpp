@@ -474,6 +474,8 @@ void AsemanFileSystemModel::changed(const QList<QFileInfo> &list)
 
     if(count_changed)
         emit countChanged();
+
+    emit listChanged();
 }
 
 AsemanFileSystemModel::~AsemanFileSystemModel()

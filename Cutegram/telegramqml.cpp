@@ -727,6 +727,13 @@ InputPeer TelegramQml::getInputPeer(qint64 peerId)
     else
         peer.setUserId(peerId);
 
+    if(peer.classType() == InputPeer::typeInputPeerForeign)
+    {
+        UserObject *user = p->users.value(peerId);
+        if(user)
+            peer.setAccessHash(user->accessHash());
+    }
+
     return peer;
 }
 
@@ -830,10 +837,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     }
     else
     {
-        InputPeer peer(getInputPeerType(dId));
-        peer.setChatId(message.toId().chatId());
-        peer.setUserId(message.toId().userId());
-
+        InputPeer peer = getInputPeer(dId);
         sendId = p->telegram->messagesSendMessage(peer, p->msg_send_random_id, msg);
 
     }
@@ -1126,9 +1130,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
         return false;
 
     Message message = newMessage(dId);
-    InputPeer peer(getInputPeerType(dId));
-    peer.setChatId(message.toId().chatId());
-    peer.setUserId(message.toId().userId());
+    InputPeer peer = getInputPeer(dId);
 
     qint64 fileId;
     p->msg_send_random_id = generateRandomId();

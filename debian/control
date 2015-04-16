@@ -34,6 +34,6 @@ Description: Cutegram telegram client data pack
 
 Package: cutegram
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, cutegram-data (>= ${binary:Version}), libqt5qml-quickcontrols (>= 5.2.0), libqt5qml-graphicaleffects (>= 5.2.0), libqt5multimedia5 (>= 5.2.0), libqt5multimedia5-plugins (>= 5.2.0), libqt5multimediaquick-p5 (>= 5.2.0), libqt5sql5-sqlite (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), qtdeclarative5-qtsensors-plugin (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), dconf-tools, libav-tools
+Depends: ${shlibs:Depends}, ${misc:Depends}, cutegram-data (>= ${binary:Version}), libqt5qml-quickcontrols (>= 5.2.0), qtdeclarative5-dialogs-plugin (>= 5.2.0), qtdeclarative5-qtquick2-plugin (>= 5.2.0), qtdeclarative5-window-plugin (>= 5.2.0), libqt5qml-graphicaleffects (>= 5.2.0), libqt5multimedia5 (>= 5.2.0), libqt5multimedia5-plugins (>= 5.2.0), libqt5multimediaquick-p5 (>= 5.2.0), libqt5sql5-sqlite (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), qtdeclarative5-qtsensors-plugin (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), dconf-tools, libav-tools
 Description: Cutegram telegram client
  Better telegram client from Aseman Team.

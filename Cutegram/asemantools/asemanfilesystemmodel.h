@@ -93,6 +93,7 @@ signals:
     void folderChanged();
     void parentFolderChanged();
     void sortFieldChanged();
+    void listChanged();
 
 private slots:
     void reinit_buffer();
