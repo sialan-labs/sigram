@@ -65,6 +65,10 @@ class ThemeItem : public AsemanQuickObject
     Q_PROPERTY(QColor messageMediaNameColor READ messageMediaNameColor WRITE setMessageMediaNameColor NOTIFY messageMediaNameColorChanged)
     Q_PROPERTY(QColor messageMediaDateColor READ messageMediaDateColor WRITE setMessageMediaDateColor NOTIFY messageMediaDateColorChanged)
     Q_PROPERTY(bool messageMediaLightIcon READ messageMediaLightIcon WRITE setMessageMediaLightIcon NOTIFY messageMediaLightIconChanged)
+    Q_PROPERTY(QColor messageAudioColor READ messageAudioColor WRITE setMessageAudioColor NOTIFY messageAudioColorChanged)
+    Q_PROPERTY(QColor messageAudioNameColor READ messageAudioNameColor WRITE setMessageAudioNameColor NOTIFY messageAudioNameColorChanged)
+    Q_PROPERTY(QColor messageAudioDateColor READ messageAudioDateColor WRITE setMessageAudioDateColor NOTIFY messageAudioDateColorChanged)
+    Q_PROPERTY(bool messageAudioLightIcon READ messageAudioLightIcon WRITE setMessageAudioLightIcon NOTIFY messageAudioLightIconChanged)
     Q_PROPERTY(qreal messageRadius READ messageRadius WRITE setMessageRadius NOTIFY messageRadiusChanged)
     Q_PROPERTY(bool messageShadow READ messageShadow WRITE setMessageShadow NOTIFY messageShadowChanged)
     Q_PROPERTY(qreal messageShadowSize READ messageShadowSize WRITE setMessageShadowSize NOTIFY messageShadowSizeChanged)
@@ -110,6 +114,7 @@ public:
         _messageIncomingLightIcon = false;
         _messageOutgoingLightIcon = false;
         _messageMediaLightIcon = false;
+        _messageAudioLightIcon = false;
         _messageRadius = 5;
         _messageShadow = true;
         _messageShadowSize = 2;
@@ -748,6 +753,54 @@ public:
         emit changed();
     }
 
+    QColor messageAudioColor() const {
+        return _messageAudioColor;
+    }
+
+    void setMessageAudioColor(QColor value) {
+        if( value == _messageAudioColor )
+            return;
+        _messageAudioColor = value;
+        emit messageAudioColorChanged();
+        emit changed();
+    }
+
+    QColor messageAudioNameColor() const {
+        return _messageAudioNameColor;
+    }
+
+    void setMessageAudioNameColor(QColor value) {
+        if( value == _messageAudioNameColor )
+            return;
+        _messageAudioNameColor = value;
+        emit messageAudioNameColorChanged();
+        emit changed();
+    }
+
+    QColor messageAudioDateColor() const {
+        return _messageAudioDateColor;
+    }
+
+    void setMessageAudioDateColor(QColor value) {
+        if( value == _messageAudioDateColor )
+            return;
+        _messageAudioDateColor = value;
+        emit messageAudioDateColorChanged();
+        emit changed();
+    }
+
+    bool messageAudioLightIcon() const {
+        return _messageAudioLightIcon;
+    }
+
+    void setMessageAudioLightIcon(bool value) {
+        if( value == _messageAudioLightIcon )
+            return;
+        _messageAudioLightIcon = value;
+        emit messageAudioLightIconChanged();
+        emit changed();
+    }
+
     qreal messageRadius() const {
         return _messageRadius;
     }
@@ -1173,6 +1226,10 @@ public:
         _messageMediaNameColor = another->messageMediaNameColor();
         _messageMediaDateColor = another->messageMediaDateColor();
         _messageMediaLightIcon = another->messageMediaLightIcon();
+        _messageAudioColor = another->messageAudioColor();
+        _messageAudioNameColor = another->messageAudioNameColor();
+        _messageAudioDateColor = another->messageAudioDateColor();
+        _messageAudioLightIcon = another->messageAudioLightIcon();
         _messageRadius = another->messageRadius();
         _messageShadow = another->messageShadow();
         _messageShadowSize = another->messageShadowSize();
@@ -1260,6 +1317,10 @@ signals:
     void messageMediaNameColorChanged();
     void messageMediaDateColorChanged();
     void messageMediaLightIconChanged();
+    void messageAudioColorChanged();
+    void messageAudioNameColorChanged();
+    void messageAudioDateColorChanged();
+    void messageAudioLightIconChanged();
     void messageRadiusChanged();
     void messageShadowChanged();
     void messageShadowSizeChanged();
@@ -1345,6 +1406,10 @@ private:
     QColor _messageMediaNameColor;
     QColor _messageMediaDateColor;
     bool _messageMediaLightIcon;
+    QColor _messageAudioColor;
+    QColor _messageAudioNameColor;
+    QColor _messageAudioDateColor;
+    bool _messageAudioLightIcon;
     qreal _messageRadius;
     bool _messageShadow;
     qreal _messageShadowSize;

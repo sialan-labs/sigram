@@ -31,6 +31,20 @@ Item {
     property real typeInputAudioFileLocation: 0x74dc404d
     property real typeInputDocumentFileLocation: 0x4e45abe9
 
+    property variant mediaPlayer
+    property bool mediaPlayerState: media.classType == typeMessageMediaAudio && fileLocation.length != 0
+    onMediaPlayerStateChanged: {
+        if(mediaPlayerState) {
+            if(mediaPlayer)
+                mediaPlayer.destroy()
+            mediaPlayer = media_player_component.createObject(msg_media)
+        } else {
+            if(mediaPlayer)
+                mediaPlayer.destroy()
+            mediaPlayer = 0
+        }
+    }
+
     property FileLocation locationObj: {
         var result
         switch( media.classType )
@@ -88,6 +102,8 @@ Item {
 
     width: {
         var result
+        if(mediaPlayer)
+            return mediaPlayer.width
 
         switch( media.classType )
         {
@@ -119,6 +135,9 @@ Item {
 
     height: {
         var result
+        if(mediaPlayer)
+            return mediaPlayer.height
+
         switch( media.classType )
         {
         case typeMessageMediaPhoto:
@@ -169,6 +188,9 @@ Item {
 
         source: {
             var result
+            if(mediaPlayer)
+                return ""
+
             switch( media.classType )
             {
             case typeMessageMediaPhoto:
@@ -371,5 +393,14 @@ Item {
         }
 
         return true
+    }
+
+    Component {
+        id: media_player_component
+        MediaPlayerItem {
+            width: 250*Devices.density
+            height: 50*Devices.density
+            filePath: fileLocation
+        }
     }
 }

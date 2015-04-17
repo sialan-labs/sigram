@@ -157,6 +157,9 @@ Item {
                         anchors.fill: parent
                         radius: Cutegram.currentTheme.messageRadius*Devices.density
                         color: {
+                            if(msg_media.mediaPlayer)
+                                return Cutegram.currentTheme.messageAudioColor
+                            else
                             if(hasMedia || encryptMedia)
                                 return Cutegram.currentTheme.messageMediaColor
                             else
@@ -194,6 +197,9 @@ Item {
                     text: user.firstName + " " + user.lastName
                     visible: visibleNames
                     color: {
+                        if(msg_media.mediaPlayer)
+                            return Cutegram.currentTheme.messageAudioNameColor
+                        else
                         if(hasMedia || encryptMedia)
                             return Cutegram.currentTheme.messageMediaNameColor
                         else
@@ -243,6 +249,9 @@ Item {
                             textFormat: Text.RichText
                             height: contentHeight
                             color: {
+                                if(msg_media.mediaPlayer)
+                                    return Cutegram.currentTheme.messageAudioDateColor
+                                else
                                 if(hasMedia || encryptMedia)
                                     return Cutegram.currentTheme.messageMediaDateColor
                                 else
@@ -274,6 +283,9 @@ Item {
                             text: Cutegram.getTimeString(msgDate)
                             verticalAlignment: Text.AlignVCenter
                             color: {
+                                if(msg_media.mediaPlayer)
+                                    return Cutegram.currentTheme.messageAudioDateColor
+                                else
                                 if(hasMedia || encryptMedia)
                                     return Cutegram.currentTheme.messageMediaDateColor
                                 else
@@ -322,6 +334,9 @@ Item {
                                 indicatorSize: 10*Devices.density
                                 Component.onCompleted: if(!sent) start()
                                 light: {
+                                    if(msg_media.mediaPlayer)
+                                        return Cutegram.currentTheme.messageAudioLightIcon
+                                    else
                                     if(hasMedia || encryptMedia) {
                                         return Cutegram.currentTheme.messageMediaLightIcon
                                     } else if(message.out) {

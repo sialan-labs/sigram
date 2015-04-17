@@ -110,6 +110,7 @@ void UserData::addMute(int id)
     mute_query.bindValue(":id",id);
     mute_query.bindValue(":mute",1);
     mute_query.exec();
+    CHECK_QUERY_ERROR(mute_query);
 
     p->mutes.insert(id,true);
     emit muteChanged(id);
@@ -121,6 +122,7 @@ void UserData::removeMute(int id)
     query.prepare("DELETE FROM mutes WHERE id=:id");
     query.bindValue(":id", id);
     query.exec();
+    CHECK_QUERY_ERROR(query);
 
     p->mutes.remove(id);
     emit muteChanged(id);
@@ -152,6 +154,7 @@ void UserData::addFavorite(int id)
     mute_query.bindValue(":id",id);
     mute_query.bindValue(":fave",1);
     mute_query.exec();
+    CHECK_QUERY_ERROR(mute_query);
 
     p->favorites.insert(id,true);
     emit favoriteChanged(id);
@@ -194,6 +197,7 @@ void UserData::setNotify(int id, int value)
     notify_query.bindValue(":id",id);
     notify_query.bindValue(":val",value);
     notify_query.exec();
+    CHECK_QUERY_ERROR(notify_query);
 
     p->notifies.insert(id,value);
     emit notifyChanged(id, value);
@@ -214,6 +218,7 @@ void UserData::addTag(const QString &t)
     mute_query.prepare("INSERT OR REPLACE INTO tags (tag) VALUES (:tag)");
     mute_query.bindValue(":tag",tag);
     mute_query.exec();
+    CHECK_QUERY_ERROR(mute_query);
 
     p->tags.insert(tag, true);
     emit tagsChanged(tag);
@@ -232,6 +237,7 @@ void UserData::addMessageUpdate(const MessageUpdate &msg)
     mute_query.bindValue(":msg" ,msg.message);
     mute_query.bindValue(":date",msg.date);
     mute_query.exec();
+    CHECK_QUERY_ERROR(mute_query);
 
     p->msg_updates[msg.id] = msg;
     emit messageUpdateChanged(msg.id);
@@ -243,6 +249,7 @@ void UserData::removeMessageUpdate(int id)
     query.prepare("DELETE FROM updatemessages WHERE id=:id");
     query.bindValue(":id", id);
     query.exec();
+    CHECK_QUERY_ERROR(query);
 
     p->msg_updates.remove(id);
     emit messageUpdateChanged(id);
@@ -265,6 +272,7 @@ void UserData::setValue(const QString &key, const QString &value)
     mute_query.bindValue(":key", key);
     mute_query.bindValue(":val", value);
     mute_query.exec();
+    CHECK_QUERY_ERROR(mute_query);
 
     p->general[key] = value;
     emit valueChanged(key);

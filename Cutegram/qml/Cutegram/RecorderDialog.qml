@@ -7,10 +7,6 @@ Window {
     id: recorder_item
     width: 350*Devices.density
     height: 200*Devices.density
-    maximumWidth: width
-    minimumWidth: width
-    maximumHeight: height
-    minimumHeight: height
     flags: Qt.Dialog
     modality: Qt.ApplicationModal
     x: View.x + View.width/2 - width/2
@@ -22,7 +18,7 @@ Window {
 
     Rectangle {
         anchors.fill: parent
-        color: "#eeeeee"
+        color: "#fafafa"
     }
 
     AudioEncoderSettings {
@@ -86,11 +82,19 @@ Window {
             color: "#333333"
             font.pixelSize: 60*Devices.fontDensity
             font.family: AsemanApp.globalFont.family
+            visible: record_btn.visible
             text: {
                 var second = timer.counter%60
                 var minute = Math.floor(timer.counter/60)
                 return (minute<10? "0"+minute : minute) + ":" + (second<10? "0"+second : second)
             }
+        }
+
+        MediaPlayerItem {
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: recorder_item.width - 20*Devices.density
+            visible: !record_btn.visible
+            filePath: currentPath.length!=0? Devices.localFilesPrePath + currentPath : ""
         }
 
         Row {

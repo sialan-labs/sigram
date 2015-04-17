@@ -73,6 +73,10 @@ CutegramTheme {
     messageMediaDateColor: "#dddddd"
     messageMediaNameColor: masterColor
     messageMediaLightIcon: true
+    messageAudioColor: "#fafafa"
+    messageAudioDateColor: "#333333"
+    messageAudioNameColor: masterColor
+    messageAudioLightIcon: false
     messageRadius: 5
     messageShadow: true
     messageShadowSize: 2

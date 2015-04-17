@@ -106,7 +106,8 @@ SOURCES += \
     asemantools/asemanautostartmanager.cpp \
     asemantools/asemanquickitemimagegrabber.cpp \
     asemantools/asemanquickobject.cpp \
-    asemantools/asemanfilesystemmodel.cpp
+    asemantools/asemanfilesystemmodel.cpp \
+    $$PWD/asemandebugobjectcounter.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -132,7 +133,8 @@ HEADERS += \
     asemantools/asemanautostartmanager.h \
     asemantools/asemanquickitemimagegrabber.h \
     asemantools/asemanquickobject.h \
-    asemantools/asemanfilesystemmodel.h
+    asemantools/asemanfilesystemmodel.h \
+    $$PWD/asemandebugobjectcounter.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \
