@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QThread>
+#include <QDir>
 
 class DatabasePrivate
 {
@@ -50,7 +51,9 @@ void Database::setPhoneNumber(const QString &phoneNumber)
     }
     else
     {
-        p->path = AsemanApplication::homePath() + "/" + p->phoneNumber + "/database.db";
+        const QString &dirPath = AsemanApplication::homePath() + "/" + p->phoneNumber;
+        QDir().mkpath(dirPath);
+        p->path = dirPath + "/database.db";
 
         if( !QFileInfo::exists(p->path) )
             QFile::copy(DATABASE_DB_PATH,p->path);

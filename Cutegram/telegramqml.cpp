@@ -2631,7 +2631,7 @@ void TelegramQml::insertUser(const User &u, bool fromDb)
         obj = new UserObject(u, this);
         p->users.insert(u.id(), obj);
 
-        getFile(obj->photo()->photoSmall());
+//        getFile(obj->photo()->photoSmall());
 
         QStringList userNameKeys;
         if(!u.username().isEmpty())
@@ -2665,7 +2665,7 @@ void TelegramQml::insertChat(const Chat &c, bool fromDb)
         obj = new ChatObject(c, this);
         p->chats.insert(c.id(), obj);
 
-        getFile(obj->photo()->photoSmall());
+//        getFile(obj->photo()->photoSmall());
     }
     else
     if(fromDb)

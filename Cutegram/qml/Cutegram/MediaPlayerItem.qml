@@ -20,6 +20,7 @@ Item {
 
     MediaPlayer {
         id: player
+        autoLoad: false
     }
 
     Item {
@@ -108,7 +109,7 @@ Item {
         Rectangle {
             id: seeker
             anchors.verticalCenter: parent.verticalCenter
-            height: parent.height*4
+            height: parent.height*3
             width: height
             radius: width/2
             color: "#ffffff"

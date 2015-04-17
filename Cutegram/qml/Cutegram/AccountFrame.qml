@@ -44,6 +44,7 @@ Rectangle {
     MediaPlayer {
         id: sound_notify
         source: Cutegram.messageAudio
+        autoLoad: false
     }
 
     Notification {

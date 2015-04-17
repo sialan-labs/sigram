@@ -31,6 +31,7 @@
 #include <QSettings>
 #include <QHash>
 #include <QFileInfo>
+#include <QDir>
 
 class SecretChatDBClass
 {
@@ -70,7 +71,10 @@ void UserData::setPhoneNumber(const QString &phoneNumber)
         disconnect();
 
     p->phoneNumber = phoneNumber;
-    p->path = AsemanApplication::homePath() + "/" + p->phoneNumber + "/userdata.db";
+    const QString &dirPath = AsemanApplication::homePath() + "/" + p->phoneNumber;
+    QDir().mkpath(dirPath);
+
+    p->path = dirPath + "/userdata.db";
 
     if( !QFileInfo::exists(p->path) )
         QFile::copy(USERDATA_DB_PATH,p->path);

@@ -32,7 +32,7 @@ Item {
     property real typeInputDocumentFileLocation: 0x4e45abe9
 
     property variant mediaPlayer
-    property bool mediaPlayerState: media.classType == typeMessageMediaAudio && fileLocation.length != 0
+    property bool mediaPlayerState: media.classType == typeMessageMediaAudio
     onMediaPlayerStateChanged: {
         if(mediaPlayerState) {
             if(mediaPlayer)
@@ -259,6 +259,7 @@ Item {
         anchors.fill: parent
         color: "#88000000"
         visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto
+        radius: 3*Devices.density
 
         Text {
             anchors.centerIn: parent
@@ -398,9 +399,17 @@ Item {
     Component {
         id: media_player_component
         MediaPlayerItem {
-            width: 250*Devices.density
-            height: 50*Devices.density
+            width: 180*Devices.density
+            height: 40*Devices.density
+            anchors.verticalCenter: parent.verticalCenter
             filePath: fileLocation
+            z: fileLocation.length == 0? -1 : 0
+
+            MouseArea {
+                anchors.fill: parent
+                visible: fileLocation.length == 0
+                onClicked: msg_media.click()
+            }
         }
     }
 }

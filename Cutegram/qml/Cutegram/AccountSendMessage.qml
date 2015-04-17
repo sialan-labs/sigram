@@ -345,17 +345,23 @@ Item {
             anchors.left: parent.left
             anchors.verticalCenter: txt_frame.verticalCenter
             height: 40*Devices.density
-            width: attach_box_marea.containsMouse? 100*Devices.density : 40*Devices.density
+            width: attach_box_marea.containsMouse || attach_box_timer.running? 100*Devices.density : 40*Devices.density
             clip: true
 
             Behavior on width {
                 NumberAnimation{easing.type: Easing.OutCubic; duration: 300}
             }
 
+            Timer {
+                id: attach_box_timer
+                interval: 500
+            }
+
             MouseArea {
                 id: attach_box_marea
                 anchors.fill: parent
                 hoverEnabled: true
+                onContainsMouseChanged: if(!containsMouse) attach_box_timer.restart()
             }
 
             Button {

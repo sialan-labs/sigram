@@ -88,7 +88,7 @@ void DatabaseCore::insertUser(const DbUser &duser)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 }
@@ -133,7 +133,7 @@ void DatabaseCore::insertChat(const DbChat &dchat)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 }
@@ -155,7 +155,7 @@ void DatabaseCore::insertDialog(const DbDialog &ddialog, bool encrypted)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 }
@@ -203,7 +203,7 @@ void DatabaseCore::insertMessage(const DbMessage &dmessage)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 
@@ -227,7 +227,7 @@ void DatabaseCore::insertMediaEncryptedKeys(qint64 mediaId, const QByteArray &ke
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 }
@@ -258,7 +258,7 @@ void DatabaseCore::readMessages(const DbPeer &dpeer, int offset, int limit)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 
@@ -340,7 +340,7 @@ void DatabaseCore::deleteMessage(qint64 msgId)
 
     bool res = query.exec();
     if(!res)
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
 }
 
 void DatabaseCore::deleteDialog(qint64 dlgId)
@@ -352,7 +352,7 @@ void DatabaseCore::deleteDialog(qint64 dlgId)
 
     bool res = query.exec();
     if(!res)
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
 }
 
 void DatabaseCore::deleteHistory(qint64 dlgId)
@@ -366,7 +366,7 @@ void DatabaseCore::deleteHistory(qint64 dlgId)
 
     bool res = query.exec();
     if(!res)
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
 }
 
 void DatabaseCore::readDialogs()
@@ -377,7 +377,7 @@ void DatabaseCore::readDialogs()
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 
@@ -423,7 +423,7 @@ void DatabaseCore::readUsers()
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 
@@ -483,7 +483,7 @@ void DatabaseCore::readChats()
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 
@@ -771,7 +771,7 @@ void DatabaseCore::insertAudio(const Audio &audio)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 }
@@ -802,7 +802,7 @@ void DatabaseCore::insertVideo(const Video &video)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 
@@ -832,7 +832,7 @@ void DatabaseCore::insertDocument(const Document &document)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 
@@ -856,7 +856,7 @@ void DatabaseCore::insertGeo(int id, const GeoPoint &geo)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 }
@@ -880,7 +880,7 @@ void DatabaseCore::insertPhoto(const Photo &photo)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return;
     }
 
@@ -913,7 +913,7 @@ void DatabaseCore::insertPhotoSize(qint64 pid, const QList<PhotoSize> &sizes)
 
         bool res = query.exec();
         if(!res)
-            qDebug() << __FUNCTION__ << query.lastError();
+            qDebug() << __PRETTY_FUNCTION__ << query.lastError();
     }
 }
 
@@ -930,7 +930,7 @@ Audio DatabaseCore::readAudio(qint64 id)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return audio;
     }
 
@@ -965,7 +965,7 @@ Video DatabaseCore::readVideo(qint64 id)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return video;
     }
 
@@ -1007,7 +1007,7 @@ Document DatabaseCore::readDocument(qint64 id)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return document;
     }
 
@@ -1046,7 +1046,7 @@ GeoPoint DatabaseCore::readGeo(qint64 id)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return geo;
     }
 
@@ -1075,7 +1075,7 @@ Photo DatabaseCore::readPhoto(qint64 id)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return photo;
     }
 
@@ -1105,7 +1105,7 @@ QPair<QByteArray, QByteArray> DatabaseCore::readMediaKey(qint64 mediaId)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return result;
     }
 
@@ -1133,7 +1133,7 @@ QList<PhotoSize> DatabaseCore::readPhotoSize(qint64 pid)
     bool res = query.exec();
     if(!res)
     {
-        qDebug() << __FUNCTION__ << query.lastError();
+        qDebug() << __PRETTY_FUNCTION__ << query.lastError();
         return list;
     }
 
