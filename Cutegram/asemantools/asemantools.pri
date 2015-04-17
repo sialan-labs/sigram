@@ -61,6 +61,15 @@ contains(QT,widgets) {
         asemantools/asemannativenotification.h \
         asemantools/asemannativenotificationitem.h
 }
+contains(QT,multimedia) {
+    DEFINES += ASEMAN_MULTIMEDIA
+    SOURCES +=  \
+        asemantools/asemanaudiorecorder.cpp \
+        asemantools/asemanaudioencodersettings.cpp
+    HEADERS +=  \
+        asemantools/asemanaudiorecorder.h \
+        asemantools/asemanaudioencodersettings.h
+}
 linux {
 contains(QT,dbus) {
     DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION

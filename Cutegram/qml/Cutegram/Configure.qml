@@ -494,6 +494,7 @@ Rectangle {
                     text: qsTr("About Cutegram")
                     radius: 4*Devices.density
                     cursorShape: Qt.PointingHandCursor
+                    visible: false
                     onClicked: Cutegram.about()
                 }
 
@@ -507,6 +508,7 @@ Rectangle {
                     height: 40*Devices.density
                     text: qsTr("About Aseman")
                     radius: 4*Devices.density
+                    visible: false
                     cursorShape: Qt.PointingHandCursor
                     onClicked: Cutegram.aboutAseman()
                 }

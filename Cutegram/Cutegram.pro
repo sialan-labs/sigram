@@ -14,7 +14,7 @@ linux {
 
 TEMPLATE = app
 TARGET = cutegram
-QT += qml quick sql xml
+QT += qml quick sql xml multimedia
 
 linux: QT += dbus
 win32 {
@@ -54,7 +54,8 @@ SOURCES += main.cpp \
     dialogfilesmodel.cpp \
     cutegramenums.cpp \
     usernamefiltermodel.cpp \
-    tagfiltermodel.cpp
+    tagfiltermodel.cpp \
+    mp3converterengine.cpp
 
 RESOURCES += resource.qrc
 
@@ -88,7 +89,8 @@ HEADERS += \
     cutegramenums.h \
     themeitem.h \
     usernamefiltermodel.h \
-    tagfiltermodel.h
+    tagfiltermodel.h \
+    mp3converterengine.h
 
 OTHER_FILES += \
     objects/types.sco \

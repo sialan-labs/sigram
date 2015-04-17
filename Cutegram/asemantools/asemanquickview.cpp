@@ -43,6 +43,10 @@
 #ifdef ASEMAN_SENSORS
 #include "asemansensors.h"
 #endif
+#ifdef ASEMAN_MULTIMEDIA
+#include "asemanaudiorecorder.h"
+#include "asemanaudioencodersettings.h"
+#endif
 
 #include <QPointer>
 #include <QSharedPointer>
@@ -124,6 +128,10 @@ AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
 
 #ifdef ASEMAN_SENSORS
     qmlRegisterType<AsemanSensors>("AsemanTools", 1,0, "AsemanSensors");
+#endif
+#ifdef ASEMAN_MULTIMEDIA
+    qmlRegisterType<AsemanAudioRecorder>("AsemanTools", 1,0, "AudioRecorder");
+    qmlRegisterType<AsemanAudioEncoderSettings>("AsemanTools", 1,0, "AudioEncoderSettings");
 #endif
 
     qmlRegisterUncreatableType<AsemanDesktopTools>("AsemanTools", 1,0, "AsemanDesktopTools", "It's a singleton class");

@@ -37,7 +37,7 @@ Rectangle {
             id: cphones_list
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            width: frame.minimumWidth? frame.width : parent.width/2 - column.width/2 - 20*Devices.density
+            width: frame.minimumWidth? frame.width : parent.width/2 - column.width/2 - 80*Devices.density
             visible: cphones_list.number.length==0 || !frame.minimumWidth
 
             onNumberChanged: {

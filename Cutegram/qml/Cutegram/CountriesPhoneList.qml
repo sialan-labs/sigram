@@ -52,8 +52,8 @@ Item {
         flick: countries_list
     }
 
-    ScrollBar {
+    PhysicalScrollBar {
         scrollArea: countries_list; height: countries_list.height; width: 6*Devices.density
-        anchors.left: countries_list.left; anchors.top: countries_list.top; color: textColor0
+        anchors.right: countries_list.right; anchors.top: countries_list.top; color: textColor0
     }
 }

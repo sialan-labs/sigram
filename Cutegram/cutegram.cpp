@@ -39,6 +39,7 @@
 #include "telegramuploadsmodel.h"
 #include "telegramchatparticipantsmodel.h"
 #include "themeitem.h"
+#include "mp3converterengine.h"
 #include "emojis.h"
 #include "unitysystemtray.h"
 #include "userdata.h"
@@ -173,6 +174,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<UserNameFilterModel>("Cutegram", 1, 0, "UserNameFilterModel");
     qmlRegisterType<CutegramEnums>("Cutegram", 1, 0, "CutegramEnums");
     qmlRegisterType<ThemeItem>("Cutegram", 1, 0, "CutegramTheme");
+    qmlRegisterType<MP3ConverterEngine>("Cutegram", 1, 0, "MP3ConverterEngine");
     qmlRegisterType<TelegramChatParticipantsModel>("Cutegram", 1, 0, "ChatParticipantsModel");
     qmlRegisterType<Emojis>("Cutegram", 1, 0, "Emojis");
     qmlRegisterUncreatableType<UserData>("Cutegram", 1, 0, "UserData", "");

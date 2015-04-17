@@ -2,6 +2,7 @@ import QtQuick 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
+import QtQuick.Controls 1.1 as Controls
 
 Rectangle {
     id: acc_msg_list
@@ -27,6 +28,8 @@ Rectangle {
 
     property EncryptedChat enchat: telegramObject.encryptedChat(currentDialog.peer.userId)
     property int enChatUid: enchat.adminId==telegramObject.me? enchat.participantId : enchat.adminId
+
+    property int filterId: -1
 
     property real typeEncryptedChatWaiting: 0x3bf703dc
     property real typeEncryptedChatRequested: 0xc878527e
@@ -112,6 +115,7 @@ Rectangle {
     ListView {
         id: mlist
         anchors.fill: parent
+        visible: enchat.classType != typeEncryptedChatDiscarded
         verticalLayoutDirection: ListView.BottomToTop
         onAtYBeginningChanged: if( atYBeginning && contentHeight>height &&
                                    currentDialog != telegramObject.nullDialog ) messages_model.loadMore()
@@ -127,6 +131,7 @@ Rectangle {
             maximumMediaWidth: acc_msg_list.maximumMediaWidth
             message: item
             width: mlist.width - 2*x
+            opacity: filterId == user.id || filterId == -1? 1 : 0.1
             onSelectedTextChanged: {
                 if(selectedText.length = 0)
                     return
@@ -141,6 +146,10 @@ Rectangle {
             property bool selected: mlist.currentIndex == index
 
             onSelectedChanged: if(!selected) discardSelection()
+
+            Behavior on opacity {
+                NumberAnimation{ easing.type: Easing.OutCubic; duration: 200 }
+            }
 
             DragObject {
                 id: drag
@@ -205,11 +214,16 @@ Rectangle {
                 onReleased: {
                     if(user.id == telegram.cutegramId)
                         return
-
-                    msg_item.click()
+                    if(msg_item.click())
+                        return
+                    if(filterId == -1)
+                        filterId = user.id
+                    else
+                        filterId = -1
                 }
 
                 onPressed: {
+                    dragged = false
                     if(user.id == telegram.cutegramId)
                         return
                     if( mouse.button == Qt.RightButton ) {
@@ -256,6 +270,7 @@ Rectangle {
                 }
 
                 property point startPoint
+                property bool dragged
             }
         }
     }
@@ -312,6 +327,19 @@ Rectangle {
         onVisibleChanged: secret_chat_indicator.stop()
     }
 
+    Text {
+        id: rejected_txt
+        anchors.top: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 100*Devices.density
+        font.family: AsemanApp.globalFont.family
+        font.pixelSize: Math.floor(12*Devices.fontDensity)
+        horizontalAlignment: Text.AlignHCenter
+        text: qsTr("Secret chat rejected. Or accepted from another device.\nNote that android accept secret chat automatically.")
+        visible: enchat.classType == typeEncryptedChatDiscarded
+        onVisibleChanged: secret_chat_indicator.stop()
+    }
+
     Indicator {
         id: secret_chat_indicator
         light: false
@@ -325,16 +353,13 @@ Rectangle {
     Row {
         anchors.top: acc_rjc_txt.bottom
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 10*Devices.density
         spacing: 10*Devices.density
         visible: acc_rjc_txt.visible
 
-        Button {
+        Controls.Button {
             anchors.margins: 20*Devices.density
-            normalColor: "#3FDA3A"
-            highlightColor: Qt.darker(normalColor)
-            textColor: "#ffffff"
             width: 100*Devices.density
-            height: 36*Devices.density
             text: qsTr("Accept")
             onClicked: {
                 secret_chat_indicator.start()
@@ -342,13 +367,9 @@ Rectangle {
             }
         }
 
-        Button {
+        Controls.Button {
             anchors.margins: 20*Devices.density
-            normalColor: "#DA3737"
-            highlightColor: Qt.darker(normalColor)
-            textColor: "#ffffff"
             width: 100*Devices.density
-            height: 36*Devices.density
             text: qsTr("Reject")
             onClicked: {
                 secret_chat_indicator.start()

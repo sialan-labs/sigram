@@ -364,11 +364,12 @@ Item {
                 break;
 
             case typeMessageMediaUnsupported:
-                break;
-
             default:
+                return false
                 break;
             }
         }
+
+        return true
     }
 }

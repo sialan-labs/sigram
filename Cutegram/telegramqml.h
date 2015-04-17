@@ -233,7 +233,7 @@ public slots:
 
     void search(const QString &keyword);
 
-    bool sendFile(qint64 dialogId, const QString & file , bool forceDocument = false);
+    bool sendFile(qint64 dialogId, const QString & file , bool forceDocument = false, bool forceAudio = false);
     void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
     void getFileJustCheck(FileLocationObject *location);
     void cancelDownload(DownloadObject *download);

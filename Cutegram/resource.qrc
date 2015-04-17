@@ -98,5 +98,8 @@
         <file>qml/Cutegram/files/telegram-dark.png</file>
         <file>qml/Cutegram/UserNameSuggestionMenu.qml</file>
         <file>qml/Cutegram/TagSuggestionMenu.qml</file>
+        <file>qml/Cutegram/files/microphone.png</file>
+        <file>qml/Cutegram/files/microphone-light.png</file>
+        <file>qml/Cutegram/RecorderDialog.qml</file>
     </qresource>
 </RCC>

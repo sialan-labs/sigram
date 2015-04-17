@@ -134,7 +134,7 @@ Item {
 
         Controls.Frame {
             id: txt_frame
-            anchors.left: camera_btn.right
+            anchors.left: attach_box.right
             anchors.right: send_btn.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 4*Devices.density
@@ -340,48 +340,82 @@ Item {
             }
         }
 
-        Button {
-            id: attach_btn
+        Item {
+            id: attach_box
             anchors.left: parent.left
             anchors.verticalCenter: txt_frame.verticalCenter
             height: 40*Devices.density
-            width: 40*Devices.density
-            opacity: Cutegram.currentTheme.sendFrameLightIcon? 1 : 0.6
-            highlightColor: "#220d80ec"
-            normalColor: "#00000000"
-            cursorShape: Qt.PointingHandCursor
-            iconHeight: height*0.5
-            icon: Cutegram.currentTheme.sendFrameLightIcon? "files/attach-light.png" : "files/attach.png"
-            onClicked: {
-                if( currentDialog == telegramObject.nullDialog )
-                    return
-                var file = Desktop.getOpenFileName(View)
-                if( file.length == 0 )
-                    return
+            width: attach_box_marea.containsMouse? 100*Devices.density : 40*Devices.density
+            clip: true
 
-                var dId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
-                telegramObject.sendFile(dId, file)
+            Behavior on width {
+                NumberAnimation{easing.type: Easing.OutCubic; duration: 300}
             }
-        }
 
-        Button {
-            id: camera_btn
-            anchors.left: attach_btn.right
-            anchors.verticalCenter: txt_frame.verticalCenter
-            height: 40*Devices.density
-            width: 30*Devices.density
-            opacity: Cutegram.currentTheme.sendFrameLightIcon? 1 : 0.6
-            highlightColor: "#220d80ec"
-            normalColor: "#00000000"
-            cursorShape: Qt.PointingHandCursor
-            iconHeight: height*0.5
-            icon: Cutegram.currentTheme.sendFrameLightIcon? "files/camera-light.png" : "files/camera.png"
-            onClicked: captureImage()
+            MouseArea {
+                id: attach_box_marea
+                anchors.fill: parent
+                hoverEnabled: true
+            }
+
+            Button {
+                id: attach_btn
+                anchors.left: parent.left
+                height: 40*Devices.density
+                width: 40*Devices.density
+                hoverEnabled: false
+                opacity: Cutegram.currentTheme.sendFrameLightIcon? 1 : 0.6
+                highlightColor: "#220d80ec"
+                normalColor: "#00000000"
+                cursorShape: Qt.PointingHandCursor
+                iconHeight: height*0.5
+                icon: Cutegram.currentTheme.sendFrameLightIcon? "files/attach-light.png" : "files/attach.png"
+                onClicked: {
+                    if( currentDialog == telegramObject.nullDialog )
+                        return
+                    var file = Desktop.getOpenFileName(View)
+                    if( file.length == 0 )
+                        return
+
+                    var dId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
+                    telegramObject.sendFile(dId, file)
+                }
+            }
+
+            Button {
+                id: camera_btn
+                anchors.left: attach_btn.right
+                height: 40*Devices.density
+                width: 30*Devices.density
+                hoverEnabled: false
+                opacity: Cutegram.currentTheme.sendFrameLightIcon? 1 : 0.6
+                highlightColor: "#220d80ec"
+                normalColor: "#00000000"
+                cursorShape: Qt.PointingHandCursor
+                iconHeight: height*0.5
+                icon: Cutegram.currentTheme.sendFrameLightIcon? "files/camera-light.png" : "files/camera.png"
+                onClicked: captureImage()
+            }
+
+            Button {
+                id: microphone_btn
+                anchors.left: camera_btn.right
+                height: 40*Devices.density
+                width: 30*Devices.density
+                hoverEnabled: false
+                opacity: Cutegram.currentTheme.sendFrameLightIcon? 1 : 0.7
+                highlightColor: "#220d80ec"
+                normalColor: "#00000000"
+                cursorShape: Qt.PointingHandCursor
+                iconHeight: height*0.6
+                icon: Cutegram.currentTheme.sendFrameLightIcon? "files/microphone-light.png" : "files/microphone.png"
+                onClicked: recordAudio()
+            }
         }
 
         DropTrashArea {
             id: trash_item
-            anchors.left: camera_btn.right
+            anchors.left: attach_box.right
             anchors.verticalCenter: txt_frame.verticalCenter
             height: 30*Devices.density
             width: height
@@ -442,7 +476,14 @@ Item {
         if( currentDialog == telegramObject.nullDialog )
             return
 
-        camera_camponent.createObject(smsg)
+        camera_camponent.createObject(smsg, {"dialog": currentDialog})
+    }
+
+    function recordAudio() {
+        if( currentDialog == telegramObject.nullDialog )
+            return
+
+        recorder_camponent.createObject(smsg, {"dialog": currentDialog})
     }
 
     function setFocus() {
@@ -465,12 +506,35 @@ Item {
             visible: true
             onVisibleChanged: if(!visible) destroy()
             title: qsTr("Camera")
+
+            property Dialog dialog
+
             onSelected: {
-                var dId = currentDialog.peer.chatId
+                var dId = dialog.peer.chatId
                 if(dId == 0)
-                    dId = currentDialog.peer.userId
+                    dId = dialog.peer.userId
 
                 telegramObject.sendFile(dId, path)
+                visible = false
+            }
+        }
+    }
+
+    Component {
+        id: recorder_camponent
+        RecorderDialog {
+            visible: true
+            onVisibleChanged: if(!visible) destroy()
+            title: qsTr("Audio Recorder")
+
+            property Dialog dialog
+
+            onSelected: {
+                var dId = dialog.peer.chatId
+                if(dId == 0)
+                    dId = dialog.peer.userId
+
+                telegramObject.sendFile(dId, path, false, true)
                 visible = false
             }
         }

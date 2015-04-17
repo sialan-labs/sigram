@@ -1114,7 +1114,7 @@ void TelegramQml::search(const QString &keyword)
     p->telegram->messagesSearch(peer, keyword, filter, 0, 0, 0, 0, 50);
 }
 
-bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
+bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument, bool forceAudio)
 {
     QString file = fpath;
     if( file.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath() )
@@ -1135,7 +1135,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
     qint64 fileId;
     p->msg_send_random_id = generateRandomId();
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
-    if( t.name().contains("image/") && !forceDocument )
+    if( t.name().contains("image/") && !forceDocument && !forceAudio )
     {
         if(dlg->encrypted())
             fileId = p->telegram->messagesSendEncryptedPhoto(dId, p->msg_send_random_id, 0, file);
@@ -1143,7 +1143,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
             fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
     }
     else
-    if( t.name().contains("video/") && !forceDocument )
+    if( t.name().contains("video/") && !forceDocument && !forceAudio )
     {
         QString thumbnail = AsemanApplication::tempPath()+"/cutegram_thumbnail_" + QUuid::createUuid().toString() + ".jpg";
         int width = 0;
@@ -1178,7 +1178,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument)
     if( dlg->encrypted() )
         return false;
     else
-    if( t.name().contains("audio/") && !forceDocument )
+    if( (t.name().contains("audio/") || forceAudio) && !forceDocument )
         fileId = p->telegram->messagesSendAudio(peer, p->msg_send_random_id, file, 0);
     else
         fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file);

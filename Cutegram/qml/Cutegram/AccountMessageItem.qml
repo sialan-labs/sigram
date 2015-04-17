@@ -339,7 +339,7 @@ Item {
     }
 
     function click() {
-        msg_media.click()
+        return msg_media.click()
     }
 
     function copy() {
