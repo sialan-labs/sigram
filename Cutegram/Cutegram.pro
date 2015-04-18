@@ -26,7 +26,7 @@ macx {
     LIBS += -lssl -lcrypto -lz -lqtelegram
     INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
 } else {
-    LIBS += -lssl -lcrypto -lz -L$$OUT_PWD/$$DESTDIR -lqtelegram
+    LIBS += -lssl -lcrypto -lz -lqtelegram
     INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
 }
 }
