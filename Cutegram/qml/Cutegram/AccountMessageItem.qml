@@ -45,6 +45,10 @@ Item {
 
     property bool modernMode: false
 
+    property variant messageLinks: Tools.stringLinks(message.message)
+    property bool hasLink: (messageLinks.length!=0)
+    property bool allowLoadLinks: telegramObject.userData.isLoadLink(user.id)
+
     signal dialogRequest(variant dialogObject)
     signal tagSearchRequest(string tag)
 
@@ -53,6 +57,16 @@ Item {
             indicator.stop()
         else
             indicator.start()
+    }
+
+    Connections {
+        target: telegramObject.userData
+        onLoadLinkChanged: {
+            if(id != user.id)
+                return
+
+            allowLoadLinks = telegramObject.userData.isLoadLink(user.id)
+        }
     }
 
     AccountMessageAction {
@@ -186,7 +200,8 @@ Item {
             Column {
                 id: column
                 anchors.centerIn: parent
-                height: (visibleNames?user_name.height:0) + (uploading?uploadItem.height:0) + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_column.height
+                height: (visibleNames?user_name.height:0) + (uploading?uploadItem.height:0)
+                        + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_column.height
                 clip: true
 
                 Text {
@@ -272,6 +287,21 @@ Item {
                         }
                     }
 
+                    MessageLinkImage {
+                        id: message_link
+                        visible: link.length != 0
+                        link: {
+                            var msgLink = !messageLinks || messageLinks.length == 0? "" : messageLinks[0]
+                            var checkPath = webPageGrabber.check(msgLink)
+                            if(checkPath != "")
+                                return msgLink
+                            if(allowLoadLinks)
+                                return msgLink
+                            else
+                                return ""
+                        }
+                    }
+
                     Row {
                         anchors.right: parent.right
                         spacing: 4*Devices.density
@@ -351,10 +381,44 @@ Item {
                 }
             }
         }
+
+        Button {
+            anchors.verticalCenter: parent.verticalCenter
+            normalColor: "#cccccc"
+            highlightColor: "#bbbbbb"
+            textColor: "#555555"
+            visible: hasLink
+            text: {
+                if(message_link.visible) {
+                    if(allowLoadLinks)
+                        return qsTr("Don't Load Anymore")
+                    else
+                        return qsTr("Load Always")
+                }
+                else
+                    qsTr("Load Link")
+            }
+            radius: 3*Devices.density
+            onClicked: {
+                if(message_link.visible) {
+                    if(allowLoadLinks)
+                        telegramObject.userData.removeLoadlink(user.id)
+                    else
+                        telegramObject.userData.addLoadLink(user.id)
+                } else {
+                    showLink()
+                }
+            }
+        }
+
     }
 
     function click() {
         return msg_media.click()
+    }
+
+    function showLink() {
+        message_link.link = (!messageLinks || messageLinks.length == 0? "" : messageLinks[0])
     }
 
     function copy() {

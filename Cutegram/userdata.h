@@ -61,6 +61,11 @@ public slots:
     QList<int> favorites() const;
     bool isFavorited(int id);
 
+    void addLoadLink(int id);
+    void removeLoadlink(int id);
+    QList<int> loadLinks();
+    bool isLoadLink(int id);
+
     void setNotify(int id, int value);
     int notify(int id);
 
@@ -81,6 +86,7 @@ public slots:
 signals:
     void muteChanged(int id);
     void favoriteChanged(int id);
+    void loadLinkChanged(int id);
     void tagsChanged(const QString &tag);
     void valueChanged( const QString & key );
     void messageUpdateChanged(int id);

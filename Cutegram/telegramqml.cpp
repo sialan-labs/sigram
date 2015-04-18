@@ -1200,6 +1200,8 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
 
 void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
 {
+    if(!l)
+        return;
     if( !p->telegram )
         return;
     if(l->accessHash()==0 && l->volumeId()==0 && l->localId()==0)
@@ -1381,6 +1383,47 @@ void TelegramQml::timerUpdateDialogs(bool duration)
         killTimer(p->upd_dialogs_timer);
 
     p->upd_dialogs_timer = startTimer(duration);
+}
+
+void TelegramQml::cleanUp()
+{
+    p->userNameIndexes.clear();
+    p->fakeDialogs.clear();
+    p->dialogs_list.clear();
+    p->messages_list.clear();
+    p->garbages.clear();
+    p->delete_history_requests.clear();
+    p->downloads.clear();
+    p->accessHashes.clear();
+    p->pend_messages.clear();
+    p->uploads.clear();
+
+    foreach(WallPaperObject *obj, p->wallpapers_map) obj->deleteLater();
+    foreach(DialogObject *obj, p->dialogs) obj->deleteLater();
+    foreach(MessageObject *obj, p->messages) obj->deleteLater();
+    foreach(ChatObject *obj, p->chats) obj->deleteLater();
+    foreach(UserObject *obj, p->users) obj->deleteLater();
+    foreach(ChatFullObject *obj, p->chatfulls) obj->deleteLater();
+    foreach(ContactObject *obj, p->contacts) obj->deleteLater();
+    foreach(EncryptedMessageObject *obj, p->encmessages) obj->deleteLater();
+    foreach(EncryptedChatObject *obj, p->encchats) obj->deleteLater();
+
+    p->wallpapers_map.clear();
+    p->dialogs.clear();
+    p->messages.clear();
+    p->chats.clear();
+    p->users.clear();
+    p->chatfulls.clear();
+    p->contacts.clear();
+    p->encmessages.clear();
+    p->encchats.clear();
+
+    emit dialogsChanged(false);
+    emit messagesChanged(false);
+    emit wallpapersChanged();
+    emit uploadsChanged();
+    emit chatFullsChanged();
+    emit contactsChanged();
 }
 
 void TelegramQml::try_init()

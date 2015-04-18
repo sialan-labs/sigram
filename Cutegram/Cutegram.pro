@@ -14,7 +14,7 @@ linux {
 
 TEMPLATE = app
 TARGET = cutegram
-QT += qml quick sql xml multimedia
+QT += qml quick sql xml multimedia webkitwidgets
 
 linux: QT += dbus
 win32 {

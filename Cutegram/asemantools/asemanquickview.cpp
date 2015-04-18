@@ -47,6 +47,9 @@
 #include "asemanaudiorecorder.h"
 #include "asemanaudioencodersettings.h"
 #endif
+#if defined(ASEMAN_WEBKIT) || defined(ASEMAN_WEBENGINE)
+#include "asemanwebpagegrabber.h"
+#endif
 
 #include <QPointer>
 #include <QSharedPointer>
@@ -132,6 +135,9 @@ AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
 #ifdef ASEMAN_MULTIMEDIA
     qmlRegisterType<AsemanAudioRecorder>("AsemanTools", 1,0, "AudioRecorder");
     qmlRegisterType<AsemanAudioEncoderSettings>("AsemanTools", 1,0, "AudioEncoderSettings");
+#endif
+#if defined(ASEMAN_WEBKIT) || defined(ASEMAN_WEBENGINE)
+    qmlRegisterType<AsemanWebPageGrabber>("AsemanTools", 1,0, "WebPageGrabber");
 #endif
 
     qmlRegisterUncreatableType<AsemanDesktopTools>("AsemanTools", 1,0, "AsemanDesktopTools", "It's a singleton class");

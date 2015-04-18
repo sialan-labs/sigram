@@ -70,6 +70,20 @@ contains(QT,multimedia) {
         asemantools/asemanaudiorecorder.h \
         asemantools/asemanaudioencodersettings.h
 }
+contains(QT,webkitwidgets) {
+    DEFINES += ASEMAN_WEBKIT
+    SOURCES +=  \
+        asemantools/asemanwebpagegrabber.cpp
+    HEADERS +=  \
+        asemantools/asemanwebpagegrabber.h
+}
+contains(QT,webenginewidgets) {
+    DEFINES += ASEMAN_WEBENGINE
+    SOURCES +=  \
+        asemantools/asemanwebpagegrabber.cpp
+    HEADERS +=  \
+        asemantools/asemanwebpagegrabber.h
+}
 linux {
 contains(QT,dbus) {
     DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION
@@ -107,7 +121,7 @@ SOURCES += \
     asemantools/asemanquickitemimagegrabber.cpp \
     asemantools/asemanquickobject.cpp \
     asemantools/asemanfilesystemmodel.cpp \
-    $$PWD/asemandebugobjectcounter.cpp
+    asemantools/asemandebugobjectcounter.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -134,7 +148,7 @@ HEADERS += \
     asemantools/asemanquickitemimagegrabber.h \
     asemantools/asemanquickobject.h \
     asemantools/asemanfilesystemmodel.h \
-    $$PWD/asemandebugobjectcounter.h
+    asemantools/asemandebugobjectcounter.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \

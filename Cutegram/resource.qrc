@@ -102,5 +102,7 @@
         <file>qml/Cutegram/files/microphone-light.png</file>
         <file>qml/Cutegram/RecorderDialog.qml</file>
         <file>qml/Cutegram/MediaPlayerItem.qml</file>
+        <file>qml/Cutegram/WebPageGrabberQueue.qml</file>
+        <file>qml/Cutegram/MessageLinkImage.qml</file>
     </qresource>
 </RCC>

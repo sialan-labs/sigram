@@ -115,6 +115,24 @@ QString AsemanTools::readText(const QString &path)
     return res;
 }
 
+QStringList AsemanTools::stringLinks(const QString &str)
+{
+    QStringList links;
+    QRegExp links_rxp("((?:(?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w))|(?:\\w+\\.(?:com|org|co|net)))");
+    int pos = 0;
+    while ((pos = links_rxp.indexIn(str, pos)) != -1)
+    {
+        QString link = links_rxp.cap(1);
+        if(link.indexOf(QRegExp("\\w+\\:\\/\\/")) == -1)
+            link = "http://" + link;
+
+        links << link;
+        pos += links_rxp.matchedLength();
+    }
+
+    return links;
+}
+
 QString AsemanTools::qtVersion()
 {
     return qVersion();

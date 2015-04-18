@@ -14,6 +14,7 @@ AsemanMain {
 
     property variant authDialog
     property alias profiles: profile_model
+    property alias webPageGrabber: web_grabber
 
     property bool aboutMode: false
 
@@ -42,6 +43,10 @@ AsemanMain {
         if(event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier) {
             Cutegram.quit()
         }
+    }
+
+    WebPageGrabberQueue {
+        id: web_grabber
     }
 
     Connections {

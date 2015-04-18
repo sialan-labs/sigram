@@ -24,6 +24,7 @@
 #include <QVariantMap>
 #include <QDateTime>
 #include <QSize>
+#include <QStringList>
 
 class AsemanToolsPrivate;
 class AsemanTools : public QObject
@@ -44,6 +45,8 @@ public slots:
     static QString fileName( const QString & path );
     static QString fileSuffix( const QString & path );
     static QString readText( const QString & path );
+
+    static QStringList stringLinks(const QString &str);
 
     static QString qtVersion();
     static QString aboutAseman();

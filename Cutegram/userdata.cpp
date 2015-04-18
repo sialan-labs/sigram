@@ -51,6 +51,7 @@ public:
 
     QHash<int,bool> mutes;
     QHash<int,bool> favorites;
+    QHash<int,bool> loadLink;
     QHash<QString,QString> general;
     QMap<quint64, MessageUpdate> msg_updates;
     QMap<QString,bool> tags;
@@ -194,6 +195,49 @@ bool UserData::isFavorited(int id)
     return p->favorites.value(id);
 }
 
+void UserData::addLoadLink(int id)
+{
+    QSqlQuery mute_query(p->db);
+    mute_query.prepare("INSERT OR REPLACE INTO loadLink (id,canLoad) VALUES (:id,:cld)");
+    mute_query.bindValue(":id",id);
+    mute_query.bindValue(":cld",1);
+    mute_query.exec();
+    CHECK_QUERY_ERROR(mute_query);
+
+    p->loadLink.insert(id,true);
+    emit loadLinkChanged(id);
+}
+
+void UserData::removeLoadlink(int id)
+{
+    QSqlQuery query(p->db);
+    query.prepare("DELETE FROM loadLink WHERE id=:id");
+    query.bindValue(":id", id);
+    query.exec();
+
+    p->loadLink.remove(id);
+    emit loadLinkChanged(id);
+}
+
+QList<int> UserData::loadLinks()
+{
+    QList<int> res;
+    QHashIterator<int,bool> i(p->loadLink);
+    while( i.hasNext() )
+    {
+        i.next();
+        if( i.value() )
+            res << i.key();
+    }
+
+    return res;
+}
+
+bool UserData::isLoadLink(int id)
+{
+    return p->loadLink.value(id);
+}
+
 void UserData::setNotify(int id, int value)
 {
     QSqlQuery notify_query(p->db);
@@ -314,6 +358,16 @@ void UserData::init_buffer()
         p->favorites.insert( record.value(0).toInt(), record.value(1).toInt() );
     }
 
+    QSqlQuery llinks_query(p->db);
+    llinks_query.prepare("SELECT id, canLoad FROM loadLink");
+    llinks_query.exec();
+
+    while( llinks_query.next() )
+    {
+        const QSqlRecord & record = llinks_query.record();
+        p->loadLink.insert( record.value(0).toInt(), record.value(1).toInt() );
+    }
+
     QSqlQuery notifies_query(p->db);
     notifies_query.prepare("SELECT id, value FROM notifysettings");
     notifies_query.exec();
@@ -398,6 +452,18 @@ void UserData::update_db()
             QSqlQuery( query_str, p->db ).exec();
 
         setValue("version","5");
+    }
+    if( version < 6 )
+    {
+        QStringList query_list;
+        query_list << "BEGIN;";
+        query_list << "CREATE  TABLE IF NOT EXISTS loadLink (id INT NOT NULL ,canLoad INT NOT NULL, PRIMARY KEY (id) );";
+        query_list << "COMMIT;";
+
+        foreach( const QString & query_str, query_list )
+            QSqlQuery( query_str, p->db ).exec();
+
+        setValue("version","6");
     }
 }
 

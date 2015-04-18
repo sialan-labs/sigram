@@ -242,6 +242,7 @@ public slots:
     void setProfilePhoto( const QString & fileName );
 
     void timerUpdateDialogs( bool duration = 1000 );
+    void cleanUp();
 
 signals:
     void phoneNumberChanged();
