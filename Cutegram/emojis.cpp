@@ -167,6 +167,11 @@ QString Emojis::pathOf(const QString &key) const
     return p->emojis.value(key);
 }
 
+const QHash<QString, QString> &Emojis::emojis() const
+{
+    return p->emojis;
+}
+
 Emojis::~Emojis()
 {
     delete p;

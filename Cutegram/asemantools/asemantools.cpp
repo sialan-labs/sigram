@@ -133,6 +133,11 @@ QStringList AsemanTools::stringLinks(const QString &str)
     return links;
 }
 
+QUrl AsemanTools::stringToUrl(const QString &path)
+{
+    return QUrl(path);
+}
+
 QString AsemanTools::qtVersion()
 {
     return qVersion();

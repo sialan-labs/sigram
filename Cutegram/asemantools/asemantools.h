@@ -25,6 +25,7 @@
 #include <QDateTime>
 #include <QSize>
 #include <QStringList>
+#include <QUrl>
 
 class AsemanToolsPrivate;
 class AsemanTools : public QObject
@@ -47,6 +48,8 @@ public slots:
     static QString readText( const QString & path );
 
     static QStringList stringLinks(const QString &str);
+
+    static QUrl stringToUrl(const QString &path);
 
     static QString qtVersion();
     static QString aboutAseman();

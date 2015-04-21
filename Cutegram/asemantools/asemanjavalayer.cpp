@@ -70,7 +70,7 @@ bool AsemanJavaLayer::sharePaper(const QString &title, const QString &msg)
 {
     jstring jtitle = p->env->NewString(reinterpret_cast<const jchar*>(title.constData()), title.length());
     jstring jmsg   = p->env->NewString(reinterpret_cast<const jchar*>(msg.constData()), msg.length());
-    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "(Ljava/lang/String;Ljava/lang/String;)Z", jtitle, jmsg );
+    jboolean res = p->object.callMethod<jboolean>(__PRETTY_FUNCTION__, "(Ljava/lang/String;Ljava/lang/String;)Z", jtitle, jmsg );
     return res;
 }
 
@@ -78,68 +78,68 @@ bool AsemanJavaLayer::openFile(const QString &path, const QString &type)
 {
     jstring jpath = p->env->NewString(reinterpret_cast<const jchar*>(path.constData()), path.length());
     jstring jtype = p->env->NewString(reinterpret_cast<const jchar*>(type.constData()), type.length());
-    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "(Ljava/lang/String;Ljava/lang/String;)Z", jpath, jtype );
+    jboolean res = p->object.callMethod<jboolean>(__PRETTY_FUNCTION__, "(Ljava/lang/String;Ljava/lang/String;)Z", jpath, jtype );
     return res;
 }
 
 bool AsemanJavaLayer::startCamera(const QString &output)
 {
     jstring joutput = p->env->NewString(reinterpret_cast<const jchar*>(output.constData()), output.length());
-    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "(Ljava/lang/String;)Z", joutput );
+    jboolean res = p->object.callMethod<jboolean>(__PRETTY_FUNCTION__, "(Ljava/lang/String;)Z", joutput );
     return res;
 }
 
 bool AsemanJavaLayer::getOpenPictures()
 {
-    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "()Z");
+    jboolean res = p->object.callMethod<jboolean>(__PRETTY_FUNCTION__, "()Z");
     return res;
 }
 
 bool AsemanJavaLayer::transparentStatusBar()
 {
-    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "()Z");
+    jboolean res = p->object.callMethod<jboolean>(__PRETTY_FUNCTION__, "()Z");
     return res;
 }
 
 bool AsemanJavaLayer::transparentNavigationBar()
 {
-    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "()Z");
+    jboolean res = p->object.callMethod<jboolean>(__PRETTY_FUNCTION__, "()Z");
     return res;
 }
 
 bool AsemanJavaLayer::startService()
 {
-    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "()Z" );
+    jboolean res = p->object.callMethod<jboolean>(__PRETTY_FUNCTION__, "()Z" );
     return res;
 }
 
 bool AsemanJavaLayer::stopService()
 {
-    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "()Z" );
+    jboolean res = p->object.callMethod<jboolean>(__PRETTY_FUNCTION__, "()Z" );
     return res;
 }
 
 int AsemanJavaLayer::densityDpi()
 {
-    jint res = p->object.callMethod<jint>(__FUNCTION__, "()I" );
+    jint res = p->object.callMethod<jint>(__PRETTY_FUNCTION__, "()I" );
     return res;
 }
 
 int AsemanJavaLayer::getSizeName()
 {
-    jint res = p->object.callMethod<jint>(__FUNCTION__, "()I" );
+    jint res = p->object.callMethod<jint>(__PRETTY_FUNCTION__, "()I" );
     return res;
 }
 
 bool AsemanJavaLayer::isTablet()
 {
-    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "()Z");
+    jboolean res = p->object.callMethod<jboolean>(__PRETTY_FUNCTION__, "()Z");
     return res;
 }
 
 qreal AsemanJavaLayer::density()
 {
-    jfloat res = p->object.callMethod<jfloat>(__FUNCTION__, "()F" );
+    jfloat res = p->object.callMethod<jfloat>(__PRETTY_FUNCTION__, "()F" );
     return res;
 }
 

@@ -1135,7 +1135,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
     qint64 fileId;
     p->msg_send_random_id = generateRandomId();
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
-    if( t.name().contains("image/") && !forceDocument && !forceAudio )
+    if( !t.name().contains("gif") && t.name().contains("image/") && !forceDocument && !forceAudio )
     {
         if(dlg->encrypted())
             fileId = p->telegram->messagesSendEncryptedPhoto(dId, p->msg_send_random_id, 0, file);
@@ -1262,7 +1262,7 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
         Q_UNUSED(upp)
     }
     else
-        qDebug() << __FUNCTION__ << ": Can't detect size of: " << parentObj;
+        qDebug() << __PRETTY_FUNCTION__ << ": Can't detect size of: " << parentObj;
 
     qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId(), ekey, eiv);
     p->downloads[fileId] = l;

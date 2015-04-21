@@ -27,7 +27,8 @@ WebPageGrabber {
         id: hash
     }
 
-    function addToQueue(url, method) {
+    function addToQueue(urlStr, method) {
+        var url = Tools.stringToUrl(urlStr)
         var checkPath = check(url)
         if(checkPath != "") {
             method(checkPath)

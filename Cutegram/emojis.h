@@ -46,6 +46,8 @@ public:
     Q_INVOKABLE QList<QString> keys() const;
     Q_INVOKABLE QString pathOf( const QString & key ) const;
 
+    const QHash<QString,QString> &emojis() const;
+
 signals:
     void currentThemeChanged();
     void userDataChanged();

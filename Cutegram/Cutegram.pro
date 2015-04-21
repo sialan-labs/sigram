@@ -55,7 +55,8 @@ SOURCES += main.cpp \
     cutegramenums.cpp \
     usernamefiltermodel.cpp \
     tagfiltermodel.cpp \
-    mp3converterengine.cpp
+    mp3converterengine.cpp \
+    textemojiwrapper.cpp
 
 RESOURCES += resource.qrc
 
@@ -90,7 +91,8 @@ HEADERS += \
     themeitem.h \
     usernamefiltermodel.h \
     tagfiltermodel.h \
-    mp3converterengine.h
+    mp3converterengine.h \
+    textemojiwrapper.h
 
 OTHER_FILES += \
     objects/types.sco \
