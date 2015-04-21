@@ -104,5 +104,6 @@
         <file>qml/Cutegram/MediaPlayerItem.qml</file>
         <file>qml/Cutegram/WebPageGrabberQueue.qml</file>
         <file>qml/Cutegram/MessageLinkImage.qml</file>
+        <file>qml/Cutegram/AddContactDialog.qml</file>
     </qresource>
 </RCC>

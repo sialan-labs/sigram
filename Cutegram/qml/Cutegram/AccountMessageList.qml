@@ -65,7 +65,7 @@ Rectangle {
             if(!hasNewMessageChanged)
                 return
 
-            focus_msg_timer.msgIndex = dialog.unreadCount
+            focus_msg_timer.msgIndex = dialog.unreadCount>0? dialog.unreadCount-1 : 0
             focus_msg_timer.restart()
         }
     }
@@ -132,6 +132,10 @@ Rectangle {
         header: Item{ width: 4; height: acc_msg_list.bottomMargin }
         footer: Item{ width: 4; height: acc_msg_list.topMargin }
 
+        displaced: Transition {
+            NumberAnimation { properties: "y"; duration: 300; easing.type: Easing.OutCubic }
+        }
+
         section.property: "unreaded"
         section.criteria: ViewSection.FullString
         section.delegate: Item {
@@ -154,7 +158,7 @@ Rectangle {
                 anchors.margins: 10*Devices.density
                 anchors.verticalCenter: parent.verticalCenter
                 color: Cutegram.currentTheme.masterColor
-                height: 2*Devices.density
+                height: 1*Devices.density
             }
 
             Rectangle {
@@ -163,7 +167,7 @@ Rectangle {
                 anchors.margins: 10*Devices.density
                 anchors.verticalCenter: parent.verticalCenter
                 color: Cutegram.currentTheme.masterColor
-                height: 2*Devices.density
+                height: 1*Devices.density
             }
         }
 

@@ -220,6 +220,7 @@ void TelegramMessagesModel::sendMessage(const QString &msg)
     if( !p->dialog )
         return;
 
+    clearNewMessageFlag();
     qint32 did = p->dialog->peer()->classType()==Peer::typePeerChat? p->dialog->peer()->chatId() : p->dialog->peer()->userId();
     p->telegram->sendMessage(did, msg);
 }
@@ -386,6 +387,9 @@ void TelegramMessagesModel::messagesChanged_priv()
         const qint64 msgId = messages.at(i);
         if( p->messages.contains(msgId) )
             continue;
+
+        if(!p->refreshing && i<p->unreadCount)
+            p->unreadCount++;
 
         beginInsertRows(QModelIndex(), i, i );
         p->messages.insert( i, msgId );

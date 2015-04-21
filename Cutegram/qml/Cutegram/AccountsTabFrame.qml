@@ -219,7 +219,11 @@ Rectangle {
             color: Cutegram.currentTheme.sidebarColor
 
             AccountContactList {
-                anchors.fill: parent
+                anchors.top: parent.top
+                anchors.bottom: done_btn.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottomMargin: 4*Devices.density
                 telegram: accountView.telegramObject
                 onSelected: {
                     slide_menu.end()
@@ -227,6 +231,25 @@ Rectangle {
                 }
 
                 property variant accountView: hash.value(tab_list.currentKey)
+            }
+
+            Button {
+                id: done_btn
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                normalColor: Cutegram.currentTheme.masterColor
+                highlightColor: Qt.darker(Cutegram.currentTheme.masterColor)
+                textColor: masterPalette.highlightedText
+                textFont.family: AsemanApp.globalFont.family
+                textFont.pixelSize: Math.floor(9*Devices.fontDensity)
+                textFont.bold: false
+                height: 40*Devices.density
+                text: qsTr("Add New Contact")
+                onClicked: {
+                    slide_menu.end()
+                    add_contact_component.createObject(main)
+                }
             }
         }
     }
@@ -321,6 +344,18 @@ Rectangle {
                     contact_list.telegram.messagesCreateChat(contact_list.selecteds, topic)
                 }
             }
+        }
+    }
+
+    Component {
+        id: add_contact_component
+        AddContactDialog {
+            visible: true
+            onVisibleChanged: if(!visible) destroy()
+            title: qsTr("Add Contact")
+            telegram: accountView.telegramObject
+
+            property variant accountView: hash.value(tab_list.currentKey)
         }
     }
 
