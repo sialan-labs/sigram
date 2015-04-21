@@ -871,6 +871,16 @@ bool TelegramQml::sendMessageAsDocument(qint64 dId, const QString &msg)
     return sendFile(dId, path, true);
 }
 
+void TelegramQml::addContact(const QString &firstName, const QString &lastName, const QString &phoneNumber)
+{
+    InputContact contact;
+    contact.setFirstName(firstName);
+    contact.setLastName(lastName);
+    contact.setPhone(phoneNumber);
+
+    p->telegram->contactsImportContacts(QList<InputContact>()<<contact, false);
+}
+
 void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)
 {
     const InputPeer & peer = getInputPeer(peerId);
@@ -1456,6 +1466,8 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(accountGetWallPapersAnswer(qint64,QList<WallPaper>)),
              SLOT(accountGetWallPapers_slt(qint64,QList<WallPaper>)) );
 
+    connect( p->telegram, SIGNAL(contactsImportContactsAnswer(qint64,QList<ImportedContact>,QList<qint64>,QList<User>)),
+             SLOT(contactsImportContacts_slt(qint64,QList<ImportedContact>,QList<qint64>,QList<User>)));
     connect( p->telegram, SIGNAL(photosUploadProfilePhotoAnswer(qint64,Photo,QList<User>)),
              SLOT(photosUploadProfilePhoto_slt(qint64,Photo,QList<User>)) );
     connect( p->telegram, SIGNAL(photosUpdateProfilePhotoAnswer(qint64,UserProfilePhoto)),
@@ -1708,6 +1720,18 @@ void TelegramQml::photosUpdateProfilePhoto_slt(qint64 id, const UserProfilePhoto
     UserObject *user = p->users.value(me());
     if(user)
         *(user->photo()) = userProfilePhoto;
+
+    timerUpdateDialogs(100);
+}
+
+void TelegramQml::contactsImportContacts_slt(qint64 id, const QList<ImportedContact> &importedContacts, const QList<qint64> &retryContacts, const QList<User> &users)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(importedContacts)
+    Q_UNUSED(retryContacts)
+
+    foreach( const User & user, users )
+        insertUser(user);
 
     timerUpdateDialogs(100);
 }

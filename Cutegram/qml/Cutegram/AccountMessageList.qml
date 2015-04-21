@@ -61,6 +61,13 @@ Rectangle {
                     focus_msg_timer.restart()
             }
         }
+        onHasNewMessageChanged: {
+            if(!hasNewMessageChanged)
+                return
+
+            focus_msg_timer.msgIndex = dialog.unreadCount
+            focus_msg_timer.restart()
+        }
     }
 
     Timer {
@@ -124,6 +131,42 @@ Rectangle {
 
         header: Item{ width: 4; height: acc_msg_list.bottomMargin }
         footer: Item{ width: 4; height: acc_msg_list.topMargin }
+
+        section.property: "unreaded"
+        section.criteria: ViewSection.FullString
+        section.delegate: Item {
+            width: mlist.width
+            height: unread_texts.text.length != 0 && messages_model.hasNewMessage? 30*Devices.density : 0
+            clip: true
+
+            Text {
+                id: unread_texts
+                anchors.centerIn: parent
+                font.family: AsemanApp.globalFont.family
+                font.pixelSize: 9*Devices.fontDensity
+                color: "#333333"
+                text: section=="false"? qsTr("New Messages") : ""
+            }
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: unread_texts.left
+                anchors.margins: 10*Devices.density
+                anchors.verticalCenter: parent.verticalCenter
+                color: Cutegram.currentTheme.masterColor
+                height: 2*Devices.density
+            }
+
+            Rectangle {
+                anchors.left: unread_texts.right
+                anchors.right: parent.right
+                anchors.margins: 10*Devices.density
+                anchors.verticalCenter: parent.verticalCenter
+                color: Cutegram.currentTheme.masterColor
+                height: 2*Devices.density
+            }
+        }
+
         delegate: AccountMessageItem {
             id: msg_item
             x: 8*Devices.density
@@ -382,11 +425,16 @@ Rectangle {
         id: focus_msg_timer
         interval: 300
         onTriggered: {
-            var idx = messages_model.indexOf(msgId)
+            var idx = msgIndex
+            if(msgId)
+                idx = messages_model.indexOf(msgId)
+
             mlist.positionViewAtIndex(idx, ListView.Center)
+            msgIndex = 0
             msgId = 0
         }
         property int msgId
+        property int msgIndex
     }
 
     function sendMessage( txt ) {

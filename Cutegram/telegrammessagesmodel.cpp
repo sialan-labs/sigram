@@ -41,6 +41,8 @@ public:
     int load_count;
     int load_limit;
     int refresh_timer;
+
+    int unreadCount;
 };
 
 TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
@@ -54,6 +56,7 @@ TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
     p->load_limit = 0;
     p->refresh_timer = 0;
     p->maxId = 0;
+    p->unreadCount = 0;
 }
 
 TelegramQml *TelegramMessagesModel::telegram() const
@@ -100,6 +103,9 @@ void TelegramMessagesModel::setDialog(DialogObject *dlg)
         return;
     if( !p->dialog->peer()->chatId() && !p->dialog->peer()->userId() )
         return;
+
+    p->unreadCount = p->dialog->unreadCount();
+    emit hasNewMessageChanged();
 
     init();
 }
@@ -231,6 +237,12 @@ void TelegramMessagesModel::setReaded()
     p->dialog->setUnreadCount(0);
 }
 
+void TelegramMessagesModel::clearNewMessageFlag()
+{
+    p->unreadCount = 0;
+    emit hasNewMessageChanged();
+}
+
 qint64 TelegramMessagesModel::id(const QModelIndex &index) const
 {
     int row = index.row();
@@ -252,6 +264,10 @@ QVariant TelegramMessagesModel::data(const QModelIndex &index, int role) const
     case ItemRole:
         res = QVariant::fromValue<MessageObject*>(p->telegram->message(key));
         break;
+
+    case UnreadedRole:
+        res = index.row()<p->unreadCount;
+        break;
     }
 
     return res;
@@ -265,6 +281,7 @@ QHash<qint32, QByteArray> TelegramMessagesModel::roleNames() const
 
     res = new QHash<qint32, QByteArray>();
     res->insert( ItemRole, "item");
+    res->insert( UnreadedRole, "unreaded");
     return *res;
 }
 
@@ -281,6 +298,11 @@ bool TelegramMessagesModel::initializing() const
 bool TelegramMessagesModel::refreshing() const
 {
     return p->refreshing;
+}
+
+bool TelegramMessagesModel::hasNewMessage() const
+{
+    return p->unreadCount;
 }
 
 qint64 TelegramMessagesModel::peerId() const

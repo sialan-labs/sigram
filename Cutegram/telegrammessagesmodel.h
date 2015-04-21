@@ -36,10 +36,12 @@ class TelegramMessagesModel : public QAbstractListModel
     Q_PROPERTY(bool initializing READ initializing NOTIFY initializingChanged)
     Q_PROPERTY(bool refreshing  READ refreshing  NOTIFY refreshingChanged)
     Q_PROPERTY(int maxId READ maxId WRITE setMaxId NOTIFY maxIdChanged)
+    Q_PROPERTY(bool hasNewMessage READ hasNewMessage NOTIFY hasNewMessageChanged)
 
 public:
     enum MessagesRoles {
-        ItemRole = Qt::UserRole
+        ItemRole = Qt::UserRole,
+        UnreadedRole
     };
 
     TelegramMessagesModel(QObject *parent = 0);
@@ -66,6 +68,7 @@ public:
     int count() const;
     bool initializing() const;
     bool refreshing() const;
+    bool hasNewMessage() const;
 
     qint64 peerId() const;
     Peer peer() const;
@@ -75,6 +78,7 @@ public slots:
     void loadMore(bool force = false);
     void sendMessage( const QString & msg );
     void setReaded();
+    void clearNewMessageFlag();
 
 signals:
     void telegramChanged();
@@ -84,6 +88,7 @@ signals:
     void refreshingChanged();
     void maxIdChanged();
     void messageAdded(qint64 msgId);
+    void hasNewMessageChanged();
 
 private slots:
     void messagesChanged(bool cachedData);

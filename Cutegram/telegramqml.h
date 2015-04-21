@@ -50,6 +50,7 @@ class PhotoObject;
 class ContactsLink;
 class Update;
 class Message;
+class ImportedContact;
 class User;
 class Contact;
 class ContactObject;
@@ -212,6 +213,8 @@ public slots:
     void sendMessage( qint64 dialogId, const QString & msg );
     bool sendMessageAsDocument( qint64 dialogId, const QString & msg );
 
+    void addContact(const QString &firstName, const QString &lastName, const QString &phoneNumber);
+
     void forwardMessage( qint64 msgId, qint64 peerId );
     void deleteMessage( qint64 msgId );
 
@@ -310,6 +313,7 @@ private slots:
     void accountGetWallPapers_slt(qint64 id, const QList<WallPaper> & wallPapers);
     void photosUploadProfilePhoto_slt(qint64 id, const Photo & photo, const QList<User> & users);
     void photosUpdateProfilePhoto_slt(qint64 id, const UserProfilePhoto & userProfilePhoto);
+    void contactsImportContacts_slt(qint64 id, const QList<ImportedContact> &importedContacts, const QList<qint64> &retryContacts, const QList<User> &users);
 
     void contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> & contacts, const QList<User> & users);
     void usersGetFullUser_slt(qint64 id, const User &user, const ContactsLink &link, const Photo &profilePhoto, const PeerNotifySettings &notifySettings, bool blocked, const QString &realFirstName, const QString &realLastName);
