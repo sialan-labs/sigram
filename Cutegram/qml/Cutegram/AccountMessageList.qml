@@ -132,9 +132,9 @@ Rectangle {
         header: Item{ width: 4; height: acc_msg_list.bottomMargin }
         footer: Item{ width: 4; height: acc_msg_list.topMargin }
 
-        displaced: Transition {
-            NumberAnimation { properties: "y"; duration: 300; easing.type: Easing.OutCubic }
-        }
+//        displaced: Transition {
+//            NumberAnimation { properties: "y"; duration: 300; easing.type: Easing.OutCubic }
+//        }
 
         section.property: "unreaded"
         section.criteria: ViewSection.FullString
@@ -334,10 +334,10 @@ Rectangle {
         flick: mlist
     }
 
-    ScrollBar {
+    PhysicalScrollBar {
         scrollArea: mlist; height: mlist.height-bottomMargin-topMargin; width: 6*Devices.density
         anchors.right: mlist.right; anchors.top: mlist.top; color: textColor0
-        anchors.topMargin: topMargin; forceVisible: true
+        anchors.topMargin: topMargin; reverse: true
     }
 
     Button {

@@ -63,10 +63,11 @@ import AsemanTools 1.0
 Item {
     id: container
 
-    property variant scrollArea
-    property variant orientation: Qt.Vertical
+    property Flickable scrollArea
+    property int orientation: Qt.Vertical
     property alias color: bilbilak.color
     property alias pressed: marea.pressed
+    property bool reverse
 
     opacity: 1
 
@@ -108,9 +109,9 @@ Item {
         id: bilbilak
         color: "#000000"
         smooth: true
-        radius: width/2
+        radius: 2*Devices.density
         x: container.orientation == Qt.Vertical ? 2 : position()
-        width: container.orientation == Qt.Vertical ? (marea.containsMouse||marea.pressed? 2*(container.width-3) : container.width - 4) : diagonal
+        width: container.orientation == Qt.Vertical ? (marea.containsMouse||marea.pressed? 1.5*(container.width-3) : container.width - 4) : diagonal
         y: container.orientation == Qt.Vertical ? position() : 2
         height: container.orientation == Qt.Vertical ? diagonal : container.height - 4
         opacity: marea.containsMouse? 1 : 0.5
@@ -135,14 +136,25 @@ Item {
                 if( !pressed )
                     return
 
-                var cy = container.scrollArea.contentY + (mouseY-pinY)/scrollArea.visibleArea.heightRatio
-                if( cy < 0 )
-                    cy = 0
-                else
-                if( cy > container.scrollArea.contentHeight - container.scrollArea.height )
-                    cy = container.scrollArea.contentHeight - container.scrollArea.height
+                var cy = scrollArea.contentY + (mouseY-pinY)/scrollArea.visibleArea.heightRatio
+                var pad
+                if(reverse) {
+                    pad = scrollArea.originY+scrollArea.contentHeight
+                    if( cy > -scrollArea.height+pad )
+                        cy = -scrollArea.height+pad
+                    else
+                    if( cy < -scrollArea.contentHeight+pad )
+                        cy = -scrollArea.contentHeight+pad
+                } else {
+                    pad = scrollArea.originY
+                    if( cy < -pad )
+                        cy = -pad
+                    else
+                    if( cy > scrollArea.contentHeight - scrollArea.height + pad )
+                        cy = scrollArea.contentHeight - scrollArea.height + pad
+                }
 
-                container.scrollArea.contentY  = cy
+                scrollArea.contentY  = cy
             }
 
             property real pinY

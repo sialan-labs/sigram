@@ -39,6 +39,7 @@ public:
     QString destination;
     QString destPrivate;
     int timeOut;
+    int progress;
 };
 
 AsemanWebPageGrabber::AsemanWebPageGrabber(QObject *parent) :
@@ -46,6 +47,7 @@ AsemanWebPageGrabber::AsemanWebPageGrabber(QObject *parent) :
 {
     p = new AsemanWebPageGrabberPrivate;
     p->timeOut = 0;
+    p->progress = 0;
 
     p->timer = new QTimer(this);
     p->timer->setSingleShot(true);
@@ -120,9 +122,17 @@ void AsemanWebPageGrabber::start(bool force)
         p->destPrivate.clear();
 
     createWebView();
+
+    p->progress = 0;
     p->viewer->stop();
     p->viewer->setUrl(p->source);
+
     p->timer->stop();
+    if(p->timeOut)
+    {
+        p->timer->setInterval(p->timeOut);
+        p->timer->start();
+    }
 }
 
 QUrl AsemanWebPageGrabber::check(const QUrl &source, QString *destPath)
@@ -153,6 +163,17 @@ void AsemanWebPageGrabber::completed(bool stt)
         return;
     if(!p->viewer)
         return;
+    if(p->progress < 80)
+    {
+        p->timer->stop();
+        p->viewer->stop();
+
+        destroyWebView();
+        emit complete(QImage());
+        emit finished(QUrl());
+        p->destPrivate.clear();
+        return;
+    }
 
     p->timer->stop();
     p->viewer->stop();
@@ -175,15 +196,7 @@ void AsemanWebPageGrabber::completed(bool stt)
 
 void AsemanWebPageGrabber::loadProgress(int pr)
 {
-    if(pr<80)
-        return;
-
-    p->timer->stop();
-    if(p->timeOut)
-    {
-        p->timer->setInterval(p->timeOut);
-        p->timer->start();
-    }
+    p->progress = pr;
 }
 
 void AsemanWebPageGrabber::createWebView()
