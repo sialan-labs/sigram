@@ -515,6 +515,8 @@ int AsemanDesktopTools::showMenu(const QVariantList &actions, QPoint point)
 
     return pointers.indexOf(res);
 #else
+    Q_UNUSED(actions)
+    Q_UNUSED(point)
     return -1;
 #endif
 }
@@ -568,6 +570,9 @@ QMenu *AsemanDesktopTools::menuOf(const QVariantList &list, QList<QAction *> *ac
 
     return result;
 #else
+    Q_UNUSED(list)
+    Q_UNUSED(actions)
+    Q_UNUSED(parent)
     return 0;
 #endif
 }
@@ -597,6 +602,9 @@ bool AsemanDesktopTools::yesOrNo(QWindow *window, const QString &title, const QS
 
     return false;
 #else
+    Q_UNUSED(title)
+    Q_UNUSED(text)
+    Q_UNUSED(type)
     return false;
 #endif
 }

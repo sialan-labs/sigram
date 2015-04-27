@@ -25,14 +25,12 @@ android {
             QT += widgets
 
             HEADERS += \
-                asemantools/asemanmimeapps.h \
                 asemantools/qtsingleapplication/qtsinglecoreapplication.h \
                 asemantools/qtsingleapplication/qtsingleapplication.h \
                 asemantools/qtsingleapplication/qtlockedfile.h \
                 asemantools/qtsingleapplication/qtlocalpeer.h
 
             SOURCES += \
-                asemantools/asemanmimeapps.cpp \
                 asemantools/qtsingleapplication/qtsinglecoreapplication.cpp \
                 asemantools/qtsingleapplication/qtsingleapplication.cpp \
                 asemantools/qtsingleapplication/qtlockedfile.cpp \
@@ -114,6 +112,7 @@ SOURCES += \
     asemantools/asemanimagecoloranalizor.cpp \
     asemantools/asemancountriesmodel.cpp \
     asemantools/asemanmimedata.cpp \
+    asemantools/asemanmimeapps.cpp \
     asemantools/asemandragobject.cpp \
     asemantools/asemandownloader.cpp \
     asemantools/asemannotification.cpp \
@@ -141,6 +140,7 @@ HEADERS += \
     asemantools/asemanimagecoloranalizor.h \
     asemantools/asemancountriesmodel.h \
     asemantools/asemanmimedata.h \
+    asemantools/asemanmimeapps.h \
     asemantools/asemandragobject.h \
     asemantools/asemandownloader.h \
     asemantools/asemannotification.h \

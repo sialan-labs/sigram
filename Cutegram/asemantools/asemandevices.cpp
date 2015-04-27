@@ -532,6 +532,16 @@ void AsemanDevices::openFile(const QString &address)
 #endif
 }
 
+void AsemanDevices::shareFile(const QString &address)
+{
+#ifdef Q_OS_ANDROID
+    const QMimeType & t = p->mime_db.mimeTypeForFile(address);
+    p->java_layer->shareFile( address, t.name() );
+#else
+    QDesktopServices::openUrl( QUrl(address) );
+#endif
+}
+
 void AsemanDevices::setClipboard(const QString &text)
 {
     QGuiApplication::clipboard()->setText( text );

@@ -33,6 +33,7 @@ public:
     static AsemanJavaLayer *instance();
 
     bool sharePaper( const QString & title, const QString & msg );
+    bool shareFile( const QString & path, const QString & type );
     bool openFile( const QString & path, const QString & type );
     bool startCamera( const QString & output );
     bool getOpenPictures();
