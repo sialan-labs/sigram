@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="nl_NL">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -134,7 +136,15 @@
     </message>
     <message>
         <source>%1 invited to group</source>
-        <translation>%1 is uitgenodigd voor de groep</translation>
+        <translation type="vanished">%1 is uitgenodigd voor de groep</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -142,6 +152,18 @@
     <message>
         <source>Media files is not supported on secret chat currently</source>
         <translation>Mediabestanden worden momenteen niet ondersteund in geheime gesprekken</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Load Anymore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Always</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Link</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -177,6 +199,15 @@
     <message>
         <source>Search on the Web</source>
         <translation>Zoeken op het internet</translation>
+    </message>
+    <message>
+        <source>New Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Secret chat rejected. Or accepted from another device.
+Note that android accept secret chat automatically.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -228,7 +259,7 @@
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Het bevat Curegram-nieuws met informatie over nieuwe versies en oplossingen.
 Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
@@ -236,6 +267,10 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     <message>
         <source>Camera</source>
         <translation>Camera</translation>
+    </message>
+    <message>
+        <source>Audio Recorder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -306,12 +341,47 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
         <source>Just drag and drop contacts here</source>
         <translation>Versleep contactpersonen hier naartoe</translation>
     </message>
+    <message>
+        <source>Add New Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
         <translation>Account toevoegen (experimenteel)</translation>
+    </message>
+</context>
+<context>
+    <name>AddContactDialog</name>
+    <message>
+        <source>Fill below form to add new contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First Name</source>
+        <translation type="unfinished">Voornaam</translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation type="unfinished">Achternaam</translation>
+    </message>
+    <message>
+        <source>Phone Number</source>
+        <translation type="unfinished">Telefoonnummer</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuleren</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -767,6 +837,29 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
 </context>
 <context>
+    <name>RecorderDialog</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Verzenden</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuleren</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
@@ -821,6 +914,10 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     <message>
         <source>Add Participant</source>
         <translation>Deelnemer toevoegen</translation>
+    </message>
+    <message>
+        <source>Show Badges</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

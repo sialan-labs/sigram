@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr_FR" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fr_FR">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -65,11 +67,11 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -92,15 +94,15 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -134,7 +136,15 @@
     </message>
     <message>
         <source>%1 invited to group</source>
-        <translation>%1 a été invité dans le groupe</translation>
+        <translation type="vanished">%1 a été invité dans le groupe</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -142,6 +152,18 @@
     <message>
         <source>Media files is not supported on secret chat currently</source>
         <translation>Les fichiers média ne sont pas supportés dans les discussions secrètes pour le moment.</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Load Anymore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Always</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Link</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -176,7 +198,16 @@
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Secret chat rejected. Or accepted from another device.
+Note that android accept secret chat automatically.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -228,7 +259,7 @@
         <translation>Supprimer</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Il s&apos;agit des informations à propos des nouvelles versions et solutions Cutegram
 Il ne s&apos;agit pas d&apos;un contact telegram. C&apos;est juste une contact virtuel.</translation>
@@ -236,6 +267,10 @@ Il ne s&apos;agit pas d&apos;un contact telegram. C&apos;est juste une contact v
     <message>
         <source>Camera</source>
         <translation>Webcam</translation>
+    </message>
+    <message>
+        <source>Audio Recorder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -306,12 +341,47 @@ Il ne s&apos;agit pas d&apos;un contact telegram. C&apos;est juste une contact v
         <source>Just drag and drop contacts here</source>
         <translation>Simplement glisser-déposer les contacts ici</translation>
     </message>
+    <message>
+        <source>Add New Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
         <translation>Ajouter un compte (expérimental)</translation>
+    </message>
+</context>
+<context>
+    <name>AddContactDialog</name>
+    <message>
+        <source>Fill below form to add new contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First Name</source>
+        <translation type="unfinished">Prénom</translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation type="unfinished">Nom</translation>
+    </message>
+    <message>
+        <source>Phone Number</source>
+        <translation type="unfinished">Numéro de téléphone</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -533,23 +603,23 @@ Il ne s&apos;agit pas d&apos;un contact telegram. C&apos;est juste une contact v
     </message>
     <message>
         <source>Minimum List</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -767,6 +837,29 @@ Il ne s&apos;agit pas d&apos;un contact telegram. C&apos;est juste une contact v
     </message>
 </context>
 <context>
+    <name>RecorderDialog</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Envoyer</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
@@ -821,6 +914,10 @@ Il ne s&apos;agit pas d&apos;un contact telegram. C&apos;est juste une contact v
     <message>
         <source>Add Participant</source>
         <translation>Ajouter un participant</translation>
+    </message>
+    <message>
+        <source>Show Badges</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

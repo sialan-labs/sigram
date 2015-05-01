@@ -135,7 +135,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 invited to group</source>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -143,6 +147,18 @@
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Load Anymore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Always</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Link</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -178,6 +194,15 @@
     </message>
     <message>
         <source>Search on the Web</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Secret chat rejected. Or accepted from another device.
+Note that android accept secret chat automatically.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -236,6 +261,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Camera</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio Recorder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -307,11 +336,46 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Just drag and drop contacts here</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add New Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AddContactDialog</name>
+    <message>
+        <source>Fill below form to add new contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -768,6 +832,29 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>RecorderDialog</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
@@ -821,6 +908,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Add Participant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Badges</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
