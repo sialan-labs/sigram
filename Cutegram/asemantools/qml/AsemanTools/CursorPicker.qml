@@ -44,7 +44,8 @@ Item {
     onTextItemChanged: {
         top_picker.visible = false
         bottom_picker.visible = false
-        View.root.hideRollerDialog()
+        if(View.root)
+            View.root.hideRollerDialog()
     }
     onCursorPositionChanged: {
         if( moving )

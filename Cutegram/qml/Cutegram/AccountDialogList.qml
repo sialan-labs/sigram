@@ -133,7 +133,20 @@ Item {
             property bool selected: currentDialog==dItem
             property real itemOpacities: minimum? 0 : 1
 
+            property bool disableBadges: (telegramObject.userData.notify(isChat? chat.id : user.id) & UserData.DisableBadges)
+
             onSelectedChanged: if(selected) dlist.currentIndex = index
+
+            Connections {
+                target: telegramObject.userData
+                onNotifyChanged: {
+                    if(isChat && id == chat.id)
+                        disableBadges = value
+                    else
+                    if(!isChat && id == user.id)
+                        disableBadges = value
+                }
+            }
 
             Behavior on itemOpacities {
                 NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -254,7 +267,7 @@ Item {
 
                 UnreadItem {
                     unread: dItem.unreadCount
-                    visible: unread != 0 && !selected
+                    visible: unread != 0 && !selected && !disableBadges
                 }
             }
 
@@ -319,12 +332,14 @@ Item {
                                     telegramObject.messagesDeleteHistory(dItem.peer.userId)
                                 break;
                             case 2:
+                                var withoutOnline = (notifyValue-notifyOnline)
                                 notifyOnline = notifyOnline? 0 : UserData.NotifyOnline
-                                telegramObject.userData.setNotify(dItem.peer.userId, notifyOnline|notifyTyping)
+                                telegramObject.userData.setNotify(dItem.peer.userId, notifyOnline|withoutOnline)
                                 break;
                             case 3:
+                                var withoutTyping = (notifyValue-notifyTyping)
                                 notifyTyping = notifyTyping? 0 : UserData.NotifyTyping
-                                telegramObject.userData.setNotify(dItem.peer.userId, notifyOnline|notifyTyping)
+                                telegramObject.userData.setNotify(dItem.peer.userId, notifyTyping|withoutTyping)
                                 break;
                             }
                         }

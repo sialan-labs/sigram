@@ -57,19 +57,17 @@ Item {
                     break
 
                 case typeMessageActionChatAddUser:
-                {
                     userName = user.firstName + " " + user.lastName
                     userName = userName.trim()
 
                     res = qsTr("%1 added %2 to group").arg(fromUserName).arg(userName)
-                }
                     break
 
                 case typeMessageActionChatDeleteUser:
                     userName = user.firstName + " " + user.lastName
                     userName = userName.trim()
 
-                    if(fromUserName == userName)
+                    if(user.id == fromUser.id)
                         res = qsTr("%1 left the group").arg(userName)
                     else
                         res = qsTr("%1 kicked %2").arg(fromUserName).arg(userName)

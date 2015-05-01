@@ -460,6 +460,9 @@ QString AsemanDevices::documentsLocation()
 
 QString AsemanDevices::resourcePath()
 {
+#ifdef Q_OS_ANDROID
+    return "assets:";
+#else
 #ifndef Q_OS_MAC
     QString result = QCoreApplication::applicationDirPath() + "/../share/" + QCoreApplication::applicationName().toLower();
     QFileInfo file(result);
@@ -469,6 +472,16 @@ QString AsemanDevices::resourcePath()
         return QCoreApplication::applicationDirPath() + "/";
 #else
     return QCoreApplication::applicationDirPath() + "/../Resources/";
+#endif
+#endif
+}
+
+QString AsemanDevices::resourcePathQml()
+{
+#ifdef Q_OS_ANDROID
+    return resourcePath();
+#else
+    return localFilesPrePath() + resourcePath();
 #endif
 }
 

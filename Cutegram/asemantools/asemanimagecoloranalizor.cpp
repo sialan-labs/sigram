@@ -20,6 +20,7 @@
 #define IMAGE_WIDTH 400
 
 #include "asemanimagecoloranalizor.h"
+#include "asemandevices.h"
 
 #include <QThread>
 #include <QCoreApplication>
@@ -218,8 +219,12 @@ AsemanImageColorAnalizorCore::AsemanImageColorAnalizorCore(QObject *parent) :
     p = new AsemanImageColorAnalizorCorePrivate;
 }
 
-void AsemanImageColorAnalizorCore::analize(int method, const QString &path)
+void AsemanImageColorAnalizorCore::analize(int method, const QString &pt)
 {
+    QString path = pt;
+    if(path.left(AsemanDevices::localFilesPrePath().size()) == AsemanDevices::localFilesPrePath())
+        path = path.mid(AsemanDevices::localFilesPrePath().size());
+
     QImageReader image(path);
 
     QSize image_size = image.size();
@@ -273,7 +278,7 @@ void AsemanImageColorAnalizorCore::analize(int method, const QString &path)
             for( int j=0 ; j<image_size.height(); j++ )
             {
                 QColor clr = img.pixel(i,j);
-                if( clr.saturation() < 150 || clr.lightness() < 100 )
+                if( clr.saturation() < 150 || clr.lightness() < 50 )
                     continue;
 
                 sum_r += clr.red();

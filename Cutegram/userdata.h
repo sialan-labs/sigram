@@ -42,6 +42,8 @@ public:
         NotifyDisabled = 0,
         NotifyOnline = 1,
         NotifyTyping = 2,
+
+        DisableBadges = 4
     };
 
     UserData(QObject *parent = 0);

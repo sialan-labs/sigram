@@ -15,7 +15,7 @@ Item {
     property variant dId: isChat? currentDialog.peer.chatId : currentDialog.peer.userId
 
     property bool signalBlocker: false
-    property real frameMargins: 8*Devices.density
+    property real frameMargins: 20*Devices.density
 
     property bool particianMode: false
 
@@ -38,6 +38,7 @@ Item {
         favorite_check.checked = telegramObject.userData.isFavorited(dId)
         mute_check.checked = telegramObject.userData.isMuted(dId)
         love_check.checked = (telegramObject.userData.value("love")==dId)
+        badge_check.checked = !(telegramObject.userData.notify(dId) & UserData.DisableBadges)
         signalBlocker = false
     }
 
@@ -177,6 +178,14 @@ Item {
             }
 
             Text {
+                id: badge_lbl
+                font.family: AsemanApp.globalFont.family
+                font.pixelSize: Math.floor(11*Devices.fontDensity)
+                color: Desktop.titleBarTextColor
+                text: qsTr("Show Badges")
+            }
+
+            Text {
                 id: participants_lbl
                 font.family: AsemanApp.globalFont.family
                 font.pixelSize: Math.floor(11*Devices.fontDensity)
@@ -251,6 +260,27 @@ Item {
                             telegramObject.userData.addMute(dId)
                         else
                             telegramObject.userData.removeMute(dId)
+                    }
+                }
+            }
+
+            Item {
+                height: badge_lbl.height
+                width: badge_check.width
+
+                Switch {
+                    id: badge_check
+                    anchors.verticalCenter: parent.verticalCenter
+                    onCheckedChanged: {
+                        if( signalBlocker )
+                            return
+
+                        var attrValue = telegramObject.userData.notify(dId)
+                        var badgesState = attrValue & UserData.DisableBadges
+                        var otherState = attrValue - badgesState
+
+                        badgesState = checked? 0 : UserData.DisableBadges
+                        telegramObject.userData.setNotify(dId, badgesState|otherState)
                     }
                 }
             }

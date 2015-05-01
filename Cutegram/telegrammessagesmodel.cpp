@@ -33,6 +33,7 @@ public:
     TelegramQml *telegram;
     bool initializing;
     bool refreshing;
+    bool refreshing_cache;
     int maxId;
 
     QList<qint64> messages;
@@ -52,6 +53,7 @@ TelegramMessagesModel::TelegramMessagesModel(QObject *parent) :
     p->telegram = 0;
     p->initializing = false;
     p->refreshing = false;
+    p->refreshing_cache = false;
     p->load_count = 0;
     p->load_limit = 0;
     p->refresh_timer = 0;
@@ -388,7 +390,7 @@ void TelegramMessagesModel::messagesChanged_priv()
         if( p->messages.contains(msgId) )
             continue;
 
-        if(!p->refreshing && i<p->unreadCount)
+        if(!p->refreshing_cache && !p->refreshing && i<p->unreadCount)
             p->unreadCount++;
 
         beginInsertRows(QModelIndex(), i, i );
@@ -400,6 +402,8 @@ void TelegramMessagesModel::messagesChanged_priv()
 
     p->load_count = p->messages.count();
     emit countChanged();
+
+    p->refreshing_cache = p->refreshing;
 }
 
 void TelegramMessagesModel::timerEvent(QTimerEvent *e)

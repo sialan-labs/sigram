@@ -3119,7 +3119,13 @@ void TelegramQml::refreshUnreadCount()
 {
     int unreadCount = 0;
     foreach( DialogObject *obj, p->dialogs )
+    {
+        int dId = obj->peer()->chatId()? obj->peer()->chatId() : obj->peer()->userId();
+        if(p->userdata && (p->userdata->notify(dId) & UserData::DisableBadges) )
+            continue;
+
         unreadCount += obj->unreadCount();
+    }
 
     if( p->unreadCount == unreadCount )
         return;

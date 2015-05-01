@@ -37,23 +37,36 @@ Item {
     property real headerColorDomain: 10*Devices.density
     property real headerColorHeight: 50*Devices.density
 
-    property real contentY: listv.contentY
+    property alias verticalVelocity: listv.verticalVelocity
+    property alias horizontalVelocity: listv.horizontalVelocity
+
+    property alias contentY: listv.contentY
+    property alias originY: listv.originY
 
     property alias model: listv.model
+    property alias footer: listv.footer
+
     property alias count: listv.count
     property alias atBegin: listv.atYBeginning
     property alias atEnd: listv.atYEnd
 
+    property alias listScale: listv.scale
+    property alias listTransformOrigin: listv.transformOrigin
+
     property Component delegate
     property Component header
+    property Component customHeader
+
+    onCustomHeaderChanged: custom_titlebar_frame.item = customHeader.createObject(custom_titlebar_frame)
 
     ListView {
         id: listv
-        anchors.top: titlebar.bottom
+        anchors.top: custom_titlebar_frame.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         maximumFlickVelocity: View.flickVelocity
+        clip: true
 
         property color color0
         property color color1
@@ -108,16 +121,16 @@ Item {
 
             titlebar.color = Qt.rgba(red, grn, blu, 1)
 
-            var title_new_y = titlebar.height + item.y-contentY
+            var title_new_y = titlebar.height + custom_titlebar_frame.height + item.y-contentY
             var title_new_opacity = (title_new_y-headerColorHeight)/header_extra_area
 
             var title_new_txt = crntItem.title
-            if( title_new_y < titlebar.height - title_txt_frame.height ) {
-                title_new_y = titlebar.height - title_txt_frame.height
+            if( title_new_y < titlebar.height + custom_titlebar_frame.height - title_txt_frame.height ) {
+                title_new_y = titlebar.height + custom_titlebar_frame.height - title_txt_frame.height
             }
             else
             if( title_new_y > headerColorHeight ) {
-                title_new_y = titlebar.height - title_txt_frame.height
+                title_new_y = titlebar.height + custom_titlebar_frame.height - title_txt_frame.height
                 if( prevItem )
                     title_new_txt = prevItem.title
                 else
@@ -210,7 +223,7 @@ Item {
         Item {
             id: title_txt_frame
             height: headersHeight
-            y: titlebar.height
+            y: titlebar.height + custom_titlebar_frame.height
 
             Text {
                 id: title_txt
@@ -218,6 +231,21 @@ Item {
                 color: titleBarDefaultTextColor
                 font.family: AsemanApp.globalFont.family
             }
+        }
+    }
+
+    Item {
+        id: custom_titlebar_frame
+        anchors.top: titlebar.bottom
+        width: listv.width
+        height: item? item.height : 0
+
+        property variant item
+        property variant itemTmp
+        onItemChanged: {
+            if(itemTmp)
+                itemTmp.destroy()
+            itemTmp = item
         }
     }
 

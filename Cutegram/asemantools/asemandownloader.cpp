@@ -171,15 +171,15 @@ void AsemanDownloader::sslErrors(const QList<QSslError> &list)
 
 void AsemanDownloader::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
-    if( p->recieved_bytes != bytesReceived )
-    {
-        p->recieved_bytes = bytesReceived;
-        emit recievedBytesChanged();
-    }
     if( p->total_bytes != bytesTotal )
     {
         p->total_bytes = bytesTotal;
         emit totalBytesChanged();
+    }
+    if( p->recieved_bytes != bytesReceived )
+    {
+        p->recieved_bytes = bytesReceived;
+        emit recievedBytesChanged();
     }
 }
 
