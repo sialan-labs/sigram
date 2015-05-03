@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Home Page</source>
-        <translation>主页</translation>
+        <translation>主页</translation>卡
     </message>
 </context>
 <context>
@@ -144,7 +144,7 @@
     </message>
     <message>
         <source>Forward</source>
-        <translation>前进</translation>
+        <translation>转发</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -589,11 +589,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>&lt;&lt;&lt; 拖动到对话框列表后前进</translation>
+        <translation>&lt;&lt;&lt; 拖动到对话框列表后转发</translation>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation>拖动后前进</translation>
+        <translation>拖动后转发</translation>
     </message>
     <message>
         <source>Drop to send as Document</source>
@@ -647,7 +647,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Forward</source>
-        <translation>前进</translation>
+        <translation>转发</translation>
     </message>
 </context>
 <context>
