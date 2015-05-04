@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -32,7 +30,7 @@
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation>1% participantes (%2 en línea)</translation>
+        <translation>%1 participantes (%2 en línea)</translation>
     </message>
 </context>
 <context>
@@ -55,11 +53,11 @@
     </message>
     <message>
         <source>Delete History</source>
-        <translation>Eliminar historial</translation>
+        <translation>Borrar historial</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation>¿Está seguro acerca de eliminar historial?</translation>
+        <translation>¿Está seguro acerca de borrar historial?</translation>
     </message>
     <message>
         <source>Open in New Window</source>
@@ -67,11 +65,11 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificarme cuando</translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"></translation>
+        <translation>Se ponga en línea</translation>
     </message>
 </context>
 <context>
@@ -82,7 +80,7 @@
     </message>
     <message>
         <source>Mute</source>
-        <translation>Silenciar</translation>
+        <translation>Silencio</translation>
     </message>
     <message>
         <source>Message!</source>
@@ -94,15 +92,15 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 está en línea</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 comenzó a escribir en &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 comenzó a escribir</translation>
     </message>
 </context>
 <context>
@@ -135,16 +133,12 @@
         <translation>%1 eliminó foto del grupo</translation>
     </message>
     <message>
-        <source>%1 invited to group</source>
-        <translation type="vanished">%1 invitó al grupo</translation>
-    </message>
-    <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 añadió a %2 al grupo</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 hechó a %2</translation>
     </message>
 </context>
 <context>
@@ -155,15 +149,15 @@
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation type="unfinished"></translation>
+        <translation>No Cargar Más</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar Siempre</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar Enlace</translation>
     </message>
 </context>
 <context>
@@ -198,16 +192,17 @@
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar en la Web</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensajes Nuevos</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chat Secreto rechazado. O aceptado desde otro dispositivo.
+Notar que android acepta chat secretos automáticamente.</translation>
     </message>
 </context>
 <context>
@@ -259,9 +254,9 @@ Note that android accept secret chat automatically.</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation>Es un noticiero de Cutegram sobre nuevos lanzamientos y soluciones.
+        <translation>Esto es un boletín de Cutegram sobre nuevos lanzamientos y soluciones.
 No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
@@ -270,7 +265,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>Grabador de Audio</translation>
     </message>
 </context>
 <context>
@@ -343,11 +338,11 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir Contacto Nuevo</translation>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir Contacto</translation>
     </message>
 </context>
 <context>
@@ -361,27 +356,27 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rellene este formulario para añadir contacto nuevo.</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished">Apellido</translation>
+        <translation>Apellido</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation type="unfinished">Número de Teléfono</translation>
+        <translation>Número de Teléfono</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -575,7 +570,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Tipo de Letra</translation>
+        <translation>Tipo de letra</translation>
     </message>
     <message>
         <source>Select</source>
@@ -583,7 +578,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Seleccionar Tipo de Letra</translation>
+        <translation>Seleccionar Tipo de letra</translation>
     </message>
     <message>
         <source>Auto Start</source>
@@ -591,7 +586,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation>Configuración del Proxy</translation>
+        <translation>Ajustes del Proxy</translation>
     </message>
     <message>
         <source>About Cutegram</source>
@@ -611,15 +606,15 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor de Búsqueda</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color Maestro</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color del Sistema</translation>
     </message>
 </context>
 <context>
@@ -695,7 +690,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>&lt;&lt;&lt; Soltar a la lista de diálogos para reenviar</translation>
+        <translation>&lt;&lt;&lt; Soltar en la lista de diálogos para reenviar</translation>
     </message>
     <message>
         <source>Drop to forward</source>
@@ -723,7 +718,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation>Por favor ingrese el nombre del nuevo grupo</translation>
+        <translation>Por favor, ingrese el nombre del nuevo grupo</translation>
     </message>
 </context>
 <context>
@@ -734,14 +729,14 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>All Emoji</source>
-        <translation>Todo Emoji</translation>
+        <translation>Todos los Emojis</translation>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>Por favor seleccione un contacto...</translation>
+        <translation>Por favor, seleccione un contacto...</translation>
     </message>
     <message>
         <source>To</source>
@@ -764,7 +759,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation>Por favor ingrese la contraseña</translation>
+        <translation>Por favor, ingrese la contraseña</translation>
     </message>
     <message>
         <source>password</source>
@@ -797,7 +792,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation>Configuración del Proxy</translation>
+        <translation>Ajustes del Proxy</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
@@ -809,7 +804,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation>Nombre de Host</translation>
+        <translation>Nombre de equipo</translation>
     </message>
     <message>
         <source>Port</source>
@@ -840,23 +835,23 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Enviar</translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Detener</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Grabar</translation>
     </message>
 </context>
 <context>
@@ -889,7 +884,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Silenciar</translation>
+        <translation>Silencio</translation>
     </message>
     <message>
         <source>Participants</source>
@@ -917,7 +912,7 @@ No es un contacto de telegram. Es sólo un contacto virtual.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Insignias</translation>
     </message>
 </context>
 </TS>

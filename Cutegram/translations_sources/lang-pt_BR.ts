@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -67,11 +65,11 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificar quando</translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficar online</translation>
     </message>
 </context>
 <context>
@@ -94,15 +92,15 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 está online</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 começou a escrever às &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 começou a escrever</translation>
     </message>
 </context>
 <context>
@@ -135,16 +133,12 @@
         <translation>%1 removeu a foto do grupo</translation>
     </message>
     <message>
-        <source>%1 invited to group</source>
-        <translation type="vanished">%1 convidado para o grupo</translation>
-    </message>
-    <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 adicionou %2 ao grupo</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 removeu %2</translation>
     </message>
 </context>
 <context>
@@ -155,15 +149,15 @@
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation type="unfinished"></translation>
+        <translation>Não Carregar Mais</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation type="unfinished"></translation>
+        <translation>Carregar Sempre</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation type="unfinished"></translation>
+        <translation>Link para Carregar</translation>
     </message>
 </context>
 <context>
@@ -198,16 +192,17 @@
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar na Web</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Novas Mensagens</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chat secreto rejeitado. Ou aceito por um outro dispositivo.
+Note que o Android aceita o chat secreto automaticamente.</translation>
     </message>
 </context>
 <context>
@@ -259,7 +254,7 @@ Note that android accept secret chat automatically.</source>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>São as novidades do Cutegram, lançamentos e soluções.
 Não é o contato do Telegram, somente um contato virtual.</translation>
@@ -270,7 +265,7 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravador de Áudio</translation>
     </message>
 </context>
 <context>
@@ -343,11 +338,11 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar Novo Contato</translation>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar Contato</translation>
     </message>
 </context>
 <context>
@@ -361,27 +356,27 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation type="unfinished"></translation>
+        <translation>Preencha o formulário para adicionar novo contato.</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished">Sobrenome</translation>
+        <translation>Sobrenome</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation type="unfinished">Número de Telefone</translation>
+        <translation>Número de Telefone</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -603,23 +598,23 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Minimum List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista Mínima</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscador</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor Principal</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do Sistema</translation>
     </message>
 </context>
 <context>
@@ -840,23 +835,23 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Enviar</translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Parar</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar</translation>
     </message>
 </context>
 <context>
@@ -917,7 +912,7 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Contador</translation>
     </message>
 </context>
 </TS>

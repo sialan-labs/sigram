@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -67,11 +65,11 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigen wenn</translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakt online geht</translation>
     </message>
 </context>
 <context>
@@ -94,15 +92,15 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist online</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 beginnt in &quot;%2&quot; zu schreiben</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 beginnt zu schreiben</translation>
     </message>
 </context>
 <context>
@@ -135,16 +133,12 @@
         <translation>%1 hat das Gruppenbild gelöscht</translation>
     </message>
     <message>
-        <source>%1 invited to group</source>
-        <translation type="vanished">%1 zur Gruppe eingeladen</translation>
-    </message>
-    <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -155,15 +149,15 @@
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Load Always</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Load Link</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -198,16 +192,16 @@
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"></translation>
+        <translation>Im Netz suchen</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -259,7 +253,7 @@ Note that android accept secret chat automatically.</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Cutegram-Nachrichten über neue Veröffentlichungen und Lösungen.
 Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
@@ -270,7 +264,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -343,11 +337,11 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -361,27 +355,27 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished">Vorname</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished">Nachname</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation type="unfinished">Telefonnummer</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -611,15 +605,15 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchmaschine</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauptfarbe</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Systemfarbe</translation>
     </message>
 </context>
 <context>
@@ -840,23 +834,23 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Senden</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -917,7 +911,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

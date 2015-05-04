@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Home Page</source>
-        <translation>主页</translation>卡
+        <translation>主页</translation>
     </message>
 </context>
 <context>

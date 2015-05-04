@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ast">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -67,11 +65,11 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificar cuando</translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -94,15 +92,15 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ta en llinia</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -135,16 +133,12 @@
         <translation>%1 desanició la semeya del grupu</translation>
     </message>
     <message>
-        <source>%1 invited to group</source>
-        <translation type="vanished">Convidóse a %1 al grupu</translation>
-    </message>
-    <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 amestó a %2 al grupu</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 espulsó a %2</translation>
     </message>
 </context>
 <context>
@@ -155,15 +149,15 @@
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation type="unfinished"></translation>
+        <translation>Nun cargar</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar siempres</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar enllaz</translation>
     </message>
 </context>
 <context>
@@ -198,16 +192,17 @@
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"></translation>
+        <translation>Guetar na web</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaxes nuevos</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Charra secreta refugada o aceutada dende otru preśeu.
+Decátate qu&apos;Android aceuta les charres secretes automáticamente.</translation>
     </message>
 </context>
 <context>
@@ -259,7 +254,7 @@ Note that android accept secret chat automatically.</source>
         <translation>Desaniciar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Cutegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
@@ -270,7 +265,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>Grabador d&apos;audiu</translation>
     </message>
 </context>
 <context>
@@ -343,11 +338,11 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Amestar contautu nuevu</translation>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Amestar contautu</translation>
     </message>
 </context>
 <context>
@@ -361,27 +356,27 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished">Apellíos</translation>
+        <translation>Apellíos</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation type="unfinished">Númberu teléfonu</translation>
+        <translation>Númberu teléfonu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Encaboxar</translation>
+        <translation>Encaboxar</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Aceutar</translation>
     </message>
 </context>
 <context>
@@ -611,15 +606,15 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Motor de gueta</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color maestra</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color del sistema</translation>
     </message>
 </context>
 <context>
@@ -840,23 +835,23 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Unviar</translation>
+        <translation>Unviar</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Encaboxar</translation>
+        <translation>Encaboxar</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallu</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Parar</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Grabar</translation>
     </message>
 </context>
 <context>
@@ -917,7 +912,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
