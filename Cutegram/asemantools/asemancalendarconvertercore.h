@@ -22,6 +22,7 @@
 #include <QString>
 #include <QDate>
 #include <QDateTime>
+#include <QObject>
 
 class DateProperty
 {
@@ -85,6 +86,13 @@ private:
 
 private:
     AsemanCalendarConverterCorePrivate *p;
+};
+
+class JalaliCalendarObject : public QObject
+{
+    Q_OBJECT
+public:
+    JalaliCalendarObject(QObject *parent = 0): QObject(parent){}
 };
 
 #endif // ASEMANCALENDARCONVERTERCORE_H

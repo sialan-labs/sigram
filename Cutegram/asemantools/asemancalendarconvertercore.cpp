@@ -411,40 +411,40 @@ QString AsemanCalendarConverterCore::monthNamesJalali(int m)
     switch( m )
     {
     case 1:
-        return "Farvardin";
+        return JalaliCalendarObject::tr("Farvardin");
         break;
     case 2:
-        return "Ordibehesht";
+        return JalaliCalendarObject::tr("Ordibehesht");
         break;
     case 3:
-        return "Khordad";
+        return JalaliCalendarObject::tr("Khordad");
         break;
     case 4:
-        return "Tir";
+        return JalaliCalendarObject::tr("Tir");
         break;
     case 5:
-        return "Mordad";
+        return JalaliCalendarObject::tr("Mordad");
         break;
     case 6:
-        return "Shahrivar";
+        return JalaliCalendarObject::tr("Shahrivar");
         break;
     case 7:
-        return "Mehr";
+        return JalaliCalendarObject::tr("Mehr");
         break;
     case 8:
-        return "Abaan";
+        return JalaliCalendarObject::tr("Abaan");
         break;
     case 9:
-        return "Aazar";
+        return JalaliCalendarObject::tr("Aazar");
         break;
     case 10:
-        return "Dey";
+        return JalaliCalendarObject::tr("Dey");
         break;
     case 11:
-        return "Bahman";
+        return JalaliCalendarObject::tr("Bahman");
         break;
     case 12:
-        return "Esfand";
+        return JalaliCalendarObject::tr("Esfand");
         break;
     }
 
@@ -456,25 +456,25 @@ QString AsemanCalendarConverterCore::dayNameJalali(int d)
     switch( d )
     {
     case 1:
-        return "Shanbe";
+        return JalaliCalendarObject::tr("Shanbe");
         break;
     case 2:
-        return "1Shanbe";
+        return JalaliCalendarObject::tr("1Shanbe");
         break;
     case 3:
-        return "2Shanbe";
+        return JalaliCalendarObject::tr("2Shanbe");
         break;
     case 4:
-        return "3Shanbe";
+        return JalaliCalendarObject::tr("3Shanbe");
         break;
     case 5:
-        return "4Shanbe";
+        return JalaliCalendarObject::tr("4Shanbe");
         break;
     case 6:
-        return "5Shanbe";
+        return JalaliCalendarObject::tr("5Shanbe");
         break;
     case 7:
-        return "Jome";
+        return JalaliCalendarObject::tr("Jome");
         break;
     }
 
