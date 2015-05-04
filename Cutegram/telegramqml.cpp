@@ -1446,10 +1446,14 @@ void TelegramQml::try_init()
     if( p->phoneNumber.isEmpty() || p->publicKeyFile.isEmpty() || p->configPath.isEmpty() )
         return;
 
-    p->telegram = new Telegram(p->phoneNumber, p->configPath, p->publicKeyFile);
+    QString pKeyFile = p->publicKeyFile;
+    if(pKeyFile.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath())
+        pKeyFile = pKeyFile.mid(AsemanDevices::localFilesPrePath().length());
+
+    p->telegram = new Telegram(p->phoneNumber, p->configPath, pKeyFile);
 
     p->tsettings = Settings::getInstance();
-    p->tsettings->loadSettings(p->phoneNumber, p->configPath, p->publicKeyFile);
+    p->tsettings->loadSettings(p->phoneNumber, p->configPath, pKeyFile);
 
     connect( p->telegram, SIGNAL(authNeeded())                          , SLOT(authNeeded_slt())                           );
     connect( p->telegram, SIGNAL(authLoggedIn())                        , SLOT(authLoggedIn_slt())                         );

@@ -14,20 +14,20 @@ linux {
 
 TEMPLATE = app
 TARGET = cutegram
-QT += qml quick sql xml
+QT += qml quick sql xml multimedia webkitwidgets webkit
 
 linux: QT += dbus
 win32 {
-    LIBS += -L$$OUT_PWD/$$DESTDIR -lssleay32 -lcrypto -lz -lqtelegram
-    INCLUDEPATH += $$OUT_PWD/$$DESTDIR/include $$OUT_PWD/$$DESTDIR/include/libqtelegram
+    LIBS += -L$$OUT_PWD/$$DESTDIR -lssleay32 -lcrypto -lz -lqtelegram-ae
+    INCLUDEPATH += $$OUT_PWD/$$DESTDIR/include $$OUT_PWD/$$DESTDIR/include/libqtelegram-ae
 } else {
 macx {
     QT += macextras
-    LIBS += -lssl -lcrypto -lz -lqtelegram
-    INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
+    LIBS += -lssl -lcrypto -lz -lqtelegram-ae
+    INCLUDEPATH += /usr/include/libqtelegram-ae $$OUT_PWD/$$DESTDIR/include/libqtelegram-ae
 } else {
-    LIBS += -lssl -lcrypto -lz -lqtelegram
-    INCLUDEPATH += /usr/include/libqtelegram $$OUT_PWD/$$DESTDIR/include/libqtelegram
+    LIBS += -lssl -lcrypto -lz -lqtelegram-ae
+    INCLUDEPATH += /usr/include/libqtelegram-ae $$OUT_PWD/$$DESTDIR/include/libqtelegram-ae
 }
 }
 
@@ -52,7 +52,11 @@ SOURCES += main.cpp \
     cutegramdialog.cpp \
     telegramsearchmodel.cpp \
     dialogfilesmodel.cpp \
-    cutegramenums.cpp
+    cutegramenums.cpp \
+    tagfiltermodel.cpp \
+    usernamefiltermodel.cpp \
+    mp3converterengine.cpp \
+    textemojiwrapper.cpp
 
 RESOURCES += resource.qrc
 
@@ -84,7 +88,11 @@ HEADERS += \
     telegramsearchmodel.h \
     dialogfilesmodel.h \
     cutegramenums.h \
-    themeitem.h
+    themeitem.h \
+    tagfiltermodel.h \
+    usernamefiltermodel.h \
+    mp3converterengine.h \
+    textemojiwrapper.h
 
 OTHER_FILES += \
     objects/types.sco \
