@@ -12,6 +12,7 @@ class AsemanWebPageGrabber : public AsemanQuickObject
     Q_PROPERTY(QString destination READ destination WRITE setDestination NOTIFY destinationChanged)
     Q_PROPERTY(int timeOut READ timeOut WRITE setTimeOut NOTIFY timeOutChanged)
     Q_PROPERTY(bool running READ running NOTIFY runningChanged)
+    Q_PROPERTY(bool isAvailable READ isAvailable NOTIFY isAvailableChanged)
 
 public:
     AsemanWebPageGrabber(QObject *parent = 0);
@@ -27,6 +28,7 @@ public:
     int timeOut() const;
 
     bool running() const;
+    bool isAvailable() const;
 
 public slots:
     void start(bool force = false);
@@ -40,6 +42,7 @@ signals:
     void destinationChanged();
     void timeOutChanged();
     void runningChanged();
+    void isAvailableChanged();
 
 private slots:
     void completed(bool stt = true);

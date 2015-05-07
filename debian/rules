@@ -8,7 +8,7 @@
 	dh $@ 
 
 override_dh_auto_configure:
-	dh_auto_configure -- PREFIX=/usr EXTENSIONS+=unity
+	dh_auto_configure -- PREFIX=/usr EXTENSIONS+=unity DEFINES+=DISABLE_ASEMAN_WEBGRABBER
 
 override_dh_install:
 	dh_install

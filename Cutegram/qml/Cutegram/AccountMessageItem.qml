@@ -394,7 +394,7 @@ Item {
             normalColor: "#cccccc"
             highlightColor: "#bbbbbb"
             textColor: "#555555"
-            visible: hasLink
+            visible: hasLink && webPageGrabber.isAvailable
             text: {
                 if(message_link.visible) {
                     if(allowLoadLinks)

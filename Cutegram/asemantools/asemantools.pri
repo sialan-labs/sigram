@@ -70,17 +70,9 @@ contains(QT,multimedia) {
 }
 contains(QT,webkitwidgets) {
     DEFINES += ASEMAN_WEBKIT
-    SOURCES +=  \
-        asemantools/asemanwebpagegrabber.cpp
-    HEADERS +=  \
-        asemantools/asemanwebpagegrabber.h
 }
 contains(QT,webenginewidgets) {
     DEFINES += ASEMAN_WEBENGINE
-    SOURCES +=  \
-        asemantools/asemanwebpagegrabber.cpp
-    HEADERS +=  \
-        asemantools/asemanwebpagegrabber.h
 }
 linux {
 contains(QT,dbus) {
@@ -122,7 +114,8 @@ SOURCES += \
     asemantools/asemanfilesystemmodel.cpp \
     asemantools/asemandebugobjectcounter.cpp \
     asemantools/asemanfiledownloaderqueue.cpp \
-    asemantools/asemanfiledownloaderqueueitem.cpp
+    asemantools/asemanfiledownloaderqueueitem.cpp \
+    asemantools/asemanwebpagegrabber.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -152,7 +145,8 @@ HEADERS += \
     asemantools/asemanfilesystemmodel.h \
     asemantools/asemandebugobjectcounter.h \
     asemantools/asemanfiledownloaderqueue.h \
-    asemantools/asemanfiledownloaderqueueitem.h
+    asemantools/asemanfiledownloaderqueueitem.h \
+    asemantools/asemanwebpagegrabber.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \
