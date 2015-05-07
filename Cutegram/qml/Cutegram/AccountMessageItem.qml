@@ -298,6 +298,8 @@ Item {
                         id: message_link
                         visible: link.length != 0
                         link: {
+                            if(user.id == telegramObject.cutegramId)
+                                return ""
                             var msgLink = !messageLinks || messageLinks.length == 0? "" : messageLinks[0]
                             var checkPath = webPageGrabber.check(msgLink)
                             if(checkPath != "")
@@ -394,7 +396,7 @@ Item {
             normalColor: "#cccccc"
             highlightColor: "#bbbbbb"
             textColor: "#555555"
-            visible: hasLink && webPageGrabber.isAvailable
+            visible: hasLink && webPageGrabber.isAvailable && (user.id != telegramObject.cutegramId)
             text: {
                 if(message_link.visible) {
                     if(allowLoadLinks)

@@ -403,6 +403,9 @@ void TelegramMessagesModel::messagesChanged_priv()
     p->load_count = p->messages.count();
     emit countChanged();
 
+    if(p->refreshing_cache && !p->refreshing)
+        emit focusToNewRequest(p->unreadCount);
+
     p->refreshing_cache = p->refreshing;
 }
 

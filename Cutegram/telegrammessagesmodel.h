@@ -89,6 +89,7 @@ signals:
     void maxIdChanged();
     void messageAdded(qint64 msgId);
     void hasNewMessageChanged();
+    void focusToNewRequest(int unreads);
 
 private slots:
     void messagesChanged(bool cachedData);

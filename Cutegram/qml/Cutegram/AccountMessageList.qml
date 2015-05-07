@@ -61,11 +61,11 @@ Rectangle {
                     focus_msg_timer.restart()
             }
         }
-        onHasNewMessageChanged: {
-            if(!hasNewMessageChanged)
+        onFocusToNewRequest: {
+            if(!hasNewMessage)
                 return
 
-            focus_msg_timer.msgIndex = dialog.unreadCount>0? dialog.unreadCount-1 : 0
+            focus_msg_timer.msgIndex = unreads>0? unreads-1 : 0
             focus_msg_timer.restart()
         }
     }
