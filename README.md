@@ -26,7 +26,7 @@ For other distributions search for the corresponding packages.
 
 First, you should build and install libqtelegram.
 
-    git clone git@github.com:Aseman-Land/libqtelegram-aseman-edition.git
+    git clone https://github.com/Aseman-Land/libqtelegram-aseman-edition.git
     
 And:
 
