@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS language="ru" version="2.1">
+<TS version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>Home Page</source>
-        <translation type="Домашня страница"></translation>
+        <translation type="Домашняя страница"></translation>
     </message>
 </context>
 <context>
@@ -392,7 +392,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Home Page</source>
-        <translation type="Домашня страница"></translation>
+        <translation type="Домашняя страница"></translation>
     </message>
 </context>
 <context>
@@ -749,7 +749,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="Вперед"></translation>
+        <translation type="Отправить"></translation>
     </message>
 </context>
 <context>
@@ -760,7 +760,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation type="Пожалуйста введите пароль"></translation>
+        <translation type="Пожалуйста, введите пароль"></translation>
     </message>
     <message>
         <source>password</source>
