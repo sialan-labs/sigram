@@ -14,10 +14,8 @@
 #else
 #define NULL_WEBVIEW_ENGINE
 #ifdef ASEMAN_WEBENGINE
-#include <QWebEngineFrame>
 #include <QWebEngineView>
 #include <QWebEngineSettings>
-#define WEBFRAME_CLASS QWebEngineFrame
 #define WEBVIEW_CLASS QWebEngineView
 #define WEBSETTINGS_CLASS QWebEngineSettings
 #else
@@ -246,6 +244,8 @@ void AsemanWebPageGrabber::createWebView()
 
     p->viewer = new WEBVIEW_CLASS();
     p->viewer->resize(800, 800);
+
+#ifdef ASEMAN_WEBKIT
     p->viewer->page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
     p->viewer->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
 //    p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::JavascriptEnabled, false);
@@ -264,6 +264,11 @@ void AsemanWebPageGrabber::createWebView()
     p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::NotificationsEnabled, false);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
     p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::Accelerated2dCanvasEnabled, false);
+#endif
+#endif
+
+#ifdef ASEMAN_WEBENGINE
+    p->viewer->show();
 #endif
 
     connect(p->viewer, SIGNAL(loadProgress(int)), SLOT(loadProgress(int)));
