@@ -7,6 +7,7 @@
 #include <QDir>
 #include <QImageWriter>
 #include <QPointer>
+#include <QCoreApplication>
 #include <QDebug>
 
 #ifdef DISABLE_ASEMAN_WEBGRABBER
@@ -248,7 +249,6 @@ void AsemanWebPageGrabber::createWebView()
 #ifdef ASEMAN_WEBKIT
     p->viewer->page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
     p->viewer->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
-//    p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::JavascriptEnabled, false);
     p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::JavaEnabled, false);
     p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::PluginsEnabled, false);
     p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::PrivateBrowsingEnabled, true);
@@ -265,6 +265,12 @@ void AsemanWebPageGrabber::createWebView()
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
     p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::Accelerated2dCanvasEnabled, false);
 #endif
+#else
+    p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::LinksIncludedInFocusChain, false);
+    p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::JavascriptCanOpenWindows, false);
+    p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::JavascriptCanAccessClipboard, false);
+    p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::LocalStorageEnabled, false);
+    p->viewer->settings()->setAttribute(WEBSETTINGS_CLASS::LocalContentCanAccessFileUrls, false);
 #endif
 
 #ifdef ASEMAN_WEBENGINE

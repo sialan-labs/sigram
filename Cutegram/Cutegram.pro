@@ -14,7 +14,16 @@ linux {
 
 TEMPLATE = app
 TARGET = cutegram
-QT += qml quick sql xml multimedia webkitwidgets webkit
+QT += qml quick sql xml multimedia
+
+contains(DEFINES, WEBENGINE_ASEMAN_WEBGRABBER) {
+    QT += webenginewidgets webengine
+} else {
+contains(DEFINES, DISABLE_ASEMAN_WEBGRABBER) {
+} else {
+    QT += webkitwidgets webkit
+}
+}
 
 linux: QT += dbus
 win32 {
