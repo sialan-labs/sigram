@@ -188,7 +188,7 @@ AsemanImageColorAnalizorCore *AsemanImageColorAnalizorThread::getCore()
 
     connect( core, SIGNAL(found(AsemanImageColorAnalizorCore*,int,QString,QColor)), SLOT(found_slt(AsemanImageColorAnalizorCore*,int,QString,QColor)), Qt::QueuedConnection );
 
-    thread->start();
+    thread->start(QThread::LowestPriority);
     p->cores.insert(core);
 
     return core;

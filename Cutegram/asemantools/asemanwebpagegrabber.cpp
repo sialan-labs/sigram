@@ -12,9 +12,6 @@
 #ifdef DISABLE_ASEMAN_WEBGRABBER
 #define NULL_ASEMAN_WEBGRABBER
 #else
-#if (QT_VERSION < QT_VERSION_CHECK(5, 4, 0)) && defined(ASEMAN_MULTIMEDIA)
-#define NULL_ASEMAN_WEBGRABBER
-#else
 #define NULL_WEBVIEW_ENGINE
 #ifdef ASEMAN_WEBENGINE
 #include <QWebEngineFrame>
@@ -33,7 +30,6 @@
 #define WEBSETTINGS_CLASS QWebSettings
 #else
 #define NULL_ASEMAN_WEBGRABBER
-#endif
 #endif
 #endif
 #endif

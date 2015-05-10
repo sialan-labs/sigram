@@ -1,3 +1,42 @@
+cutegram (2.2.0-4aseman-vivid) vivid; urgency=medium
+
+  * Fix missed gstreamer bad and ugly plugins dependencies.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 8 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-4aseman-utopic) utopic; urgency=medium
+
+  * Fix missed gstreamer bad and ugly plugins dependencies.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 8 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-4aseman-trusty) trusty; urgency=medium
+
+  * Fix missed gstreamer bad and ugly plugins dependencies.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 8 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-3aseman-vivid) vivid; urgency=medium
+
+  * Cutegram newsletter bugfix.
+  * New messages focus bugfix.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 7 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-3aseman-utopic) utopic; urgency=medium
+
+  * Cutegram newsletter bugfix.
+  * New messages focus bugfix.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 7 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-3aseman-trusty) trusty; urgency=medium
+
+  * Cutegram newsletter bugfix.
+  * New messages focus bugfix.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 7 May 2015 11:00:00 +0330
+ 
 cutegram (2.2.0-2aseman-vivid) vivid; urgency=medium
 
   * Disable web-grabber because of default ubuntu libraries bug.

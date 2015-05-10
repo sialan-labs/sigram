@@ -14,11 +14,7 @@ linux {
 
 TEMPLATE = app
 TARGET = cutegram
-QT += qml quick sql xml multimedia
-
-greaterThan(QT_MAJOR_VERSION, 4) {
-    greaterThan(QT_MINOR_VERSION, 3): QT += webkitwidgets webkit
-}
+QT += qml quick sql xml multimedia webkitwidgets webkit
 
 linux: QT += dbus
 win32 {
