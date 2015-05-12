@@ -35,6 +35,22 @@ Description: Cutegram telegram client data pack
 
 Package: cutegram
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, cutegram-data (>= ${binary:Version}), qtdeclarative5-controls-plugin (>= 5.2.0), qtdeclarative5-dialogs-plugin (>= 5.2.0), qtdeclarative5-qtquick2-plugin (>= 5.2.0), qtdeclarative5-window-plugin (>= 5.2.0), libqt5qml-graphicaleffects (>= 5.2.0), libqt5multimedia5 (>= 5.2.0), libqt5multimedia5-plugins (>= 5.2.0), libqt5multimediaquick-p5 (>= 5.2.0), libqt5sql5-sqlite (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), qtdeclarative5-qtsensors-plugin (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), dconf-tools, libav-tools, gstreamer0.10-plugins-bad, gstreamer0.10-plugins-ugly
+Depends: ${shlibs:Depends}, ${misc:Depends}, 
+  cutegram-data (>= ${binary:Version}),
+  qtdeclarative5-controls-plugin (>= 5.2.0) | qml-module-qtquick-controls,
+  qtdeclarative5-dialogs-plugin (>= 5.2.0) | qml-module-qtquick-dialogs, 
+  qtdeclarative5-qtquick2-plugin (>= 5.2.0) |  qml-module-qtquick2, 
+  qtdeclarative5-window-plugin (>= 5.2.0) | qml-module-qtquick-window2, 
+  qtdeclarative5-qtmultimedia-plugin (>= 5.2.0) | qml-module-qtmultimedia, 
+  qtdeclarative5-qtsensors-plugin (>= 5.2.0) | qml-module-qtsensors,
+  libqt5qml-graphicaleffects (>= 5.2.0) | qml-module-qtgraphicaleffects, 
+  libqt5multimedia5 (>= 5.2.0),
+  libqt5multimedia5-plugins (>= 5.2.0), 
+  libqt5multimediaquick-p5 (>= 5.2.0), 
+  libqt5sql5-sqlite (>= 5.2.0), 
+  dconf-tools, 
+  libav-tools, 
+  gstreamer0.10-plugins-bad, 
+  gstreamer0.10-plugins-ugly
 Description: Cutegram telegram client
  Better telegram client from Aseman Team.
