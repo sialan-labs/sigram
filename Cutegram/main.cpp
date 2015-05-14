@@ -2,6 +2,7 @@
 #include "asemantools/asemanquickview.h"
 
 #include "cutegram.h"
+#include "telegramtestobject.h"
 #include "compabilitytools.h"
 
 #include <QMainWindow>
@@ -20,6 +21,9 @@ int main(int argc, char *argv[])
     app.setOrganizationName("Aseman");
     app.setWindowIcon(QIcon(":/qml/Cutegram/files/icon.png"));
     app.setQuitOnLastWindowClosed(false);
+
+//    TelegramTestObject testObj;
+//    return app.exec();
 
     if(app.readSetting("Proxy/enable",false).toBool())
     {

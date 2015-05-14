@@ -1576,7 +1576,7 @@ void TelegramQml::authNeeded_slt()
     if( p->telegram && !p->checkphone_req_id )
         p->checkphone_req_id = p->telegram->authCheckPhone();
 
-    p->telegram->accountUpdateStatus(!p->online || p->invisible);
+//    p->telegram->accountUpdateStatus(!p->online || p->invisible);
 }
 
 void TelegramQml::authLoggedIn_slt()

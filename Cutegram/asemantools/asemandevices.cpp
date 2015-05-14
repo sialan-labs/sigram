@@ -333,7 +333,7 @@ qreal AsemanDevices::density() const
 qreal AsemanDevices::fontDensity() const
 {
 #ifdef Q_OS_ANDROID
-    qreal ratio = (1.28)*1.35;
+    qreal ratio = isMobile()? (1.28)*1.25 : (1.28)*1.35;
     return p->java_layer->density()*ratio;
 #else
 #ifdef Q_OS_IOS

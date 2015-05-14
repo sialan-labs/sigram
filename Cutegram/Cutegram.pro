@@ -65,7 +65,8 @@ SOURCES += main.cpp \
     tagfiltermodel.cpp \
     usernamefiltermodel.cpp \
     mp3converterengine.cpp \
-    textemojiwrapper.cpp
+    textemojiwrapper.cpp \
+    telegramtestobject.cpp
 
 RESOURCES += resource.qrc
 
@@ -101,7 +102,8 @@ HEADERS += \
     tagfiltermodel.h \
     usernamefiltermodel.h \
     mp3converterengine.h \
-    textemojiwrapper.h
+    textemojiwrapper.h \
+    telegramtestobject.h
 
 OTHER_FILES += \
     objects/types.sco \
