@@ -214,7 +214,7 @@ qreal AsemanQuickView::statusBarHeight() const
     if( !p->devices )
         return 0;
 
-    return p->devices->transparentStatusBar() && !fullscreen()? 20*p->devices->density() : 0;
+    return p->devices->transparentStatusBar() && !fullscreen()? 22*p->devices->density() : 0;
 }
 
 qreal AsemanQuickView::navigationBarHeight() const

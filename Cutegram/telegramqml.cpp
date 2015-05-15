@@ -1590,7 +1590,7 @@ void TelegramQml::authLoggedIn_slt()
     emit authPhoneChecked();
     emit meChanged();
 
-    p->telegram->accountUpdateStatus(!p->online || p->invisible);
+//    p->telegram->accountUpdateStatus(!p->online || p->invisible);
 }
 
 void TelegramQml::authLogOut_slt(qint64 id, bool ok)
