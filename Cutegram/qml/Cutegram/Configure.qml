@@ -172,6 +172,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: systray_style_text
+                            height: systray_style_combo.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Tray icon style")
+                        }
+
+                        Text {
                             id: languages_text
                             height: languages_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -299,6 +309,13 @@ Rectangle {
                             model: [ qsTr("Automatic"), qsTr("Always visible"), qsTr("Minimize to system tray") ]
                             currentIndex: Cutegram.startupOption
                             onCurrentIndexChanged: if(init_timer.inited) Cutegram.startupOption = currentIndex
+                        }
+
+                        Controls.ComboBox {
+                            id: systray_style_combo
+                            model: [ qsTr("Automatic"), qsTr("Dark"), qsTr("Light") ]
+                            currentIndex: Cutegram.statusIconStyle
+                            onCurrentIndexChanged: if(init_timer.inited) Cutegram.statusIconStyle = currentIndex
                         }
 
                         Controls.ComboBox {

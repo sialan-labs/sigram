@@ -203,10 +203,11 @@ AsemanMain {
     Component.onCompleted: {
         if(Devices.isMacX)
             menubar_component.createObject(main)
-
-        var fontsPath = AsemanApp.appPath + "/files/fonts/"
-        var fonts = Tools.filesOf(fontsPath)
-        for(var i=0; i<fonts.length; i++)
-            font_loader_component.createObject(main, {"source": Devices.localFilesPrePath + fontsPath + fonts[i]})
+        if(Devices.isWindows) {
+            var fontsPath = AsemanApp.appPath + "/files/fonts/"
+            var fonts = Tools.filesOf(fontsPath)
+            for(var i=0; i<fonts.length; i++)
+                font_loader_component.createObject(main, {"source": Devices.localFilesPrePath + fontsPath + fonts[i]})
+        }
     }
 }

@@ -17,8 +17,8 @@
 */
 
 #define UNITY_LIGHT (p->desktop->desktopSession()==AsemanDesktopTools::Unity && !p->desktop->titleBarIsDark())
-#define UNITY_ICON_PATH(NUM) "/tmp/aseman-telegram-client-trayicon" + QString::number(NUM) + (darkSystemTray()?"-dark":"-light") + ".png"
-#define SYSTRAY_ICON (darkSystemTray()?":/qml/Cutegram/files/systray-dark.png":":/qml/Cutegram/files/systray.png")
+#define UNITY_ICON_PATH(NUM) "/tmp/aseman-telegram-client-trayicon" + QString::number(NUM) + (lowLevelDarkSystemTray()?"-dark":"-light") + ".png"
+#define SYSTRAY_ICON (lowLevelDarkSystemTray()?":/qml/Cutegram/files/systray-dark.png":":/qml/Cutegram/files/systray.png")
 
 #include "cutegram.h"
 #include "asemantools/asemanquickview.h"
@@ -74,6 +74,7 @@ public:
     bool close_blocker;
     int sysTrayCounter;
     int startupOption;
+    int statusIconStyle;
     bool notification;
     bool minimumDialogs;
     bool showLastMessage;
@@ -123,11 +124,6 @@ Cutegram::Cutegram(QObject *parent) :
 #endif
 #ifdef Q_OS_WIN
     default_font.setPointSize(10);
-
-    QFont appFont;
-    appFont.setFamily("ubuntu");
-
-    QGuiApplication::setFont(appFont);
 #endif
 
     p = new CutegramPrivate;
@@ -138,6 +134,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->sysTrayCounter = 0;
     p->closingState = false;
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
+    p->statusIconStyle = AsemanApplication::settings()->value("General/statusIconStyle", static_cast<int>(StatusIconAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
@@ -745,6 +742,24 @@ bool Cutegram::cutegramSubscribe() const
     return p->cutegramSubscribe;
 }
 
+void Cutegram::setStatusIconStyle(int style)
+{
+    if(p->statusIconStyle == style)
+        return;
+
+    p->statusIconStyle = style;
+    AsemanApplication::settings()->setValue("General/statusIconStyle", style);
+
+    emit cutegramSubscribeChanged();
+
+    setSysTrayCounter(sysTrayCounter(), true);
+}
+
+int Cutegram::statusIconStyle()
+{
+    return p->statusIconStyle;
+}
+
 QStringList Cutegram::themes() const
 {
     return p->themes;
@@ -833,6 +848,26 @@ void Cutegram::init_theme()
         qDebug() << p->currentThemeComponent->errorString();
 
     emit currentThemeChanged();
+}
+
+bool Cutegram::lowLevelDarkSystemTray()
+{
+    switch(p->statusIconStyle)
+    {
+    case StatusIconAutomatic:
+        return darkSystemTray();
+        break;
+
+    case StatusIconDark:
+        return true;
+        break;
+
+    case StatusIconLight:
+        return false;
+        break;
+    }
+
+    return darkSystemTray();
 }
 
 QVariantList Cutegram::intListToVariantList(const QList<qint32> &list)
