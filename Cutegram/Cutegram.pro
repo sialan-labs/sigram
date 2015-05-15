@@ -7,9 +7,11 @@ linux {
     emojis.target = $${DESTDIR}
     translations.source = translations
     translations.target = $$DESTDIR/files
+    fonts.source = fonts
+    fonts.target = $$DESTDIR/files
     themes.source = themes
     themes.target = $${DESTDIR}
-    DEPLOYMENTFOLDERS = server emojis translations themes
+    DEPLOYMENTFOLDERS = server emojis translations themes fonts
 }
 
 TEMPLATE = app
@@ -149,6 +151,8 @@ target = $$TARGET
 target.path = $$BIN_PATH
 translations.files = $$TRANSLATIONS
 translations.path = $$SHARES_PATH/files/translations
+fontsFiles.files = fonts
+fontsFiles.path = $$SHARES_PATH/files/
 icons.files = icons
 icons.path = $$SHARES_PATH
 hicolor.files = icons
@@ -164,7 +168,7 @@ themesFiles.path = $$SHARES_PATH
 serverPub.files = tg-server.pub
 serverPub.path = $$SHARES_PATH/
 
-INSTALLS = target translations icons desktopFile emojis serverPub pixmaps hicolor themesFiles
+INSTALLS = target translations icons desktopFile emojis serverPub pixmaps hicolor themesFiles fontsFiles
 
 win32 {
     RC_FILE = extra/windows/cutegram.rc

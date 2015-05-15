@@ -115,6 +115,11 @@ QString AsemanTools::readText(const QString &path)
     return res;
 }
 
+QStringList AsemanTools::filesOf(const QString &path)
+{
+    return QDir(path).entryList(QDir::Files);
+}
+
 QStringList AsemanTools::stringLinks(const QString &str)
 {
     QStringList links;

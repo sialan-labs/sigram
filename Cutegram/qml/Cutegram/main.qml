@@ -55,10 +55,6 @@ AsemanMain {
         onAboutAsemanRequest: qlist.currentIndex = 0
     }
 
-    FontLoader {
-        source: "fonts/OpenSans-Regular.ttf"
-    }
-
     Connections {
         target: AsemanApp
         onBackRequest: {
@@ -189,6 +185,11 @@ AsemanMain {
         }
     }
 
+    Component {
+        id: font_loader_component
+        FontLoader{}
+    }
+
     function addAccount() {
         qlist.currentIndex = 3
         BackHandler.pushHandler(main, main.backToAccounts )
@@ -202,5 +203,10 @@ AsemanMain {
     Component.onCompleted: {
         if(Devices.isMacX)
             menubar_component.createObject(main)
+
+        var fontsPath = AsemanApp.appPath + "/files/fonts/"
+        var fonts = Tools.filesOf(fontsPath)
+        for(var i=0; i<fonts.length; i++)
+            font_loader_component.createObject(main, {"source": Devices.localFilesPrePath + fontsPath + fonts[i]})
     }
 }

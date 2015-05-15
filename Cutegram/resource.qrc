@@ -105,6 +105,5 @@
         <file>qml/Cutegram/WebPageGrabberQueue.qml</file>
         <file>qml/Cutegram/MessageLinkImage.qml</file>
         <file>qml/Cutegram/AddContactDialog.qml</file>
-        <file>qml/Cutegram/fonts/OpenSans-Regular.ttf</file>
     </qresource>
 </RCC>

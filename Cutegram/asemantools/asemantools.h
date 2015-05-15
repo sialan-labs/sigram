@@ -46,6 +46,7 @@ public slots:
     static QString fileName( const QString & path );
     static QString fileSuffix( const QString & path );
     static QString readText( const QString & path );
+    static QStringList filesOf(const QString &path);
 
     static QStringList stringLinks(const QString &str);
 

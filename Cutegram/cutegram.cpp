@@ -123,6 +123,11 @@ Cutegram::Cutegram(QObject *parent) :
 #endif
 #ifdef Q_OS_WIN
     default_font.setPointSize(10);
+
+    QFont appFont;
+    appFont.setFamily("ubuntu");
+
+    QGuiApplication::setFont(appFont);
 #endif
 
     p = new CutegramPrivate;
