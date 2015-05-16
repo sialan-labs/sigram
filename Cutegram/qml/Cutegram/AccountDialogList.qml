@@ -418,6 +418,7 @@ Item {
 
     NormalWheelScroll {
         flick: dlist
+        visible: !Cutegram.smoothScroll
     }
 
     Timer {

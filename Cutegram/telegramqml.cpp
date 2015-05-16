@@ -1274,7 +1274,7 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
     else
         qDebug() << __PRETTY_FUNCTION__ << ": Can't detect size of: " << parentObj;
 
-    qint64 fileId = p->telegram->uploadGetFile(input, fileSize, 0, ekey, eiv);
+    qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId(), ekey, eiv);
     p->downloads[fileId] = l;
 
     l->download()->setFileId(fileId);

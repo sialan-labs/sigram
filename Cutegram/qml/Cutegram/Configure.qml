@@ -202,6 +202,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: smooth_scroll_text
+                            height: smooth_scroll_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Smooth Scroll")
+                        }
+
+                        Text {
                             id: last_msg_text
                             height: last_msg_checkbox.height
                             verticalAlignment: Text.AlignVCenter
@@ -337,6 +347,12 @@ Rectangle {
                             id: minimum_list_checkbox
                             checked: Cutegram.minimumDialogs
                             onCheckedChanged: Cutegram.minimumDialogs = checked
+                        }
+
+                        Controls.Switch {
+                            id: smooth_scroll_checkbox
+                            checked: Cutegram.smoothScroll
+                            onCheckedChanged: Cutegram.smoothScroll = checked
                         }
 
                         Controls.Switch {

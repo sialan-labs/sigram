@@ -80,6 +80,7 @@ Item {
 
     NormalWheelScroll {
         flick: list
+        visible: !Cutegram.smoothScroll
     }
 
     ScrollBar {
