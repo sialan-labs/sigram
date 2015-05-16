@@ -121,6 +121,9 @@ Cutegram::Cutegram(QObject *parent) :
 #ifdef Q_OS_MAC
     default_font.setPointSize(9);
 #endif
+#ifdef Q_OS_WIN
+    default_font.setPointSize(10);
+#endif
 
     p = new CutegramPrivate;
     p->doc = new QTextDocument(this);

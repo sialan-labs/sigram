@@ -55,6 +55,10 @@ AsemanMain {
         onAboutAsemanRequest: qlist.currentIndex = 0
     }
 
+    FontLoader {
+        source: "fonts/OpenSans-Regular.ttf"
+    }
+
     Connections {
         target: AsemanApp
         onBackRequest: {
@@ -198,10 +202,5 @@ AsemanMain {
     Component.onCompleted: {
         if(Devices.isMacX)
             menubar_component.createObject(main)
-//        Desktop.menuStyle = "QMenu{border: 0px solid black; border-radius: 7; background-color: #333333; padding: 5; }" +
-//                "QMenu::item{border: 0px solid black; padding: 5px; border-radius: 3; color: white; padding-right: 30px; padding-left: 30px; }" +
-//                "QMenu::item:hover{background-color: palette(highlight); color: white; }" +
-//                "QMenu::item:selected{background-color: palette(highlight); color: white; }" +
-//                "QMenu::item:disabled{background-color: transparent; color: gray; }"
     }
 }

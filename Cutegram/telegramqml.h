@@ -309,6 +309,7 @@ private slots:
     void authCheckPhone_slt(qint64 id, bool phoneRegistered, bool phoneInvited);
     void authSignInError_slt(qint64 id, qint32 errorCode, QString errorText);
     void authSignUpError_slt(qint64 id, qint32 errorCode, QString errorText);
+    void error(qint64 id, qint32 errorCode, QString errorText);
 
     void accountGetWallPapers_slt(qint64 id, const QList<WallPaper> & wallPapers);
     void photosUploadProfilePhoto_slt(qint64 id, const Photo & photo, const QList<User> & users);
@@ -346,8 +347,6 @@ private slots:
     void messagesEncryptedChatDiscarded_slt(qint32 chatId);
     void messagesSendEncrypted_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile);
     void messagesSendEncryptedFile_slt(qint64 id, qint32 date, const EncryptedFile &encryptedFile);
-
-    void error(qint64 id, qint32 errorCode, QString errorText);
 
     void updatesTooLong_slt();
     void updateShortMessage_slt(qint32 id, qint32 fromId, QString message, qint32 pts, qint32 date, qint32 seq);

@@ -1464,6 +1464,7 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(authSendInvitesAnswer(qint64,bool))    , SLOT(authSendInvites_slt(qint64,bool))           );
     connect( p->telegram, SIGNAL(authSignInError(qint64,qint32,QString)), SLOT(authSignInError_slt(qint64,qint32,QString)) );
     connect( p->telegram, SIGNAL(authSignUpError(qint64,qint32,QString)), SLOT(authSignUpError_slt(qint64,qint32,QString)) );
+    connect( p->telegram, SIGNAL(error(qint64,qint32,QString))          , SLOT(error(qint64,qint32,QString))               );
     connect( p->telegram, SIGNAL(connected())                           , SIGNAL(connectedChanged())                       );
     connect( p->telegram, SIGNAL(disconnected())                        , SIGNAL(connectedChanged())                       );
 
@@ -1657,6 +1658,8 @@ void TelegramQml::authSignInError_slt(qint64 id, qint32 errorCode, QString error
     emit authNeededChanged();
     emit authSignInErrorChanged();
     emit authSignUpErrorChanged();
+
+    qDebug() << __PRETTY_FUNCTION__ << errorText;
 }
 
 void TelegramQml::authSignUpError_slt(qint64 id, qint32 errorCode, QString errorText)
@@ -1670,6 +1673,18 @@ void TelegramQml::authSignUpError_slt(qint64 id, qint32 errorCode, QString error
     emit authNeededChanged();
     emit authSignInErrorChanged();
     emit authSignUpErrorChanged();
+
+    qDebug() << __PRETTY_FUNCTION__ << errorText;
+}
+
+void TelegramQml::error(qint64 id, qint32 errorCode, QString errorText)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(errorCode)
+    p->error = errorText;
+    emit errorChanged();
+
+    qDebug() << __PRETTY_FUNCTION__ << errorText;
 }
 
 void TelegramQml::accountGetWallPapers_slt(qint64 id, const QList<WallPaper> &wallPapers)
@@ -2314,14 +2329,6 @@ void TelegramQml::messagesSendEncryptedFile_slt(qint64 id, qint32 date, const En
     insertMessage(msg, true);
     insertDialog(dialog, true);
     timerUpdateDialogs(3000);
-}
-
-void TelegramQml::error(qint64 id, qint32 errorCode, QString errorText)
-{
-    Q_UNUSED(id)
-    Q_UNUSED(errorCode)
-    p->error = errorText;
-    emit errorChanged();
 }
 
 void TelegramQml::updatesTooLong_slt()
