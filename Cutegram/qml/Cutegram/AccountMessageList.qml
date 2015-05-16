@@ -128,6 +128,8 @@ Rectangle {
                                    currentDialog != telegramObject.nullDialog ) messages_model.loadMore()
         clip: true
         model: messages_model
+        maximumFlickVelocity: 2500
+        flickDeceleration: 1500
 
         header: Item{ width: 4; height: acc_msg_list.bottomMargin }
         footer: Item{ width: 4; height: acc_msg_list.topMargin }
