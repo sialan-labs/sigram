@@ -617,6 +617,22 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>System Color</source>
         <translation type="Системная"></translation>
     </message>
+    <message>
+        <source>Tray icon style</source>
+        <translation type="Стиль иконки в трее"></translation>
+    </message>
+    <message>
+        <source>Smooth Scroll</source>
+        <translation type="Плавная прокрутка"></translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="Темный"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="Светлый"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -780,6 +796,85 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Back</source>
         <translation type="Назад"></translation>
+    </message>
+</context>
+<context>
+    <name>JalaliCalendarObject</name>
+    <message>
+        <source>Farvardin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ordibehesht</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Khordad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tir</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mordad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shahrivar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mehr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abaan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aazar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bahman</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esfand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jome</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
