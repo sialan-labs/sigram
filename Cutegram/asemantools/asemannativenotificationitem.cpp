@@ -1,6 +1,5 @@
 #define ROUNDED_PIXEL    5
 #define SHADOW_COLOR     palette().highlight().color()
-#define SHADOW_SIZE      20
 
 #include "asemannativenotificationitem.h"
 
@@ -18,6 +17,14 @@
 #include <QApplication>
 #include <QTimer>
 #include <QPixmap>
+#include <QStyleFactory>
+#include <QDebug>
+
+#ifdef Q_OS_WIN
+#define SHADOW_SIZE 5
+#else
+#define SHADOW_SIZE 20
+#endif
 
 class DialogBack: public QWidget
 {
@@ -78,7 +85,11 @@ protected:
         Q_UNUSED(e)
         QPainter painter(this);
         painter.setRenderHint( QPainter::Antialiasing , true );
+#ifdef Q_OS_WIN
+        painter.fillRect(e->rect(), palette().window());
+#else
         painter.fillPath( dialogPath(rect(),0), QColor(255,255,255) );
+#endif
     }
 };
 
@@ -112,8 +123,25 @@ AsemanNativeNotificationItem::AsemanNativeNotificationItem(QWidget *parent) :
     p = new AsemanNativeNotificationItemPrivate;
     p->shadow_color = QColor( SHADOW_COLOR );
 
+#ifdef Q_OS_WIN
+    QPalette palette;
+    palette.setColor(QPalette::Window, "#5588cc");
+    palette.setColor(QPalette::WindowText, "#ffffff");
+    palette.setColor(QPalette::ButtonText, "#ffffff");
+    palette.setColor(QPalette::Button, "#113355");
+
+    QFont font;
+    font.setPointSize(10);
+
+    setFont(font);
+    setPalette(palette);
+#endif
+
     p->back = new DialogBack(this);
     p->back->setColor( p->shadow_color );
+#ifdef Q_OS_WIN
+    p->back->hide();
+#endif
 
     p->scene = new DialogScene( this );
 
@@ -161,7 +189,7 @@ AsemanNativeNotificationItem::AsemanNativeNotificationItem(QWidget *parent) :
     setAttribute(Qt::WA_NoSystemBackground);
     setAttribute(Qt::WA_DeleteOnClose);
     setMouseTracking( true );
-    setWindowOpacity(0.9);
+    setWindowOpacity(0.98);
 
     refreshSize();
 
@@ -180,6 +208,13 @@ void AsemanNativeNotificationItem::setActions(const QStringList &actions)
 
         QPushButton *btn = new QPushButton();
         btn->setText(text);
+        btn->setPalette(QPalette());
+        btn->setFont(QFont());
+
+#ifdef Q_OS_WIN
+        static QStyle *style = QStyleFactory::create("Fusion");
+        btn->setStyle(style);
+#endif
 
         p->actions.insert(btn, action);
         p->buttons << btn;
