@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -63,6 +65,14 @@
         <source>Open in New Window</source>
         <translation>在新窗口中打开</translation>
     </message>
+    <message>
+        <source>Notify when</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Become online</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -80,7 +90,19 @@
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 start typing on &quot;%2&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 start typing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -114,7 +136,15 @@
     </message>
     <message>
         <source>%1 invited to group</source>
-        <translation>%1 被邀请进群组</translation>
+        <translation type="vanished">%1 被邀请进群组</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -122,6 +152,18 @@
     <message>
         <source>Media files is not supported on secret chat currently</source>
         <translation>私密聊天当前不支持媒体文件</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Load Anymore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Always</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Link</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -153,6 +195,19 @@
     <message>
         <source>Delete</source>
         <translation>删除</translation>
+    </message>
+    <message>
+        <source>New Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search on the Web</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Secret chat rejected. Or accepted from another device.
+Note that android accept secret chat automatically.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -204,7 +259,7 @@
         <translation>删除</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>此为 Cutegram 新闻频道，及时发布更新信息。
 并不是 telegram 联系人。仅仅是虚拟联系人。</translation>
@@ -212,6 +267,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Camera</source>
         <translation>相机</translation>
+    </message>
+    <message>
+        <source>Audio Recorder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -280,7 +339,15 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add New Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -291,14 +358,41 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>AddContactDialog</name>
+    <message>
+        <source>Fill below form to add new contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First Name</source>
+        <translation type="unfinished">名</translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation type="unfinished">姓</translation>
+    </message>
+    <message>
+        <source>Phone Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Home Page</source>
@@ -349,11 +443,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -383,7 +477,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Capture</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -405,7 +499,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>On Start</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Languages</source>
@@ -514,6 +608,34 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Theme</source>
         <translation>主题</translation>
+    </message>
+    <message>
+        <source>Tray icon style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Smooth Scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Engine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -681,6 +803,85 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>JalaliCalendarObject</name>
+    <message>
+        <source>Farvardin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ordibehesht</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Khordad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tir</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mordad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shahrivar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mehr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abaan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aazar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bahman</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esfand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jome</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
@@ -728,6 +929,29 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Ok</source>
         <translation>确认</translation>
+    </message>
+</context>
+<context>
+    <name>RecorderDialog</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">发送</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -785,6 +1009,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Add Participant</source>
         <translation>添加参与者</translation>
+    </message>
+    <message>
+        <source>Show Badges</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="pt_BR">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -254,7 +256,7 @@ Note que o Android aceita o chat secreto automaticamente.</translation>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>São as novidades do Cutegram, lançamentos e soluções.
 Não é o contato do Telegram, somente um contato virtual.</translation>
@@ -616,6 +618,22 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
         <source>System Color</source>
         <translation>Cor do Sistema</translation>
     </message>
+    <message>
+        <source>Tray icon style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Smooth Scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -779,6 +797,85 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <message>
         <source>Back</source>
         <translation>Voltar</translation>
+    </message>
+</context>
+<context>
+    <name>JalaliCalendarObject</name>
+    <message>
+        <source>Farvardin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ordibehesht</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Khordad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tir</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mordad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shahrivar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mehr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abaan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aazar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bahman</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esfand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5Shanbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jome</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
