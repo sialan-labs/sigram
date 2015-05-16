@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     AsemanApplication app(argc, argv);
     app.setApplicationName("Cutegram");
     app.setApplicationDisplayName("Cutegram");
-    app.setApplicationVersion("v2.2.0");
+    app.setApplicationVersion("v2.2.1");
     app.setOrganizationDomain("land.aseman");
     app.setOrganizationName("Aseman");
     app.setWindowIcon(QIcon(":/qml/Cutegram/files/icon.png"));
