@@ -1,3 +1,24 @@
+cutegram (2.2.1-1aseman-vivid) vivid; urgency=medium
+
+  * Bugfix and Improvments
+  * Add option to change system tray icon style
+
+ -- Aseman Team <contact@aseman.co>  Sat, 16 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.1-1aseman-utopic) utopic; urgency=medium
+
+  * Bugfix and Improvments
+  * Add option to change system tray icon style
+
+ -- Aseman Team <contact@aseman.co>  Sat, 16 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.1-1aseman-trusty) trusty; urgency=medium
+
+  * Bugfix and Improvments
+  * Add option to change system tray icon style
+
+ -- Aseman Team <contact@aseman.co>  Sat, 16 May 2015 00:00:00 +0330
+ 
 cutegram (2.2.0-5aseman-vivid) vivid; urgency=medium
 
   * Fix density problem on hires monitors.
