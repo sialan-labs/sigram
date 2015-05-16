@@ -81,6 +81,7 @@ public:
     bool darkSystemTray;
     bool closingState;
     bool cutegramSubscribe;
+    bool smoothScroll;
 
     QTextDocument *doc;
 
@@ -139,6 +140,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
+    p->smoothScroll = AsemanApplication::settings()->value("General/smoothScroll", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
@@ -657,6 +659,22 @@ void Cutegram::setDarkSystemTray(bool stt)
 bool Cutegram::darkSystemTray() const
 {
     return p->darkSystemTray;
+}
+
+void Cutegram::setSmoothScroll(bool stt)
+{
+    if(p->smoothScroll == stt)
+        return;
+
+    p->smoothScroll = stt;
+    AsemanApplication::settings()->setValue("General/smoothScroll", stt);
+
+    emit smoothScrollChanged();
+}
+
+bool Cutegram::smoothScroll() const
+{
+    return p->smoothScroll;
 }
 
 void Cutegram::setBackground(const QString &background)

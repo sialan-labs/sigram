@@ -50,6 +50,7 @@ class Cutegram : public QObject
     Q_PROPERTY(bool darkSystemTray    READ darkSystemTray    WRITE setDarkSystemTray  NOTIFY darkSystemTrayChanged   )
     Q_PROPERTY(bool cutegramSubscribe READ cutegramSubscribe WRITE setAsemanSubscribe NOTIFY cutegramSubscribeChanged)
     Q_PROPERTY(int  statusIconStyle   READ statusIconStyle   WRITE setStatusIconStyle NOTIFY statusIconStyleChanged  )
+    Q_PROPERTY(bool smoothScroll      READ smoothScroll      WRITE setSmoothScroll    NOTIFY smoothScrollChanged     )
 
     Q_PROPERTY(ThemeItem* currentTheme READ currentTheme NOTIFY currentThemeChanged)
     Q_PROPERTY(QStringList themes READ themes NOTIFY themesChanged)
@@ -115,6 +116,9 @@ public:
     void setDarkSystemTray(bool stt);
     bool darkSystemTray() const;
 
+    void setSmoothScroll(bool stt);
+    bool smoothScroll() const;
+
     void setBackground(const QString &background);
     QString background() const;
 
@@ -179,6 +183,7 @@ signals:
     void closingStateChanged();
     void cutegramSubscribeChanged();
     void statusIconStyleChanged();
+    void smoothScrollChanged();
 
     void themesChanged();
     void currentThemeChanged();
