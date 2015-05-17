@@ -453,7 +453,7 @@ Item {
             anchors.rightMargin: 4*Devices.density
             width: 70*Devices.density
             text: qsTr("Send")
-            onClicked: smsg.send()
+            onClicked: Cutegram.testGrab()// smsg.send()
         }
     }
 

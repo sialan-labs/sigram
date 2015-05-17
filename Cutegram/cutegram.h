@@ -34,7 +34,7 @@ class Cutegram : public QObject
     Q_ENUMS(StatusIconStyles)
 
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
-    Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY highlightColorChanged)
+    Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setHighlightColor NOTIFY highlightColorChanged)
 
     Q_PROPERTY(QString language     READ language     WRITE setLanguage     NOTIFY languageChanged    )
     Q_PROPERTY(QString messageAudio READ messageAudio WRITE setMessageAudio NOTIFY messageAudioChanged)
@@ -129,6 +129,7 @@ public:
     QString masterColor() const;
 
     QColor highlightColor() const;
+    void setHighlightColor(const QColor &color);
 
     void setVisualEffects(bool stt);
     bool visualEffects() const;

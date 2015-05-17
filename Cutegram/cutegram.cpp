@@ -104,6 +104,7 @@ public:
     QFont font;
 
     QPalette mainPalette;
+    QColor highlightColor;
 
     QMimeDatabase mdb;
 
@@ -134,6 +135,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->unityTray = 0;
     p->sysTrayCounter = 0;
     p->closingState = false;
+    p->highlightColor = p->mainPalette.highlight().color();
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
     p->statusIconStyle = AsemanApplication::settings()->value("General/statusIconStyle", static_cast<int>(StatusIconAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
@@ -726,7 +728,16 @@ QString Cutegram::masterColor() const
 
 QColor Cutegram::highlightColor() const
 {
-    return p->masterColor.isEmpty()? p->mainPalette.highlight().color() : QColor(p->masterColor);
+    return p->masterColor.isEmpty()? p->highlightColor : QColor(p->masterColor);
+}
+
+void Cutegram::setHighlightColor(const QColor &color)
+{
+    if(p->highlightColor == color)
+        return;
+
+    p->highlightColor = color;
+    emit highlightColorChanged();
 }
 
 void Cutegram::setFont(const QFont &font)

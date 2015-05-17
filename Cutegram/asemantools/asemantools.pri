@@ -115,7 +115,8 @@ SOURCES += \
     asemantools/asemandebugobjectcounter.cpp \
     asemantools/asemanfiledownloaderqueue.cpp \
     asemantools/asemanfiledownloaderqueueitem.cpp \
-    asemantools/asemanwebpagegrabber.cpp
+    asemantools/asemanwebpagegrabber.cpp \
+    $$PWD/asemantitlebarcolorgrabber.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -146,7 +147,8 @@ HEADERS += \
     asemantools/asemandebugobjectcounter.h \
     asemantools/asemanfiledownloaderqueue.h \
     asemantools/asemanfiledownloaderqueueitem.h \
-    asemantools/asemanwebpagegrabber.h
+    asemantools/asemanwebpagegrabber.h \
+    $$PWD/asemantitlebarcolorgrabber.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \

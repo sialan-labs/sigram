@@ -25,6 +25,19 @@ AsemanMain {
     property color textColor1: "#333333"
     property color textColor2: "#888888"
 
+    property color masterColor: {
+        if(!Devices.isWindows)
+            return masterPalette.highlight
+
+        var color = tbar_cgrabber.color
+        var satur = Tools.colorSaturation(color)
+        if(satur < 0.2)
+            return masterPalette.highlight
+        else
+            return color
+    }
+    onMasterColorChanged: Cutegram.highlightColor = masterColor
+
     onWidthChanged: size_save_timer.restart()
     onHeightChanged: size_save_timer.restart()
 
@@ -43,6 +56,12 @@ AsemanMain {
         if(event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier) {
             Cutegram.quit()
         }
+    }
+
+    TitleBarColorGrabber {
+        id: tbar_cgrabber
+        window: Devices.isWindows? View : 0
+        autoRefresh: Devices.isWindows
     }
 
     WebPageGrabberQueue {
