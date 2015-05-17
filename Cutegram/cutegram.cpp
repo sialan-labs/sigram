@@ -66,6 +66,9 @@
 #ifdef Q_OS_MAC
 #include <QtMac>
 #endif
+#ifdef Q_OS_WIN
+#include <QtWin>
+#endif
 
 class CutegramPrivate
 {
@@ -283,7 +286,11 @@ void Cutegram::start()
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
     init_theme();
 
+
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Cutegram/main.qml")));
+#ifdef Q_OS_WIN
+    QtWin::extendFrameIntoClientArea(p->viewer,-1,-1,-1,-1);
+#endif
 
     switch(startupOption())
     {
@@ -369,6 +376,9 @@ void Cutegram::incomingAppMessage(const QString &msg)
 
 void Cutegram::active()
 {
+#ifdef Q_OS_WIN
+    QtWin::extendFrameIntoClientArea(p->viewer,-1,-1,-1,-1);
+#endif
     p->viewer->show();
     p->viewer->requestActivate();
 }

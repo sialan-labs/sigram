@@ -43,6 +43,10 @@
 #include <QDebug>
 #include <QMimeData>
 
+#ifdef Q_OS_WIN
+#include <QSysInfo>
+#endif
+
 class AsemanDevicesPrivate
 {
 public:
@@ -172,6 +176,16 @@ bool AsemanDevices::isWindowsPhone() const
 {
 #ifdef Q_OS_WINPHONE
     return true;
+#else
+    return false;
+#endif
+}
+
+bool AsemanDevices::isWindows8() const
+{
+#ifdef Q_OS_WIN
+    return QSysInfo::windowsVersion() == QSysInfo::WV_WINDOWS8 ||
+           QSysInfo::windowsVersion() == QSysInfo::WV_WINDOWS8_1;
 #else
     return false;
 #endif

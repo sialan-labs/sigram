@@ -29,6 +29,7 @@ contains(DEFINES, DISABLE_ASEMAN_WEBGRABBER) {
 
 linux: QT += dbus
 win32 {
+    QT += winextras
     LIBS += -LD:/Projects/cutegram-deps/lib -lssleay32 -lcrypto -lz -lqtelegram-ae
     INCLUDEPATH += D:/Projects/cutegram-deps/include D:/Projects/libqtelegram-aseman-edition
 } else {

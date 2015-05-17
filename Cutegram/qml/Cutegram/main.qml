@@ -27,7 +27,7 @@ AsemanMain {
 
     property alias titleBarColor: tbar_cgrabber.color
     property color masterColor: {
-        if(!Devices.isWindows)
+        if(!Devices.isWindows8)
             return masterPalette.highlight
 
         var color = titleBarColor
@@ -61,8 +61,8 @@ AsemanMain {
 
     TitleBarColorGrabber {
         id: tbar_cgrabber
-        autoRefresh: Devices.isWindows
-        Component.onCompleted: if(Devices.isWindows) window = View
+        autoRefresh: Devices.isWindows8
+        Component.onCompleted: if(Devices.isWindows8) window = View
     }
 
     WebPageGrabberQueue {
