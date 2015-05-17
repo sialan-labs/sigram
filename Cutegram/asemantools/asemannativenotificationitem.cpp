@@ -20,86 +20,25 @@
 #include <QStyleFactory>
 #include <QDebug>
 
-#ifdef Q_OS_WIN
-#define SHADOW_SIZE 5
-#else
-#define SHADOW_SIZE 20
-#endif
-
-class DialogBack: public QWidget
-{
-public:
-    DialogBack( QWidget *parent = 0 ): QWidget(parent){
-        effect = new QGraphicsBlurEffect(this);
-        effect->setBlurRadius(SHADOW_SIZE-10);
-        setGraphicsEffect(effect);
-        color = QColor(0,0,0,255);
-    }
-
-    void setColor( const QColor & color ){
-        DialogBack::color = color;
-        repaint();
-    }
-
-    ~DialogBack(){}
-
-protected:
-    void paintEvent(QPaintEvent *e){
-        QPainter painter(this);
-        painter.setRenderHint( QPainter::Antialiasing , true );
-        painter.fillRect( e->rect(), color );
-    }
-
-private:
-    QGraphicsBlurEffect *effect;
-    QColor color;
-};
-
 class DialogScene: public QWidget
 {
 public:
     DialogScene( QWidget *parent = 0 ): QWidget(parent){    }
     ~DialogScene(){}
 
-    QPainterPath dialogPath( const QRect & rct , int padding ) const
-    {
-        QPainterPath path;
-        path.setFillRule( Qt::WindingFill );
-
-        path.moveTo( rct.width()/2 , padding );
-        path.lineTo( rct.width()-padding-ROUNDED_PIXEL , padding );
-        path.quadTo( rct.width()-padding , padding , rct.width()-padding , padding+ROUNDED_PIXEL );
-        path.lineTo( rct.width()-padding , rct.height()-padding-ROUNDED_PIXEL );
-        path.quadTo( rct.width()-padding , rct.height()-padding , rct.width()-padding-ROUNDED_PIXEL , rct.height()-padding );
-        path.lineTo( padding+ROUNDED_PIXEL , rct.height()-padding );
-        path.quadTo( padding , rct.height()-padding , padding , rct.height()-padding-ROUNDED_PIXEL );
-        path.lineTo( padding , padding+ROUNDED_PIXEL );
-        path.quadTo( padding , padding , padding+ROUNDED_PIXEL , padding );
-        path.lineTo( rct.width()/2 , padding );
-
-        return path;
-    }
-
 protected:
     void paintEvent(QPaintEvent *e){
         Q_UNUSED(e)
         QPainter painter(this);
         painter.setRenderHint( QPainter::Antialiasing , true );
-#ifdef Q_OS_WIN
         painter.fillRect(e->rect(), palette().window());
-#else
-        painter.fillPath( dialogPath(rect(),0), QColor(255,255,255) );
-#endif
     }
 };
 
 class AsemanNativeNotificationItemPrivate
 {
 public:
-    DialogBack *back;
     DialogScene *scene;
-
-    QColor shadow_color;
 
     QVBoxLayout *layout;
     QHBoxLayout *body_layout;
@@ -114,6 +53,11 @@ public:
     QHash<QPushButton*,QString> actions;
 
     QToolButton *close_btn;
+
+    QColor color;
+    QColor backColor;
+    QColor textColor;
+    QColor buttonColor;
 };
 
 
@@ -121,27 +65,12 @@ AsemanNativeNotificationItem::AsemanNativeNotificationItem(QWidget *parent) :
     QWidget(parent)
 {
     p = new AsemanNativeNotificationItemPrivate;
-    p->shadow_color = QColor( SHADOW_COLOR );
-
-#ifdef Q_OS_WIN
-    QPalette palette;
-    palette.setColor(QPalette::Window, "#5588cc");
-    palette.setColor(QPalette::WindowText, "#ffffff");
-    palette.setColor(QPalette::ButtonText, "#ffffff");
-    palette.setColor(QPalette::Button, "#113355");
 
     QFont font;
     font.setPointSize(10);
 
     setFont(font);
-    setPalette(palette);
-#endif
-
-    p->back = new DialogBack(this);
-    p->back->setColor( p->shadow_color );
-#ifdef Q_OS_WIN
-    p->back->hide();
-#endif
+    setColor(palette().highlight().color());
 
     p->scene = new DialogScene( this );
 
@@ -181,10 +110,10 @@ AsemanNativeNotificationItem::AsemanNativeNotificationItem(QWidget *parent) :
     p->layout = new QVBoxLayout(this);
     p->layout->addLayout(p->ttle_layout);
     p->layout->addLayout(p->body_layout);
-    p->layout->setContentsMargins(SHADOW_SIZE+10,SHADOW_SIZE+8,SHADOW_SIZE+10,SHADOW_SIZE+8);
+    p->layout->setContentsMargins(10,8,10,8);
     p->layout->setSpacing(1);
 
-    setWindowFlags( Qt::Window | Qt::FramelessWindowHint );
+    setWindowFlags( Qt::ToolTip );
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_NoSystemBackground);
     setAttribute(Qt::WA_DeleteOnClose);
@@ -194,6 +123,34 @@ AsemanNativeNotificationItem::AsemanNativeNotificationItem(QWidget *parent) :
     refreshSize();
 
     connect(p->close_btn, SIGNAL(clicked()), SLOT(close()) );
+}
+
+void AsemanNativeNotificationItem::setColor(const QColor &color)
+{
+    if(p->color == color)
+        return;
+
+    p->color = color;
+
+    qreal mid = (p->color.red()+p->color.green()+p->color.blue())/3.0;
+
+    p->backColor = QColor( p->color.red()*0.7, p->color.green()*0.7, p->color.blue()*0.7 );
+    p->textColor = mid>=128? QColor("#333333") : QColor("#ffffff");
+    p->buttonColor = QColor( p->color.red()*0.5, p->color.green()*0.5, p->color.blue()*0.5 );
+
+    QPalette palette;
+    palette.setColor(QPalette::Window, p->backColor);
+    palette.setColor(QPalette::WindowText, p->textColor);
+    palette.setColor(QPalette::ButtonText, "#ffffff");
+    palette.setColor(QPalette::Button, p->buttonColor);
+    setPalette(palette);
+
+    emit colorChanged();
+}
+
+QColor AsemanNativeNotificationItem::color() const
+{
+    return p->color;
 }
 
 void AsemanNativeNotificationItem::setActions(const QStringList &actions)
@@ -211,10 +168,8 @@ void AsemanNativeNotificationItem::setActions(const QStringList &actions)
         btn->setPalette(QPalette());
         btn->setFont(QFont());
 
-#ifdef Q_OS_WIN
         static QStyle *style = QStyleFactory::create("Fusion");
         btn->setStyle(style);
-#endif
 
         p->actions.insert(btn, action);
         p->buttons << btn;
@@ -264,14 +219,13 @@ void AsemanNativeNotificationItem::mouseReleaseEvent(QMouseEvent *e)
 
 void AsemanNativeNotificationItem::refreshSize()
 {
-    QRect rect( SHADOW_SIZE, SHADOW_SIZE, width()-2*SHADOW_SIZE, height()-2*SHADOW_SIZE );
+    QRect rect( 0, 0, width(), height() );
 
     const QRect &scr = QApplication::desktop()->availableGeometry();
 
-    p->back->setGeometry( rect );
     p->scene->setGeometry( rect );
 
-    move(scr.x()+scr.width()-width()+SHADOW_SIZE*0.7, scr.y()+scr.height()-height()+SHADOW_SIZE*0.7);
+    move(scr.x()+scr.width()-width() - 4, scr.y()+scr.height()-height() - 4);
 }
 
 void AsemanNativeNotificationItem::setRaised()

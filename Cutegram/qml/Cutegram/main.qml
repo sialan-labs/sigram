@@ -25,11 +25,12 @@ AsemanMain {
     property color textColor1: "#333333"
     property color textColor2: "#888888"
 
+    property alias titleBarColor: tbar_cgrabber.color
     property color masterColor: {
         if(!Devices.isWindows)
             return masterPalette.highlight
 
-        var color = tbar_cgrabber.color
+        var color = titleBarColor
         var satur = Tools.colorSaturation(color)
         if(satur < 0.2)
             return masterPalette.highlight
@@ -60,8 +61,8 @@ AsemanMain {
 
     TitleBarColorGrabber {
         id: tbar_cgrabber
-        window: Devices.isWindows? View : 0
         autoRefresh: Devices.isWindows
+        Component.onCompleted: if(Devices.isWindows) window = View
     }
 
     WebPageGrabberQueue {

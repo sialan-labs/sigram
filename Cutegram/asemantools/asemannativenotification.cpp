@@ -6,6 +6,8 @@ class AsemanNativeNotificationPrivate
 public:
     QHash<uint, AsemanNativeNotificationItem*> items;
     uint last_id;
+
+    QColor color;
 };
 
 AsemanNativeNotification::AsemanNativeNotification(QObject *parent) :
@@ -13,6 +15,20 @@ AsemanNativeNotification::AsemanNativeNotification(QObject *parent) :
 {
     p = new AsemanNativeNotificationPrivate;
     p->last_id = 1000;
+}
+
+void AsemanNativeNotification::setColor(const QColor &color)
+{
+    if(p->color == color)
+        return;
+
+    p->color = color;
+    emit colorChanged();
+}
+
+QColor AsemanNativeNotification::color() const
+{
+    return p->color;
 }
 
 uint AsemanNativeNotification::sendNotify(const QString &title, const QString &body, const QString &icon, uint replace_id, int timeOut, const QStringList &actions)
@@ -24,6 +40,7 @@ uint AsemanNativeNotification::sendNotify(const QString &title, const QString &b
     {
         item = new AsemanNativeNotificationItem();
         item->setFixedWidth(400);
+        item->setColor(p->color);
 
         p->items.insert(p->last_id, item);
 

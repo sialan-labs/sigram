@@ -8,9 +8,14 @@ class AsemanNativeNotificationItemPrivate;
 class AsemanNativeNotificationItem : public QWidget
 {
     Q_OBJECT
+    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+
 public:
     AsemanNativeNotificationItem(QWidget *parent = 0);
     ~AsemanNativeNotificationItem();
+
+    void setColor(const QColor &color);
+    QColor color() const;
 
     void setActions(const QStringList & actions);
     void setTitle(const QString &title);
@@ -20,6 +25,7 @@ public:
 
 signals:
     void actionTriggered(const QString & act);
+    void colorChanged();
 
 protected:
     void resizeEvent(QResizeEvent *e);

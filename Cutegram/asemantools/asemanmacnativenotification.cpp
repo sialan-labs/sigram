@@ -25,6 +25,7 @@ public:
 
     QHash<uint, AsemanMacNativeNotificationItem*> items;
     uint last_id;
+    QColor color;
 };
 
 AsemanMacNativeNotification::AsemanMacNativeNotification(QObject *parent) :
@@ -33,6 +34,20 @@ AsemanMacNativeNotification::AsemanMacNativeNotification(QObject *parent) :
     p = new AsemanMacNativeNotificationPrivate;
     p->last_id = 1000;
 
+}
+
+void AsemanMacNativeNotification::setColor(const QColor &color)
+{
+    if(p->color == color)
+        return;
+
+    p->color = color;
+    emit colorChanged();
+}
+
+QColor AsemanMacNativeNotification::color() const
+{
+    return p->color;
 }
 
 uint AsemanMacNativeNotification::sendNotify(const QString &title, const QString &body, const QString &icon, uint replace_id, int timeOut, const QStringList &actions)

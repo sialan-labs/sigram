@@ -20,6 +20,7 @@ public:
     QDBusConnection *connection;
 
     QSet<uint> notifies;
+    QColor color;
 };
 
 AsemanLinuxNativeNotification::AsemanLinuxNativeNotification(QObject *parent) :
@@ -30,6 +31,20 @@ AsemanLinuxNativeNotification::AsemanLinuxNativeNotification(QObject *parent) :
     p->connection = new QDBusConnection( QDBusConnection::sessionBus() );
     p->connection->connect( DBUS_SERVICE , DBUS_PATH , DBUS_OBJECT , DBUS_CLOSED , this , SLOT(notificationClosed(QDBusMessage)) );
     p->connection->connect( DBUS_SERVICE , DBUS_PATH , DBUS_OBJECT , DBUS_ACTION , this , SLOT(actionInvoked(QDBusMessage))      );
+}
+
+void AsemanLinuxNativeNotification::setColor(const QColor &color)
+{
+    if(p->color == color)
+        return;
+
+    p->color = color;
+    emit colorChanged();
+}
+
+QColor AsemanLinuxNativeNotification::color() const
+{
+    return p->color;
 }
 
 uint AsemanLinuxNativeNotification::sendNotify(const QString &title, const QString &body, const QString &icon, uint replace_id, int timeOut, const QStringList &actions)

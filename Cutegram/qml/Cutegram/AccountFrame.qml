@@ -49,6 +49,7 @@ Rectangle {
 
     Notification {
         id: notification
+        color: titleBarColor
         onNotifyClosed: notifies_hash.remove(id)
         onNotifyAction: {
             var notifyData = notifies_hash.value(id)
