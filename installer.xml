@@ -1,7 +1,7 @@
 <project>
     <shortName>cutegram</shortName>
     <fullName>Cutegram</fullName>
-    <version>2.1.1</version>
+    <version>2.2.1</version>
     <licenseFile>LICENSE</licenseFile>
     <htmlLicenseFile>LICENSE.html</htmlLicenseFile>
     <leftImage>installer/logo.png</leftImage>
