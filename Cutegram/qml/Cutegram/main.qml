@@ -26,7 +26,7 @@ AsemanMain {
     property color textColor2: "#888888"
 
     property color masterColor: {
-        if(!Devices.isWindows)
+        if(!Devices.isWindows8)
             return masterPalette.highlight
 
         var color = tbar_cgrabber.color
@@ -60,8 +60,8 @@ AsemanMain {
 
     TitleBarColorGrabber {
         id: tbar_cgrabber
-        window: Devices.isWindows? View : 0
-        autoRefresh: Devices.isWindows
+        window: Devices.isWindows8? View : 0
+        autoRefresh: Devices.isWindows8
     }
 
     WebPageGrabberQueue {
