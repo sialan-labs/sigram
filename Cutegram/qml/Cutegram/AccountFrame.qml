@@ -13,6 +13,7 @@ Rectangle {
     property AccountView view
     property alias telegramObject: telegram
     property alias unreadCount: telegram.unreadCount
+    property int notifyTimeOut: Devices.isWindows? 5000 : 3000
 
     property bool isActive: {
         if(view && view.windowsCount!=0)
@@ -146,7 +147,7 @@ Rectangle {
             if(location && location.slice(0,Devices.localFilesPrePath.length) == Devices.localFilesPrePath)
                 location = location.slice(Devices.localFilesPrePath.length, location.length)
 
-            var nid = notification.sendNotify( title, message, location, 0, 3000, actions )
+            var nid = notification.sendNotify( title, message, location, 0, notifyTimeOut, actions )
 
             notifies_hash.insert(nid, msg)
         }
@@ -186,7 +187,7 @@ Rectangle {
 
             var message = qsTr("%1 is online").arg(title)
 
-            var nid = notification.sendNotify( title, message, location, 0, 3000, actions )
+            var nid = notification.sendNotify( title, message, location, 0, notifyTimeOut, actions )
             notifies_hash.insert(nid, userId)
         }
         onUserStartTyping: {
@@ -237,7 +238,7 @@ Rectangle {
             else
                 message = qsTr("%1 start typing").arg(title)
 
-            var nid = notification.sendNotify( title, message, location, 0, 3000, actions )
+            var nid = notification.sendNotify( title, message, location, 0, notifyTimeOut, actions )
             notifies_hash.insert(nid, dId)
         }
     }
