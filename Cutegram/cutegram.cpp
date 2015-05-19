@@ -848,6 +848,13 @@ QString Cutegram::searchEngine() const
     return p->searchEngine;
 }
 
+bool Cutegram::isLoggedIn(const QString &phone) const
+{
+    const QString &home = AsemanApplication::homePath();
+    const QString &ppath = home + "/" + phone;
+    return QFile::exists(ppath + "/auth");
+}
+
 void Cutegram::init_languages()
 {
     QDir dir(p->translationsPath);

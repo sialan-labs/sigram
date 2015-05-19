@@ -152,6 +152,8 @@ public:
     void setSearchEngine(const QString &se);
     QString searchEngine() const;
 
+    Q_INVOKABLE bool isLoggedIn(const QString &phone) const;
+
 public slots:
     void start();
     void restart();

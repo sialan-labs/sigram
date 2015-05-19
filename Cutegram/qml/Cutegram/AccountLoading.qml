@@ -46,6 +46,7 @@ Rectangle {
     }
 
     Text {
+        id: logout_text
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.verticalCenter
         anchors.topMargin: 80*Devices.density
@@ -53,8 +54,8 @@ Rectangle {
         font.pixelSize: 10*Devices.fontDensity
         font.underline: true
         color: masterPalette.highlight
-        text: qsTr("Logout & Relogin")
-        visible: !logout_timout.running
+        text: qsTr("Login again")
+        visible: false
 
         MouseArea {
             anchors.fill: parent
@@ -68,5 +69,9 @@ Rectangle {
         id: logout_timout
         interval: 20000
         repeat: false
+        onTriggered: {
+            if(Cutegram.isLoggedIn(telegramObject.phoneNumber))
+                logout_text.visible = true
+        }
     }
 }
