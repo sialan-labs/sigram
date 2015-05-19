@@ -53,7 +53,7 @@ Item {
             Button {
                 anchors.fill: parent
                 normalColor: "#00000000"
-                highlightColor: selected? normalColor : "#88339DCC"
+                highlightColor: selected? normalColor : Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
                 cursorShape: Qt.PointingHandCursor
                 icon: {
                     if(isAddBtn)

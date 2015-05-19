@@ -37,7 +37,7 @@ AsemanMain {
         else
             return color
     }
-    onMasterColorChanged: Cutegram.highlightColor = masterColor
+    onMasterColorChanged: if(Devices.isWindows8) Cutegram.highlightColor = masterColor
 
     onWidthChanged: size_save_timer.restart()
     onHeightChanged: size_save_timer.restart()

@@ -138,7 +138,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->unityTray = 0;
     p->sysTrayCounter = 0;
     p->closingState = false;
-    p->highlightColor = p->mainPalette.highlight().color();
+    p->highlightColor = AsemanApplication::settings()->value("General/lastHighlightColor", p->mainPalette.highlight().color().name() ).toString();
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
     p->statusIconStyle = AsemanApplication::settings()->value("General/statusIconStyle", static_cast<int>(StatusIconAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
@@ -747,6 +747,8 @@ void Cutegram::setHighlightColor(const QColor &color)
         return;
 
     p->highlightColor = color;
+    AsemanApplication::settings()->setValue("General/lastHighlightColor", color.name());
+
     emit highlightColorChanged();
 }
 

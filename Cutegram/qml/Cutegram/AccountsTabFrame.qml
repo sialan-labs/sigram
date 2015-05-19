@@ -98,7 +98,7 @@ Rectangle {
             width: parent.width
             height: width
             normalColor: "#00000000"
-            highlightColor: "#88339DCC"
+            highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
             cursorShape: Qt.PointingHandCursor
             icon: Cutegram.currentTheme.panelLightIcon? "files/lock.png" : "files/lock-dark.png"
             iconHeight: 18*Devices.density
@@ -120,7 +120,7 @@ Rectangle {
             width: parent.width
             height: width
             normalColor: "#00000000"
-            highlightColor: "#88339DCC"
+            highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
             cursorShape: Qt.PointingHandCursor
             icon: Cutegram.currentTheme.panelLightIcon? "files/add_chat.png" : "files/add_chat-dark.png"
             iconHeight: 26*Devices.density
@@ -142,7 +142,7 @@ Rectangle {
             width: parent.width
             height: width
             normalColor: "#00000000"
-            highlightColor: "#88339DCC"
+            highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
             cursorShape: Qt.PointingHandCursor
             icon: Cutegram.currentTheme.panelLightIcon? "files/add_user.png" : "files/add_user-dark.png"
             iconHeight: 22*Devices.density
@@ -164,7 +164,7 @@ Rectangle {
             width: parent.width
             height: width
             normalColor: "#00000000"
-            highlightColor: "#88339DCC"
+            highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
             cursorShape: Qt.PointingHandCursor
             icon: Cutegram.currentTheme.panelLightIcon? "files/configure.png" : "files/configure-dark.png"
             iconHeight: 22*Devices.density
