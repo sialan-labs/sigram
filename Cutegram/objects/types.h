@@ -2171,9 +2171,8 @@ class DocumentObject : public QObject
     Q_PROPERTY(QString mimeType READ mimeType WRITE setMimeType NOTIFY mimeTypeChanged)
     Q_PROPERTY(PhotoSizeObject* thumb READ thumb WRITE setThumb NOTIFY thumbChanged)
     Q_PROPERTY(qint32 date READ date WRITE setDate NOTIFY dateChanged)
-    Q_PROPERTY(QString fileName READ fileName WRITE setFileName NOTIFY fileNameChanged)
+    Q_PROPERTY(QList<DocumentAttribute> attributes READ attributes WRITE setAttributes NOTIFY attributesChanged)
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
-    Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(qint32 size READ size WRITE setSize NOTIFY sizeChanged)
     Q_PROPERTY(QByteArray encryptKey READ encryptKey WRITE setEncryptKey NOTIFY encryptKeyChanged)
     Q_PROPERTY(QByteArray encryptIv READ encryptIv WRITE setEncryptIv NOTIFY encryptIvChanged)
@@ -2187,9 +2186,8 @@ public:
         _mimeType = another.mimeType();
         _thumb = new PhotoSizeObject(another.thumb(), this);
         _date = another.date();
-        _fileName = another.fileName();
+        _attributes = another.attributes();
         _accessHash = another.accessHash();
-        _userId = another.userId();
         _size = another.size();
         _encryptKey = QByteArray();
         _encryptIv = QByteArray();
@@ -2259,15 +2257,13 @@ public:
         emit changed();
     }
 
-    QString fileName() const {
-        return _fileName;
+    QList<DocumentAttribute> attributes() const {
+        return _attributes;
     }
 
-    void setFileName(QString value) {
-        if( value == _fileName )
-            return;
-        _fileName = value;
-        emit fileNameChanged();
+    void setAttributes(QList<DocumentAttribute> value) {
+        _attributes = value;
+        emit attributesChanged();
         emit changed();
     }
 
@@ -2280,18 +2276,6 @@ public:
             return;
         _accessHash = value;
         emit accessHashChanged();
-        emit changed();
-    }
-
-    qint32 userId() const {
-        return _userId;
-    }
-
-    void setUserId(qint32 value) {
-        if( value == _userId )
-            return;
-        _userId = value;
-        emit userIdChanged();
         emit changed();
     }
 
@@ -2355,12 +2339,10 @@ public:
         emit thumbChanged();
         _date = another.date();
         emit dateChanged();
-        _fileName = another.fileName();
-        emit fileNameChanged();
+        _attributes = another.attributes();
+        emit attributesChanged();
         _accessHash = another.accessHash();
         emit accessHashChanged();
-        _userId = another.userId();
-        emit userIdChanged();
         _size = another.size();
         emit sizeChanged();
         _classType = another.classType();
@@ -2374,9 +2356,8 @@ signals:
     void mimeTypeChanged();
     void thumbChanged();
     void dateChanged();
-    void fileNameChanged();
+    void attributesChanged();
     void accessHashChanged();
-    void userIdChanged();
     void sizeChanged();
     void encryptKeyChanged();
     void encryptIvChanged();
@@ -2388,7 +2369,7 @@ private:
     QString _mimeType;
     PhotoSizeObject* _thumb;
     qint32 _date;
-    QString _fileName;
+    QList<DocumentAttribute> _attributes;
     qint64 _accessHash;
     qint32 _userId;
     qint32 _size;

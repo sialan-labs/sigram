@@ -61,6 +61,7 @@ class Photo;
 class UserProfilePhoto;
 class DialogObject;
 class MessageObject;
+class ContactFound;
 class InputPeerObject;
 class ChatFullObject;
 class ChatObject;
@@ -176,6 +177,8 @@ public:
     Q_INVOKABLE FileLocationObject *locationOfVideo(VideoObject *vid);
     Q_INVOKABLE FileLocationObject *locationOfAudio(AudioObject *aud);
 
+    Q_INVOKABLE bool documentIsSticker(DocumentObject *doc);
+
     Q_INVOKABLE DialogObject *fakeDialogObject( qint64 id, bool isChat );
 
     DialogObject *nullDialog() const;
@@ -235,6 +238,7 @@ public slots:
     void messagesGetFullChat(qint32 chatId);
 
     void search(const QString &keyword);
+    void searchContact(const QString &keyword);
 
     bool sendFile(qint64 dialogId, const QString & file , bool forceDocument = false, bool forceAudio = false);
     void getFile(FileLocationObject *location, qint64 type = InputFileLocation::typeInputFileLocation , qint32 fileSize = 0);
@@ -295,6 +299,7 @@ signals:
     void incomingEncryptedMessage( EncryptedMessageObject *msg );
 
     void searchDone(const QList<qint64> &messages);
+    void contactsFounded(const QList<qint32> &contacts);
 
 protected:
     void try_init();
@@ -315,6 +320,7 @@ private slots:
     void photosUploadProfilePhoto_slt(qint64 id, const Photo & photo, const QList<User> & users);
     void photosUpdateProfilePhoto_slt(qint64 id, const UserProfilePhoto & userProfilePhoto);
     void contactsImportContacts_slt(qint64 id, const QList<ImportedContact> &importedContacts, const QList<qint64> &retryContacts, const QList<User> &users);
+    void contactsFound_slt(qint64 id, const QList<ContactFound> &founds, const QList<User> &users);
 
     void contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> & contacts, const QList<User> & users);
     void usersGetFullUser_slt(qint64 id, const User &user, const ContactsLink &link, const Photo &profilePhoto, const PeerNotifySettings &notifySettings, bool blocked, const QString &realFirstName, const QString &realLastName);

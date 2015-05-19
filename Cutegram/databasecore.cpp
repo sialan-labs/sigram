@@ -814,6 +814,12 @@ void DatabaseCore::insertDocument(const Document &document)
     if(document.id() == 0 || document.classType() == Document::typeDocumentEmpty)
         return;
 
+    QString fileName;
+    QList<DocumentAttribute> attrs;
+    for(int i=0; i<attrs.length(); i++)
+        if(attrs.at(i).classType() == DocumentAttribute::typeAttributeFilename)
+            fileName = attrs.at(i).filename();
+
     begin();
     QSqlQuery query(p->db);
     query.prepare("INSERT OR REPLACE INTO Documents (id, dcId, mimeType, date, fileName, size, accessHash, userId, type) "
@@ -823,10 +829,10 @@ void DatabaseCore::insertDocument(const Document &document)
     query.bindValue(":dcId", document.dcId());
     query.bindValue(":mimeType", document.mimeType());
     query.bindValue(":date", document.date());
-    query.bindValue(":fileName", document.fileName());
+    query.bindValue(":fileName", fileName);
     query.bindValue(":size", document.size());
     query.bindValue(":accessHash", document.accessHash());
-    query.bindValue(":userId", document.userId());
+    query.bindValue(":userId", 0);
     query.bindValue(":type", document.classType());
 
     bool res = query.exec();
@@ -1016,14 +1022,16 @@ Document DatabaseCore::readDocument(qint64 id)
 
     const QSqlRecord &record = query.record();
 
+    DocumentAttribute attr(DocumentAttribute::typeAttributeFilename);
+    attr.setFilename(record.value("fileName").toString());
+
     document.setId( record.value("id").toLongLong() );
     document.setDcId( record.value("dcId").toLongLong() );
     document.setMimeType( record.value("mimeType").toString() );
     document.setDate( record.value("date").toLongLong() );
-    document.setFileName( record.value("fileName").toString() );
+    document.setAttributes( QList<DocumentAttribute>()<<attr );
     document.setSize( record.value("size").toLongLong() );
     document.setAccessHash( record.value("accessHash").toLongLong() );
-    document.setUserId( record.value("userId").toLongLong() );
     document.setClassType( static_cast<Document::DocumentType>(record.value("type").toLongLong()) );
 
     const QList<PhotoSize> &sizes = readPhotoSize(document.id());

@@ -53,23 +53,29 @@ Item {
         id: typing_timer
         interval: 3000
         onTriggered: finishTyping()
+
         function finishTyping() {
             var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
             telegramObject.messagesSetTyping(peerId, false)
+            typing_update_timer.stop()
         }
     }
 
     Timer {
         id: typing_update_timer
         interval: 1000
+        triggeredOnStart: true
+        onTriggered: {
+            var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
+            telegramObject.messagesSetTyping(peerId, true)
+        }
 
         function startTyping() {
             typing_timer.restart()
             if(running)
                 return
 
-            var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
-            telegramObject.messagesSetTyping(peerId, true)
+            typing_update_timer.restart()
         }
     }
 
@@ -453,7 +459,7 @@ Item {
             anchors.rightMargin: 4*Devices.density
             width: 70*Devices.density
             text: qsTr("Send")
-            onClicked: Cutegram.testGrab()// smsg.send()
+            onClicked: smsg.send()
         }
     }
 

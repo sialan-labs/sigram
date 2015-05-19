@@ -115,7 +115,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             width: img.width
             height: img.height
-            visible: message.fwdFromId != 0
+            visible: message.fwdFromId != 0 && !msg_media.isSticker
             backgroundColor: "#E4E9EC"
 
             ContactImage {
@@ -156,7 +156,7 @@ Item {
                 id: msg_frame_box
                 anchors.fill: parent
                 anchors.margins: -20*Devices.density
-                visible: !Cutegram.currentTheme.messageShadow
+                visible: !Cutegram.currentTheme.messageShadow && !msg_media.isSticker
 
                 Item {
                     anchors.fill: parent
@@ -200,7 +200,7 @@ Item {
                 samples: 16
                 horizontalOffset: 0
                 verticalOffset: 1*Devices.density
-                visible: Cutegram.currentTheme.messageShadow
+                visible: Cutegram.currentTheme.messageShadow && !msg_media.isSticker
                 color: Cutegram.currentTheme.messageShadowColor
             }
 
@@ -271,6 +271,9 @@ Item {
                             textFormat: Text.RichText
                             height: contentHeight
                             color: {
+                                if(msg_media.isSticker)
+                                    return "#333333"
+                                else
                                 if(msg_media.mediaPlayer)
                                     return Cutegram.currentTheme.messageAudioDateColor
                                 else
@@ -322,6 +325,9 @@ Item {
                             text: Cutegram.getTimeString(msgDate)
                             verticalAlignment: Text.AlignVCenter
                             color: {
+                                if(msg_media.isSticker)
+                                    return "#333333"
+                                else
                                 if(msg_media.mediaPlayer)
                                     return Cutegram.currentTheme.messageAudioDateColor
                                 else
@@ -373,6 +379,9 @@ Item {
                                 indicatorSize: 10*Devices.density
                                 Component.onCompleted: if(!sent) start()
                                 light: {
+                                    if(msg_media.isSticker)
+                                        return false
+                                    else
                                     if(msg_media.mediaPlayer)
                                         return Cutegram.currentTheme.messageAudioLightIcon
                                     else

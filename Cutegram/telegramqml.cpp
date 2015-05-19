@@ -508,8 +508,12 @@ FileLocationObject *TelegramQml::locationOf(qint64 id, qint64 dcId, qint64 acces
 FileLocationObject *TelegramQml::locationOfDocument(DocumentObject *doc)
 {
     FileLocationObject *res = locationOf(doc->id(), doc->dcId(), doc->accessHash(), doc);
-    res->setFileName(doc->fileName());
     res->setMimeType(doc->mimeType());
+
+    QList<DocumentAttribute> attrs;
+    for(int i=0; i<attrs.length(); i++)
+        if(attrs.at(i).classType() == DocumentAttribute::typeAttributeFilename)
+            res->setFileName(attrs.at(i).filename());
 
     return res;
 }
@@ -522,6 +526,19 @@ FileLocationObject *TelegramQml::locationOfVideo(VideoObject *vid)
 FileLocationObject *TelegramQml::locationOfAudio(AudioObject *aud)
 {
     return locationOf(aud->id(), aud->dcId(), aud->accessHash(), aud);
+}
+
+bool TelegramQml::documentIsSticker(DocumentObject *doc)
+{
+    if(!doc)
+        return false;
+
+    QList<DocumentAttribute> attrs = doc->attributes();
+    foreach(DocumentAttribute attr, attrs)
+        if(attr.classType() == DocumentAttribute::typeAttributeSticker)
+            return true;
+
+    return false;
 }
 
 DialogObject *TelegramQml::fakeDialogObject(qint64 id, bool isChat)
@@ -1124,6 +1141,14 @@ void TelegramQml::search(const QString &keyword)
     p->telegram->messagesSearch(peer, keyword, filter, 0, 0, 0, 0, 50);
 }
 
+void TelegramQml::searchContact(const QString &keyword)
+{
+    if(!p->telegram)
+        return;
+
+    p->telegram->contactsSearch(keyword);
+}
+
 bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument, bool forceAudio)
 {
     QString file = fpath;
@@ -1537,6 +1562,8 @@ void TelegramQml::try_init()
 
     connect( p->telegram, SIGNAL(contactsGetContactsAnswer(qint64,bool,QList<Contact>,QList<User>)),
              SLOT(contactsGetContacts_slt(qint64,bool,QList<Contact>,QList<User>)) );
+    connect( p->telegram, SIGNAL(contactsFound(qint64,QList<ContactFound>,QList<User>)),
+             SLOT(contactsFound_slt(qint64,QList<ContactFound>,QList<User>)));
 
     connect( p->telegram, SIGNAL(updates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)),
              SLOT(updates_slt(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)) );
@@ -1753,6 +1780,19 @@ void TelegramQml::contactsImportContacts_slt(qint64 id, const QList<ImportedCont
         insertUser(user);
 
     timerUpdateDialogs(100);
+}
+
+void TelegramQml::contactsFound_slt(qint64 id, const QList<ContactFound> &founds, const QList<User> &users)
+{
+    Q_UNUSED(id)
+    foreach( const User & user, users )
+        insertUser(user);
+
+    QList<qint32> result;
+    foreach( const ContactFound & fnd, founds )
+        result << fnd.userId();
+
+    emit contactsFounded(result);
 }
 
 void TelegramQml::contactsGetContacts_slt(qint64 id, bool modified, const QList<Contact> &contacts, const QList<User> &users)

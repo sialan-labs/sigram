@@ -31,6 +31,8 @@ Item {
     property real typeInputAudioFileLocation: 0x74dc404d
     property real typeInputDocumentFileLocation: 0x4e45abe9
 
+    property bool isSticker: media.classType == typeMessageMediaDocument? telegramObject.documentIsSticker(media.document) : false
+
     property variant mediaPlayer
     property bool mediaPlayerState: media.classType == typeMessageMediaAudio
     onMediaPlayerStateChanged: {
@@ -60,7 +62,10 @@ Item {
 
         case typeMessageMediaDocument:
             result = telegramObject.locationOfDocument(media.document)
-            telegramObject.getFileJustCheck(result)
+            if(isSticker)
+                telegramObject.getFile(result, typeInputDocumentFileLocation, media.document.size)
+            else
+                telegramObject.getFileJustCheck(result)
             break;
 
         case typeMessageMediaAudio:
@@ -122,7 +127,7 @@ Item {
         case typeMessageMediaUnsupported:
         case typeMessageMediaAudio:
         case typeMessageMediaDocument:
-            result = 168*Devices.density
+            result = isSticker? 220*Devices.density : 168*Devices.density
             break;
 
         default:
@@ -155,7 +160,7 @@ Item {
         case typeMessageMediaUnsupported:
         case typeMessageMediaAudio:
         case typeMessageMediaDocument:
-            result = width
+            result = isSticker? width*media_img.imageSize.height/media_img.imageSize.width : width
             break;
 
         default:
@@ -171,7 +176,7 @@ Item {
     Image {
         id: media_img
         anchors.fill: parent
-        fillMode: Image.PreserveAspectCrop
+        fillMode: isSticker? Image.PreserveAspectFit : Image.PreserveAspectCrop
         asynchronous: true
         smooth: true
         visible: media.classType != typeMessageMediaVideo || fileLocation.length != 0
@@ -213,13 +218,20 @@ Item {
                 break;
 
             case typeMessageMediaDocument:
+                if(isSticker) {
+                    result = locationObj.download.location
+                    if(result.length==0)
+                        result = media.document.thumb.location.download.location
+                    if(result.length==0)
+                        result = "files/document.png"
+                }
+                else
                 if(Cutegram.filsIsImage(fileLocation))
                     result = fileLocation
                 else {
                     result = media.document.thumb.location.download.location
-                    if(result.length==0) {
+                    if(result.length==0)
                         result = "files/document.png"
-                    }
                 }
                 break;
 
@@ -258,7 +270,7 @@ Item {
         id: download_frame
         anchors.fill: parent
         color: "#88000000"
-        visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto
+        visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto && !isSticker
         radius: 3*Devices.density
 
         Text {
@@ -359,7 +371,7 @@ Item {
         text: qsTr("Cancel")
         radius: 4*Devices.density
         cursorShape: Qt.PointingHandCursor
-        visible: indicator.active && media.classType != typeMessageMediaPhoto
+        visible: indicator.active && media.classType != typeMessageMediaPhoto && !isSticker
         onClicked: telegramObject.cancelDownload(locationObj.download)
     }
 
