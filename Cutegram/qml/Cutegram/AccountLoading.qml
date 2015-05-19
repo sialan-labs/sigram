@@ -10,10 +10,13 @@ Rectangle {
     property bool active: false
 
     onActiveChanged: {
-        if( active )
+        if( active ) {
             indicator.start()
-        else
+            logout_timout.restart()
+        } else {
             indicator.stop()
+            logout_timout.stop()
+        }
     }
 
     MouseArea {
@@ -40,5 +43,30 @@ Rectangle {
             color: textColor0
             text: qsTr("Loading...")
         }
+    }
+
+    Text {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.verticalCenter
+        anchors.topMargin: 80*Devices.density
+        font.family: AsemanApp.globalFont.family
+        font.pixelSize: 10*Devices.fontDensity
+        font.underline: true
+        color: masterPalette.highlight
+        text: qsTr("Logout & Relogin")
+        visible: !logout_timout.running
+
+        MouseArea {
+            anchors.fill: parent
+            anchors.margins: -10*Devices.density
+            cursorShape: Qt.PointingHandCursor
+            onClicked: Cutegram.logout(telegramObject.phoneNumber)
+        }
+    }
+
+    Timer {
+        id: logout_timout
+        interval: 20000
+        repeat: false
     }
 }

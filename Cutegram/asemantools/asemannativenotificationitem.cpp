@@ -134,10 +134,10 @@ void AsemanNativeNotificationItem::setColor(const QColor &color)
 
 
     p->backColor = QColor( p->color.red()*0.8, p->color.green()*0.8, p->color.blue()*0.8 );
-
-    qreal mid = (p->backColor.red()+p->backColor.green()+p->backColor.blue())/3.0;
-    p->textColor = mid>=128? QColor("#333333") : QColor("#ffffff");
     p->buttonColor = QColor( p->color.red()*0.5, p->color.green()*0.5, p->color.blue()*0.5 );
+
+    qreal mid = (p->buttonColor.red()+p->buttonColor.green()+p->buttonColor.blue())/3.0;
+    p->textColor = mid>=128? QColor("#333333") : QColor("#ffffff");
 
     QPalette palette;
     palette.setColor(QPalette::Window, p->backColor);

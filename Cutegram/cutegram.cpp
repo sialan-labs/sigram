@@ -323,8 +323,8 @@ void Cutegram::logout(const QString &phone)
     QFile::remove(ppath + "/auth");
     QFile::remove(ppath + "/config");
     QFile::remove(ppath + "/secret");
-    QFile::remove(ppath + "/database.db");
-    QFile::remove(ppath + "/database.db-journal");
+//    QFile::remove(ppath + "/database.db");
+//    QFile::remove(ppath + "/database.db-journal");
 
     restart();
 }
