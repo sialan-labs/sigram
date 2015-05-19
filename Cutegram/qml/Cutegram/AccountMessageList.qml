@@ -134,10 +134,6 @@ Rectangle {
         header: Item{ width: 4; height: acc_msg_list.bottomMargin }
         footer: Item{ width: 4; height: acc_msg_list.topMargin }
 
-//        displaced: Transition {
-//            NumberAnimation { properties: "y"; duration: 300; easing.type: Easing.OutCubic }
-//        }
-
         section.property: "unreaded"
         section.criteria: ViewSection.FullString
         section.delegate: Item {
@@ -334,7 +330,8 @@ Rectangle {
 
     NormalWheelScroll {
         flick: mlist
-        visible: !Cutegram.smoothScroll
+        animated: Cutegram.smoothScroll
+        reverse: true
     }
 
     PhysicalScrollBar {

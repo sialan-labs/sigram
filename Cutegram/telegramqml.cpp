@@ -510,7 +510,7 @@ FileLocationObject *TelegramQml::locationOfDocument(DocumentObject *doc)
     FileLocationObject *res = locationOf(doc->id(), doc->dcId(), doc->accessHash(), doc);
     res->setMimeType(doc->mimeType());
 
-    QList<DocumentAttribute> attrs;
+    QList<DocumentAttribute> attrs = doc->attributes();
     for(int i=0; i<attrs.length(); i++)
         if(attrs.at(i).classType() == DocumentAttribute::typeAttributeFilename)
             res->setFileName(attrs.at(i).filename());
@@ -621,6 +621,7 @@ QString TelegramQml::fileLocation(FileLocationObject *l)
 {
     QObject *obj = l;
     qint64 dId = 0;
+    bool isSticker = false;
     while(obj)
     {
         const QMetaObject *mobj = obj->metaObject();
@@ -641,6 +642,13 @@ QString TelegramQml::fileLocation(FileLocationObject *l)
             dId = messageDialogId( static_cast<MessageObject*>(obj)->id() );
             break;
         }
+
+        if(mobj == &DocumentObject::staticMetaObject)
+        {
+            DocumentObject *doc = static_cast<DocumentObject*>(obj);
+            isSticker = documentIsSticker(doc);
+        }
+
         obj = obj->parent();
     }
 
@@ -664,6 +672,8 @@ QString TelegramQml::fileLocation(FileLocationObject *l)
 
         QFile::rename(old_path, result);
     }
+    if(isSticker)
+        result += ".webp";
 
     return result;
 }

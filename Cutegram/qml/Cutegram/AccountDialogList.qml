@@ -53,6 +53,8 @@ Item {
         x: Cutegram.currentTheme.dialogListScrollWidth*Devices.density
         clip: true
         model: dialogs_model
+        maximumFlickVelocity: 2000
+        flickDeceleration: 2000
 
         currentIndex: -1
         highlightMoveDuration: 0

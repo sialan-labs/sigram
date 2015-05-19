@@ -8,7 +8,7 @@
 #define VER_PRODUCTVERSION_STR      "2.0\0"
 
 #define VER_COMPANYNAME_STR         "Aseman Team"
-#define VER_FILEDESCRIPTION_STR     "Cutegram is a better telegram client. It's Free and Open source."
+#define VER_FILEDESCRIPTION_STR     "Cutegram telegram client"
 #define VER_INTERNALNAME_STR        "Cutegram"
 #define VER_LEGALCOPYRIGHT_STR      "Copyright (C) 2015 Aseman Co"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"

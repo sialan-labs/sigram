@@ -14,7 +14,7 @@
    width="96"
    height="96"
    id="svg2408"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r"
    sodipodi:docname="cutegram.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -25,17 +25,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1104"
-     inkscape:window-height="716"
+     inkscape:window-width="1319"
+     inkscape:window-height="748"
      id="namedview59"
      showgrid="false"
-     inkscape:zoom="4.9166667"
-     inkscape:cx="37.839246"
-     inkscape:cy="54.259387"
-     inkscape:window-x="65"
-     inkscape:window-y="24"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2408" />
+     inkscape:zoom="3.4766084"
+     inkscape:cx="38.454318"
+     inkscape:cy="54.981411"
+     inkscape:window-x="47"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
   <defs
      id="defs2410">
     <linearGradient
@@ -68,7 +68,7 @@
          offset="0" />
       <stop
          id="stop3692"
-         style="stop-color:#e42c0d;stop-opacity:1"
+         style="stop-color:#d40000;stop-opacity:1"
          offset="1" />
     </linearGradient>
     <linearGradient
@@ -156,10 +156,10 @@
          style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" />
     </clipPath>
     <linearGradient
-       x1="48"
-       y1="90"
-       x2="48"
-       y2="5.9877172"
+       x1="44.012627"
+       y1="63.908375"
+       x2="44.012627"
+       y2="35.101151"
        id="linearGradient3617"
        xlink:href="#linearGradient3688"
        gradientUnits="userSpaceOnUse" />
@@ -356,8 +356,8 @@
     <rect
        width="84"
        height="84"
-       rx="6"
-       ry="6"
+       rx="14.198085"
+       ry="14.198085"
        x="6"
        y="6"
        id="rect2419"

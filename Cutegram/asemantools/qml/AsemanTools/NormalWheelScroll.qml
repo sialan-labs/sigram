@@ -23,27 +23,76 @@ MouseArea {
     anchors.fill: flick
 
     property Flickable flick
+    property bool animated: true
+    property bool reverse: false
+
+    property real startContentY
+
+    NumberAnimation {
+        id: animY
+        target: flick
+        easing.type: Easing.OutSine
+        property: "contentY"
+        duration: 400
+        onRunningChanged: if(!running) flick.returnToBounds()
+    }
 
     onPressed: mouse.accepted = false
     onWheel: {
         wheel.accepted = true
+        var contentX = 0
+        var contentY = 0
+
+        if(!animY.running)
+            startContentY = flick.contentY
+
+        var ratio = animated? 0.7 : 0.5
         if( flick.orientation ) {
             if( flick.orientation == Qt.Horizontal )
-                flick.contentX -= wheel.angleDelta.y/2
+                contentX = -wheel.angleDelta.y*ratio
             else
-                flick.contentY -= wheel.angleDelta.y/2
+                contentY = -wheel.angleDelta.y*ratio
         } else {
             if( flick.flickableDirection == Flickable.VerticalFlick )
-                flick.contentY -= wheel.angleDelta.y/2
+                contentY = -wheel.angleDelta.y*ratio
             else
             if( flick.flickableDirection == Flickable.HorizontalFlick )
-                flick.contentX -= wheel.angleDelta.y/2
+                contentX = -wheel.angleDelta.y*ratio
             else {
-                flick.contentY -= wheel.angleDelta.y/2
-                flick.contentX -= wheel.angleDelta.x/2
+                contentY = -wheel.angleDelta.y*ratio
+                contentX = -wheel.angleDelta.x*ratio
             }
         }
 
-        flick.returnToBounds()
+        if(animated) {
+            startContentY += contentY
+
+            var padY
+            if(reverse) {
+                padY = flick.originY+flick.contentHeight
+                if( startContentY > -flick.height+padY )
+                    startContentY = -flick.height+padY
+                else
+                if( startContentY < -flick.contentHeight+padY )
+                    startContentY = -flick.contentHeight+padY
+            } else {
+                padY = flick.originY
+                if( startContentY < -padY )
+                    startContentY = -padY
+                else
+                if( startContentY > flick.contentHeight - flick.height + padY )
+                    startContentY = flick.contentHeight - flick.height + padY
+            }
+
+            animY.from = flick.contentY;
+            animY.to = startContentY;
+            animY.restart();
+
+            flick.contentX += contentX
+        } else {
+            flick.contentY += contentY
+            flick.contentX += contentX
+            flick.returnToBounds()
+        }
     }
 }
