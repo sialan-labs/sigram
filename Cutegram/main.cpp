@@ -8,6 +8,7 @@
 #include <QMainWindow>
 #include <QPalette>
 #include <QNetworkProxy>
+#include <telegram.h>
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +22,12 @@ int main(int argc, char *argv[])
     app.setOrganizationName("Aseman");
     app.setWindowIcon(QIcon(":/qml/Cutegram/files/icon.png"));
     app.setQuitOnLastWindowClosed(false);
+
+    Telegram::setDefaultHostAddress("149.154.167.50");
+    Telegram::setDefaultHostPort(443);
+    Telegram::setDefaultHostDcId(2);
+    Telegram::setAppId(13682);
+    Telegram::setAppHash("de37bcf00f4688de900510f4f87384bb");
 
 //    TelegramTestObject testObj;
 //    return app.exec();

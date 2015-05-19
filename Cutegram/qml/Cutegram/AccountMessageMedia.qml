@@ -223,7 +223,7 @@ Item {
                     if(result.length==0)
                         result = media.document.thumb.location.download.location
                     if(result.length==0)
-                        result = "files/document.png"
+                        result = ""
                 }
                 else
                 if(Cutegram.filsIsImage(fileLocation))
