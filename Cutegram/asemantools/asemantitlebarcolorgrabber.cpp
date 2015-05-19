@@ -4,6 +4,7 @@
 #include <QPointer>
 #include <QTimer>
 #include <QDebug>
+#include <QGuiApplication>
 
 class AsemanTitleBarColorGrabberPrivate
 {
@@ -97,7 +98,7 @@ void AsemanTitleBarColorGrabber::refresh()
         emit colorChanged();
         return;
     }
-    if(!p->window->isActive())
+    if(!p->window->isActive() || QGuiApplication::focusWindow() != p->window)
     {
         if(p->color == QColor())
             QTimer::singleShot(100, this, SLOT(refresh()));
