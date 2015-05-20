@@ -50,7 +50,7 @@ Item {
 
     NormalWheelScroll {
         flick: countries_list
-        visible: !Cutegram.smoothScroll
+        animated: Cutegram.smoothScroll
     }
 
     PhysicalScrollBar {

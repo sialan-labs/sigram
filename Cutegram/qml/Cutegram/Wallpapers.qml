@@ -84,7 +84,7 @@ Rectangle {
 
     NormalWheelScroll {
         flick: grid
-        visible: !Cutegram.smoothScroll
+        animated: Cutegram.smoothScroll
     }
 
     PhysicalScrollBar {

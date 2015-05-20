@@ -80,7 +80,7 @@ Item {
 
     Item {
         id: particians_frame
-        width: parent.width
+        width: parent.width - 20*Devices.density
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.margins: frameMargins

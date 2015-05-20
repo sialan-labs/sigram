@@ -139,7 +139,7 @@ Item {
 
     NormalWheelScroll {
         flick: slist
-        visible: !Cutegram.smoothScroll
+        animated: Cutegram.smoothScroll
     }
 
     PhysicalScrollBar {
