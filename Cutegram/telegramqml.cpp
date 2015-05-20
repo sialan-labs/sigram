@@ -672,7 +672,7 @@ QString TelegramQml::fileLocation(FileLocationObject *l)
 
         QFile::rename(old_path, result);
     }
-    if(isSticker)
+    if(isSticker && result.right(5) != ".webp")
         result += ".webp";
 
     return result;
@@ -1180,6 +1180,11 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
     qint64 fileId;
     p->msg_send_random_id = generateRandomId();
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
+    if( t.name().contains("webp") && !dlg->encrypted() && !forceDocument && !forceAudio )
+    {
+        fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file, "", true);
+    }
+    else
     if( !t.name().contains("gif") && t.name().contains("image/") && !forceDocument && !forceAudio )
     {
         if(dlg->encrypted())
