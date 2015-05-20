@@ -34,6 +34,18 @@
         <source>%1 participants (%2 online)</source>
         <translation>%1 位參與者 (%2 位在線上)</translation>
     </message>
+    <message>
+        <source>Recently</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last Week</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountDialogList</name>
@@ -110,6 +122,10 @@
     <message>
         <source>Loading...</source>
         <translation>載入中...</translation>
+    </message>
+    <message>
+        <source>Login again</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -203,6 +219,10 @@
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to Personal</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -741,10 +761,29 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>Emoticons</name>
     <message>
         <source>Recent</source>
-        <translation>最近</translation>
+        <translation type="vanished">最近</translation>
     </message>
     <message>
-        <source>All Emoji</source>
+        <source>Delete</source>
+        <translation type="unfinished">刪除</translation>
+    </message>
+    <message>
+        <source>Delete Sticker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about delete this?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EmoticonsModel</name>
+    <message>
+        <source>Recent</source>
+        <translation type="unfinished">最近</translation>
+    </message>
+    <message>
+        <source>Emojis</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

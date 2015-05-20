@@ -34,6 +34,18 @@
         <source>%1 participants (%2 online)</source>
         <translation>%1 participantes (%2 online)</translation>
     </message>
+    <message>
+        <source>Recently</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last Week</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountDialogList</name>
@@ -110,6 +122,10 @@
     <message>
         <source>Loading...</source>
         <translation>Carregando...</translation>
+    </message>
+    <message>
+        <source>Login again</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -205,6 +221,10 @@
 Note that android accept secret chat automatically.</source>
         <translation>Chat secreto rejeitado. Ou aceito por um outro dispositivo.
 Note que o Android aceita o chat secreto automaticamente.</translation>
+    </message>
+    <message>
+        <source>Add to Personal</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -743,11 +763,34 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <name>Emoticons</name>
     <message>
         <source>Recent</source>
-        <translation>Recente</translation>
+        <translation type="vanished">Recente</translation>
     </message>
     <message>
         <source>All Emoji</source>
-        <translation>Todos Emojis</translation>
+        <translation type="vanished">Todos Emojis</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>Delete Sticker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure about delete this?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EmoticonsModel</name>
+    <message>
+        <source>Recent</source>
+        <translation type="unfinished">Recente</translation>
+    </message>
+    <message>
+        <source>Emojis</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

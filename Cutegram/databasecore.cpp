@@ -1034,6 +1034,9 @@ Document DatabaseCore::readDocument(qint64 id)
     document.setAccessHash( record.value("accessHash").toLongLong() );
     document.setClassType( static_cast<Document::DocumentType>(record.value("type").toLongLong()) );
 
+    if(document.mimeType().contains("webp"))
+        document.setAttributes( document.attributes() << DocumentAttribute(DocumentAttribute::typeAttributeSticker) );
+
     const QList<PhotoSize> &sizes = readPhotoSize(document.id());
     if(!sizes.isEmpty())
         document.setThumb(sizes.first());
