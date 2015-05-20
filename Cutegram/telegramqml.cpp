@@ -1183,6 +1183,13 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
     if( t.name().contains("webp") && !dlg->encrypted() && !forceDocument && !forceAudio )
     {
         fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file, "", true);
+
+        MessageMedia media = message.media();
+        Document document = media.document();
+        document.setAttributes( document.attributes() << DocumentAttribute(DocumentAttribute::typeAttributeSticker) );
+
+        media.setDocument(document);
+        message.setMedia(media);
     }
     else
     if( !t.name().contains("gif") && t.name().contains("image/") && !forceDocument && !forceAudio )

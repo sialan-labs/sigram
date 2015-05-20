@@ -157,7 +157,7 @@ Item {
                 id: msg_frame_box
                 anchors.fill: parent
                 anchors.margins: -20*Devices.density
-                visible: !Cutegram.currentTheme.messageShadow && !msg_media.isSticker
+                visible: !Cutegram.currentTheme.messageShadow && !msg_media.isSticker && !uploadItem.isSticker
 
                 Item {
                     anchors.fill: parent
@@ -201,7 +201,7 @@ Item {
                 samples: 16
                 horizontalOffset: 0
                 verticalOffset: 1*Devices.density
-                visible: Cutegram.currentTheme.messageShadow && !msg_media.isSticker
+                visible: Cutegram.currentTheme.messageShadow && !msg_media.isSticker && !uploadItem.isSticker
                 color: Cutegram.currentTheme.messageShadowColor
             }
 

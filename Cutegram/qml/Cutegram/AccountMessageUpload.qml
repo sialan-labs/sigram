@@ -4,7 +4,7 @@ import Cutegram 1.0
 import CutegramTypes 1.0
 
 Item {
-    width: height
+    width: isSticker? 220*Devices.density : height
     height: 200*Devices.density
     visible: uploading
 
@@ -12,13 +12,14 @@ Item {
     property Message message: telegram.nullMessage
 
     property bool uploading: message.upload.fileId != 0
+    property bool isSticker: telegram.documentIsSticker(message.media.document)
 
     Image {
         id: upload_img
         visible: uploading
         anchors.fill: parent
         smooth: true
-        fillMode: Image.PreserveAspectCrop
+        fillMode: isSticker? Image.PreserveAspectFit : Image.PreserveAspectCrop
         source: {
             if(!uploading)
                 return ""
