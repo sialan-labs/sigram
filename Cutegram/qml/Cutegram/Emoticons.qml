@@ -27,10 +27,10 @@ Item {
     clip: true
 
     property bool recent: true
+    property variant accountEmojis: emojis
 
-    signal selected( string code )
-
-    onRecentChanged: slist.refresh()
+    signal emojiSelected( string code )
+    signal stickerSelected( string path )
 
     MouseArea {
         anchors.fill: parent
@@ -39,34 +39,30 @@ Item {
         onWheel: wheel.accepted = true
     }
 
-    Row {
+    EmoticonsModel {
+        id: emodel
+        emojis: accountEmojis
+        stickerSubPaths: [Devices.localFilesPrePath + AsemanApp.homePath + "/stickers", Devices.resourcePath + "/stickers"]
+    }
+
+    ListView {
         id: tab_row
-        anchors.left: parent.left
-        anchors.right: parent.right
+        width: parent.width
+        height: 30*Devices.density
         anchors.top: parent.top
-
-        Button {
-            width: parent.width/2
+        orientation: ListView.Horizontal
+        model: emodel.keys
+        delegate: Button {
+            width: tab_row.width/tab_row.count
+            height: tab_row.height
             textFont.family: AsemanApp.globalFont.family
             textFont.pixelSize: Math.floor(9*Devices.fontDensity)
             normalColor: "#00000000"
             highlightColor: "#0f000000"
-            textColor: recent? Cutegram.currentTheme.masterColor : "#333333"
-            text: qsTr("Recent")
             cursorShape: Qt.PointingHandCursor
-            onClicked: recent = true
-        }
-
-        Button {
-            width: parent.width/2
-            textFont.family: AsemanApp.globalFont.family
-            textFont.pixelSize: Math.floor(9*Devices.fontDensity)
-            normalColor: "#00000000"
-            highlightColor: "#0f000000"
-            textColor: recent? "#333333" : Cutegram.currentTheme.masterColor
-            text: qsTr("All Emoji")
-            cursorShape: Qt.PointingHandCursor
-            onClicked: recent = false
+            textColor: emodel.currentKeyIndex==index? "#333333" : Cutegram.currentTheme.masterColor
+            text: Cutegram.normalizeText(emodel.keys[index])
+            onClicked: emodel.currentKey = emodel.keys[index]
         }
     }
 
@@ -78,9 +74,9 @@ Item {
         anchors.bottom: parent.bottom
         anchors.margins: 4*Devices.density
         clip: true
-        model: ListModel{}
-        cellWidth: 32*Devices.density
-        cellHeight: 32*Devices.density
+        model: emodel
+        cellWidth: emodel.currentKeyIndex>1? 100*Devices.density : 32*Devices.density
+        cellHeight: cellWidth
         delegate: Rectangle {
             id: item
             width: slist.cellWidth
@@ -91,50 +87,45 @@ Item {
                 anchors.fill: parent
                 anchors.margins: 5*Devices.density
                 sourceSize: Qt.size(width,height)
-                source: emoti.length==0? "" : Devices.localFilesPrePath + emojis.pathOf(key)
+                source: model.path
                 smooth: true
                 fillMode: Image.PreserveAspectFit
                 asynchronous: true
-
-                property string emoti: emojis.pathOf(key)
             }
 
             MouseArea {
                 id: marea
                 anchors.fill: parent
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onClicked: {
-                    smilies.selected(key)
-
-                    var newList = new Array
-                    newList[0] = key
-
-                    var cnt = 1
-                    var recentList = AsemanApp.readSetting("recentEmoji")
-                    for( var i=0; cnt<35; i++ )
-                        if( recentList[i] != key ) {
-                            newList[cnt] = recentList[i]
-                            cnt++
+                    if( mouse.button == Qt.RightButton ) {
+                        if(model.type == EmoticonsModel.EmoticonSticker) {
+                            var actions = [qsTr("Delete")]
+                            switch(Desktop.showMenu(actions)) {
+                            case 0:
+                                if( Desktop.yesOrNo(View, qsTr("Delete Sticker"), qsTr("Are you sure about delete this?")) ) {
+                                    Cutegram.deleteFile(model.path)
+                                    emodel.refresh()
+                                }
+                                break;
+                            }
                         }
+                    } else {
+                        switch(model.type)
+                        {
+                        case EmoticonsModel.EmoticonEmoji:
+                            smilies.emojiSelected(model.key)
+                            emodel.pushToRecent(model.key)
+                            break;
 
-                    AsemanApp.setSetting("recentEmoji", newList)
+                        case EmoticonsModel.EmoticonSticker:
+                            smilies.stickerSelected(model.path)
+                            break;
+                        }
+                    }
                 }
             }
         }
-
-        function refresh() {
-            model.clear()
-            var recentList = AsemanApp.readSetting("recentEmoji")
-            if( !recentList ) {
-                recentList = emojis.keys().slice(0,20)
-                AsemanApp.setSetting("recentEmoji", recentList)
-            }
-
-            var keys = recent? recentList : emojis.keys()
-            for( var i=0; i<keys.length; i++ )
-                model.append( {"key":keys[i]} )
-        }
-
-        Component.onCompleted: refresh()
     }
 
     NormalWheelScroll {

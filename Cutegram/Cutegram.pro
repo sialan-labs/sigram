@@ -5,13 +5,15 @@ linux {
     server.target = $${DESTDIR}
     emojis.source = emojis
     emojis.target = $${DESTDIR}
+    stickers.source = stickers
+    stickers.target = $${DESTDIR}
     translations.source = translations
     translations.target = $$DESTDIR/files
     fonts.source = fonts
     fonts.target = $$DESTDIR/files
     themes.source = themes
     themes.target = $${DESTDIR}
-    DEPLOYMENTFOLDERS = server emojis translations themes fonts
+    DEPLOYMENTFOLDERS = server emojis translations themes fonts stickers
 }
 
 TEMPLATE = app
@@ -69,7 +71,8 @@ SOURCES += main.cpp \
     usernamefiltermodel.cpp \
     mp3converterengine.cpp \
     textemojiwrapper.cpp \
-    telegramtestobject.cpp
+    telegramtestobject.cpp \
+    emoticonsmodel.cpp
 
 RESOURCES += resource.qrc
 
@@ -106,7 +109,8 @@ HEADERS += \
     usernamefiltermodel.h \
     mp3converterengine.h \
     textemojiwrapper.h \
-    telegramtestobject.h
+    telegramtestobject.h \
+    emoticonsmodel.h
 
 OTHER_FILES += \
     objects/types.sco \

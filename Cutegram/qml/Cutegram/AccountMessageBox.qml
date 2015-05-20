@@ -117,8 +117,8 @@ Item {
             onCopyRequest: messages.copy()
             onEmojiRequest: {
                 var item = emoticons_component.createObject(message_box)
-                var w = 260*Devices.density
-                var h = w
+                var w = 360*Devices.density
+                var h = 300*Devices.density
 
                 var newPoint = msg_box.mapFromItem(send_msg, x, y)
                 var nx = newPoint.x
@@ -189,8 +189,16 @@ Item {
             anchors.right: parent.right
             anchors.bottom: send_msg.top
             anchors.top: header.bottom
-            width: 200*Devices.density
-            onSelected: send_msg.insertText(code)
+            width: 300*Devices.density
+            onEmojiSelected: send_msg.insertText(code)
+            onStickerSelected: {
+                var dId = currentDialog.peer.userId
+                if(!dId)
+                    dId = currentDialog.peer.chatId
+
+                telegramObject.sendFile(dId, path)
+                point_dialog.hide()
+            }
         }
     }
 

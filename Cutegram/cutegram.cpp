@@ -37,6 +37,7 @@
 #include "usernamefiltermodel.h"
 #include "textemojiwrapper.h"
 #include "telegramcontactsmodel.h"
+#include "emoticonsmodel.h"
 #include "telegramuploadsmodel.h"
 #include "telegramchatparticipantsmodel.h"
 #include "themeitem.h"
@@ -169,6 +170,8 @@ Cutegram::Cutegram(QObject *parent) :
 
     p->themes = QDir(p->themesPath).entryList( QStringList()<<"*.qml" ,QDir::Files, QDir::Name);
 
+    QDir().mkpath(personalStickerDirectory());
+
     qRegisterMetaType<TelegramQml*>("TelegramQml*");
     qRegisterMetaType<UserData*>("UserData*");
     qRegisterMetaType< QList<qint32> >("QList<qint32>");
@@ -191,6 +194,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<MP3ConverterEngine>("Cutegram", 1, 0, "MP3ConverterEngine");
     qmlRegisterType<TelegramChatParticipantsModel>("Cutegram", 1, 0, "ChatParticipantsModel");
     qmlRegisterType<Emojis>("Cutegram", 1, 0, "Emojis");
+    qmlRegisterType<EmoticonsModel>("Cutegram", 1, 0, "EmoticonsModel");
     qmlRegisterUncreatableType<UserData>("Cutegram", 1, 0, "UserData", "");
 
     init_languages();
@@ -381,6 +385,15 @@ void Cutegram::active()
 #endif
     p->viewer->show();
     p->viewer->requestActivate();
+}
+
+void Cutegram::addToPersonal(const QString &src)
+{
+    QString file = src;
+    if( file.left(AsemanDevices::localFilesPrePath().length()) == AsemanDevices::localFilesPrePath() )
+        file = file.mid(AsemanDevices::localFilesPrePath().length());
+
+    QFile::copy(file, personalStickerDirectory() + "/" + QFileInfo(src).baseName() + ".webp");
 }
 
 void Cutegram::setSysTrayCounter(int count, bool force)
@@ -850,11 +863,24 @@ QString Cutegram::searchEngine() const
     return p->searchEngine;
 }
 
+QString Cutegram::personalStickerDirectory() const
+{
+    return AsemanApplication::homePath() + "/stickers/Personal";
+}
+
 bool Cutegram::isLoggedIn(const QString &phone) const
 {
     const QString &home = AsemanApplication::homePath();
     const QString &ppath = home + "/" + phone;
     return QFile::exists(ppath + "/auth");
+}
+
+QString Cutegram::normalizeText(const QString &text) const
+{
+    if(text.isEmpty())
+        return text;
+
+    return text[0].toUpper() + text.mid(1);
 }
 
 void Cutegram::init_languages()

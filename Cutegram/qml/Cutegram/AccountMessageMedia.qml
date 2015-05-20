@@ -344,7 +344,7 @@ Item {
     Indicator {
         id: indicator
         anchors.centerIn: parent
-        light: true
+        light: !isSticker
         modern: true
         indicatorSize: 22*Devices.density
         property bool active: locationObj.download.fileId!=0? fileLocation.length==0 : false

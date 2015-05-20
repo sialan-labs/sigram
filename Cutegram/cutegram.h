@@ -34,6 +34,7 @@ class Cutegram : public QObject
     Q_ENUMS(StatusIconStyles)
 
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
+    Q_PROPERTY(QString personalStickerDirectory READ personalStickerDirectory NOTIFY fakeSignal)
     Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setHighlightColor NOTIFY highlightColorChanged)
 
     Q_PROPERTY(QString language     READ language     WRITE setLanguage     NOTIFY languageChanged    )
@@ -152,7 +153,10 @@ public:
     void setSearchEngine(const QString &se);
     QString searchEngine() const;
 
+    QString personalStickerDirectory() const;
+
     Q_INVOKABLE bool isLoggedIn(const QString &phone) const;
+    Q_INVOKABLE QString normalizeText(const QString &text) const;
 
 public slots:
     void start();
@@ -166,6 +170,7 @@ public slots:
     void configure();
     void incomingAppMessage( const QString & msg = "show" );
     void active();
+    void addToPersonal(const QString &src);
 
 signals:
     void backRequest();

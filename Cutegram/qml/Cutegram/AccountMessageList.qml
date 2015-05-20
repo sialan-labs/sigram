@@ -287,8 +287,14 @@ Rectangle {
                                 break;
                             }
                         } else {
-                            actions = msg_item.selectedText.length == 0? [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
-                                                                       : [qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Search on the Web")]
+                            if(msg_item.isSticker)
+                                actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal")]
+                            else
+                            if(msg_item.selectedText.length == 0)
+                                actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
+                            else
+                                actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Search on the Web")]
+
                             res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
@@ -304,7 +310,10 @@ Rectangle {
                                 break;
 
                             case 3:
-                                Qt.openUrlExternally(Cutegram.searchEngine + msg_item.selectedText.replace(" ","+"))
+                                if(msg_item.isSticker)
+                                    Cutegram.addToPersonal(msg_item.mediaLOcation.download.location)
+                                else
+                                    Qt.openUrlExternally(Cutegram.searchEngine + msg_item.selectedText.replace(" ","+"))
                                 break;
                             }
                         }
