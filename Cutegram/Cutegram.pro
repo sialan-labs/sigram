@@ -168,12 +168,14 @@ desktopFile.files = desktop/Cutegram.desktop
 desktopFile.path = $$APPDESK_PATH/share/applications
 emojis.files = emojis
 emojis.path = $$SHARES_PATH
+stickerFiles.files = stickers
+stickerFiles.path = $$SHARES_PATH
 themesFiles.files = themes
 themesFiles.path = $$SHARES_PATH
 serverPub.files = tg-server.pub
 serverPub.path = $$SHARES_PATH/
 
-INSTALLS = target translations icons desktopFile emojis serverPub pixmaps hicolor themesFiles fontsFiles
+INSTALLS = target translations icons desktopFile emojis stickerFiles serverPub pixmaps hicolor themesFiles fontsFiles
 
 win32 {
     RC_FILE = extra/windows/cutegram.rc

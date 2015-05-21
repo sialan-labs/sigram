@@ -1,3 +1,30 @@
+cutegram (2.2.9-1aseman-vivid) vivid; urgency=medium
+
+  * Sticker send and recieve support
+  * Improve on emoji menu
+  * Bugfix and Improvments
+  * Better Smooth scroll
+
+ -- Aseman Team <contact@aseman.co>  Thu, 21 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.9-1aseman-utopic) utopic; urgency=medium
+
+  * Sticker send and recieve support
+  * Improve on emoji menu
+  * Bugfix and Improvments
+  * Better Smooth scroll
+
+ -- Aseman Team <contact@aseman.co>  Thu, 21 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.9-1aseman-trusty) trusty; urgency=medium
+
+  * Sticker send and recieve support
+  * Improve on emoji menu
+  * Bugfix and Improvments
+  * Better Smooth scroll
+
+ -- Aseman Team <contact@aseman.co>  Thu, 21 May 2015 00:00:00 +0330
+ 
 cutegram (2.2.1-2aseman-vivid) vivid; urgency=medium
 
   * Bugfix and Improvments

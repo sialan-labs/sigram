@@ -99,7 +99,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
 {
     QString res = txt.toHtmlEscaped();
 
-    QRegExp links_rxp("((?:(?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w))|(?:\\w+\\.(?:com|org|co|net)))");
+    QRegExp links_rxp("((?:(?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w|\\/))|(?:\\w+\\.(?:com|org|co|net)))");
     int pos = 0;
     while (!skipLinks && (pos = links_rxp.indexIn(res, pos)) != -1)
     {
@@ -108,7 +108,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
         if(href.indexOf(QRegExp("\\w+\\:\\/\\/")) == -1)
             href = "http://" + href;
 
-        QString atag = QString("<a href='%1'>%2</a>").arg(href,link);
+        QString atag = QString("<a href=\"%1\">%2</a>").arg(href,link);
         res.replace( pos, link.length(), atag );
         pos += atag.size();
     }
