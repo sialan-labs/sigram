@@ -160,6 +160,8 @@ void TelegramMessagesModel::refresh()
         return;
     if( !p->dialog )
         return;
+    if(p->dialog == p->telegram->nullDialog())
+        return;
 
     Telegram *tgObject = p->telegram->telegram();
     if(p->dialog->encrypted())
@@ -188,6 +190,8 @@ void TelegramMessagesModel::loadMore(bool force)
     if( !force && p->messages.count() == 0 )
         return;
     if( !force && p->load_limit == p->load_count + LOAD_STEP_COUNT)
+        return;
+    if(p->dialog == p->telegram->nullDialog())
         return;
 
     p->load_limit = p->load_count + LOAD_STEP_COUNT;

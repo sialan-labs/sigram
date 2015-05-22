@@ -1083,6 +1083,8 @@ void TelegramQml::messagesReadHistory(qint64 peerId)
 {
     if(!p->telegram)
         return;
+    if(!peerId)
+        return;
 
     const InputPeer & peer = getInputPeer(peerId);
     p->telegram->messagesReadHistory(peer);
@@ -1733,7 +1735,7 @@ void TelegramQml::error(qint64 id, qint32 errorCode, QString errorText)
     p->error = errorText;
     emit errorChanged();
 
-//    qDebug() << __PRETTY_FUNCTION__ << errorText;
+    qDebug() << __PRETTY_FUNCTION__ << errorText;
 }
 
 void TelegramQml::accountGetWallPapers_slt(qint64 id, const QList<WallPaper> &wallPapers)

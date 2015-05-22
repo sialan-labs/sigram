@@ -19,21 +19,12 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 
-Rectangle {
+Item {
     id: bpanel
-    anchors.left: parent.left
-    anchors.right: parent.right
-    anchors.bottom: parent.bottom
-    color: "#D9D9D9"
-    height: 0
-    clip: true
+    anchors.fill: parent
 
     property variant item
     property bool destroyOnHide: false
-
-    Behavior on height {
-        NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
-    }
 
     onItemChanged: {
         if( item )
@@ -45,11 +36,12 @@ Rectangle {
             privates.oldItem.destroy()
 
         if( item ) {
-            item.parent = bpanel
-            item.anchors.top = bpanel.top
-            item.anchors.left = bpanel.left
-            item.anchors.right = bpanel.right
-            bpanel.height = item.height + View.navigationBarHeight
+            item.parent = pbar_scene
+            item.anchors.top = pbar_scene.top
+            item.anchors.left = pbar_scene.left
+            item.anchors.right = pbar_scene.right
+            pbar_scene.destHeight = item.height + View.navigationBarHeight
+            pbar_scene.height = pbar_scene.destHeight
         }
 
         privates.oldItem = item
@@ -60,19 +52,41 @@ Rectangle {
         property variant oldItem
     }
 
-    Timer {
-        id: destroy_timer
-        interval: 400
-        onTriggered: {
-            if(bpanel.item)
-                bpanel.item.destroy()
-            if(destroyOnHide)
-                bpanel.destroy()
+    Rectangle {
+        anchors.fill: parent
+        color: "#88000000"
+        opacity: pbar_scene.height/pbar_scene.destHeight
+    }
+
+    Rectangle {
+        id: pbar_scene
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        color: "#f0f0f0"
+        height: 0
+        clip: true
+
+        property real destHeight: 10
+
+        Behavior on height {
+            NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+        }
+
+        Timer {
+            id: destroy_timer
+            interval: 400
+            onTriggered: {
+                if(bpanel.item)
+                    bpanel.item.destroy()
+                if(destroyOnHide)
+                    bpanel.destroy()
+            }
         }
     }
 
     function hide() {
-        height = 0
+        pbar_scene.height = 0
         destroy_timer.restart()
     }
 }
