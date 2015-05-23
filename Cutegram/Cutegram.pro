@@ -37,8 +37,8 @@ win32 {
 } else {
 macx {
     QT += macextras
-    LIBS += -lssl -lcrypto -lz -lqtelegram-ae
-    INCLUDEPATH += /usr/include/libqtelegram-ae $$OUT_PWD/$$DESTDIR/include/libqtelegram-ae
+    LIBS += -lssl -lcrypto -lz -L/Users/bardia/Projects/builds/64/lib/ -lqtelegram-ae
+    INCLUDEPATH += /Users/bardia/Projects/builds/64/include/libqtelegram-ae
 } else {
     LIBS += -lssl -lcrypto -lz -lqtelegram-ae
     INCLUDEPATH += /usr/include/libqtelegram-ae $$OUT_PWD/$$DESTDIR/include/libqtelegram-ae

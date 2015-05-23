@@ -1182,7 +1182,7 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
     qint64 fileId;
     p->msg_send_random_id = generateRandomId();
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
-    if( t.name().contains("webp") && !dlg->encrypted() && !forceDocument && !forceAudio )
+    if( (t.name().contains("webp") || fpath.right(5) == ".webp") && !dlg->encrypted() && !forceDocument && !forceAudio )
     {
         QImageReader reader(file);
         const QSize imageSize = reader.size();
