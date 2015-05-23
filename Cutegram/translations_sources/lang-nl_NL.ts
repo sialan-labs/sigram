@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -36,15 +34,15 @@
     </message>
     <message>
         <source>Recently</source>
-        <translation type="unfinished"></translation>
+        <translation>Recent</translation>
     </message>
     <message>
         <source>Last Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Laatste maand</translation>
     </message>
     <message>
         <source>Last Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Laatste week</translation>
     </message>
 </context>
 <context>
@@ -125,7 +123,7 @@
     </message>
     <message>
         <source>Login again</source>
-        <translation type="unfinished"></translation>
+        <translation>Opnieuw inloggen</translation>
     </message>
 </context>
 <context>
@@ -224,7 +222,7 @@ Android accepteerd geheime chats automatisch.</translation>
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>Toevoegen aan persoonlijk</translation>
     </message>
 </context>
 <context>
@@ -276,7 +274,7 @@ Android accepteerd geheime chats automatisch.</translation>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Het bevat Curegram-nieuws met informatie over nieuwe versies en oplossingen.
 Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
@@ -762,35 +760,27 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
 <context>
     <name>Emoticons</name>
     <message>
-        <source>Recent</source>
-        <translation type="vanished">Recent</translation>
-    </message>
-    <message>
-        <source>All Emoji</source>
-        <translation type="vanished">Alle emoticons</translation>
-    </message>
-    <message>
         <source>Delete</source>
-        <translation type="unfinished">Verwijderen</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation type="unfinished"></translation>
+        <translation>Sticker verwijderen</translation>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
-        <translation type="unfinished"></translation>
+        <translation>Weet u zeker dat u dit wilt verwijderen?</translation>
     </message>
 </context>
 <context>
     <name>EmoticonsModel</name>
     <message>
         <source>Recent</source>
-        <translation type="unfinished">Recent</translation>
+        <translation>Recent</translation>
     </message>
     <message>
         <source>Emojis</source>
-        <translation type="unfinished"></translation>
+        <translation>Emoticons</translation>
     </message>
 </context>
 <context>
@@ -846,79 +836,79 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     <name>JalaliCalendarObject</name>
     <message>
         <source>Farvardin</source>
-        <translation type="unfinished"></translation>
+        <translation>Farvardin</translation>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

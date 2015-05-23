@@ -1,3 +1,21 @@
+cutegram (2.3.0-1aseman-vivid) vivid; urgency=medium
+
+  * Improvement and Bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 00:00:00 +0330
+ 
+cutegram (2.3.0-1aseman-utopic) utopic; urgency=medium
+
+  * Improvement and Bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 00:00:00 +0330
+ 
+cutegram (2.3.0-1aseman-trusty) trusty; urgency=medium
+
+  * Improvement and Bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 00:00:00 +0330
+ 
 cutegram (2.2.9-1aseman-vivid) vivid; urgency=medium
 
   * Sticker send and recieve support

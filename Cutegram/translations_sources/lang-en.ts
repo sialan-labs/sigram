@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.0" language="en_US">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</translation>
     </message>
     <message>
         <source>Home Page</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Become online</source>
-        <translation type="unfinished"></translation>
+        <translation>Go online</translation>
     </message>
 </context>
 <context>
@@ -110,11 +110,11 @@
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 started typing on &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 started typing</translation>
     </message>
 </context>
 <context>
@@ -163,7 +163,7 @@
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation type="unfinished"></translation>
+        <translation>Media files are not currently supported on secret chats</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>

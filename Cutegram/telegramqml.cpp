@@ -1184,7 +1184,15 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
     const QMimeType & t = p->mime_db.mimeTypeForFile(file);
     if( t.name().contains("webp") && !dlg->encrypted() && !forceDocument && !forceAudio )
     {
-        fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file, "", true);
+        QImageReader reader(file);
+        const QSize imageSize = reader.size();
+        reader.setScaledSize(QSize(200, 200.0*imageSize.height()/imageSize.width()));
+
+        QString thumbnail = AsemanApplication::tempPath()+"/cutegram_thumbnail_" + QUuid::createUuid().toString() + ".webp";
+        QImageWriter writer(thumbnail);
+        writer.write(reader.read());
+
+        fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file, thumbnail, true);
 
         MessageMedia media = message.media();
         Document document = media.document();

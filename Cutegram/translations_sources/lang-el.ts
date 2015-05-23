@@ -1,398 +1,398 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="en_GB" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="el" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation>Cutegram is a Telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 licence.</translation>
+        <translation>Cutegram είναι ένα telegram λογισμικο από τον Aseman. Είναι δωρεάν και ανοικτού κώδικα και έχει εκδοθεί υπό την άδεια GPLv3.</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</translation>
+        <translation>Cutegram χρησιμοποιοι Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, ορισμένα εργαλεία του KDE, εικονίδια Faenza και το Twitter emojies.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation>Αρχική Σελίδα</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogHeader</name>
     <message>
         <source>Online</source>
-        <translation>Online</translation>
+        <translation>Συνδεδεμένοι</translation>
     </message>
     <message>
         <source>%1 was online</source>
-        <translation>%1 was online</translation>
+        <translation>1% ήταν σε απευθείας σύνδεση</translation>
     </message>
     <message>
         <source>Secret chat</source>
-        <translation>Secret chat</translation>
+        <translation>Μυστική συνομιλία</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation>%1 participants (%2 online)</translation>
+        <translation>1% συμμετέχοντες (% 2 σε απευθείας σύνδεση)</translation>
     </message>
     <message>
         <source>Recently</source>
-        <translation>Recently</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Last Month</source>
-        <translation>Last Month</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Last Week</source>
-        <translation>Last Week</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
-        <translation>Typing...</translation>
+        <translation>Πληκτρολόγηση...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Διαγραφή</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation>Delete secret chat</translation>
+        <translation>Διαγραφή μυστικής συνομιλίας</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation>Are you sure about deleting this secret chat?</translation>
+        <translation>Είστε σίγουροι για τη διαγραφή αυτής της μυστικής συνομιλίας;</translation>
     </message>
     <message>
         <source>Delete History</source>
-        <translation>Delete History</translation>
+        <translation>Διαγραφή Ιστορικου</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation>Are you sure about deleting history?</translation>
+        <translation>Είστε σίγουροι για τη διαγραφή του ιστορικου;</translation>
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation>Open in New Window</translation>
+        <translation>Άνοιγμα σε νέο παράθυρο</translation>
     </message>
     <message>
         <source>Notify when</source>
-        <translation>Notify when</translation>
+        <translation>Ειδοποίηση όταν</translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation>Become online</translation>
+        <translation>Γίνετε απευθείας σύνδεση</translation>
     </message>
 </context>
 <context>
     <name>AccountFrame</name>
     <message>
         <source>Show</source>
-        <translation>Show</translation>
+        <translation>Εμφάνιση</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Mute</translation>
+        <translation>Σίγαση</translation>
     </message>
     <message>
         <source>Message!</source>
-        <translation>Message!</translation>
+        <translation>Μήνυμα!</translation>
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation>Message on &quot;%1&quot; by &quot;%2&quot;</translation>
+        <translation>Μήνυμα για &quot;%1&quot; by &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 is online</source>
-        <translation>%1 is online</translation>
+        <translation>%1 είναι σε απευθείας σύνδεση</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation>%1 start typing on &quot;%2&quot;</translation>
+        <translation>%1 αρχίσε να γραφει στον &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation>%1 start typing</translation>
+        <translation>%1 αρχισε να γραφει</translation>
     </message>
 </context>
 <context>
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation>Loading...</translation>
+        <translation>Φόρτωση...</translation>
     </message>
     <message>
         <source>Login again</source>
-        <translation>Login again</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountMessageAction</name>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation>%1 created the group &quot;%2&quot;</translation>
+        <translation>%1 δημιούργησε την ομάδα &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation>%1 left the group</translation>
+        <translation>%1 εγκατέλειψε την ομάδα</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation>%1 changed group name to &quot;%2&quot;</translation>
+        <translation>%1 αλλαξε το όνομα της ομάδας σε &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation>%1 changed group photo.</translation>
+        <translation>%1 αλλαξε την φωτογραφια της ομαδας</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation>%1 deleted group photo</translation>
+        <translation>%1 διεγραψε την ομαδικη φωτογραφια</translation>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation>%1 added %2 to group</translation>
+        <translation>%1 προστέθηκε %2 στην ομάδα</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation>%1 kicked %2</translation>
+        <translation>%1 εκδιωχθηκε %2</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation>Media files are not supported on secret chat currently</translation>
+        <translation>Αρχεία πολυμέσων δεν υποστηρίζονται σε μυστική συνομιλία επί του παρόντος</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation>Don&apos;t Load Anymore</translation>
+        <translation>Να μην ξανα γίνει φόρτωση</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation>Load Always</translation>
+        <translation>Φόρτωση πάντα</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation>Load Link</translation>
+        <translation>Φόρτωση σύνδεσμου</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageList</name>
     <message>
         <source>Welcome :)</source>
-        <translation>Welcome :)</translation>
+        <translation>Καλως Ηρθατε :)</translation>
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>Secret chat request. Please Accept or Reject.</translation>
+        <translation>Αιτηση για μυστικη συνομιλια, Παρακαλούμε Αποδεχτητε την ή Απόρριψτε.</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation>Accept</translation>
+        <translation>Αποδοχή</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation>Reject</translation>
+        <translation>Απόρριψη</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Forward</translation>
+        <translation>Προς Τα Εμπρός</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Αντιγραφή</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Διαγραφή</translation>
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation>Search on the Web</translation>
+        <translation>Αναζήτηση στο διαδίκτυο</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation>New Messages</translation>
+        <translation>Νέα μηνύματα</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation>Secret chat rejected. Or accepted from another device.
-Note that android accept secret chat automatically.</translation>
+        <translation>Η μυστική συνομιλία απορρίφθηκε. Η την δεχθηκε από άλλη συσκευή.
+Σημειώστε ότι το Android αποδέχεται μυστικές συνομιλίες αυτόματα.</translation>
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation>Add to Personal</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>Click to Download</translation>
+        <translation>Κάντε κλικ για λήψη</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation>Unsupported Media</translation>
+        <translation>Μη υποστηριζόμενα μέσα </translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Ακύρωση</translation>
     </message>
 </context>
 <context>
     <name>AccountSearchList</name>
     <message>
         <source>Me</source>
-        <translation>Me</translation>
+        <translation>Εμένα</translation>
     </message>
     <message>
         <source>%1 on %2</source>
-        <translation>%1 on %2</translation>
+        <translation>%1 σε %2</translation>
     </message>
     <message>
         <source>%1 to %2</source>
-        <translation>%1 to %2</translation>
+        <translation>%1 σε %2</translation>
     </message>
 </context>
 <context>
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
-        <translation>Send</translation>
+        <translation>Αποστολη</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Αντιγραφη</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Επικολληση</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Διαγραφή</translation>
     </message>
     <message>
         <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation>It&apos;s Cutegram news about new releases and solutions.
-It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translation>
+        <translation>Είναι Cutegram νέα σχετικά με νέες κυκλοφορίες και λύσεις.
+Δεν είναι μια telegram επαφή. Είναι απλά μια εικονική επαφή.</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Camera</translation>
+        <translation>Κάμερα</translation>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation>Audio Recorder</translation>
+        <translation>Εγγραφή ήχου</translation>
     </message>
 </context>
 <context>
     <name>AccountSign</name>
     <message>
         <source>Code</source>
-        <translation>Code</translation>
+        <translation>Κωδικός</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>First Name</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Last Name</translation>
+        <translation>Επίθετο</translation>
     </message>
     <message>
         <source>Sign In</source>
-        <translation>Sign In</translation>
+        <translation>Σύνδεση</translation>
     </message>
     <message>
         <source>Sign Up</source>
-        <translation>Sign Up</translation>
+        <translation>Αποσύνδεση</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>Call Request</translation>
+        <translation>Αίτηση κλήσης</translation>
     </message>
     <message>
         <source>Requested</source>
-        <translation>Requested</translation>
+        <translation>Αιτήματα</translation>
     </message>
 </context>
 <context>
     <name>AccountView</name>
     <message>
         <source>Search</source>
-        <translation>Search</translation>
+        <translation>Αναζήτηση</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation>New group chat</translation>
+        <translation>Νεα ομαδα συζητησης</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configure</translation>
+        <translation>Διαμόρφωση</translation>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation>Group Topic</translation>
+        <translation>Ομάδα Θέματος</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation>Create</translation>
+        <translation>Δημιουργία</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>Add Secret Chat</translation>
+        <translation>Προσθήκη μυστικής συνομιλίας</translation>
     </message>
     <message>
         <source>Contact List</source>
-        <translation>Contact List</translation>
+        <translation>Λιστα επαφων</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation>Just drag and drop contacts here</translation>
+        <translation>Απλά μεταφορά και απόθεση των επαφών εδώ</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation>Add New Contact</translation>
+        <translation>Προσθήκη Νέας Επαφής</translation>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation>Add Contact</translation>
+        <translation>Προσθήκη επαφής</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation>Add Account (experimental)</translation>
+        <translation>Προσθήκη λογαριασμού (σε πειραματικό στάδιο)</translation>
     </message>
 </context>
 <context>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation>Fill below form to add new contact.</translation>
+        <translation>Συμπληρώστε την παρακάτω φόρμα για να προσθέσετε την νέα επαφή.</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>First Name</translation>
+        <translation>Όνομα</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Last Name</translation>
+        <translation>Επίθετο</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>Phone Number</translation>
+        <translation>Αριθμος Τηλεφωνου</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Ακύρωση</translation>
     </message>
     <message>
         <source>OK</source>
@@ -403,15 +403,15 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation>Aseman is a non-profit organisation. It exists to support and lead the free, open source and cross-platform projects and researches.</translation>
+        <translation>Ο Aseman είναι ένας μη-κερδοσκοπικός οργανισμός, υπάρχει για να υποστηρίζει και να καθοοδηγήσει λογισμικα δωρεάν, ανοιχτού κώδικα και εργα πολλαπλής πλατφόρμας και ερευνών.</translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</translation>
+        <translation>Ο σκοπός του Aseman είναι να παρέχει ελεύθερα και ασφαλή προϊόντα για να διατηρήσουν την ελευθερία των ανθρώπων και την ιδιωτική τους ζωή.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation>Αρχική Σελίδα</translation>
     </message>
 </context>
 <context>
@@ -458,503 +458,503 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the Universe. Currently, we are focusing on design and development of software applications and tools which have a direct connection with end users.</translation>
+        <translation>Το Aseman είναι μια μη-κερδοσκοπική έρευνα και ανάπτυξη λογισμικού ομάδα που ξεκίνησε το Φεβρουάριο, 2014 εστιάζοντας στην ανάπτυξη των προϊόντων, τεχνολογιών και λύσεων, προκειμένου να δημοσιεύσει λογισμικο ανοικτού κώδικα προσβάσιμο σε όλους τους ανθρώπους σε ολο τον κόσμο. Επί του παρόντος, επικεντρωνόμαστε στο σχεδιασμό και την ανάπτυξη εφαρμογών λογισμικού και εργαλείων που έχουν άμεση σχέση με τους τελικούς χρήστες.</translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the World. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
+        <translation>Με την ενεργοποίηση καινοτόμων έργων και τη διανομή λογισμικού σε εκατομμύρια χρήστες σε παγκόσμιο επίπεδο, το εργαστήριο εργάζεται για να επιταχύνει την ανάπτυξη του υψηλού αντίκτυπο σχεδίων ανοικτού κώδικα λογισμικού και την προώθηση μιας ανοικτής πηγής καλλιέργειας της προσβασιμότητας και την αύξηση της παραγωγικότητας σε όλο τον κόσμο. Οι εταίροι του εργαστηρίου με τους ηγέτες της βιομηχανίας και των φορέων χάραξης πολιτικής, ώστε οι τεχνολογίες ανοικτού κώδικα σε νέους τομείς, συμπεριλαμβανομένης της εκπαίδευσης, της υγείας και της κυβέρνησης.</translation>
     </message>
 </context>
 <context>
     <name>AuthenticateDialog</name>
     <message>
         <source>Authenticating</source>
-        <translation>Authenticating</translation>
+        <translation>Έλεγχος ταυτότητας</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>Phone Number</translation>
+        <translation>Αριθμος Τηλεφωνου</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>Login</translation>
+        <translation>Είσοδος</translation>
     </message>
 </context>
 <context>
     <name>CameraDialog</name>
     <message>
         <source>Send</source>
-        <translation>Send</translation>
+        <translation>Αποστολη</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Ακύρωση</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation>Capture</translation>
+        <translation>Σύλληψη</translation>
     </message>
 </context>
 <context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation>On</translation>
+        <translation>Ενεργοποιηση</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation>Off</translation>
+        <translation>Απενεργοποιηση</translation>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Notifications</source>
-        <translation>Notifications</translation>
+        <translation>Ειδοποιήσεις</translation>
     </message>
     <message>
         <source>On Start</source>
-        <translation>On Start</translation>
+        <translation>Στην Έναρξη</translation>
     </message>
     <message>
         <source>Languages</source>
-        <translation>Languages</translation>
+        <translation>Γλώσσες</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automatic</translation>
+        <translation>Αυτόματα</translation>
     </message>
     <message>
         <source>Always visible</source>
-        <translation>Always visible</translation>
+        <translation>Πάντα ορατά</translation>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation>Minimise to system tray</translation>
+        <translation>Ελαχιστοποίηση στο πλαισίο συστήματος</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Logout</translation>
+        <translation>Αποσυνδεση</translation>
     </message>
     <message>
         <source>Change Photo</source>
-        <translation>Change Photo</translation>
+        <translation>Αλλαγη φωτογραφιας</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation>Select photo</translation>
+        <translation>Επιλογη φωτογραφιας</translation>
     </message>
     <message>
         <source>Detailed List</source>
-        <translation>Detailed List</translation>
+        <translation>Αναλυτική Λίστα</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>Background</translation>
+        <translation>Φόντος</translation>
     </message>
     <message>
         <source>Notify Sound</source>
-        <translation>Notify Sound</translation>
+        <translation>Ειδοποίηση ήχου</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation>Change</translation>
+        <translation>Αλλαγή</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Αφαίρεση</translation>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>Select Image</translation>
+        <translation>Επιλογή εικόνας</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>None</translation>
+        <translation>Καμία</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Default</translation>
+        <translation>Προεπιλογή</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Custom</translation>
+        <translation>Προσαρμοσμένη</translation>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation>Select Sound</translation>
+        <translation>Επιλογή ήχου</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation>Cutegram Newsletter</translation>
+        <translation>Cutegram Ενημερωτικό Δελτίο</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Font</translation>
+        <translation>Γραμματοσειρά</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation>Select</translation>
+        <translation>Επιλογή</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Select Font</translation>
+        <translation>Επιλογή γραμματοσειράς</translation>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation>Auto Start</translation>
+        <translation>Αυτόματη Έναρξη</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation>Proxy Settings</translation>
+        <translation>Ρυθμίσεις διακομιστή μεσολάβησης</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>About Cutegram</translation>
+        <translation>Σχετικά με το Cutegram</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>About Aseman</translation>
+        <translation>Σχετικά με το Aseman</translation>
     </message>
     <message>
         <source>Minimum List</source>
-        <translation>Minimum List</translation>
+        <translation>Ελάχιστοποιηση λίστας</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation>Theme</translation>
+        <translation>Θέμα</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation>Search Engine</translation>
+        <translation>Μηχανή Αναζήτησης</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation>Master Colour</translation>
+        <translation>Κύριο Χρώμα</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation>System Colour</translation>
+        <translation>Χρωματα συστηματος</translation>
     </message>
     <message>
         <source>Tray icon style</source>
-        <translation>Tray icon style</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Smooth Scroll</source>
-        <translation>Smooth Scroll</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dark</source>
-        <translation>Dark</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Light</source>
-        <translation>Light</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>CursorPicker</name>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Αντιγραφη</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Cut</translation>
+        <translation>Αποκοπη</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Επικολληση</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Διαγραφή</translation>
     </message>
 </context>
 <context>
     <name>Cutegram</name>
     <message>
         <source>Show</source>
-        <translation>Show</translation>
+        <translation>Εμφάνιση</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configure</translation>
+        <translation>Διαμόρφωση</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>About</translation>
+        <translation>Σχετικά με</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>About Aseman</translation>
+        <translation>Σχετικά με το Aseman</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quit</translation>
+        <translation>Έξοδος</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Exit</translation>
+        <translation>Έξοδος</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contact</translation>
+        <translation>Επαφες</translation>
     </message>
 </context>
 <context>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation>AM</translation>
+        <translation>Μετα μεσημβριας</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation>Προ μεσημβριας</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation>Ημερομηνία</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Time</translation>
+        <translation>Ωρα</translation>
     </message>
 </context>
 <context>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>&lt;&lt;&lt; Drop to dialogues list to forward</translation>
+        <translation>&lt;&lt;&lt; Πτώση στην λίστα διαλόγων για διαβιβαση</translation>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation>Drop to forward</translation>
+        <translation>Πτώση για διαβιβάση</translation>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation>Drop to send as Document</translation>
+        <translation>Πτώση για αποστολή εγγράφου</translation>
     </message>
     <message>
         <source>Drop to send</source>
-        <translation>Drop to send</translation>
+        <translation>Πτώση για αποστολή</translation>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation>Drop to add participant</translation>
+        <translation>Πτώση για να προσθέσετε συμμετέχοντες</translation>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation>Drop to add new chat</translation>
+        <translation>Πτώση για να προσθέσετε νέα συνομιλία</translation>
     </message>
     <message>
         <source>New Group</source>
-        <translation>New Group</translation>
+        <translation>Νεα ομαδα </translation>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation>Please enter new group name</translation>
+        <translation>Παρακαλούμε εισάγετε το νέο όνομα της ομάδας</translation>
     </message>
 </context>
 <context>
     <name>Emoticons</name>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation>Delete Sticker</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
-        <translation>Are you sure about delete this?</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>EmoticonsModel</name>
     <message>
         <source>Recent</source>
-        <translation>Recent</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Emojis</source>
-        <translation>Emojis</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>Please select a contact...</translation>
+        <translation>Παρακαλούμε επιλέξτε μια επαφή..</translation>
     </message>
     <message>
         <source>To</source>
-        <translation>To</translation>
+        <translation>Σε</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Ακύρωση</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Forward</translation>
+        <translation>Προς Τα Εμπρός</translation>
     </message>
 </context>
 <context>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Επικολληση</translation>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation>Please enter the password</translation>
+        <translation>Παρακαλούμε εισάγετε τον κωδικό πρόσβασης</translation>
     </message>
     <message>
         <source>password</source>
-        <translation>password</translation>
+        <translation>κωδικός πρόσβασης</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Done</translation>
+        <translation>Ολοκληρώθηκε</translation>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation>Incorrect!</translation>
+        <translation>Λάθος!</translation>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation>Back</translation>
+        <translation>Πίσω</translation>
     </message>
 </context>
 <context>
     <name>JalaliCalendarObject</name>
     <message>
         <source>Farvardin</source>
-        <translation>Farvardin</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation>Ordibehesht</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khordad</source>
-        <translation>Khordad</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tir</source>
-        <translation>Tir</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mordad</source>
-        <translation>Mordad</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation>Shahrivar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mehr</source>
-        <translation>Mehr</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Abaan</source>
-        <translation>Abaan</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aazar</source>
-        <translation>Aazar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dey</source>
-        <translation>Dey</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bahman</source>
-        <translation>Bahman</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Esfand</source>
-        <translation>Esfand</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation>Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation>1Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation>2Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation>3Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation>4Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation>5Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Jome</source>
-        <translation>Jome</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Επικολληση</translation>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation>Proxy Settings</translation>
+        <translation>Ρυθμίσεις διακομιστή μεσολάβησης</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation>This changes needs to restart application.</translation>
+        <translation>Για αυτες τις αλλαγές χρειάζεται να κάνετε επανεκκίνηση της εφαρμογής.</translation>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation>Proxy Type</translation>
+        <translation>Τυπος διακομιστή μεσολάβησης</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation>Hostname</translation>
+        <translation>Όνομα κεντρικού υπολογιστή</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation>Port</translation>
+        <translation>Θυρα</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Username</translation>
+        <translation>Ονομα χρηστη</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Password</translation>
+        <translation>Κωδικός πρόσβασης</translation>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation>Ex: 127.0.0.1</translation>
+        <translation>Π.χ: 127.0.0.1</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Ακύρωση</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -965,84 +965,84 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation>Send</translation>
+        <translation>Αποστολη</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Ακύρωση</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Σφάλμα</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stop</translation>
+        <translation>Στοπ</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation>Record</translation>
+        <translation>Καταγραφή</translation>
     </message>
 </context>
 <context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation>Select Application</translation>
+        <translation>Επιλογή εφαρμογής</translation>
     </message>
 </context>
 <context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation>Secret Chat</translation>
+        <translation>Μυστική συνομιλία</translation>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation>Phone Number</translation>
+        <translation>Αριθμος Τηλεφωνου</translation>
     </message>
     <message>
         <source>Favorite</source>
-        <translation>Favourite</translation>
+        <translation>Αγαπημένα</translation>
     </message>
     <message>
         <source>Love</source>
-        <translation>Love</translation>
+        <translation>Αγάπη</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Mute</translation>
+        <translation>Σίγαση</translation>
     </message>
     <message>
         <source>Participants</source>
-        <translation>Participants</translation>
+        <translation>Συμμετέχοντες</translation>
     </message>
     <message>
         <source>Show List</source>
-        <translation>Show List</translation>
+        <translation>Εμφάνιση λίστας</translation>
     </message>
     <message>
         <source>Leave</source>
-        <translation>Leave</translation>
+        <translation>Εγκαταλυψη</translation>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation>Leave the group</translation>
+        <translation>Εγκαταλειψη της ομάδας</translation>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
-        <translation>Are you sure about leaving this group?</translation>
+        <translation>Είστε σίγουροι για την έξοδο από αυτή την ομάδα;</translation>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation>Add Participant</translation>
+        <translation>Προσθήκη συμμετέχοντος</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation>Show Badges</translation>
+        <translation>Εμφάνιση Διακριτικων</translation>
     </message>
 </context>
 </TS>

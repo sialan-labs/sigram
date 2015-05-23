@@ -1,94 +1,94 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="en_GB" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation>Cutegram is a Telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 licence.</translation>
+        <translation>Cutegram är en Telegramklient av Aseman. Den är gratis, öppen källkod och släpps med GPLv3-licensen.</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</translation>
+        <translation>Cutegram använder Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, några KDE-verktyg, Faenza-ikoner och Twitter emojis.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation>Hemsida</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogHeader</name>
     <message>
         <source>Online</source>
-        <translation>Online</translation>
+        <translation>Inloggad</translation>
     </message>
     <message>
         <source>%1 was online</source>
-        <translation>%1 was online</translation>
+        <translation>%1 var inloggad</translation>
     </message>
     <message>
         <source>Secret chat</source>
-        <translation>Secret chat</translation>
+        <translation>Hemlig chatt</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation>%1 participants (%2 online)</translation>
+        <translation>%1 deltagare (%2 inloggade)</translation>
     </message>
     <message>
         <source>Recently</source>
-        <translation>Recently</translation>
+        <translation>Nyligen</translation>
     </message>
     <message>
         <source>Last Month</source>
-        <translation>Last Month</translation>
+        <translation>Förra månaden</translation>
     </message>
     <message>
         <source>Last Week</source>
-        <translation>Last Week</translation>
+        <translation>Förra veckan</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
-        <translation>Typing...</translation>
+        <translation>Skriver...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Radera</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation>Delete secret chat</translation>
+        <translation>Radera hemlig chatt</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation>Are you sure about deleting this secret chat?</translation>
+        <translation>Är du säker på att du vill radera denna hemliga chatt?</translation>
     </message>
     <message>
         <source>Delete History</source>
-        <translation>Delete History</translation>
+        <translation>Radera Historik</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation>Are you sure about deleting history?</translation>
+        <translation>Är du säker på att du vill radera historiken?</translation>
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation>Open in New Window</translation>
+        <translation>Öppna i Nytt Fönster</translation>
     </message>
     <message>
         <source>Notify when</source>
-        <translation>Notify when</translation>
+        <translation>Meddela när</translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation>Become online</translation>
+        <translation>Logga in</translation>
     </message>
 </context>
 <context>
     <name>AccountFrame</name>
     <message>
         <source>Show</source>
-        <translation>Show</translation>
+        <translation>Visa</translation>
     </message>
     <message>
         <source>Mute</source>
@@ -96,303 +96,303 @@
     </message>
     <message>
         <source>Message!</source>
-        <translation>Message!</translation>
+        <translation>Meddelande!</translation>
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation>Message on &quot;%1&quot; by &quot;%2&quot;</translation>
+        <translation>Meddelande på &quot;%1&quot; av &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 is online</source>
-        <translation>%1 is online</translation>
+        <translation>%1 är inloggad</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation>%1 start typing on &quot;%2&quot;</translation>
+        <translation>%1 började skriva på &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation>%1 start typing</translation>
+        <translation>%1 började skriva</translation>
     </message>
 </context>
 <context>
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation>Loading...</translation>
+        <translation>Laddar...</translation>
     </message>
     <message>
         <source>Login again</source>
-        <translation>Login again</translation>
+        <translation>Logga in igen</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageAction</name>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation>%1 created the group &quot;%2&quot;</translation>
+        <translation>%1 skapade gruppen &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation>%1 left the group</translation>
+        <translation>%1 lämnade gruppen</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation>%1 changed group name to &quot;%2&quot;</translation>
+        <translation>%1 bytte gruppnamn till &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation>%1 changed group photo.</translation>
+        <translation>%1 bytte gruppfoto</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation>%1 deleted group photo</translation>
+        <translation>%1 radera gruppfotot</translation>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation>%1 added %2 to group</translation>
+        <translation>%1 lade till %2 till gruppen</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation>%1 kicked %2</translation>
+        <translation>%1 sparkade ut %2</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation>Media files are not supported on secret chat currently</translation>
+        <translation>Mediafiler stöds för närvarande inte i hemliga chatter</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation>Don&apos;t Load Anymore</translation>
+        <translation>Ladda Inte Mer</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation>Load Always</translation>
+        <translation>Ladda Alltid</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation>Load Link</translation>
+        <translation>Ladda Länk</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageList</name>
     <message>
         <source>Welcome :)</source>
-        <translation>Welcome :)</translation>
+        <translation>Välkommen :)</translation>
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>Secret chat request. Please Accept or Reject.</translation>
+        <translation>Hemlig chatt-inbudan. Vänligen Godkänn eller Neka.</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation>Accept</translation>
+        <translation>Godkänn</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation>Reject</translation>
+        <translation>Neka</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Forward</translation>
+        <translation>Vidarebefordra</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Kopiera</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Radera</translation>
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation>Search on the Web</translation>
+        <translation>Sök på Webben</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation>New Messages</translation>
+        <translation>Nya Meddelanden</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation>Secret chat rejected. Or accepted from another device.
-Note that android accept secret chat automatically.</translation>
+        <translation>Hemlig chatt nekades. Eller accepterades av en annan apparat.
+Notera att Android automatiskt accepterar hemliga chatter.</translation>
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation>Add to Personal</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>Click to Download</translation>
+        <translation>Klicka för att Ladda Ner</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation>Unsupported Media</translation>
+        <translation>Media stöds ej</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Avbryt</translation>
     </message>
 </context>
 <context>
     <name>AccountSearchList</name>
     <message>
         <source>Me</source>
-        <translation>Me</translation>
+        <translation>Jag</translation>
     </message>
     <message>
         <source>%1 on %2</source>
-        <translation>%1 on %2</translation>
+        <translation>%1 på %2</translation>
     </message>
     <message>
         <source>%1 to %2</source>
-        <translation>%1 to %2</translation>
+        <translation>%1 till %2</translation>
     </message>
 </context>
 <context>
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
-        <translation>Send</translation>
+        <translation>Skicka</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Kopiera</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Klistra in</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Radera</translation>
     </message>
     <message>
         <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation>It&apos;s Cutegram news about new releases and solutions.
-It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translation>
+        <translation>Detta är Cutegrams nyheter om nya uppdateringar och lösningar.
+Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Camera</translation>
+        <translation>Kamera</translation>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation>Audio Recorder</translation>
+        <translation>Ljudinspelare</translation>
     </message>
 </context>
 <context>
     <name>AccountSign</name>
     <message>
         <source>Code</source>
-        <translation>Code</translation>
+        <translation>Kod</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>First Name</translation>
+        <translation>Förnamn</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Last Name</translation>
+        <translation>Efternamn</translation>
     </message>
     <message>
         <source>Sign In</source>
-        <translation>Sign In</translation>
+        <translation>Logga in</translation>
     </message>
     <message>
         <source>Sign Up</source>
-        <translation>Sign Up</translation>
+        <translation>Registrera dig</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>Call Request</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Requested</source>
-        <translation>Requested</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountView</name>
     <message>
         <source>Search</source>
-        <translation>Search</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation>New group chat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configure</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation>Group Topic</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Create</source>
-        <translation>Create</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>Add Secret Chat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact List</source>
-        <translation>Contact List</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation>Just drag and drop contacts here</translation>
+        <translation>Drag och släpp kontakter här</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation>Add New Contact</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation>Add Contact</translation>
+        <translation>Lägg till Kontakt</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation>Add Account (experimental)</translation>
+        <translation>Lägg till Konto (experimentell)</translation>
     </message>
 </context>
 <context>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation>Fill below form to add new contact.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>First Name</source>
-        <translation>First Name</translation>
+        <translation>Förnamn</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Last Name</translation>
+        <translation>Efternamn</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>Phone Number</translation>
+        <translation>Telefonnummer</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <source>OK</source>
@@ -403,15 +403,15 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation>Aseman is a non-profit organisation. It exists to support and lead the free, open source and cross-platform projects and researches.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -458,591 +458,591 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </translatio
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the Universe. Currently, we are focusing on design and development of software applications and tools which have a direct connection with end users.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the World. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AuthenticateDialog</name>
     <message>
         <source>Authenticating</source>
-        <translation>Authenticating</translation>
+        <translation>Autentiserar</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>Phone Number</translation>
+        <translation>Telefonnummer</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>Login</translation>
+        <translation>Logga in</translation>
     </message>
 </context>
 <context>
     <name>CameraDialog</name>
     <message>
         <source>Send</source>
-        <translation>Send</translation>
+        <translation>Skicka</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation>Capture</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation>On</translation>
+        <translation>På</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation>Off</translation>
+        <translation>Av</translation>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Notifications</source>
-        <translation>Notifications</translation>
+        <translation>Notifikationer</translation>
     </message>
     <message>
         <source>On Start</source>
-        <translation>On Start</translation>
+        <translation>Vid Start</translation>
     </message>
     <message>
         <source>Languages</source>
-        <translation>Languages</translation>
+        <translation>Språk</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automatic</translation>
+        <translation>Automatisk</translation>
     </message>
     <message>
         <source>Always visible</source>
-        <translation>Always visible</translation>
+        <translation>Alltid synlig</translation>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation>Minimise to system tray</translation>
+        <translation>Minimera till verktygsfältet</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Logout</translation>
+        <translation>Logga ut</translation>
     </message>
     <message>
         <source>Change Photo</source>
-        <translation>Change Photo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select photo</source>
-        <translation>Select photo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Detailed List</source>
-        <translation>Detailed List</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Background</source>
-        <translation>Background</translation>
+        <translation>Bakgrund</translation>
     </message>
     <message>
         <source>Notify Sound</source>
-        <translation>Notify Sound</translation>
+        <translation>Notifieringsljud</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation>Change</translation>
+        <translation>Byt</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>Select Image</translation>
+        <translation>Välj Bild</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>None</translation>
+        <translation>Ingen</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Default</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Custom</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation>Select Sound</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation>Cutegram Newsletter</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Font</source>
-        <translation>Font</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select</source>
-        <translation>Select</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Select Font</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation>Auto Start</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation>Proxy Settings</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>About Cutegram</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>About Aseman</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Minimum List</source>
-        <translation>Minimum List</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Theme</source>
-        <translation>Theme</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation>Search Engine</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Master Color</source>
-        <translation>Master Colour</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>System Color</source>
-        <translation>System Colour</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tray icon style</source>
-        <translation>Tray icon style</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Smooth Scroll</source>
-        <translation>Smooth Scroll</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dark</source>
-        <translation>Dark</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Light</source>
-        <translation>Light</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>CursorPicker</name>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Cut</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Cutegram</name>
     <message>
         <source>Show</source>
-        <translation>Show</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configure</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About</source>
-        <translation>About</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>About Aseman</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quit</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Exit</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contact</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation>AM</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Time</source>
-        <translation>Time</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>&lt;&lt;&lt; Drop to dialogues list to forward</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation>Drop to forward</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation>Drop to send as Document</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to send</source>
-        <translation>Drop to send</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation>Drop to add participant</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation>Drop to add new chat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>New Group</source>
-        <translation>New Group</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation>Please enter new group name</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Emoticons</name>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation>Delete Sticker</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
-        <translation>Are you sure about delete this?</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>EmoticonsModel</name>
     <message>
         <source>Recent</source>
-        <translation>Recent</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Emojis</source>
-        <translation>Emojis</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>Please select a contact...</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>To</source>
-        <translation>To</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Forward</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation>Please enter the password</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>password</source>
-        <translation>password</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Done</source>
-        <translation>Done</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation>Incorrect!</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation>Back</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>JalaliCalendarObject</name>
     <message>
         <source>Farvardin</source>
-        <translation>Farvardin</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation>Ordibehesht</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khordad</source>
-        <translation>Khordad</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tir</source>
-        <translation>Tir</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mordad</source>
-        <translation>Mordad</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation>Shahrivar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mehr</source>
-        <translation>Mehr</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Abaan</source>
-        <translation>Abaan</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aazar</source>
-        <translation>Aazar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dey</source>
-        <translation>Dey</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bahman</source>
-        <translation>Bahman</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Esfand</source>
-        <translation>Esfand</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation>Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation>1Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation>2Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation>3Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation>4Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation>5Shanbe</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Jome</source>
-        <translation>Jome</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation>Proxy Settings</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation>This changes needs to restart application.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation>Proxy Type</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Hostname</source>
-        <translation>Hostname</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Port</source>
-        <translation>Port</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Username</source>
-        <translation>Username</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Password</source>
-        <translation>Password</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation>Ex: 127.0.0.1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation>Send</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stop</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Record</source>
-        <translation>Record</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation>Select Application</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation>Secret Chat</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation>Phone Number</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Favorite</source>
-        <translation>Favourite</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Love</source>
-        <translation>Love</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Mute</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Participants</source>
-        <translation>Participants</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show List</source>
-        <translation>Show List</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Leave</source>
-        <translation>Leave</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation>Leave the group</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
-        <translation>Are you sure about leaving this group?</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation>Add Participant</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation>Show Badges</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
