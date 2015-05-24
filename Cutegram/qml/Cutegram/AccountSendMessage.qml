@@ -63,7 +63,7 @@ Item {
 
     Timer {
         id: typing_update_timer
-        interval: 1000
+        interval: 3000
         triggeredOnStart: true
         onTriggered: {
             var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId

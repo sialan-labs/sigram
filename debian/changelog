@@ -1,3 +1,39 @@
+cutegram (2.3.0-3aseman-vivid) vivid; urgency=medium
+
+  * Typing status bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sun, 24 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-3aseman-utopic) utopic; urgency=medium
+
+  * Typing status bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sun, 24 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-3aseman-trusty) trusty; urgency=medium
+
+  * Typing status bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sun, 24 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-2aseman-vivid) vivid; urgency=medium
+
+  * Stickers bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 23:00:00 +0330
+ 
+cutegram (2.3.0-2aseman-utopic) utopic; urgency=medium
+
+  * Stickers bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 23:00:00 +0330
+ 
+cutegram (2.3.0-2aseman-trusty) trusty; urgency=medium
+
+  * Stickers bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 23:00:00 +0330
+ 
 cutegram (2.3.0-1aseman-vivid) vivid; urgency=medium
 
   * Improvement and Bugfix
