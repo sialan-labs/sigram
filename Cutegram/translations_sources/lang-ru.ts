@@ -1,1048 +1,1047 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ru" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation></translation>
+        <translation>Cutegram - клиент телеграмма от Aseman. Бесплатный, с открытым исходным кодом и выпущенный под лизенцией GPLv3</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation></translation>
+        <translation>Cutegram использует Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, некоторые KDE утилиты, иконки Faenza и смайлы Twitter. </translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation></translation>
+        <translation>Домашняя страница</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogHeader</name>
     <message>
         <source>Online</source>
-        <translation></translation>
+        <translation>В сети</translation>
     </message>
     <message>
         <source>%1 was online</source>
-        <translation></translation>
+        <translation>%1 был в сети</translation>
     </message>
     <message>
         <source>Secret chat</source>
-        <translation></translation>
+        <translation>Секретный чат</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation></translation>
+        <translation>%1 участников (%2 в сети)</translation>
     </message>
     <message>
         <source>Recently</source>
-        <translation type="unfinished"></translation>
+        <translation>Недавно</translation>
     </message>
     <message>
         <source>Last Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Месяц назад</translation>
     </message>
     <message>
         <source>Last Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Неделю назад</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
-        <translation></translation>
+        <translation>Печатает...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation></translation>
+        <translation>Удалить секретный чат</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation></translation>
+        <translation>Вы уверенны, что хотите удалить секретный чат?</translation>
     </message>
     <message>
         <source>Delete History</source>
-        <translation></translation>
+        <translation>Удалить Историю</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation></translation>
+        <translation>Вы уверенны, что хотите удалить историю?</translation>
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation></translation>
+        <translation>Открыть в Новом Окне</translation>
     </message>
     <message>
         <source>Notify when</source>
-        <translation></translation>
+        <translation>Уведомить, когда</translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation></translation>
+        <translation>Будет в сети</translation>
     </message>
 </context>
 <context>
     <name>AccountFrame</name>
     <message>
         <source>Show</source>
-        <translation></translation>
+        <translation>Показать</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation></translation>
+        <translation>Без звука</translation>
     </message>
     <message>
         <source>Message!</source>
-        <translation></translation>
+        <translation>Сообщение!</translation>
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation></translation>
+        <translation>Сообщение от &quot;%1&quot; для &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 is online</source>
-        <translation></translation>
+        <translation>%1 в сети</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation></translation>
+        <translation>%1 печатает для &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation></translation>
+        <translation>%1 печатает</translation>
     </message>
 </context>
 <context>
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation></translation>
+        <translation>Загрузка...</translation>
     </message>
     <message>
         <source>Login again</source>
-        <translation type="unfinished"></translation>
+        <translation>Войти снова</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageAction</name>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation></translation>
+        <translation>%1 создал группу &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation></translation>
+        <translation>%1 покинул группу</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation></translation>
+        <translation>%1 сменил имя группы на &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation></translation>
+        <translation>%1 сменил логотип группы.</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation></translation>
+        <translation>%1 удалил логотип группы</translation>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation></translation>
+        <translation>%1 добавил %2 в группу</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation></translation>
+        <translation>%1 исключил %2</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation></translation>
+        <translation>В настоящее время медиа-файлы не поддерживаются в секретном чате</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation></translation>
+        <translation>Больше не загружать</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation></translation>
+        <translation>Загружать всегда</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation></translation>
+        <translation>Загрузить ссылку</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageList</name>
     <message>
         <source>Welcome :)</source>
-        <translation></translation>
+        <translation>Добро пожаловать :)</translation>
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation></translation>
+        <translation>Запрос в секретный чат. Пожалуйста, Примите или Отклоните</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation></translation>
+        <translation>Приянть</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation></translation>
+        <translation>Отклонить</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation></translation>
+        <translation>Вперед</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation></translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation></translation>
+        <translation>Искать в Сети</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation></translation>
+        <translation>Новые Сообщения</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation></translation>
+        <translation>Секретный чат отклонен. Или принят другим устройством.
+Обратите внимание, что Android принимает секретный чат автоматически.</translation>
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить в Личное</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation></translation>
+        <translation>Кликнуть для Загрузки</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation></translation>
+        <translation>Неподдерживаемый формат медиа</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation></translation>
+        <translation>Отменить</translation>
     </message>
 </context>
 <context>
     <name>AccountSearchList</name>
     <message>
         <source>Me</source>
-        <translation></translation>
+        <translation>Я</translation>
     </message>
     <message>
         <source>%1 on %2</source>
-        <translation></translation>
+        <translation>%1 на %2</translation>
     </message>
     <message>
         <source>%1 to %2</source>
-        <translation></translation>
+        <translation>%1 с %2</translation>
     </message>
 </context>
 <context>
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
-        <translation></translation>
+        <translation>Отправить</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation></translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation></translation>
+        <translation>Вставить</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation></translation>
+        <translation>Новости Cutegram о новых релизах и изменениях. Это не контакт telegram, а виртуальный контакт.</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation></translation>
+        <translation>Камера</translation>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation></translation>
+        <translation>Аудио запись</translation>
     </message>
 </context>
 <context>
     <name>AccountSign</name>
     <message>
         <source>Code</source>
-        <translation></translation>
+        <translation>Код</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation></translation>
+        <translation>Фамилия</translation>
     </message>
     <message>
         <source>Sign In</source>
-        <translation></translation>
+        <translation>Войти</translation>
     </message>
     <message>
         <source>Sign Up</source>
-        <translation></translation>
+        <translation>Зарегистрировать</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation></translation>
+        <translation>Запросить звонок</translation>
     </message>
     <message>
         <source>Requested</source>
-        <translation></translation>
+        <translation>Запрошено</translation>
     </message>
 </context>
 <context>
     <name>AccountView</name>
     <message>
         <source>Search</source>
-        <translation></translation>
+        <translation>Поиск</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation></translation>
+        <translation>Новый групповой чат</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation></translation>
+        <translation>Тема Группы</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation></translation>
+        <translation>Создать</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation></translation>
+        <translation>Добавить Секретный Чат</translation>
     </message>
     <message>
         <source>Contact List</source>
-        <translation></translation>
+        <translation>Контакты</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation></translation>
+        <translation>Перетащите сюда контакты</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation></translation>
+        <translation>Добавить Новый Контакт</translation>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation></translation>
+        <translation>Добавить Контакт</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation></translation>
+        <translation>Добавить Аккаунт (экспериментально)</translation>
     </message>
 </context>
 <context>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation></translation>
+        <translation>Заполните форму ниже, чтобы добавить новый контакт.</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation></translation>
+        <translation>Фамилия</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation></translation>
+        <translation>Номер Телефона</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation></translation>
+        <translation>ОК</translation>
     </message>
 </context>
 <context>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation></translation>
+        <translation>Aseman является некоммерческой организацией, существующей для поддержки и реализации бесплатного, с открытым исходным кодом и кросс-платформенных проектов и исследований</translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation></translation>
+        <translation>Целью Aseman является обеспечение свободных и безопасных продуктов, для сохранения свободы людей и их частной жизни.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation></translation>
+        <translation>Домашняя страница</translation>
     </message>
 </context>
 <context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation></translation>
+        <translation>Aseman занимается исследованием и разработкой программного обеспечения не для прибыли, запущенный в феврале 2014 года, с упором на развитие продукции, технологий и решений для публикации их в качестве проектов с открытым кодом, доступных для всех людей во Вселенной . В настоящее время мы сосредоточены на проектировании и разработке программных приложений и инструментов, которые имеют прямую связь с конечными пользователями.</translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation></translation>
+        <translation>Для включения инновационных проектов и распространения программного обеспечения, для миллионов пользователей по всему миру, лаборатория работает, чтобы ускорить рост сильных программных проектов с открытым исходным кодом и содействовать культуре открытой исходной доступности и повышения производительности во всем мире. Лабораторные партнеры с лидерами и политиками, чтобы принести технологии с открытым исходным кодом для новых секторов, включая образование, здравоохранение и правительство.</translation>
     </message>
 </context>
 <context>
     <name>AuthenticateDialog</name>
     <message>
         <source>Authenticating</source>
-        <translation></translation>
+        <translation>Аутентификация</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation></translation>
+        <translation>Номер Телефона</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation></translation>
+        <translation>Логин</translation>
     </message>
 </context>
 <context>
     <name>CameraDialog</name>
     <message>
         <source>Send</source>
-        <translation></translation>
+        <translation>Отправить</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation></translation>
+        <translation>Захватить</translation>
     </message>
 </context>
 <context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation></translation>
+        <translation>Включено</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation></translation>
+        <translation>Выключено</translation>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Notifications</source>
-        <translation></translation>
+        <translation>Уведомления</translation>
     </message>
     <message>
         <source>On Start</source>
-        <translation></translation>
+        <translation>Запуск</translation>
     </message>
     <message>
         <source>Languages</source>
-        <translation></translation>
+        <translation>Языки</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation></translation>
+        <translation>Автоматически</translation>
     </message>
     <message>
         <source>Always visible</source>
-        <translation></translation>
+        <translation>Всегда виден</translation>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation></translation>
+        <translation>Свернуть в трей</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation></translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <source>Change Photo</source>
-        <translation></translation>
+        <translation>Сменить Фото</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation></translation>
+        <translation>Выбрать фото</translation>
     </message>
     <message>
         <source>Detailed List</source>
-        <translation></translation>
+        <translation>Подробнее</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation></translation>
+        <translation>Фон</translation>
     </message>
     <message>
         <source>Notify Sound</source>
-        <translation></translation>
+        <translation>Звуковое уведомление</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation></translation>
+        <translation>Сменить</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Select Image</source>
-        <translation></translation>
+        <translation>Выбрать Изображение</translation>
     </message>
     <message>
         <source>None</source>
-        <translation></translation>
+        <translation>Отключено</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation></translation>
+        <translation>По-умолчанию</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation></translation>
+        <translation>Другое</translation>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation></translation>
+        <translation>Выбрать звук</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation></translation>
+        <translation>Новости Cutegram</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation></translation>
+        <translation>Шрифт</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation></translation>
+        <translation>Выбрать</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation></translation>
+        <translation>Выбрать Шрифт</translation>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation></translation>
+        <translation>Автозапуск</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation></translation>
+        <translation>Настройки Прокси</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation></translation>
+        <translation>О Cutegram</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation></translation>
+        <translation>О Aseman</translation>
     </message>
     <message>
         <source>Minimum List</source>
-        <translation></translation>
+        <translation>Минимальный лист</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation></translation>
+        <translation>Тема</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation></translation>
+        <translation>Поисковый движок</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation></translation>
+        <translation>Настройка цвета</translation>
     </message>
     <message>
         <source>System Color</source>
-        <translation></translation>
+        <translation>Системная</translation>
     </message>
     <message>
         <source>Tray icon style</source>
-        <translation></translation>
+        <translation>Стиль иконки в трее</translation>
     </message>
     <message>
         <source>Smooth Scroll</source>
-        <translation></translation>
+        <translation>Плавная прокрутка</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation></translation>
+        <translation>Темный</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation></translation>
+        <translation>Светлый</translation>
     </message>
 </context>
 <context>
     <name>CursorPicker</name>
     <message>
         <source>Copy</source>
-        <translation></translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation></translation>
+        <translation>Вырезать</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation></translation>
+        <translation>Вставить</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
     <name>Cutegram</name>
     <message>
         <source>Show</source>
-        <translation></translation>
+        <translation>Показать</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>About</source>
-        <translation></translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation></translation>
+        <translation>О Aseman</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation></translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation></translation>
+        <translation>Выход</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation></translation>
+        <translation>Контакт</translation>
     </message>
 </context>
 <context>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Date</source>
-        <translation></translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation></translation>
+        <translation>Время</translation>
     </message>
 </context>
 <context>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation></translation>
+        <translation>Перетащить в лист диалогов для отправки</translation>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation></translation>
+        <translation>Перетащить для отправки</translation>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation></translation>
+        <translation>Перетащить для отправки как Документ</translation>
     </message>
     <message>
         <source>Drop to send</source>
-        <translation></translation>
+        <translation>Перетащить для отправки</translation>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation></translation>
+        <translation>Перетащить для добавления участника</translation>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation></translation>
+        <translation>Перетащить для добавления нового чата</translation>
     </message>
     <message>
         <source>New Group</source>
-        <translation></translation>
+        <translation>Новая Группа</translation>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation></translation>
+        <translation>Пожалуйста, введите имя новой группы</translation>
     </message>
 </context>
 <context>
     <name>Emoticons</name>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить стикер</translation>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы уверенны, что хотите это удалить?</translation>
     </message>
 </context>
 <context>
     <name>EmoticonsModel</name>
     <message>
         <source>Recent</source>
-        <translation type="unfinished"></translation>
+        <translation>Последние</translation>
     </message>
     <message>
-        <source>Emojis</source>
-        <translation type="unfinished"></translation>
+        <source>All Emoji</source>
+        <translation>Все смайлы</translation>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation></translation>
+        <translation>Пожалуйста, выберите контакт...</translation>
     </message>
     <message>
         <source>To</source>
-        <translation></translation>
+        <translation>Для</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation></translation>
+        <translation>Отправить</translation>
     </message>
 </context>
 <context>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation></translation>
+        <translation>Вставить</translation>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation></translation>
+        <translation>Пожалуйста, введите пароль</translation>
     </message>
     <message>
         <source>password</source>
-        <translation></translation>
+        <translation>пароль</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation></translation>
+        <translation>Выполнено</translation>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation></translation>
+        <translation>Неверный!</translation>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation></translation>
+        <translation>Назад</translation>
     </message>
 </context>
 <context>
     <name>JalaliCalendarObject</name>
     <message>
         <source>Farvardin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation></translation>
+        <translation>Вставить</translation>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation></translation>
+        <translation>Настройки Прокси</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation></translation>
+        <translation>Эти изменения вступят в силу, после перезапуска приложения</translation>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation></translation>
+        <translation>Тип Прокси</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation></translation>
+        <translation>Имя хоста</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation></translation>
+        <translation>Логин</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation></translation>
+        <translation>Ок</translation>
     </message>
 </context>
 <context>
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation></translation>
+        <translation>Отправить</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation></translation>
+        <translation>Стоп</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation></translation>
+        <translation>Запись</translation>
     </message>
 </context>
 <context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation></translation>
+        <translation>Выберите приложение</translation>
     </message>
 </context>
 <context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation></translation>
+        <translation>Секретный чат</translation>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation></translation>
+        <translation>Номер Телефона</translation>
     </message>
     <message>
         <source>Favorite</source>
-        <translation></translation>
+        <translation>Избранное</translation>
     </message>
     <message>
         <source>Love</source>
-        <translation></translation>
+        <translation>Любовь</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation></translation>
+        <translation>Без звука</translation>
     </message>
     <message>
         <source>Participants</source>
-        <translation></translation>
+        <translation>Участники</translation>
     </message>
     <message>
         <source>Show List</source>
-        <translation></translation>
+        <translation>Показать список</translation>
     </message>
     <message>
         <source>Leave</source>
-        <translation></translation>
+        <translation>Покинуть</translation>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation></translation>
+        <translation>Покинуть группу</translation>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
-        <translation></translation>
+        <translation>Вы уверенны, что хотите покинуть группу?</translation>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation></translation>
+        <translation>Добавить участника</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation></translation>
+        <translation>Показать Значки</translation>
     </message>
 </context>
 </TS>
