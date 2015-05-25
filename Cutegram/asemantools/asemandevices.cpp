@@ -138,7 +138,7 @@ bool AsemanDevices::isWindows() const
 
 bool AsemanDevices::isLinux() const
 {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_OPENBSD)
     return true;
 #else
     return false;
@@ -327,7 +327,7 @@ qreal AsemanDevices::density() const
     qreal ratio = isTablet()? 1.28 : 1;
     return ratio*densityDpi()/180.0;
 #else
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_OPENBSD)
 #ifdef Q_OS_UBUNTUTOUCH
     return screen()->logicalDotsPerInch()/UTOUCH_DEFAULT_DPI;
 #else
@@ -353,7 +353,7 @@ qreal AsemanDevices::fontDensity() const
 #ifdef Q_OS_IOS
     return 1.4;
 #else
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_OPENBSD)
 #ifdef Q_OS_UBUNTUTOUCH
     qreal ratio = 1.3;
     return ratio*density();

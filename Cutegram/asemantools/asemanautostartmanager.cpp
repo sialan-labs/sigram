@@ -121,7 +121,7 @@ bool AsemanAutoStartManager::active() const
 
 void AsemanAutoStartManager::refresh()
 {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_OPENBSD)
     const QString &pathDir = QDir::homePath() + "/.config/autostart";
     const QString &path = pathDir + "/" + p->source + ".desktop";
 
@@ -140,7 +140,7 @@ void AsemanAutoStartManager::refresh()
 
 void AsemanAutoStartManager::save()
 {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_OPENBSD)
     const QString &pathDir = QDir::homePath() + "/.config/autostart";
     const QString &path = pathDir + "/" + p->source + ".desktop";
 

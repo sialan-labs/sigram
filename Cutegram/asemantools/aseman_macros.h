@@ -25,7 +25,7 @@
 #define TOUCH_DEVICE
 #else
 #define DESKTOP_DEVICE
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_OPENBSD)
 #define DESKTOP_LINUX
 #endif
 #endif

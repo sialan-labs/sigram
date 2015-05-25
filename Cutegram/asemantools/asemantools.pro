@@ -60,7 +60,7 @@ contains(QT,widgets) {
         asemannativenotification.h \
         asemannativenotificationitem.h
 }
-linux {
+linux|openbsd {
 contains(QT,dbus) {
     DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION
     SOURCES += asemanlinuxnativenotification.cpp

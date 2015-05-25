@@ -1,3 +1,21 @@
+cutegram (2.3.0-4aseman-vivid) vivid; urgency=medium
+
+  * Add qt5-image-formats-plugins to dependencies
+
+ -- Aseman Team <contact@aseman.co>  Mon, 25 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-4aseman-utopic) utopic; urgency=medium
+
+  * Add qt5-image-formats-plugins to dependencies
+
+ -- Aseman Team <contact@aseman.co>  Mon, 25 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-4aseman-trusty) trusty; urgency=medium
+
+  * Add qt5-image-formats-plugins to dependencies
+
+ -- Aseman Team <contact@aseman.co>  Mon, 25 May 2015 11:00:00 +0330
+ 
 cutegram (2.3.0-3aseman-vivid) vivid; urgency=medium
 
   * Typing status bugfix

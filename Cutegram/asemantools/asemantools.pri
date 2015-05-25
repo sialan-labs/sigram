@@ -74,7 +74,7 @@ contains(QT,webkitwidgets) {
 contains(QT,webenginewidgets) {
     DEFINES += ASEMAN_WEBENGINE
 }
-linux {
+linux|openbsd {
 contains(QT,dbus) {
     DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION
     SOURCES += asemantools/asemanlinuxnativenotification.cpp
