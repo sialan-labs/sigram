@@ -1,6 +1,6 @@
 DESTDIR=../build
 
-linux {
+linux|openbsd {
     server.source = tg-server.pub
     server.target = $${DESTDIR}
     emojis.source = emojis
@@ -29,7 +29,7 @@ contains(DEFINES, DISABLE_ASEMAN_WEBGRABBER) {
 }
 }
 
-linux: QT += dbus
+linux|openbsd: QT += dbus
 win32 {
     QT += winextras
     LIBS += -LD:/Projects/cutegram-deps/lib -lssleay32 -lcrypto -lz -lqtelegram-ae
@@ -40,8 +40,13 @@ macx {
     LIBS += -lssl -lcrypto -lz -L/Users/bardia/Projects/builds/64/lib/ -lqtelegram-ae
     INCLUDEPATH += /Users/bardia/Projects/builds/64/include/libqtelegram-ae
 } else {
+openbsd {
+    LIBS += -lssl -lcrypto -lz -lqtelegram-ae
+    INCLUDEPATH += /usr/local/include/libqtelegram-ae $$OUT_PWD/$$DESTDIR/include/libqtelegram-ae
+} else {
     LIBS += -lssl -lcrypto -lz -lqtelegram-ae
     INCLUDEPATH += /usr/include/libqtelegram-ae $$OUT_PWD/$$DESTDIR/include/libqtelegram-ae
+}
 }
 }
 
