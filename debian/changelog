@@ -1,3 +1,24 @@
+cutegram (2.3.0-5aseman-vivid) vivid; urgency=medium
+
+  * Add command line options
+  * Improvements
+
+ -- Aseman Team <contact@aseman.co>  Fri, 29 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-5aseman-utopic) utopic; urgency=medium
+
+  * Add command line options
+  * Improvements
+
+ -- Aseman Team <contact@aseman.co>  Fri, 29 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-5aseman-trusty) trusty; urgency=medium
+
+  * Add command line options
+  * Improvements
+
+ -- Aseman Team <contact@aseman.co>  Fri, 29 May 2015 11:00:00 +0330
+ 
 cutegram (2.3.0-4aseman-vivid) vivid; urgency=medium
 
   * Add qt5-image-formats-plugins to dependencies

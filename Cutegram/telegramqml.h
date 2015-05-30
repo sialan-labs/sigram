@@ -81,8 +81,9 @@ class TelegramQml : public QObject
 
     Q_PROPERTY(bool cutegramDialog READ cutegramDialog WRITE setCutegramDialog NOTIFY cutegramDialogChanged)
 
-    Q_PROPERTY(bool online READ online WRITE setOnline NOTIFY onlineChanged)
-    Q_PROPERTY(int unreadCount READ unreadCount NOTIFY unreadCountChanged)
+    Q_PROPERTY(bool  online               READ online WRITE setOnline NOTIFY onlineChanged)
+    Q_PROPERTY(int   unreadCount          READ unreadCount            NOTIFY unreadCountChanged)
+    Q_PROPERTY(qreal totalUploadedPercent READ totalUploadedPercent   NOTIFY totalUploadedPercentChanged)
 
     Q_PROPERTY(bool uploadingProfilePhoto READ uploadingProfilePhoto NOTIFY uploadingProfilePhotoChanged)
 
@@ -145,7 +146,8 @@ public:
     void setInvisible( bool stt );
     bool invisible() const;
 
-    int unreadCount();
+    int unreadCount() const;
+    qreal totalUploadedPercent() const;
 
     bool authNeeded() const;
     bool authLoggedIn() const;
@@ -272,6 +274,7 @@ signals:
     void cutegramDialogChanged();
 
     void unreadCountChanged();
+    void totalUploadedPercentChanged();
     void invisibleChanged();
 
     void authNeededChanged();
@@ -395,6 +398,7 @@ private slots:
     void dbMediaKeysFounded(qint64 mediaId, const QByteArray &key, const QByteArray &iv);
 
     void refreshUnreadCount();
+    void refreshTotalUploadedPercent();
     void refreshSecretChats();
     void updateEncryptedTopMessage(const Message &message);
 
@@ -403,6 +407,8 @@ private slots:
     Peer::PeerType getPeerType(qint64 pid);
 
     QStringList stringToIndex(const QString & str);
+
+    void objectDestroyed(QObject *obj);
 
 private:
     TelegramQmlPrivate *p;

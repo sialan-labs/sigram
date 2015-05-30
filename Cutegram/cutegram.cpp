@@ -64,9 +64,6 @@
 #include <QDesktopServices>
 #include <QMimeDatabase>
 
-#ifdef Q_OS_MAC
-#include <QtMac>
-#endif
 #ifdef Q_OS_WIN
 #include <QtWin>
 #endif
@@ -417,11 +414,6 @@ void Cutegram::setSysTrayCounter(int count, bool force)
     }
 
     p->sysTrayCounter = count;
-
-#ifdef Q_OS_MAC
-    QtMac::setBadgeLabelText(count?QString::number(count):"");
-#endif
-
     emit sysTrayCounterChanged();
 }
 

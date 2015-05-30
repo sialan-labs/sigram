@@ -45,6 +45,14 @@ android {
 QML_IMPORT_PATH = \
     asemantools/qml/
 
+contains(QT,macextras) {
+    SOURCES += asemantools/private/asemanmactaskbarbuttonengine.cpp
+    HEADERS += asemantools/private/asemanmactaskbarbuttonengine.h
+}
+contains(QT,winextras) {
+    SOURCES += asemantools/private/asemanwintaskbarbuttonengine.cpp
+    HEADERS += asemantools/private/asemanwintaskbarbuttonengine.h
+}
 contains(QT,sensors) {
     DEFINES += ASEMAN_SENSORS
     SOURCES += asemantools/asemansensors.cpp
@@ -77,8 +85,10 @@ contains(QT,webenginewidgets) {
 linux|openbsd {
 contains(QT,dbus) {
     DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION
-    SOURCES += asemantools/asemanlinuxnativenotification.cpp
-    HEADERS += asemantools/asemanlinuxnativenotification.h
+    SOURCES += asemantools/asemanlinuxnativenotification.cpp \
+        asemantools/private/asemanunitytaskbarbuttonengine.cpp
+    HEADERS += asemantools/asemanlinuxnativenotification.h \
+        asemantools/private/asemanunitytaskbarbuttonengine.h
 }
 }
 macx {
@@ -116,7 +126,9 @@ SOURCES += \
     asemantools/asemanfiledownloaderqueue.cpp \
     asemantools/asemanfiledownloaderqueueitem.cpp \
     asemantools/asemanwebpagegrabber.cpp \
-    $$PWD/asemantitlebarcolorgrabber.cpp
+    asemantools/asemantitlebarcolorgrabber.cpp \
+    asemantools/asemantaskbarbutton.cpp \
+    asemantools/private/asemanabstracttaskbarbuttonengine.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -148,7 +160,9 @@ HEADERS += \
     asemantools/asemanfiledownloaderqueue.h \
     asemantools/asemanfiledownloaderqueueitem.h \
     asemantools/asemanwebpagegrabber.h \
-    $$PWD/asemantitlebarcolorgrabber.h
+    asemantools/asemantitlebarcolorgrabber.h \
+    asemantools/asemantaskbarbutton.h \
+    asemantools/private/asemanabstracttaskbarbuttonengine.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \

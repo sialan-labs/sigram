@@ -243,6 +243,11 @@ Rectangle {
         }
     }
 
+    TaskbarButton {
+        badgeNumber: telegram.unreadCount
+        progress: telegram.totalUploadedPercent
+    }
+
     AccountSign {
         id: acc_sign
         anchors.fill: parent

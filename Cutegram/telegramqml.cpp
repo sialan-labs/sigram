@@ -69,6 +69,7 @@ public:
     bool online;
     bool invisible;
     int unreadCount;
+    qreal totalUploadedPercent;
 
     bool authNeeded;
     bool authLoggedIn;
@@ -93,6 +94,7 @@ public:
     QHash<qint64,ContactObject*> contacts;
     QHash<qint64,EncryptedMessageObject*> encmessages;
     QHash<qint64,EncryptedChatObject*> encchats;
+    QSet<UploadObject*> uploadPercents;
 
     QMultiMap<QString, qint64> userNameIndexes;
 
@@ -142,6 +144,7 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->upd_dialogs_timer = 0;
     p->garbage_checker_timer = 0;
     p->unreadCount = 0;
+    p->totalUploadedPercent = 0;
     p->online = false;
     p->invisible = false;
     p->msg_send_id_counter = INT_MAX - 100000;
@@ -337,9 +340,14 @@ bool TelegramQml::invisible() const
     return p->invisible;
 }
 
-int TelegramQml::unreadCount()
+int TelegramQml::unreadCount() const
 {
     return p->unreadCount;
+}
+
+qreal TelegramQml::totalUploadedPercent() const
+{
+    return p->totalUploadedPercent;
 }
 
 bool TelegramQml::authNeeded() const
@@ -1260,7 +1268,12 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
     upload->setLocation(file);
     upload->setTotalSize(QFileInfo(file).size());
 
+    connect(upload, SIGNAL(uploadedChanged())  , SLOT(refreshTotalUploadedPercent()));
+    connect(upload, SIGNAL(destroyed(QObject*)), SLOT(objectDestroyed(QObject*))    );
+
     p->uploads[fileId] = msgObj;
+    p->uploadPercents.insert(upload);
+
     emit uploadsChanged();
     return true;
 }
@@ -3217,6 +3230,31 @@ void TelegramQml::refreshUnreadCount()
     emit unreadCountChanged();
 }
 
+void TelegramQml::refreshTotalUploadedPercent()
+{
+    qint64 totalSize = 0;
+    qint64 uploaded = 0;
+    foreach(UploadObject *upld, p->uploadPercents)
+    {
+        totalSize += upld->totalSize();
+        uploaded += upld->uploaded();
+    }
+
+    if(totalSize == 0)
+        p->totalUploadedPercent = 0;
+    else
+        p->totalUploadedPercent = 100.0*uploaded/totalSize;
+
+    emit totalUploadedPercentChanged();
+
+    if(p->totalUploadedPercent == 100)
+    {
+        p->totalUploadedPercent = 0;
+        p->uploadPercents.clear();
+        emit totalUploadedPercentChanged();
+    }
+}
+
 void TelegramQml::refreshSecretChats()
 {
     if(!p->tsettings)
@@ -3321,6 +3359,15 @@ Peer::PeerType TelegramQml::getPeerType(qint64 pid)
 QStringList TelegramQml::stringToIndex(const QString &str)
 {
     return QStringList() << str.toLower();
+}
+
+void TelegramQml::objectDestroyed(QObject *obj)
+{
+    if(obj->metaObject() == &UploadObject::staticMetaObject)
+    {
+        p->uploadPercents.remove( static_cast<UploadObject*>(obj) );
+        refreshTotalUploadedPercent();
+    }
 }
 
 TelegramQml::~TelegramQml()
