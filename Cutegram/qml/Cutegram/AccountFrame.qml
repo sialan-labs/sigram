@@ -246,6 +246,7 @@ Rectangle {
     TaskbarButton {
         badgeNumber: telegram.unreadCount
         progress: telegram.totalUploadedPercent
+        window: View
     }
 
     AccountSign {

@@ -11,7 +11,7 @@ public:
 
     void updateBadgeNumber(int number);
     void updateProgress(qreal progress);
-    void updateLauncher(const QVariant &launcher);
+    void updateWindow(class QWindow *window);
 
 private:
     QImage generateIcon(int count);

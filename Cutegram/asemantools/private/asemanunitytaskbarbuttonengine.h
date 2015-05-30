@@ -10,7 +10,7 @@ public:
 
     void updateBadgeNumber(int number);
     void updateProgress(qreal progress);
-    void updateLauncher(const QVariant &launcher);
+    void updateLauncher(const QString &launcher);
 
 private:
     void update(const QString &launcher, qint64 badgeNumber, qreal progress);

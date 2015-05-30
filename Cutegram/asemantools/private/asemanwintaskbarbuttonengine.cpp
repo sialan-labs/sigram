@@ -6,13 +6,12 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QRect>
+#include <QDebug>
 
 #ifdef QT_WINEXTRAS_LIB
 #include <QtWin>
 #include <QWinTaskbarButton>
 #include <QWinTaskbarProgress>
-#else
-typedef QObject QWinTaskbarButton;
 #endif
 
 AsemanWinTaskbarButtonEngine::AsemanWinTaskbarButtonEngine()
@@ -37,29 +36,31 @@ void AsemanWinTaskbarButtonEngine::updateProgress(qreal progress)
     _button->progress()->setValue(progress);
 }
 
-void AsemanWinTaskbarButtonEngine::updateLauncher(const QVariant &launcher)
+void AsemanWinTaskbarButtonEngine::updateWindow(QWindow *window)
 {
-    QWindow *newWin = launcher.value<QWindow*>();
-    if(_button->window() == newWin)
+    if(_button->window() == window)
         return;
-
     if(_button->window()) {
         updateBadgeNumber(0);
         updateProgress(0);
     }
 
-    _button->setWindow(newWin);
+    _button->setWindow(window);
 }
 
 QImage AsemanWinTaskbarButtonEngine::generateIcon(int count)
 {
-    QImage res = QImage(64, 64);
+    QImage res = QImage(22, 22, QImage::Format_ARGB32);
     res.fill(QColor(0,0,0,0));
 
     if( count == 0 )
         return res;
 
-    QRect rct = res.rect();
+    QRect rct;
+    rct.setX(1);
+    rct.setY(1);
+    rct.setWidth(res.width() - 2*rct.x());
+    rct.setHeight(res.height() - 2*rct.y());
 
     QPainterPath path;
     path.addEllipse(rct);

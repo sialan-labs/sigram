@@ -24,14 +24,14 @@ void AsemanUnityTaskbarButtonEngine::updateProgress(qreal progress)
     update(_launcher ,_badge_number, _progress);
 }
 
-void AsemanUnityTaskbarButtonEngine::updateLauncher(const QVariant &launcher)
+void AsemanUnityTaskbarButtonEngine::updateLauncher(const QString &launcher)
 {
     if(_launcher == launcher)
         return;
     if(!_launcher.isEmpty() && (_badge_number || _progress))
         update(_launcher ,0, 0);
 
-    _launcher = launcher.toString();
+    _launcher = launcher;
     update(_launcher ,_badge_number, _progress);
 }
 

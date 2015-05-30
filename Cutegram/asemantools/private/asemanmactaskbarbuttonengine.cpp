@@ -17,8 +17,3 @@ void AsemanMacTaskbarButtonEngine::updateProgress(qreal progress)
 {
     Q_UNUSED(progress)
 }
-
-void AsemanMacTaskbarButtonEngine::updateLauncher(const QVariant &launcher)
-{
-    Q_UNUSED(launcher)
-}

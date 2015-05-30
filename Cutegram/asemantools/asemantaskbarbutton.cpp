@@ -1,6 +1,8 @@
 #include "asemantaskbarbutton.h"
 #include "private/asemanabstracttaskbarbuttonengine.h"
 
+#include <QDebug>
+
 #ifdef Q_OS_WIN
 #include "private/asemanwintaskbarbuttonengine.h"
 #else
@@ -16,7 +18,6 @@ class AsemanNullTaskbarButtonEngine: public AsemanAbstractTaskbarButtonEngine
 public:
     void updateBadgeNumber(int number){Q_UNUSED(number)}
     void updateProgress(qreal progress){Q_UNUSED(progress)}
-    void updateLauncher(const QVariant &launcher){Q_UNUSED(launcher)}
 };
 #endif
 #endif
@@ -27,8 +28,9 @@ class AsemanTaskbarButtonPrivate
 public:
     int badgeNumber;
     qreal progress;
-    QVariant launcher;
+    QString launcher;
     AsemanAbstractTaskbarButtonEngine *engine;
+    QWindow *window;
 };
 
 AsemanTaskbarButton::AsemanTaskbarButton(QObject *parent) :
@@ -37,6 +39,7 @@ AsemanTaskbarButton::AsemanTaskbarButton(QObject *parent) :
     p = new AsemanTaskbarButtonPrivate;
     p->badgeNumber = 0;
     p->progress = 0;
+    p->window = 0;
 
 #ifdef Q_OS_WIN
     p->engine = new AsemanWinTaskbarButtonEngine();
@@ -83,18 +86,34 @@ qreal AsemanTaskbarButton::progress() const
     return p->progress;
 }
 
-void AsemanTaskbarButton::setLauncher(const QVariant &launcher)
+void AsemanTaskbarButton::setLauncher(const QString &launcher)
 {
     if(p->launcher == launcher)
         return;
 
     p->launcher = launcher;
+    p->engine->updateLauncher(p->launcher);
     emit launcherChanged();
 }
 
-QVariant AsemanTaskbarButton::launcher() const
+QString AsemanTaskbarButton::launcher() const
 {
     return p->launcher;
+}
+
+void AsemanTaskbarButton::setWindow(QWindow *win)
+{
+    if(p->window == win)
+        return;
+
+    p->window = win;
+    p->engine->updateWindow(p->window);
+    emit windowChanged();
+}
+
+QWindow *AsemanTaskbarButton::window() const
+{
+    return p->window;
 }
 
 AsemanTaskbarButton::~AsemanTaskbarButton()
