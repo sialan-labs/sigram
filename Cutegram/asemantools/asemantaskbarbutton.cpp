@@ -9,7 +9,7 @@
 #ifdef Q_OS_MAC
 #include "private/asemanmactaskbarbuttonengine.h"
 #else
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) && defined(QT_DBUS_LIB)
 #include "private/asemanunitytaskbarbuttonengine.h"
 #else
 #include "private/asemanabstracttaskbarbuttonengine.h"
@@ -47,7 +47,7 @@ AsemanTaskbarButton::AsemanTaskbarButton(QObject *parent) :
 #ifdef Q_OS_MAC
     p->engine = new AsemanMacTaskbarButtonEngine();
 #else
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) && defined(QT_DBUS_LIB)
     p->engine = new AsemanUnityTaskbarButtonEngine();
 #else
     p->engine = new AsemanNullTaskbarButtonEngine();
