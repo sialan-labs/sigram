@@ -114,7 +114,7 @@ object EncryptedMessage {
     qint64 classType rw = another.%name();
 }
 
-object ContactsForeignLink {
+object ContactLink {
     bool hasPhone rw = another.%name();
     qint64 classType rw = another.%name();
 }

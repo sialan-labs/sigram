@@ -58,7 +58,7 @@ void DatabaseCore::insertUser(const DbUser &duser)
 
     query.bindValue(":id",user.id() );
     query.bindValue(":accessHash",user.accessHash() );
-    query.bindValue(":inactive",user.inactive() );
+    query.bindValue(":inactive",false );
     query.bindValue(":phone",user.phone() );
     query.bindValue(":firstName",user.firstName() );
     query.bindValue(":lastName",user.lastName() );
@@ -459,7 +459,7 @@ void DatabaseCore::readUsers()
         User user(User::typeUserEmpty);
         user.setId( record.value("id").toLongLong() );
         user.setAccessHash( record.value("accessHash").toLongLong() );
-        user.setInactive( record.value("inactive").toBool() );
+//        user.setInactive( record.value("inactive").toBool() );
         user.setPhone( record.value("phone").toString() );
         user.setFirstName( record.value("firstName").toString() );
         user.setLastName( record.value("lastName").toString() );

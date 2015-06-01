@@ -985,50 +985,6 @@ private:
 
 Q_DECLARE_METATYPE(PeerNotifySettingsObject*)
 
-class ContactsMyLinkObject : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(bool contact READ contact WRITE setContact NOTIFY contactChanged)
-
-public:
-    ContactsMyLinkObject(const ContactsMyLink & another, QObject *parent = 0) : QObject(parent){
-        (void)another;
-        _contact = another.contact();
-
-    }
-    ContactsMyLinkObject(QObject *parent = 0) : QObject(parent){}
-    ~ContactsMyLinkObject(){}
-
-    bool contact() const {
-        return _contact;
-    }
-
-    void setContact(bool value) {
-        if( value == _contact )
-            return;
-        _contact = value;
-        emit contactChanged();
-        emit changed();
-    }
-
-
-    void operator= ( const ContactsMyLink & another) {
-        _contact = another.contact();
-        emit contactChanged();
-
-    }
-
-signals:
-    void changed();
-    void contactChanged();
-
-private:
-    bool _contact;
-
-};
-
-Q_DECLARE_METATYPE(ContactsMyLinkObject*)
-
 class EncryptedFileObject : public QObject
 {
     Q_OBJECT
@@ -1485,33 +1441,19 @@ private:
 
 Q_DECLARE_METATYPE(EncryptedMessageObject*)
 
-class ContactsForeignLinkObject : public QObject
+class ContactLinkObject : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool hasPhone READ hasPhone WRITE setHasPhone NOTIFY hasPhoneChanged)
     Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
-    ContactsForeignLinkObject(const ContactsForeignLink & another, QObject *parent = 0) : QObject(parent){
+    ContactLinkObject(const ContactLink & another, QObject *parent = 0) : QObject(parent){
         (void)another;
-        _hasPhone = another.hasPhone();
         _classType = another.classType();
 
     }
-    ContactsForeignLinkObject(QObject *parent = 0) : QObject(parent){}
-    ~ContactsForeignLinkObject(){}
-
-    bool hasPhone() const {
-        return _hasPhone;
-    }
-
-    void setHasPhone(bool value) {
-        if( value == _hasPhone )
-            return;
-        _hasPhone = value;
-        emit hasPhoneChanged();
-        emit changed();
-    }
+    ContactLinkObject(QObject *parent = 0) : QObject(parent){}
+    ~ContactLinkObject(){}
 
     qint64 classType() const {
         return _classType;
@@ -1526,9 +1468,7 @@ public:
     }
 
 
-    void operator= ( const ContactsForeignLink & another) {
-        _hasPhone = another.hasPhone();
-        emit hasPhoneChanged();
+    void operator= ( const ContactLink & another) {
         _classType = another.classType();
         emit classTypeChanged();
 
@@ -1536,16 +1476,14 @@ public:
 
 signals:
     void changed();
-    void hasPhoneChanged();
     void classTypeChanged();
 
 private:
-    bool _hasPhone;
     qint64 _classType;
 
 };
 
-Q_DECLARE_METATYPE(ContactsForeignLinkObject*)
+Q_DECLARE_METATYPE(ContactLinkObject*)
 
 class NotifyPeerObject : public QObject
 {
@@ -5171,7 +5109,6 @@ class UserObject : public QObject
     Q_OBJECT
     Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
-    Q_PROPERTY(bool inactive READ inactive WRITE setInactive NOTIFY inactiveChanged)
     Q_PROPERTY(QString phone READ phone WRITE setPhone NOTIFY phoneChanged)
     Q_PROPERTY(QString firstName READ firstName WRITE setFirstName NOTIFY firstNameChanged)
     Q_PROPERTY(UserProfilePhotoObject* photo READ photo WRITE setPhoto NOTIFY photoChanged)
@@ -5185,7 +5122,6 @@ public:
         (void)another;
         _id = another.id();
         _accessHash = another.accessHash();
-        _inactive = another.inactive();
         _phone = another.phone();
         _firstName = another.firstName();
         _photo = new UserProfilePhotoObject(another.photo(), this);
@@ -5219,18 +5155,6 @@ public:
             return;
         _accessHash = value;
         emit accessHashChanged();
-        emit changed();
-    }
-
-    bool inactive() const {
-        return _inactive;
-    }
-
-    void setInactive(bool value) {
-        if( value == _inactive )
-            return;
-        _inactive = value;
-        emit inactiveChanged();
         emit changed();
     }
 
@@ -5324,8 +5248,6 @@ public:
         emit idChanged();
         _accessHash = another.accessHash();
         emit accessHashChanged();
-        _inactive = another.inactive();
-        emit inactiveChanged();
         _phone = another.phone();
         emit phoneChanged();
         _firstName = another.firstName();
@@ -5359,7 +5281,6 @@ signals:
 private:
     qint32 _id;
     qint64 _accessHash;
-    bool _inactive;
     QString _phone;
     QString _firstName;
     UserProfilePhotoObject* _photo;
@@ -5402,9 +5323,6 @@ static bool initialize() {
     qmlRegisterType<PeerNotifySettingsObject>("CutegramTypes", 1, 0, "PeerNotifySettings");
     qRegisterMetaType<PeerNotifySettingsObject*>("PeerNotifySettingsObject*");
 
-    qmlRegisterType<ContactsMyLinkObject>("CutegramTypes", 1, 0, "ContactsMyLink");
-    qRegisterMetaType<ContactsMyLinkObject*>("ContactsMyLinkObject*");
-
     qmlRegisterType<EncryptedFileObject>("CutegramTypes", 1, 0, "EncryptedFile");
     qRegisterMetaType<EncryptedFileObject*>("EncryptedFileObject*");
 
@@ -5414,8 +5332,8 @@ static bool initialize() {
     qmlRegisterType<EncryptedMessageObject>("CutegramTypes", 1, 0, "EncryptedMessage");
     qRegisterMetaType<EncryptedMessageObject*>("EncryptedMessageObject*");
 
-    qmlRegisterType<ContactsForeignLinkObject>("CutegramTypes", 1, 0, "ContactsForeignLink");
-    qRegisterMetaType<ContactsForeignLinkObject*>("ContactsForeignLinkObject*");
+    qmlRegisterType<ContactLinkObject>("CutegramTypes", 1, 0, "ContactsForeignLink");
+    qRegisterMetaType<ContactLinkObject*>("ContactLinkObject*");
 
     qmlRegisterType<NotifyPeerObject>("CutegramTypes", 1, 0, "NotifyPeer");
     qRegisterMetaType<NotifyPeerObject*>("NotifyPeerObject*");

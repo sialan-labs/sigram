@@ -20,7 +20,7 @@ Item {
     property real typeMessageMediaContact: 0x5e7d2f39
     property real typeMessageMediaEmpty: 0x3ded6320
     property real typeMessageMediaVideo: 0xa2d24290
-    property real typeMessageMediaUnsupported: 0x29632a36
+    property real typeMessageMediaUnsupported: 0x9f84f49e
     property real typeMessageMediaAudio: 0xc6b68300
     property real typeMessageMediaPhoto: 0xc8c45a2a
     property real typeMessageMediaGeo: 0x56e0d474
