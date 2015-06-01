@@ -41,6 +41,7 @@ Rectangle {
     signal focusRequest()
     signal dialogRequest(variant dialogObject)
     signal tagSearchRequest(string tag)
+    signal replyToRequest(int msgId)
 
     onIsActiveChanged: {
         if( isActive )
@@ -186,6 +187,7 @@ Rectangle {
             }
             onDialogRequest: acc_msg_list.dialogRequest(dialogObject)
             onTagSearchRequest: acc_msg_list.tagSearchRequest(tag)
+            onMessageFocusRequest: focusOnMessage(msgId)
 
             property string messageFile
             property bool selected: mlist.currentIndex == index
@@ -288,28 +290,32 @@ Rectangle {
                             }
                         } else {
                             if(msg_item.isSticker)
-                                actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal")]
+                                actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal")]
                             else
                             if(msg_item.selectedText.length == 0)
-                                actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
+                                actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
                             else
-                                actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Search on the Web")]
+                                actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Search on the Web")]
 
                             res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
-                                acc_msg_list.forwardRequest(message)
+                                acc_msg_list.replyToRequest(message.id)
                                 break;
 
                             case 1:
-                                msg_item.copy()
+                                acc_msg_list.forwardRequest(message)
                                 break;
 
                             case 2:
-                                telegramObject.deleteMessage(message.id)
+                                msg_item.copy()
                                 break;
 
                             case 3:
+                                telegramObject.deleteMessage(message.id)
+                                break;
+
+                            case 4:
                                 if(msg_item.isSticker)
                                     Cutegram.addToPersonal(msg_item.mediaLOcation.download.location)
                                 else
@@ -450,12 +456,17 @@ Rectangle {
         property int msgIndex
     }
 
-    function sendMessage( txt ) {
-        messages_model.sendMessage(txt)
+    function sendMessage( txt, inReplyTo ) {
+        messages_model.sendMessage(txt, inReplyTo)
     }
 
     function focusOn(msgId) {
         focus_msg_timer.msgId = msgId
+    }
+
+    function focusOnMessage(msgId) {
+        var idx = messages_model.indexOf(msgId)
+        mlist.positionViewAtIndex(idx, ListView.Center)
     }
 
     function copy() {

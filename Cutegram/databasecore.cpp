@@ -165,8 +165,8 @@ void DatabaseCore::insertMessage(const DbMessage &dmessage)
     begin();
     const Message &message = dmessage.message;
     QSqlQuery query(p->db);
-    query.prepare("INSERT OR REPLACE INTO Messages (id, toId, toPeerType, unread, fromId, out, date, fwdDate, fwdFromId, message, actionAddress, actionUserId, actionPhoto, actionTitle, actionUsers, actionType, mediaAudio, mediaLastName, mediaFirstName, mediaPhoneNumber, mediaDocument, mediaGeo, mediaPhoto, mediaUserId, mediaVideo, mediaType) "
-                  "VALUES (:id, :toId, :toPeerType, :unread, :fromId, :out, :date, :fwdDate, :fwdFromId, :message, :actionAddress, :actionUserId, :actionPhoto, :actionTitle, :actionUsers, :actionType, :mediaAudio, :mediaLastName, :mediaFirstName, :mediaPhoneNumber, :mediaDocument, :mediaGeo, :mediaPhoto, :mediaUserId, :mediaVideo, :mediaType);");
+    query.prepare("INSERT OR REPLACE INTO Messages (id, toId, toPeerType, unread, fromId, out, date, fwdDate, fwdFromId, replyToMsgId, message, actionAddress, actionUserId, actionPhoto, actionTitle, actionUsers, actionType, mediaAudio, mediaLastName, mediaFirstName, mediaPhoneNumber, mediaDocument, mediaGeo, mediaPhoto, mediaUserId, mediaVideo, mediaType) "
+                  "VALUES (:id, :toId, :toPeerType, :unread, :fromId, :out, :date, :fwdDate, :fwdFromId, :replyToMsgId, :message, :actionAddress, :actionUserId, :actionPhoto, :actionTitle, :actionUsers, :actionType, :mediaAudio, :mediaLastName, :mediaFirstName, :mediaPhoneNumber, :mediaDocument, :mediaGeo, :mediaPhoto, :mediaUserId, :mediaVideo, :mediaType);");
 
     query.bindValue(":id",message.id() );
     query.bindValue(":toId",message.toId().classType()==Peer::typePeerChat?message.toId().chatId():message.toId().userId() );
@@ -177,6 +177,7 @@ void DatabaseCore::insertMessage(const DbMessage &dmessage)
     query.bindValue(":date",message.date() );
     query.bindValue(":fwdDate",message.fwdDate() );
     query.bindValue(":fwdFromId",message.fwdFromId() );
+    query.bindValue(":replyToMsgId",message.replyToMsgId() );
     query.bindValue(":message",message.message() );
 
     const MessageAction &action = message.action();
@@ -301,6 +302,7 @@ void DatabaseCore::readMessages(const DbPeer &dpeer, int offset, int limit)
         message.setDate( record.value("date").toLongLong() );
         message.setFwdDate( record.value("fwdDate").toLongLong() );
         message.setFwdFromId( record.value("fwdFromId").toLongLong() );
+        message.setReplyToMsgId( record.value("replyToMsgId").toLongLong() );
         message.setMessage( record.value("message").toString() );
 
         DbMessage dmsg;
@@ -580,6 +582,14 @@ void DatabaseCore::update_db()
         query.exec();
 
         db_version = 2;
+    }
+    if(db_version == 2)
+    {
+        QSqlQuery query(p->db);
+        query.prepare("ALTER TABLE messages ADD COLUMN replyToMsgId BIGINT");
+        query.exec();
+
+        db_version = 3;
     }
 
     setValue("version", QString::number(db_version) );

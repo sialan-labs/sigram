@@ -216,7 +216,7 @@ public slots:
     void authSignIn(const QString &code);
     void authSignUp(const QString &code, const QString &firstName, const QString &lastName);
 
-    void sendMessage( qint64 dialogId, const QString & msg );
+    void sendMessage( qint64 dialogId, const QString & msg, int replyTo = 0 );
     bool sendMessageAsDocument( qint64 dialogId, const QString & msg );
 
     void addContact(const QString &firstName, const QString &lastName, const QString &phoneNumber);

@@ -7,7 +7,7 @@ import CutegramTypes 1.0
 
 Item {
     id: smsg
-    clip: true
+//    clip: true
     height: {
         if(txt_frame.height+4*Devices.density<minimumHeight)
             return minimumHeight
@@ -23,7 +23,7 @@ Item {
 
     property alias trash: trash_item.visible
 
-    signal accepted( string text )
+    signal accepted( string text, int inReplyTo )
     signal emojiRequest(real x, real y)
     signal copyRequest()
 
@@ -100,42 +100,8 @@ Item {
         }
 
         Rectangle {
-            anchors.top: parent.top
-            anchors.bottom: txt_frame.top
-            anchors.left: txt_frame.left
-            anchors.right: txt_frame.right
+            anchors.fill: parent
             color: smsg.color
-        }
-
-        Rectangle {
-            anchors.top: txt_frame.bottom
-            anchors.bottom: parent.bottom
-            anchors.left: txt_frame.left
-            anchors.right: txt_frame.right
-            color: smsg.color
-        }
-
-        Rectangle {
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.right: txt_frame.left
-            color: smsg.color
-        }
-
-        Rectangle {
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.left: txt_frame.right
-            anchors.right: parent.right
-            color: smsg.color
-        }
-
-        Rectangle {
-            anchors.fill: txt_frame
-            anchors.margins: 1
-            color: smsg.color
-            radius: txt_frame.radius
         }
 
         Controls.Frame {
@@ -480,7 +446,8 @@ Item {
         if(privates.suggestionItem)
             privates.suggestionItem.destroy()
 
-        smsg.accepted(msg)
+        smsg.accepted(msg, messageReply.replyMessage? messageReply.replyMessage.id : 0)
+        messageReply.discard()
         txt.text = ""
     }
 
@@ -502,6 +469,10 @@ Item {
         txt.focus = true
     }
 
+    function replyTo(msgId) {
+        messageReply.replyMessage = telegramObject.message(msgId)
+    }
+
     Timer {
         id: check_suggestion
         interval: 20
@@ -509,6 +480,38 @@ Item {
             txt.selectWord()
             privates.suggestionItem.keyword = txt.selectedText
             txt.deselect()
+        }
+    }
+
+    Item {
+        width: parent.width
+        height: messageReply.height
+        anchors.bottom: parent.top
+        visible: messageReply.replyMessage? true : false
+
+        Rectangle {
+            anchors.fill: parent
+            color: smsg.color
+            opacity: 0.8
+        }
+
+        MessageReplyItem {
+            id: messageReply
+            width: parent.width
+            telegram: telegramObject
+
+            function discard() {
+                messageReply.replyMessage = messageReply.message
+            }
+        }
+
+        Controls.Button {
+            width: height
+            anchors.right: parent.right
+            anchors.rightMargin: 4*Devices.density
+            anchors.verticalCenter: parent.verticalCenter
+            iconSource: "files/close.png"
+            onClicked: messageReply.discard()
         }
     }
 

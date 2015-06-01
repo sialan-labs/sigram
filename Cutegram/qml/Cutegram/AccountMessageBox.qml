@@ -49,6 +49,7 @@ Item {
             onFocusRequest: send_msg.setFocus()
             onDialogRequest: acc_view.currentDialog = dialogObject
             onTagSearchRequest: msg_box.tagSearchRequest(tag)
+            onReplyToRequest: send_msg.replyTo(msgId)
         }
 
         Item {
@@ -112,7 +113,7 @@ Item {
             anchors.bottom: parent.bottom
             color: Cutegram.currentTheme.sendFrameColor
             currentDialog: msg_box.currentDialog
-            onAccepted: messages.sendMessage(text)
+            onAccepted: messages.sendMessage(text, inReplyTo)
             trash: messages.messageDraging
             onCopyRequest: messages.copy()
             onEmojiRequest: {

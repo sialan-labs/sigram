@@ -219,7 +219,7 @@ void TelegramMessagesModel::loadMore(bool force)
     emit refreshingChanged();
 }
 
-void TelegramMessagesModel::sendMessage(const QString &msg)
+void TelegramMessagesModel::sendMessage(const QString &msg, int inReplyTo)
 {
     if( !p->telegram )
         return;
@@ -228,7 +228,7 @@ void TelegramMessagesModel::sendMessage(const QString &msg)
 
     clearNewMessageFlag();
     qint32 did = p->dialog->peer()->classType()==Peer::typePeerChat? p->dialog->peer()->chatId() : p->dialog->peer()->userId();
-    p->telegram->sendMessage(did, msg);
+    p->telegram->sendMessage(did, msg, inReplyTo);
 }
 
 void TelegramMessagesModel::setReaded()

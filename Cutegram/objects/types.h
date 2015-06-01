@@ -4658,6 +4658,7 @@ class MessageObject : public QObject
     Q_PROPERTY(MessageMediaObject* media READ media WRITE setMedia NOTIFY mediaChanged)
     Q_PROPERTY(qint32 fwdDate READ fwdDate WRITE setFwdDate NOTIFY fwdDateChanged)
     Q_PROPERTY(qint32 fwdFromId READ fwdFromId WRITE setFwdFromId NOTIFY fwdFromIdChanged)
+    Q_PROPERTY(qint32 replyToMsgId READ replyToMsgId WRITE setReplyToMsgId NOTIFY replyToMsgIdChanged)
     Q_PROPERTY(QString message READ message WRITE setMessage NOTIFY messageChanged)
     Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
@@ -4677,6 +4678,7 @@ public:
         _media = new MessageMediaObject(another.media(), this);
         _fwdDate = another.fwdDate();
         _fwdFromId = another.fwdFromId();
+        _replyToMsgId = another.replyToMsgId();
         _message = another.message();
         _classType = another.classType();
 
@@ -4840,6 +4842,18 @@ public:
         emit changed();
     }
 
+    qint32 replyToMsgId() const {
+        return _replyToMsgId;
+    }
+
+    void setReplyToMsgId(const qint32 &replyToMsgId) {
+        if( replyToMsgId == _replyToMsgId )
+            return;
+        _replyToMsgId = replyToMsgId;
+        emit replyToMsgIdChanged();
+        emit changed();
+    }
+
     QString message() const {
         return _message;
     }
@@ -4888,6 +4902,8 @@ public:
         emit fwdDateChanged();
         _fwdFromId = another.fwdFromId();
         emit fwdFromIdChanged();
+        _replyToMsgId = another.replyToMsgId();
+        emit replyToMsgIdChanged();
         _message = another.message();
         emit messageChanged();
         _classType = another.classType();
@@ -4910,6 +4926,7 @@ signals:
     void mediaChanged();
     void fwdDateChanged();
     void fwdFromIdChanged();
+    void replyToMsgIdChanged();
     void messageChanged();
     void classTypeChanged();
 
@@ -4927,6 +4944,7 @@ private:
     MessageMediaObject* _media;
     qint32 _fwdDate;
     qint32 _fwdFromId;
+    qint32 _replyToMsgId;
     QString _message;
     qint64 _classType;
 

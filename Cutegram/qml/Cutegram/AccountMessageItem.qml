@@ -52,6 +52,7 @@ Item {
 
     signal dialogRequest(variant dialogObject)
     signal tagSearchRequest(string tag)
+    signal messageFocusRequest(int msgId)
 
     onSentChanged: {
         if( sent )
@@ -209,7 +210,8 @@ Item {
                 id: column
                 anchors.centerIn: parent
                 height: (visibleNames?user_name.height:0) + (uploading?uploadItem.height:0)
-                        + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_column.height
+                        + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_column.height +
+                        (msg_reply.visible? msg_reply.height : 0)
                 clip: true
 
                 Text {
@@ -243,6 +245,13 @@ Item {
                     id: msg_media
                     media: message.media
                     visible: msg_media.hasMedia && !uploading
+                }
+
+                MessageReplyItem {
+                    id: msg_reply
+                    telegram: telegramObject
+                    message: msg_item.message
+                    onMessageFocusRequest: msg_item.messageFocusRequest(msgId)
                 }
 
                 Column {

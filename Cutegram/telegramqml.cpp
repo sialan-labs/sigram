@@ -853,7 +853,7 @@ void TelegramQml::authSignUp(const QString &code, const QString &firstName, cons
     emit authNeededChanged();
 }
 
-void TelegramQml::sendMessage(qint64 dId, const QString &msg)
+void TelegramQml::sendMessage(qint64 dId, const QString &msg, int replyTo)
 {
     if( !p->telegram )
         return;
@@ -865,6 +865,9 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     Message message = newMessage(dId);
     message.setMessage(msg);
 
+    if(replyTo)
+        message.setReplyToMsgId(replyTo);
+
     p->msg_send_random_id = generateRandomId();
     if(dlg && dlg->encrypted())
     {
@@ -873,8 +876,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg)
     else
     {
         InputPeer peer = getInputPeer(dId);
-        sendId = p->telegram->messagesSendMessage(peer, p->msg_send_random_id, msg);
-
+        sendId = p->telegram->messagesSendMessage(peer, p->msg_send_random_id, msg, replyTo);
     }
 
     insertMessage(message, (dlg && dlg->encrypted()), false, true);
