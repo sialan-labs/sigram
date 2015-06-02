@@ -15,6 +15,7 @@ AsemanMain {
     property variant authDialog
     property alias profiles: profile_model
     property alias webPageGrabber: web_grabber
+    property alias mapDownloader: map_downloader
 
     property bool aboutMode: false
 
@@ -63,6 +64,14 @@ AsemanMain {
         id: tbar_cgrabber
         autoRefresh: Devices.isWindows8
         Component.onCompleted: if(Devices.isWindows8) window = View
+    }
+
+    MapDownloaderQueue {
+        id: map_downloader
+        destination: Devices.localFilesPrePath + AsemanApp.homePath + "/maps"
+        size: Qt.size(320*Devices.density, 220*Devices.density)
+        mapProvider: MapDownloader.MapProviderGoogle
+        zoom: 15
     }
 
     WebPageGrabberQueue {

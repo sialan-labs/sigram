@@ -106,5 +106,7 @@
         <file>qml/Cutegram/MessageLinkImage.qml</file>
         <file>qml/Cutegram/AddContactDialog.qml</file>
         <file>qml/Cutegram/MessageReplyItem.qml</file>
+        <file>qml/Cutegram/files/map-pin.png</file>
+        <file>qml/Cutegram/MapDownloaderQueue.qml</file>
     </qresource>
 </RCC>

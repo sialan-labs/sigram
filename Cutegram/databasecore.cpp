@@ -862,7 +862,7 @@ void DatabaseCore::insertGeo(int id, const GeoPoint &geo)
 
     begin();
     QSqlQuery query(p->db);
-    query.prepare("INSERT OR REPLACE INTO Audios (id, longitude, lat) "
+    query.prepare("INSERT OR REPLACE INTO Geos (id, longitude, lat) "
                   "VALUES (:id, :longitude, :lat);");
 
     query.bindValue(":id", id);

@@ -73,6 +73,11 @@ Item {
             telegramObject.getFileJustCheck(result)
             break;
 
+        case typeMessageMediaGeo:
+            mapDownloader.addToQueue(Qt.point(media.geo.lat, media.geo.longitude), media_img.setImage)
+            result = telegramObject.nullLocation
+            break;
+
         case typeMessageMediaUnsupported:
         default:
             result = telegramObject.nullLocation
@@ -130,6 +135,10 @@ Item {
             result = isSticker? 220*Devices.density : 168*Devices.density
             break;
 
+        case typeMessageMediaGeo:
+            result = mapDownloader.size.width
+            break;
+
         default:
             result = 0
             break;
@@ -163,6 +172,10 @@ Item {
             result = isSticker? width*media_img.imageSize.height/media_img.imageSize.width : width
             break;
 
+        case typeMessageMediaGeo:
+            result = mapDownloader.size.height
+            break;
+
         default:
             result = 0
             break;
@@ -182,6 +195,7 @@ Item {
         visible: media.classType != typeMessageMediaVideo || fileLocation.length != 0
 
         property size imageSize: Cutegram.imageSize(source)
+        property string customImage
 
         sourceSize: {
             var ratio = imageSize.width/imageSize.height
@@ -235,12 +249,20 @@ Item {
                 }
                 break;
 
+            case typeMessageMediaGeo:
+                result = customImage
+                break;
+
             default:
                 result = ""
                 break;
             }
 
             return result
+        }
+
+        function setImage(img) {
+            customImage = img
         }
     }
 
@@ -270,7 +292,7 @@ Item {
         id: download_frame
         anchors.fill: parent
         color: "#88000000"
-        visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto && !isSticker
+        visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto && !isSticker && media.classType != typeMessageMediaGeo
         radius: 3*Devices.density
 
         Text {
@@ -357,6 +379,19 @@ Item {
         }
     }
 
+    Image {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.verticalCenter
+        source: media.classType == typeMessageMediaGeo? "files/map-pin.png" : ""
+        sourceSize: Qt.size(width,height)
+        fillMode: Image.PreserveAspectFit
+        width: 92*Devices.density
+        height: 92*Devices.density
+        visible: media.classType == typeMessageMediaGeo
+        asynchronous: true
+        smooth: true
+    }
+
     Button {
         anchors.top: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -396,6 +431,10 @@ Item {
 
             case typeMessageMediaAudio:
                 telegramObject.getFile(locationObj, typeInputAudioFileLocation, media.audio.size)
+                break;
+
+            case typeMessageMediaGeo:
+                Qt.openUrlExternally( mapDownloader.webLinkOf(Qt.point(media.geo.lat, media.geo.longitude)) )
                 break;
 
             case typeMessageMediaUnsupported:

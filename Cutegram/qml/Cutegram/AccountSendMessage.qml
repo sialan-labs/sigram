@@ -497,7 +497,6 @@ Item {
 
         MessageReplyItem {
             id: messageReply
-            width: parent.width
             telegram: telegramObject
 
             function discard() {

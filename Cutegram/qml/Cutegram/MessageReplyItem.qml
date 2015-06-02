@@ -5,7 +5,7 @@ import AsemanTools 1.0
 
 Item {
     id: msg_reply
-    width: 200*Devices.density
+    width: row.width + 12*Devices.density
     height: row.height + 4*Devices.density
     visible: replyMessage || (message && message.replyToMsgId != 0)
 
@@ -26,11 +26,7 @@ Item {
 
     Row {
         id: row
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 6*Devices.density
-        anchors.rightMargin: 6*Devices.density
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.centerIn: parent
         spacing: 2*Devices.density
 
         Rectangle {
@@ -41,7 +37,6 @@ Item {
 
         Column {
             id: column
-            width: parent.width - 10*Devices.density
             anchors.verticalCenter: parent.verticalCenter
             spacing: 2*Devices.density
 
@@ -148,7 +143,7 @@ Item {
 
             Text {
                 id: txt
-                width: parent.width
+                width: htmlWidth>200*Devices.density? 200*Devices.density : htmlWidth
                 font.pixelSize: Math.floor(Cutegram.font.pointSize*Devices.fontDensity)-1
                 font.family: Cutegram.font.family
                 horizontalAlignment: Text.AlignLeft
@@ -168,8 +163,10 @@ Item {
                         return ""
 
                     var replyMsg = replyMessage? replyMessage : telegram.message(message.replyToMsgId)
-                    return replyMsg.message
+                    return emojis.textToEmojiText(replyMsg.message,16,true)
                 }
+
+                property real htmlWidth: Cutegram.htmlWidth(text)
             }
         }
     }

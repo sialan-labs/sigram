@@ -235,6 +235,13 @@ Item {
                     }
                 }
 
+                MessageReplyItem {
+                    id: msg_reply
+                    telegram: telegramObject
+                    message: msg_item.message
+                    onMessageFocusRequest: msg_item.messageFocusRequest(msgId)
+                }
+
                 AccountMessageUpload {
                     id: uploadItem
                     telegram: telegramObject
@@ -245,13 +252,6 @@ Item {
                     id: msg_media
                     media: message.media
                     visible: msg_media.hasMedia && !uploading
-                }
-
-                MessageReplyItem {
-                    id: msg_reply
-                    telegram: telegramObject
-                    message: msg_item.message
-                    onMessageFocusRequest: msg_item.messageFocusRequest(msgId)
                 }
 
                 Column {
