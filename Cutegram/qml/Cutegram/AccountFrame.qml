@@ -93,7 +93,7 @@ Rectangle {
 
             var window = view? view.windowOf(dId) : 0
             var windowIsActive = window? window.active && window.visible : false
-            if( (view && isActive) || windowIsActive ) {
+            if( (view && isActive && acc_frame.visible) || windowIsActive ) {
                 var cDialog = windowIsActive? window.currentDialog : view.currentDialog
 
                 if( cDialog.peer.chatId && cDialog.peer.chatId == msg.toId.chatId ) {
@@ -241,12 +241,6 @@ Rectangle {
             var nid = notification.sendNotify( title, message, location, 0, notifyTimeOut, actions )
             notifies_hash.insert(nid, dId)
         }
-    }
-
-    TaskbarButton {
-        badgeNumber: telegram.unreadCount
-        progress: telegram.totalUploadedPercent
-        window: View
     }
 
     AccountSign {

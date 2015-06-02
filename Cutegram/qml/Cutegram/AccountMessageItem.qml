@@ -78,13 +78,6 @@ Item {
         message: msg_item.message
     }
 
-//    TextEmojiWrapper {
-//        id: wrapper
-//        text: msg_txt.messageText
-//        emojisItem: emojis
-//        Component.onCompleted: textDocument = msg_txt.textDocument
-//    }
-
     Row {
         id: frame_row
         anchors.fill: parent

@@ -38,6 +38,10 @@ int main(int argc, char *argv[])
 
     if(!parser.isSet(verboseOption))
         qputenv("QT_LOGGING_RULES", "tg.*=false");
+    else
+        qputenv("QT_LOGGING_RULES", "tg.core.settings=false\n"
+                                    "tg.core.outboundpkt=false\n"
+                                    "tg.core.inboundpkt=false");
 
     Telegram::setDefaultHostAddress("149.154.167.50");
     Telegram::setDefaultHostPort(443);

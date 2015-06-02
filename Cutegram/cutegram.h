@@ -25,6 +25,7 @@
 #include <QSystemTrayIcon>
 #include <QFont>
 
+class QMenu;
 class ThemeItem;
 class CutegramPrivate;
 class Cutegram : public QObject
@@ -211,12 +212,13 @@ private slots:
 
 private:
     void init_systray();
-    void showContextMenu();
     QImage generateIcon( const QImage & img, int count );
     void init_languages();
     void init_theme();
 
     bool lowLevelDarkSystemTray();
+
+    QMenu *contextMenu();
 
 private:
     CutegramPrivate *p;

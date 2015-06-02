@@ -459,16 +459,11 @@ void Cutegram::systray_action(QSystemTrayIcon::ActivationReason act)
             active();
         }
         break;
-
-    case QSystemTrayIcon::Context:
-        showContextMenu();
-        break;
     }
 }
 
 void Cutegram::init_systray()
 {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 5, 0))
     if( p->desktop->desktopSession() == AsemanDesktopTools::Unity || p->desktop->desktopSession() == AsemanDesktopTools::GnomeFallBack )
     {
         QFile::remove(UNITY_ICON_PATH(0));
@@ -485,10 +480,10 @@ void Cutegram::init_systray()
         p->unityTray->addMenu( tr("About Aseman"), this, "aboutAseman" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
     }
-#endif
     if( !p->unityTray || !p->unityTray->pntr() )
     {
         p->sysTray = new QSystemTrayIcon( QIcon(SYSTRAY_ICON), this );
+        p->sysTray->setContextMenu(contextMenu());
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0))
         p->sysTray->setToolTip(tr("Cutegram"));
 #endif
@@ -500,51 +495,22 @@ void Cutegram::init_systray()
     }
 }
 
-void Cutegram::showContextMenu()
+QMenu *Cutegram::contextMenu()
 {
-    QMenu menu;
-    menu.move( QCursor::pos() );
+    QMenu *menu = new QMenu();
+    menu->move( QCursor::pos() );
 
-    QAction *show_act = menu.addAction( tr("Show") );
-    menu.addSeparator();
-    QAction *conf_act = menu.addAction( tr("Configure") );
-    QAction *cnct_act = menu.addAction( tr("Contact") );
-    menu.addSeparator();
-    QAction *abut_act = menu.addAction( tr("About") );
-    QAction *sabt_act = menu.addAction( tr("About Aseman") );
-    menu.addSeparator();
-    QAction *exit_act = menu.addAction( tr("Exit") );
-    QAction *res_act  = menu.exec();
+    menu->addAction( tr("Show"), this, SLOT(active()) );
+    menu->addSeparator();
+    menu->addAction( tr("Configure"), this, SLOT(configure()) );
+    menu->addAction( tr("Contact"), this, SLOT(contact()) );
+    menu->addSeparator();
+    menu->addAction( tr("About"), this, SLOT(about()) );
+    menu->addAction( tr("About Aseman"), this, SLOT(aboutAseman()) );
+    menu->addSeparator();
+    menu->addAction( tr("Exit"), this, SLOT(quit()) );
 
-    if( res_act == show_act )
-    {
-        active();
-    }
-    else
-    if( res_act == conf_act )
-    {
-        configure();
-    }
-    else
-    if( res_act == cnct_act )
-    {
-        contact();
-    }
-    else
-    if( res_act == abut_act )
-    {
-        about();
-    }
-    else
-    if( res_act == sabt_act )
-    {
-        aboutAseman();
-    }
-    else
-    if( res_act == exit_act )
-    {
-        quit();
-    }
+    return menu;
 }
 
 QImage Cutegram::generateIcon(const QImage &img, int count)

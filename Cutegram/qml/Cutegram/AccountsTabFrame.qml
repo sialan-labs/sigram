@@ -12,6 +12,25 @@ Rectangle {
     property alias hash: tab_list.hash
     property alias list: tab_list.list
 
+    TaskbarButton {
+        window: View
+        badgeNumber: {
+            var result = 0
+            for(var i=0; i<list.count; i++)
+                result += hash.value(list.at(i)).telegramObject.unreadCount
+            return result
+        }
+        progress: {
+            var result = 0
+            for(var i=0; i<list.count; i++)
+                result += hash.value(list.at(i)).telegramObject.totalUploadedPercent
+
+            result = result/list.count
+            return result
+        }
+        onBadgeNumberChanged: Cutegram.sysTrayCounter = badgeNumber
+    }
+
     Connections {
         target: profiles
         onKeysChanged: refresh()
@@ -198,7 +217,6 @@ Rectangle {
         AccountFrame {
             id: accfr
             anchors.fill: parent
-            onUnreadCountChanged: refreshUnreadCounts()
             onActiveRequest: {
                 tab_list.currentKey = hash.key(accfr)
             }
@@ -357,17 +375,6 @@ Rectangle {
 
             property variant accountView: hash.value(tab_list.currentKey)
         }
-    }
-
-    function refreshUnreadCounts() {
-        var keys = hash.keys()
-        var counter = 0
-        for( var i=0; i<keys.length; i++ ) {
-            var acc = hash.value(keys[i])
-            counter += acc.unreadCount
-        }
-
-        Cutegram.sysTrayCounter = counter
     }
 
     function showContactList() {

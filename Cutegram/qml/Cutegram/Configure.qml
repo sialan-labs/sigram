@@ -549,6 +549,12 @@ Rectangle {
         }
     }
 
+    NormalWheelScroll {
+        flick: flickable
+        animated: Cutegram.smoothScroll
+        reverse: true
+    }
+
     PhysicalScrollBar {
         scrollArea: flickable; height: flickable.height; width: 6*Devices.density
         anchors.right: flickable.right; anchors.top: flickable.top; color: "#777777"

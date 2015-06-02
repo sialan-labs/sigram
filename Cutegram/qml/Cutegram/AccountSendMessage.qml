@@ -89,6 +89,11 @@ Item {
                    "It's not a telegram contact. It's just a virtual contact. ")
     }
 
+    MouseArea {
+        anchors.fill: parent
+        onWheel: wheel.accepted = true
+    }
+
     Item {
         id: msd_send_frame
         anchors.fill: parent
@@ -110,7 +115,7 @@ Item {
             anchors.right: send_btn.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 4*Devices.density
-            height: logicalHeight>300*Devices.density? 300*Devices.density : logicalHeight
+            height: logicalHeight>200*Devices.density? 200*Devices.density : logicalHeight
             backgroundColor: smsg.color
             shadowColor: Cutegram.currentTheme.sendFrameShadowColor
             shadowSize: Cutegram.currentTheme.sendFrameShadowSize
@@ -285,7 +290,7 @@ Item {
                 }
             }
 
-            PhysicalScrollBar {
+            ScrollBar {
                 scrollArea: flick; height: flick.height; width: 6*Devices.density
                 anchors.right: flick.right; anchors.top: flick.top; color: "#888888"
             }

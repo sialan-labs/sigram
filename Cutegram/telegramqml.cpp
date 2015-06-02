@@ -1573,9 +1573,7 @@ void TelegramQml::try_init()
         pKeyFile = pKeyFile.mid(AsemanDevices::localFilesPrePath().length());
 
     p->telegram = new Telegram(p->phoneNumber, p->configPath, pKeyFile);
-
-    p->tsettings = Settings::getInstance();
-    p->tsettings->loadSettings(p->phoneNumber, p->configPath, pKeyFile);
+    p->tsettings = p->telegram->settings();
 
     connect( p->telegram, SIGNAL(authNeeded())                          , SLOT(authNeeded_slt())                           );
     connect( p->telegram, SIGNAL(authLoggedIn())                        , SLOT(authLoggedIn_slt())                         );

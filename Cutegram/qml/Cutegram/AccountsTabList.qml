@@ -62,7 +62,7 @@ Item {
                         return Cutegram.currentTheme.panelLightIcon? "files/telegram.png" : "files/telegram-dark.png"
                 }
                 iconHeight: isAddBtn? 18*Devices.density : 26*Devices.density
-                tooltipText: isAddBtn? qsTr("Add Account (experimental)") : key
+                tooltipText: isAddBtn? qsTr("Add Account") : key
                 tooltipFont.family: AsemanApp.globalFont.family
                 tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
                 tooltipColor: Cutegram.currentTheme.panelTooltipBackground
@@ -73,6 +73,30 @@ Item {
                     } else {
                         currentKey = key
                     }
+                }
+            }
+
+            Rectangle {
+                id: badge
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.margins: 4*Devices.density
+                width: 18*Devices.density
+                height: width
+                radius: width/2
+                color: "#ff0000"
+                border.color: "#44ffffff"
+                border.width: 1*Devices.density
+                visible: count != 0
+
+                property int count: key.length!=0 && listObject.count>1? hash.value(key).telegramObject.unreadCount : 0
+
+                Text {
+                    anchors.centerIn: parent
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(9*Devices.fontDensity)
+                    color: "#ffffff"
+                    text: badge.count
                 }
             }
         }
