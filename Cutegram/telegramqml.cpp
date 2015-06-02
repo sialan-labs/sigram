@@ -908,6 +908,56 @@ bool TelegramQml::sendMessageAsDocument(qint64 dId, const QString &msg)
     return sendFile(dId, path, true);
 }
 
+void TelegramQml::sendGeo(qint64 dId, qreal latitude, qreal longitude, int replyTo)
+{
+    if( !p->telegram )
+        return;
+
+    DialogObject *dlg = p->dialogs.value(dId);
+
+    qint64 sendId;
+
+    Message message = newMessage(dId);
+
+    MessageMedia media = message.media();
+    media.setClassType(MessageMedia::typeMessageMediaGeo);
+
+    GeoPoint geoPoint = media.geo();
+    geoPoint.setLat(latitude);
+    geoPoint.setLongitude(longitude);
+    geoPoint.setClassType(GeoPoint::typeGeoPoint);
+
+    media.setGeo(geoPoint);
+    message.setMedia(media);
+
+    InputGeoPoint input(InputGeoPoint::typeInputGeoPoint);
+    input.setLat(latitude);
+    input.setLongitude(longitude);
+
+    if(replyTo)
+        message.setReplyToMsgId(replyTo);
+
+    p->msg_send_random_id = generateRandomId();
+    if(dlg && dlg->encrypted())
+    {
+        return;
+    }
+    else
+    {
+        InputPeer peer = getInputPeer(dId);
+        sendId = p->telegram->messagesSendGeoPoint(peer, p->msg_send_random_id, input, replyTo);
+    }
+
+    insertMessage(message, (dlg && dlg->encrypted()), false, true);
+
+    MessageObject *msgObj = p->messages.value(message.id());
+    msgObj->setSent(false);
+
+    p->pend_messages[sendId] = msgObj;
+
+    timerUpdateDialogs();
+}
+
 void TelegramQml::addContact(const QString &firstName, const QString &lastName, const QString &phoneNumber)
 {
     InputContact contact;

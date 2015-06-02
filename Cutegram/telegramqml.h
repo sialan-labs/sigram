@@ -218,6 +218,7 @@ public slots:
 
     void sendMessage( qint64 dialogId, const QString & msg, int replyTo = 0 );
     bool sendMessageAsDocument( qint64 dialogId, const QString & msg );
+    void sendGeo(qint64 dialogId, qreal latitude, qreal longitude, int replyTo = 0);
 
     void addContact(const QString &firstName, const QString &lastName, const QString &phoneNumber);
 
