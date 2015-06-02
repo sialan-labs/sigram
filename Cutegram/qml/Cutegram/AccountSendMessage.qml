@@ -121,7 +121,7 @@ Item {
                 id: flick
                 anchors.fill: parent
                 contentWidth: width
-                contentHeight: txt.height
+                contentHeight: txt_scene.height
                 flickableDirection: Flickable.VerticalFlick
                 topMargin: txt.height<height? (height-txt.height)/2 : 8*Devices.density
                 bottomMargin: topMargin
@@ -139,141 +139,147 @@ Item {
                         contentY = r.y+r.height-height;
                 }
 
-                TextAreaCore {
-                    id: txt
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: 10*Devices.density
-                    anchors.rightMargin: 5*Devices.density+emoji_btn.width
-                    anchors.verticalCenter: parent.verticalCenter
-                    selectByMouse: true
-                    selectionColor: Cutegram.currentTheme.masterColor
-                    selectedTextColor: masterPalette.highlightedText
-                    pickerEnable: Devices.isTouchDevice
-                    color: Cutegram.currentTheme.sendFrameFontColor
-                    font.family: Cutegram.currentTheme.sendFrameFont.family
-                    font.pixelSize: Cutegram.currentTheme.sendFrameFont.pointSize*Devices.fontDensity
-                    wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
-                    clip: true
-                    visible: !trash
+                Item {
+                    id: txt_scene
+                    width: parent.width
+                    height: txt.height<flick.height? flick.height : txt.height
 
-                    onCursorRectangleChanged: flick.ensureVisible(cursorRectangle)
-                    onTextChanged: {
-                        if( text.trim().length == 0 )
-                            text = ""
+                    TextAreaCore {
+                        id: txt
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: 10*Devices.density
+                        anchors.rightMargin: 5*Devices.density+emoji_btn.width
+                        anchors.verticalCenter: parent.verticalCenter
+                        selectByMouse: true
+                        selectionColor: Cutegram.currentTheme.masterColor
+                        selectedTextColor: masterPalette.highlightedText
+                        pickerEnable: Devices.isTouchDevice
+                        color: Cutegram.currentTheme.sendFrameFontColor
+                        font.family: Cutegram.currentTheme.sendFrameFont.family
+                        font.pixelSize: Cutegram.currentTheme.sendFrameFont.pointSize*Devices.fontDensity
+                        wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
+                        clip: true
+                        visible: !trash
 
-                        typing_update_timer.startTyping()
-                    }
-                    Keys.onPressed: {
-                        if((event.key == Qt.Key_Enter || event.key == Qt.Key_Return) && privates.suggestionItem)
-                        {
-                            var result
-                            if(privates.suggestionItem.isTagSuggestion) {
-                                result = privates.suggestionItem.currentTag()
-                            } else {
-                                var uId = privates.suggestionItem.currentUserId()
-                                if(!uId) {
-                                    if( event.modifiers == Qt.NoModifier )
-                                        smsg.send()
+                        onCursorRectangleChanged: flick.ensureVisible(cursorRectangle)
+                        onTextChanged: {
+                            if( text.trim().length == 0 )
+                                text = ""
 
-                                    typing_timer.finishTyping()
-                                    return
+                            typing_update_timer.startTyping()
+                        }
+                        Keys.onPressed: {
+                            if((event.key == Qt.Key_Enter || event.key == Qt.Key_Return) && privates.suggestionItem)
+                            {
+                                var result
+                                if(privates.suggestionItem.isTagSuggestion) {
+                                    result = privates.suggestionItem.currentTag()
+                                } else {
+                                    var uId = privates.suggestionItem.currentUserId()
+                                    if(!uId) {
+                                        if( event.modifiers == Qt.NoModifier )
+                                            smsg.send()
+
+                                        typing_timer.finishTyping()
+                                        return
+                                    }
+
+                                    var userObj = telegramObject.user(uId)
+                                    var userName = userObj.username
+                                    result = userName
                                 }
 
-                                var userObj = telegramObject.user(uId)
-                                var userName = userObj.username
-                                result = userName
-                            }
-
-                            txt.selectWord()
-                            txt.remove(txt.selectionStart, txt.selectionEnd)
-                            txt.insert(txt.cursorPosition, result)
-
-                            last_line_remover.restart()
-                            privates.suggestionItem.destroy()
-                            event.accepted = false
-                        }
-                        else
-                        if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
-                        {
-                            if( event.modifiers == Qt.NoModifier )
-                                smsg.send()
-
-                            typing_timer.finishTyping()
-                        }
-                        else
-                        if(event.key == 8204 && event.modifiers == Qt.ShiftModifier)
-                        {
-                            if(txt.selectedText.length!=0)
+                                txt.selectWord()
                                 txt.remove(txt.selectionStart, txt.selectionEnd)
+                                txt.insert(txt.cursorPosition, result)
 
-                            var npos = txt.cursorPosition+1
-                            txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
-                            txt.cursorPosition = npos
-
-                            event.accepted = false
-                        }
-                        else
-                        if(event.modifiers == Qt.ControlModifier && event.key == Qt.Key_C)
-                        {
-                            if(txt.selectedText.length == 0) {
-                                smsg.copyRequest()
+                                last_line_remover.restart()
+                                privates.suggestionItem.destroy()
                                 event.accepted = false
                             }
-                        }
-                        else
-                        if(event.key == Qt.Key_At || event.key == Qt.Key_NumberSign)
-                        {
-                            if(!privates.suggestionItem) {
-                                if(event.key == Qt.Key_At)
-                                    privates.suggestionItem = username_sgs_component.createObject(mainFrame)
-                                else
-                                if(event.key == Qt.Key_NumberSign)
-                                    privates.suggestionItem = tags_sgs_component.createObject(mainFrame)
+                            else
+                            if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
+                            {
+                                if( event.modifiers == Qt.NoModifier )
+                                    smsg.send()
 
-                                var pnt = smsg.mapToItem(mainFrame, 0, 0)
-                                var pntY = pnt.y
-                                var pntX = pnt.x + txt.positionToRectangle(txt.cursorPosition).x + txt_frame.x
+                                typing_timer.finishTyping()
+                            }
+                            else
+                            if(event.key == 8204 && event.modifiers == Qt.ShiftModifier)
+                            {
+                                if(txt.selectedText.length!=0)
+                                    txt.remove(txt.selectionStart, txt.selectionEnd)
 
-                                privates.suggestionItem.x = pntX
-                                privates.suggestionItem.y = pntY - privates.suggestionItem.height
-                            } else {
-                                privates.suggestionItem.keyword = ""
+                                var npos = txt.cursorPosition+1
+                                txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
+                                txt.cursorPosition = npos
+
+                                event.accepted = false
+                            }
+                            else
+                            if(event.modifiers == Qt.ControlModifier && event.key == Qt.Key_C)
+                            {
+                                if(txt.selectedText.length == 0) {
+                                    smsg.copyRequest()
+                                    event.accepted = false
+                                }
+                            }
+                            else
+                            if(event.key == Qt.Key_At || event.key == Qt.Key_NumberSign)
+                            {
+                                if(!privates.suggestionItem) {
+                                    if(event.key == Qt.Key_At)
+                                        privates.suggestionItem = username_sgs_component.createObject(mainFrame)
+                                    else
+                                    if(event.key == Qt.Key_NumberSign)
+                                        privates.suggestionItem = tags_sgs_component.createObject(mainFrame)
+
+                                    var pnt = smsg.mapToItem(mainFrame, 0, 0)
+                                    var pntY = pnt.y
+                                    var pntX = pnt.x + txt.positionToRectangle(txt.cursorPosition).x + txt_frame.x
+
+                                    privates.suggestionItem.x = pntX
+                                    privates.suggestionItem.y = pntY - privates.suggestionItem.height
+                                } else {
+                                    privates.suggestionItem.keyword = ""
+                                }
+                            }
+                            else
+                            if(event.key == Qt.Key_Space || event.key == Qt.Key_Escape || event.key == Qt.Key_Delete)
+                            {
+                                if(privates.suggestionItem)
+                                    privates.suggestionItem.destroy()
+                            }
+                            else
+                            if(event.key == Qt.Key_Up && privates.suggestionItem)
+                            {
+                                privates.suggestionItem.up()
+                                event.accepted = false
+                            }
+                            else
+                            if(event.key == Qt.Key_Down && privates.suggestionItem)
+                            {
+                                privates.suggestionItem.down()
+                                event.accepted = false
+                            }
+                            else
+                            if((event.modifiers == Qt.NoModifier || event.modifiers == Qt.ShiftModifier) && privates.suggestionItem &&
+                               event.key != Qt.Key_Left && event.key != Qt.Key_Right)
+                            {
+                                check_suggestion.restart()
                             }
                         }
-                        else
-                        if(event.key == Qt.Key_Space || event.key == Qt.Key_Escape || event.key == Qt.Key_Delete)
-                        {
-                            if(privates.suggestionItem)
-                                privates.suggestionItem.destroy()
-                        }
-                        else
-                        if(event.key == Qt.Key_Up && privates.suggestionItem)
-                        {
-                            privates.suggestionItem.up()
-                            event.accepted = false
-                        }
-                        else
-                        if(event.key == Qt.Key_Down && privates.suggestionItem)
-                        {
-                            privates.suggestionItem.down()
-                            event.accepted = false
-                        }
-                        else
-                        if((event.modifiers == Qt.NoModifier || event.modifiers == Qt.ShiftModifier) && privates.suggestionItem &&
-                           event.key != Qt.Key_Left && event.key != Qt.Key_Right)
-                        {
-                            check_suggestion.restart()
-                        }
-                    }
 
-                    Timer {
-                        id: last_line_remover
-                        interval: 1
-                        onTriggered: {
-                            var cpos = txt.cursorPosition
-                            txt.text = txt.text.slice(0, cpos-1) + " " + txt.text.slice(cpos+1, txt.length)
-                            txt.cursorPosition = cpos
+                        Timer {
+                            id: last_line_remover
+                            interval: 1
+                            onTriggered: {
+                                var cpos = txt.cursorPosition
+                                txt.text = txt.text.slice(0, cpos-1) + " " + txt.text.slice(cpos+1, txt.length)
+                                txt.cursorPosition = cpos
+                            }
                         }
                     }
                 }

@@ -468,6 +468,7 @@ void Cutegram::systray_action(QSystemTrayIcon::ActivationReason act)
 
 void Cutegram::init_systray()
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 5, 0))
     if( p->desktop->desktopSession() == AsemanDesktopTools::Unity || p->desktop->desktopSession() == AsemanDesktopTools::GnomeFallBack )
     {
         QFile::remove(UNITY_ICON_PATH(0));
@@ -484,9 +485,13 @@ void Cutegram::init_systray()
         p->unityTray->addMenu( tr("About Aseman"), this, "aboutAseman" );
         p->unityTray->addMenu( tr("Quit"), this, "quit" );
     }
+#endif
     if( !p->unityTray || !p->unityTray->pntr() )
     {
         p->sysTray = new QSystemTrayIcon( QIcon(SYSTRAY_ICON), this );
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0))
+        p->sysTray->setToolTip(tr("Cutegram"));
+#endif
 #ifndef Q_OS_MAC
         p->sysTray->show();
 #endif
