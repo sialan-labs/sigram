@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
     CompabilityTools::version1();
 
     Cutegram cutegram;
-    cutegram.start();
+    cutegram.start( parser.isSet(forceOption) );
 
 #ifdef DESKTOP_DEVICE
     QObject::connect( &app, SIGNAL(messageReceived(QString)), &cutegram, SLOT(incomingAppMessage(QString)) );

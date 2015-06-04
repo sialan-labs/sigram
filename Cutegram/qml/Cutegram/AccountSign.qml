@@ -40,14 +40,18 @@ Rectangle {
 
     Text {
         id: timeout_text
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: column.top
-        anchors.left: column.left
         anchors.bottomMargin: 4*Devices.density
         font.family: AsemanApp.globalFont.family
-        font.pixelSize: Math.floor(10*Devices.fontDensity)
+        font.pixelSize: Math.floor(18*Devices.fontDensity)
         color: textColor0
         visible: time_out_timer.running
-        text: Math.floor(time_out_timer.countDown/60).toString() + ":" + time_out_timer.countDown%60
+        text: {
+            var second = time_out_timer.countDown%60
+            var minute = Math.floor(time_out_timer.countDown/60)
+            return (minute<10? "0"+minute : minute) + ":" + (second<10? "0"+second : second)
+        }
     }
 
     Column {
@@ -107,8 +111,18 @@ Rectangle {
             normalColor: "#339DCC"
             highlightColor: "#3384CC"
             textColor: textColor0
-            text: phoneRegistered? qsTr("Sign In") : qsTr("Sign Up")
-            onClicked: accept()
+            text: {
+                if(time_out_timer.running)
+                    return phoneRegistered? qsTr("Sign In") : qsTr("Sign Up")
+                else
+                    return qsTr("Resend Code")
+            }
+            onClicked: {
+                if(time_out_timer.running)
+                    accept()
+                else
+                    telegramObject.authSendCode()
+            }
         }
     }
 

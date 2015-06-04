@@ -160,7 +160,7 @@ public:
     Q_INVOKABLE QString normalizeText(const QString &text) const;
 
 public slots:
-    void start();
+    void start(bool forceVisible = false);
     void restart();
     void logout(const QString & phone);
     void close();

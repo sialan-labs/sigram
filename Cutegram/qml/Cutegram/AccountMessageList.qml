@@ -2,7 +2,7 @@ import QtQuick 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
-import QtQuick.Controls 1.1 as Controls
+import AsemanTools.Controls 1.0 as Controls
 
 Rectangle {
     id: acc_msg_list

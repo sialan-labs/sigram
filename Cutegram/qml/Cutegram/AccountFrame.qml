@@ -81,6 +81,12 @@ Rectangle {
         onAuthCodeRequested: {
             acc_sign.timeOut = sendCallTimeout
         }
+        onAuthPasswordProtectedError: {
+            Desktop.showMessage(View, qsTr("Password Error"), qsTr("Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.\nBut currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again."))
+            if( profiles.remove(phoneNumber) )
+                Cutegram.logout(phoneNumber)
+        }
+
         onAuthLoggedInChanged: {
             if( authLoggedIn && !view )
                 view = account_view.createObject(acc_frame)

@@ -22,10 +22,16 @@ Rectangle {
         }
         progress: {
             var result = 0
-            for(var i=0; i<list.count; i++)
-                result += hash.value(list.at(i)).telegramObject.totalUploadedPercent
+            var count = 0
+            for(var i=0; i<list.count; i++) {
+                var prgs = hash.value(list.at(i)).telegramObject.totalUploadedPercent
+                if(prgs != 0)
+                    count++
 
-            result = result/list.count
+                result += prgs
+            }
+
+            result = result/count
             return result
         }
         onBadgeNumberChanged: Cutegram.sysTrayCounter = badgeNumber

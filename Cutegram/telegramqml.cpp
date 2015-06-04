@@ -815,6 +815,14 @@ void TelegramQml::authSendCall()
     p->telegram->authSendCall();
 }
 
+void TelegramQml::authSendCode()
+{
+    if( !p->telegram )
+        return;
+
+    p->telegram->authSendCode();
+}
+
 void TelegramQml::authSendInvites(const QStringList &phoneNumbers, const QString &inviteText)
 {
     if( !p->telegram )
@@ -1587,9 +1595,13 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(error(qint64,qint32,QString))          , SLOT(error(qint64,qint32,QString))               );
     connect( p->telegram, SIGNAL(connected())                           , SIGNAL(connectedChanged())                       );
     connect( p->telegram, SIGNAL(disconnected())                        , SIGNAL(connectedChanged())                       );
+    connect( p->telegram, SIGNAL(authCheckPasswordAnswer(qint64,qint32,User)),
+             SLOT(authCheckPassword_slt(qint64,qint32,User)));
 
     connect( p->telegram, SIGNAL(accountGetWallPapersAnswer(qint64,QList<WallPaper>)),
              SLOT(accountGetWallPapers_slt(qint64,QList<WallPaper>)) );
+    connect( p->telegram, SIGNAL(accountGetPasswordAnswer(qint64,AccountPassword)),
+             SLOT(accountGetPassword_slt(qint64,AccountPassword)));
 
     connect( p->telegram, SIGNAL(contactsImportContactsAnswer(qint64,QList<ImportedContact>,QList<qint64>,QList<User>)),
              SLOT(contactsImportContacts_slt(qint64,QList<ImportedContact>,QList<qint64>,QList<User>)));
@@ -1754,6 +1766,14 @@ void TelegramQml::authSendInvites_slt(qint64 id, bool ok)
     emit authInvitesSent(ok);
 }
 
+void TelegramQml::authCheckPassword_slt(qint64 id, qint32 expires, const User &user)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(expires)
+
+    insertUser(user);
+}
+
 void TelegramQml::authCheckPhone_slt(qint64 id, bool phoneRegistered)
 {
     Q_UNUSED(id)
@@ -1767,6 +1787,12 @@ void TelegramQml::authCheckPhone_slt(qint64 id, bool phoneRegistered)
 
     if( p->telegram )
         p->telegram->authSendCode();
+}
+
+void TelegramQml::accountGetPassword_slt(qint64 id, const AccountPassword &password)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(password)
 }
 
 void TelegramQml::authSignInError_slt(qint64 id, qint32 errorCode, QString errorText)
@@ -1805,6 +1831,9 @@ void TelegramQml::error(qint64 id, qint32 errorCode, QString errorText)
     Q_UNUSED(errorCode)
     p->error = errorText;
     emit errorChanged();
+
+    if(errorText.contains("PHONE_PASSWORD_PROTECTED"))
+        emit authPasswordProtectedError();
 
     qDebug() << __PRETTY_FUNCTION__ << errorText;
 }

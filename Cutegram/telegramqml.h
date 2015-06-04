@@ -50,6 +50,7 @@ class PhotoObject;
 class ContactsLink;
 class Update;
 class Message;
+class AccountPassword;
 class AffectedMessages;
 class ImportedContact;
 class User;
@@ -212,6 +213,7 @@ public:
 public slots:
     void authLogout();
     void authSendCall();
+    void authSendCode();
     void authSendInvites(const QStringList &phoneNumbers, const QString &inviteText);
     void authSignIn(const QString &code);
     void authSignUp(const QString &code, const QString &firstName, const QString &lastName);
@@ -284,6 +286,7 @@ signals:
     void authPhoneRegisteredChanged();
     void authPhoneInvitedChanged();
     void authPhoneCheckedChanged();
+    void authPasswordProtectedError();
     void connectedChanged();
 
     void authSignUpErrorChanged();
@@ -316,11 +319,13 @@ private slots:
     void authSendCode_slt(qint64 id, bool phoneRegistered, qint32 sendCallTimeout);
     void authSendCall_slt(qint64 id, bool ok);
     void authSendInvites_slt(qint64 id, bool ok);
+    void authCheckPassword_slt(qint64 msgId, qint32 expires, const User &user);
     void authCheckPhone_slt(qint64 id, bool phoneRegistered);
     void authSignInError_slt(qint64 id, qint32 errorCode, QString errorText);
     void authSignUpError_slt(qint64 id, qint32 errorCode, QString errorText);
     void error(qint64 id, qint32 errorCode, QString errorText);
 
+    void accountGetPassword_slt(qint64 msgId, const AccountPassword &password);
     void accountGetWallPapers_slt(qint64 id, const QList<WallPaper> & wallPapers);
     void photosUploadProfilePhoto_slt(qint64 id, const Photo & photo, const QList<User> & users);
     void photosUpdateProfilePhoto_slt(qint64 id, const UserProfilePhoto & userProfilePhoto);

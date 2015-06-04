@@ -511,6 +511,7 @@ Rectangle {
                     radius: 4*Devices.density
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
+                        Desktop.showMessage(View, qsTr("Logout"), qsTr("Cutegram will restart after this operation."))
                         if( profiles.remove(telegram.phoneNumber) )
                             Cutegram.logout(telegram.phoneNumber)
                     }

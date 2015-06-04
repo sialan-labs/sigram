@@ -278,7 +278,7 @@ int Cutegram::showMenu(const QStringList &actions, QPoint point)
     return pointers.indexOf(res);
 }
 
-void Cutegram::start()
+void Cutegram::start(bool forceVisible)
 {
     if( p->viewer )
         return;
@@ -307,6 +307,9 @@ void Cutegram::start()
     case StartupHide:
         break;
     }
+
+    if(forceVisible)
+        p->viewer->show();
 
     init_systray();
 }
