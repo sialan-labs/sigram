@@ -36,12 +36,22 @@ public:
     QStringList keys;
     QString theme;
     QPointer<UserData> userData;
+    QVariantMap replacements;
+
+    int minReplacementSize;
+    int maxReplacementSize;
+
+    bool autoEmojis;
 };
 
 Emojis::Emojis(QObject *parent) :
     QObject(parent)
 {
     p = new EmojisPrivate;
+    p->maxReplacementSize = 0;
+    p->minReplacementSize = 0;
+    p->autoEmojis = false;
+
     setCurrentTheme("twitter");
 }
 
@@ -95,9 +105,91 @@ void Emojis::setUserData(UserData *userData)
     emit userDataChanged();
 }
 
+void Emojis::setReplacements(const QVariantMap &map)
+{
+    if(p->replacements == map)
+        return;
+
+    p->replacements = map;
+    p->maxReplacementSize = 0;
+    p->minReplacementSize = 0;
+
+    QMapIterator<QString,QVariant> i(p->replacements);
+    while(i.hasNext())
+    {
+        i.next();
+        const int length = i.key().length();
+
+        if(!p->maxReplacementSize)
+            p->maxReplacementSize = length;
+        else
+        if(length > p->maxReplacementSize)
+            p->maxReplacementSize = length;
+
+        if(!p->minReplacementSize)
+            p->minReplacementSize = length;
+        else
+        if(length < p->minReplacementSize)
+            p->minReplacementSize = length;
+    }
+
+    emit replacementsChanged();
+}
+
+QVariantMap Emojis::replacements() const
+{
+    return p->replacements;
+}
+
+bool Emojis::autoEmojis() const
+{
+    return p->autoEmojis;
+}
+
+void Emojis::setAutoEmojis(bool stt)
+{
+    if(p->autoEmojis == stt)
+        return;
+
+    p->autoEmojis = stt;
+    emit autoEmojisChanged();
+}
+
+QString Emojis::convertSmiliesToEmoji(const QString &txt)
+{
+    QString res = txt;
+    for(int i=0; i<res.length()-1; i++)
+    {
+        const QChar currentString = res[i];
+        if(i!=0 && currentString != ' ' && currentString != '\n')
+            continue;
+
+        const int smileyPointer = i==0? i : i+1;
+        for(int j=p->minReplacementSize; j<=p->maxReplacementSize; j++)
+        {
+            if(smileyPointer+j < res.length())
+            {
+                const QChar endChar = res[smileyPointer+j];
+                if(endChar != ' ' && endChar != '\n')
+                    continue;
+            }
+
+            const QString &selection = res.mid(smileyPointer, j).toLower();
+            if(!p->replacements.contains(selection))
+                continue;
+
+            res.replace(smileyPointer, j, p->replacements.value(selection).toString());
+            i = smileyPointer;
+        }
+    }
+
+    return res;
+}
+
 QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
 {
-    QString res = txt.toHtmlEscaped();
+    QString res = p->autoEmojis? convertSmiliesToEmoji(txt) : txt;
+    res = res.toHtmlEscaped();
 
     QRegExp links_rxp("((?:(?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w|\\/))|(?:\\w+\\.(?:com|org|co|net)))");
     int pos = 0;

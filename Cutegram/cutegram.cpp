@@ -82,6 +82,7 @@ public:
     bool darkSystemTray;
     bool closingState;
     bool cutegramSubscribe;
+    bool autoEmojis;
     bool smoothScroll;
 
     QTextDocument *doc;
@@ -143,6 +144,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
+    p->autoEmojis = AsemanApplication::settings()->value("General/autoEmojis", true ).toBool();
     p->smoothScroll = AsemanApplication::settings()->value("General/smoothScroll", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
@@ -760,6 +762,22 @@ void Cutegram::setAsemanSubscribe(bool stt)
 bool Cutegram::cutegramSubscribe() const
 {
     return p->cutegramSubscribe;
+}
+
+void Cutegram::setAutoEmojis(bool stt)
+{
+    if(p->autoEmojis == stt)
+        return;
+
+    p->autoEmojis = stt;
+    AsemanApplication::settings()->setValue("General/autoEmojis", stt);
+
+    emit autoEmojisChanged();
+}
+
+bool Cutegram::autoEmojis() const
+{
+    return p->autoEmojis;
 }
 
 void Cutegram::setStatusIconStyle(int style)

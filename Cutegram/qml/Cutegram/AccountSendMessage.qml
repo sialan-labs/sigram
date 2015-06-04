@@ -454,6 +454,8 @@ Item {
         if( msg == "" )
             return
 
+        if(Cutegram.autoEmojis)
+            msg = emojis.convertSmiliesToEmoji(msg)
         if(privates.suggestionItem)
             privates.suggestionItem.destroy()
 
