@@ -11,8 +11,10 @@ Rectangle {
 
     property alias hash: tab_list.hash
     property alias list: tab_list.list
+    property alias taskbarButton: taskbar_btn
 
     TaskbarButton {
+        id: taskbar_btn
         window: View
         badgeNumber: {
             var result = 0
@@ -31,10 +33,19 @@ Rectangle {
                 result += prgs
             }
 
-            result = result/count
+            result = count==0? 0 : result/count
             return result
         }
+
         onBadgeNumberChanged: Cutegram.sysTrayCounter = badgeNumber
+        onProgressChanged: {
+            if(last_progrss != 0 && progress == 0)
+                taskbar_btn.userAttention()
+
+            last_progrss = progress
+        }
+
+        property real last_progrss: 0
     }
 
     Connections {

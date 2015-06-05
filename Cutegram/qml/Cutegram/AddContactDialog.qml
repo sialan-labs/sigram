@@ -32,6 +32,7 @@ Window {
             width: parent.width
             font: AsemanApp.globalFont
             color: "#333333"
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             text: qsTr("Fill below form to add new contact.")
         }
 

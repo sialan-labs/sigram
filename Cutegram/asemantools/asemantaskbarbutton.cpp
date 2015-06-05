@@ -116,6 +116,11 @@ QWindow *AsemanTaskbarButton::window() const
     return p->window;
 }
 
+void AsemanTaskbarButton::userAttention()
+{
+    p->engine->userAttention();
+}
+
 AsemanTaskbarButton::~AsemanTaskbarButton()
 {
     delete p->engine;

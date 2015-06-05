@@ -28,6 +28,7 @@ Window {
         QtControls.Label {
             anchors.left: parent.left
             anchors.right: parent.right
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             text: qsTr("This changes needs to restart application.")
         }
 

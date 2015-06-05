@@ -154,6 +154,7 @@ Rectangle {
                 location = location.slice(Devices.localFilesPrePath.length, location.length)
 
             var nid = notification.sendNotify( title, message, location, 0, notifyTimeOut, actions )
+            taskbarButton.userAttention()
 
             notifies_hash.insert(nid, msg)
         }
