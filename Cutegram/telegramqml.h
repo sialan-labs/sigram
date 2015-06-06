@@ -228,7 +228,7 @@ public slots:
     void deleteMessages(QList<int> msgIds );
 
     void deleteCutegramDialog();
-    void messagesCreateChat( const QList<qint32> & users, const QString & topic );
+    void messagesCreateChat(const QList<int> &users, const QString & topic );
     void messagesAddChatUser(qint64 chatId, qint64 userId, qint32 fwdLimit = 0);
     void messagesDeleteChatUser(qint64 chatId, qint64 userId);
     void messagesEditChatTitle(qint32 chatId, const QString &title);

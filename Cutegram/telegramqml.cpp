@@ -1022,7 +1022,7 @@ void TelegramQml::deleteCutegramDialog()
     emit dialogsChanged(false);
 }
 
-void TelegramQml::messagesCreateChat(const QList<qint32> &users, const QString &topic)
+void TelegramQml::messagesCreateChat(const QList<int> &users, const QString &topic)
 {
     QList<InputUser> inputUsers;
     foreach( qint32 user, users )

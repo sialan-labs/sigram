@@ -29,6 +29,10 @@ Item {
         id: list
     }
 
+    DropArea {
+        anchors.fill: parent
+    }
+
     ListView {
         id: clist
         anchors.fill: parent
