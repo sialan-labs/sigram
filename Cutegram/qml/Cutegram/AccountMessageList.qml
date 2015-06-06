@@ -291,6 +291,10 @@ Rectangle {
                 }
 
                 onReleased: {
+                    if(menuRequested) {
+                        menuRequested = false
+                        return
+                    }
                     if(user.id == telegram.cutegramId)
                         return
                     if(msg_item.click())
@@ -302,10 +306,13 @@ Rectangle {
                 }
 
                 onPressed: {
-                    dragged = false
+                    messageDraging = false
+                    menuRequested = false
+
                     if(user.id == telegram.cutegramId)
                         return
                     if( mouse.button == Qt.RightButton ) {
+                        menuRequested = true
                         var actions
                         var res
                         if(message.encrypted) {
@@ -362,7 +369,7 @@ Rectangle {
                 }
 
                 property point startPoint
-                property bool dragged
+                property bool menuRequested: false
             }
         }
     }
