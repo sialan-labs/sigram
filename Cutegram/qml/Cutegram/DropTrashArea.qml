@@ -37,7 +37,7 @@ Item {
             if( drop.formats.indexOf("land.aseman.cutegram/messageId") != -1 ) {
 
                 var msgId = drop.getDataAsString("land.aseman.cutegram/messageId")
-                telegramObject.deleteMessage(msgId)
+                telegramObject.deleteMessages([msgId])
             }
         }
     }

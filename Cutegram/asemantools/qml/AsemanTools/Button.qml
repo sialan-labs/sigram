@@ -39,7 +39,7 @@ Rectangle {
     property bool press: marea.pressed
     property bool enter: marea.containsMouse
 
-    property string highlightColor: masterPalette.highlight
+    property color highlightColor: masterPalette.highlight
     property string normalColor: "#00000000"
     property string hoverColor: normalColor
 

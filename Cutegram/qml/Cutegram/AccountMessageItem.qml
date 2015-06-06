@@ -52,6 +52,7 @@ Item {
 
     signal dialogRequest(variant dialogObject)
     signal tagSearchRequest(string tag)
+    signal messageFocusRequest(int msgId)
 
     onSentChanged: {
         if( sent )
@@ -76,13 +77,6 @@ Item {
         anchors.right: parent.right
         message: msg_item.message
     }
-
-//    TextEmojiWrapper {
-//        id: wrapper
-//        text: msg_txt.messageText
-//        emojisItem: emojis
-//        Component.onCompleted: textDocument = msg_txt.textDocument
-//    }
 
     Row {
         id: frame_row
@@ -209,7 +203,8 @@ Item {
                 id: column
                 anchors.centerIn: parent
                 height: (visibleNames?user_name.height:0) + (uploading?uploadItem.height:0)
-                        + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_column.height
+                        + (msg_media.hasMedia?msg_media.height:0) + spacing + msg_column.height +
+                        (msg_reply.visible? msg_reply.height : 0)
                 clip: true
 
                 Text {
@@ -231,6 +226,13 @@ Item {
                         else
                             return Cutegram.currentTheme.messageIncomingNameColor
                     }
+                }
+
+                MessageReplyItem {
+                    id: msg_reply
+                    telegram: telegramObject
+                    message: msg_item.message
+                    onMessageFocusRequest: msg_item.messageFocusRequest(msgId)
                 }
 
                 AccountMessageUpload {

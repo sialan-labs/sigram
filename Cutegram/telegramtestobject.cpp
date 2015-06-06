@@ -63,6 +63,11 @@ void TelegramTestObject::authSendCode()
 
 void TelegramTestObject::messagesGetDialogsAnswer(qint64 id, qint32 sliceCount, QList<Dialog> dialogs, QList<Message> messages, QList<Chat> chats, QList<User> users)
 {
+    Q_UNUSED(id)
+    Q_UNUSED(sliceCount)
+    Q_UNUSED(dialogs)
+    Q_UNUSED(messages)
+    Q_UNUSED(chats)
     foreach(User u, users)
         qDebug() << u.firstName();
 }

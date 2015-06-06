@@ -20,7 +20,7 @@ Item {
     property real typeMessageMediaContact: 0x5e7d2f39
     property real typeMessageMediaEmpty: 0x3ded6320
     property real typeMessageMediaVideo: 0xa2d24290
-    property real typeMessageMediaUnsupported: 0x29632a36
+    property real typeMessageMediaUnsupported: 0x9f84f49e
     property real typeMessageMediaAudio: 0xc6b68300
     property real typeMessageMediaPhoto: 0xc8c45a2a
     property real typeMessageMediaGeo: 0x56e0d474
@@ -71,6 +71,11 @@ Item {
         case typeMessageMediaAudio:
             result = telegramObject.locationOfAudio(media.audio)
             telegramObject.getFileJustCheck(result)
+            break;
+
+        case typeMessageMediaGeo:
+            mapDownloader.addToQueue(Qt.point(media.geo.lat, media.geo.longitude), media_img.setImage)
+            result = telegramObject.nullLocation
             break;
 
         case typeMessageMediaUnsupported:
@@ -130,6 +135,10 @@ Item {
             result = isSticker? 220*Devices.density : 168*Devices.density
             break;
 
+        case typeMessageMediaGeo:
+            result = mapDownloader.size.width
+            break;
+
         default:
             result = 0
             break;
@@ -163,6 +172,10 @@ Item {
             result = isSticker? width*media_img.imageSize.height/media_img.imageSize.width : width
             break;
 
+        case typeMessageMediaGeo:
+            result = mapDownloader.size.height
+            break;
+
         default:
             result = 0
             break;
@@ -182,6 +195,7 @@ Item {
         visible: media.classType != typeMessageMediaVideo || fileLocation.length != 0
 
         property size imageSize: Cutegram.imageSize(source)
+        property string customImage
 
         sourceSize: {
             var ratio = imageSize.width/imageSize.height
@@ -235,12 +249,20 @@ Item {
                 }
                 break;
 
+            case typeMessageMediaGeo:
+                result = customImage
+                break;
+
             default:
                 result = ""
                 break;
             }
 
             return result
+        }
+
+        function setImage(img) {
+            customImage = img
         }
     }
 
@@ -270,7 +292,7 @@ Item {
         id: download_frame
         anchors.fill: parent
         color: "#88000000"
-        visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto && !isSticker
+        visible: fileLocation.length == 0 && media.classType != typeMessageMediaPhoto && !isSticker && media.classType != typeMessageMediaGeo
         radius: 3*Devices.density
 
         Text {
@@ -357,6 +379,19 @@ Item {
         }
     }
 
+    Image {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.verticalCenter
+        source: media.classType == typeMessageMediaGeo? "files/map-pin.png" : ""
+        sourceSize: Qt.size(width,height)
+        fillMode: Image.PreserveAspectFit
+        width: 92*Devices.density
+        height: 92*Devices.density
+        visible: media.classType == typeMessageMediaGeo
+        asynchronous: true
+        smooth: true
+    }
+
     Button {
         anchors.top: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -396,6 +431,10 @@ Item {
 
             case typeMessageMediaAudio:
                 telegramObject.getFile(locationObj, typeInputAudioFileLocation, media.audio.size)
+                break;
+
+            case typeMessageMediaGeo:
+                Qt.openUrlExternally( mapDownloader.webLinkOf(Qt.point(media.geo.lat, media.geo.longitude)) )
                 break;
 
             case typeMessageMediaUnsupported:

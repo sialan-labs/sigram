@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.0 as QtControls
+import AsemanTools.Controls 1.0 as Controls
 import QtQuick.Window 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
@@ -27,6 +28,7 @@ Window {
         QtControls.Label {
             anchors.left: parent.left
             anchors.right: parent.right
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             text: qsTr("This changes needs to restart application.")
         }
 
@@ -91,7 +93,7 @@ Window {
             Column {
                 spacing: 6*Devices.density
 
-                QtControls.ComboBox {
+                Controls.ComboBox {
                     id: proxy_type_combo
                     model: [ "No Proxy", "Http Proxy", "Socks5 Proxy" ]
                     Component.onCompleted: {
@@ -107,27 +109,27 @@ Window {
                     }
                 }
 
-                QtControls.TextField {
+                Controls.TextField {
                     id: proxy_host_line
                     width: 200*Devices.density
                     placeholderText: qsTr("Ex: 127.0.0.1")
                     text: AsemanApp.readSetting("Proxy/host","")
                 }
 
-                QtControls.SpinBox {
+                Controls.SpinBox {
                     id: proxy_port_spin
                     maximumValue: 99999
                     minimumValue: 0
                     value: AsemanApp.readSetting("Proxy/port", 0)
                 }
 
-                QtControls.TextField {
+                Controls.TextField {
                     id: proxy_user_line
                     width: 200*Devices.density
                     text: AsemanApp.readSetting("Proxy/user", "")
                 }
 
-                QtControls.TextField {
+                Controls.TextField {
                     id: proxy_pass_line
                     width: 200*Devices.density
                     echoMode: TextInput.Password
@@ -140,12 +142,12 @@ Window {
             spacing: 2*Devices.density
             anchors.right: parent.right
 
-            QtControls.Button {
+            Controls.Button {
                 text: qsTr("Cancel")
                 onClicked: proxy_window.visible = false
             }
 
-            QtControls.Button {
+            Controls.Button {
                 text: qsTr("Ok")
                 onClicked: {
                     var host = proxy_host_line.text

@@ -87,6 +87,7 @@ public slots:
     QString getText(QWindow *window = 0, const QString &title = QString(), const QString &text = QString(), const QString &defaultText = QString());
     int showMenu( const QVariantList & actions, QPoint point = QPoint() );
     bool yesOrNo(QWindow *window, const QString &title, const QString &text, int type = Warning);
+    void showMessage(QWindow *window, const QString &title, const QString &text, int type = Information);
 
 signals:
     void titleBarColorChanged();

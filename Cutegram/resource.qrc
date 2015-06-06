@@ -105,5 +105,15 @@
         <file>qml/Cutegram/WebPageGrabberQueue.qml</file>
         <file>qml/Cutegram/MessageLinkImage.qml</file>
         <file>qml/Cutegram/AddContactDialog.qml</file>
+        <file>qml/Cutegram/MessageReplyItem.qml</file>
+        <file>qml/Cutegram/files/map-pin.png</file>
+        <file>qml/Cutegram/MapDownloaderQueue.qml</file>
+        <file>qml/Cutegram/files/delete.png</file>
+        <file>qml/Cutegram/files/forward-light.png</file>
+        <file>qml/Cutegram/files/forward.png</file>
+        <file>qml/Cutegram/files/select-all-light.png</file>
+        <file>qml/Cutegram/files/select-all.png</file>
+        <file>qml/Cutegram/files/select-none-light.png</file>
+        <file>qml/Cutegram/files/select-none.png</file>
     </qresource>
 </RCC>

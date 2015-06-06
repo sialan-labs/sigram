@@ -136,7 +136,7 @@ Item {
                     return
 
                 var msgId = drop.getDataAsString("land.aseman.cutegram/messageId")
-                telegramObject.forwardMessage(msgId, dId)
+                telegramObject.forwardMessages([msgId], dId)
                 am_dropfile.dropped()
             }
             else

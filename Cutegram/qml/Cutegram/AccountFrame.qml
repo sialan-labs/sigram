@@ -81,6 +81,12 @@ Rectangle {
         onAuthCodeRequested: {
             acc_sign.timeOut = sendCallTimeout
         }
+        onAuthPasswordProtectedError: {
+            Desktop.showMessage(View, qsTr("Password Error"), qsTr("Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.\nBut currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again."))
+            if( profiles.remove(phoneNumber) )
+                Cutegram.logout(phoneNumber)
+        }
+
         onAuthLoggedInChanged: {
             if( authLoggedIn && !view )
                 view = account_view.createObject(acc_frame)
@@ -93,7 +99,7 @@ Rectangle {
 
             var window = view? view.windowOf(dId) : 0
             var windowIsActive = window? window.active && window.visible : false
-            if( (view && isActive) || windowIsActive ) {
+            if( (view && isActive && acc_frame.visible) || windowIsActive ) {
                 var cDialog = windowIsActive? window.currentDialog : view.currentDialog
 
                 if( cDialog.peer.chatId && cDialog.peer.chatId == msg.toId.chatId ) {
@@ -148,6 +154,7 @@ Rectangle {
                 location = location.slice(Devices.localFilesPrePath.length, location.length)
 
             var nid = notification.sendNotify( title, message, location, 0, notifyTimeOut, actions )
+            taskbarButton.userAttention()
 
             notifies_hash.insert(nid, msg)
         }
@@ -241,12 +248,6 @@ Rectangle {
             var nid = notification.sendNotify( title, message, location, 0, notifyTimeOut, actions )
             notifies_hash.insert(nid, dId)
         }
-    }
-
-    TaskbarButton {
-        badgeNumber: telegram.unreadCount
-        progress: telegram.totalUploadedPercent
-        window: View
     }
 
     AccountSign {

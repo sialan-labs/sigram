@@ -30,6 +30,9 @@ public:
     void setWindow(QWindow *win);
     QWindow *window() const;
 
+public slots:
+    void userAttention();
+
 signals:
     void badgeNumberChanged();
     void progressChanged();

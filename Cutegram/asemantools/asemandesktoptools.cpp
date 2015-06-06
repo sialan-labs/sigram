@@ -609,6 +609,36 @@ bool AsemanDesktopTools::yesOrNo(QWindow *window, const QString &title, const QS
 #endif
 }
 
+void AsemanDesktopTools::showMessage(QWindow *window, const QString &title, const QString &text, int type)
+{
+    Q_UNUSED(window)
+#ifdef DESKTOP_DEVICE
+    switch(type)
+    {
+    case Warning:
+        QMessageBox::warning(0, title, text, QMessageBox::Ok);
+        break;
+
+    case Information:
+        QMessageBox::information(0, title, text, QMessageBox::Ok);
+        break;
+
+    case Question:
+        QMessageBox::question(0, title, text, QMessageBox::Ok);
+        break;
+
+    case Critical:
+        QMessageBox::critical(0, title, text, QMessageBox::Ok);
+        break;
+    }
+#else
+    Q_UNUSED(title)
+    Q_UNUSED(text)
+    Q_UNUSED(type)
+    return false;
+#endif
+}
+
 AsemanDesktopTools::~AsemanDesktopTools()
 {
     if(p->font_db)

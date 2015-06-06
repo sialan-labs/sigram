@@ -222,6 +222,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: auto_emoji_text
+                            height: auto_emojis_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Convert smilies to emojis")
+                        }
+
+                        Text {
                             id: theme_text
                             height: theme_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -359,6 +369,12 @@ Rectangle {
                             id: last_msg_checkbox
                             checked: Cutegram.showLastMessage
                             onCheckedChanged: Cutegram.showLastMessage = checked
+                        }
+
+                        Controls.Switch {
+                            id: auto_emojis_checkbox
+                            checked: Cutegram.autoEmojis
+                            onCheckedChanged: Cutegram.autoEmojis = checked
                         }
 
                         Controls.ComboBox {
@@ -511,6 +527,7 @@ Rectangle {
                     radius: 4*Devices.density
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
+                        Desktop.showMessage(View, qsTr("Logout"), qsTr("Cutegram will restart after this operation."))
                         if( profiles.remove(telegram.phoneNumber) )
                             Cutegram.logout(telegram.phoneNumber)
                     }
@@ -547,6 +564,12 @@ Rectangle {
                 }
             }
         }
+    }
+
+    NormalWheelScroll {
+        flick: flickable
+        animated: Cutegram.smoothScroll
+        reverse: true
     }
 
     PhysicalScrollBar {

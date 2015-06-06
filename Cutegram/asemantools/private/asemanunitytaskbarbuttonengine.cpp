@@ -15,13 +15,13 @@ AsemanUnityTaskbarButtonEngine::AsemanUnityTaskbarButtonEngine() :
 void AsemanUnityTaskbarButtonEngine::updateBadgeNumber(int number)
 {
     _badge_number = number;
-    update(_launcher ,_badge_number, _progress);
+    update(_launcher ,_badge_number, _progress, false);
 }
 
 void AsemanUnityTaskbarButtonEngine::updateProgress(qreal progress)
 {
     _progress = progress;
-    update(_launcher ,_badge_number, _progress);
+    update(_launcher ,_badge_number, _progress, false);
 }
 
 void AsemanUnityTaskbarButtonEngine::updateLauncher(const QString &launcher)
@@ -29,13 +29,18 @@ void AsemanUnityTaskbarButtonEngine::updateLauncher(const QString &launcher)
     if(_launcher == launcher)
         return;
     if(!_launcher.isEmpty() && (_badge_number || _progress))
-        update(_launcher ,0, 0);
+        update(_launcher ,0, 0, false);
 
     _launcher = launcher;
-    update(_launcher ,_badge_number, _progress);
+    update(_launcher ,_badge_number, _progress, false);
 }
 
-void AsemanUnityTaskbarButtonEngine::update(const QString &launcher, qint64 badgeNumber, qreal progress)
+void AsemanUnityTaskbarButtonEngine::userAttention()
+{
+    update(_launcher ,_badge_number, _progress, true);
+}
+
+void AsemanUnityTaskbarButtonEngine::update(const QString &launcher, qint64 badgeNumber, qreal progress, bool userAttention)
 {
 #ifdef QT_DBUS_LIB
     QDBusMessage signal = QDBusMessage::createSignal(
@@ -50,7 +55,7 @@ void AsemanUnityTaskbarButtonEngine::update(const QString &launcher, qint64 badg
     setProperty.insert("count-visible", badgeNumber != 0);
     setProperty.insert("progress", progress/100);
     setProperty.insert("progress-visible", progress != 0);
-    setProperty.insert("urgent",false);
+    setProperty.insert("urgent", userAttention);
 
     signal << setProperty;
     QDBusConnection::sessionBus().send(signal);

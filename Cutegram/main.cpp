@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     AsemanApplication app(argc, argv);
     app.setApplicationName("Cutegram");
     app.setApplicationDisplayName("Cutegram");
-    app.setApplicationVersion("2.3.1");
+    app.setApplicationVersion("2.4.0");
     app.setOrganizationDomain("land.aseman");
     app.setOrganizationName("Aseman");
     app.setWindowIcon(QIcon(":/qml/Cutegram/files/icon.png"));
@@ -38,6 +38,10 @@ int main(int argc, char *argv[])
 
     if(!parser.isSet(verboseOption))
         qputenv("QT_LOGGING_RULES", "tg.*=false");
+    else
+        qputenv("QT_LOGGING_RULES", "tg.core.settings=false\n"
+                                    "tg.core.outboundpkt=false\n"
+                                    "tg.core.inboundpkt=false");
 
     Telegram::setDefaultHostAddress("149.154.167.50");
     Telegram::setDefaultHostPort(443);
@@ -80,7 +84,7 @@ int main(int argc, char *argv[])
     CompabilityTools::version1();
 
     Cutegram cutegram;
-    cutegram.start();
+    cutegram.start( parser.isSet(forceOption) );
 
 #ifdef DESKTOP_DEVICE
     QObject::connect( &app, SIGNAL(messageReceived(QString)), &cutegram, SLOT(incomingAppMessage(QString)) );

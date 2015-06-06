@@ -76,7 +76,7 @@ public:
 public slots:
     void refresh();
     void loadMore(bool force = false);
-    void sendMessage( const QString & msg );
+    void sendMessage( const QString & msg, int inReplyTo = 0 );
     void setReaded();
     void clearNewMessageFlag();
 

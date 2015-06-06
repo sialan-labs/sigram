@@ -25,6 +25,7 @@
 #include <QSystemTrayIcon>
 #include <QFont>
 
+class QMenu;
 class ThemeItem;
 class CutegramPrivate;
 class Cutegram : public QObject
@@ -52,6 +53,7 @@ class Cutegram : public QObject
     Q_PROPERTY(bool cutegramSubscribe READ cutegramSubscribe WRITE setAsemanSubscribe NOTIFY cutegramSubscribeChanged)
     Q_PROPERTY(int  statusIconStyle   READ statusIconStyle   WRITE setStatusIconStyle NOTIFY statusIconStyleChanged  )
     Q_PROPERTY(bool smoothScroll      READ smoothScroll      WRITE setSmoothScroll    NOTIFY smoothScrollChanged     )
+    Q_PROPERTY(bool autoEmojis        READ autoEmojis        WRITE setAutoEmojis      NOTIFY autoEmojisChanged       )
 
     Q_PROPERTY(ThemeItem* currentTheme READ currentTheme NOTIFY currentThemeChanged)
     Q_PROPERTY(QStringList themes READ themes NOTIFY themesChanged)
@@ -141,6 +143,9 @@ public:
     void setAsemanSubscribe(bool stt);
     bool cutegramSubscribe() const;
 
+    void setAutoEmojis(bool stt);
+    bool autoEmojis() const;
+
     void setStatusIconStyle(int style);
     int statusIconStyle();
 
@@ -159,7 +164,7 @@ public:
     Q_INVOKABLE QString normalizeText(const QString &text) const;
 
 public slots:
-    void start();
+    void start(bool forceVisible = false);
     void restart();
     void logout(const QString & phone);
     void close();
@@ -192,6 +197,7 @@ signals:
     void cutegramSubscribeChanged();
     void statusIconStyleChanged();
     void smoothScrollChanged();
+    void autoEmojisChanged();
 
     void themesChanged();
     void currentThemeChanged();
@@ -211,12 +217,13 @@ private slots:
 
 private:
     void init_systray();
-    void showContextMenu();
     QImage generateIcon( const QImage & img, int count );
     void init_languages();
     void init_theme();
 
     bool lowLevelDarkSystemTray();
+
+    QMenu *contextMenu();
 
 private:
     CutegramPrivate *p;

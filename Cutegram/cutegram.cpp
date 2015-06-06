@@ -82,6 +82,7 @@ public:
     bool darkSystemTray;
     bool closingState;
     bool cutegramSubscribe;
+    bool autoEmojis;
     bool smoothScroll;
 
     QTextDocument *doc;
@@ -143,6 +144,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
+    p->autoEmojis = AsemanApplication::settings()->value("General/autoEmojis", true ).toBool();
     p->smoothScroll = AsemanApplication::settings()->value("General/smoothScroll", true ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
@@ -278,7 +280,7 @@ int Cutegram::showMenu(const QStringList &actions, QPoint point)
     return pointers.indexOf(res);
 }
 
-void Cutegram::start()
+void Cutegram::start(bool forceVisible)
 {
     if( p->viewer )
         return;
@@ -307,6 +309,9 @@ void Cutegram::start()
     case StartupHide:
         break;
     }
+
+    if(forceVisible)
+        p->viewer->show();
 
     init_systray();
 }
@@ -459,10 +464,6 @@ void Cutegram::systray_action(QSystemTrayIcon::ActivationReason act)
             active();
         }
         break;
-
-    case QSystemTrayIcon::Context:
-        showContextMenu();
-        break;
     }
 }
 
@@ -487,6 +488,10 @@ void Cutegram::init_systray()
     if( !p->unityTray || !p->unityTray->pntr() )
     {
         p->sysTray = new QSystemTrayIcon( QIcon(SYSTRAY_ICON), this );
+        p->sysTray->setContextMenu(contextMenu());
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0))
+        p->sysTray->setToolTip(tr("Cutegram"));
+#endif
 #ifndef Q_OS_MAC
         p->sysTray->show();
 #endif
@@ -495,51 +500,22 @@ void Cutegram::init_systray()
     }
 }
 
-void Cutegram::showContextMenu()
+QMenu *Cutegram::contextMenu()
 {
-    QMenu menu;
-    menu.move( QCursor::pos() );
+    QMenu *menu = new QMenu();
+    menu->move( QCursor::pos() );
 
-    QAction *show_act = menu.addAction( tr("Show") );
-    menu.addSeparator();
-    QAction *conf_act = menu.addAction( tr("Configure") );
-    QAction *cnct_act = menu.addAction( tr("Contact") );
-    menu.addSeparator();
-    QAction *abut_act = menu.addAction( tr("About") );
-    QAction *sabt_act = menu.addAction( tr("About Aseman") );
-    menu.addSeparator();
-    QAction *exit_act = menu.addAction( tr("Exit") );
-    QAction *res_act  = menu.exec();
+    menu->addAction( tr("Show"), this, SLOT(active()) );
+    menu->addSeparator();
+    menu->addAction( tr("Configure"), this, SLOT(configure()) );
+    menu->addAction( tr("Contact"), this, SLOT(contact()) );
+    menu->addSeparator();
+    menu->addAction( tr("About"), this, SLOT(about()) );
+    menu->addAction( tr("About Aseman"), this, SLOT(aboutAseman()) );
+    menu->addSeparator();
+    menu->addAction( tr("Exit"), this, SLOT(quit()) );
 
-    if( res_act == show_act )
-    {
-        active();
-    }
-    else
-    if( res_act == conf_act )
-    {
-        configure();
-    }
-    else
-    if( res_act == cnct_act )
-    {
-        contact();
-    }
-    else
-    if( res_act == abut_act )
-    {
-        about();
-    }
-    else
-    if( res_act == sabt_act )
-    {
-        aboutAseman();
-    }
-    else
-    if( res_act == exit_act )
-    {
-        quit();
-    }
+    return menu;
 }
 
 QImage Cutegram::generateIcon(const QImage &img, int count)
@@ -786,6 +762,22 @@ void Cutegram::setAsemanSubscribe(bool stt)
 bool Cutegram::cutegramSubscribe() const
 {
     return p->cutegramSubscribe;
+}
+
+void Cutegram::setAutoEmojis(bool stt)
+{
+    if(p->autoEmojis == stt)
+        return;
+
+    p->autoEmojis = stt;
+    AsemanApplication::settings()->setValue("General/autoEmojis", stt);
+
+    emit autoEmojisChanged();
+}
+
+bool Cutegram::autoEmojis() const
+{
+    return p->autoEmojis;
 }
 
 void Cutegram::setStatusIconStyle(int style)

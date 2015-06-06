@@ -2,7 +2,7 @@ import QtQuick 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
-import QtQuick.Controls 1.1 as Controls
+import AsemanTools.Controls 1.0 as Controls
 
 Rectangle {
     id: acc_msg_list
@@ -37,14 +37,21 @@ Rectangle {
     property real typeEncryptedChatDiscarded: 0x13d6dd27
     property real typeEncryptedChat: 0xfa56ce36
 
-    signal forwardRequest( variant message )
+    signal forwardRequest( variant messages )
     signal focusRequest()
     signal dialogRequest(variant dialogObject)
     signal tagSearchRequest(string tag)
+    signal replyToRequest(int msgId)
 
     onIsActiveChanged: {
         if( isActive )
             messages_model.setReaded()
+    }
+
+    onCurrentDialogChanged: selected_list.clear()
+
+    ListObject {
+        id: selected_list
     }
 
     MessagesModel {
@@ -186,6 +193,7 @@ Rectangle {
             }
             onDialogRequest: acc_msg_list.dialogRequest(dialogObject)
             onTagSearchRequest: acc_msg_list.tagSearchRequest(tag)
+            onMessageFocusRequest: focusOnMessage(msgId)
 
             property string messageFile
             property bool selected: mlist.currentIndex == index
@@ -194,6 +202,27 @@ Rectangle {
 
             Behavior on opacity {
                 NumberAnimation{ easing.type: Easing.OutCubic; duration: 200 }
+            }
+
+            Rectangle {
+                id: select_rect
+                anchors.fill: parent
+                color: Cutegram.currentTheme.masterColor
+                opacity: 0.2
+                z: -100
+                visible: selected_list.count==0? false : selected_list.contains(message)
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if(select_rect.visible)
+                        selected_list.removeOne(message)
+                    else
+                        selected_list.append(message)
+                }
+
+                z: -100
             }
 
             DragObject {
@@ -283,33 +312,37 @@ Rectangle {
                                 break;
 
                             case 1:
-                                telegramObject.deleteMessage(message.id)
+                                telegramObject.deleteMessages([message.id])
                                 break;
                             }
                         } else {
                             if(msg_item.isSticker)
-                                actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal")]
+                                actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal")]
                             else
                             if(msg_item.selectedText.length == 0)
-                                actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
+                                actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
                             else
-                                actions = [qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Search on the Web")]
+                                actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Search on the Web")]
 
                             res = Desktop.showMenu(actions)
                             switch(res) {
                             case 0:
-                                acc_msg_list.forwardRequest(message)
+                                acc_msg_list.replyToRequest(message.id)
                                 break;
 
                             case 1:
-                                msg_item.copy()
+                                acc_msg_list.forwardRequest([message])
                                 break;
 
                             case 2:
-                                telegramObject.deleteMessage(message.id)
+                                msg_item.copy()
                                 break;
 
                             case 3:
+                                telegramObject.deleteMessages([message.id])
+                                break;
+
+                            case 4:
                                 if(msg_item.isSticker)
                                     Cutegram.addToPersonal(msg_item.mediaLOcation.download.location)
                                 else
@@ -347,6 +380,90 @@ Rectangle {
         scrollArea: mlist; height: mlist.height-bottomMargin-topMargin; width: 6*Devices.density
         anchors.right: mlist.right; anchors.top: mlist.top; color: textColor0
         anchors.topMargin: topMargin; reverse: true
+    }
+
+    Item {
+        anchors.fill: parent
+        anchors.topMargin: acc_msg_list.topMargin
+        anchors.bottomMargin: acc_msg_list.bottomMargin
+        clip: true
+
+        Rectangle {
+            width: parent.width
+            height: 40*Devices.density
+            y: selected_list.count==0? -height : 0
+            color: currentDialog.encrypted? Cutegram.currentTheme.headerSecretColor : Cutegram.currentTheme.headerColor
+
+            Behavior on y {
+                NumberAnimation{easing.type: Easing.OutCubic; duration: 300}
+            }
+
+            Row {
+                id: toolbutton_row
+                anchors.centerIn: parent
+                height: parent.height
+
+                property bool toolButtonLightIcon: currentDialog.encrypted? Cutegram.currentTheme.headerSecretLightIcon : Cutegram.currentTheme.headerLightIcon
+                property color toolButtonColors: {
+                    var mclr = Cutegram.currentTheme.masterColor
+                    return Qt.rgba(mclr.r, mclr.g, mclr.b, 0.3)
+                }
+
+                Button {
+                    width: height
+                    height: parent.height
+                    icon: toolbutton_row.toolButtonLightIcon? "files/select-none-light.png" : "files/select-none.png"
+                    normalColor: "#00000000"
+                    highlightColor: toolbutton_row.toolButtonColors
+                    iconHeight: 22*Devices.density
+                    onClicked: selected_list.clear()
+                }
+
+                Button {
+                    width: height
+                    height: parent.height
+                    icon: toolbutton_row.toolButtonLightIcon? "files/forward-light.png" : "files/forward.png"
+                    normalColor: "#00000000"
+                    highlightColor: toolbutton_row.toolButtonColors
+                    iconHeight: 22*Devices.density
+                    onClicked: {
+                        acc_msg_list.forwardRequest(selected_list.toList())
+                        selected_list.clear()
+                    }
+                }
+
+                Button {
+                    width: height
+                    height: parent.height
+                    icon: "files/delete.png"
+                    normalColor: "#00000000"
+                    highlightColor: toolbutton_row.toolButtonColors
+                    iconHeight: 22*Devices.density
+                    onClicked: {
+                        var ids = new Array
+                        for(var i=0; i<selected_list.count; i++)
+                            ids[i] = selected_list.at(i).id
+
+                        telegramObject.deleteMessages(ids)
+                        selected_list.clear()
+                    }
+                }
+            }
+        }
+
+        Rectangle {
+            width: parent.width
+            height: 2*Devices.density
+            opacity: selected_list.count!=0? 0.3 : 0
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: currentDialog.encrypted? Cutegram.currentTheme.headerSecretTitleColor : Cutegram.currentTheme.headerTitleColor }
+                GradientStop { position: 1.0; color: "#00000000" }
+            }
+
+            Behavior on opacity {
+                NumberAnimation{easing.type: Easing.OutCubic; duration: 300}
+            }
+        }
     }
 
     Button {
@@ -450,12 +567,17 @@ Rectangle {
         property int msgIndex
     }
 
-    function sendMessage( txt ) {
-        messages_model.sendMessage(txt)
+    function sendMessage( txt, inReplyTo ) {
+        messages_model.sendMessage(txt, inReplyTo)
     }
 
     function focusOn(msgId) {
         focus_msg_timer.msgId = msgId
+    }
+
+    function focusOnMessage(msgId) {
+        var idx = messages_model.indexOf(msgId)
+        mlist.positionViewAtIndex(idx, ListView.Center)
     }
 
     function copy() {

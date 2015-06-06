@@ -13,6 +13,7 @@ public:
     virtual void updateProgress(qreal progress) = 0;
     virtual void updateLauncher(const QString &launcher) {Q_UNUSED(launcher)}
     virtual void updateWindow(QWindow *window) {Q_UNUSED(window)}
+    virtual void userAttention() {}
 };
 
 #endif // ASEMANABSTRACTTASKBARBUTTONENGINE_H

@@ -3,7 +3,7 @@ import QtQuick.Window 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
-import QtQuick.Controls 1.0 as Controls
+import AsemanTools.Controls 1.0 as Controls
 
 Window {
     id: add_dialog
@@ -32,6 +32,7 @@ Window {
             width: parent.width
             font: AsemanApp.globalFont
             color: "#333333"
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             text: qsTr("Fill below form to add new contact.")
         }
 

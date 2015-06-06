@@ -30,6 +30,26 @@ Rectangle {
         id: emojis_obj
         currentTheme: "twitter"
         userData: telegramObject.userData
+        autoEmojis: Cutegram.autoEmojis
+        replacements: {":)"   : "😌",
+                       ":("   : "😞",
+                       ":d"   : "😁",
+                       ":*"   : "😘",
+                       ":s"   : "😖",
+                       "^_^"  : "😊",
+                       ":/"   : "😕",
+                       "B)"   : "😎",
+                       ":p"   : "😋",
+                       ":o"   : "😯",
+                       ":x"   : "😍",
+                       ";)"   : "😉",
+                       ">:)"  : "😈",
+                       "o:)"  : "😇",
+                       ":(("  : "😢",
+                       ":(((" : "😭",
+                       ":))"  : "😀",
+                       ":)))" : "😆",
+                       ":))))": "😂"}
     }
 
     HashObject {
