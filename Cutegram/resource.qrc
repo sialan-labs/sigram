@@ -115,5 +115,6 @@
         <file>qml/Cutegram/files/select-all.png</file>
         <file>qml/Cutegram/files/select-none-light.png</file>
         <file>qml/Cutegram/files/select-none.png</file>
+        <file>qml/Cutegram/FramedContactImage.qml</file>
     </qresource>
 </RCC>

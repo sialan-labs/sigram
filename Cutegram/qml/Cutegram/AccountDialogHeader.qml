@@ -6,6 +6,7 @@ import CutegramTypes 1.0
 Rectangle {
     id: header
     height: Cutegram.currentTheme.headerHeight*Devices.density
+    clip: true
 
     property Dialog currentDialog
 
@@ -50,6 +51,17 @@ Rectangle {
         } else {
             online_count_refresher.stop()
         }
+    }
+
+    Image {
+        anchors.fill: parent
+        anchors.margins: -3*Devices.density
+        fillMode: Image.PreserveAspectCrop
+        source: headerManager.background
+        opacity: 0.6
+        sourceSize: Qt.size(width, width*imageSize.height/imageSize.width)
+
+        property size imageSize: Cutegram.imageSize(source)
     }
 
     Timer {

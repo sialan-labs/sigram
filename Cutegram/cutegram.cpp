@@ -34,6 +34,7 @@
 #include "telegramdialogsmodel.h"
 #include "telegramwallpapersmodel.h"
 #include "telegramsearchmodel.h"
+#include "backgroundmanager.h"
 #include "usernamefiltermodel.h"
 #include "textemojiwrapper.h"
 #include "telegramcontactsmodel.h"
@@ -176,6 +177,7 @@ Cutegram::Cutegram(QObject *parent) :
     qRegisterMetaType< QList<qint32> >("QList<qint32>");
 
     qmlRegisterType<TelegramQml>("Cutegram", 1, 0, "Telegram");
+    qmlRegisterType<BackgroundManager>("Cutegram", 1, 0, "BackgroundManager");
     qmlRegisterType<ProfilesModel>("Cutegram", 1, 0, "ProfilesModel");
     qmlRegisterType<ProfilesModelItem>("Cutegram", 1, 0, "ProfilesModelItem");
     qmlRegisterType<TelegramMessagesModel>("Cutegram", 1, 0, "MessagesModel");

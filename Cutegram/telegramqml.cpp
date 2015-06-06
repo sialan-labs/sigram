@@ -1160,7 +1160,10 @@ void TelegramQml::messagesReadHistory(qint64 peerId)
         return;
 
     const InputPeer & peer = getInputPeer(peerId);
-    p->telegram->messagesReadHistory(peer);
+    if(!p->encchats.contains(peerId))
+        p->telegram->messagesReadHistory(peer);
+    else
+        p->telegram->messagesReadEncryptedHistory(peerId, QDateTime::currentDateTime().toTime_t());
 }
 
 void TelegramQml::messagesCreateEncryptedChat(qint64 userId)

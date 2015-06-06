@@ -77,7 +77,8 @@ SOURCES += main.cpp \
     mp3converterengine.cpp \
     textemojiwrapper.cpp \
     telegramtestobject.cpp \
-    emoticonsmodel.cpp
+    emoticonsmodel.cpp \
+    backgroundmanager.cpp
 
 RESOURCES += resource.qrc
 
@@ -115,7 +116,8 @@ HEADERS += \
     mp3converterengine.h \
     textemojiwrapper.h \
     telegramtestobject.h \
-    emoticonsmodel.h
+    emoticonsmodel.h \
+    backgroundmanager.h
 
 OTHER_FILES += \
     objects/types.sco \

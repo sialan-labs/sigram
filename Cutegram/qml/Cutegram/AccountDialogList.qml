@@ -114,6 +114,13 @@ Item {
             }
         }
 
+        move: Transition {
+            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: 300 }
+        }
+        moveDisplaced: Transition {
+            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: 300 }
+        }
+
         delegate: Item {
             id: list_item
             width: dlist.width

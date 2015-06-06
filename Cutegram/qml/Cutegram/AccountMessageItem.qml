@@ -85,46 +85,34 @@ Item {
         visible: !action_item.hasAction
         spacing: frameMargins
 
-        Frame {
+        FramedContactImage {
+            id: img
             anchors.verticalCenter: parent.verticalCenter
             width: 40*Devices.density
             height: width
-            backgroundColor: "#E4E9EC"
+            user: msg_item.user
+            isChat: false
 
-            ContactImage {
-                id: img
+            MouseArea {
                 anchors.fill: parent
-                user: msg_item.user
-                isChat: false
-                circleMode: false
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(img.user.id, false) )
-                }
+                cursorShape: Qt.PointingHandCursor
+                onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(img.user.id, false) )
             }
         }
 
-        Frame {
+        FramedContactImage {
+            id: forward_img
             anchors.verticalCenter: parent.verticalCenter
             width: img.width
             height: img.height
             visible: message.fwdFromId != 0 && !msg_media.isSticker
-            backgroundColor: "#E4E9EC"
+            user: msg_item.fwdUser
+            isChat: false
 
-            ContactImage {
-                id: forward_img
+            MouseArea {
                 anchors.fill: parent
-                user: msg_item.fwdUser
-                isChat: false
-                circleMode: false
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(forward_img.user.id, false) )
-                }
+                cursorShape: Qt.PointingHandCursor
+                onClicked: msg_item.dialogRequest( telegramObject.fakeDialogObject(forward_img.user.id, false) )
             }
         }
 

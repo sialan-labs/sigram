@@ -1,12 +1,12 @@
 import QtQuick 2.0
-import AsemanTools.Controls 1.0
+import AsemanTools.Controls 1.0 as Controls
 import AsemanTools 1.0
 import Cutegram 1.0
 import CutegramTypes 1.0
 
 Item {
     id: up_base
-    height: row.height + 2*frameMargins
+    height: main_page.height + 2*frameMargins
 
     property Dialog currentDialog
     property bool isChat: currentDialog.peer.chatId != 0
@@ -84,7 +84,7 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.margins: frameMargins
-        anchors.left: row.right
+        anchors.left: main_page.right
         visible: isChat
 
         Button {
@@ -112,229 +112,303 @@ Item {
         }
     }
 
-    Row {
-        id: row
-        width: parent.width-10*Devices.density
-        x: particianMode? -width : 10*Devices.density
+    Item {
+        id: main_page
         anchors.top: parent.top
         anchors.margins: frameMargins
-        spacing: 8*Devices.density
+        height: row.height
+        width: parent.width-10*Devices.density
+        x: particianMode? -width : 10*Devices.density
 
         Behavior on x {
             NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
         }
 
-        Item {
-            width: 140*Devices.density
-            height: 160*Devices.density
-
-            ClickableContactImage {
-                width: 128*Devices.density
-                height: width
-                anchors.centerIn: parent
-                dialog: up_base.currentDialog
-            }
-        }
-
-        Item { width: 20*Devices.density; height: 1 }
-
-        Column {
-            id: col1
-            anchors.top: parent.top
-            anchors.margins: 20*Devices.density
-            spacing: 12*Devices.density
-
-            Text {
-                id: phone_lbl
-                font.family: AsemanApp.globalFont.family
-                font.pixelSize: Math.floor(11*Devices.fontDensity)
-                color: Desktop.titleBarTextColor
-                text: qsTr("Phone Number")
-                visible: !isChat
-            }
-
-            Text {
-                id: favorite_lbl
-                font.family: AsemanApp.globalFont.family
-                font.pixelSize: Math.floor(11*Devices.fontDensity)
-                color: Desktop.titleBarTextColor
-                text: qsTr("Favorite")
-            }
-
-            Text {
-                id: love_lbl
-                font.family: AsemanApp.globalFont.family
-                font.pixelSize: Math.floor(11*Devices.fontDensity)
-                color: Desktop.titleBarTextColor
-                text: qsTr("Love")
-            }
-
-            Text {
-                id: mute_lbl
-                font.family: AsemanApp.globalFont.family
-                font.pixelSize: Math.floor(11*Devices.fontDensity)
-                color: Desktop.titleBarTextColor
-                text: qsTr("Mute")
-            }
-
-            Text {
-                id: badge_lbl
-                font.family: AsemanApp.globalFont.family
-                font.pixelSize: Math.floor(11*Devices.fontDensity)
-                color: Desktop.titleBarTextColor
-                text: qsTr("Show Badges")
-            }
-
-            Text {
-                id: participants_lbl
-                font.family: AsemanApp.globalFont.family
-                font.pixelSize: Math.floor(11*Devices.fontDensity)
-                verticalAlignment: Text.AlignVCenter
-                height: 40*Devices.density
-                color: Desktop.titleBarTextColor
-                text: qsTr("Participants")
-                visible: isChat
-            }
-        }
-
-        Column {
-            id: col2
-            anchors.top: parent.top
-            anchors.margins: 20*Devices.density
-            spacing: 12*Devices.density
-
-            Text {
-                height: phone_lbl.height
-                font.family: AsemanApp.globalFont.family
-                font.pixelSize: Math.floor(11*Devices.fontDensity)
-                verticalAlignment: Text.AlignVCenter
-                color: Desktop.titleBarTextColor
-                text: user.phone + " "
-                visible: !isChat
-            }
+        Row {
+            id: row
+            width: parent.width
+            spacing: 8*Devices.density
 
             Item {
-                height: favorite_lbl.height
-                width: favorite_check.width
+                width: 140*Devices.density
+                height: 160*Devices.density
 
-                Switch {
-                    id: favorite_check
-                    anchors.verticalCenter: parent.verticalCenter
-                    onCheckedChanged: {
-                        if( signalBlocker )
-                            return
-                        if( checked )
-                            telegramObject.userData.addFavorite(dId)
-                        else
-                            telegramObject.userData.removeFavorite(dId)
-                    }
+                ClickableContactImage {
+                    width: 128*Devices.density
+                    height: width
+                    anchors.centerIn: parent
+                    dialog: up_base.currentDialog
                 }
             }
 
-            Item {
-                height: love_lbl.height
-                width: love_check.width
+            Item { width: 20*Devices.density; height: 1 }
 
-                Switch {
-                    id: love_check
-                    anchors.verticalCenter: parent.verticalCenter
-                    onCheckedChanged: {
-                        if( signalBlocker )
-                            return
-                        telegramObject.userData.setValue("love", checked?dId:"")
-                    }
+            Column {
+                id: col1
+                anchors.top: parent.top
+                anchors.margins: 20*Devices.density
+                spacing: 12*Devices.density
+
+                Text {
+                    id: phone_lbl
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
+                    color: Desktop.titleBarTextColor
+                    text: qsTr("Phone Number")
+                    visible: !isChat
+                }
+
+                Text {
+                    id: favorite_lbl
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
+                    color: Desktop.titleBarTextColor
+                    text: qsTr("Favorite")
+                }
+
+                Text {
+                    id: love_lbl
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
+                    color: Desktop.titleBarTextColor
+                    text: qsTr("Love")
+                }
+
+                Text {
+                    id: mute_lbl
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
+                    color: Desktop.titleBarTextColor
+                    text: qsTr("Mute")
+                }
+
+                Text {
+                    id: badge_lbl
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
+                    color: Desktop.titleBarTextColor
+                    text: qsTr("Show Badges")
+                }
+
+                Text {
+                    id: participants_lbl
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
+                    verticalAlignment: Text.AlignVCenter
+                    height: 40*Devices.density
+                    color: Desktop.titleBarTextColor
+                    text: qsTr("Participants")
+                    visible: isChat
                 }
             }
 
-            Item {
-                height: mute_lbl.height
-                width: mute_check.width
+            Column {
+                id: col2
+                anchors.top: parent.top
+                anchors.margins: 20*Devices.density
+                spacing: 12*Devices.density
 
-                Switch {
-                    id: mute_check
-                    anchors.verticalCenter: parent.verticalCenter
-                    onCheckedChanged: {
-                        if( signalBlocker )
-                            return
-                        if( checked )
-                            telegramObject.userData.addMute(dId)
-                        else
-                            telegramObject.userData.removeMute(dId)
-                    }
+                Text {
+                    height: phone_lbl.height
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
+                    verticalAlignment: Text.AlignVCenter
+                    color: Desktop.titleBarTextColor
+                    text: user.phone + " "
+                    visible: !isChat
                 }
-            }
 
-            Item {
-                height: badge_lbl.height
-                width: badge_check.width
+                Item {
+                    height: favorite_lbl.height
+                    width: favorite_check.width
 
-                Switch {
-                    id: badge_check
-                    anchors.verticalCenter: parent.verticalCenter
-                    onCheckedChanged: {
-                        if( signalBlocker )
-                            return
-
-                        var attrValue = telegramObject.userData.notify(dId)
-                        var badgesState = attrValue & UserData.DisableBadges
-                        var otherState = attrValue - badgesState
-
-                        badgesState = checked? 0 : UserData.DisableBadges
-                        telegramObject.userData.setNotify(dId, badgesState|otherState)
-                    }
-                }
-            }
-
-            Item {
-                height: participants_lbl.height
-                width: particians_row.width
-                visible: isChat
-
-                Row {
-                    id: particians_row
-                    anchors.verticalCenter: parent.verticalCenter
-                    spacing: 4*Devices.density
-
-                    Button {
-                        textFont.family: AsemanApp.globalFont.family
-                        textFont.pixelSize: Math.floor(10*Devices.fontDensity)
-                        textFont.bold: false
-                        normalColor: Cutegram.currentTheme.masterColor
-                        highlightColor: Qt.darker(normalColor)
-                        textColor: "#ffffff"
-                        text: qsTr("Show List")
-                        radius: 4*Devices.density
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: particianMode = true
-                    }
-
-                    Button {
-                        textFont.family: AsemanApp.globalFont.family
-                        textFont.pixelSize: Math.floor(10*Devices.fontDensity)
-                        textFont.bold: false
-                        normalColor: Cutegram.currentTheme.masterColor
-                        highlightColor: Qt.darker(normalColor)
-                        textColor: "#ffffff"
-                        text: qsTr("Add Participant")
-                        radius: 4*Devices.density
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: up_base.addParticianRequest()
-                    }
-
-                    Button {
-                        textFont.family: AsemanApp.globalFont.family
-                        textFont.pixelSize: Math.floor(10*Devices.fontDensity)
-                        textFont.bold: false
-                        highlightColor: Qt.darker(normalColor)
-                        normalColor: "#C81414"
-                        textColor: "#ffffff"
-                        text: qsTr("Leave")
-                        radius: 4*Devices.density
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            if( Desktop.yesOrNo(View, qsTr("Leave the group"), qsTr("Are you sure about leaving this group?")) )
-                                telegramObject.messagesDeleteChatUser(chat.id, telegramObject.me)
+                    Controls.Switch {
+                        id: favorite_check
+                        anchors.verticalCenter: parent.verticalCenter
+                        onCheckedChanged: {
+                            if( signalBlocker )
+                                return
+                            if( checked )
+                                telegramObject.userData.addFavorite(dId)
+                            else
+                                telegramObject.userData.removeFavorite(dId)
                         }
+                    }
+                }
+
+                Item {
+                    height: love_lbl.height
+                    width: love_check.width
+
+                    Controls.Switch {
+                        id: love_check
+                        anchors.verticalCenter: parent.verticalCenter
+                        onCheckedChanged: {
+                            if( signalBlocker )
+                                return
+                            telegramObject.userData.setValue("love", checked?dId:"")
+                        }
+                    }
+                }
+
+                Item {
+                    height: mute_lbl.height
+                    width: mute_check.width
+
+                    Controls.Switch {
+                        id: mute_check
+                        anchors.verticalCenter: parent.verticalCenter
+                        onCheckedChanged: {
+                            if( signalBlocker )
+                                return
+                            if( checked )
+                                telegramObject.userData.addMute(dId)
+                            else
+                                telegramObject.userData.removeMute(dId)
+                        }
+                    }
+                }
+
+                Item {
+                    height: badge_lbl.height
+                    width: badge_check.width
+
+                    Controls.Switch {
+                        id: badge_check
+                        anchors.verticalCenter: parent.verticalCenter
+                        onCheckedChanged: {
+                            if( signalBlocker )
+                                return
+
+                            var attrValue = telegramObject.userData.notify(dId)
+                            var badgesState = attrValue & UserData.DisableBadges
+                            var otherState = attrValue - badgesState
+
+                            badgesState = checked? 0 : UserData.DisableBadges
+                            telegramObject.userData.setNotify(dId, badgesState|otherState)
+                        }
+                    }
+                }
+
+                Item {
+                    height: participants_lbl.height
+                    width: particians_row.width
+                    visible: isChat
+
+                    Row {
+                        id: particians_row
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: 4*Devices.density
+
+                        Button {
+                            textFont.family: AsemanApp.globalFont.family
+                            textFont.pixelSize: Math.floor(10*Devices.fontDensity)
+                            textFont.bold: false
+                            normalColor: Cutegram.currentTheme.masterColor
+                            highlightColor: Qt.darker(normalColor)
+                            textColor: "#ffffff"
+                            text: qsTr("Show List")
+                            radius: 4*Devices.density
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: particianMode = true
+                        }
+
+                        Button {
+                            textFont.family: AsemanApp.globalFont.family
+                            textFont.pixelSize: Math.floor(10*Devices.fontDensity)
+                            textFont.bold: false
+                            normalColor: Cutegram.currentTheme.masterColor
+                            highlightColor: Qt.darker(normalColor)
+                            textColor: "#ffffff"
+                            text: qsTr("Add Participant")
+                            radius: 4*Devices.density
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: up_base.addParticianRequest()
+                        }
+
+                        Button {
+                            textFont.family: AsemanApp.globalFont.family
+                            textFont.pixelSize: Math.floor(10*Devices.fontDensity)
+                            textFont.bold: false
+                            highlightColor: Qt.darker(normalColor)
+                            normalColor: "#C81414"
+                            textColor: "#ffffff"
+                            text: qsTr("Leave")
+                            radius: 4*Devices.density
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                if( Desktop.yesOrNo(View, qsTr("Leave the group"), qsTr("Are you sure about leaving this group?")) )
+                                    telegramObject.messagesDeleteChatUser(chat.id, telegramObject.me)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Column {
+            id: buttons_col
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 8*Devices.density
+
+            property color buttonColors: {
+                var mclr = Cutegram.currentTheme.masterColor
+                return Qt.rgba(mclr.r, mclr.g, mclr.b, 0.3)
+            }
+
+            Row {
+                anchors.right: parent.right
+
+                Button {
+                    height: 32*Devices.density
+                    width: height
+                    anchors.verticalCenter: parent.verticalCenter
+                    icon: "files/delete.png"
+                    iconHeight: 26*Devices.density
+                    normalColor: "#00000000"
+                    highlightColor: buttons_col.buttonColors
+                    visible: backgroundManager.background != ""
+                    onClicked: backgroundManager.setBackground("")
+                }
+
+                Controls.Button {
+                    width: 100*Devices.density
+                    text: qsTr("Background")
+                    onClicked: {
+                        var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
+                        if(newImg.length == 0)
+                            return
+
+                        backgroundManager.setBackground(newImg)
+                    }
+                }
+            }
+
+            Row {
+                anchors.right: parent.right
+
+                Button {
+                    height: 32*Devices.density
+                    width: height
+                    anchors.verticalCenter: parent.verticalCenter
+                    icon: "files/delete.png"
+                    iconHeight: 26*Devices.density
+                    normalColor: "#00000000"
+                    highlightColor: buttons_col.buttonColors
+                    visible: headerManager.background != ""
+                    onClicked: headerManager.setBackground("")
+                }
+
+                Controls.Button {
+                    width: 100*Devices.density
+                    text: qsTr("Header")
+                    onClicked: {
+                        var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
+                        if(newImg.length == 0)
+                            return
+
+                        headerManager.setBackground(newImg)
                     }
                 }
             }

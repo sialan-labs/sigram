@@ -91,7 +91,12 @@ Rectangle {
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
         sourceSize: Cutegram.background.length==0? Cutegram.imageSize(":/qml/files/telegram_background.png") : Qt.size(width,height)
-        source: Cutegram.background.length==0? "files/telegram_background.png" : Devices.localFilesPrePath + Cutegram.background
+        source: {
+            if(backgroundManager.background == "")
+                return Cutegram.background.length==0? "files/telegram_background.png" : Devices.localFilesPrePath + Cutegram.background
+            else
+                return backgroundManager.background
+        }
         opacity: 0.7
     }
 

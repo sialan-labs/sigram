@@ -13,8 +13,22 @@ Item {
     property Dialog currentDialog: telegramObject.nullDialog
 
     property alias maxId: messages.maxId
+    property alias backgroundManager: background_manager
+    property alias headerManager: header_manager
 
     signal tagSearchRequest(string tag)
+
+    BackgroundManager {
+        id: background_manager
+        directory: Devices.localFilesPrePath + AsemanApp.homePath + "/" + telegramObject.phoneNumber + "/backgrounds"
+        dialog: currentDialog
+    }
+
+    BackgroundManager {
+        id: header_manager
+        directory: Devices.localFilesPrePath + AsemanApp.homePath + "/" + telegramObject.phoneNumber + "/headers"
+        dialog: currentDialog
+    }
 
     Item {
         id: properties_frame

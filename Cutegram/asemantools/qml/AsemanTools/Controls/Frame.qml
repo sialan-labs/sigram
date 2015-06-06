@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls.Styles 1.1
 import QtGraphicalEffects 1.0
 import AsemanTools.Controls.Styles 1.0
+import AsemanTools 1.0
 
 Item {
     width: 200
@@ -43,8 +44,8 @@ Item {
                 id: canvas
                 anchors.fill: parent
                 anchors.margins: -padding+1
-                property real radius: 5
-                property real padding: 5
+                property real radius: 5*Devices.density
+                property real padding: 5*Devices.density
                 onPaint: {
                     var ctx = getContext("2d");
                     ctx.save();
