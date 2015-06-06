@@ -116,6 +116,15 @@
         <source>%1 start typing</source>
         <translation>%1 αρχισε να γραφει</translation>
     </message>
+    <message>
+        <source>Password Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
+But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountLoading</name>
@@ -226,6 +235,10 @@ Note that android accept secret chat automatically.</source>
         <source>Add to Personal</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reply</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -320,6 +333,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Requested</source>
         <translation>Αιτήματα</translation>
     </message>
+    <message>
+        <source>Resend Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountView</name>
@@ -371,7 +388,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation>Προσθήκη λογαριασμού (σε πειραματικό στάδιο)</translation>
+        <translation type="vanished">Προσθήκη λογαριασμού (σε πειραματικό στάδιο)</translation>
+    </message>
+    <message>
+        <source>Add Account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -654,6 +675,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Convert smilies to emojis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram will restart after this operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -703,6 +732,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Contact</source>
         <translation>Επαφες</translation>
+    </message>
+    <message>
+        <source>Cutegram</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1053,6 +1086,29 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Show Badges</source>
         <translation>Εμφάνιση Διακριτικων</translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished">Φόντος</translation>
+    </message>
+    <message>
+        <source>Select photo</source>
+        <translation type="unfinished">Επιλογη φωτογραφιας</translation>
+    </message>
+    <message>
+        <source>Header</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Verbose Mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force to run multiple instance of Cutegram.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

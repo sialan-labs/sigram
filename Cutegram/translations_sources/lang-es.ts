@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -34,15 +36,15 @@
     </message>
     <message>
         <source>Recently</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last Month</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last Week</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -114,6 +116,15 @@
         <source>%1 start typing</source>
         <translation>%1 comenzó a escribir</translation>
     </message>
+    <message>
+        <source>Password Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
+But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountLoading</name>
@@ -123,7 +134,7 @@
     </message>
     <message>
         <source>Login again</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -222,7 +233,11 @@ Notar que android acepta chat secretos automáticamente.</translation>
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -274,7 +289,7 @@ Notar que android acepta chat secretos automáticamente.</translation>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Este es un boletín de Cutegram sobre nuevos lanzamientos y soluciones.
 No es un contacto de telegram. Es solo un contacto virtual.</translation>
@@ -317,6 +332,10 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     <message>
         <source>Requested</source>
         <translation>Pedido</translation>
+    </message>
+    <message>
+        <source>Resend Code</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -369,7 +388,11 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation>Añadir Contacto (experimental)</translation>
+        <translation type="vanished">Añadir Contacto (experimental)</translation>
+    </message>
+    <message>
+        <source>Add Account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -652,6 +675,14 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
         <source>Light</source>
         <translation>Claro</translation>
     </message>
+    <message>
+        <source>Convert smilies to emojis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram will restart after this operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -701,6 +732,10 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     <message>
         <source>Contact</source>
         <translation>Contacto</translation>
+    </message>
+    <message>
+        <source>Cutegram</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -761,26 +796,26 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     <name>Emoticons</name>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Eliminar</translation>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EmoticonsModel</name>
     <message>
         <source>Recent</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Emojis</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1043,6 +1078,29 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     <message>
         <source>Show Badges</source>
         <translation>Mostrar Insignias</translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished">Fondo</translation>
+    </message>
+    <message>
+        <source>Select photo</source>
+        <translation type="unfinished">Seleccionar foto</translation>
+    </message>
+    <message>
+        <source>Header</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Verbose Mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force to run multiple instance of Cutegram.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ru" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ru">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -114,6 +116,15 @@
         <source>%1 start typing</source>
         <translation>%1 печатает</translation>
     </message>
+    <message>
+        <source>Password Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
+But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountLoading</name>
@@ -224,6 +235,10 @@ Note that android accept secret chat automatically.</source>
         <source>Add to Personal</source>
         <translation>Добавить в Личное</translation>
     </message>
+    <message>
+        <source>Reply</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -317,6 +332,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Requested</source>
         <translation>Запрошено</translation>
     </message>
+    <message>
+        <source>Resend Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountView</name>
@@ -368,7 +387,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation>Добавить Аккаунт (экспериментально)</translation>
+        <translation type="vanished">Добавить Аккаунт (экспериментально)</translation>
+    </message>
+    <message>
+        <source>Add Account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -417,43 +440,43 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
@@ -651,6 +674,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Light</source>
         <translation>Светлый</translation>
     </message>
+    <message>
+        <source>Convert smilies to emojis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram will restart after this operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -701,16 +732,20 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Contact</source>
         <translation>Контакт</translation>
     </message>
+    <message>
+        <source>Cutegram</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Date</source>
@@ -779,7 +814,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>All Emoji</source>
-        <translation>Все смайлы</translation>
+        <translation type="vanished">Все смайлы</translation>
+    </message>
+    <message>
+        <source>Emojis</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -835,79 +874,79 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>JalaliCalendarObject</name>
     <message>
         <source>Farvardin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -949,7 +988,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1042,6 +1081,29 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Show Badges</source>
         <translation>Показать Значки</translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished">Фон</translation>
+    </message>
+    <message>
+        <source>Select photo</source>
+        <translation type="unfinished">Выбрать фото</translation>
+    </message>
+    <message>
+        <source>Header</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Verbose Mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force to run multiple instance of Cutegram.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ast">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -114,6 +116,15 @@
         <source>%1 start typing</source>
         <translation>%1 entamó a teclexar</translation>
     </message>
+    <message>
+        <source>Password Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
+But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountLoading</name>
@@ -123,7 +134,7 @@
     </message>
     <message>
         <source>Login again</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -222,7 +233,11 @@ Decátate qu&apos;Android aceuta les charres secretes automáticamente.</transla
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -274,7 +289,7 @@ Decátate qu&apos;Android aceuta les charres secretes automáticamente.</transla
         <translation>Desaniciar</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Cutegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
@@ -317,6 +332,10 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Requested</source>
         <translation>Pidida</translation>
+    </message>
+    <message>
+        <source>Resend Code</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -369,7 +388,11 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account (experimental)</source>
-        <translation>Amestar cuenta (experimental)</translation>
+        <translation type="vanished">Amestar cuenta (experimental)</translation>
+    </message>
+    <message>
+        <source>Add Account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -638,7 +661,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Tray icon style</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Smooth Scroll</source>
@@ -651,6 +674,14 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Light</source>
         <translation>Claru</translation>
+    </message>
+    <message>
+        <source>Convert smilies to emojis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram will restart after this operation.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -701,6 +732,10 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Contact</source>
         <translation>Contautu</translation>
+    </message>
+    <message>
+        <source>Cutegram</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1042,7 +1077,30 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished">Fondu</translation>
+    </message>
+    <message>
+        <source>Select photo</source>
+        <translation type="unfinished">Esbillar semeya</translation>
+    </message>
+    <message>
+        <source>Header</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Verbose Mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force to run multiple instance of Cutegram.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
