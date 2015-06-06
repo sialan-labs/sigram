@@ -976,27 +976,32 @@ void TelegramQml::addContact(const QString &firstName, const QString &lastName, 
     p->telegram->contactsImportContacts(QList<InputContact>()<<contact, false);
 }
 
-void TelegramQml::forwardMessage(qint64 msgId, qint64 peerId)
+void TelegramQml::forwardMessages(QList<int> msgIds, qint64 peerId)
 {
     const InputPeer & peer = getInputPeer(peerId);
-    p->telegram->messagesForwardMessage(peer, msgId);
+    qStableSort(msgIds.begin(), msgIds.end());
+
+    foreach(int msgId, msgIds)
+        p->telegram->messagesForwardMessage(peer, msgId);
 }
 
-void TelegramQml::deleteMessage(qint64 msgId)
+void TelegramQml::deleteMessages(QList<int> msgIds)
 {
-    p->telegram->messagesDeleteMessages( QList<qint32>()<<msgId );
-
-    MessageObject *msgObj = p->messages.value(msgId);
-    if(msgObj)
+    p->telegram->messagesDeleteMessages( msgIds );
+    foreach(int msgId, msgIds)
     {
-        qint64 dId = messageDialogId(msgId);
+        MessageObject *msgObj = p->messages.value(msgId);
+        if(msgObj)
+        {
+            qint64 dId = messageDialogId(msgId);
 
-        p->garbages.insert( p->messages.take(msgId) );
-        p->messages_list[dId].removeAll(msgId);
-        p->database->deleteMessage(msgId);
-        startGarbageChecker();
+            p->garbages.insert( p->messages.take(msgId) );
+            p->messages_list[dId].removeAll(msgId);
+            p->database->deleteMessage(msgId);
+            startGarbageChecker();
 
-        emit messagesChanged(false);
+            emit messagesChanged(false);
+        }
     }
 }
 
@@ -1622,6 +1627,8 @@ void TelegramQml::try_init()
              SLOT(messagesSendMessage_slt(qint64,qint32,qint32,qint32,qint32,qint32,QList<ContactsLink>)) );
     connect( p->telegram, SIGNAL(messagesForwardMessageAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)),
              SLOT(messagesForwardMessage_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)) );
+    connect( p->telegram, SIGNAL(messagesForwardMessagesAnswer(qint64,QList<Message>,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)),
+             SLOT(messagesForwardMessages_slt(qint64,QList<Message>,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)) );
     connect( p->telegram, SIGNAL(messagesDeleteMessagesAnswer(qint64,AffectedMessages)),
              SLOT(messagesDeleteMessages_slt(qint64,AffectedMessages)) );
     connect( p->telegram, SIGNAL(messagesDeleteHistoryAnswer(qint64,qint32,qint32,qint32)),
@@ -1996,6 +2003,22 @@ void TelegramQml::messagesForwardMessage_slt(qint64 id, const Message &message, 
         insertUser(user);
 
     insertMessage(message);
+}
+
+void TelegramQml::messagesForwardMessages_slt(qint64 id, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 pts_count, qint32 seq)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(links)
+    Q_UNUSED(pts)
+    Q_UNUSED(pts_count)
+    Q_UNUSED(seq)
+
+    foreach( const Chat & chat, chats )
+        insertChat(chat);
+    foreach( const User & user, users )
+        insertUser(user);
+    foreach( const Message & message, messages )
+        insertMessage(message);
 }
 
 void TelegramQml::messagesDeleteMessages_slt(qint64 id, const AffectedMessages &deletedMessages)

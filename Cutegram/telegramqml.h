@@ -224,8 +224,8 @@ public slots:
 
     void addContact(const QString &firstName, const QString &lastName, const QString &phoneNumber);
 
-    void forwardMessage( qint64 msgId, qint64 peerId );
-    void deleteMessage( qint64 msgId );
+    void forwardMessages( QList<int> msgIds, qint64 peerId );
+    void deleteMessages(QList<int> msgIds );
 
     void deleteCutegramDialog();
     void messagesCreateChat( const QList<qint32> & users, const QString & topic );
@@ -337,6 +337,7 @@ private slots:
 
     void messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, qint32 pts, qint32 pts_count, qint32 seq, const QList<ContactsLink> & links);
     void messagesForwardMessage_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 pts_count, qint32 seq);
+    void messagesForwardMessages_slt(qint64 id, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 pts_count, qint32 seq);
     void messagesDeleteMessages_slt(qint64 id, const AffectedMessages &deletedMessages);
 
     void messagesSendMedia_slt(qint64 id, const Message & message, const QList<Chat> & chats, const QList<User> & users, const QList<ContactsLink> & links, qint32 pts, qint32 seq);

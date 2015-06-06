@@ -37,7 +37,7 @@ Rectangle {
     property real typeEncryptedChatDiscarded: 0x13d6dd27
     property real typeEncryptedChat: 0xfa56ce36
 
-    signal forwardRequest( variant message )
+    signal forwardRequest( variant messages )
     signal focusRequest()
     signal dialogRequest(variant dialogObject)
     signal tagSearchRequest(string tag)
@@ -46,6 +46,12 @@ Rectangle {
     onIsActiveChanged: {
         if( isActive )
             messages_model.setReaded()
+    }
+
+    onCurrentDialogChanged: selected_list.clear()
+
+    ListObject {
+        id: selected_list
     }
 
     MessagesModel {
@@ -198,6 +204,27 @@ Rectangle {
                 NumberAnimation{ easing.type: Easing.OutCubic; duration: 200 }
             }
 
+            Rectangle {
+                id: select_rect
+                anchors.fill: parent
+                color: Cutegram.currentTheme.masterColor
+                opacity: 0.2
+                z: -100
+                visible: selected_list.count==0? false : selected_list.contains(message)
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if(select_rect.visible)
+                        selected_list.removeOne(message)
+                    else
+                        selected_list.append(message)
+                }
+
+                z: -100
+            }
+
             DragObject {
                 id: drag
                 mimeData: mime
@@ -285,7 +312,7 @@ Rectangle {
                                 break;
 
                             case 1:
-                                telegramObject.deleteMessage(message.id)
+                                telegramObject.deleteMessages([message.id])
                                 break;
                             }
                         } else {
@@ -304,7 +331,7 @@ Rectangle {
                                 break;
 
                             case 1:
-                                acc_msg_list.forwardRequest(message)
+                                acc_msg_list.forwardRequest([message])
                                 break;
 
                             case 2:
@@ -312,7 +339,7 @@ Rectangle {
                                 break;
 
                             case 3:
-                                telegramObject.deleteMessage(message.id)
+                                telegramObject.deleteMessages([message.id])
                                 break;
 
                             case 4:
@@ -353,6 +380,90 @@ Rectangle {
         scrollArea: mlist; height: mlist.height-bottomMargin-topMargin; width: 6*Devices.density
         anchors.right: mlist.right; anchors.top: mlist.top; color: textColor0
         anchors.topMargin: topMargin; reverse: true
+    }
+
+    Item {
+        anchors.fill: parent
+        anchors.topMargin: acc_msg_list.topMargin
+        anchors.bottomMargin: acc_msg_list.bottomMargin
+        clip: true
+
+        Rectangle {
+            width: parent.width
+            height: 40*Devices.density
+            y: selected_list.count==0? -height : 0
+            color: currentDialog.encrypted? Cutegram.currentTheme.headerSecretColor : Cutegram.currentTheme.headerColor
+
+            Behavior on y {
+                NumberAnimation{easing.type: Easing.OutCubic; duration: 300}
+            }
+
+            Row {
+                id: toolbutton_row
+                anchors.centerIn: parent
+                height: parent.height
+
+                property bool toolButtonLightIcon: currentDialog.encrypted? Cutegram.currentTheme.headerSecretLightIcon : Cutegram.currentTheme.headerLightIcon
+                property color toolButtonColors: {
+                    var mclr = Cutegram.currentTheme.masterColor
+                    return Qt.rgba(mclr.r, mclr.g, mclr.b, 0.3)
+                }
+
+                Button {
+                    width: height
+                    height: parent.height
+                    icon: toolbutton_row.toolButtonLightIcon? "files/select-none-light.png" : "files/select-none.png"
+                    normalColor: "#00000000"
+                    highlightColor: toolbutton_row.toolButtonColors
+                    iconHeight: 22*Devices.density
+                    onClicked: selected_list.clear()
+                }
+
+                Button {
+                    width: height
+                    height: parent.height
+                    icon: toolbutton_row.toolButtonLightIcon? "files/forward-light.png" : "files/forward.png"
+                    normalColor: "#00000000"
+                    highlightColor: toolbutton_row.toolButtonColors
+                    iconHeight: 22*Devices.density
+                    onClicked: {
+                        acc_msg_list.forwardRequest(selected_list.toList())
+                        selected_list.clear()
+                    }
+                }
+
+                Button {
+                    width: height
+                    height: parent.height
+                    icon: "files/delete.png"
+                    normalColor: "#00000000"
+                    highlightColor: toolbutton_row.toolButtonColors
+                    iconHeight: 22*Devices.density
+                    onClicked: {
+                        var ids = new Array
+                        for(var i=0; i<selected_list.count; i++)
+                            ids[i] = selected_list.at(i).id
+
+                        telegramObject.deleteMessages(ids)
+                        selected_list.clear()
+                    }
+                }
+            }
+        }
+
+        Rectangle {
+            width: parent.width
+            height: 2*Devices.density
+            opacity: selected_list.count!=0? 0.3 : 0
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: currentDialog.encrypted? Cutegram.currentTheme.headerSecretTitleColor : Cutegram.currentTheme.headerTitleColor }
+                GradientStop { position: 1.0; color: "#00000000" }
+            }
+
+            Behavior on opacity {
+                NumberAnimation{easing.type: Easing.OutCubic; duration: 300}
+            }
+        }
     }
 
     Button {

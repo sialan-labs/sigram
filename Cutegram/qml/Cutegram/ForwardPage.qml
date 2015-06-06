@@ -27,7 +27,8 @@ Rectangle {
     height: 62
     color: "#66ffffff"
 
-    property Message forwardMessage
+    property variant forwardMessages
+    property Message forwardMessage: forwardMessages[0]
     property Dialog forwardDialog: telegramObject.nullDialog
 
     property User fromUser: telegramObject.user(forwardMessage.fromId)
@@ -168,7 +169,11 @@ Rectangle {
                 return
 
             var dId = toIsChat? forwardDialog.peer.chatId : forwardDialog.peer.userId
-            telegramObject.forwardMessage(forwardMessage.id, dId)
+            var ids = new Array
+            for(var i=0; i<forwardMessages.length; i++)
+                ids[i] = forwardMessages[i].id
+
+            telegramObject.forwardMessages(ids, dId)
             forward_page.closeRequest()
         }
     }

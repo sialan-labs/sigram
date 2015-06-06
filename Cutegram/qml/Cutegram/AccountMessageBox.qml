@@ -45,7 +45,7 @@ Item {
             bottomMargin: send_msg.height
             telegramObject: msg_box.telegramObject
             currentDialog: msg_box.currentDialog
-            onForwardRequest: forward_component.createObject(message_box, {"forwardMessage":message})
+            onForwardRequest: forward_component.createObject(message_box, {"forwardMessages":messages})
             onFocusRequest: send_msg.setFocus()
             onDialogRequest: acc_view.currentDialog = dialogObject
             onTagSearchRequest: msg_box.tagSearchRequest(tag)
@@ -224,7 +224,7 @@ Item {
             anchors.fill: messages
             clip: true
 
-            property alias forwardMessage: forward_page.forwardMessage
+            property alias forwardMessages: forward_page.forwardMessages
             property alias forwardDialog: forward_page.forwardDialog
 
             FastBlur {
