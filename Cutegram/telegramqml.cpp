@@ -1597,7 +1597,7 @@ void TelegramQml::try_init()
     connect( p->telegram, SIGNAL(authSendInvitesAnswer(qint64,bool))    , SLOT(authSendInvites_slt(qint64,bool))           );
     connect( p->telegram, SIGNAL(authSignInError(qint64,qint32,QString)), SLOT(authSignInError_slt(qint64,qint32,QString)) );
     connect( p->telegram, SIGNAL(authSignUpError(qint64,qint32,QString)), SLOT(authSignUpError_slt(qint64,qint32,QString)) );
-    connect( p->telegram, SIGNAL(error(qint64,qint32,QString))          , SLOT(error(qint64,qint32,QString))               );
+    connect( p->telegram, SIGNAL(error(qint64,qint32,QString,QString))  , SLOT(error(qint64,qint32,QString,QString))       );
     connect( p->telegram, SIGNAL(connected())                           , SIGNAL(connectedChanged())                       );
     connect( p->telegram, SIGNAL(disconnected())                        , SIGNAL(connectedChanged())                       );
     connect( p->telegram, SIGNAL(authCheckPasswordAnswer(qint64,qint32,User)),
@@ -1654,7 +1654,7 @@ void TelegramQml::try_init()
              SLOT(messagesCreateChat_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)) );
     connect( p->telegram, SIGNAL(messagesEditChatTitleAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)),
              SLOT(messagesEditChatTitle_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)));
-    connect( p->telegram, SIGNAL(messagesEditChatPhotoAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)),
+    connect( p->telegram, SIGNAL(messagesEditChatPhotoStatedMessageAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)),
              SLOT(messagesEditChatPhoto_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)));
     connect( p->telegram, SIGNAL(messagesAddChatUserAnswer(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)),
              SLOT(messagesAddChatUser_slt(qint64,Message,QList<Chat>,QList<User>,QList<ContactsLink>,qint32,qint32,qint32)));
@@ -1832,7 +1832,7 @@ void TelegramQml::authSignUpError_slt(qint64 id, qint32 errorCode, QString error
     qDebug() << __PRETTY_FUNCTION__ << errorText;
 }
 
-void TelegramQml::error(qint64 id, qint32 errorCode, QString errorText)
+void TelegramQml::error(qint64 id, qint32 errorCode, QString functionName, QString errorText)
 {
     Q_UNUSED(id)
     Q_UNUSED(errorCode)
@@ -1842,7 +1842,7 @@ void TelegramQml::error(qint64 id, qint32 errorCode, QString errorText)
     if(errorText.contains("PHONE_PASSWORD_PROTECTED"))
         emit authPasswordProtectedError();
 
-    qDebug() << __PRETTY_FUNCTION__ << errorText;
+    qDebug() << __PRETTY_FUNCTION__ << functionName << errorText;
 }
 
 void TelegramQml::accountGetWallPapers_slt(qint64 id, const QList<WallPaper> &wallPapers)

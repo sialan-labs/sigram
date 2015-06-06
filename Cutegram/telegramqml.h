@@ -323,7 +323,7 @@ private slots:
     void authCheckPhone_slt(qint64 id, bool phoneRegistered);
     void authSignInError_slt(qint64 id, qint32 errorCode, QString errorText);
     void authSignUpError_slt(qint64 id, qint32 errorCode, QString errorText);
-    void error(qint64 id, qint32 errorCode, QString errorText);
+    void error(qint64 id, qint32 errorCode, QString functionName, QString errorText);
 
     void accountGetPassword_slt(qint64 msgId, const AccountPassword &password);
     void accountGetWallPapers_slt(qint64 id, const QList<WallPaper> & wallPapers);
