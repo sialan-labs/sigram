@@ -5,15 +5,23 @@
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation>Cutegram ist ein Telegram-Client von Aseman. Er ist frei, quelloffen und unter den Bedingungen der GLPv3-Lizenz verfügbar.</translation>
+        <translation type="vanished">Cutegram ist ein Telegram-Client von Aseman. Er ist frei, quelloffen und unter den Bedingungen der GLPv3-Lizenz verfügbar.</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation>Cutegramm nutzt Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, einige KDE-Werkzeuge, Faenza-Symbole und Twitter-Emojies.</translation>
+        <translation type="vanished">Cutegramm nutzt Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, einige KDE-Werkzeuge, Faenza-Symbole und Twitter-Emojies.</translation>
     </message>
     <message>
         <source>Home Page</source>
         <translation>Internetpräsenz</translation>
+    </message>
+    <message>
+        <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -83,7 +91,11 @@
     </message>
     <message>
         <source>Become online</source>
-        <translation>Kontakt online geht</translation>
+        <translation type="vanished">Kontakt online geht</translation>
+    </message>
+    <message>
+        <source>Go online</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -110,11 +122,11 @@
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation>%1 beginnt in &quot;%2&quot; zu schreiben</translation>
+        <translation type="vanished">%1 beginnt in &quot;%2&quot; zu schreiben</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation>%1 beginnt zu schreiben</translation>
+        <translation type="vanished">%1 beginnt zu schreiben</translation>
     </message>
     <message>
         <source>Password Error</source>
@@ -123,6 +135,14 @@
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 started typing on &quot;%2&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 started typing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -172,7 +192,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation>Mediendateien werden in geheimen Chats aktuell nicht unterstützt</translation>
+        <translation type="vanished">Mediendateien werden in geheimen Chats aktuell nicht unterstützt</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
@@ -185,6 +205,10 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <message>
         <source>Load Link</source>
         <translation>Link zum laden</translation>
+    </message>
+    <message>
+        <source>Media files are not currently supported on secret chats.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

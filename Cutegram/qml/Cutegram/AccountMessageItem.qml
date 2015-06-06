@@ -284,7 +284,7 @@ Item {
                             }
 
                             property real htmlWidth: Cutegram.htmlWidth(text)
-                            property string messageText: encryptMedia? qsTr("Media files is not supported on secret chat currently") : message.message
+                            property string messageText: encryptMedia? qsTr("Media files are not currently supported on secret chats.") : message.message
                         }
                     }
 

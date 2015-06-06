@@ -327,7 +327,7 @@ Item {
                             var notifyOnline = notifyValue & UserData.NotifyOnline
                             var notifyTyping = notifyValue & UserData.NotifyTyping
                             var notifyMenu = {"text": qsTr("Notify when"),
-                                "list":[{"text": qsTr("Become online"), "checkable": true, "checked": notifyOnline}]}
+                                "list":[{"text": qsTr("Go online"), "checkable": true, "checked": notifyOnline}]}
 //                                        {"text": qsTr("Start typing"), "checkable": true, "checked": notifyTyping}]}
 
                             actions = [qsTr("Open in New Window"), qsTr("Delete History"), notifyMenu]

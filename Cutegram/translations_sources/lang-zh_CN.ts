@@ -5,15 +5,23 @@
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation>Cutegram 是 telegram 的一个客户端，由 Aseman 开发，自由开源，基于 GPLv3 协议发布。</translation>
+        <translation type="vanished">Cutegram 是 telegram 的一个客户端，由 Aseman 开发，自由开源，基于 GPLv3 协议发布。</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation>Cutegram 使用 Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, 一些 KDE 工具, Faenza 图标和 Twitter 表情。</translation>
+        <translation type="vanished">Cutegram 使用 Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, 一些 KDE 工具, Faenza 图标和 Twitter 表情。</translation>
     </message>
     <message>
         <source>Home Page</source>
         <translation>主页</translation>
+    </message>
+    <message>
+        <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -82,7 +90,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Become online</source>
+        <source>Go online</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -109,20 +117,20 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 start typing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Password Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 started typing on &quot;%2&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 started typing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -176,7 +184,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation>私密聊天当前不支持媒体文件</translation>
+        <translation type="vanished">私密聊天当前不支持媒体文件</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
@@ -188,6 +196,10 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Load Link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Media files are not currently supported on secret chats.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

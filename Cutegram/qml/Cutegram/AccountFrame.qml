@@ -241,9 +241,9 @@ Rectangle {
 
             var message
             if(chatObj)
-                message = qsTr("%1 start typing on \"%2\"").arg(title).arg(chatObj.title)
+                message = qsTr("%1 started typing on \"%2\"").arg(title).arg(chatObj.title)
             else
-                message = qsTr("%1 start typing").arg(title)
+                message = qsTr("%1 started typing").arg(title)
 
             var nid = notification.sendNotify( title, message, location, 0, notifyTimeOut, actions )
             notifies_hash.insert(nid, dId)

@@ -5,15 +5,23 @@
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation>Cutegram је телеграм клијент аутора Асемана. Он је бесплатан и отвореног кода и издат је под ГПЛв3 лиценцом.</translation>
+        <translation type="vanished">Cutegram је телеграм клијент аутора Асемана. Он је бесплатан и отвореног кода и издат је под ГПЛв3 лиценцом.</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation>Cutegram користи Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, неке КДЕ алате, Faenza иконе и Twitter emoji.</translation>
+        <translation type="vanished">Cutegram користи Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, неке КДЕ алате, Faenza иконе и Twitter emoji.</translation>
     </message>
     <message>
         <source>Home Page</source>
         <translation>Почетна страна</translation>
+    </message>
+    <message>
+        <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -83,7 +91,11 @@
     </message>
     <message>
         <source>Become online</source>
-        <translation>Буди на вези</translation>
+        <translation type="vanished">Буди на вези</translation>
+    </message>
+    <message>
+        <source>Go online</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -110,11 +122,11 @@
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation>%1 почиње да куца &quot;%2&quot;</translation>
+        <translation type="vanished">%1 почиње да куца &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation>%1 почиње да куца</translation>
+        <translation type="vanished">%1 почиње да куца</translation>
     </message>
     <message>
         <source>Password Error</source>
@@ -123,6 +135,14 @@
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 started typing on &quot;%2&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 started typing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -172,7 +192,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation>Тренутно документа медија нису подржана у тајном ћаскању</translation>
+        <translation type="vanished">Тренутно документа медија нису подржана у тајном ћаскању</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
@@ -185,6 +205,10 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <message>
         <source>Load Link</source>
         <translation>Учитај линк</translation>
+    </message>
+    <message>
+        <source>Media files are not currently supported on secret chats.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

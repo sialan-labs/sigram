@@ -5,15 +5,23 @@
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation>Cutegram είναι ένα telegram λογισμικο από τον Aseman. Είναι δωρεάν και ανοικτού κώδικα και έχει εκδοθεί υπό την άδεια GPLv3.</translation>
+        <translation type="vanished">Cutegram είναι ένα telegram λογισμικο από τον Aseman. Είναι δωρεάν και ανοικτού κώδικα και έχει εκδοθεί υπό την άδεια GPLv3.</translation>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation>Cutegram χρησιμοποιοι Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, ορισμένα εργαλεία του KDE, εικονίδια Faenza και το Twitter emojies.</translation>
+        <translation type="vanished">Cutegram χρησιμοποιοι Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, ορισμένα εργαλεία του KDE, εικονίδια Faenza και το Twitter emojies.</translation>
     </message>
     <message>
         <source>Home Page</source>
         <translation>Αρχική Σελίδα</translation>
+    </message>
+    <message>
+        <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -83,7 +91,11 @@
     </message>
     <message>
         <source>Become online</source>
-        <translation>Γίνετε απευθείας σύνδεση</translation>
+        <translation type="vanished">Γίνετε απευθείας σύνδεση</translation>
+    </message>
+    <message>
+        <source>Go online</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -110,11 +122,11 @@
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation>%1 αρχίσε να γραφει στον &quot;%2&quot;</translation>
+        <translation type="vanished">%1 αρχίσε να γραφει στον &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation>%1 αρχισε να γραφει</translation>
+        <translation type="vanished">%1 αρχισε να γραφει</translation>
     </message>
     <message>
         <source>Password Error</source>
@@ -123,6 +135,14 @@
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 started typing on &quot;%2&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 started typing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -172,7 +192,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation>Αρχεία πολυμέσων δεν υποστηρίζονται σε μυστική συνομιλία επί του παρόντος</translation>
+        <translation type="vanished">Αρχεία πολυμέσων δεν υποστηρίζονται σε μυστική συνομιλία επί του παρόντος</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
@@ -185,6 +205,10 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <message>
         <source>Load Link</source>
         <translation>Φόρτωση σύνδεσμου</translation>
+    </message>
+    <message>
+        <source>Media files are not currently supported on secret chats.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

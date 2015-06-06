@@ -40,8 +40,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             color: Desktop.titleBarTextColor
-            text: qsTr("Cutegram is a telegram client by Aseman. It's free and opensource and released "+
-                       "under GPLv3 license.")
+            text: qsTr("Cutegram is a Telegram client by Aseman. It's free, open source and released under the GPLv3 license.")
         }
 
         Text {
@@ -54,7 +53,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             color: Desktop.titleBarTextColor
-            text: qsTr("Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.")
+            text: qsTr("Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.")
         }
 
         Item { width: 4; height: 10*Devices.density }
