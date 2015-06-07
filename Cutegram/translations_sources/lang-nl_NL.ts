@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -17,11 +15,11 @@
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram is een telegram-applicatie van Aseman. Het is gratis met verspreiding van broncode (open source) en uitgebracht onder de GPLv3-licentie.</translation>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram gebruikt Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, enkele KDE-hulpmiddelen, de Faenza-pictogrammen en Twitter-emoticons.</translation>
     </message>
 </context>
 <context>
@@ -95,7 +93,7 @@
     </message>
     <message>
         <source>Go online</source>
-        <translation type="unfinished"></translation>
+        <translation>Online gaan</translation>
     </message>
 </context>
 <context>
@@ -130,20 +128,21 @@
     </message>
     <message>
         <source>Password Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoordfout</translation>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het spijt ons, maar uw account is een met wachtwoord beveiligd account. We werken eraan om deze mogelijkheid toe te voegen aan Cutegram, zo snel als mogelijk.
+Om het voor nu op te lossen kunt u 2-factor-authenticatie uitschakelen, inloggen op Cutegram en daarna de 2-factor-authenticatie weer inschakelen.</translation>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is begonnen met typen op &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is begonnen met typen</translation>
     </message>
 </context>
 <context>
@@ -208,7 +207,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediabestanden worden momenteel niet ondersteund in geheime chatgesprekken.</translation>
     </message>
 </context>
 <context>
@@ -261,7 +260,7 @@ Android accepteerd geheime chats automatisch.</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Beantwoorden</translation>
     </message>
 </context>
 <context>
@@ -313,7 +312,7 @@ Android accepteerd geheime chats automatisch.</translation>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Het bevat Curegram-nieuws met informatie over nieuwe versies en oplossingen.
 Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
@@ -359,7 +358,7 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Code opnieuw versturen</translation>
     </message>
 </context>
 <context>
@@ -411,12 +410,8 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
 <context>
     <name>AccountsTabList</name>
     <message>
-        <source>Add Account (experimental)</source>
-        <translation type="vanished">Account toevoegen (experimenteel)</translation>
-    </message>
-    <message>
         <source>Add Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Account toevoegen</translation>
     </message>
 </context>
 <context>
@@ -701,11 +696,11 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation type="unfinished"></translation>
+        <translation>Smilies converteren naar emoji&apos;s</translation>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram zal herstarten na het uitvoeren hiervan</translation>
     </message>
 </context>
 <context>
@@ -759,7 +754,7 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Cutegram</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram</translation>
     </message>
 </context>
 <context>
@@ -899,75 +894,75 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1105,26 +1100,26 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished">Achtergrond</translation>
+        <translation>Achtergrond</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation type="unfinished">Foto selecteren</translation>
+        <translation>Selecteer afbeelding</translation>
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Omslag</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbale modus.</translation>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forceren dat Cutegram meerdere keren mag draaien.</translation>
     </message>
 </context>
 </TS>

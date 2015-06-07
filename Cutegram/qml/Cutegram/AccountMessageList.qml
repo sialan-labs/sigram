@@ -48,7 +48,10 @@ Rectangle {
             messages_model.setReaded()
     }
 
-    onCurrentDialogChanged: selected_list.clear()
+    onCurrentDialogChanged: {
+        selected_list.clear()
+        add_anim_disabler.restart()
+    }
 
     ListObject {
         id: selected_list

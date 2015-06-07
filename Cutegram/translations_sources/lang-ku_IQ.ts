@@ -1,17 +1,17 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="it_IT" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ku_IQ" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation type="vanished">Cutegram è un client telegram di Aseman. È gratuito e opensource e rilasciato sotto licenza GPLv3</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation type="vanished">Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, alcuni tool KDE, icone Faenza e emoticon Twitter.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
@@ -26,19 +26,19 @@
     <name>AccountDialogHeader</name>
     <message>
         <source>Online</source>
-        <translation>Online</translation>
+        <translation>سەرهێڵ</translation>
     </message>
     <message>
         <source>%1 was online</source>
-        <translation>%1 era online</translation>
+        <translation>%1 لەسەر هێڵ بوون</translation>
     </message>
     <message>
         <source>Secret chat</source>
-        <translation>Chat segreta</translation>
+        <translation>گفتوگۆی نهێنی</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation>%1 partecipanti (%2 online)</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Recently</source>
@@ -46,42 +46,42 @@
     </message>
     <message>
         <source>Last Month</source>
-        <translation type="unfinished"/>
+        <translation>دوایین مانگ</translation>
     </message>
     <message>
         <source>Last Week</source>
-        <translation type="unfinished"/>
+        <translation>دوایین هەفتە</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
-        <translation>Scrivendo...</translation>
+        <translation>دەنووسێت...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>سڕینەوە</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation>Cancella chat segreta</translation>
+        <translation>سڕینەوەی گفتوگۆی نهێنی</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation>Sei sicuro di voler cancellare questa chat segreta?</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete History</source>
-        <translation>Cancella Conversazione</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation>Sei sicuro di voler cancellare la conversazione?</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation>Apri in una nuova finestra</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Notify when</source>
@@ -100,19 +100,19 @@
     <name>AccountFrame</name>
     <message>
         <source>Show</source>
-        <translation>Mostra</translation>
+        <translation>پیشاندان</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Silenzia</translation>
+        <translation>بێدەنگکردن</translation>
     </message>
     <message>
         <source>Message!</source>
-        <translation>Messaggio!</translation>
+        <translation>پەیام!</translation>
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation>Messaggio in &quot;%1&quot; da &quot;%2&quot;</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 is online</source>
@@ -148,34 +148,34 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation>Caricamento...</translation>
+        <translation>ئامادەکردن...</translation>
     </message>
     <message>
         <source>Login again</source>
-        <translation type="unfinished"/>
+        <translation>دووبارە چوونەژوورەوە</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageAction</name>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation>%1 ha creato il gruppo &quot;%2&quot;</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation>%1 ha lasciato il gruppo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation>%1 ha cambiato il nome del gruppo in &quot;%2&quot;</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation>%1 ha cambiato la foto del gruppo.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation>%1 ha cancellato la foto del gruppo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 added %2 to group</source>
@@ -190,7 +190,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation type="vanished">I file multimediali non sono al momento supportati nelle chat segrete</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
@@ -202,7 +202,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Load Link</source>
-        <translation type="unfinished"/>
+        <translation>ئامادەکردنی بەستەر</translation>
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
@@ -213,39 +213,39 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <name>AccountMessageList</name>
     <message>
         <source>Welcome :)</source>
-        <translation>Benvenuto/a :)</translation>
+        <translation>بەخێربێیت :)</translation>
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>Richiesta di chat segreta. Per favore Accetta o Rifiuta.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Accept</source>
-        <translation>Accetta</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Reject</source>
-        <translation>Rifiuta</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Inoltra</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation>لەبەرگرتنەوە</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>سڕینەوە</translation>
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"/>
+        <translation>گەڕان لەناو تۆڕ</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation type="unfinished"/>
+        <translation>پەیامە نوێیەکان</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
@@ -265,59 +265,58 @@ Note that android accept secret chat automatically.</source>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>Clicca per scaricare</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation>Media non supportato</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountSearchList</name>
     <message>
         <source>Me</source>
-        <translation>Io</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 on %2</source>
-        <translation>%1 su %2</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 to %2</source>
-        <translation>%1 a %2</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
-        <translation>Invia</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Incolla</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation>È una notizia di Cutegram riguardo nuovi aggiornamenti e soluzioni.
-Non è un contatto telegram. È solo un contatto virtuale.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Camera</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Audio Recorder</source>
@@ -328,31 +327,31 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>AccountSign</name>
     <message>
         <source>Code</source>
-        <translation>Codice</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Nome</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Cognome</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sign In</source>
-        <translation>Accedi</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sign Up</source>
-        <translation>Registrati</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>Richiedi una telefonata</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Requested</source>
-        <translation>Richiesto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Resend Code</source>
@@ -363,38 +362,38 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>AccountView</name>
     <message>
         <source>Search</source>
-        <translation>Cerca</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation>Nuova chat di gruppo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configura</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation>Argomento del gruppo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Create</source>
-        <translation>Crea</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>Aggiungi Chat Segreta</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact List</source>
-        <translation>Lista Contatti</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation>Trascina e rilascia i contatti qui</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add New Contact</source>
@@ -443,218 +442,218 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation>Aseman è un&apos;organizzazione no-profit, esiste per supportare e gestire i progetti e le ricerche gratuite, open source e multi piattaforma.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation>L&apos;obbiettivo di Aseman e di fornire prodotti gratuiti e sicuri per garantire la libertà e la privacy degli utenti.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>Home Page</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
-        <translation>0</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1</source>
-        <translation>1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2</source>
-        <translation>2</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3</source>
-        <translation>3</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4</source>
-        <translation>4</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5</source>
-        <translation>5</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>6</source>
-        <translation>6</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>7</source>
-        <translation>7</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>8</source>
-        <translation>8</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>9</source>
-        <translation>9</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>Aseman è un team no-profit di ricerca e sviluppo software partito nel Febbraio 2014 che si concentra sullo sviluppo di prodotti, tecnologie e soluzioni sotto forma di progetti open-source accessibili a ogni persona nell&apos;universo. Al momento, ci stiamo concentrando sul design e lo sviluppo di software, applicazioni e strumenti a diretto contatto con il consumatore.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation>Abilitando innovativi progetti e distribuendo software a milioni di utenti globalmente, il lab lavora per incrementare la crescita di progetti software open source ad alto impatto e a promuovere una cultura di accessibilità e aumentata produttività open source in tutto il mondo. Il lab collabora con leader di industrie e responsabili politici per portare tecnologie open source in nuovi settori, includendo l&apos;educazione, la salute e il governo.</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AuthenticateDialog</name>
     <message>
         <source>Authenticating</source>
-        <translation>Accesso</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>Numero di telefono</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Login</source>
-        <translation>Accedi</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>CameraDialog</name>
     <message>
         <source>Send</source>
-        <translation>Invia</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Capture</source>
-        <translation>Cattura</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation>On</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Off</source>
-        <translation>Off</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Notifications</source>
-        <translation>Notifiche</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>On Start</source>
-        <translation>All&apos;avvio</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Languages</source>
-        <translation>Lingue</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automatico</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Always visible</source>
-        <translation>Sempre visibile</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation>Minimizza nella barra di sistema</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Disconnetti</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Change Photo</source>
-        <translation>Cambia foto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select photo</source>
-        <translation>Seleziona foto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Detailed List</source>
-        <translation>Lista dettagliata</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Background</source>
-        <translation>Sfondo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Notify Sound</source>
-        <translation>Suono Notifiche</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Change</source>
-        <translation>Cambia</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Rimuovi</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>Seleziona immagine</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>None</source>
-        <translation>Nessuno</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Default</source>
-        <translation>Default</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalizzato</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation>Seleziona suono</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation>Cutegram Newsletter</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Font</source>
-        <translation>Carattere</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select</source>
-        <translation>Seleziona</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Seleziona Carattere</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation>Avvia automaticamente</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation>Impostazioni proxy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>Riguardo Cutegram</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>Riguardo Aseman</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Minimum List</source>
@@ -705,50 +704,50 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>CursorPicker</name>
     <message>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Taglia</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Incolla</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Cutegram</name>
     <message>
         <source>Show</source>
-        <translation>Mostra</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Configura</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About</source>
-        <translation>Riguardo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>Riguardo Aseman</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Esci</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Esci</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contatta</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram</source>
@@ -759,54 +758,54 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation>AM</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Time</source>
-        <translation>Ora</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>&lt;&lt;&lt; Trascina nella lista delle conversazioni per inoltrare</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation>Rilascia per inoltrare</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation>Rilascia per inviare come documento</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to send</source>
-        <translation>Rilascia per inviare</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation>Rilascia per aggiungere un partecipante</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation>Rilascia per aggiungere una nuova chat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>New Group</source>
-        <translation>Nuovo Gruppo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation>Inserire il nome del nuovo gruppo</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -839,49 +838,49 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>Selezionare un contatto...</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>To</source>
-        <translation>Per</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Inoltra</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation>Incolla</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation>Inserire la password</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>password</source>
-        <translation>password</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Done</source>
-        <translation>Fatto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation>Sbagliata!</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation>Indietro</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -967,50 +966,50 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation>Incolla</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation>Impostazioni Proxy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation>Queste modifiche richiedono il riavvio dell&apos;applicazione.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation>Tipo di Proxy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Hostname</source>
-        <translation>Hostname</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Port</source>
-        <translation>Porta</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Username</source>
-        <translation>Username</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Password</source>
-        <translation>Password</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation>Ex: 127.0.0.1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1040,57 +1039,57 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation>Seleziona Applicazione</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation>Chat Segreta</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation>Numero di Telefono</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Favorite</source>
-        <translation>Preferito</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Love</source>
-        <translation>Love</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Silenzia</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Participants</source>
-        <translation>Partecipanti</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show List</source>
-        <translation>Mostra Lista</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Leave</source>
-        <translation>Abbandona</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation>Abbandona il gruppo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
-        <translation>Sei sicuro di voler lasciare questo gruppo?</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation>Aggiungi partecipanti</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show Badges</source>

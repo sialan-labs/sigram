@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fa_IR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fa_IR" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -9,26 +7,26 @@
     </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation type="vanished">این کلاینت به کمک چهارچوب Qt5، ابزار QML و کتابخانه‌های libqtelegram و AsemanQtTools ساخته شده و همینطور در ساخت آن از آیکن‌های Faenza و شکلک‌های توییتر استفاده شده است.</translation>
+        <translation type="vanished">این کلاینت به کمک چهارچوب Qt5، ابزار QML و کتابخانه‌های libqtelegram و AsemanQtTools ساخته شده و همین‌طور در ساخت آن از آیکن‌های Faenza و اموجی‌های توییتر استفاده شده است.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>وبسایت آسمان</translation>
+        <translation>صفحه‌ی خانگی</translation>
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountDialogHeader</name>
     <message>
         <source>Online</source>
-        <translation>آنلاین</translation>
+        <translation>برخط</translation>
     </message>
     <message>
         <source>%1 was online</source>
@@ -36,23 +34,23 @@
     </message>
     <message>
         <source>Secret chat</source>
-        <translation>گفت‌گوی امن</translation>
+        <translation>گپ امن</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation>%1 غضو (%2 نفر آنلاین)</translation>
+        <translation>%1 عضو (%2 نفر برخط)</translation>
     </message>
     <message>
         <source>Recently</source>
-        <translation type="unfinished"></translation>
+        <translation>اخیراً</translation>
     </message>
     <message>
         <source>Last Month</source>
-        <translation type="unfinished"></translation>
+        <translation>ماه گذشته</translation>
     </message>
     <message>
         <source>Last Week</source>
-        <translation type="unfinished"></translation>
+        <translation>هفته‌ی پیش</translation>
     </message>
 </context>
 <context>
@@ -67,35 +65,35 @@
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation>پاک کردن گفت‌گو</translation>
+        <translation>حذف گپ امن</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation>آیا از پاک کردن این گفت‌گو مطمئن هستید؟</translation>
+        <translation>آیا از حذف این گپ امن مطمئن هستید؟</translation>
     </message>
     <message>
         <source>Delete History</source>
-        <translation>پاک کردن تاریخچه</translation>
+        <translation>حذف تاریخچه</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation>آیا از پاک کردن تاریخچه مطمئن هستید؟</translation>
+        <translation>آیا از حذف تاریخچه مطمئن هستید؟</translation>
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation>باز کردن در پنجره‌ی جدید</translation>
+        <translation>گشودن در پنجره‌ی جدید</translation>
     </message>
     <message>
         <source>Notify when</source>
-        <translation>اطلاع دادن</translation>
+        <translation>اطلاع دادن هنگام</translation>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="vanished">کاربر آنلاین شد</translation>
+        <translation type="vanished">برخط شد</translation>
     </message>
     <message>
         <source>Go online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -106,11 +104,11 @@
     </message>
     <message>
         <source>Mute</source>
-        <translation>بدون صدا</translation>
+        <translation>بی‌صدا</translation>
     </message>
     <message>
         <source>Message!</source>
-        <translation>پیغام جدید!</translation>
+        <translation>پیغام!</translation>
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
@@ -118,7 +116,7 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation>%1 آنلاین است</translation>
+        <translation>%1 برخط است</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
@@ -130,31 +128,31 @@
     </message>
     <message>
         <source>Password Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation>در حال بارگذاری...</translation>
+        <translation>در حال بارگذاری…</translation>
     </message>
     <message>
         <source>Login again</source>
-        <translation type="unfinished"></translation>
+        <translation>ورود دوباره</translation>
     </message>
 </context>
 <context>
@@ -177,7 +175,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation>%1 تصویر گروه را پاک کرد</translation>
+        <translation>%1 تصویر گروه را حذف کرد</translation>
     </message>
     <message>
         <source>%1 added %2 to group</source>
@@ -192,23 +190,23 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation type="vanished">کیوتگرام در حال حاضر از دریافت و ارسال فایل در چت امن پشتیبانی نمی‌کند</translation>
+        <translation type="vanished">کیوتگرام در حال حاضر از دریافت و ارسال پرونده در گپ امن پشتیبانی نمی‌کند</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation>دیگه باز نکن</translation>
+        <translation>دیگر بار نشود</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation>همیشه باز کن</translation>
+        <translation>همیشه بار شود</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation>باز کردن لینک</translation>
+        <translation>بار کردن پیوند</translation>
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -219,7 +217,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>درخواست چت امن. لطفا قبول یا رد کنید.</translation>
+        <translation>درخواست گپ امن. لطفاً قبول یا رد کنید.</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -243,7 +241,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation>جستجو در اینترنت</translation>
+        <translation>جست‌وجو روی وب</translation>
     </message>
     <message>
         <source>New Messages</source>
@@ -257,22 +255,22 @@ Note that android accept secret chat automatically.</source>
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>افزودن به شخصی</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>برای دانلود کلیک کنید</translation>
+        <translation>برای بارگیری کلیک کنید</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation>فایل ناشناس</translation>
+        <translation>رسانه‌ی ناشناس</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -302,21 +300,21 @@ Note that android accept secret chat automatically.</source>
     </message>
     <message>
         <source>Copy</source>
-        <translation>کپی</translation>
+        <translation>رونوشت</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>پیست</translation>
+        <translation>جای گذاری</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>پاک‌کردن</translation>
+        <translation>حذف</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation>این خبرنامه‌ی کیوت‌گرام درباره‌ی آخرین اخبار کیوت‌گرام است.
-این یک مخاطب در لیست شما نیست. درواقع یک مخاطب مجازی است.</translation>
+        <translation>این خبرنامه‌ی کیوت‌گرام درباره‌ی آخرین ارائه‌ها و راهکارهاست.
+این یک مخاطب تلگرام نیست. تنها یک مخاطب مجازی است.</translation>
     </message>
     <message>
         <source>Camera</source>
@@ -324,14 +322,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation>ضبط صوت</translation>
+        <translation>ضبط صدا</translation>
     </message>
 </context>
 <context>
     <name>AccountSign</name>
     <message>
         <source>Code</source>
-        <translation>کد</translation>
+        <translation>رمز</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -339,7 +337,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>فامیلی</translation>
+        <translation>نام خانوادگی</translation>
     </message>
     <message>
         <source>Sign In</source>
@@ -347,83 +345,79 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Sign Up</source>
-        <translation>عضو شدن</translation>
+        <translation>ثبت‌نام</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>درخواست تماس تلفنی</translation>
+        <translation>درخواست تماس</translation>
     </message>
     <message>
         <source>Requested</source>
-        <translation>درخواست ارسال شد</translation>
+        <translation>ارسال شد</translation>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountView</name>
     <message>
         <source>Search</source>
-        <translation>جستجو</translation>
+        <translation>جست‌وجو</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation>چت گروهی جدید</translation>
+        <translation>گپ گروهی جدید</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>تنظیمات</translation>
+        <translation>پیکربندی</translation>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation>عنوان گروه</translation>
+        <translation>موضوع گروه</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation>ساختن</translation>
+        <translation>ایجاد</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>چت امن جدید</translation>
+        <translation>افزودن گپ امن</translation>
     </message>
     <message>
         <source>Contact List</source>
-        <translation>لیست مخاطب‌ها</translation>
+        <translation>فهرست مخاطبین</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation>مخاطب مورد نظر را بکشید و اینجا رها کنید</translation>
+        <translation>مخاطبین را کشیده و اینجا رها کنید</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation>اضافه کردن</translation>
+        <translation>افزودن مخاطب جدید</translation>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation>مخاطب جدید</translation>
+        <translation>افزودن مخاطب</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
-        <source>Add Account (experimental)</source>
-        <translation type="vanished">اضافه کردن (آزمایشی)</translation>
-    </message>
-    <message>
         <source>Add Account</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation>فرم زیر را پر کنید.</translation>
+        <translation>برای افزودن مخاطب جدید، فرم زیر را پر کنید.</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -435,7 +429,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>شماره‌ی موبایل</translation>
+        <translation>شماره تلفن</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -443,7 +437,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>OK</source>
-        <translation>ردیفه</translation>
+        <translation>تأیید</translation>
     </message>
 </context>
 <context>
@@ -458,7 +452,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>وبسایت آسمان</translation>
+        <translation>صفحه‌ی خانگی</translation>
     </message>
 </context>
 <context>
@@ -505,7 +499,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>آسمان یک موسسه‌ی غیر انتفاعی است که در دی ماه ساب ۱۳۹۳ با هدف توسعه‌ی و تحقیق در مورد نرم‌افزارهای آزاد تشکیل شد. هدف اصلی آسمان توسعه‌ی نرم‌افزارهای آزاد با درجه‌ی امنیت بالا و حفظ حریم خصوصی کاربرهاست. همینطور در مرحله‌ی بعدی هدف آسمان تولید نرم‌افزارهای با کیفیت و با رابط کاربری برتر می‌باشد.</translation>
+        <translation>آسمان یک موسسه‌ی غیر انتفاعی است که در دی ماه سال ۱۳۹۳ با هدف توسعه و تحقیق در مورد نرم‌افزارهای آزاد تشکیل شد. هدف اصلی آسمان توسعه‌ی نرم‌افزارهای آزاد با درجه‌ی امنیت بالا و حفظ حریم خصوصی کاربرهاست. همین‌طور در مرحله‌ی بعدی، هدف آسمان تولید نرم‌افزارهای با کیفیت و با رابط کاربری برتر می‌باشد.</translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
@@ -516,7 +510,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>AuthenticateDialog</name>
     <message>
         <source>Authenticating</source>
-        <translation>صفحه‌ی ورود</translation>
+        <translation>تأیید هویت</translation>
     </message>
     <message>
         <source>Phone Number</source>
@@ -557,11 +551,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>Configure</name>
     <message>
         <source>Notifications</source>
-        <translation>پیغام‌ها</translation>
+        <translation>آگهی رسانی‌ها</translation>
     </message>
     <message>
         <source>On Start</source>
-        <translation>هنگام باز شدن برنامه</translation>
+        <translation>هنگام شروع</translation>
     </message>
     <message>
         <source>Languages</source>
@@ -573,11 +567,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Always visible</source>
-        <translation>همیشه نمایش داده شود</translation>
+        <translation>همیشه قابل مشاهده</translation>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation>به نوار سیستم برود</translation>
+        <translation>کمینه کردن در تابلوی سامانه</translation>
     </message>
     <message>
         <source>Logout</source>
@@ -589,15 +583,15 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Select photo</source>
-        <translation>انتخاب تصویر</translation>
+        <translation>گزینش تصویر</translation>
     </message>
     <message>
         <source>Detailed List</source>
-        <translation>لیست با جزییات</translation>
+        <translation>فهرست با جزییات</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>تصویر پس‌زمینه</translation>
+        <translation>پس‌زمینه</translation>
     </message>
     <message>
         <source>Notify Sound</source>
@@ -605,35 +599,35 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Change</source>
-        <translation>تغییر دادن</translation>
+        <translation>تغییر</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>پاک کردن</translation>
+        <translation>برداشتن</translation>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>انتخاب تصویر</translation>
+        <translation>گزینش تصویر</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>هیچی</translation>
+        <translation>هیچ کدام</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>پیش‌فرض</translation>
+        <translation>پیش‌گزیده</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>انتخاب</translation>
+        <translation>سفارشی</translation>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation>انتخاب صدا</translation>
+        <translation>گزینش صدا</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation>خبرنامه</translation>
+        <translation>خبرنامه‌ی کیوتگرام</translation>
     </message>
     <message>
         <source>Font</source>
@@ -641,19 +635,19 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Select</source>
-        <translation>انتخاب</translation>
+        <translation>گزینش</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>انتخاب قلم</translation>
+        <translation>گزینش قلم</translation>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation>اجرای خودکار</translation>
+        <translation>شروع خودکار</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation>تنظیمات پراکسی</translation>
+        <translation>تنظیمات کارگزار</translation>
     </message>
     <message>
         <source>About Cutegram</source>
@@ -665,7 +659,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Minimum List</source>
-        <translation>لیست کوچک</translation>
+        <translation>فهرست کمینه</translation>
     </message>
     <message>
         <source>Theme</source>
@@ -673,7 +667,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation>موتور جستجو</translation>
+        <translation>موتور جست‌وجو</translation>
     </message>
     <message>
         <source>Master Color</source>
@@ -681,50 +675,50 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>System Color</source>
-        <translation>رنگ سیستم</translation>
+        <translation>رنگ سامانه</translation>
     </message>
     <message>
         <source>Tray icon style</source>
-        <translation>استایل آیکون</translation>
+        <translation>سبک شمایل سامانه</translation>
     </message>
     <message>
         <source>Smooth Scroll</source>
-        <translation>اسکرول نرم</translation>
+        <translation>لغزش نرم</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation>مشکلی</translation>
+        <translation>تیره</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation>سفید</translation>
+        <translation>روشن</translation>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>CursorPicker</name>
     <message>
         <source>Copy</source>
-        <translation>کپی</translation>
+        <translation>رونوشت</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>کات</translation>
+        <translation>برش</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>پیست</translation>
+        <translation>جای‌گذاری</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>پاک‌کردن</translation>
+        <translation>حذف</translation>
     </message>
 </context>
 <context>
@@ -735,7 +729,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Configure</source>
-        <translation>تنظیمات</translation>
+        <translation>پیکربندی</translation>
     </message>
     <message>
         <source>About</source>
@@ -759,7 +753,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Cutegram</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -785,7 +779,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>برای ارسال به دیگری آن را در لیست دوستان رها کنید &gt;&gt;&gt;</translation>
+        <translation>برای ارسال در فهرست صحبت‌ها رها کنید &gt;&gt;&gt;</translation>
     </message>
     <message>
         <source>Drop to forward</source>
@@ -793,7 +787,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation>برای ارسال به شکل پرونده اینجا رها کنید</translation>
+        <translation>برای ارسال به‌عنوان سند رها کنید</translation>
     </message>
     <message>
         <source>Drop to send</source>
@@ -801,11 +795,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation>برای اضافه کردن به گروه رها کنید</translation>
+        <translation>برای افزودن اعضا رها کنید</translation>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation>برای تشکیل گفت‌گو رها کنید</translation>
+        <translation>برای افزودن گپ جدید رها کنید</translation>
     </message>
     <message>
         <source>New Group</source>
@@ -820,33 +814,33 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>Emoticons</name>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">پاک‌کردن</translation>
+        <translation>حذف</translation>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation type="unfinished"></translation>
+        <translation>حذف برچسب</translation>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
-        <translation type="unfinished"></translation>
+        <translation>مطمئنید می‌خواهید این را حذف کنید؟</translation>
     </message>
 </context>
 <context>
     <name>EmoticonsModel</name>
     <message>
         <source>Recent</source>
-        <translation type="unfinished"></translation>
+        <translation>اخیر</translation>
     </message>
     <message>
         <source>Emojis</source>
-        <translation type="unfinished"></translation>
+        <translation>اموجی‌ها</translation>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>لطفا یکی از مخاطب‌ها را انتخاب کنید...</translation>
+        <translation>لطفاً مخاطبی را برگزینید…</translation>
     </message>
     <message>
         <source>To</source>
@@ -865,15 +859,15 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation>پیست</translation>
+        <translation>جای گذاری</translation>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation>لطفا پسورد را وارد کنید</translation>
+        <translation>لطفاً گذرواژه را وارد کنید</translation>
     </message>
     <message>
         <source>password</source>
-        <translation>پسورد</translation>
+        <translation>گذرواژه</translation>
     </message>
     <message>
         <source>Done</source>
@@ -881,14 +875,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation>اشتباه است!</translation>
+        <translation>ناصحیح!</translation>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation>برگرد</translation>
+        <translation>بازگشت</translation>
     </message>
 </context>
 <context>
@@ -947,23 +941,23 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation>۱ شنبه</translation>
+        <translation>یک‌شنبه</translation>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation>۲ شنبه</translation>
+        <translation>دوشنبه</translation>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation>۳ شنبه</translation>
+        <translation>سه‌شنبه</translation>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation>۴ شنبه</translation>
+        <translation>چهارشنبه</translation>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation>۵ شنبه</translation>
+        <translation>پنج‌شنبه</translation>
     </message>
     <message>
         <source>Jome</source>
@@ -974,26 +968,26 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation>پیست</translation>
+        <translation>جای گذاری</translation>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation>تنظیمات پراکسی</translation>
+        <translation>تنظیمات کارگزار</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation>این تغییرات نیاز به اجرای مجدد برنامه دارند.</translation>
+        <translation>این تغییرات نیاز به اجرای مجدّد برنامه دارند.</translation>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation>نوع پراکسی</translation>
+        <translation>نوع کارگزار</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation>نام سرور</translation>
+        <translation>نام میزبان</translation>
     </message>
     <message>
         <source>Port</source>
@@ -1005,7 +999,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Password</source>
-        <translation>کلمه عبور</translation>
+        <translation>گذرواژه</translation>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
@@ -1017,7 +1011,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Ok</source>
-        <translation>انجام شد</translation>
+        <translation>تأیید</translation>
     </message>
 </context>
 <context>
@@ -1036,7 +1030,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Stop</source>
-        <translation>نگه‌داشتن</translation>
+        <translation>توقّف</translation>
     </message>
     <message>
         <source>Record</source>
@@ -1047,25 +1041,25 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation>انتخاب برنامه</translation>
+        <translation>گزینش برنامه</translation>
     </message>
 </context>
 <context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation>چت امن</translation>
+        <translation>گپ امن</translation>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation>شماره‌ی موبایل</translation>
+        <translation>شماره تلفن</translation>
     </message>
     <message>
         <source>Favorite</source>
-        <translation>مورد علاقه</translation>
+        <translation>برگزیده</translation>
     </message>
     <message>
         <source>Love</source>
@@ -1073,7 +1067,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Mute</source>
-        <translation>بدون صدا</translation>
+        <translation>بی‌صدا</translation>
     </message>
     <message>
         <source>Participants</source>
@@ -1081,7 +1075,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Show List</source>
-        <translation>نمایش لیست</translation>
+        <translation>نمایش فهرست</translation>
     </message>
     <message>
         <source>Leave</source>
@@ -1097,34 +1091,34 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation>عضو جدید</translation>
+        <translation>افزودن عضو</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation>نمایش شماره‌ها</translation>
+        <translation>نمایش نشان‌ها</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished">تصویر پس‌زمینه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select photo</source>
-        <translation type="unfinished">انتخاب تصویر</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
