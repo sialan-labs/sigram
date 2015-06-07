@@ -131,6 +131,11 @@ Rectangle {
         property string filePath
     }
 
+    Timer {
+        id: add_anim_disabler
+        interval: 500
+    }
+
     ListView {
         id: mlist
         anchors.fill: parent
@@ -145,6 +150,13 @@ Rectangle {
 
         header: Item{ width: 4; height: acc_msg_list.bottomMargin }
         footer: Item{ width: 4; height: acc_msg_list.topMargin }
+
+        displaced: Transition {
+            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: 300 }
+        }
+        add: Transition {
+            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: add_anim_disabler.running? 0 : 300 }
+        }
 
         section.property: "unreaded"
         section.criteria: ViewSection.FullString
@@ -204,6 +216,7 @@ Rectangle {
             property bool selected: mlist.currentIndex == index
 
             onSelectedChanged: if(!selected) discardSelection()
+            onSentChanged: if(sent && message.out) add_anim_disabler.restart()
 
             Behavior on opacity {
                 NumberAnimation{ easing.type: Easing.OutCubic; duration: 200 }

@@ -363,7 +363,6 @@ void TelegramMessagesModel::messagesChanged_priv()
         endRemoveRows();
     }
 
-
     QList<qint64> temp_msgs = messages;
     for( int i=0 ; i<temp_msgs.count() ; i++ )
     {
