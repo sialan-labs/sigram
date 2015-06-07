@@ -56,7 +56,8 @@ Item {
 
         function finishTyping() {
             var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
-            telegramObject.messagesSetTyping(peerId, false)
+            if(peerId != 0)
+                telegramObject.messagesSetTyping(peerId, false)
             typing_update_timer.stop()
         }
     }
@@ -67,7 +68,8 @@ Item {
         triggeredOnStart: true
         onTriggered: {
             var peerId = isChat? currentDialog.peer.chatId : currentDialog.peer.userId
-            telegramObject.messagesSetTyping(peerId, true)
+            if(peerId != 0)
+                telegramObject.messagesSetTyping(peerId, true)
         }
 
         function startTyping() {
@@ -300,7 +302,7 @@ Item {
             anchors.fill: txt_frame
             acceptedButtons: Qt.RightButton
             cursorShape: Qt.IBeamCursor
-            onClicked: {
+            onPressed: {
                 if( mouse.button == Qt.RightButton ) {
                     var actions = [qsTr("Copy"),qsTr("Paste"),qsTr("Delete")]
                     var res = Desktop.showMenu(actions)

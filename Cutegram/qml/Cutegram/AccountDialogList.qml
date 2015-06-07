@@ -287,7 +287,7 @@ Item {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onContainsMouseChanged: toggleMinimum(containsMouse)
                 onDoubleClicked: ad_list.windowRequest(list_item.dItem)
-                onClicked: {
+                onPressed: {
                     if( mouse.button == Qt.RightButton ) {
                         var actions, res
                         if(dItem.encrypted) {
@@ -352,9 +352,11 @@ Item {
                                 break;
                             }
                         }
-                    } else {
-                        currentDialog = list_item.dItem
                     }
+                }
+                onClicked: {
+                    if( mouse.button == Qt.LeftButton )
+                        currentDialog = list_item.dItem
                 }
             }
 

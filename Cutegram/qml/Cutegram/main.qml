@@ -167,7 +167,6 @@ AsemanMain {
         anchors.fill: parent
         visible: Devices.isMacX && Desktop.currentMenuObject
         onClicked: if(Desktop.currentMenuObject) Desktop.currentMenuObject.hide()
-        Component.onCompleted: console.debug(Desktop.currentMenuObject)
     }
 
     Component {
