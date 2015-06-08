@@ -146,7 +146,6 @@ TRANSLATIONS += \
     translations/lang-sr.qm \
     translations/lang-sv.qm \
     translations/lang-zh.qm \
-    translations/lang-zh_CN.qm \
     translations/lang-zh_TW.qm
 
 

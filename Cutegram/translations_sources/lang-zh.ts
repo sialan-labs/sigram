@@ -15,11 +15,11 @@
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation type="unfinished"/>
+        <translation>Cutegram 是一个由 Aseman 开发的 Telegram 客户端。它是自由开源软件，以 GPLv3 协议授权发布。</translation>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation type="unfinished"/>
+        <translation>Cutegram 使用了 Qt5、QML、libqtelegram、libappindicator、AsemanQtTools 和其他一些 KDE 工具，还包括 Faenza 图标及 Twitter 的表情图标。</translation>
     </message>
 </context>
 <context>
@@ -42,15 +42,15 @@
     </message>
     <message>
         <source>Recently</source>
-        <translation type="unfinished"/>
+        <translation>最近</translation>
     </message>
     <message>
         <source>Last Month</source>
-        <translation type="unfinished"/>
+        <translation>上月</translation>
     </message>
     <message>
         <source>Last Week</source>
-        <translation type="unfinished"/>
+        <translation>上周</translation>
     </message>
 </context>
 <context>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>Go online</source>
-        <translation type="unfinished"/>
+        <translation>在线</translation>
     </message>
 </context>
 <context>
@@ -128,31 +128,32 @@
     </message>
     <message>
         <source>Password Error</source>
-        <translation type="unfinished"/>
+        <translation>密码错误</translation>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation type="unfinished"/>
+        <translation>抱歉。您的帐号是由密码保护的。我们将会尽快将此特性加入到 Cutegram 中。
+为了解决此问题， 请先停用2步验证，再次登录 Cutegram 之后再打开2步验证。</translation>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation type="unfinished"/>
+        <translation>%1 在 &quot;%2&quot; 正在输入</translation>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation type="unfinished"/>
+        <translation>%1 正在输入</translation>
     </message>
 </context>
 <context>
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation>加载中……</translation>
+        <translation>加载中…</translation>
     </message>
     <message>
         <source>Login again</source>
-        <translation type="unfinished"/>
+        <translation>重新登录</translation>
     </message>
 </context>
 <context>
@@ -179,11 +180,11 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished"/>
+        <translation>%1 已将 %2 加到群</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished"/>
+        <translation>%1 已将 %2 踢出群</translation>
     </message>
 </context>
 <context>
@@ -194,19 +195,19 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation type="unfinished"/>
+        <translation>不再载入</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation type="unfinished"/>
+        <translation>始终载入</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation type="unfinished"/>
+        <translation>载入链接</translation>
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation type="unfinished"/>
+        <translation>私密会话尚未支持多媒体文件</translation>
     </message>
 </context>
 <context>
@@ -217,11 +218,11 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>收到私密会话请求，请同意或拒绝。</translation>
+        <translation>收到私密会话请求，请接受或拒绝。</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation>同意</translation>
+        <translation>接受</translation>
     </message>
     <message>
         <source>Reject</source>
@@ -245,20 +246,21 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>New Messages</source>
-        <translation type="unfinished"/>
+        <translation>新消息</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation type="unfinished"/>
+        <translation>私密会话被拒绝。或者已经从其他设备接受。
+注意 Android 设备会自动接受私密会话。</translation>
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation type="unfinished"/>
+        <translation>添加到个人</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"/>
+        <translation>回复</translation>
     </message>
 </context>
 <context>
@@ -269,7 +271,7 @@ Note that android accept secret chat automatically.</source>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation type="unfinished"/>
+        <translation>不支持的媒体</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -284,11 +286,11 @@ Note that android accept secret chat automatically.</source>
     </message>
     <message>
         <source>%1 on %2</source>
-        <translation type="unfinished"/>
+        <translation>%1 在 %2</translation>
     </message>
     <message>
         <source>%1 to %2</source>
-        <translation type="unfinished"/>
+        <translation>%1 到 %2</translation>
     </message>
 </context>
 <context>
@@ -312,7 +314,8 @@ Note that android accept secret chat automatically.</source>
     <message>
         <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation type="unfinished"/>
+        <translation>这是 Cutegram 的新闻，主要是新版本发布以及一些解决方案。
+这并不是一个 Telegram 联系人。只是一个虚拟联系人。</translation>
     </message>
     <message>
         <source>Camera</source>
@@ -320,14 +323,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation type="unfinished"/>
+        <translation>音频录音机</translation>
     </message>
 </context>
 <context>
     <name>AccountSign</name>
     <message>
         <source>Code</source>
-        <translation type="unfinished"/>
+        <translation>编码</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -347,15 +350,15 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Call Request</source>
-        <translation type="unfinished"/>
+        <translation>呼叫请求</translation>
     </message>
     <message>
         <source>Requested</source>
-        <translation type="unfinished"/>
+        <translation>已请求</translation>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation type="unfinished"/>
+        <translation>重新发送编码</translation>
     </message>
 </context>
 <context>
@@ -377,15 +380,15 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation type="unfinished"/>
+        <translation>群话题</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation type="unfinished"/>
+        <translation>创建</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation type="unfinished"/>
+        <translation>添加私密会话</translation>
     </message>
     <message>
         <source>Contact List</source>
@@ -393,60 +396,60 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation>只需将联系人科为拖放到此处</translation>
+        <translation>只需将联系人拖放到此处</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation type="unfinished"/>
+        <translation>添加新联系人</translation>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation type="unfinished"/>
+        <translation>添加联系人</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account</source>
-        <translation type="unfinished"/>
+        <translation>添加账户</translation>
     </message>
 </context>
 <context>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation type="unfinished"/>
+        <translation>要添加新联系人请填写以下表格</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"/>
+        <translation>名</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"/>
+        <translation>姓</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation type="unfinished"/>
+        <translation>手机号</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>取消</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>确认</translation>
     </message>
 </context>
 <context>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation type="unfinished"/>
+        <translation>Aseman 是一个非营利性组织，致力于支持和引领自由开源和跨平台项目的开发研究。</translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation type="unfinished"/>
+        <translation>Aseman 的目标是提供一个自由且安全的产品以保障人们的自由和隐私权。</translation>
     </message>
     <message>
         <source>Home Page</source>
@@ -457,51 +460,51 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
-        <translation type="unfinished"/>
+        <translation>0</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"/>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"/>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"/>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"/>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"/>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"/>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"/>
+        <translation>8</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"/>
+        <translation>9</translation>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation type="unfinished"/>
+        <translation>Aseman 是一个成立于2014年2月研究和开发软件的非营利性团队，主要致力于开发产品，技术和产品解决方案，并以开源的方式发布以利于全球人们的自由访问。当前我们主要致力于设计和开发软件应用以及可以直接连接到终端用户的工具。</translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation type="unfinished"/>
+        <translation>通过启动创新性项目和面向全球数万用户发布软件，实验室正在致力于快速成长的开源软件项目并推动无障碍化和全球产品化的开源文化。实验室的合作伙伴有行业领导者和政策制定者，目的是将开源技术推广到新的行业，包括教育、医疗和政府机构。</translation>
     </message>
 </context>
 <context>
@@ -531,18 +534,18 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Capture</source>
-        <translation type="unfinished"/>
+        <translation>拍摄</translation>
     </message>
 </context>
 <context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation type="unfinished"/>
+        <translation>打开</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"/>
+        <translation>关闭</translation>
     </message>
 </context>
 <context>
@@ -621,11 +624,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation type="unfinished"/>
+        <translation>选择声音</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation type="unfinished"/>
+        <translation>Cutegram 新闻</translation>
     </message>
     <message>
         <source>Font</source>
@@ -641,7 +644,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation>自启动</translation>
+        <translation>自动启动</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
@@ -657,7 +660,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Minimum List</source>
-        <translation>迷你列表</translation>
+        <translation>最小化列表</translation>
     </message>
     <message>
         <source>Theme</source>
@@ -677,27 +680,27 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Tray icon style</source>
-        <translation type="unfinished"/>
+        <translation>托盘区图标风格</translation>
     </message>
     <message>
         <source>Smooth Scroll</source>
-        <translation type="unfinished"/>
+        <translation>平滑滚动</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation type="unfinished"/>
+        <translation>深色</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"/>
+        <translation>浅色</translation>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation type="unfinished"/>
+        <translation>转换笑脸符号到表情图标</translation>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation type="unfinished"/>
+        <translation>Cutegram 将在此操作后重启。</translation>
     </message>
 </context>
 <context>
@@ -723,7 +726,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>Cutegram</name>
     <message>
         <source>Show</source>
-        <translation type="unfinished"/>
+        <translation>显示</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -739,11 +742,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Quit</source>
-        <translation>退出</translation>
+        <translation>离开</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>离开</translation>
+        <translation>退出</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -751,7 +754,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Cutegram</source>
-        <translation type="unfinished"/>
+        <translation> Cutegram </translation>
     </message>
 </context>
 <context>
@@ -781,215 +784,215 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation>放开以转发</translation>
+        <translation>拖放以转发</translation>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation type="unfinished"/>
+        <translation>拖放以文档方式发送</translation>
     </message>
     <message>
         <source>Drop to send</source>
-        <translation type="unfinished"/>
+        <translation>拖放以发送</translation>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation type="unfinished"/>
+        <translation>拖放以添加参与者</translation>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation type="unfinished"/>
+        <translation>拖放以开始新会话</translation>
     </message>
     <message>
         <source>New Group</source>
-        <translation type="unfinished"/>
+        <translation>新建群聊</translation>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation type="unfinished"/>
+        <translation>请输入群名称</translation>
     </message>
 </context>
 <context>
     <name>Emoticons</name>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>删除</translation>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation type="unfinished"/>
+        <translation>删除贴纸</translation>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
-        <translation type="unfinished"/>
+        <translation>你确定要删除这个吗？</translation>
     </message>
 </context>
 <context>
     <name>EmoticonsModel</name>
     <message>
         <source>Recent</source>
-        <translation type="unfinished"/>
+        <translation>最近</translation>
     </message>
     <message>
         <source>Emojis</source>
-        <translation type="unfinished"/>
+        <translation>表情图标</translation>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation type="unfinished"/>
+        <translation>请选择一个联系人…</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"/>
+        <translation>到</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>取消</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"/>
+        <translation>转发</translation>
     </message>
 </context>
 <context>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"/>
+        <translation>粘贴</translation>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation type="unfinished"/>
+        <translation>请输入密码</translation>
     </message>
     <message>
         <source>password</source>
-        <translation type="unfinished"/>
+        <translation>密码</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"/>
+        <translation>完成</translation>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation type="unfinished"/>
+        <translation>不正确！</translation>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>返回</translation>
     </message>
 </context>
 <context>
     <name>JalaliCalendarObject</name>
     <message>
         <source>Farvardin</source>
-        <translation type="unfinished"/>
+        <translation>Farvardin</translation>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"/>
+        <translation>Ordibehesht</translation>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"/>
+        <translation>Khordad</translation>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"/>
+        <translation>Tir</translation>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"/>
+        <translation>Mordad</translation>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"/>
+        <translation>Shahrivar</translation>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"/>
+        <translation>Mehr</translation>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"/>
+        <translation>Abaan</translation>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"/>
+        <translation>Aazar</translation>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"/>
+        <translation>Dey</translation>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"/>
+        <translation>Bahman</translation>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"/>
+        <translation>Esfand</translation>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"/>
+        <translation>Shanbe</translation>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"/>
+        <translation>1Shanbe</translation>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"/>
+        <translation>2Shanbe</translation>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"/>
+        <translation>3Shanbe</translation>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"/>
+        <translation>4Shanbe</translation>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"/>
+        <translation>5Shanbe</translation>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"/>
+        <translation>Jome</translation>
     </message>
 </context>
 <context>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"/>
+        <translation>粘贴</translation>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation type="unfinished"/>
+        <translation>代理服务器设置</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation type="unfinished"/>
+        <translation>此变动需要重启</translation>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation type="unfinished"/>
+        <translation>代理类型</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation type="unfinished"/>
+        <translation>主机名</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"/>
+        <translation>端口</translation>
     </message>
     <message>
         <source>Username</source>
@@ -1009,51 +1012,51 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"/>
+        <translation>确认</translation>
     </message>
 </context>
 <context>
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished"/>
+        <translation>发送</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>取消</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"/>
+        <translation>错误</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"/>
+        <translation>停止</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"/>
+        <translation>记录</translation>
     </message>
 </context>
 <context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation type="unfinished"/>
+        <translation>选择应用</translation>
     </message>
 </context>
 <context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation type="unfinished"/>
+        <translation>私密会话</translation>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation type="unfinished"/>
+        <translation>手机号</translation>
     </message>
     <message>
         <source>Favorite</source>
@@ -1065,58 +1068,58 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Mute</source>
-        <translation>别吵</translation>
+        <translation>静音</translation>
     </message>
     <message>
         <source>Participants</source>
-        <translation type="unfinished"/>
+        <translation>参与者</translation>
     </message>
     <message>
         <source>Show List</source>
-        <translation type="unfinished"/>
+        <translation>显示列表</translation>
     </message>
     <message>
         <source>Leave</source>
-        <translation type="unfinished"/>
+        <translation>离开</translation>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation type="unfinished"/>
+        <translation>离开此群</translation>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
-        <translation type="unfinished"/>
+        <translation>你确定要离开此群吗？</translation>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation type="unfinished"/>
+        <translation>添加参与者</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"/>
+        <translation>显示徽章</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"/>
+        <translation>背景</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation type="unfinished"/>
+        <translation>选择照片</translation>
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"/>
+        <translation>顶部</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"/>
+        <translation>Verbose 模式</translation>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"/>
+        <translation>强制以多实例方式运行 Cutegram。</translation>
     </message>
 </context>
 </TS>

@@ -27,6 +27,10 @@ int main(int argc, char *argv[])
             QCoreApplication::translate("main", "Verbose Mode."));
     QCommandLineOption forceOption(QStringList() << "f" << "force",
             QCoreApplication::translate("main", "Force to run multiple instance of Cutegram."));
+    QCommandLineOption dcIdOption(QStringList() << "dc-id",
+            QCoreApplication::translate("main", "Sets default DC ID to <id>"), "id");
+    QCommandLineOption ipAdrsOption(QStringList() << "ip-address",
+            QCoreApplication::translate("main", "Sets default IP Address to <ip>"), "ip");
 
     QCommandLineParser parser;
     parser.setApplicationDescription(ABOUT_TEXT);
@@ -34,6 +38,8 @@ int main(int argc, char *argv[])
     parser.addVersionOption();
     parser.addOption(forceOption);
     parser.addOption(verboseOption);
+    parser.addOption(dcIdOption);
+    parser.addOption(ipAdrsOption);
     parser.process(app);
 
     if(!parser.isSet(verboseOption))
@@ -43,9 +49,9 @@ int main(int argc, char *argv[])
                                     "tg.core.outboundpkt=false\n"
                                     "tg.core.inboundpkt=false");
 
-    Telegram::setDefaultHostAddress("149.154.167.50");
+    Telegram::setDefaultHostAddress( parser.isSet(ipAdrsOption)? parser.value(ipAdrsOption) : "149.154.167.50");
     Telegram::setDefaultHostPort(443);
-    Telegram::setDefaultHostDcId(2);
+    Telegram::setDefaultHostDcId(parser.isSet(dcIdOption)? parser.value(dcIdOption).toInt() : 2);
     Telegram::setAppId(13682);
     Telegram::setAppHash("de37bcf00f4688de900510f4f87384bb");
 
