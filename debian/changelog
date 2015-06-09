@@ -1,3 +1,21 @@
+cutegram (2.4.0-3aseman-vivid) vivid; urgency=medium
+
+  * Segmentation fault fix
+
+ -- Aseman Team <contact@aseman.co>  Mon, 8 Jun 2015 11:00:00 +0330
+ 
+cutegram (2.4.0-3aseman-utopic) utopic; urgency=medium
+
+  * Segmentation fault fix
+
+ -- Aseman Team <contact@aseman.co>  Mon, 8 Jun 2015 11:00:00 +0330
+ 
+cutegram (2.4.0-3aseman-trusty) trusty; urgency=medium
+
+  * Segmentation fault fix
+
+ -- Aseman Team <contact@aseman.co>  Mon, 8 Jun 2015 11:00:00 +0330
+ 
 cutegram (2.4.0-2aseman-vivid) vivid; urgency=medium
 
   * Add custom dcId and IP address from command line
