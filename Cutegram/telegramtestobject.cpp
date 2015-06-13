@@ -38,20 +38,20 @@ void TelegramTestObject::start()
 
 void TelegramTestObject::authNeeded()
 {
-    qDebug() << __PRETTY_FUNCTION__;
+    qDebug() << __FUNCTION__;
     p->tg->authCheckPhone();
     QTimer::singleShot(2000, this, SLOT(authSendCode()));
 }
 
 void TelegramTestObject::authLoggedIn()
 {
-    qDebug() << __PRETTY_FUNCTION__;
+    qDebug() << __FUNCTION__;
     p->tg->messagesGetDialogs();
 }
 
 void TelegramTestObject::authSendCode()
 {
-    qDebug() << __PRETTY_FUNCTION__;
+    qDebug() << __FUNCTION__;
     p->tg->authSendCode();
 
     QString code = QInputDialog::getText(0, "get code", "get code");
