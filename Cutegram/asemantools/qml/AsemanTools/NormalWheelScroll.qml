@@ -26,7 +26,7 @@ MouseArea {
     property bool animated: true
     property bool reverse: false
 
-    property real startContentY
+    property real endContentY
 
     NumberAnimation {
         id: animY
@@ -44,7 +44,7 @@ MouseArea {
         var contentY = 0
 
         if(!animY.running)
-            startContentY = flick.contentY
+            endContentY = flick.contentY
 
         var ratio = animated? 0.7 : 0.5
         if( flick.orientation ) {
@@ -65,27 +65,27 @@ MouseArea {
         }
 
         if(animated) {
-            startContentY += contentY
+            endContentY += contentY
 
             var padY
             if(reverse) {
                 padY = flick.originY+flick.contentHeight
-                if( startContentY > -flick.height+padY )
-                    startContentY = -flick.height+padY
+                if( endContentY > -flick.height+padY )
+                    endContentY = -flick.height+padY
                 else
-                if( startContentY < -flick.contentHeight+padY )
-                    startContentY = -flick.contentHeight+padY
+                if( endContentY < -flick.contentHeight+padY )
+                    endContentY = -flick.contentHeight+padY
             } else {
-                padY = flick.originY
-                if( startContentY < -padY )
-                    startContentY = -padY
+                padY = -flick.originY
+                if( endContentY < -padY )
+                    endContentY = -padY
                 else
-                if( startContentY > flick.contentHeight - flick.height + padY )
-                    startContentY = flick.contentHeight - flick.height + padY
+                if( endContentY > flick.contentHeight - flick.height + padY )
+                    endContentY = flick.contentHeight - flick.height + padY
             }
 
             animY.from = flick.contentY;
-            animY.to = startContentY;
+            animY.to = endContentY;
             animY.restart();
 
             flick.contentX += contentX
