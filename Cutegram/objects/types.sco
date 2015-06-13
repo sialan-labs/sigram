@@ -37,38 +37,38 @@ object FileLocation {
     qint32 dcId rw = another.%name();
     qint64 accessHash rw = 0;
     qint64 volumeId rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object Peer {
     qint32 chatId rw = another.%name();
     qint32 userId rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object Contact {
     qint32 userId rw = another.%name();
     bool mutual rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object InputPeer {
     qint32 chatId rw = another.%name();
     qint32 userId rw = another.%name();
     qint64 accessHash rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object UserStatus {
     qint32 wasOnline rw = another.%name();
     qint32 expires rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object GeoPoint {
     double longitude rw = another.%name();
     double lat rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object PeerNotifySettings {
@@ -76,12 +76,12 @@ object PeerNotifySettings {
     qint32 eventsMask rw = another.%name();
     QString sound rw = another.%name();
     bool showPreviews rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object ContactsMyLink {
     bool contact rw = another.%name();
-    qint64 classType = another.%name();
+    quint32 classType = another.%name();
 }
 
 object EncryptedFile {
@@ -90,7 +90,7 @@ object EncryptedFile {
     qint32 keyFingerprint rw = another.%name();
     qint32 size rw = another.%name();
     qint64 accessHash rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object EncryptedChat {
@@ -102,7 +102,7 @@ object EncryptedChat {
     qint32 adminId rw = another.%name();
     QByteArray gAOrB rw = another.%name();
     qint32 participantId rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object EncryptedMessage {
@@ -111,24 +111,24 @@ object EncryptedMessage {
     qint64 randomId rw = another.%name();
     EncryptedFileObject* file rw = new EncryptedFileObject(another.%name(), this);
     QByteArray bytes rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object ContactLink {
     bool hasPhone rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object NotifyPeer {
     PeerObject* peer rw = new PeerObject(another.%name(), this);
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object ChatParticipant {
     qint32 userId rw = another.%name();
     qint32 date rw = another.%name();
     qint32 inviterId rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object ChatParticipants {
@@ -136,7 +136,7 @@ object ChatParticipants {
     qint32 chatId rw = another.%name();
     qint32 version rw = another.%name();
     qint32 adminId rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object PhotoSize {
@@ -146,7 +146,7 @@ object PhotoSize {
     FileLocationObject* location rw = new FileLocationObject(another.%name(), this);
     qint32 size rw = another.%name();
     qint32 w rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object Audio {
@@ -158,7 +158,7 @@ object Audio {
     qint32 size rw = another.%name();
     qint64 accessHash rw = another.%name();
     qint32 userId rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object Document {
@@ -173,7 +173,7 @@ object Document {
     qint32 size rw = another.%name();
     QByteArray encryptKey rw = QByteArray();
     QByteArray encryptIv rw = QByteArray();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object Video {
@@ -189,7 +189,7 @@ object Video {
     qint64 accessHash rw = another.%name();
     qint32 userId rw = another.%name();
     qint32 w rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object Photo {
@@ -200,7 +200,7 @@ object Photo {
     GeoPointObject* geo rw = new GeoPointObject(another.%name(), this);
     qint64 accessHash rw = another.%name();
     qint32 userId rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object WallPaper {
@@ -209,7 +209,7 @@ object WallPaper {
     qint32 id rw = another.%name();
     QString title rw = another.%name();
     PhotoSizeList* sizes rw = new PhotoSizeList(another.%name(), this);
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object MessageAction {
@@ -218,13 +218,13 @@ object MessageAction {
     PhotoObject* photo rw = new PhotoObject(another.%name(), this);
     QString title rw = another.%name();
     QList<qint32> users rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object ChatPhoto {
     FileLocationObject* photoBig rw = new FileLocationObject(another.%name(), this);
     FileLocationObject* photoSmall rw = new FileLocationObject(another.%name(), this);
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object ChatFull {
@@ -232,14 +232,14 @@ object ChatFull {
     PhotoObject* chatPhoto rw = new PhotoObject(another.%name(), this);
     qint32 id rw = another.%name();
     PeerNotifySettingsObject* notifySettings rw = new PeerNotifySettingsObject(another.%name(), this);
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object UserProfilePhoto {
     qint64 photoId rw = another.%name();
     FileLocationObject* photoBig rw = new FileLocationObject(another.%name(), this);
     FileLocationObject* photoSmall rw = new FileLocationObject(another.%name(), this);
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object Chat {
@@ -255,7 +255,7 @@ object Chat {
     qint64 accessHash rw = another.%name();
     bool checkedIn rw = another.%name();
     bool left rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object Dialog {
@@ -265,11 +265,11 @@ object Dialog {
     qint32 unreadCount rw = another.%name();
     bool encrypted rw = false;
     QStringList typingUsers rw;
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object SendMessageAction {
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object DecryptedMessageAction {
@@ -279,7 +279,7 @@ object DecryptedMessageAction {
     qint32 startSeqNo rw = another.%name();
     qint32 endSeqNo rw = another.%name();
     SendMessageActionObject* action rw = new SendMessageActionObject(another.%name(), this);
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object DecryptedMessageMedia {
@@ -300,7 +300,7 @@ object DecryptedMessageMedia {
     qint32 userId rw = another.%name();
     QString fileName rw = another.%name();
     QString mimeType rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object DecryptedMessage {
@@ -310,7 +310,7 @@ object DecryptedMessage {
     QString message rw = another.%name();
     DecryptedMessageMediaObject* media rw = new DecryptedMessageMediaObject(another.%name(), this);
     DecryptedMessageActionObject* action rw = new DecryptedMessageActionObject(another.%name(), this);
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object MessageMedia {
@@ -324,7 +324,7 @@ object MessageMedia {
     QString phoneNumber rw = another.%name();
     qint32 userId rw = another.%name();
     VideoObject* video rw = new VideoObject(another.%name(), this);
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object Message {
@@ -342,7 +342,7 @@ object Message {
     qint32 fwdDate rw = another.%name();
     qint32 fwdFromId rw = another.%name();
     QString message rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object GeoChatMessage {
@@ -353,7 +353,7 @@ object GeoChatMessage {
     MessageMediaObject* media rw = new MessageMediaObject(another.%name(), this);
     qint32 chatId rw = another.%name();
     QString message rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }
 
 object User {
@@ -366,5 +366,5 @@ object User {
     UserStatusObject* status rw = new UserStatusObject(another.%name(), this);
     QString lastName rw = another.%name();
     QString username rw = another.%name();
-    qint64 classType rw = another.%name();
+    quint32 classType rw = another.%name();
 }

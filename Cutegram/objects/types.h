@@ -252,7 +252,7 @@ class FileLocationObject : public QObject
     Q_PROPERTY(qint32 dcId READ dcId WRITE setDcId NOTIFY dcIdChanged)
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
     Q_PROPERTY(qint64 volumeId READ volumeId WRITE setVolumeId NOTIFY volumeIdChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     FileLocationObject(const FileLocation & another, QObject *parent = 0) : QObject(parent){
@@ -378,11 +378,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -445,7 +445,7 @@ private:
     qint32 _dcId;
     qint64 _accessHash;
     qint64 _volumeId;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -456,7 +456,7 @@ class PeerObject : public QObject
     Q_OBJECT
     Q_PROPERTY(qint32 chatId READ chatId WRITE setChatId NOTIFY chatIdChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     PeerObject(const Peer & another, QObject *parent = 0) : QObject(parent){
@@ -493,11 +493,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -525,7 +525,7 @@ signals:
 private:
     qint32 _chatId;
     qint32 _userId;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -536,7 +536,7 @@ class ContactObject : public QObject
     Q_OBJECT
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(bool mutual READ mutual WRITE setMutual NOTIFY mutualChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     ContactObject(const Contact & another, QObject *parent = 0) : QObject(parent){
@@ -573,11 +573,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -605,7 +605,7 @@ signals:
 private:
     qint32 _userId;
     bool _mutual;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -617,7 +617,7 @@ class InputPeerObject : public QObject
     Q_PROPERTY(qint32 chatId READ chatId WRITE setChatId NOTIFY chatIdChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     InputPeerObject(const InputPeer & another, QObject *parent = 0) : QObject(parent){
@@ -667,11 +667,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -703,7 +703,7 @@ private:
     qint32 _chatId;
     qint32 _userId;
     qint64 _accessHash;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -714,7 +714,7 @@ class UserStatusObject : public QObject
     Q_OBJECT
     Q_PROPERTY(qint32 wasOnline READ wasOnline WRITE setWasOnline NOTIFY wasOnlineChanged)
     Q_PROPERTY(qint32 expires READ expires WRITE setExpires NOTIFY expiresChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     UserStatusObject(const UserStatus & another, QObject *parent = 0) : QObject(parent){
@@ -751,11 +751,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -783,7 +783,7 @@ signals:
 private:
     qint32 _wasOnline;
     qint32 _expires;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -794,7 +794,7 @@ class GeoPointObject : public QObject
     Q_OBJECT
     Q_PROPERTY(double longitude READ longitude WRITE setLongitude NOTIFY longitudeChanged)
     Q_PROPERTY(double lat READ lat WRITE setLat NOTIFY latChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     GeoPointObject(const GeoPoint & another, QObject *parent = 0) : QObject(parent){
@@ -831,11 +831,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -863,7 +863,7 @@ signals:
 private:
     double _longitude;
     double _lat;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -876,7 +876,7 @@ class PeerNotifySettingsObject : public QObject
     Q_PROPERTY(qint32 eventsMask READ eventsMask WRITE setEventsMask NOTIFY eventsMaskChanged)
     Q_PROPERTY(QString sound READ sound WRITE setSound NOTIFY soundChanged)
     Q_PROPERTY(bool showPreviews READ showPreviews WRITE setShowPreviews NOTIFY showPreviewsChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     PeerNotifySettingsObject(const PeerNotifySettings & another, QObject *parent = 0) : QObject(parent){
@@ -939,11 +939,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -979,7 +979,7 @@ private:
     qint32 _eventsMask;
     QString _sound;
     bool _showPreviews;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -993,7 +993,7 @@ class EncryptedFileObject : public QObject
     Q_PROPERTY(qint32 keyFingerprint READ keyFingerprint WRITE setKeyFingerprint NOTIFY keyFingerprintChanged)
     Q_PROPERTY(qint32 size READ size WRITE setSize NOTIFY sizeChanged)
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     EncryptedFileObject(const EncryptedFile & another, QObject *parent = 0) : QObject(parent){
@@ -1069,11 +1069,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -1113,7 +1113,7 @@ private:
     qint32 _keyFingerprint;
     qint32 _size;
     qint64 _accessHash;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -1130,7 +1130,7 @@ class EncryptedChatObject : public QObject
     Q_PROPERTY(qint32 adminId READ adminId WRITE setAdminId NOTIFY adminIdChanged)
     Q_PROPERTY(QByteArray gAOrB READ gAOrB WRITE setGAOrB NOTIFY gAOrBChanged)
     Q_PROPERTY(qint32 participantId READ participantId WRITE setParticipantId NOTIFY participantIdChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     EncryptedChatObject(const EncryptedChat & another, QObject *parent = 0) : QObject(parent){
@@ -1245,11 +1245,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -1301,7 +1301,7 @@ private:
     qint32 _adminId;
     QByteArray _gAOrB;
     qint32 _participantId;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -1315,7 +1315,7 @@ class EncryptedMessageObject : public QObject
     Q_PROPERTY(qint64 randomId READ randomId WRITE setRandomId NOTIFY randomIdChanged)
     Q_PROPERTY(EncryptedFileObject* file READ file WRITE setFile NOTIFY fileChanged)
     Q_PROPERTY(QByteArray bytes READ bytes WRITE setBytes NOTIFY bytesChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     EncryptedMessageObject(const EncryptedMessage & another, QObject *parent = 0) : QObject(parent){
@@ -1391,11 +1391,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -1435,7 +1435,7 @@ private:
     qint64 _randomId;
     EncryptedFileObject* _file;
     QByteArray _bytes;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -1444,7 +1444,7 @@ Q_DECLARE_METATYPE(EncryptedMessageObject*)
 class ContactLinkObject : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     ContactLinkObject(const ContactLink & another, QObject *parent = 0) : QObject(parent){
@@ -1455,11 +1455,11 @@ public:
     ContactLinkObject(QObject *parent = 0) : QObject(parent){}
     ~ContactLinkObject(){}
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -1479,7 +1479,7 @@ signals:
     void classTypeChanged();
 
 private:
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -1489,7 +1489,7 @@ class NotifyPeerObject : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(PeerObject* peer READ peer WRITE setPeer NOTIFY peerChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     NotifyPeerObject(const NotifyPeer & another, QObject *parent = 0) : QObject(parent){
@@ -1513,11 +1513,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -1541,7 +1541,7 @@ signals:
 
 private:
     PeerObject* _peer;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -1553,7 +1553,7 @@ class ChatParticipantObject : public QObject
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(qint32 date READ date WRITE setDate NOTIFY dateChanged)
     Q_PROPERTY(qint32 inviterId READ inviterId WRITE setInviterId NOTIFY inviterIdChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     ChatParticipantObject(const ChatParticipant & another, QObject *parent = 0) : QObject(parent){
@@ -1603,11 +1603,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -1639,7 +1639,7 @@ private:
     qint32 _userId;
     qint32 _date;
     qint32 _inviterId;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -1652,7 +1652,7 @@ class ChatParticipantsObject : public QObject
     Q_PROPERTY(qint32 chatId READ chatId WRITE setChatId NOTIFY chatIdChanged)
     Q_PROPERTY(qint32 version READ version WRITE setVersion NOTIFY versionChanged)
     Q_PROPERTY(qint32 adminId READ adminId WRITE setAdminId NOTIFY adminIdChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     ChatParticipantsObject(const ChatParticipants & another, QObject *parent = 0) : QObject(parent){
@@ -1715,11 +1715,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -1755,7 +1755,7 @@ private:
     qint32 _chatId;
     qint32 _version;
     qint32 _adminId;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -1770,7 +1770,7 @@ class PhotoSizeObject : public QObject
     Q_PROPERTY(FileLocationObject* location READ location WRITE setLocation NOTIFY locationChanged)
     Q_PROPERTY(qint32 size READ size WRITE setSize NOTIFY sizeChanged)
     Q_PROPERTY(qint32 w READ w WRITE setW NOTIFY wChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     PhotoSizeObject(const PhotoSize & another, QObject *parent = 0) : QObject(parent){
@@ -1859,11 +1859,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -1907,7 +1907,7 @@ private:
     FileLocationObject* _location;
     qint32 _size;
     qint32 _w;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -1924,7 +1924,7 @@ class AudioObject : public QObject
     Q_PROPERTY(qint32 size READ size WRITE setSize NOTIFY sizeChanged)
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     AudioObject(const Audio & another, QObject *parent = 0) : QObject(parent){
@@ -2039,11 +2039,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -2095,7 +2095,7 @@ private:
     qint32 _size;
     qint64 _accessHash;
     qint32 _userId;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -2114,7 +2114,7 @@ class DocumentObject : public QObject
     Q_PROPERTY(qint32 size READ size WRITE setSize NOTIFY sizeChanged)
     Q_PROPERTY(QByteArray encryptKey READ encryptKey WRITE setEncryptKey NOTIFY encryptKeyChanged)
     Q_PROPERTY(QByteArray encryptIv READ encryptIv WRITE setEncryptIv NOTIFY encryptIvChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     DocumentObject(const Document & another, QObject *parent = 0) : QObject(parent){
@@ -2253,11 +2253,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -2313,7 +2313,7 @@ private:
     qint32 _size;
     QByteArray _encryptKey;
     QByteArray _encryptIv;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -2334,7 +2334,7 @@ class VideoObject : public QObject
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(qint32 w READ w WRITE setW NOTIFY wChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     VideoObject(const Video & another, QObject *parent = 0) : QObject(parent){
@@ -2501,11 +2501,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -2573,7 +2573,7 @@ private:
     qint64 _accessHash;
     qint32 _userId;
     qint32 _w;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -2589,7 +2589,7 @@ class PhotoObject : public QObject
     Q_PROPERTY(GeoPointObject* geo READ geo WRITE setGeo NOTIFY geoChanged)
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     PhotoObject(const Photo & another, QObject *parent = 0) : QObject(parent){
@@ -2691,11 +2691,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -2743,7 +2743,7 @@ private:
     GeoPointObject* _geo;
     qint64 _accessHash;
     qint32 _userId;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -2757,7 +2757,7 @@ class WallPaperObject : public QObject
     Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(PhotoSizeList* sizes READ sizes WRITE setSizes NOTIFY sizesChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     WallPaperObject(const WallPaper & another, QObject *parent = 0) : QObject(parent){
@@ -2833,11 +2833,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -2877,7 +2877,7 @@ private:
     qint32 _id;
     QString _title;
     PhotoSizeList* _sizes;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -2891,7 +2891,7 @@ class MessageActionObject : public QObject
     Q_PROPERTY(PhotoObject* photo READ photo WRITE setPhoto NOTIFY photoChanged)
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QList<qint32> users READ users WRITE setUsers NOTIFY usersChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     MessageActionObject(const MessageAction & another, QObject *parent = 0) : QObject(parent){
@@ -2967,11 +2967,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -3011,7 +3011,7 @@ private:
     PhotoObject* _photo;
     QString _title;
     QList<qint32> _users;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -3022,7 +3022,7 @@ class ChatPhotoObject : public QObject
     Q_OBJECT
     Q_PROPERTY(FileLocationObject* photoBig READ photoBig WRITE setPhotoBig NOTIFY photoBigChanged)
     Q_PROPERTY(FileLocationObject* photoSmall READ photoSmall WRITE setPhotoSmall NOTIFY photoSmallChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     ChatPhotoObject(const ChatPhoto & another, QObject *parent = 0) : QObject(parent){
@@ -3059,11 +3059,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -3091,7 +3091,7 @@ signals:
 private:
     FileLocationObject* _photoBig;
     FileLocationObject* _photoSmall;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -3104,7 +3104,7 @@ class ChatFullObject : public QObject
     Q_PROPERTY(PhotoObject* chatPhoto READ chatPhoto WRITE setChatPhoto NOTIFY chatPhotoChanged)
     Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(PeerNotifySettingsObject* notifySettings READ notifySettings WRITE setNotifySettings NOTIFY notifySettingsChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     ChatFullObject(const ChatFull & another, QObject *parent = 0) : QObject(parent){
@@ -3167,11 +3167,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -3207,7 +3207,7 @@ private:
     PhotoObject* _chatPhoto;
     qint32 _id;
     PeerNotifySettingsObject* _notifySettings;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -3219,7 +3219,7 @@ class UserProfilePhotoObject : public QObject
     Q_PROPERTY(qint64 photoId READ photoId WRITE setPhotoId NOTIFY photoIdChanged)
     Q_PROPERTY(FileLocationObject* photoBig READ photoBig WRITE setPhotoBig NOTIFY photoBigChanged)
     Q_PROPERTY(FileLocationObject* photoSmall READ photoSmall WRITE setPhotoSmall NOTIFY photoSmallChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     UserProfilePhotoObject(const UserProfilePhoto & another, QObject *parent = 0) : QObject(parent){
@@ -3269,11 +3269,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -3305,7 +3305,7 @@ private:
     qint64 _photoId;
     FileLocationObject* _photoBig;
     FileLocationObject* _photoSmall;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -3326,7 +3326,7 @@ class ChatObject : public QObject
     Q_PROPERTY(qint64 accessHash READ accessHash WRITE setAccessHash NOTIFY accessHashChanged)
     Q_PROPERTY(bool checkedIn READ checkedIn WRITE setCheckedIn NOTIFY checkedInChanged)
     Q_PROPERTY(bool left READ left WRITE setLeft NOTIFY leftChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     ChatObject(const Chat & another, QObject *parent = 0) : QObject(parent){
@@ -3493,11 +3493,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -3565,7 +3565,7 @@ private:
     qint64 _accessHash;
     bool _checkedIn;
     bool _left;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -3580,7 +3580,7 @@ class DialogObject : public QObject
     Q_PROPERTY(qint32 unreadCount READ unreadCount WRITE setUnreadCount NOTIFY unreadCountChanged)
     Q_PROPERTY(bool encrypted READ encrypted WRITE setEncrypted NOTIFY encryptedChanged)
     Q_PROPERTY(QStringList typingUsers READ typingUsers WRITE setTypingUsers NOTIFY typingUsersChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     DialogObject(const Dialog & another, QObject *parent = 0) : QObject(parent){
@@ -3668,11 +3668,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -3714,7 +3714,7 @@ private:
     qint32 _unreadCount;
     bool _encrypted;
     QStringList _typingUsers;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -3723,7 +3723,7 @@ Q_DECLARE_METATYPE(DialogObject*)
 class SendMessageActionObject : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     SendMessageActionObject(const SendMessageAction & another, QObject *parent = 0) : QObject(parent){
@@ -3734,11 +3734,11 @@ public:
     SendMessageActionObject(QObject *parent = 0) : QObject(parent){}
     ~SendMessageActionObject(){}
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -3758,7 +3758,7 @@ signals:
     void classTypeChanged();
 
 private:
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -3773,7 +3773,7 @@ class DecryptedMessageActionObject : public QObject
     Q_PROPERTY(qint32 startSeqNo READ startSeqNo WRITE setStartSeqNo NOTIFY startSeqNoChanged)
     Q_PROPERTY(qint32 endSeqNo READ endSeqNo WRITE setEndSeqNo NOTIFY endSeqNoChanged)
     Q_PROPERTY(SendMessageActionObject* action READ action WRITE setAction NOTIFY actionChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     DecryptedMessageActionObject(const DecryptedMessageAction & another, QObject *parent = 0) : QObject(parent){
@@ -3862,11 +3862,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -3910,7 +3910,7 @@ private:
     qint32 _startSeqNo;
     qint32 _endSeqNo;
     SendMessageActionObject* _action;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -3936,7 +3936,7 @@ class DecryptedMessageMediaObject : public QObject
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(QString fileName READ fileName WRITE setFileName NOTIFY fileNameChanged)
     Q_PROPERTY(QString mimeType READ mimeType WRITE setMimeType NOTIFY mimeTypeChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     DecryptedMessageMediaObject(const DecryptedMessageMedia & another, QObject *parent = 0) : QObject(parent){
@@ -4168,11 +4168,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -4260,7 +4260,7 @@ private:
     qint32 _userId;
     QString _fileName;
     QString _mimeType;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -4275,7 +4275,7 @@ class DecryptedMessageObject : public QObject
     Q_PROPERTY(QString message READ message WRITE setMessage NOTIFY messageChanged)
     Q_PROPERTY(DecryptedMessageMediaObject* media READ media WRITE setMedia NOTIFY mediaChanged)
     Q_PROPERTY(DecryptedMessageActionObject* action READ action WRITE setAction NOTIFY actionChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     DecryptedMessageObject(const DecryptedMessage & another, QObject *parent = 0) : QObject(parent){
@@ -4364,11 +4364,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -4412,7 +4412,7 @@ private:
     QString _message;
     DecryptedMessageMediaObject* _media;
     DecryptedMessageActionObject* _action;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -4431,7 +4431,7 @@ class MessageMediaObject : public QObject
     Q_PROPERTY(QString phoneNumber READ phoneNumber WRITE setPhoneNumber NOTIFY phoneNumberChanged)
     Q_PROPERTY(qint32 userId READ userId WRITE setUserId NOTIFY userIdChanged)
     Q_PROPERTY(VideoObject* video READ video WRITE setVideo NOTIFY videoChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     MessageMediaObject(const MessageMedia & another, QObject *parent = 0) : QObject(parent){
@@ -4572,11 +4572,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -4636,7 +4636,7 @@ private:
     QString _phoneNumber;
     qint32 _userId;
     VideoObject* _video;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -4660,7 +4660,7 @@ class MessageObject : public QObject
     Q_PROPERTY(qint32 fwdFromId READ fwdFromId WRITE setFwdFromId NOTIFY fwdFromIdChanged)
     Q_PROPERTY(qint32 replyToMsgId READ replyToMsgId WRITE setReplyToMsgId NOTIFY replyToMsgIdChanged)
     Q_PROPERTY(QString message READ message WRITE setMessage NOTIFY messageChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     MessageObject(const Message & another, QObject *parent = 0) : QObject(parent){
@@ -4866,11 +4866,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -4946,7 +4946,7 @@ private:
     qint32 _fwdFromId;
     qint32 _replyToMsgId;
     QString _message;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -4962,7 +4962,7 @@ class GeoChatMessageObject : public QObject
     Q_PROPERTY(MessageMediaObject* media READ media WRITE setMedia NOTIFY mediaChanged)
     Q_PROPERTY(qint32 chatId READ chatId WRITE setChatId NOTIFY chatIdChanged)
     Q_PROPERTY(QString message READ message WRITE setMessage NOTIFY messageChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     GeoChatMessageObject(const GeoChatMessage & another, QObject *parent = 0) : QObject(parent){
@@ -5064,11 +5064,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -5116,7 +5116,7 @@ private:
     MessageMediaObject* _media;
     qint32 _chatId;
     QString _message;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -5133,7 +5133,7 @@ class UserObject : public QObject
     Q_PROPERTY(UserStatusObject* status READ status WRITE setStatus NOTIFY statusChanged)
     Q_PROPERTY(QString lastName READ lastName WRITE setLastName NOTIFY lastNameChanged)
     Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
-    Q_PROPERTY(qint64 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
+    Q_PROPERTY(quint32 classType READ classType WRITE setClassType NOTIFY classTypeChanged)
 
 public:
     UserObject(const User & another, QObject *parent = 0) : QObject(parent){
@@ -5248,11 +5248,11 @@ public:
         emit changed();
     }
 
-    qint64 classType() const {
+    quint32 classType() const {
         return _classType;
     }
 
-    void setClassType(qint64 value) {
+    void setClassType(quint32 value) {
         if( value == _classType )
             return;
         _classType = value;
@@ -5305,7 +5305,7 @@ private:
     UserStatusObject* _status;
     QString _lastName;
     QString _username;
-    qint64 _classType;
+    quint32 _classType;
 
 };
 
@@ -5431,6 +5431,6 @@ static bool initialize() {
     
     return true;
 }
-static bool initialized = initialize();
+static bool initialized = false;
 
 #endif

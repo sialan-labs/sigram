@@ -10,10 +10,14 @@
 #include <QNetworkProxy>
 #include <QCommandLineParser>
 
+#include <objects/types.h>
+
 #include <telegram.h>
 
 int main(int argc, char *argv[])
 {
+    initialized = initialize();
+
     AsemanApplication app(argc, argv);
     app.setApplicationName("Cutegram");
     app.setApplicationDisplayName("Cutegram");
