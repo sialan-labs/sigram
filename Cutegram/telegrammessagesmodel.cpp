@@ -71,8 +71,13 @@ void TelegramMessagesModel::setTelegram(TelegramQml *tgo)
     TelegramQml *tg = static_cast<TelegramQml*>(tgo);
     if( p->telegram == tg )
         return;
+    if(p->telegram)
+        p->telegram->unregisterMessagesModel(this);
 
     p->telegram = tg;
+    if(p->telegram)
+        p->telegram->registerMessagesModel(this);
+
     p->initializing = tg;
     emit telegramChanged();
     emit initializingChanged();
@@ -426,5 +431,8 @@ void TelegramMessagesModel::timerEvent(QTimerEvent *e)
 
 TelegramMessagesModel::~TelegramMessagesModel()
 {
+    if(p->telegram)
+        p->telegram->unregisterMessagesModel(this);
+
     delete p;
 }

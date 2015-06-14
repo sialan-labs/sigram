@@ -116,5 +116,11 @@
         <file>qml/Cutegram/files/select-none-light.png</file>
         <file>qml/Cutegram/files/select-none.png</file>
         <file>qml/Cutegram/FramedContactImage.qml</file>
+        <file>qml/Cutegram/about/github-contributors</file>
+        <file>qml/Cutegram/about/cutegram</file>
+        <file>qml/Cutegram/about/libqtelegram</file>
+        <file>qml/Cutegram/about/sigram</file>
+        <file>qml/Cutegram/about/translators</file>
+        <file>qml/Cutegram/ContributorsList.qml</file>
     </qresource>
 </RCC>

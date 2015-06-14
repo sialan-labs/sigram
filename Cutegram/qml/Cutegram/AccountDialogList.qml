@@ -478,4 +478,20 @@ Item {
             restore_minimum_timer.restart()
         }
     }
+
+    function next() {
+        var dialog = dialogs_model.at(dlist.currentIndex+1)
+        if(!dialog)
+            return
+
+        currentDialog = dialog
+    }
+
+    function previous() {
+        var dialog = dialogs_model.at(dlist.currentIndex-1)
+        if(!dialog)
+            return
+
+        currentDialog = dialog
+    }
 }

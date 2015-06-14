@@ -9,7 +9,7 @@ Rectangle {
     Column {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.right: cblist.left
         spacing: 4*Devices.density
 
         Image {
@@ -71,8 +71,28 @@ Rectangle {
         }
     }
 
-    AsemanLogo {
+    ContributorsList {
+        id: cblist
         anchors.right: parent.right
+        width: 400*Devices.density
+        height: parent.height
+
+
+        Rectangle {
+            y: -height
+            width: parent.height
+            height: 6*Devices.density
+            rotation: 90
+            transformOrigin: Item.BottomLeft
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#00000000" }
+                GradientStop { position: 1.0; color: "#000000" }
+            }
+        }
+    }
+
+    AsemanLogo {
+        anchors.right: cblist.left
         anchors.bottom: parent.bottom
         anchors.margins: 8*Devices.density
         height: 30*Devices.density

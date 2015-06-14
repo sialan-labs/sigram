@@ -144,6 +144,14 @@ int TelegramDialogsModel::indexOf(DialogObject *dialog)
     return p->dialogs.indexOf(dId);
 }
 
+DialogObject *TelegramDialogsModel::at(int row)
+{
+    if(row < 0 || row >= p->dialogs.count())
+        return 0;
+
+    return p->telegram->dialog( p->dialogs.at(row) );
+}
+
 void TelegramDialogsModel::refreshDatabase()
 {
     if(!p->telegram)

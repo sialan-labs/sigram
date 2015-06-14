@@ -78,7 +78,8 @@ SOURCES += main.cpp \
     textemojiwrapper.cpp \
     telegramtestobject.cpp \
     emoticonsmodel.cpp \
-    backgroundmanager.cpp
+    backgroundmanager.cpp \
+    contributorsmodel.cpp
 
 RESOURCES += resource.qrc
 
@@ -117,7 +118,8 @@ HEADERS += \
     textemojiwrapper.h \
     telegramtestobject.h \
     emoticonsmodel.h \
-    backgroundmanager.h
+    backgroundmanager.h \
+    contributorsmodel.h
 
 OTHER_FILES += \
     objects/types.sco \

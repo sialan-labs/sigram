@@ -55,6 +55,7 @@ public:
     bool initializing() const;
 
     Q_INVOKABLE int indexOf(DialogObject *dialog);
+    Q_INVOKABLE DialogObject *at(int row);
 
 public slots:
     void refreshDatabase();

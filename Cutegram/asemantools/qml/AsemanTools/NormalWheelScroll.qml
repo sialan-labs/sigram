@@ -76,7 +76,7 @@ MouseArea {
                 if( endContentY < -flick.contentHeight+padY )
                     endContentY = -flick.contentHeight+padY
             } else {
-                padY = -flick.originY
+                padY = flick.originY
                 if( endContentY < -padY )
                     endContentY = -padY
                 else
