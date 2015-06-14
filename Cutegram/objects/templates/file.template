@@ -11,4 +11,4 @@ static bool initialize() {
     
     return true;
 }
-static bool initialized = initialize();
+static bool initialized = false;

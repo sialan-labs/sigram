@@ -88,7 +88,7 @@ void Database::insertUser(const User &user)
     DbUser duser;
     duser.user = user;
 
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(DbUser,duser));
+    QMetaObject::invokeMethod(p->core, "insertUser", Qt::QueuedConnection, Q_ARG(DbUser,duser));
 }
 
 void Database::insertChat(const Chat &chat)
@@ -97,7 +97,7 @@ void Database::insertChat(const Chat &chat)
     DbChat dchat;
     dchat.chat = chat;
 
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(DbChat,dchat));
+    QMetaObject::invokeMethod(p->core, "insertChat", Qt::QueuedConnection, Q_ARG(DbChat,dchat));
 }
 
 void Database::insertDialog(const Dialog &dialog, bool encrypted)
@@ -106,7 +106,7 @@ void Database::insertDialog(const Dialog &dialog, bool encrypted)
     DbDialog ddlg;
     ddlg.dialog = dialog;
 
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(DbDialog,ddlg), Q_ARG(bool,encrypted));
+    QMetaObject::invokeMethod(p->core, "insertDialog", Qt::QueuedConnection, Q_ARG(DbDialog,ddlg), Q_ARG(bool,encrypted));
 }
 
 void Database::insertMessage(const Message &message)
@@ -115,19 +115,19 @@ void Database::insertMessage(const Message &message)
     DbMessage dmsg;
     dmsg.message = message;
 
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(DbMessage,dmsg));
+    QMetaObject::invokeMethod(p->core, "insertMessage", Qt::QueuedConnection, Q_ARG(DbMessage,dmsg));
 }
 
 void Database::insertMediaEncryptedKeys(qint64 mediaId, const QByteArray &key, const QByteArray &iv)
 {
     FIRST_CHECK;
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(qint64,mediaId), Q_ARG(QByteArray,key), Q_ARG(QByteArray,iv));
+    QMetaObject::invokeMethod(p->core, "insertMediaEncryptedKeys", Qt::QueuedConnection, Q_ARG(qint64,mediaId), Q_ARG(QByteArray,key), Q_ARG(QByteArray,iv));
 }
 
 void Database::readFullDialogs()
 {
     FIRST_CHECK;
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection);
+    QMetaObject::invokeMethod(p->core, "readFullDialogs", Qt::QueuedConnection);
 }
 
 void Database::readMessages(const Peer &peer, int offset, int limit)
@@ -136,25 +136,25 @@ void Database::readMessages(const Peer &peer, int offset, int limit)
     DbPeer dpeer;
     dpeer.peer = peer;
 
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(DbPeer,dpeer), Q_ARG(int,offset), Q_ARG(int,limit) );
+    QMetaObject::invokeMethod(p->core, "readMessages", Qt::QueuedConnection, Q_ARG(DbPeer,dpeer), Q_ARG(int,offset), Q_ARG(int,limit) );
 }
 
 void Database::deleteMessage(qint64 msgId)
 {
     FIRST_CHECK;
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(qint64,msgId));
+    QMetaObject::invokeMethod(p->core, "deleteMessage", Qt::QueuedConnection, Q_ARG(qint64,msgId));
 }
 
 void Database::deleteDialog(qint64 dlgId)
 {
     FIRST_CHECK;
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(qint64,dlgId));
+    QMetaObject::invokeMethod(p->core, "deleteDialog", Qt::QueuedConnection, Q_ARG(qint64,dlgId));
 }
 
 void Database::deleteHistory(qint64 dlgId)
 {
     FIRST_CHECK;
-    QMetaObject::invokeMethod(p->core, __FUNCTION__, Qt::QueuedConnection, Q_ARG(qint64,dlgId));
+    QMetaObject::invokeMethod(p->core, "deleteHistory", Qt::QueuedConnection, Q_ARG(qint64,dlgId));
 }
 
 void Database::userFounded_slt(const DbUser &user)

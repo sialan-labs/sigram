@@ -32,6 +32,6 @@
 
 #define CHECK_QUERY_ERROR(QUERY_OBJECT) \
     if(QUERY_OBJECT.lastError().isValid()) \
-        qDebug() << __PRETTY_FUNCTION__ << QUERY_OBJECT.lastError().text();
+        qDebug() << __FUNCTION__ << QUERY_OBJECT.lastError().text();
 
 #endif // CUTEGRAM_MACROS_H

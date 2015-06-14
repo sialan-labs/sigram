@@ -1451,7 +1451,7 @@ void TelegramQml::getFile(FileLocationObject *l, qint64 type, qint32 fileSize)
         Q_UNUSED(upp)
     }
     else
-        qDebug() << __PRETTY_FUNCTION__ << ": Can't detect size of: " << parentObj;
+        qDebug() << __FUNCTION__ << ": Can't detect size of: " << parentObj;
 
     qint64 fileId = p->telegram->uploadGetFile(input, fileSize, l->dcId(), ekey, eiv);
     p->downloads[fileId] = l;
@@ -1951,7 +1951,7 @@ void TelegramQml::authSignInError_slt(qint64 id, qint32 errorCode, QString error
     emit authSignInErrorChanged();
     emit authSignUpErrorChanged();
 
-    qDebug() << __PRETTY_FUNCTION__ << errorText;
+    qDebug() << __FUNCTION__ << errorText;
 }
 
 void TelegramQml::authSignUpError_slt(qint64 id, qint32 errorCode, QString errorText)
@@ -1966,7 +1966,7 @@ void TelegramQml::authSignUpError_slt(qint64 id, qint32 errorCode, QString error
     emit authSignInErrorChanged();
     emit authSignUpErrorChanged();
 
-    qDebug() << __PRETTY_FUNCTION__ << errorText;
+    qDebug() << __FUNCTION__ << errorText;
 }
 
 void TelegramQml::error(qint64 id, qint32 errorCode, QString functionName, QString errorText)
@@ -1979,7 +1979,7 @@ void TelegramQml::error(qint64 id, qint32 errorCode, QString functionName, QStri
     if(errorText.contains("PHONE_PASSWORD_PROTECTED"))
         emit authPasswordProtectedError();
 
-    qDebug() << __PRETTY_FUNCTION__ << functionName << errorText;
+    qDebug() << __FUNCTION__ << functionName << errorText;
 }
 
 void TelegramQml::accountGetWallPapers_slt(qint64 id, const QList<WallPaper> &wallPapers)
