@@ -17,11 +17,11 @@
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram - клиент телеграмма от Aseman. Бесплатный, с открытым исходным кодом и выпущенный под лизенцией GPLv3.</translation>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram использует Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, некоторые KDE утилиты, иконки Faenza и смайлы Twitter.</translation>
     </message>
 </context>
 <context>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Go online</source>
-        <translation type="unfinished"></translation>
+        <translation>Появится в сети</translation>
     </message>
 </context>
 <context>
@@ -130,20 +130,21 @@
     </message>
     <message>
         <source>Password Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка пароля</translation>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изивините, но ваша учетная запись защищена двойной аутентификацией. Мы работаем над этим и добавим эту функцию в Cutegram как можно скорее.
+Но в настоящее время, для исправления этого отключите двойную аутентификацию, используя только логин Cutegram, а затем включите снова двойную аутентификацию.</translation>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 печатает для &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 печатает</translation>
     </message>
 </context>
 <context>
@@ -208,7 +209,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Медиа-файлы в настоящее время не поддерживаются в секретных чатах.</translation>
     </message>
 </context>
 <context>
@@ -261,7 +262,7 @@ Note that android accept secret chat automatically.</source>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Ответить</translation>
     </message>
 </context>
 <context>
@@ -358,7 +359,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Запросить код</translation>
     </message>
 </context>
 <context>
@@ -415,7 +416,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Add Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить Аккаунт</translation>
     </message>
 </context>
 <context>
@@ -700,11 +701,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразовать символы в смайлы</translation>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram выполнит перезапуск после этого действия.</translation>
     </message>
 </context>
 <context>
@@ -1012,7 +1013,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пример: 127.0.0.1</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1108,26 +1109,26 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished">Фон</translation>
+        <translation>Фон</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation type="unfinished">Выбрать фото</translation>
+        <translation>Выбрать фото</translation>
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Подробный Режим</translation>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить запускать нескольких копий Cutegram.</translation>
     </message>
 </context>
 </TS>
