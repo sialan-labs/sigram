@@ -1525,7 +1525,7 @@ void TelegramQml::setProfilePhoto(const QString &fileName)
     emit uploadingProfilePhotoChanged();
 }
 
-void TelegramQml::timerUpdateDialogs(bool duration)
+void TelegramQml::timerUpdateDialogs(qint32 duration)
 {
     if( p->upd_dialogs_timer )
         killTimer(p->upd_dialogs_timer);
