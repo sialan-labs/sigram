@@ -882,8 +882,8 @@ void TelegramQml::authSignIn(const QString &code)
     p->telegram->authSignIn(code);
 
     p->authNeeded = false;
-    p->authSignUpError = "";
-    p->authSignInError = "";
+    p->authSignUpError.clear();
+    p->authSignInError.clear();
     emit authSignInErrorChanged();
     emit authSignUpErrorChanged();
     emit authNeededChanged();
@@ -897,8 +897,8 @@ void TelegramQml::authSignUp(const QString &code, const QString &firstName, cons
     p->telegram->authSignUp(code, firstName, lastName);
 
     p->authNeeded = false;
-    p->authSignUpError = "";
-    p->authSignInError = "";
+    p->authSignUpError.clear();
+    p->authSignInError.clear();
     emit authSignInErrorChanged();
     emit authSignUpErrorChanged();
     emit authNeededChanged();
@@ -1566,7 +1566,7 @@ void TelegramQml::setProfilePhoto(const QString &fileName)
     emit uploadingProfilePhotoChanged();
 }
 
-void TelegramQml::timerUpdateDialogs(bool duration)
+void TelegramQml::timerUpdateDialogs(qint32 duration)
 {
     if( p->upd_dialogs_timer )
         killTimer(p->upd_dialogs_timer);

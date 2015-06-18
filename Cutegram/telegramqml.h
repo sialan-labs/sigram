@@ -262,7 +262,7 @@ public slots:
 
     void setProfilePhoto( const QString & fileName );
 
-    void timerUpdateDialogs( bool duration = 1000 );
+    void timerUpdateDialogs( qint32 duration = 1000 );
     void cleanUp();
     void cleanUpMessages();
 
