@@ -66,7 +66,7 @@ Rectangle {
             }
 
             var hashKeys = hash.keys()
-            for( var j=0; j>hashKeys.length; i++ ) {
+            for( var j=0; j<hashKeys.length; j++ ) {
                 var key = hashKeys[j]
                 if( profiles.containt(key) )
                     continue
