@@ -57,7 +57,7 @@ Item {
             result = isSticker? 220*Devices.density : 168*Devices.density
             break;
 
-        case FileHandler.TypeTargetMediaOther:
+        case FileHandler.TypeTargetMediaGeoPoint:
             result = mapDownloader.size.width
             break;
 
@@ -91,7 +91,7 @@ Item {
             result = isSticker? width*media_img.imageSize.height/media_img.imageSize.width : width
             break;
 
-        case FileHandler.TypeTargetMediaOther:
+        case FileHandler.TypeTargetMediaGeoPoint:
             result = mapDownloader.size.height
             break;
 
@@ -121,6 +121,9 @@ Item {
             case FileHandler.TypeTargetMediaPhoto:
                 download()
                 break;
+
+            case FileHandler.TypeTargetMediaGeoPoint:
+                mapDownloader.addToQueue(Qt.point(message.media.geo.lat, message.media.geo.longitude), media_img.setImage )
             }
         }
     }
@@ -173,7 +176,7 @@ Item {
                     result = file_handler.thumbPath
                 break;
 
-            case FileHandler.TypeTargetMediaOther:
+            case FileHandler.TypeTargetMediaGeoPoint:
                 result = customImage
                 break;
             }
@@ -212,7 +215,7 @@ Item {
         id: download_frame
         anchors.fill: parent
         color: "#88000000"
-        visible: fileLocation.length == 0 && file_handler.targetType != FileHandler.TypeTargetMediaPhoto && !isSticker && file_handler.targetType != FileHandler.TypeTargetMediaOther
+        visible: fileLocation.length == 0 && file_handler.targetType != FileHandler.TypeTargetMediaPhoto && !isSticker && file_handler.targetType != FileHandler.TypeTargetMediaGeoPoint
         radius: 3*Devices.density
 
         Text {
@@ -317,7 +320,7 @@ Item {
                 file_handler.download()
                 break;
 
-            case FileHandler.TypeTargetMediaOther:
+            case FileHandler.TypeTargetMediaGeoPoint:
                 Qt.openUrlExternally( mapDownloader.webLinkOf(Qt.point(media.geo.lat, media.geo.longitude)) )
                 break;
 

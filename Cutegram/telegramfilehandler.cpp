@@ -574,6 +574,9 @@ FileLocationObject *TelegramFileHandler::analizeObject(QObject *target, int *tar
         else
         if(media->classType() == MessageMedia::typeMessageMediaPhoto)
             object = media->photo();
+        else
+        if(media->classType() == MessageMedia::typeMessageMediaGeo)
+            object = media->geo();
     }
         break;
 
@@ -599,7 +602,13 @@ FileLocationObject *TelegramFileHandler::analizeObject(QObject *target, int *tar
 
     case TypeObjectGeoPoint:
         object = 0;
-        if(targetType) *targetType = TypeTargetMediaOther;
+        if(targetType) *targetType = TypeTargetMediaGeoPoint;
+        if(targetPointer) *targetPointer = object;
+        break;
+
+    case TypeObjectContact:
+        object = 0;
+        if(targetType) *targetType = TypeTargetMediaContact;
         if(targetPointer) *targetPointer = object;
         break;
 
