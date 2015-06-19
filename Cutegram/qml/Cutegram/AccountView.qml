@@ -232,4 +232,16 @@ Rectangle {
             }
         }
     }
+
+    function nextDialog() {
+        dialogs.next()
+    }
+
+    function previousDialog() {
+        dialogs.previous()
+    }
+
+    function showNull() {
+        dialogs.currentDialog = telegramObject.nullDialog
+    }
 }

@@ -39,6 +39,7 @@
 #include "textemojiwrapper.h"
 #include "telegramcontactsmodel.h"
 #include "emoticonsmodel.h"
+#include "contributorsmodel.h"
 #include "telegramuploadsmodel.h"
 #include "telegramchatparticipantsmodel.h"
 #include "themeitem.h"
@@ -189,6 +190,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<TelegramUploadsModel>("Cutegram", 1, 0, "UploadsModel");
     qmlRegisterType<TelegramSearchModel>("Cutegram", 1, 0, "SearchModel");
     qmlRegisterType<UserNameFilterModel>("Cutegram", 1, 0, "UserNameFilterModel");
+    qmlRegisterType<ContributorsModel>("Cutegram", 1, 0, "ContributorsModel");
     qmlRegisterType<CutegramEnums>("Cutegram", 1, 0, "CutegramEnums");
     qmlRegisterType<ThemeItem>("Cutegram", 1, 0, "CutegramTheme");
     qmlRegisterType<TextEmojiWrapper>("Cutegram", 1, 0, "TextEmojiWrapper");

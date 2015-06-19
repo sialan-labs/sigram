@@ -23,6 +23,7 @@
 #include "userdata.h"
 #include "database.h"
 #include "cutegramdialog.h"
+#include "telegrammessagesmodel.h"
 #include "objects/types.h"
 
 #include <secret/secretchat.h>
@@ -42,6 +43,7 @@
 #include <QImageReader>
 #include <QImageWriter>
 #include <QBuffer>
+#include <QTimer>
 
 #ifdef Q_OS_WIN
 #define FILES_PRE_STR QString("file:///")
@@ -71,6 +73,8 @@ public:
     int unreadCount;
     qreal totalUploadedPercent;
 
+    bool autoCleanUpMessages;
+
     bool authNeeded;
     bool authLoggedIn;
     bool phoneRegistered;
@@ -85,6 +89,8 @@ public:
     qint64 checkphone_req_id;
     qint64 profile_upload_id;
     QString upload_photo_path;
+
+    QSet<TelegramMessagesModel*> messagesModels;
 
     QHash<qint64,DialogObject*> dialogs;
     QHash<qint64,MessageObject*> messages;
@@ -135,6 +141,7 @@ public:
     qint64 msg_send_random_id;
 
     CutegramDialog *cutegram_dlg;
+    QTimer *cleanUpTimer;
 };
 
 TelegramQml::TelegramQml(QObject *parent) :
@@ -150,6 +157,11 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->msg_send_id_counter = INT_MAX - 100000;
     p->msg_send_random_id = 0;
     p->cutegram_dlg = 0;
+    p->autoCleanUpMessages = false;
+
+    p->cleanUpTimer = new QTimer(this);
+    p->cleanUpTimer->setSingleShot(true);
+    p->cleanUpTimer->setInterval(1000);
 
     p->userdata = new UserData(this);
     p->database = new Database(this);
@@ -178,6 +190,8 @@ TelegramQml::TelegramQml(QObject *parent) :
     p->nullLocation = new FileLocationObject(FileLocation(), this);
     p->nullEncryptedChat = new EncryptedChatObject(EncryptedChat(), this);
     p->nullEncryptedMessage = new EncryptedMessageObject(EncryptedMessage(), this);
+
+    connect(p->cleanUpTimer, SIGNAL(timeout()), SLOT(cleanUpMessages_prv()));
 }
 
 QString TelegramQml::phoneNumber() const
@@ -277,6 +291,35 @@ void TelegramQml::setCutegramDialog(bool stt)
 bool TelegramQml::cutegramDialog() const
 {
     return p->cutegram_dlg;
+}
+
+void TelegramQml::setAutoCleanUpMessages(bool stt)
+{
+    if(p->autoCleanUpMessages == stt)
+        return;
+
+    p->autoCleanUpMessages = stt;
+    if(p->autoCleanUpMessages)
+        cleanUpMessages();
+
+    emit autoCleanUpMessagesChanged();
+}
+
+bool TelegramQml::autoCleanUpMessages() const
+{
+    return p->autoCleanUpMessages;
+}
+
+void TelegramQml::registerMessagesModel(TelegramMessagesModel *model)
+{
+    p->messagesModels.insert(model);
+    connect(model, SIGNAL(dialogChanged()), this, SLOT(cleanUpMessages()));
+}
+
+void TelegramQml::unregisterMessagesModel(TelegramMessagesModel *model)
+{
+    p->messagesModels.remove(model);
+    disconnect(model, SIGNAL(dialogChanged()), this, SLOT(cleanUpMessages()));
 }
 
 UserData *TelegramQml::userData() const
@@ -872,9 +915,7 @@ void TelegramQml::sendMessage(qint64 dId, const QString &msg, int replyTo)
 
     Message message = newMessage(dId);
     message.setMessage(msg);
-
-    if(replyTo)
-        message.setReplyToMsgId(replyTo);
+    message.setReplyToMsgId(replyTo);
 
     p->msg_send_random_id = generateRandomId();
     if(dlg && dlg->encrypted())
@@ -1574,6 +1615,99 @@ void TelegramQml::cleanUp()
     emit contactsChanged();
 }
 
+void TelegramQml::cleanUpMessages()
+{
+    if( !p->autoCleanUpMessages && p->messagesModels.contains(static_cast<TelegramMessagesModel*>(sender())) )
+        return;
+
+    p->cleanUpTimer->stop();
+    p->cleanUpTimer->start();
+}
+
+void TelegramQml::cleanUpMessages_prv()
+{
+    QSet<qint32> lockedMessages;
+
+    /*! Find messages shouldn't be delete !*/
+    foreach(DialogObject *dlg, p->dialogs)
+    {
+        qint32 msgId = dlg->topMessage();
+        if(msgId)
+            lockedMessages.insert(msgId);
+    }
+
+    foreach(TelegramMessagesModel *mdl, p->messagesModels)
+    {
+        DialogObject *dlg = mdl->dialog();
+        if(!dlg)
+            continue;
+
+        qint64 dId = dlg->peer()->userId();
+        if(!dId)
+            dId = dlg->peer()->chatId();
+        if(!dId)
+            continue;
+
+        const QList<qint64> &list = p->messages_list.value(dId);
+        foreach(qint64 mId, list)
+            lockedMessages.insert(mId);
+    }
+
+    foreach(MessageObject *msg, p->pend_messages)
+        lockedMessages.insert(msg->id());
+    foreach(MessageObject *msg, p->uploads)
+        lockedMessages.insert(msg->id());
+    foreach(FileLocationObject *obj, p->downloads)
+    {
+        QObject *parent = obj;
+        while(parent && parent->metaObject() != &MessageObject::staticMetaObject)
+            parent = parent->parent();
+        if(!parent)
+            continue;
+
+        lockedMessages.insert(static_cast<MessageObject*>(parent)->id());
+    }
+    foreach(FileLocationObject *obj, p->accessHashes)
+    {
+        QObject *parent = obj;
+        while(parent && parent->metaObject() != &MessageObject::staticMetaObject)
+            parent = parent->parent();
+        if(!parent)
+            continue;
+
+        lockedMessages.insert(static_cast<MessageObject*>(parent)->id());
+    }
+
+    /*! Delete expired messages !*/
+    QHashIterator<qint64, QList<qint64> > mli(p->messages_list);
+    while(mli.hasNext())
+    {
+        mli.next();
+        QList<qint64> messages = mli.value();
+        for(int i=0; i<messages.count(); i++)
+        {
+            qint64 msgId = messages.at(i);
+            if(lockedMessages.contains(msgId))
+                continue;
+
+            messages.removeAt(i);
+            i--;
+        }
+
+        p->messages_list[mli.key()] = messages;
+    }
+
+    foreach(MessageObject *msg, p->messages)
+        if(!lockedMessages.contains(msg->id()))
+        {
+            p->messages.remove(msg->id());
+            msg->deleteLater();
+        }
+
+    emit dialogsChanged(false);
+    emit messagesChanged(false);
+}
+
 void TelegramQml::try_init()
 {
     if( p->telegram )
@@ -1979,6 +2113,7 @@ void TelegramQml::messagesSendMessage_slt(qint64 id, qint32 msgId, qint32 date, 
     msg.setToId(peer);
     msg.setUnread(msgObj->unread());
     msg.setMessage(msgObj->message());
+    msg.setReplyToMsgId(msgObj->replyToMsgId());
 
     qint64 did = msg.toId().chatId();
     if( !did )

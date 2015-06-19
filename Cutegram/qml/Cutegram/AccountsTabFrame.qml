@@ -397,4 +397,28 @@ Rectangle {
     function showContactList() {
         slide_menu.show(add_userchat_component)
     }
+
+    function nextDialog() {
+        var view = hash.value(tab_list.currentKey)
+        if(!view || !view.view)
+            return
+
+        view.view.nextDialog()
+    }
+
+    function previousDialog() {
+        var view = hash.value(tab_list.currentKey)
+        if(!view || !view.view)
+            return
+
+        view.view.previousDialog()
+    }
+
+    function showNull() {
+        var view = hash.value(tab_list.currentKey)
+        if(!view || !view.view)
+            return
+
+        view.view.showNull()
+    }
 }

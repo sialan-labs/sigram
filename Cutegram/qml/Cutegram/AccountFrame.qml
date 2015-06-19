@@ -77,6 +77,7 @@ Rectangle {
         configPath: AsemanApp.homePath
         publicKeyFile: Devices.resourcePath + "/tg-server.pub"
         phoneNumber: accountItem.number
+        autoCleanUpMessages: true
         onAuthCallRequested: acc_sign.callButton = false
         onAuthCodeRequested: {
             acc_sign.timeOut = sendCallTimeout
@@ -117,7 +118,7 @@ Rectangle {
 
             if( telegram.userData.isMuted(dId) && (myUser.username=="" || message.indexOf("@"+myUser.username)==-1) )
                 return
-            if( !Cutegram.notification )
+            if( msg.fromId == me || msg.out || !Cutegram.notification )
                 return
 
             var user = telegram.user(msg.fromId)

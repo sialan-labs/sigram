@@ -13,6 +13,8 @@ AsemanMain {
     masterPalette.colorGroup: SystemPalette.Active
 
     property variant authDialog
+    property variant tabFrame
+
     property alias profiles: profile_model
     property alias webPageGrabber: web_grabber
     property alias mapDownloader: map_downloader
@@ -55,8 +57,32 @@ AsemanMain {
     }
 
     Keys.onPressed: {
-        if(event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier) {
-            Cutegram.quit()
+        if(event.modifiers & Qt.ControlModifier) {
+            switch(event.key) {
+            case Qt.Key_Q:
+                Cutegram.quit()
+                break
+
+            case Qt.Key_Tab:
+                tabFrame.nextDialog()
+                break
+
+            case Qt.Key_Backtab:
+                tabFrame.previousDialog()
+                break
+            }
+        }
+        else
+        if(event.modifiers & Qt.AltModifier) {
+            switch(event.key) {
+            case Qt.Key_Up:
+                tabFrame.previousDialog()
+                break
+
+            case Qt.Key_Down:
+                tabFrame.nextDialog()
+                break
+            }
         }
     }
 
@@ -88,8 +114,12 @@ AsemanMain {
         target: AsemanApp
         onBackRequest: {
             var res = BackHandler.back()
-            if( !res && !Devices.isDesktop )
-                Cutegram.close()
+            if( !res ) {
+                if(Devices.isDesktop)
+                    tabFrame.showNull()
+                else
+                    Cutegram.close()
+            }
         }
     }
 
@@ -184,8 +214,10 @@ AsemanMain {
     Component {
         id: accounts_frame
         AccountsTabFrame {
+            id: tframe
             anchors.fill: parent
             property bool onceInstance: true
+            Component.onCompleted: tabFrame = tframe
         }
     }
 

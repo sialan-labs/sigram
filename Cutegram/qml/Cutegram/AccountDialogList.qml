@@ -114,12 +114,12 @@ Item {
             }
         }
 
-        move: Transition {
-            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: 300 }
-        }
-        moveDisplaced: Transition {
-            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: 300 }
-        }
+//        move: Transition {
+//            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: 300 }
+//        }
+//        moveDisplaced: Transition {
+//            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: 300 }
+//        }
 
         delegate: Item {
             id: list_item
@@ -477,5 +477,21 @@ Item {
             restore_unminimum_timer.stop()
             restore_minimum_timer.restart()
         }
+    }
+
+    function next() {
+        var dialog = dialogs_model.at(dlist.currentIndex+1)
+        if(!dialog)
+            return
+
+        currentDialog = dialog
+    }
+
+    function previous() {
+        var dialog = dialogs_model.at(dlist.currentIndex-1)
+        if(!dialog)
+            return
+
+        currentDialog = dialog
     }
 }

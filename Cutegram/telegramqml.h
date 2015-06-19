@@ -53,6 +53,7 @@ class Message;
 class AccountPassword;
 class AffectedMessages;
 class ImportedContact;
+class TelegramMessagesModel;
 class User;
 class Contact;
 class ContactObject;
@@ -81,7 +82,8 @@ class TelegramQml : public QObject
     Q_PROPERTY(QString downloadPath  READ downloadPath  NOTIFY downloadPathChanged )
     Q_PROPERTY(QString tempPath      READ tempPath      NOTIFY tempPathChanged     )
 
-    Q_PROPERTY(bool cutegramDialog READ cutegramDialog WRITE setCutegramDialog NOTIFY cutegramDialogChanged)
+    Q_PROPERTY(bool cutegramDialog      READ cutegramDialog      WRITE setCutegramDialog      NOTIFY cutegramDialogChanged     )
+    Q_PROPERTY(bool autoCleanUpMessages READ autoCleanUpMessages WRITE setAutoCleanUpMessages NOTIFY autoCleanUpMessagesChanged)
 
     Q_PROPERTY(bool  online               READ online WRITE setOnline NOTIFY onlineChanged)
     Q_PROPERTY(int   unreadCount          READ unreadCount            NOTIFY unreadCountChanged)
@@ -135,6 +137,12 @@ public:
 
     void setCutegramDialog(bool stt);
     bool cutegramDialog() const;
+
+    void setAutoCleanUpMessages(bool stt);
+    bool autoCleanUpMessages() const;
+
+    void registerMessagesModel(TelegramMessagesModel *model);
+    void unregisterMessagesModel(TelegramMessagesModel *model);
 
     UserData *userData() const;
     Database *database() const;
@@ -256,12 +264,14 @@ public slots:
 
     void timerUpdateDialogs( qint32 duration = 1000 );
     void cleanUp();
+    void cleanUpMessages();
 
 signals:
     void phoneNumberChanged();
     void configPathChanged();
     void publicKeyFileChanged();
     void telegramChanged();
+    void autoCleanUpMessagesChanged();
     void userDataChanged();
     void onlineChanged();
     void downloadPathChanged();
@@ -417,6 +427,7 @@ private slots:
     QStringList stringToIndex(const QString & str);
 
     void objectDestroyed(QObject *obj);
+    void cleanUpMessages_prv();
 
 private:
     TelegramQmlPrivate *p;
