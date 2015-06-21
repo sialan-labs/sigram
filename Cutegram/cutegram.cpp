@@ -62,6 +62,12 @@
 class CutegramPrivate
 {
 public:
+    QString defaultHostAddress;
+    int defaultHostPort;
+    int defaultHostDcId;
+    int appId;
+    QString appHash;
+
     QPointer<AsemanQuickView> viewer;
     bool close_blocker;
     int sysTrayCounter;
@@ -122,6 +128,11 @@ Cutegram::Cutegram(QObject *parent) :
 #endif
 
     p = new CutegramPrivate;
+    p->defaultHostAddress = "149.154.167.50";
+    p->defaultHostPort = 443;
+    p->defaultHostDcId = 2;
+    p->appId = 13682;
+    p->appHash = "de37bcf00f4688de900510f4f87384bb";
     p->doc = new QTextDocument(this);
     p->desktop = new AsemanDesktopTools(this);
     p->sysTray = 0;
@@ -252,6 +263,76 @@ int Cutegram::showMenu(const QStringList &actions, QPoint point)
 
     QAction *res = menu.exec(point);
     return pointers.indexOf(res);
+}
+
+void Cutegram::setDefaultHostAddress(const QString &host)
+{
+    if(p->defaultHostAddress == host)
+        return;
+
+    p->defaultHostAddress = host;
+    emit defaultHostAddressChanged();
+}
+
+QString Cutegram::defaultHostAddress() const
+{
+    return p->defaultHostAddress;
+}
+
+void Cutegram::setDefaultHostPort(int port)
+{
+    if(p->defaultHostPort == port)
+        return;
+
+    p->defaultHostPort = port;
+    emit defaultHostPortChanged();
+}
+
+int Cutegram::defaultHostPort() const
+{
+    return p->defaultHostPort;
+}
+
+void Cutegram::setDefaultHostDcId(int dcId)
+{
+    if(p->defaultHostDcId == dcId)
+        return;
+
+    p->defaultHostDcId = dcId;
+    emit defaultHostDcIdChanged();
+}
+
+int Cutegram::defaultHostDcId() const
+{
+    return p->defaultHostDcId;
+}
+
+void Cutegram::setAppId(int appId)
+{
+    if(p->appId == appId)
+        return;
+
+    p->appId = appId;
+    emit appIdChanged();
+}
+
+int Cutegram::appId() const
+{
+    return p->appId;
+}
+
+void Cutegram::setAppHash(const QString &appHash)
+{
+    if(p->appHash == appHash)
+        return;
+
+    p->appHash = appHash;
+    emit appHashChanged();
+}
+
+QString Cutegram::appHash() const
+{
+    return p->appHash;
 }
 
 void Cutegram::start(bool forceVisible)

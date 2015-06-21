@@ -52,12 +52,6 @@ int main(int argc, char *argv[])
                                     "tg.core.outboundpkt=false\n"
                                     "tg.core.inboundpkt=false");
 
-    Telegram::setDefaultHostAddress( parser.isSet(ipAdrsOption)? parser.value(ipAdrsOption) : "149.154.167.50");
-    Telegram::setDefaultHostPort(443);
-    Telegram::setDefaultHostDcId(parser.isSet(dcIdOption)? parser.value(dcIdOption).toInt() : 2);
-    Telegram::setAppId(13682);
-    Telegram::setAppHash("de37bcf00f4688de900510f4f87384bb");
-
     if(app.readSetting("Proxy/enable",false).toBool())
     {
         const int type = app.readSetting("Proxy/type",QNetworkProxy::HttpProxy).toInt();
@@ -93,6 +87,11 @@ int main(int argc, char *argv[])
     CompabilityTools::version1();
 
     Cutegram cutegram;
+    if(parser.isSet(dcIdOption))
+        cutegram.setDefaultHostDcId(parser.value(dcIdOption).toInt());
+    if(parser.isSet(ipAdrsOption))
+        cutegram.setDefaultHostAddress(parser.value(ipAdrsOption));
+
     cutegram.start( parser.isSet(forceOption) );
 
 #ifdef DESKTOP_DEVICE

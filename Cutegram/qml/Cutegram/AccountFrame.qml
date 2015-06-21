@@ -84,6 +84,11 @@ Rectangle {
 
     Telegram {
         id: telegram
+        defaultHostAddress: Cutegram.defaultHostAddress
+        defaultHostDcId: Cutegram.defaultHostDcId
+        defaultHostPort: Cutegram.defaultHostPort
+        appId: Cutegram.appId
+        appHash: Cutegram.appHash
         configPath: AsemanApp.homePath
         publicKeyFile: Devices.resourcePath + "/tg-server.pub"
         phoneNumber: accountItem.number
