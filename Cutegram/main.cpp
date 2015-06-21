@@ -15,7 +15,7 @@
 
 int main(int argc, char *argv[])
 {
-    TelegramQmlInitializer::init("TelegramQML");
+    TelegramQmlInitializer::init("TelegramQml");
 
     AsemanApplication app(argc, argv);
     app.setApplicationName("Cutegram");

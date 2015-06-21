@@ -1,4 +1,4 @@
-import TelegramQML 1.0
+import TelegramQml 1.0
 import QtQuick 2.0
 
 CutegramTheme {
