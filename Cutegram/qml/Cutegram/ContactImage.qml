@@ -43,19 +43,18 @@ Item {
 
     property bool circleMode: true
 
-    property FileLocation locationObj: {
-        if(isChat) {
-            return chat.photo.photoSmall
-        } else {
-            return user.photo.photoSmall
+    FileHandler {
+        id: file_handler
+        target: isChat? chat : user
+        telegram: contact_image.telegram
+        defaultThumbnail: {
+            if(user.id == telegram.cutegramId)
+                return "files/icon-normal.png"
+            if(isChat)
+                return "files/group.png"
+            else
+                return "files/user.png"
         }
-    }
-
-    onLocationObjChanged: telegram.getFile(locationObj)
-
-    Connections {
-        target: locationObj
-        onDownloadChanged: telegram.getFile(locationObj)
     }
 
     Rectangle {
@@ -73,22 +72,10 @@ Item {
         anchors.centerIn: parent
         sourceSize: Qt.size(width,height)
         smooth: true
-        source: {
-            if(user.id == telegram.cutegramId)
-                return "files/icon-normal.png"
-            if(imgPath.length==0 && isChat)
-                return "files/group.png"
-            else
-            if(imgPath.length==0)
-                return "files/user.png"
-            else
-                return imgPath
-        }
+        source: file_handler.thumbPath
         asynchronous: true
         fillMode: Image.PreserveAspectCrop
         visible: !circleMode
-
-        property string imgPath: locationObj.download.location
     }
 
     OpacityMask {
