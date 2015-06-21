@@ -1,8 +1,8 @@
 import QtQuick 2.0
 import AsemanTools.Controls 1.0
 import AsemanTools 1.0
-import Cutegram 1.0
-import CutegramTypes 1.0
+import TelegramQML 1.0
+// import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
 
 Item {
@@ -432,7 +432,7 @@ Item {
 
     function copy() {
         if(hasMedia)
-            Devices.clipboardUrl = [msg_media.locationObj.download.location]
+            Devices.clipboardUrl = [msg_media.location]
         else
         if(msg_txt.selectedText.length == 0)
             Devices.clipboard = message.message

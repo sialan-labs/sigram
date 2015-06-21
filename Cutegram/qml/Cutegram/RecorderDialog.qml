@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
 import AsemanTools 1.0
-import Cutegram 1.0
+import TelegramQML 1.0
 
 Window {
     id: recorder_item

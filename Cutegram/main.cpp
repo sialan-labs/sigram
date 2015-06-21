@@ -1,22 +1,21 @@
+
 #define ABOUT_TEXT "Cutegram is a free and opensource telegram clients, released under the GPLv3 license."
 
 #include "asemantools/asemanapplication.h"
 #include "cutegram.h"
-#include "telegramtestobject.h"
 #include "compabilitytools.h"
+#include "telegramqmlinitializer.h"
 
 #include <QMainWindow>
 #include <QPalette>
 #include <QNetworkProxy>
 #include <QCommandLineParser>
 
-#include <objects/types.h>
-
 #include <telegram.h>
 
 int main(int argc, char *argv[])
 {
-    initialized = initialize();
+    TelegramQmlInitializer::init("TelegramQML");
 
     AsemanApplication app(argc, argv);
     app.setApplicationName("Cutegram");

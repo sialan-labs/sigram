@@ -4,9 +4,9 @@
 #define CUTEGRAM_DIALOG_ID INT_MAX-100
 
 #include "cutegramdialog.h"
-#include "telegramqml.h"
-#include "userdata.h"
-#include "types/types.h"
+#include <telegramqml.h>
+#include <userdata.h>
+#include <types/types.h>
 #include "asemantools/asemandownloader.h"
 
 #include <QTimerEvent>
@@ -14,6 +14,7 @@
 #include <QLocale>
 #include <QDateTime>
 #include <QTimer>
+#include <QPointer>
 
 class CutegramDialogPrivate
 {
@@ -22,17 +23,18 @@ public:
     AsemanDownloader *downloader;
     int timer_id;
 
-    TelegramQml *telegram;
     QDomDocument dom;
 
     QHash<int, MessageUpdate> msgTimers;
+    QPointer<TelegramQml> telegram;
 };
 
-CutegramDialog::CutegramDialog(TelegramQml *parent) :
-    QObject(parent)
+CutegramDialog::CutegramDialog(QObject *parent) :
+    NewsLetterDialog()
 {
+    setParent(parent);
+
     p = new CutegramDialogPrivate;
-    p->telegram = parent;
 
     p->timer_id = startTimer(3600000);
 
@@ -45,9 +47,6 @@ CutegramDialog::CutegramDialog(TelegramQml *parent) :
     connect(p->downloader, SIGNAL(finished(QByteArray)), SLOT(messageReceived(QByteArray)));
 
     qsrand(QDateTime::currentDateTime().toMSecsSinceEpoch());
-    init_timers();
-
-    QTimer::singleShot(1000, this, SLOT(check()));
 }
 
 Dialog CutegramDialog::dialog() const
@@ -70,6 +69,26 @@ User CutegramDialog::user() const
     return usr;
 }
 
+void CutegramDialog::setTelegram(TelegramQml *tg)
+{
+    if(p->telegram == tg)
+        return;
+
+    p->telegram = tg;
+    if(p->telegram)
+    {
+        init_timers();
+        QTimer::singleShot(1000, this, SLOT(check()));
+    }
+
+    emit telegramChanged();
+}
+
+TelegramQml *CutegramDialog::telegram() const
+{
+    return p->telegram;
+}
+
 void CutegramDialog::check()
 {
     p->checker->start();
@@ -82,6 +101,9 @@ qint32 CutegramDialog::cutegramId()
 
 void CutegramDialog::updateListReady(const QByteArray &data)
 {
+    if(!p->telegram)
+        return;
+
     UserData *userData = p->telegram->userData();
     const quint64 lastMsgId = userData->value("last_update_msg_id").toULongLong();
 
@@ -99,6 +121,9 @@ void CutegramDialog::updateListReady(const QByteArray &data)
 
 void CutegramDialog::messageReceived(const QByteArray &data)
 {
+    if(!p->telegram)
+        return;
+
     QString errorStr;
     int errorLine;
     int errorColumn;
@@ -165,6 +190,9 @@ QMap<quint64, QString> CutegramDialog::analizeUpdateList(const QByteArray &data)
 
 void CutegramDialog::initMessage(const QString &txt, qint32 msgId)
 {
+    if(!p->telegram)
+        return;
+
     Peer peer(Peer::typePeerUser);
     peer.setUserId(p->telegram->me());
 
@@ -195,6 +223,9 @@ qint64 CutegramDialog::random() const
 
 void CutegramDialog::init_timers()
 {
+    if(!p->telegram)
+        return;
+
     p->msgTimers.clear();
 
     UserData *userData = p->telegram->userData();
@@ -205,6 +236,9 @@ void CutegramDialog::init_timers()
 
 void CutegramDialog::initTimer(quint64 msgId)
 {
+    if(!p->telegram)
+        return;
+
     UserData *userData = p->telegram->userData();
     const MessageUpdate msgUpdate = userData->messageUpdateItem(msgId);
     qint64 interval = msgUpdate.date - QDateTime::currentDateTime().toMSecsSinceEpoch();
@@ -222,6 +256,9 @@ void CutegramDialog::initTimer(quint64 msgId)
 
 void CutegramDialog::timerEvent(QTimerEvent *e)
 {
+    if(!p->telegram)
+        return;
+
     if(e->timerId() == p->timer_id)
         check();
     else

@@ -2,8 +2,8 @@ import QtQuick 2.0
 import AsemanTools 1.0
 import AsemanTools.Controls 1.0 as Controls
 import AsemanTools.Controls.Styles 1.0 as Styles
-import Cutegram 1.0
-import CutegramTypes 1.0
+import TelegramQML 1.0
+// import CutegramTypes 1.0
 
 Item {
     id: smsg

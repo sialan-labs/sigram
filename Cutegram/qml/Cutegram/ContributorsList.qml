@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import TelegramQML 1.0
 import Cutegram 1.0
 import AsemanTools 1.0
 

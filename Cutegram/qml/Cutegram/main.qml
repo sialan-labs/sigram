@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import Cutegram 1.0
+import TelegramQML 1.0
 import QtQuick.Controls 1.1
 
 AsemanMain {
@@ -144,6 +144,7 @@ AsemanMain {
 
     ProfilesModel {
         id: profile_model
+        configPath: AsemanApp.homePath
     }
 
     Timer {

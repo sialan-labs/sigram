@@ -32,55 +32,36 @@ contains(DEFINES, DISABLE_ASEMAN_WEBGRABBER) {
 linux|openbsd: QT += dbus
 win32 {
     QT += winextras
-    LIBS += -LD:/Projects/cutegram-deps/lib -lssleay32 -lcrypto -lz -lqtelegram-ae
-    INCLUDEPATH += D:/Projects/cutegram-deps/include D:/Projects/libqtelegram-aseman-edition
+    LIBS += -LD:/Projects/cutegram-deps/lib -lssleay32 -lcrypto -lz -lqtelegram-ae -ltelegramqml
+    INCLUDEPATH += D:/Projects/cutegram-deps/include D:/Projects/libqtelegram-aseman-edition \
+        D:/Projects/telegramqml
 } else {
 macx {
     QT += macextras
-    LIBS += -lssl -lcrypto -lz -L/Users/bardia/Projects/builds/64/lib/ -lqtelegram-ae
-    INCLUDEPATH += /Users/bardia/Projects/builds/64/include/libqtelegram-ae
+    LIBS += -lssl -lcrypto -lz -L/Users/bardia/Projects/builds/64/lib/ -lqtelegram-ae -ltelegramqml
+    INCLUDEPATH += /Users/bardia/Projects/builds/64/include/libqtelegram-ae \
+        /Users/bardia/Projects/builds/64/include/telegramqml
 } else {
 openbsd {
-    LIBS += -lssl -lcrypto -lz -lqtelegram-ae
-    INCLUDEPATH += /usr/local/include/libqtelegram-ae $$OUT_PWD/$$DESTDIR/include/libqtelegram-ae
+    LIBS += -lssl -lcrypto -lz -lqtelegram-ae -ltelegramqml
+    INCLUDEPATH += /usr/local/include/libqtelegram-ae /usr/local/include/telegramqml/
 } else {
-    LIBS += -lssl -lcrypto -lz -lqtelegram-ae
-    INCLUDEPATH += /usr/include/libqtelegram-ae $$OUT_PWD/$$DESTDIR/include/libqtelegram-ae
+    LIBS += -lssl -lcrypto -lz -lqtelegram-ae -ltelegramqml
+    INCLUDEPATH += /usr/include/libqtelegram-ae /usr/include/telegramqml/
 }
 }
 }
 
 SOURCES += main.cpp \
     cutegram.cpp \
-    telegramqml.cpp \
-    profilesmodel.cpp \
-    telegramdialogsmodel.cpp \
-    telegrammessagesmodel.cpp \
     emojis.cpp \
-    photosizelist.cpp \
     unitysystemtray.cpp \
-    userdata.cpp \
-    telegramwallpapersmodel.cpp \
-    chatparticipantlist.cpp \
-    telegramuploadsmodel.cpp \
-    telegramchatparticipantsmodel.cpp \
-    telegramcontactsmodel.cpp \
-    database.cpp \
-    databasecore.cpp \
     compabilitytools.cpp \
     cutegramdialog.cpp \
-    telegramsearchmodel.cpp \
-    dialogfilesmodel.cpp \
     cutegramenums.cpp \
-    tagfiltermodel.cpp \
-    usernamefiltermodel.cpp \
-    mp3converterengine.cpp \
     textemojiwrapper.cpp \
-    telegramtestobject.cpp \
     emoticonsmodel.cpp \
-    backgroundmanager.cpp \
-    contributorsmodel.cpp \
-    telegramfilehandler.cpp
+    contributorsmodel.cpp
 
 RESOURCES += resource.qrc
 
@@ -90,38 +71,16 @@ qtcAddDeployment()
 
 HEADERS += \
     cutegram.h \
-    telegramqml.h \
     cutegram_macros.h \
-    profilesmodel.h \
-    telegramdialogsmodel.h \
-    objects/types.h \
-    telegrammessagesmodel.h \
     emojis.h \
-    photosizelist.h \
     unitysystemtray.h \
-    userdata.h \
-    telegramwallpapersmodel.h \
-    chatparticipantlist.h \
-    telegramuploadsmodel.h \
-    telegramchatparticipantsmodel.h \
-    telegramcontactsmodel.h \
-    database.h \
-    databasecore.h \
     compabilitytools.h \
     cutegramdialog.h \
-    telegramsearchmodel.h \
-    dialogfilesmodel.h \
     cutegramenums.h \
     themeitem.h \
-    tagfiltermodel.h \
-    usernamefiltermodel.h \
-    mp3converterengine.h \
     textemojiwrapper.h \
-    telegramtestobject.h \
     emoticonsmodel.h \
-    backgroundmanager.h \
-    contributorsmodel.h \
-    telegramfilehandler.h
+    contributorsmodel.h
 
 OTHER_FILES += \
     objects/types.sco \

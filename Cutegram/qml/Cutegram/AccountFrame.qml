@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
+import TelegramQML 1.0
 import QtMultimedia 5.0
 
 Rectangle {
@@ -70,6 +71,15 @@ Rectangle {
         property int notifyActShow: 0
         property int notifyActMute: 1
         property int notifyActRemind: 2
+    }
+
+    CutegramDialog {
+        id: newsletter
+        telegram: telegramObject
+        Component.onCompleted: {
+            if(Cutegram.cutegramSubscribe)
+                telegramObject.newsLetterDialog = newsletter
+        }
     }
 
     Telegram {

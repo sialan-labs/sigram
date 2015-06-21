@@ -3,7 +3,8 @@ import AsemanTools 1.0
 import AsemanTools.Controls 1.0
 import AsemanTools.Controls.Styles 1.0
 import Cutegram 1.0
-import CutegramTypes 1.0
+import TelegramQML 1.0
+// import CutegramTypes 1.0
 import QtQuick.Window 2.0
 
 Rectangle {
@@ -15,16 +16,12 @@ Rectangle {
     property alias telegramObject: dialogs.telegramObject
     property color framesColor: "#aaffffff"
     property alias currentDialog: dialogs.currentDialog
-    property bool cutegramDialog: telegramObject.cutegramDialog
+    property variant cutegramDialog: telegramObject.newsLetterDialog
 
     property alias windowsCount: windoweds_hash.count
     property alias emojis: emojis_obj
 
     signal addParticianRequest()
-
-    Component.onCompleted: {
-        telegramObject.cutegramDialog = Cutegram.cutegramSubscribe
-    }
 
     Emojis {
         id: emojis_obj
@@ -58,7 +55,7 @@ Rectangle {
 
     Connections {
         target: telegramObject
-        onCutegramDialogChanged: Cutegram.cutegramSubscribe = telegramObject.cutegramDialog
+        onNewsLetterDialogChanged: Cutegram.cutegramSubscribe = telegramObject.newsLetterDialog? true : false
     }
 
     Rectangle {

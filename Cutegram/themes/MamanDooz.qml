@@ -1,3 +1,4 @@
+import TelegramQML 1.0
 import Cutegram 1.0
 import QtQuick 2.0
 

@@ -26,28 +26,14 @@
 #include "asemantools/asemandesktoptools.h"
 #include "asemantools/asemandevices.h"
 #include "asemantools/asemanapplication.h"
-#include "telegramqml.h"
-#include "profilesmodel.h"
-#include "telegrammessagesmodel.h"
-#include "tagfiltermodel.h"
-#include "dialogfilesmodel.h"
-#include "telegramdialogsmodel.h"
-#include "telegramwallpapersmodel.h"
-#include "telegramsearchmodel.h"
-#include "backgroundmanager.h"
-#include "usernamefiltermodel.h"
-#include "textemojiwrapper.h"
-#include "telegramcontactsmodel.h"
 #include "emoticonsmodel.h"
 #include "contributorsmodel.h"
-#include "telegramuploadsmodel.h"
-#include "telegramchatparticipantsmodel.h"
 #include "themeitem.h"
-#include "mp3converterengine.h"
-#include "telegramfilehandler.h"
+#include "cutegramdialog.h"
+#include "textemojiwrapper.h"
 #include "emojis.h"
 #include "unitysystemtray.h"
-#include "userdata.h"
+#include <userdata.h>
 #include "cutegramenums.h"
 
 #include <QPointer>
@@ -66,6 +52,8 @@
 #include <QPainterPath>
 #include <QDesktopServices>
 #include <QMimeDatabase>
+
+#include <telegramqml.h>
 
 #ifdef Q_OS_WIN
 #include <QtWin>
@@ -174,33 +162,13 @@ Cutegram::Cutegram(QObject *parent) :
 
     QDir().mkpath(personalStickerDirectory());
 
-    qRegisterMetaType<TelegramQml*>("TelegramQml*");
-    qRegisterMetaType<UserData*>("UserData*");
-    qRegisterMetaType< QList<qint32> >("QList<qint32>");
-
-    qmlRegisterType<TelegramQml>("Cutegram", 1, 0, "Telegram");
-    qmlRegisterType<TelegramFileHandler>("Cutegram", 1, 0, "FileHandler");
-    qmlRegisterType<BackgroundManager>("Cutegram", 1, 0, "BackgroundManager");
-    qmlRegisterType<ProfilesModel>("Cutegram", 1, 0, "ProfilesModel");
-    qmlRegisterType<ProfilesModelItem>("Cutegram", 1, 0, "ProfilesModelItem");
-    qmlRegisterType<TelegramMessagesModel>("Cutegram", 1, 0, "MessagesModel");
-    qmlRegisterType<DialogFilesModel>("Cutegram", 1, 0, "DialogFilesModel");
-    qmlRegisterType<TelegramWallpapersModel>("Cutegram", 1, 0, "WallpapersModel");
-    qmlRegisterType<TelegramDialogsModel>("Cutegram", 1, 0, "DialogsModel");
-    qmlRegisterType<TagFilterModel>("Cutegram", 1, 0, "TagFilterModel");
-    qmlRegisterType<TelegramContactsModel>("Cutegram", 1, 0, "ContactsModel");
-    qmlRegisterType<TelegramUploadsModel>("Cutegram", 1, 0, "UploadsModel");
-    qmlRegisterType<TelegramSearchModel>("Cutegram", 1, 0, "SearchModel");
-    qmlRegisterType<UserNameFilterModel>("Cutegram", 1, 0, "UserNameFilterModel");
     qmlRegisterType<ContributorsModel>("Cutegram", 1, 0, "ContributorsModel");
     qmlRegisterType<CutegramEnums>("Cutegram", 1, 0, "CutegramEnums");
     qmlRegisterType<ThemeItem>("Cutegram", 1, 0, "CutegramTheme");
     qmlRegisterType<TextEmojiWrapper>("Cutegram", 1, 0, "TextEmojiWrapper");
-    qmlRegisterType<MP3ConverterEngine>("Cutegram", 1, 0, "MP3ConverterEngine");
-    qmlRegisterType<TelegramChatParticipantsModel>("Cutegram", 1, 0, "ChatParticipantsModel");
     qmlRegisterType<Emojis>("Cutegram", 1, 0, "Emojis");
     qmlRegisterType<EmoticonsModel>("Cutegram", 1, 0, "EmoticonsModel");
-    qmlRegisterUncreatableType<UserData>("Cutegram", 1, 0, "UserData", "");
+    qmlRegisterType<CutegramDialog>("Cutegram", 1, 0, "CutegramDialog");
 
     init_languages();
 }

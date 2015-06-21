@@ -4,20 +4,28 @@
 #include <QObject>
 #include <QMap>
 
+#include <telegramqml.h>
+#include <newsletterdialog.h>
+
 class Dialog;
 class User;
 class Message;
 class TelegramQml;
 class CutegramDialogPrivate;
-class CutegramDialog : public QObject
+class CutegramDialog : public NewsLetterDialog
 {
     Q_OBJECT
+    Q_PROPERTY(TelegramQml* telegram READ telegram WRITE setTelegram NOTIFY telegramChanged)
+
 public:
-    CutegramDialog(TelegramQml *parent);
+    CutegramDialog(QObject *parent = 0);
     ~CutegramDialog();
 
     Dialog dialog() const;
     User user() const;
+
+    void setTelegram(TelegramQml *tg);
+    TelegramQml *telegram() const;
 
 public slots:
     void check();
@@ -25,6 +33,7 @@ public slots:
 
 signals:
     void incomingMessage(const Message &msg, const Dialog &dialog);
+    void telegramChanged();
 
 private slots:
     void updateListReady( const QByteArray & data );

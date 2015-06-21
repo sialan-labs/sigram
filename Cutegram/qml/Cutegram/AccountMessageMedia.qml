@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import Cutegram 1.0
-import CutegramTypes 1.0
+import TelegramQML 1.0
+// import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
 
 Item {
@@ -303,7 +303,7 @@ Item {
         radius: 4*Devices.density
         cursorShape: Qt.PointingHandCursor
         visible: indicator.active && file_handler.targetType != FileHandler.TypeTargetMediaPhoto && !isSticker
-        onClicked: telegramObject.cancelDownload(locationObj.download)
+        onClicked: file_handler.cancelProgress()
     }
 
     function click() {
