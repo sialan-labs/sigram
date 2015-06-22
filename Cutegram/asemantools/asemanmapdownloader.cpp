@@ -138,12 +138,12 @@ void AsemanMapDownloader::download(const GEO_CLASS_NAME &geo)
     emit downloadingChanged();
 }
 
-bool AsemanMapDownloader::check(const QPointF &geo)
+bool AsemanMapDownloader::check(const GEO_CLASS_NAME &geo)
 {
     return QFile::exists( pathOf(geo) );
 }
 
-QString AsemanMapDownloader::linkOf(const QPointF &geo)
+QString AsemanMapDownloader::linkOf(const GEO_CLASS_NAME &geo)
 {
     QString path;
     switch(p->mapProvider)
@@ -168,7 +168,7 @@ QString AsemanMapDownloader::linkOf(const QPointF &geo)
     return path;
 }
 
-QString AsemanMapDownloader::webLinkOf(const QPointF &geo)
+QString AsemanMapDownloader::webLinkOf(const GEO_CLASS_NAME &geo)
 {
     QString path;
     switch(p->mapProvider)
@@ -189,7 +189,7 @@ QString AsemanMapDownloader::webLinkOf(const QPointF &geo)
     return path;
 }
 
-QString AsemanMapDownloader::pathOf(const QPointF &geo)
+QString AsemanMapDownloader::pathOf(const GEO_CLASS_NAME &geo)
 {
     QString filePath = p->destination.toLocalFile() + "/" +
                        QString::number(p->mapProvider) + "_" +
