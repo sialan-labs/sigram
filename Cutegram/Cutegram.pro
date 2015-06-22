@@ -20,6 +20,8 @@ TEMPLATE = app
 TARGET = cutegram
 QT += qml quick sql xml multimedia
 
+INCLUDEPATH += ../Cutegram
+
 contains(DEFINES, WEBENGINE_ASEMAN_WEBGRABBER) {
     QT += webenginewidgets webengine
 } else {
