@@ -168,7 +168,7 @@ Item {
                         wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
                         clip: true
                         visible: !trash
-                        placeholder: qsTr("Write a message...")
+                        placeholder: qsTr("Write a message...") 
 
                         onCursorRectangleChanged: flick.ensureVisible(cursorRectangle)
                         onTextChanged: {
