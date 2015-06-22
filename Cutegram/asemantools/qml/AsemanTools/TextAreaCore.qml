@@ -28,6 +28,9 @@ STextEdit {
     property alias pickersVisible: cpicker.pickersVisible
     property alias pickerEnable: marea.visible
 
+    property alias placeholder: pholder.text
+    property alias placeholderColor: pholder.color
+
     property alias pickersColor: cpicker.pickersColor
     property alias pickersStrokeColor: cpicker.pickersStrokeColor
 
@@ -45,6 +48,15 @@ STextEdit {
     QtObject {
         id: privates
         property string last_text
+    }
+
+    Text {
+        id: pholder
+        anchors.fill: core
+        font: core.font
+        color: "#888888"
+        visible: privates.last_text.length == 0
+        verticalAlignment: Text.AlignVCenter
     }
 
     MouseArea {
