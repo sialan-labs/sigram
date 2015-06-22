@@ -1312,6 +1312,8 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
         fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file, thumbnail, true);
 
         MessageMedia media = message.media();
+        media.setClassType(MessageMedia::typeMessageMediaDocument);
+
         Document document = media.document();
         document.setAttributes( document.attributes() << DocumentAttribute(DocumentAttribute::typeAttributeSticker) );
 
@@ -1325,6 +1327,10 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
             fileId = p->telegram->messagesSendEncryptedPhoto(dId, p->msg_send_random_id, 0, file);
         else
             fileId = p->telegram->messagesSendPhoto(peer, p->msg_send_random_id, file);
+
+        MessageMedia media = message.media();
+        media.setClassType(MessageMedia::typeMessageMediaPhoto);
+        message.setMedia(media);
     }
     else
     if( t.name().contains("video/") && !forceDocument && !forceAudio )
@@ -1357,15 +1363,31 @@ bool TelegramQml::sendFile(qint64 dId, const QString &fpath, bool forceDocument,
         }
         else
             fileId = p->telegram->messagesSendVideo(peer, p->msg_send_random_id, file, 0, width, height, thumbnail);
+
+        MessageMedia media = message.media();
+        media.setClassType(MessageMedia::typeMessageMediaVideo);
+        message.setMedia(media);
     }
     else
     if( dlg->encrypted() )
         return false;
     else
     if( (t.name().contains("audio/") || forceAudio) && !forceDocument )
+    {
         fileId = p->telegram->messagesSendAudio(peer, p->msg_send_random_id, file, 0);
+
+        MessageMedia media = message.media();
+        media.setClassType(MessageMedia::typeMessageMediaAudio);
+        message.setMedia(media);
+    }
     else
+    {
         fileId = p->telegram->messagesSendDocument(peer, p->msg_send_random_id, file);
+
+        MessageMedia media = message.media();
+        media.setClassType(MessageMedia::typeMessageMediaDocument);
+        message.setMedia(media);
+    }
 
     insertMessage(message, false, false, true);
 
@@ -1822,10 +1844,10 @@ void TelegramQml::try_init()
              SLOT(updatesCombined_slt(QList<Update>,QList<User>,QList<Chat>,qint32,qint32,qint32)) );
     connect( p->telegram, SIGNAL(updateShort(Update,qint32)),
              SLOT(updateShort_slt(Update,qint32)) );
-    connect( p->telegram, SIGNAL(updateShortChatMessage(qint32,qint32,qint32,QString,qint32,qint32,qint32,qint32,qint32,qint32)),
-             SLOT(updateShortChatMessage_slt(qint32,qint32,qint32,QString,qint32,qint32,qint32,qint32,qint32,qint32)) );
-    connect( p->telegram, SIGNAL(updateShortMessage(qint32,qint32,QString,qint32,qint32,qint32,qint32,qint32,qint32)),
-             SLOT(updateShortMessage_slt(qint32,qint32,QString,qint32,qint32,qint32,qint32,qint32,qint32)) );
+    connect( p->telegram, SIGNAL(updateShortChatMessage(qint32,qint32,qint32,QString,qint32,qint32,qint32,qint32,qint32,qint32,bool,bool)),
+             SLOT(updateShortChatMessage_slt(qint32,qint32,qint32,QString,qint32,qint32,qint32,qint32,qint32,qint32,bool,bool)) );
+    connect( p->telegram, SIGNAL(updateShortMessage(qint32,qint32,QString,qint32,qint32,qint32,qint32,qint32,qint32,bool,bool)),
+             SLOT(updateShortMessage_slt(qint32,qint32,QString,qint32,qint32,qint32,qint32,qint32,qint32,bool,bool)) );
     connect( p->telegram, SIGNAL(updatesTooLong()),
              SLOT(updatesTooLong_slt()) );
     connect(  p->telegram, SIGNAL(updateSecretChatMessage(SecretChatMessage,qint32)),
@@ -2656,20 +2678,21 @@ void TelegramQml::updatesTooLong_slt()
     timerUpdateDialogs();
 }
 
-void TelegramQml::updateShortMessage_slt(qint32 id, qint32 userId, QString message, qint32 pts, qint32 pts_count, qint32 date, qint32 fwd_from_id, qint32 fwd_date, qint32 reply_to_msg_id)
+void TelegramQml::updateShortMessage_slt(qint32 id, qint32 userId, QString message, qint32 pts, qint32 pts_count, qint32 date, qint32 fwd_from_id, qint32 fwd_date, qint32 reply_to_msg_id, bool unread, bool out)
 {
     Q_UNUSED(pts)
     Q_UNUSED(pts_count)
 
     Peer to_peer(Peer::typePeerUser);
-    to_peer.setUserId(p->telegram->ourId());
+    to_peer.setUserId(out?userId:p->telegram->ourId());
 
     Message msg(Message::typeMessage);
     msg.setId(id);
-    msg.setFromId(userId);
+    msg.setFromId(out?p->telegram->ourId():userId);
     msg.setMessage(message);
     msg.setDate(date);
-    msg.setOut(false);
+    msg.setOut(out);
+    msg.setUnread(unread);
     msg.setToId(to_peer);
     msg.setFwdFromId(fwd_from_id);
     msg.setFwdDate(fwd_date);
@@ -2700,7 +2723,7 @@ void TelegramQml::updateShortMessage_slt(qint32 id, qint32 userId, QString messa
     emit incomingMessage( p->messages.value(msg.id()) );
 }
 
-void TelegramQml::updateShortChatMessage_slt(qint32 id, qint32 fromId, qint32 chatId, QString message, qint32 pts, qint32 pts_count, qint32 date, qint32 fwd_from_id, qint32 fwd_date, qint32 reply_to_msg_id)
+void TelegramQml::updateShortChatMessage_slt(qint32 id, qint32 fromId, qint32 chatId, QString message, qint32 pts, qint32 pts_count, qint32 date, qint32 fwd_from_id, qint32 fwd_date, qint32 reply_to_msg_id, bool unread, bool out)
 {
     Q_UNUSED(pts)
     Q_UNUSED(pts_count)
@@ -2713,7 +2736,8 @@ void TelegramQml::updateShortChatMessage_slt(qint32 id, qint32 fromId, qint32 ch
     msg.setFromId(fromId);
     msg.setMessage(message);
     msg.setDate(date);
-    msg.setOut(false);
+    msg.setOut(out);
+    msg.setUnread(unread);
     msg.setToId(to_peer);
     msg.setFwdDate(fwd_date);
     msg.setFwdFromId(fwd_from_id);
@@ -2891,6 +2915,7 @@ void TelegramQml::uploadGetFile_slt(qint64 id, const StorageFileType &type, qint
         else
             download->setLocation(FILES_PRE_STR + download_file);
 
+        download->setFileId(0);
         p->downloads.remove(id);
     }
 }

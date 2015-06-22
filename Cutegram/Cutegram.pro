@@ -81,7 +81,8 @@ SOURCES += main.cpp \
     telegramtestobject.cpp \
     emoticonsmodel.cpp \
     backgroundmanager.cpp \
-    contributorsmodel.cpp
+    contributorsmodel.cpp \
+    telegramfilehandler.cpp
 
 RESOURCES += resource.qrc
 
@@ -121,7 +122,8 @@ HEADERS += \
     telegramtestobject.h \
     emoticonsmodel.h \
     backgroundmanager.h \
-    contributorsmodel.h
+    contributorsmodel.h \
+    telegramfilehandler.h
 
 OTHER_FILES += \
     objects/types.sco \

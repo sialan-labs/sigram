@@ -39,7 +39,7 @@ Item {
 
     property alias hasMedia: msg_media.hasMedia
     property bool encryptMedia: message.message.length==0 && message.encrypted
-    property alias mediaLOcation: msg_media.locationObj
+    property alias mediaLocation: msg_media.location
 
     property alias selectedText: msg_txt.selectedText
     property alias messageRect: back_rect
@@ -231,7 +231,7 @@ Item {
 
                 AccountMessageMedia {
                     id: msg_media
-                    media: message.media
+                    message: msg_item.message
                     visible: msg_media.hasMedia && !uploading
                 }
 

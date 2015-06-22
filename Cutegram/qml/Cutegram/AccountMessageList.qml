@@ -154,12 +154,12 @@ Rectangle {
         header: Item{ width: 4; height: acc_msg_list.bottomMargin }
         footer: Item{ width: 4; height: acc_msg_list.topMargin }
 
-        displaced: Transition {
-            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: 300 }
-        }
-        add: Transition {
-            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: add_anim_disabler.running? 0 : 300 }
-        }
+//        displaced: Transition {
+//            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: 300 }
+//        }
+//        add: Transition {
+//            NumberAnimation { easing.type: Easing.OutCubic; properties: "y"; duration: add_anim_disabler.running? 0 : 300 }
+//        }
 
         section.property: "unreaded"
         section.criteria: ViewSection.FullString
@@ -273,7 +273,7 @@ Rectangle {
             MimeData {
                 id: mime
                 dataMap: message.encrypted? {} : {"land.aseman.cutegram/messageId": message.id}
-                urls: msg_item.hasMedia? [msg_item.mediaLOcation.download.location] : [msg_item.messageFile]
+                urls: msg_item.hasMedia? [msg_item.mediaLocation] : [msg_item.messageFile]
                 text: message.message
             }
 
@@ -372,7 +372,7 @@ Rectangle {
 
                             case 4:
                                 if(msg_item.isSticker)
-                                    Cutegram.addToPersonal(msg_item.mediaLOcation.download.location)
+                                    Cutegram.addToPersonal(msg_item.mediaLocation)
                                 else
                                     Qt.openUrlExternally(Cutegram.searchEngine + msg_item.selectedText.replace(" ","+"))
                                 break;
