@@ -7,7 +7,7 @@ TextFieldStyle {
     property color backgroundColor: masterPalette.base
     property color borderColor
     property real  borderRadius: 5*Devices.density
-	property color shadowColor: control.focus? masterPalette.highlight : "#000000"
+    property color shadowColor: control.focus? masterPalette.highlight : "#000000"
 
     SystemPalette {
         id: masterPalette
@@ -26,7 +26,7 @@ TextFieldStyle {
                 anchors.margins: 1*Devices.density
                 radius: borderRadius
                 color: backgroundColor
-				border.color: borderColor
+                border.color: borderColor
             }
         }
 
