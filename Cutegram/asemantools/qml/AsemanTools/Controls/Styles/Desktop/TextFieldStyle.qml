@@ -5,7 +5,7 @@ import AsemanTools 1.0
 
 TextFieldStyle {
     property color backgroundColor: masterPalette.base
-    property color borderColor
+    property color borderColor: masterPalette.base
     property real  borderRadius: 5*Devices.density
     property color shadowColor: control.focus? masterPalette.highlight : "#000000"
 
