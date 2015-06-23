@@ -246,7 +246,7 @@ Item {
                         onCheckedChanged: {
                             if( signalBlocker )
                                 return
-                            telegramObject.userData.setValue("love", checked?dId:"")
+                            telegramObject.userData.setValue("love", checked?dId:"-1")
                         }
                     }
                 }
