@@ -5,6 +5,9 @@ import AsemanTools 1.0
 
 TextFieldStyle {
     property color backgroundColor: masterPalette.base
+    property color borderColor: masterPalette.base
+    property real  borderRadius: 5*Devices.density
+    property color shadowColor: control.focus? masterPalette.highlight : "#000000"
 
     SystemPalette {
         id: masterPalette
@@ -21,8 +24,9 @@ TextFieldStyle {
             Rectangle {
                 anchors.fill: parent
                 anchors.margins: 1*Devices.density
-                radius: 5*Devices.density
+                radius: borderRadius
                 color: backgroundColor
+                border.color: borderColor
             }
         }
 
@@ -35,7 +39,7 @@ TextFieldStyle {
             verticalOffset: 2*Devices.density
             opacity: control.focus? 1 : 0.5
             fast: true
-            color: control.focus? masterPalette.highlight : "#000000"
+            color: shadowColor
         }
     }
 }

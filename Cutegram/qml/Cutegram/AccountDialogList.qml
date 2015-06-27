@@ -18,6 +18,13 @@ Item {
 
     property bool showLastMessage: Cutegram.showLastMessage
 
+    property real typeMessageMediaDocument: 0x2fda2204
+    property real typeMessageMediaContact: 0x5e7d2f39
+    property real typeMessageMediaVideo: 0xa2d24290
+    property real typeMessageMediaAudio: 0xc6b68300
+    property real typeMessageMediaPhoto: 0xc8c45a2a
+    property real typeMessageMediaGeo: 0x56e0d474
+
     signal windowRequest(variant dialog)
 
     onCurrentDialogChanged: {
@@ -257,7 +264,25 @@ Item {
                         if( list.length )
                             return qsTr("Typing...")
                         else
-                            return emojis.textToEmojiText(message.message,16,true)
+                        {
+                            var message_text = emojis.textToEmojiText(message.message,16,true);
+
+                            if(message_text.length == 0)
+                            {
+                                switch(message.media.classType)
+                                {
+                                    case typeMessageMediaDocument: return qsTr("Document")
+                                    case typeMessageMediaContact: return qsTr("Contact")
+                                    case typeMessageMediaVideo: return qsTr("Contact")
+                                    case typeMessageMediaAudio: return qsTr("Audio")
+                                    case typeMessageMediaPhoto: return qsTr("Photo")
+                                    case typeMessageMediaGeo: return qsTr("Location")
+                                    default: return qsTr("Unknown")
+                                }
+                            }
+
+                            return message_text
+                        }
                     }
                 }
 
