@@ -4,6 +4,7 @@ import AsemanTools.Controls 1.0 as Controls
 import QtQuick.Window 2.0
 import AsemanTools 1.0
 import TelegramQml 1.0
+import Cutegram 1.0
 
 Window {
     id: proxy_window

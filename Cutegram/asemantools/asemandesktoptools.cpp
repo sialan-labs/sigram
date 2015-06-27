@@ -40,7 +40,9 @@ class AsemanDesktopToolsPrivate
 public:
     QFontDatabase *font_db;
     QString style;
+#ifdef DESKTOP_DEVICE
     QList<QMenu*> currentMenuObjects;
+#endif
 };
 
 AsemanDesktopTools::AsemanDesktopTools(QObject *parent) :
@@ -244,10 +246,14 @@ QString AsemanDesktopTools::menuStyle() const
 
 QObject *AsemanDesktopTools::currentMenuObject() const
 {
+#ifdef DesktopSession
     if(p->currentMenuObjects.isEmpty())
         return 0;
 
     return p->currentMenuObjects.last();
+#else
+    return 0;
+#endif
 }
 
 QString AsemanDesktopTools::getOpenFileName(QWindow *window, const QString & title, const QString &filter, const QString &startPath)
@@ -651,7 +657,7 @@ void AsemanDesktopTools::showMessage(QWindow *window, const QString &title, cons
     Q_UNUSED(title)
     Q_UNUSED(text)
     Q_UNUSED(type)
-    return false;
+    return;
 #endif
 }
 

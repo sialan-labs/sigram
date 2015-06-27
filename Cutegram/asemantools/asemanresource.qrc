@@ -122,5 +122,6 @@
         <file>qml/AsemanTools/Controls/FrameItem.qml</file>
         <file>qml/AsemanTools/Controls/Styles/qmldir</file>
         <file>qml/AsemanTools/Controls/Styles/Desktop/images/arrow-down.png</file>
+        <file>qml/AsemanTools/MenuIcon.qml</file>
     </qresource>
 </RCC>

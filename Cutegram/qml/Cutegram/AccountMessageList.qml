@@ -83,7 +83,7 @@ Rectangle {
     Timer {
         id: refresh_timer
         repeat: true
-        interval: 10000
+        interval: 100000
         onTriggered: messages_model.refresh()
         Component.onCompleted: start()
     }

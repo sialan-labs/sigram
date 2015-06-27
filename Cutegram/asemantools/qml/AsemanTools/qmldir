@@ -10,6 +10,7 @@ AsemanAbout 1.0 AsemanAbout.qml
 SlideMenu 1.0 SlideMenu.qml
 CheckBox 1.0 CheckBox.qml
 MenuButton 1.0 MenuButton.qml
+MenuIcon 1.0 MenuIcon.qml
 STextEdit 1.0 STextEdit.qml
 ColorList 1.0 ColorList.qml
 ModernProgressBar 1.0 ModernProgressBar.qml
