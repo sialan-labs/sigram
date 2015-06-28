@@ -228,7 +228,7 @@ Item {
         }
 
         Text {
-            anchors.top: parent.top
+            anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.margins: 2*Devices.density
             font.family: AsemanApp.globalFont.family
@@ -304,6 +304,20 @@ Item {
         cursorShape: Qt.PointingHandCursor
         visible: indicator.active && file_handler.targetType != FileHandler.TypeTargetMediaPhoto && !isSticker
         onClicked: file_handler.cancelProgress()
+    }
+
+    Text {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.margins: 2*Devices.density
+        font.family: AsemanApp.globalFont.family
+        font.pixelSize: Math.floor(9*Devices.fontDensity)
+        wrapMode: Text.WrapAnywhere
+        elide: Text.ElideRight
+        color: "#ffffff"
+        text: file_handler.fileName
+        visible: !file_handler.isSticker
     }
 
     function click() {
