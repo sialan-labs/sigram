@@ -225,6 +225,7 @@ Item {
                     Controls.Switch {
                         id: favorite_check
                         anchors.verticalCenter: parent.verticalCenter
+                        style: Cutegram.currentTheme.switchStyle
                         onCheckedChanged: {
                             if( signalBlocker )
                                 return
@@ -243,6 +244,7 @@ Item {
                     Controls.Switch {
                         id: love_check
                         anchors.verticalCenter: parent.verticalCenter
+                        style: Cutegram.currentTheme.switchStyle
                         onCheckedChanged: {
                             if( signalBlocker )
                                 return
@@ -258,6 +260,7 @@ Item {
                     Controls.Switch {
                         id: mute_check
                         anchors.verticalCenter: parent.verticalCenter
+                        style: Cutegram.currentTheme.switchStyle
                         onCheckedChanged: {
                             if( signalBlocker )
                                 return
@@ -276,6 +279,7 @@ Item {
                     Controls.Switch {
                         id: badge_check
                         anchors.verticalCenter: parent.verticalCenter
+                        style: Cutegram.currentTheme.switchStyle
                         onCheckedChanged: {
                             if( signalBlocker )
                                 return
@@ -300,42 +304,21 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         spacing: 4*Devices.density
 
-                        Button {
-                            textFont.family: AsemanApp.globalFont.family
-                            textFont.pixelSize: Math.floor(10*Devices.fontDensity)
-                            textFont.bold: false
-                            normalColor: Cutegram.currentTheme.masterColor
-                            highlightColor: Qt.darker(normalColor)
-                            textColor: "#ffffff"
+                        Controls.Button {
                             text: qsTr("Show List")
-                            radius: 4*Devices.density
-                            cursorShape: Qt.PointingHandCursor
+                            style: Cutegram.currentTheme.buttonStyle
                             onClicked: particianMode = true
                         }
 
-                        Button {
-                            textFont.family: AsemanApp.globalFont.family
-                            textFont.pixelSize: Math.floor(10*Devices.fontDensity)
-                            textFont.bold: false
-                            normalColor: Cutegram.currentTheme.masterColor
-                            highlightColor: Qt.darker(normalColor)
-                            textColor: "#ffffff"
+                        Controls.Button {
                             text: qsTr("Add Participant")
-                            radius: 4*Devices.density
-                            cursorShape: Qt.PointingHandCursor
+                            style: Cutegram.currentTheme.buttonStyle
                             onClicked: up_base.addParticianRequest()
                         }
 
-                        Button {
-                            textFont.family: AsemanApp.globalFont.family
-                            textFont.pixelSize: Math.floor(10*Devices.fontDensity)
-                            textFont.bold: false
-                            highlightColor: Qt.darker(normalColor)
-                            normalColor: "#C81414"
-                            textColor: "#ffffff"
+                        Controls.Button {
                             text: qsTr("Leave")
-                            radius: 4*Devices.density
-                            cursorShape: Qt.PointingHandCursor
+                            style: Cutegram.currentTheme.buttonStyle
                             onClicked: {
                                 if( Desktop.yesOrNo(View, qsTr("Leave the group"), qsTr("Are you sure about leaving this group?")) )
                                     telegramObject.messagesDeleteChatUser(chat.id, telegramObject.me)
@@ -375,6 +358,7 @@ Item {
                 Controls.Button {
                     width: 100*Devices.density
                     text: qsTr("Background")
+                    style: Cutegram.currentTheme.buttonStyle
                     onClicked: {
                         var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                         if(newImg.length == 0)
@@ -403,6 +387,7 @@ Item {
                 Controls.Button {
                     width: 100*Devices.density
                     text: qsTr("Header")
+                    style: Cutegram.currentTheme.buttonStyle
                     onClicked: {
                         var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                         if(newImg.length == 0)

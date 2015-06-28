@@ -96,6 +96,7 @@ Window {
 
                 Controls.ComboBox {
                     id: proxy_type_combo
+                    style: Cutegram.currentTheme.comboBoxStyle
                     model: [ "No Proxy", "Http Proxy", "Socks5 Proxy" ]
                     Component.onCompleted: {
                         var type = AsemanApp.readSetting("Proxy/type", CutegramEnums.ProxyNoProxy)
@@ -112,6 +113,7 @@ Window {
 
                 Controls.TextField {
                     id: proxy_host_line
+                    style: Cutegram.currentTheme.textFieldStyle
                     width: 200*Devices.density
                     placeholderText: qsTr("Ex: 127.0.0.1")
                     text: AsemanApp.readSetting("Proxy/host","")
@@ -121,17 +123,20 @@ Window {
                     id: proxy_port_spin
                     maximumValue: 99999
                     minimumValue: 0
+                    style: Cutegram.currentTheme.spinBoxStyle
                     value: AsemanApp.readSetting("Proxy/port", 0)
                 }
 
                 Controls.TextField {
                     id: proxy_user_line
+                    style: Cutegram.currentTheme.textFieldStyle
                     width: 200*Devices.density
                     text: AsemanApp.readSetting("Proxy/user", "")
                 }
 
                 Controls.TextField {
                     id: proxy_pass_line
+                    style: Cutegram.currentTheme.textFieldStyle
                     width: 200*Devices.density
                     echoMode: TextInput.Password
                     text: AsemanApp.readSetting("Proxy/pass", "")
@@ -145,11 +150,13 @@ Window {
 
             Controls.Button {
                 text: qsTr("Cancel")
+                style: Cutegram.currentTheme.buttonStyle
                 onClicked: proxy_window.visible = false
             }
 
             Controls.Button {
                 text: qsTr("Ok")
+                style: Cutegram.currentTheme.buttonStyle
                 onClicked: {
                     var host = proxy_host_line.text
                     var port = proxy_port_spin.value

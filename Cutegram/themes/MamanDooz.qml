@@ -1,6 +1,7 @@
 import TelegramQml 1.0
 import Cutegram 1.0
 import QtQuick 2.0
+import AsemanTools.Controls.Styles 1.0 as AsemanStyles
 
 CutegramTheme {
     themeName: "Maman Dooz"
@@ -14,6 +15,18 @@ CutegramTheme {
 
     masterColor: palette.highlight
     visualEffects: false
+
+    menuStyleSheet: ""
+    buttonStyle: AsemanStyles.ButtonStyle {}
+    switchStyle: AsemanStyles.SwitchStyle {}
+    checkBoxStyle: AsemanStyles.CheckBoxStyle {}
+    comboBoxStyle: AsemanStyles.ComboBoxStyle {}
+    textFieldStyle: AsemanStyles.TextFieldStyle {}
+    spinBoxStyle: AsemanStyles.SpinBoxStyle {}
+    searchTextFieldStyle: AsemanStyles.TextFieldStyle {
+        backgroundColor: control.focus? searchBarFocusedColor : searchBarColor
+        placeholderTextColor: searchBarPlaceholderColor
+    }
 
     dialogListBackground: "#333333"
     dialogListDateColor: "#999999"

@@ -278,5 +278,7 @@ AsemanMain {
             for(var i=0; i<fonts.length; i++)
                 font_loader_component.createObject(main, {"source": Devices.localFilesPrePath + fontsPath + fonts[i]})
         }
+
+        Desktop.menuStyle = Cutegram.currentTheme.menuStyleSheet
     }
 }

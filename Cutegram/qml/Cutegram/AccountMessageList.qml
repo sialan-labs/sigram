@@ -562,6 +562,7 @@ Rectangle {
             anchors.margins: 20*Devices.density
             width: 100*Devices.density
             text: qsTr("Accept")
+            style: Cutegram.currentTheme.buttonStyle
             onClicked: {
                 secret_chat_indicator.start()
                 telegramObject.messagesAcceptEncryptedChat(currentDialog.peer.userId)
@@ -572,6 +573,7 @@ Rectangle {
             anchors.margins: 20*Devices.density
             width: 100*Devices.density
             text: qsTr("Reject")
+            style: Cutegram.currentTheme.buttonStyle
             onClicked: {
                 secret_chat_indicator.start()
                 telegramObject.messagesDiscardEncryptedChat(currentDialog.peer.userId)

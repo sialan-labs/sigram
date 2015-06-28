@@ -456,6 +456,7 @@ Item {
             anchors.rightMargin: 4*Devices.density
             width: 70*Devices.density
             text: qsTr("Send")
+            style: Cutegram.currentTheme.buttonStyle
             onClicked: smsg.send()
         }
     }
@@ -543,6 +544,7 @@ Item {
             anchors.rightMargin: 4*Devices.density
             anchors.verticalCenter: parent.verticalCenter
             iconSource: "files/close.png"
+            style: Cutegram.currentTheme.buttonStyle
             onClicked: messageReply.discard()
         }
     }

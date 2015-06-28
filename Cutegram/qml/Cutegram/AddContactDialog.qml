@@ -38,12 +38,14 @@ Window {
 
         Controls.TextField {
             id: first_name_txt
+            style: Cutegram.currentTheme.textFieldStyle
             width: parent.width
             placeholderText: qsTr("First Name")
         }
 
         Controls.TextField {
             id: last_name_txt
+            style: Cutegram.currentTheme.textFieldStyle
             width: parent.width
             placeholderText: qsTr("Last Name")
         }
@@ -52,6 +54,7 @@ Window {
 
         Controls.TextField {
             id: phone_number_txt
+            style: Cutegram.currentTheme.textFieldStyle
             width: parent.width
             placeholderText: qsTr("Phone Number")
             validator: RegExpValidator{regExp: /(?!0)\d*/}
@@ -66,11 +69,13 @@ Window {
 
         Controls.Button {
             text: qsTr("Cancel")
+            style: Cutegram.currentTheme.buttonStyle
             onClicked: add_dialog.visible = false
         }
 
         Controls.Button {
             text: qsTr("OK")
+            style: Cutegram.currentTheme.buttonStyle
             enabled: {
                 if(first_name_txt.text.trim().length == 0)
                     return false

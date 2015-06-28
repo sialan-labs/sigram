@@ -70,6 +70,7 @@ Rectangle {
                         width: 100*Devices.density
                         height: 36*Devices.density
                         text: qsTr("Change Photo")
+                        style: Cutegram.currentTheme.buttonStyle
                         onClicked: {
                             var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                             if(newImg.length == 0)
@@ -308,12 +309,14 @@ Rectangle {
                         Controls.Switch {
                             id: notify_checkbox
                             checked: Cutegram.notification
+                            style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: Cutegram.notification = checked
                         }
 
                         Controls.Switch {
                             id: aseman_nl_checkbox
                             checked: Cutegram.cutegramSubscribe
+                            style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: Cutegram.cutegramSubscribe = checked
                         }
 
@@ -321,11 +324,13 @@ Rectangle {
                             id: autostart_checkbox
                             visible: Devices.isLinux
                             checked: autostart_mngr.active
+                            style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: autostart_mngr.active = checked
                         }
 
                         Controls.ComboBox {
                             id: startup_combo
+                            style: Cutegram.currentTheme.comboBoxStyle
                             model: [ qsTr("Automatic"), qsTr("Always visible"), qsTr("Minimize to system tray") ]
                             currentIndex: Cutegram.startupOption
                             onCurrentIndexChanged: if(init_timer.inited) Cutegram.startupOption = currentIndex
@@ -333,6 +338,7 @@ Rectangle {
 
                         Controls.ComboBox {
                             id: systray_style_combo
+                            style: Cutegram.currentTheme.comboBoxStyle
                             model: [ qsTr("Automatic"), qsTr("Dark"), qsTr("Light") ]
                             currentIndex: Cutegram.statusIconStyle
                             onCurrentIndexChanged: if(init_timer.inited) Cutegram.statusIconStyle = currentIndex
@@ -340,6 +346,7 @@ Rectangle {
 
                         Controls.ComboBox {
                             id: languages_combo
+                            style: Cutegram.currentTheme.comboBoxStyle
                             model: Cutegram.languages
                             currentIndex: {
                                 var langs = Cutegram.languages
@@ -356,29 +363,34 @@ Rectangle {
                         Controls.Switch {
                             id: minimum_list_checkbox
                             checked: Cutegram.minimumDialogs
+                            style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: Cutegram.minimumDialogs = checked
                         }
 
                         Controls.Switch {
                             id: smooth_scroll_checkbox
                             checked: Cutegram.smoothScroll
+                            style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: Cutegram.smoothScroll = checked
                         }
 
                         Controls.Switch {
                             id: last_msg_checkbox
                             checked: Cutegram.showLastMessage
+                            style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: Cutegram.showLastMessage = checked
                         }
 
                         Controls.Switch {
                             id: auto_emojis_checkbox
                             checked: Cutegram.autoEmojis
+                            style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: Cutegram.autoEmojis = checked
                         }
 
                         Controls.ComboBox {
                             id: theme_combo
+                            style: Cutegram.currentTheme.comboBoxStyle
                             model: {
                                 var result = new Array
                                 var themes = Cutegram.themes
@@ -400,6 +412,7 @@ Rectangle {
 
                         Controls.Button {
                             id: background_btn
+                            style: Cutegram.currentTheme.buttonStyle
                             text: Cutegram.background.length==0? qsTr("Change") : qsTr("Remove")
                             onClicked: {
                                 if(Cutegram.background.length==0) {
@@ -416,6 +429,7 @@ Rectangle {
 
                         Controls.ComboBox {
                             id: search_combo
+                            style: Cutegram.currentTheme.comboBoxStyle
                             model: Cutegram.searchEngines
                             currentIndex: {
                                 var engines = Cutegram.searchEngines
@@ -431,6 +445,7 @@ Rectangle {
                         Controls.Button {
                             id: proxy_btn
                             text: qsTr("Change")
+                            style: Cutegram.currentTheme.buttonStyle
                             onClicked: {
                                 proxy_component.createObject(configure)
                             }
@@ -438,6 +453,7 @@ Rectangle {
 
                         Controls.ComboBox {
                             id: notify_sound_combo
+                            style: Cutegram.currentTheme.comboBoxStyle
                             model: [qsTr("None"), qsTr("Default"), qsTr("Custom")]
                             currentIndex: {
                                 if(Cutegram.messageAudio.length == 0)
@@ -477,6 +493,7 @@ Rectangle {
 
                         Controls.ComboBox {
                             id: color_combo
+                            style: Cutegram.currentTheme.comboBoxStyle
                             model: [qsTr("System Color"), qsTr("Custom")]
                             currentIndex: {
                                 if(Cutegram.masterColor.length == 0)
@@ -499,6 +516,7 @@ Rectangle {
                         Controls.Button {
                             id: font_btn
                             text: qsTr("Select")
+                            style: Cutegram.currentTheme.buttonStyle
                             onClicked: {
                                 Cutegram.font = Desktop.getFont(View, qsTr("Select Font"), Cutegram.font)
                             }

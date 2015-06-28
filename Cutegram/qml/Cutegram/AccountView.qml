@@ -74,6 +74,7 @@ Rectangle {
 
     TextField {
         id: search_frame
+        style: Cutegram.currentTheme.searchTextFieldStyle
         anchors.left: dialogs.left
         anchors.top: parent.top
         anchors.right: dialogs.right
@@ -82,11 +83,6 @@ Rectangle {
         textColor: Cutegram.currentTheme.searchBarTextColor
         font.family: Cutegram.currentTheme.searchBarFont.family
         font.pixelSize: Cutegram.currentTheme.searchBarFont.pointSize*Devices.fontDensity
-        style: TextFieldStyle {
-            backgroundColor: search_frame.focus? Cutegram.currentTheme.searchBarFocusedColor : Cutegram.currentTheme.searchBarColor
-            placeholderTextColor: Cutegram.currentTheme.searchBarPlaceholderColor
-        }
-
         Button {
             x: search_frame.horizontalAlignment==TextInput.AlignRight? 6*Devices.density : parent.width-6*Devices.density-width
             anchors.verticalCenter: parent.verticalCenter

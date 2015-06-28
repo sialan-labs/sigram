@@ -9,6 +9,8 @@
 #include <QString>
 #include <QColor>
 #include <QFont>
+#include <QQmlComponent>
+#include <QPointer>
 
 class ThemeItem : public AsemanQuickObject
 {
@@ -100,6 +102,14 @@ class ThemeItem : public AsemanQuickObject
     Q_PROPERTY(QColor sidebarPhoneBackground READ sidebarPhoneBackground WRITE setSidebarPhoneBackground NOTIFY sidebarPhoneBackgroundChanged)
     Q_PROPERTY(QColor sidebarPhoneColor READ sidebarPhoneColor WRITE setSidebarPhoneColor NOTIFY sidebarPhoneColorChanged)
     Q_PROPERTY(QFont sidebarPhoneFont READ sidebarPhoneFont WRITE setSidebarPhoneFont NOTIFY sidebarPhoneFontChanged)
+    Q_PROPERTY(QString menuStyleSheet READ menuStyleSheet WRITE setMenuStyleSheet NOTIFY menuStyleSheetChanged)
+    Q_PROPERTY(QQmlComponent* buttonStyle READ buttonStyle WRITE setButtonStyle NOTIFY buttonStyleChanged)
+    Q_PROPERTY(QQmlComponent* switchStyle READ switchStyle WRITE setSwitchStyle NOTIFY switchStyleChanged)
+    Q_PROPERTY(QQmlComponent* checkBoxStyle READ checkBoxStyle WRITE setCheckBoxStyle NOTIFY checkBoxStyleChanged)
+    Q_PROPERTY(QQmlComponent* comboBoxStyle READ comboBoxStyle WRITE setComboBoxStyle NOTIFY comboBoxStyleChanged)
+    Q_PROPERTY(QQmlComponent* textFieldStyle READ textFieldStyle WRITE setTextFieldStyle NOTIFY textFieldStyleChanged)
+    Q_PROPERTY(QQmlComponent* spinBoxStyle READ spinBoxStyle WRITE setSpinBoxStyle NOTIFY spinBoxStyleChanged)
+    Q_PROPERTY(QQmlComponent* searchTextFieldStyle READ searchTextFieldStyle WRITE setSearchTextFieldStyle NOTIFY searchTextFieldStyleChanged)
 
 public:
     ThemeItem(QObject *parent = 0) : AsemanQuickObject(parent){
@@ -125,7 +135,6 @@ public:
         _panelLightIcon = true;
         _panelPointerHeight = 12;
         _panelShadowWidth = 5;
-
     }
     ~ThemeItem(){}
 
@@ -1173,6 +1182,104 @@ public:
         emit changed();
     }
 
+    QString menuStyleSheet() const {
+        return _menuStyleSheet;
+    }
+
+    void setMenuStyleSheet(const QString &menuStyleSheet) {
+        if(menuStyleSheet == _menuStyleSheet)
+            return;
+        _menuStyleSheet = menuStyleSheet;
+        emit menuStyleSheetChanged();
+        emit changed();
+    }
+
+    QQmlComponent *buttonStyle() const {
+        return _buttonStyle;
+    }
+
+    void setButtonStyle(QQmlComponent *buttonStyle) {
+        if(buttonStyle == _buttonStyle)
+            return;
+        _buttonStyle = buttonStyle;
+        emit buttonStyleChanged();
+        emit changed();
+    }
+
+    QQmlComponent *switchStyle() const {
+        return _switchStyle;
+    }
+
+    void setSwitchStyle(QQmlComponent *switchStyle) {
+        if(switchStyle == _switchStyle)
+            return;
+        _switchStyle = switchStyle;
+        emit switchStyleChanged();
+        emit changed();
+    }
+
+    QQmlComponent *checkBoxStyle() const {
+        return _checkBoxStyle;
+    }
+
+    void setCheckBoxStyle(QQmlComponent *checkBoxStyle) {
+        if(checkBoxStyle == _checkBoxStyle)
+            return;
+        _checkBoxStyle = checkBoxStyle;
+        emit checkBoxStyleChanged();
+        emit changed();
+    }
+
+    QQmlComponent *comboBoxStyle() const {
+        return _comboBoxStyle;
+    }
+
+    void setComboBoxStyle(QQmlComponent *comboBoxStyle) {
+        if(comboBoxStyle == _comboBoxStyle)
+            return;
+        _comboBoxStyle = comboBoxStyle;
+        emit comboBoxStyleChanged();
+        emit changed();
+    }
+
+    QQmlComponent *textFieldStyle() const {
+        return _textFieldStyle;
+    }
+
+    void setTextFieldStyle(QQmlComponent *textFieldStyle) {
+        if(textFieldStyle == _textFieldStyle)
+            return;
+        _textFieldStyle = textFieldStyle;
+        emit textFieldStyleChanged();
+        emit changed();
+    }
+
+    QQmlComponent *spinBoxStyle() const {
+        return _spinBoxStyle;
+    }
+
+    void setSpinBoxStyle(QQmlComponent *spinBoxStyle) {
+        if(spinBoxStyle == _spinBoxStyle)
+            return;
+        _spinBoxStyle = spinBoxStyle;
+        emit spinBoxStyleChanged();
+        emit changed();
+    }
+
+    QQmlComponent *searchTextFieldStyle() const
+    {
+        return _searchTextFieldStyle;
+    }
+
+    void setSearchTextFieldStyle(QQmlComponent *searchTextFieldStyle)
+    {
+        if(searchTextFieldStyle == _searchTextFieldStyle)
+            return;
+        _searchTextFieldStyle = searchTextFieldStyle;
+        emit searchTextFieldStyleChanged();
+        emit changed();
+    }
+
     void operator= ( ThemeItem *another) {
         _themeName = another->themeName();
         _author = another->author();
@@ -1261,8 +1368,17 @@ public:
         _sidebarPhoneBackground = another->sidebarPhoneBackground();
         _sidebarPhoneColor = another->sidebarPhoneColor();
         _sidebarPhoneFont = another->sidebarPhoneFont();
-
+        _menuStyleSheet = another->menuStyleSheet();
+        _buttonStyle = another->buttonStyle();
+        _switchStyle = another->switchStyle();
+        _checkBoxStyle = another->checkBoxStyle();
+        _comboBoxStyle = another->comboBoxStyle();
+        _textFieldStyle = another->textFieldStyle();
+        _searchTextFieldStyle = another->searchTextFieldStyle();
+        _spinBoxStyle = another->spinBoxStyle();
+        _searchTextFieldStyle = another->searchTextFieldStyle();
     }
+
 signals:
     void changed();
     void themeNameChanged();
@@ -1352,6 +1468,14 @@ signals:
     void sidebarPhoneBackgroundChanged();
     void sidebarPhoneColorChanged();
     void sidebarPhoneFontChanged();
+    void menuStyleSheetChanged();
+    void buttonStyleChanged();
+    void switchStyleChanged();
+    void checkBoxStyleChanged();
+    void comboBoxStyleChanged();
+    void textFieldStyleChanged();
+    void spinBoxStyleChanged();
+    void searchTextFieldStyleChanged();
 
 private:
     QString _themeName;
@@ -1441,7 +1565,14 @@ private:
     QColor _sidebarPhoneBackground;
     QColor _sidebarPhoneColor;
     QFont _sidebarPhoneFont;
-
+    QString _menuStyleSheet;
+    QPointer<QQmlComponent> _buttonStyle;
+    QPointer<QQmlComponent> _switchStyle;
+    QPointer<QQmlComponent> _checkBoxStyle;
+    QPointer<QQmlComponent> _comboBoxStyle;
+    QPointer<QQmlComponent> _textFieldStyle;
+    QPointer<QQmlComponent> _searchTextFieldStyle;
+    QPointer<QQmlComponent> _spinBoxStyle;
 };
 
 #endif
