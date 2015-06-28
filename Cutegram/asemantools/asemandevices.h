@@ -45,6 +45,8 @@ class AsemanDevices : public QObject
 
     Q_PROPERTY(QObject* screen READ screenObj NOTIFY screenChanged )
 
+    Q_PROPERTY(bool cameraIsAvailable READ cameraIsAvailable NOTIFY cameraIsAvailableChanged)
+
     Q_PROPERTY(qreal lcdPhysicalSize   READ lcdPhysicalSize   NOTIFY lcdPhysicalSizeChanged   )
     Q_PROPERTY(qreal lcdPhysicalWidth  READ lcdPhysicalWidth  NOTIFY lcdPhysicalWidthChanged  )
     Q_PROPERTY(qreal lcdPhysicalHeight READ lcdPhysicalHeight NOTIFY lcdPhysicalHeightChanged )
@@ -110,6 +112,8 @@ public:
     qreal density() const;
     qreal fontDensity() const;
 
+    bool cameraIsAvailable() const;
+
     static QString localFilesPrePath();
 
     bool transparentStatusBar() const;
@@ -161,6 +165,8 @@ signals:
     void isIOSChanged();
     void isUbuntuTouchChanged();
     void isWindowsPhoneChanged();
+
+    void cameraIsAvailableChanged();
 
     void screenChanged();
     void localFilesPrePathChanged();

@@ -348,7 +348,8 @@ Item {
             anchors.left: parent.left
             anchors.verticalCenter: txt_frame.verticalCenter
             height: 40*Devices.density
-            width: attach_box_marea.containsMouse || attach_box_timer.running? 100*Devices.density : 40*Devices.density
+            width: attach_box_marea.containsMouse || attach_box_timer.running?
+                       (camera_btn.visible? 100*Devices.density : 70*Devices.density) : 40*Devices.density
             clip: true
 
             Behavior on width {
@@ -402,13 +403,14 @@ Item {
                 normalColor: "#00000000"
                 cursorShape: Qt.PointingHandCursor
                 iconHeight: height*0.5
+                visible: Devices.cameraIsAvailable
                 icon: Cutegram.currentTheme.sendFrameLightIcon? "files/camera-light.png" : "files/camera.png"
                 onClicked: captureImage()
             }
 
             Button {
                 id: microphone_btn
-                anchors.left: camera_btn.right
+                anchors.left: camera_btn.visible? camera_btn.right : attach_btn.right
                 height: 40*Devices.density
                 width: 30*Devices.density
                 hoverEnabled: false
