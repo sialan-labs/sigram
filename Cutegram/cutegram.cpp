@@ -33,6 +33,7 @@
 #include "textemojiwrapper.h"
 #include "emojis.h"
 #include "unitysystemtray.h"
+#include "pasteanalizer.h"
 #include <userdata.h>
 #include "cutegramenums.h"
 
@@ -180,6 +181,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<Emojis>("Cutegram", 1, 0, "Emojis");
     qmlRegisterType<EmoticonsModel>("Cutegram", 1, 0, "EmoticonsModel");
     qmlRegisterType<CutegramDialog>("Cutegram", 1, 0, "CutegramDialog");
+    qmlRegisterType<PasteAnalizer>("Cutegram", 1, 0, "PasteAnalizer");
 
     init_languages();
 }

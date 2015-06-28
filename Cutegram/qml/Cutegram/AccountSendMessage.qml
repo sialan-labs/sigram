@@ -3,6 +3,7 @@ import AsemanTools 1.0
 import AsemanTools.Controls 1.0 as Controls
 import AsemanTools.Controls.Styles 1.0 as Styles
 import TelegramQml 1.0
+import Cutegram 1.0
 // import CutegramTypes 1.0
 
 Item {
@@ -47,6 +48,11 @@ Item {
         id: privates
         property Dialog lastDialog: telegramObject.nullDialog
         property variant suggestionItem
+    }
+
+    PasteAnalizer {
+        id: paste_analizer
+        temp: telegramObject.tempPath
     }
 
     Timer {
@@ -202,9 +208,8 @@ Item {
                                 txt.remove(txt.selectionStart, txt.selectionEnd)
                                 txt.insert(txt.cursorPosition, result)
 
-                                last_line_remover.restart()
                                 privates.suggestionItem.destroy()
-                                event.accepted = false
+                                event.accepted = true
                             }
                             else
                             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
@@ -224,14 +229,26 @@ Item {
                                 txt.insert(txt.cursorPosition,"‌") //! Persian mid space character. you can't see it
                                 txt.cursorPosition = npos
 
-                                event.accepted = false
+                                event.accepted = true
                             }
                             else
                             if(event.modifiers == Qt.ControlModifier && event.key == Qt.Key_C)
                             {
                                 if(txt.selectedText.length == 0) {
                                     smsg.copyRequest()
-                                    event.accepted = false
+                                    event.accepted = true
+                                }
+                            }
+                            else
+                            if(event.modifiers == Qt.ControlModifier && event.key == Qt.Key_V)
+                            {
+                                if(paste_analizer.analize()) {
+                                    var dId = currentDialog.peer.chatId
+                                    if(dId == 0)
+                                        dId = currentDialog.peer.userId
+
+                                    telegramObject.sendFile(dId, paste_analizer.path)
+                                    event.accepted = true
                                 }
                             }
                             else
@@ -264,29 +281,19 @@ Item {
                             if(event.key == Qt.Key_Up && privates.suggestionItem)
                             {
                                 privates.suggestionItem.up()
-                                event.accepted = false
+                                event.accepted = true
                             }
                             else
                             if(event.key == Qt.Key_Down && privates.suggestionItem)
                             {
                                 privates.suggestionItem.down()
-                                event.accepted = false
+                                event.accepted = true
                             }
                             else
                             if((event.modifiers == Qt.NoModifier || event.modifiers == Qt.ShiftModifier) && privates.suggestionItem &&
                                event.key != Qt.Key_Left && event.key != Qt.Key_Right)
                             {
                                 check_suggestion.restart()
-                            }
-                        }
-
-                        Timer {
-                            id: last_line_remover
-                            interval: 1
-                            onTriggered: {
-                                var cpos = txt.cursorPosition
-                                txt.text = txt.text.slice(0, cpos-1) + " " + txt.text.slice(cpos+1, txt.length)
-                                txt.cursorPosition = cpos
                             }
                         }
                     }
@@ -312,8 +319,18 @@ Item {
                         txt.copy()
                         break;
 
-                    case 1:txt
-                        txt.paste()
+                    case 1:
+                    {
+                        if(paste_analizer.analize()) {
+                            var dId = currentDialog.peer.chatId
+                            if(dId == 0)
+                                dId = currentDialog.peer.userId
+
+                            telegramObject.sendFile(dId, paste_analizer.path)
+                        }
+                        else
+                            txt.paste()
+                    }
                         break;
 
                     case 2:

@@ -63,7 +63,8 @@ SOURCES += main.cpp \
     cutegramenums.cpp \
     textemojiwrapper.cpp \
     emoticonsmodel.cpp \
-    contributorsmodel.cpp
+    contributorsmodel.cpp \
+    pasteanalizer.cpp
 
 RESOURCES += resource.qrc
 
@@ -82,7 +83,8 @@ HEADERS += \
     themeitem.h \
     textemojiwrapper.h \
     emoticonsmodel.h \
-    contributorsmodel.h
+    contributorsmodel.h \
+    pasteanalizer.h
 
 OTHER_FILES += \
     objects/types.sco \
