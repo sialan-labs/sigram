@@ -76,7 +76,7 @@ Item {
         anchors.margins: 4*Devices.density
         clip: true
         model: emodel
-        cellWidth: emodel.currentKeyIndex>1? 100*Devices.density : 30*Devices.density
+        cellWidth: emodel.currentKeyIndex>1? 100*Devices.density : 32*Devices.density
         cellHeight: cellWidth
         delegate: Rectangle {
             id: item
@@ -85,7 +85,7 @@ Item {
             color: marea.pressed? "#66ffffff" : "#00000000"
 
             Image {
-                width: emodel.currentKeyIndex>1? parent.width - 10*Devices.density : 18*Devices.density
+                width: emodel.currentKeyIndex>1? parent.width - 10*Devices.density : 22*Devices.density
                 height: emodel.currentKeyIndex>1? parent.height - 10*Devices.density : width
                 anchors.centerIn: parent
                 sourceSize: Qt.size(width, height)

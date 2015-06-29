@@ -23,6 +23,7 @@
 #include "asemantools/asemantools.h"
 
 #define EMOJIS_PATH QString( AsemanDevices::resourcePath() + "/emojis/" )
+#define EMOJIS_THEME_PATH(THEME) QString(EMOJIS_PATH + THEME + "/")
 
 #include <QHash>
 #include <QFile>
@@ -57,7 +58,7 @@ Emojis::Emojis(QObject *parent) :
 
 void Emojis::setCurrentTheme(const QString &theme)
 {
-    QString path = EMOJIS_PATH + theme + "/";
+    QString path = EMOJIS_THEME_PATH(theme);
     QString conf = path + "theme";
 
     QFile cfile(conf);
@@ -76,7 +77,7 @@ void Emojis::setCurrentTheme(const QString &theme)
         if( parts.count() < 2 )
             continue;
 
-        QString epath = path + parts.at(0);
+        QString epath = parts.at(0);
         QString ecode = parts.at(1);
 
         p->emojis[ecode] = epath;
@@ -191,6 +192,9 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks, bo
     QString res = p->autoEmojis? convertSmiliesToEmoji(txt) : txt;
     res = res.toHtmlEscaped();
 
+    QString size_folder = QString::number(size);
+    size_folder = size_folder + "x" + size_folder;
+
     QRegExp links_rxp("((?:(?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w|\\/))|(?:\\w+\\.(?:com|org|co|net)))");
     int pos = 0;
     while (!skipLinks && (pos = links_rxp.indexIn(res, pos)) != -1)
@@ -226,7 +230,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks, bo
             if( !p->emojis.contains(emoji) )
                 continue;
 
-            QString path = p->emojis.value(emoji);
+            QString path = EMOJIS_THEME_PATH(p->theme) + size_folder + "/" + p->emojis.value(emoji);
             QString in_txt = QString(" <img align=absmiddle height=\"%2\" width=\"%3\" src=\"" + (localLinks?QString():AsemanDevices::localFilesPrePath()) +"%1\" /> ").arg(path).arg(size).arg(size);
             res.replace(i,j,in_txt);
             i += in_txt.size()-1;
@@ -256,7 +260,7 @@ QList<QString> Emojis::keys() const
 
 QString Emojis::pathOf(const QString &key) const
 {
-    return p->emojis.value(key);
+    return EMOJIS_THEME_PATH(p->theme) + "36x36/" + p->emojis.value(key);
 }
 
 const QHash<QString, QString> &Emojis::emojis() const
