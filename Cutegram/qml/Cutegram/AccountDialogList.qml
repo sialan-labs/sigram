@@ -276,7 +276,7 @@ Item {
                                 {
                                     case typeMessageMediaDocument: return qsTr("Document")
                                     case typeMessageMediaContact: return qsTr("Contact")
-                                    case typeMessageMediaVideo: return qsTr("Contact")
+                                    case typeMessageMediaVideo: return qsTr("Video")
                                     case typeMessageMediaAudio: return qsTr("Audio")
                                     case typeMessageMediaPhoto: return qsTr("Photo")
                                     case typeMessageMediaGeo: return qsTr("Location")
