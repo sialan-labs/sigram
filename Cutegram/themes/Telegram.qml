@@ -26,6 +26,9 @@ CutegramTheme {
     searchTextFieldStyle: AsemanStyles.TextFieldStyle {
         backgroundColor: control.focus? searchBarFocusedColor : searchBarColor
         placeholderTextColor: searchBarPlaceholderColor
+        borderColor: control.focus? "#80cff9" : searchBarColor
+        borderRadius: 0
+        shadowColor: "#ffffff"		
     }
 
     dialogListBackground: "#ffffff"
