@@ -58,15 +58,10 @@ bool PasteAnalizer::analize()
         return false;
 
     QImage image;
-    const QStringList &formats = data->formats();
-    foreach(const QString &f, formats)
+
+    if (data->hasImage())
     {
-        if(f.contains("image"))
-        {
-            image = QImage::fromData(data->data(f));
-            qDebug() << image.isNull();
-            break;
-        }
+        image = qvariant_cast<QImage>(data->imageData());
     }
 
     if(!image.isNull())
