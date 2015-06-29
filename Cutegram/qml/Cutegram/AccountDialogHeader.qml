@@ -115,13 +115,14 @@ Rectangle {
             color: currentDialog.encrypted? Cutegram.currentTheme.headerSecretTitleColor : Cutegram.currentTheme.headerTitleColor
             font.pixelSize: Math.floor( (currentDialog.encrypted? Cutegram.currentTheme.headerSecretTitleFont.pointSize : Cutegram.currentTheme.headerTitleFont.pointSize)*Devices.fontDensity)
             font.family: currentDialog.encrypted? Cutegram.currentTheme.headerSecretTitleFont.family : Cutegram.currentTheme.headerTitleFont.family
+            textFormat: Text.RichText
             text: {
                 if( !currentDialog )
                     return ""
                 if( isChat )
-                    return chat? chat.title : ""
+                    return emojis.textToEmojiText( chat? chat.title : "", 18, true )
                 else
-                    return user? user.firstName + " " + user.lastName : ""
+                    return emojis.textToEmojiText( user? user.firstName + " " + user.lastName : "", 18, true )
             }
         }
 

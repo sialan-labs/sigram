@@ -227,7 +227,8 @@ Item {
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     maximumLineCount: 1
-                    text: isChat? chat.title : user.firstName + " " + user.lastName
+                    textFormat: Text.RichText
+                    text: emojis.textToEmojiText( isChat? chat.title : user.firstName + " " + user.lastName, 16, true)
                     opacity: itemOpacities
                 }
 
@@ -249,11 +250,13 @@ Item {
                     anchors.right: parent.right
                     anchors.margins: 4*Devices.density
                     anchors.topMargin: 0
+                    textFormat: Text.RichText
                     font.pixelSize: Math.floor(Cutegram.currentTheme.dialogListMessageFont.pointSize*Devices.fontDensity)
                     font.family: Cutegram.currentTheme.dialogListMessageFont.family
                     color: selected || marea.pressed? Cutegram.currentTheme.dialogListHighlightMessageColor : Cutegram.currentTheme.dialogListMessageColor
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
+                    maximumLineCount: 1
                     clip: true
                     opacity: itemOpacities
                     visible: showLastMessage
@@ -265,7 +268,7 @@ Item {
                             return qsTr("Typing...")
                         else
                         {
-                            var message_text = emojis.textToEmojiText(message.message,16,true);
+                            var message_text = emojis.textToEmojiText(message.message,16*Devices.density,true);
 
                             if(message_text.length == 0)
                             {
