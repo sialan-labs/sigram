@@ -257,6 +257,7 @@ Item {
                     wrapMode: Text.WrapAnywhere
                     elide: Text.ElideRight
                     maximumLineCount: 1
+                    lineHeight: 100
                     clip: true
                     opacity: itemOpacities
                     visible: showLastMessage
@@ -268,8 +269,7 @@ Item {
                             return qsTr("Typing...")
                         else
                         {
-                            var message_text = emojis.textToEmojiText(message.message,16*Devices.density,true);
-
+                            var message_text = emojis.textToEmojiText(message.message,16*Devices.density,true)
                             if(message_text.length == 0)
                             {
                                 switch(message.media.classType)

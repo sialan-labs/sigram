@@ -186,7 +186,7 @@ QString Emojis::convertSmiliesToEmoji(const QString &txt)
     return res;
 }
 
-QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
+QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks, bool localLinks)
 {
     QString res = p->autoEmojis? convertSmiliesToEmoji(txt) : txt;
     res = res.toHtmlEscaped();
@@ -227,7 +227,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks)
                 continue;
 
             QString path = p->emojis.value(emoji);
-            QString in_txt = QString(" <img align=absmiddle height=\"%2\" width=\"%3\" src=\"" + AsemanDevices::localFilesPrePath() +"%1\" /> ").arg(path).arg(size).arg(size);
+            QString in_txt = QString(" <img align=absmiddle height=\"%2\" width=\"%3\" src=\"" + (localLinks?QString():AsemanDevices::localFilesPrePath()) +"%1\" /> ").arg(path).arg(size).arg(size);
             res.replace(i,j,in_txt);
             i += in_txt.size()-1;
             break;

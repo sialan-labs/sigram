@@ -51,7 +51,7 @@ public:
 
     Q_INVOKABLE QString convertSmiliesToEmoji(const QString &text);
 
-    Q_INVOKABLE QString textToEmojiText(const QString & txt , int size = 16, bool skipLinks = false);
+    Q_INVOKABLE QString textToEmojiText(const QString & txt , int size = 16, bool skipLinks = false, bool localLinks = false);
     Q_INVOKABLE QString bodyTextToEmojiText( const QString & txt );
 
     Q_INVOKABLE QList<QString> keys() const;
