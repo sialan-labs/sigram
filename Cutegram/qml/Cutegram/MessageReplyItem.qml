@@ -149,6 +149,7 @@ Item {
                 horizontalAlignment: Text.AlignLeft
                 opacity: 0.8
                 visible: text.length != 0
+                textFormat: Text.RichText
                 color: {
                     if(!replyMessage && (!message || message.out))
                         return Cutegram.currentTheme.messageOutgoingFontColor

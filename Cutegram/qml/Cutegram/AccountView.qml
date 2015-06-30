@@ -30,7 +30,7 @@ Rectangle {
         autoEmojis: Cutegram.autoEmojis
         replacements: {":)"   : "😀",
                        ":|"   : "😐",
-                       ":("   : "😞",
+                       ":("   : "😟",
                        ":d"   : "😁",
                        ":*"   : "😘",
                        ":s"   : "😖",
