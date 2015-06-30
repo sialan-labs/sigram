@@ -66,6 +66,7 @@ MouseArea {
 
         if(animated) {
             endContentY += contentY
+            var endYBackup = endContentY
 
             var padY
             if(reverse) {
@@ -86,7 +87,13 @@ MouseArea {
 
             animY.from = flick.contentY;
             animY.to = endContentY;
-            animY.restart();
+
+            if(endYBackup == endContentY) {
+                animY.restart();
+            } else {
+                if(!animY.running)
+                    animY.start();
+            }
 
             flick.contentX += contentX
         } else {

@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
                                     "tg.core.outboundpkt=false\n"
                                     "tg.core.inboundpkt=false");
 
+#ifndef QT_DEBUG // Disabled because of the debugger bug!!
     if(app.readSetting("Proxy/enable",false).toBool())
     {
         const int type = app.readSetting("Proxy/type",QNetworkProxy::HttpProxy).toInt();
@@ -68,6 +69,7 @@ int main(int argc, char *argv[])
         proxy.setPassword(pass);
         QNetworkProxy::setApplicationProxy(proxy);
     }
+#endif
 
 #ifdef Q_OS_MAC
     QPalette palette;
