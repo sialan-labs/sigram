@@ -28,7 +28,8 @@ Rectangle {
         currentTheme: "twitter"
         userData: telegramObject.userData
         autoEmojis: Cutegram.autoEmojis
-        replacements: {":)"   : "😌",
+        replacements: {":)"   : "😀",
+                       ":|"   : "😐",
                        ":("   : "😞",
                        ":d"   : "😁",
                        ":*"   : "😘",

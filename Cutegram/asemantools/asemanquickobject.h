@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QQmlListProperty>
 
+#define aqobject_cast(OBJECT) static_cast<AsemanQuickObject*>(OBJECT)
+
 class AsemanQuickObjectPrivate;
 class AsemanQuickObject : public QObject
 {
@@ -13,10 +15,11 @@ class AsemanQuickObject : public QObject
     Q_CLASSINFO("DefaultProperty", "items")
 
 public:
-    AsemanQuickObject(QObject *parent = 0);
+    Q_INVOKABLE explicit AsemanQuickObject(QObject *parent = 0);
     ~AsemanQuickObject();
 
     QQmlListProperty<QObject> items();
+    static bool isValid(AsemanQuickObject* obj);
 
 signals:
     void itemsChanged();

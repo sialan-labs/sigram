@@ -1,5 +1,9 @@
 #include "asemanquickobject.h"
 
+#include <QSet>
+
+QSet<AsemanQuickObject*> aseman_quick_objs;
+
 class AsemanQuickObjectPrivate
 {
 public:
@@ -10,6 +14,7 @@ AsemanQuickObject::AsemanQuickObject(QObject *parent) :
     QObject(parent)
 {
     p = new AsemanQuickObjectPrivate;
+    aseman_quick_objs.insert(this);
 }
 
 QQmlListProperty<QObject> AsemanQuickObject::items()
@@ -17,7 +22,12 @@ QQmlListProperty<QObject> AsemanQuickObject::items()
     return QQmlListProperty<QObject>(this, &p->items, QQmlListProperty<QObject>::AppendFunction(append),
                                                       QQmlListProperty<QObject>::CountFunction(count),
                                                       QQmlListProperty<QObject>::AtFunction(at),
-                                                      QQmlListProperty<QObject>::ClearFunction(clear) );
+                                     QQmlListProperty<QObject>::ClearFunction(clear) );
+}
+
+bool AsemanQuickObject::isValid(AsemanQuickObject *obj)
+{
+    return aseman_quick_objs.contains(obj);
 }
 
 void AsemanQuickObject::append(QQmlListProperty<QObject> *p, QObject *v)
@@ -48,6 +58,7 @@ void AsemanQuickObject::clear(QQmlListProperty<QObject> *p)
 
 AsemanQuickObject::~AsemanQuickObject()
 {
+    aseman_quick_objs.remove(this);
     delete p;
 }
 
