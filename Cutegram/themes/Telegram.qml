@@ -66,7 +66,7 @@ CutegramTheme {
     sendFrameHeight: 40
     sendFrameLightIcon: false
 
-	sendButtonStyle: AsemanStyles.ButtonStyle {
+    sendButtonStyle: AsemanStyles.ButtonStyle {
         buttonColor: "#ffffff"
         buttonTextColor: "#0080c0"
         shadowColor: "#ffffff"
