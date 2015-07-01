@@ -459,8 +459,17 @@ Item {
             anchors.rightMargin: 4*Devices.density
             width: 70*Devices.density
             text: qsTr("Send")
-            style: Cutegram.currentTheme.buttonStyle
+            style: Cutegram.currentTheme.sendButtonStyle
+
             onClicked: smsg.send()
+            MouseArea {
+                anchors.fill: send_btn
+                acceptedButtons: Qt.LeftButton
+                cursorShape: Qt.PointingHandCursor
+                onPressed: {
+                    send_btn.clicked()
+                }
+            }
         }
     }
 

@@ -53,6 +53,7 @@ class ThemeItem : public AsemanQuickObject
     Q_PROPERTY(QColor sendFrameFontHighlightColor READ sendFrameFontHighlightColor WRITE setSendFrameFontHighlightColor NOTIFY sendFrameFontHighlightColorChanged)
     Q_PROPERTY(QFont sendFrameFont READ sendFrameFont WRITE setSendFrameFont NOTIFY sendFrameFontChanged)
     Q_PROPERTY(qreal sendFrameHeight READ sendFrameHeight WRITE setSendFrameHeight NOTIFY sendFrameHeightChanged)
+    Q_PROPERTY(QQmlComponent* sendButtonStyle READ sendButtonStyle WRITE setSendButtonStyle NOTIFY sendButtonStyleChanged)
     Q_PROPERTY(QColor messageIncomingColor READ messageIncomingColor WRITE setMessageIncomingColor NOTIFY messageIncomingColorChanged)
     Q_PROPERTY(QColor messageIncomingFontColor READ messageIncomingFontColor WRITE setMessageIncomingFontColor NOTIFY messageIncomingFontColorChanged)
     Q_PROPERTY(QColor messageIncomingNameColor READ messageIncomingNameColor WRITE setMessageIncomingNameColor NOTIFY messageIncomingNameColorChanged)
@@ -591,6 +592,18 @@ public:
             return;
         _sendFrameHeight = value;
         emit sendFrameHeightChanged();
+        emit changed();
+    }
+
+    QQmlComponent *sendButtonStyle() const {
+        return _sendButtonStyle;
+    }
+
+    void setSendButtonStyle(QQmlComponent *buttonStyle) {
+        if(buttonStyle == _sendButtonStyle)
+            return;
+        _sendButtonStyle = buttonStyle;
+        emit sendButtonStyleChanged();
         emit changed();
     }
 
@@ -1419,6 +1432,7 @@ signals:
     void sendFrameFontHighlightColorChanged();
     void sendFrameFontChanged();
     void sendFrameHeightChanged();
+    void sendButtonStyleChanged();
     void messageIncomingColorChanged();
     void messageIncomingFontColorChanged();
     void messageIncomingNameColorChanged();
@@ -1573,6 +1587,7 @@ private:
     QPointer<QQmlComponent> _textFieldStyle;
     QPointer<QQmlComponent> _searchTextFieldStyle;
     QPointer<QQmlComponent> _spinBoxStyle;
+    QPointer<QQmlComponent> _sendButtonStyle;
 };
 
 #endif
