@@ -111,6 +111,7 @@ Item {
             id: back_marea
             hoverEnabled: true
             anchors.fill: parent
+            anchors.margins: -20*Devices.density
             z: 10
             onPressed: mouse.accepted = false
             onWheel: wheel.accepted = false

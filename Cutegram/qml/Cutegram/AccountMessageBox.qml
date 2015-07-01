@@ -20,17 +20,22 @@ Item {
 
     signal tagSearchRequest(string tag)
 
-    onVisibleEmojiPanelChanged: emoji_visibler_timer.restart()
+    onVisibleEmojiPanelChanged: {
+        if(visibleEmojiPanel) {
+            emoji_visibler_timer.stop()
+            if(point_dialog.opacity != 1)
+                return
+
+            showEmojiPanel()
+        } else {
+            emoji_visibler_timer.restart()
+        }
+    }
 
     Timer {
         id: emoji_visibler_timer
         interval: 200
-        onTriggered: {
-            if(visibleEmojiPanel)
-                showEmojiPanel()
-            else
-                point_dialog.hide()
-        }
+        onTriggered: point_dialog.hide()
     }
 
     BackgroundManager {
