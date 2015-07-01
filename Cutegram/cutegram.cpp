@@ -75,6 +75,7 @@ public:
     int startupOption;
     int statusIconStyle;
     bool notification;
+    bool emojiOnHover;
     bool minimumDialogs;
     bool showLastMessage;
     bool darkSystemTray;
@@ -144,6 +145,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
     p->statusIconStyle = AsemanApplication::settings()->value("General/statusIconStyle", static_cast<int>(StatusIconAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
+    p->emojiOnHover = AsemanApplication::settings()->value("General/emojiOnHover", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
@@ -662,6 +664,21 @@ void Cutegram::setNotification(bool stt)
 bool Cutegram::notification() const
 {
     return p->notification;
+}
+
+void Cutegram::setEmojiOnHover(bool stt)
+{
+    if(p->emojiOnHover == stt)
+        return;
+
+    p->emojiOnHover = stt;
+    AsemanApplication::settings()->setValue("General/emojiOnHover", stt);
+    emit emojiOnHoverChanged();
+}
+
+bool Cutegram::emojiOnHover() const
+{
+    return p->emojiOnHover;
 }
 
 void Cutegram::setMinimumDialogs(bool stt)

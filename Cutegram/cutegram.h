@@ -53,6 +53,7 @@ class Cutegram : public QObject
     Q_PROPERTY(int  sysTrayCounter    READ sysTrayCounter    WRITE setSysTrayCounter  NOTIFY sysTrayCounterChanged   )
     Q_PROPERTY(int  startupOption     READ startupOption     WRITE setStartupOption   NOTIFY startupOptionChanged    )
     Q_PROPERTY(bool notification      READ notification      WRITE setNotification    NOTIFY notificationChanged     )
+    Q_PROPERTY(bool emojiOnHover      READ emojiOnHover      WRITE setEmojiOnHover    NOTIFY emojiOnHoverChanged     )
     Q_PROPERTY(bool minimumDialogs    READ minimumDialogs    WRITE setMinimumDialogs  NOTIFY minimumDialogsChanged   )
     Q_PROPERTY(bool showLastMessage   READ showLastMessage   WRITE setShowLastMessage NOTIFY showLastMessageChanged  )
     Q_PROPERTY(bool darkSystemTray    READ darkSystemTray    WRITE setDarkSystemTray  NOTIFY darkSystemTrayChanged   )
@@ -131,6 +132,9 @@ public:
     void setNotification(bool stt);
     bool notification() const;
 
+    void setEmojiOnHover(bool stt);
+    bool emojiOnHover() const;
+
     void setMinimumDialogs(bool stt);
     bool minimumDialogs() const;
 
@@ -208,6 +212,7 @@ signals:
     void backRequest();
     void sysTrayCounterChanged();
     void fakeSignal();
+    void emojiOnHoverChanged();
     void languageChanged();
     void languageDirectionChanged();
     void startupOptionChanged();

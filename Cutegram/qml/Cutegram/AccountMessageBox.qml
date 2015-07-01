@@ -21,6 +21,9 @@ Item {
     signal tagSearchRequest(string tag)
 
     onVisibleEmojiPanelChanged: {
+        if(!Cutegram.emojiOnHover)
+            return;
+
         if(visibleEmojiPanel) {
             emoji_visibler_timer.stop()
             if(point_dialog.opacity != 1)

@@ -233,6 +233,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: hover_emoji_text
+                            height: hover_emojis_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Show Emojis on hover")
+                        }
+
+                        Text {
                             id: theme_text
                             height: theme_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -386,6 +396,13 @@ Rectangle {
                             checked: Cutegram.autoEmojis
                             style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: Cutegram.autoEmojis = checked
+                        }
+
+                        Controls.Switch {
+                            id: hover_emojis_checkbox
+                            checked: Cutegram.emojiOnHover
+                            style: Cutegram.currentTheme.switchStyle
+                            onCheckedChanged: Cutegram.emojiOnHover = checked
                         }
 
                         Controls.ComboBox {
