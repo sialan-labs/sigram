@@ -68,6 +68,8 @@ CutegramTheme {
     sendFrameHeight: 40
     sendFrameLightIcon: false
 
+	sendButtonStyle: AsemanStyles.ButtonStyle { }
+	
     messageOutgoingNameColor: masterColor
     messageOutgoingLightIcon: false
     messageOutgoingDateColor: "#555555"

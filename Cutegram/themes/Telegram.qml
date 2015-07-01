@@ -66,6 +66,13 @@ CutegramTheme {
     sendFrameHeight: 40
     sendFrameLightIcon: false
 
+	sendButtonStyle: AsemanStyles.ButtonStyle {
+        buttonColor: "#ffffff"
+        buttonTextColor: "#0080c0"
+        shadowColor: "#ffffff"
+        fontPixelSize: Math.floor(13*Devices.fontDensity)	    
+    }		
+	
     messageOutgoingNameColor: masterColor
     messageOutgoingLightIcon: false
     messageOutgoingDateColor: "#6cc264"

@@ -6,6 +6,8 @@ import AsemanTools 1.0
 ButtonStyle {
     property color buttonColor: masterPalette.highlight
     property color buttonTextColor: masterPalette.highlightedText
+    property color shadowColor: "#000000"
+    property real  fontPixelSize: Math.floor(9*Devices.fontDensity)
 
     SystemPalette {
         id: masterPalette
@@ -40,7 +42,7 @@ ButtonStyle {
             horizontalOffset: 0
             verticalOffset: 1*Devices.density
             opacity: control.pressed? 0.5 : 0.2
-            color: "#000000"
+            color: shadowColor
         }
     }
 
@@ -59,6 +61,7 @@ ButtonStyle {
             Text {
                 color: control.enabled? buttonTextColor : Qt.lighter(masterPalette.windowText, 5)
                 text: control.text
+                font.pixelSize: fontPixelSize
             }
         }
     }
