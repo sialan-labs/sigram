@@ -16,7 +16,22 @@ Item {
     property alias backgroundManager: background_manager
     property alias headerManager: header_manager
 
+    property bool visibleEmojiPanel: point_dialog.containsMouse || send_msg.emojiButtonHover
+
     signal tagSearchRequest(string tag)
+
+    onVisibleEmojiPanelChanged: emoji_visibler_timer.restart()
+
+    Timer {
+        id: emoji_visibler_timer
+        interval: 200
+        onTriggered: {
+            if(visibleEmojiPanel)
+                showEmojiPanel()
+            else
+                point_dialog.hide()
+        }
+    }
 
     BackgroundManager {
         id: background_manager
@@ -130,19 +145,7 @@ Item {
             onAccepted: messages.sendMessage(text, inReplyTo)
             trash: messages.messageDraging
             onCopyRequest: messages.copy()
-            onEmojiRequest: {
-                var item = emoticons_component.createObject(message_box)
-                var w = 360*Devices.density
-                var h = 300*Devices.density
-
-                var newPoint = msg_box.mapFromItem(send_msg, x, y)
-                var nx = newPoint.x
-                var ny = newPoint.y
-
-                point_dialog.pointerLeftMargin = w*0.6
-                point_dialog.item = item
-                point_dialog.pointingTo(nx-w*0.6-20*Devices.density, ny, w, h)
-            }
+            onEmojiRequest: showEmojiPanel()
         }
 
         Item {
@@ -264,6 +267,24 @@ Item {
 
     function focusOn(msgId) {
         messages.focusOn(msgId)
+    }
+
+    function showEmojiPanel() {
+        var pnt = send_msg.emojiPointer()
+        var x = pnt.x + send_msg.emojiButtonWidth/2
+        var y = pnt.y + send_msg.emojiButtonHeight*0.2
+
+        var item = emoticons_component.createObject(message_box)
+        var w = 360*Devices.density
+        var h = 300*Devices.density
+
+        var newPoint = msg_box.mapFromItem(send_msg, x, y)
+        var nx = newPoint.x
+        var ny = newPoint.y
+
+        point_dialog.pointerLeftMargin = w*0.6
+        point_dialog.item = item
+        point_dialog.pointingTo(nx-w*0.6-20*Devices.density, ny, w, h)
     }
 }
 

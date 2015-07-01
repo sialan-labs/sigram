@@ -26,6 +26,8 @@ Item {
 
     property variant item
     property real margin: 10
+    property bool hoverToClose: false
+    property alias containsMouse: back_marea.containsMouse
 
     property real extraX: 0
     property real extraY: 7*Devices.density
@@ -40,11 +42,31 @@ Item {
     }
 
     MouseArea {
+        id: marea
         anchors.fill: parent
         hoverEnabled: true
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked: p_dialog.hide()
         onWheel: wheel.accepted = true
+        onPositionChanged: {
+            if(!containsMouse || !hoverToClose || hover_disabler_timer.running) {
+                hover_close_timer.stop()
+                return
+            }
+
+            hover_close_timer.restart()
+        }
+    }
+
+    Timer {
+        id: hover_disabler_timer
+        interval: 400
+    }
+
+    Timer {
+        id: hover_close_timer
+        interval: 200
+        onTriggered: if(marea.containsMouse) p_dialog.hide()
     }
 
     QtObject {
@@ -83,6 +105,15 @@ Item {
             anchors.bottomMargin: back.mirror? 10 - 20*Devices.density : -11
             anchors.left: parent.left
             anchors.leftMargin: pointerLeftMargin
+        }
+
+        MouseArea {
+            id: back_marea
+            hoverEnabled: true
+            anchors.fill: parent
+            z: 10
+            onPressed: mouse.accepted = false
+            onWheel: wheel.accepted = false
         }
 
         Behavior on y {
@@ -130,6 +161,8 @@ Item {
         } else {
             back.mirror = false
         }
+
+        hover_disabler_timer.restart()
 
         back.x = x - extraX
         back.y = back.mirror? y + extraY : y - extraY

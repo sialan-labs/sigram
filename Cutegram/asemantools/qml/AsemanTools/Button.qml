@@ -32,12 +32,15 @@ Rectangle {
     property alias textFont: txt.font
 
     property alias hoverEnabled: marea.hoverEnabled
+    property alias containsMouse: marea.containsMouse
 
     property alias iconHeight: icn.height
     property bool iconCenter: false
 
     property bool press: marea.pressed
     property bool enter: marea.containsMouse
+
+    property bool triggeredOnHover: false
 
     property color highlightColor: masterPalette.highlight
     property string normalColor: "#00000000"
@@ -88,7 +91,12 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: button.clicked()
-        onEntered: if( !tooltipItem && tooltipText.length != 0 ) tooltipItem = tooltip_component.createObject(button)
+        onEntered: {
+            if(triggeredOnHover)
+                button.clicked()
+            if( !tooltipItem && tooltipText.length != 0 )
+                tooltipItem = tooltip_component.createObject(button)
+        }
         onExited: if( tooltipItem ) tooltipItem.end()
 
         property variant tooltipItem

@@ -22,10 +22,14 @@ Item {
     property color color: "#ffffff"
     property bool isChat: currentDialog? currentDialog.peer.chatId != 0 : false
 
+    property alias emojiButtonWidth: emoji_btn.width
+    property alias emojiButtonHeight: emoji_btn.height
+
     property alias trash: trash_item.visible
+    property alias emojiButtonHover: emoji_btn.containsMouse
 
     signal accepted( string text, int inReplyTo )
-    signal emojiRequest(real x, real y)
+    signal emojiRequest()
     signal copyRequest()
 
     onCurrentDialogChanged: {
@@ -445,10 +449,7 @@ Item {
             cursorShape: Qt.PointingHandCursor
             iconHeight: height*0.55
             icon: Cutegram.currentTheme.sendFrameLightIcon? "files/emoji-light.png" : "files/emoji.png"
-            onClicked: {
-                var pnt = smsg.mapFromItem(emoji_btn,0,0)
-                smsg.emojiRequest(pnt.x + width/2, pnt.y + height*0.2)
-            }
+            onClicked: smsg.emojiRequest()
         }
 
         Controls.Button {
@@ -606,5 +607,9 @@ Item {
             telegram: telegramObject
             property bool isTagSuggestion: true
         }
+    }
+
+    function emojiPointer() {
+        return smsg.mapFromItem(emoji_btn,0,0)
     }
 }
