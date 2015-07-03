@@ -158,7 +158,7 @@ Rectangle {
                             font.family: Cutegram.currentTheme.sidebarFont.family
                             font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
                             color: Cutegram.currentTheme.sidebarFontColor
-                            visible: Devices.isLinux
+                            visible: autostart_checkbox.visible
                             text: qsTr("Auto Start")
                         }
 
@@ -332,7 +332,7 @@ Rectangle {
 
                         Controls.Switch {
                             id: autostart_checkbox
-                            visible: Devices.isLinux
+                            visible: Devices.isLinux || Devices.isWindows
                             checked: autostart_mngr.active
                             style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: autostart_mngr.active = checked
