@@ -40,9 +40,9 @@ win32 {
 } else {
 macx {
     QT += macextras
-    LIBS += -lssl -lcrypto -lz -L/Users/bardia/Projects/builds/64/lib/ -lqtelegram-ae -ltelegramqml
-    INCLUDEPATH += /Users/bardia/Projects/builds/64/include/libqtelegram-ae \
-        /Users/bardia/Projects/builds/64/include/telegramqml
+    LIBS +=  -framework CoreServices -lssl -lcrypto -lz -L/Users/bardia/Projects/builds/64/lib/ -lqtelegram-ae -ltelegramqml
+    INCLUDEPATH += /System/Library/Frameworks/CoreServices.framework/Headers/ /Users/bardia/Projects/builds/64/include/libqtelegram-ae \
+        /Users/bardia/Projects/builds/64/include/telegramqml 
 } else {
 openbsd {
     LIBS += -lssl -lcrypto -lz -lqtelegram-ae -ltelegramqml
