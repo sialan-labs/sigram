@@ -101,6 +101,34 @@
         <source>Go online</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -322,6 +350,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Audio Recorder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write a message...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -714,6 +746,25 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Emojis on hover</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ContributorsModel</name>
+    <message>
+        <source>%1 - %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (%2) - %3</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1155,7 +1206,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation>Krüptitud vestlus</translation>
+        <translation type="vanished">Krüptitud vestlus</translation>
     </message>
 </context>
 <context>
@@ -1225,6 +1276,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sets default DC ID to &lt;id&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sets default IP Address to &lt;ip&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

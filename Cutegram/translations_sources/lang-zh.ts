@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -94,6 +96,34 @@
     <message>
         <source>Go online</source>
         <translation>在线</translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">联系人</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Photo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -312,7 +342,7 @@ Note that android accept secret chat automatically.</source>
         <translation>删除</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>这是 Cutegram 的新闻，主要是新版本发布以及一些解决方案。
 这并不是一个 Telegram 联系人。只是一个虚拟联系人。</translation>
@@ -324,6 +354,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Audio Recorder</source>
         <translation>音频录音机</translation>
+    </message>
+    <message>
+        <source>Write a message...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -702,6 +736,25 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Cutegram will restart after this operation.</source>
         <translation>Cutegram 将在此操作后重启。</translation>
     </message>
+    <message>
+        <source>Show Emojis on hover</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ContributorsModel</name>
+    <message>
+        <source>%1 - %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (%2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (%2) - %3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CursorPicker</name>
@@ -1049,7 +1102,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
-        <translation>私密会话</translation>
+        <translation type="vanished">私密会话</translation>
     </message>
 </context>
 <context>
@@ -1120,6 +1173,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
         <translation>强制以多实例方式运行 Cutegram。</translation>
+    </message>
+    <message>
+        <source>Sets default DC ID to &lt;id&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sets default IP Address to &lt;ip&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
