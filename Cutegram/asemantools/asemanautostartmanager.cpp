@@ -2,6 +2,7 @@
 
 #include <QFile>
 #include <QDir>
+#include <QSettings>
 
 class AsemanAutoStartManagerPrivate
 {
@@ -135,6 +136,12 @@ void AsemanAutoStartManager::refresh()
     p->active = !data.contains("Hidden=true");
 
     emit activeChanged();
+#elif defined(Q_OS_WIN)
+    QSettings autoStartSettings("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+
+    p->active = autoStartSettings.contains(p->source);
+
+    emit activeChanged();
 #endif
 }
 
@@ -163,6 +170,17 @@ void AsemanAutoStartManager::save()
 
     file.write(data.toUtf8());
     file.close();
+#elif defined(Q_OS_WIN)
+    QSettings autoStartSettings("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+
+    if(p->active)
+    {
+        autoStartSettings.setValue(p->source, QDir::toNativeSeparators(QDir::cleanPath(p->command)));
+    }
+    else
+    {
+        autoStartSettings.remove(p->source);
+    }
 #endif
 }
 
