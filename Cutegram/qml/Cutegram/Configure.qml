@@ -332,7 +332,7 @@ Rectangle {
 
                         Controls.Switch {
                             id: autostart_checkbox
-                            visible: Devices.isLinux || Devices.isWindows
+                            visible: Devices.isLinux || Devices.isWindows || Devices.isMacX
                             checked: autostart_mngr.active
                             style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: autostart_mngr.active = checked
