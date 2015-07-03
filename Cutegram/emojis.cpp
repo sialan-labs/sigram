@@ -238,7 +238,6 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks, bo
         }
     }
 
-
     res = res.replace("\n","<br />");
     return res;
 }
@@ -261,6 +260,11 @@ QList<QString> Emojis::keys() const
 QString Emojis::pathOf(const QString &key) const
 {
     return EMOJIS_THEME_PATH(p->theme) + "36x36/" + p->emojis.value(key);
+}
+
+bool Emojis::contains(const QString &key) const
+{
+    return p->emojis.contains(key);
 }
 
 const QHash<QString, QString> &Emojis::emojis() const
