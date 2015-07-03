@@ -67,6 +67,8 @@ win32 {
 
     macx {
         QT += macextras
+        LIBS += -framework CoreServices
+        INCLUDEPATH += /System/Library/Frameworks/CoreServices.framework/Headers/
     } else {
     openbsd {
         # OPENBSD
