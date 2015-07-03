@@ -34,7 +34,7 @@ contains(DEFINES, DISABLE_ASEMAN_WEBGRABBER) {
 linux|openbsd: QT += dbus
 win32 {
     QT += winextras
-    LIBS += -LD:/Projects/cutegram-deps/lib -lssleay32 -lcrypto -lz -lqtelegram-ae -ltelegramqml
+    LIBS += -LD:/Projects/cutegram-deps/lib -lssleay32 -lcrypto -lz -L$${DESTDIR} -lqtelegram-ae -ltelegramqml
     INCLUDEPATH += D:/Projects/cutegram-deps/include D:/Projects/libqtelegram-aseman-edition \
         D:/Projects/telegramqml
 } else {

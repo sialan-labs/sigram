@@ -327,8 +327,15 @@ Rectangle {
 
                     if(user.id == telegram.cutegramId)
                         return
-                    if( mouse.button == Qt.RightButton ) {
+                    if( mouse.button != Qt.RightButton ) {
+                        startPoint = Qt.point(mouseX, mouseY)
+                    } else {
                         menuRequested = true
+                    }
+                }
+
+                onClicked: {
+                    if( mouse.button == Qt.RightButton ) {
                         var actions
                         var res
                         if(message.encrypted) {
@@ -378,9 +385,6 @@ Rectangle {
                                 break;
                             }
                         }
-                    }
-                    else {
-                        startPoint = Qt.point(mouseX, mouseY)
                     }
                 }
 

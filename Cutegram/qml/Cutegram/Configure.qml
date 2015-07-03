@@ -158,7 +158,7 @@ Rectangle {
                             font.family: Cutegram.currentTheme.sidebarFont.family
                             font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
                             color: Cutegram.currentTheme.sidebarFontColor
-                            visible: Devices.isLinux
+                            visible: autostart_checkbox.visible
                             text: qsTr("Auto Start")
                         }
 
@@ -332,7 +332,7 @@ Rectangle {
 
                         Controls.Switch {
                             id: autostart_checkbox
-                            visible: Devices.isLinux
+                            visible: Devices.isLinux || Devices.isWindows
                             checked: autostart_mngr.active
                             style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: autostart_mngr.active = checked
@@ -485,6 +485,7 @@ Rectangle {
                                 if(!init_timer.inited)
                                     return
 
+                                select_sound_timer.stop()
                                 switch(currentIndex)
                                 {
                                 case 0:
@@ -496,14 +497,20 @@ Rectangle {
                                     break;
 
                                 case 2:
-                                {
+                                    select_sound_timer.start()
+                                    break;
+                                }
+                            }
+
+                            Timer {
+                                id: select_sound_timer
+                                interval: 300
+                                onTriggered: {
                                     var file = Desktop.getOpenFileName(View, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
                                     if(file.length != 0)
                                         Cutegram.messageAudio = Devices.localFilesPrePath + file
                                     else
                                         Cutegram.messageAudio = ""
-                                }
-                                    break;
                                 }
                             }
                         }
