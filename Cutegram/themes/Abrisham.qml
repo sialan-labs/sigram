@@ -68,7 +68,9 @@ CutegramTheme {
     sendFrameHeight: 40
     sendFrameLightIcon: false
 
-    sendButtonStyle: AsemanStyles.ButtonStyle { }	
+    sendButtonStyle: AsemanStyles.ButtonStyle {
+        fontPixelSize: Math.floor(10*Devices.fontDensity)
+    }
 	
     messageOutgoingNameColor: masterColor
     messageOutgoingLightIcon: false
