@@ -22,6 +22,17 @@ Also you should install AppIndicator and Gtk2 if you want to enable UnitySystemT
 
 For other distributions search for the corresponding packages.
 
+#### Available qmake keywords
+    
+There are some available keywords, you can use it as qmake flags on build step on each project:
+
+    OPENSSL_LIB_DIR
+    OPENSSL_INCLUDE_PATH
+    LIBQTELEGRAM_LIB_DIR
+    LIBQTELEGRAM_INCLUDE_PATH
+    TELEGRAMQML_LIB_DIR
+    TELEGRAMQML_INCLUDE_PATH
+
 #### Get libqtelegram
 
 First, you should build and install libqtelegram.
