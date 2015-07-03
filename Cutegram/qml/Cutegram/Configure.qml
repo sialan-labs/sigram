@@ -485,6 +485,7 @@ Rectangle {
                                 if(!init_timer.inited)
                                     return
 
+                                select_sound_timer.stop()
                                 switch(currentIndex)
                                 {
                                 case 0:
@@ -496,14 +497,20 @@ Rectangle {
                                     break;
 
                                 case 2:
-                                {
+                                    select_sound_timer.start()
+                                    break;
+                                }
+                            }
+
+                            Timer {
+                                id: select_sound_timer
+                                interval: 300
+                                onTriggered: {
                                     var file = Desktop.getOpenFileName(View, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
                                     if(file.length != 0)
                                         Cutegram.messageAudio = Devices.localFilesPrePath + file
                                     else
                                         Cutegram.messageAudio = ""
-                                }
-                                    break;
                                 }
                             }
                         }
