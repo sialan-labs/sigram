@@ -246,7 +246,7 @@ QString AsemanDesktopTools::menuStyle() const
 
 QObject *AsemanDesktopTools::currentMenuObject() const
 {
-#ifdef DesktopSession
+#ifdef DESKTOP_DEVICE
     if(p->currentMenuObjects.isEmpty())
         return 0;
 
