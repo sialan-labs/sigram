@@ -382,6 +382,8 @@ bool AsemanDevices::cameraIsAvailable() const
 {
 #ifdef ASEMAN_MULTIMEDIA
     return QCameraInfo::availableCameras().count();
+#else
+    return false;
 #endif
 }
 
