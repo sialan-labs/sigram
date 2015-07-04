@@ -229,6 +229,7 @@ Item {
 
         Text {
             anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8*Devices.density
             anchors.left: parent.left
             anchors.margins: 2*Devices.density
             font.family: AsemanApp.globalFont.family
