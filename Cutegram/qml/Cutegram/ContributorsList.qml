@@ -12,7 +12,9 @@ Rectangle {
         id: cbmodel
         files: ["about/cutegram",
                 "about/github-contributors",
+                "about/telegramQml",
                 "about/libqtelegram",
+                "about/libqtelegram-aseman-edition",
                 "about/sigram",
                 "about/translators"]
     }

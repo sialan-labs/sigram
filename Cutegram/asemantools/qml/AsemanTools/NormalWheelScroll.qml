@@ -88,13 +88,7 @@ MouseArea {
             animY.from = flick.contentY;
             animY.to = endContentY;
 
-            if(endYBackup == endContentY) {
-                animY.restart();
-            } else {
-                if(!animY.running)
-                    animY.start();
-            }
-
+            animY.restart();
             flick.contentX += contentX
         } else {
             flick.contentY += contentY

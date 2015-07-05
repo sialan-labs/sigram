@@ -122,5 +122,7 @@
         <file>qml/Cutegram/about/sigram</file>
         <file>qml/Cutegram/about/translators</file>
         <file>qml/Cutegram/ContributorsList.qml</file>
+        <file>qml/Cutegram/about/telegramQml</file>
+        <file>qml/Cutegram/about/libqtelegram-aseman-edition</file>
     </qresource>
 </RCC>
