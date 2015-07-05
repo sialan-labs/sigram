@@ -11,8 +11,6 @@
 #include <QNetworkProxy>
 #include <QCommandLineParser>
 
-#include <telegram.h>
-
 int main(int argc, char *argv[])
 {
     TelegramQmlInitializer::init("TelegramQml");

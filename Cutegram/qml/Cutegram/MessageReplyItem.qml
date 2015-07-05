@@ -164,7 +164,11 @@ Item {
                         return ""
 
                     var replyMsg = replyMessage? replyMessage : telegram.message(message.replyToMsgId)
-                    return emojis.textToEmojiText(replyMsg.message,16,true)
+                    var msgText = replyMsg.message
+                    if(msgText.length > 100)
+                        msgText = msgText.slice(0, 100) + "..."
+
+                    return emojis.textToEmojiText(msgText,16,true)
                 }
 
                 property real htmlWidth: Cutegram.htmlWidth(text)

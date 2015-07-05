@@ -134,7 +134,7 @@ Item {
         fillMode: isSticker? Image.PreserveAspectFit : Image.PreserveAspectCrop
         asynchronous: true
         smooth: true
-        visible: file_handler.targetType != FileHandler.TypeTargetMediaVideo || fileLocation.length != 0
+        visible: file_handler.targetType == FileHandler.TypeTargetMediaDocument || fileLocation.length != 0
 
         property size imageSize: Cutegram.imageSize(source)
         property string customImage
@@ -152,7 +152,9 @@ Item {
             switch( file_handler.targetType )
             {
             case FileHandler.TypeTargetMediaPhoto:
-                result = file_handler.filePath
+                result = fileLocation
+                if(result.length==0 && file_handler.thumbPath != file_handler.defaultThumbnail)
+                    result = file_handler.thumbPath
                 break;
 
             case FileHandler.TypeTargetMediaVideo:
@@ -192,7 +194,7 @@ Item {
     FastBlur {
         anchors.fill: media_img
         source: media_img
-        radius: 64
+        radius: 32
         visible: !media_img.visible
     }
 

@@ -45,6 +45,7 @@ Item {
             font.family: AsemanApp.globalFont.family
             font.pixelSize: Math.floor(9*Devices.fontDensity)
             color: "#333333"
+            textFormat: Text.RichText
             text: {
                 var res = ""
                 var userName
@@ -90,7 +91,7 @@ Item {
                     break
                 }
 
-                return res
+                return emojis.textToEmojiText(res, 16, true)
             }
         }
 

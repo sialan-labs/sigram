@@ -228,6 +228,8 @@ Rectangle {
             Rectangle {
                 id: select_rect
                 anchors.fill: parent
+                anchors.leftMargin: -8*Devices.density
+                anchors.rightMargin: -8*Devices.density
                 color: Cutegram.currentTheme.masterColor
                 opacity: 0.2
                 z: -100

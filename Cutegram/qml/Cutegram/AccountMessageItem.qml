@@ -9,7 +9,7 @@ Item {
     id: msg_item
     width: 100
     height: logicalHeight<minimumHeight? minimumHeight : logicalHeight
-    clip: true
+//    clip: true
 
     property real messageFrameX: back_rect.x
     property real messageFrameY: back_rect.y
@@ -75,6 +75,7 @@ Item {
         id: action_item
         anchors.left: parent.left
         anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
         message: msg_item.message
     }
 
