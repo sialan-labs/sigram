@@ -11,10 +11,10 @@ Rectangle {
     ContributorsModel {
         id: cbmodel
         files: ["about/cutegram",
-                "about/github-contributors",
                 "about/telegramQml",
                 "about/libqtelegram",
                 "about/libqtelegram-aseman-edition",
+                "about/github-contributors",
                 "about/sigram",
                 "about/translators"]
     }
