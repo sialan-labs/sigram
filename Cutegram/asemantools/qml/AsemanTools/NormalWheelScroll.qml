@@ -25,6 +25,7 @@ MouseArea {
     property Flickable flick
     property bool animated: true
     property bool reverse: false
+    property bool naturalScroll: false
 
     property real endContentY
 
@@ -43,31 +44,32 @@ MouseArea {
         var contentX = 0
         var contentY = 0
 
+        var angleX = wheel.angleDelta.x * (naturalScroll? -1 : 1)
+        var angleY = wheel.angleDelta.y * (naturalScroll? -1 : 1)
+
         if(!animY.running)
             endContentY = flick.contentY
 
         var ratio = animated? 0.7 : 0.5
         if( flick.orientation ) {
             if( flick.orientation == Qt.Horizontal )
-                contentX = -wheel.angleDelta.y*ratio
+                contentX = -angleY*ratio
             else
-                contentY = -wheel.angleDelta.y*ratio
+                contentY = -angleY*ratio
         } else {
             if( flick.flickableDirection == Flickable.VerticalFlick )
-                contentY = -wheel.angleDelta.y*ratio
+                contentY = -angleY*ratio
             else
             if( flick.flickableDirection == Flickable.HorizontalFlick )
-                contentX = -wheel.angleDelta.y*ratio
+                contentX = -angleY*ratio
             else {
-                contentY = -wheel.angleDelta.y*ratio
-                contentX = -wheel.angleDelta.x*ratio
+                contentY = -angleY*ratio
+                contentX = -angleX*ratio
             }
         }
 
         if(animated) {
             endContentY += contentY
-            var endYBackup = endContentY
-
             var padY
             if(reverse) {
                 padY = flick.originY+flick.contentHeight
@@ -85,10 +87,12 @@ MouseArea {
                     endContentY = flick.contentHeight - flick.height + padY
             }
 
-            animY.from = flick.contentY;
-            animY.to = endContentY;
+            if(animY.to != endContentY) {
+                animY.from = flick.contentY;
+                animY.to = endContentY;
+                animY.restart();
+            }
 
-            animY.restart();
             flick.contentX += contentX
         } else {
             flick.contentY += contentY
