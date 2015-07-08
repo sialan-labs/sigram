@@ -1,12 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
 <context>
     <name>AboutCutegram</name>
-    <message>
-        <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation type="vanished">Cutegram is een telegram-applicatie van Aseman. Het is gratis met verspreiding van broncode (open source) en uitgebracht onder de GPLv3-licentie.</translation>
-    </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
         <translation type="vanished">Cutegram gebruikt Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, enkele KDE-hulpmiddelen, de Faenza-pictogrammen en Twitter-emoticons.</translation>
@@ -32,7 +26,7 @@
     </message>
     <message>
         <source>%1 was online</source>
-        <translation>%1 was online</translation>
+        <translation>Laatst gezien op %1</translation>
     </message>
     <message>
         <source>Secret chat</source>
@@ -99,31 +93,31 @@
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Document</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Contactpersoon</translation>
+        <translation>Contactpersoon</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Foto</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Locatie</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend</translation>
     </message>
 </context>
 <context>
@@ -221,7 +215,7 @@ Om het voor nu op te lossen kunt u 2-factor-authenticatie uitschakelen, inloggen
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation type="vanished">Mediabestanden worden momenteen niet ondersteund in geheime gesprekken</translation>
+        <translation type="vanished">Mediabestanden worden momenteel niet ondersteund in geheime gesprekken</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
@@ -342,7 +336,7 @@ Android accepteerd geheime chats automatisch.</translation>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Het bevat Curegram-nieuws met informatie over nieuwe versies en oplossingen.
 Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
@@ -357,7 +351,7 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ een bericht...</translation>
     </message>
 </context>
 <context>
@@ -738,22 +732,22 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation>Emoji&apos;s weergeven wanneer de muis eroverheen zweeft</translation>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2) - %3</translation>
     </message>
 </context>
 <context>
@@ -947,75 +941,75 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1099,13 +1093,6 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
 </context>
 <context>
-    <name>TelegramQml</name>
-    <message>
-        <source>Secret Chat</source>
-        <translation type="vanished">Geheim chatgesprek</translation>
-    </message>
-</context>
-<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1176,11 +1163,11 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelt de standaard DC ID in op &lt;id&gt;</translation>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelt het standaard IP-adres in op &lt;ip&gt;</translation>
     </message>
 </context>
 </TS>

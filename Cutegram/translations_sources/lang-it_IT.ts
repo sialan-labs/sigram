@@ -1,12 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="it_IT" version="2.1">
 <context>
     <name>AboutCutegram</name>
-    <message>
-        <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation type="vanished">Cutegram è un client telegram di Aseman. È gratuito e opensource e rilasciato sotto licenza GPLv3</translation>
-    </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
         <translation type="vanished">Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, alcuni tool KDE, icone Faenza e emoticon Twitter.</translation>
@@ -17,11 +11,11 @@
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -44,15 +38,15 @@
     </message>
     <message>
         <source>Recently</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Last Month</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Last Week</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -87,39 +81,43 @@
     </message>
     <message>
         <source>Notify when</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Become online</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Go online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Contatta</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -142,24 +140,32 @@
     </message>
     <message>
         <source>%1 is online</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 start typing on &quot;%2&quot;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 start typing</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Password Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -170,7 +176,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Login again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -197,11 +203,11 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -212,19 +218,19 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Load Always</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Load Link</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -259,24 +265,24 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>New Messages</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -328,7 +334,7 @@ Note that android accept secret chat automatically.</source>
         <translation>Cancella</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>È una notizia di Cutegram riguardo nuovi aggiornamenti e soluzioni.
 Non è un contatto telegram. È solo un contatto virtuale.</translation>
@@ -339,11 +345,11 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -378,7 +384,7 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -420,45 +426,45 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished">Cognome</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -680,66 +686,66 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     </message>
     <message>
         <source>Minimum List</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Master Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>System Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tray icon style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Smooth Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -793,7 +799,7 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     </message>
     <message>
         <source>Cutegram</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -854,26 +860,26 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>Emoticons</name>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Cancella</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>EmoticonsModel</name>
     <message>
         <source>Recent</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Emojis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -929,79 +935,79 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>JalaliCalendarObject</name>
     <message>
         <source>Farvardin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1058,23 +1064,23 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Invia</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1082,13 +1088,6 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     <message>
         <source>Select Application</source>
         <translation>Seleziona Applicazione</translation>
-    </message>
-</context>
-<context>
-    <name>TelegramQml</name>
-    <message>
-        <source>Secret Chat</source>
-        <translation type="vanished">Chat Segreta</translation>
     </message>
 </context>
 <context>
@@ -1135,38 +1134,38 @@ Non è un contatto telegram. È solo un contatto virtuale.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished">Sfondo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select photo</source>
-        <translation type="unfinished">Seleziona foto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

@@ -1,12 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
 <context>
     <name>AboutCutegram</name>
-    <message>
-        <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation type="vanished">Cutegram es un cliente de Telegram por Aseman. Es libre y de código abierto y liberado bajo la licencia GPLv3.</translation>
-    </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
         <translation type="vanished">Cutegram usando Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, algunas herramientas de KDE, iconos de Faenza y emojis de Twitter.</translation>
@@ -99,31 +93,31 @@
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Contacto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -342,7 +336,7 @@ Notar que android acepta chat secretos automáticamente.</translation>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Este es un boletín de Cutegram sobre nuevos lanzamientos y soluciones.
 No es un contacto de telegram. Es solo un contacto virtual.</translation>
@@ -357,7 +351,7 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -738,22 +732,22 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1099,13 +1093,6 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     </message>
 </context>
 <context>
-    <name>TelegramQml</name>
-    <message>
-        <source>Secret Chat</source>
-        <translation type="vanished">Chat Secreto</translation>
-    </message>
-</context>
-<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1176,11 +1163,11 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

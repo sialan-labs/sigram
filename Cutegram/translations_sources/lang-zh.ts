@@ -1,12 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh" version="2.1">
 <context>
     <name>AboutCutegram</name>
-    <message>
-        <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation type="vanished">Cutegram 是一个由 Aseman 开发的 Telegram 客户端。它是自由开源软件，以 GPLv3 协议授权发布。</translation>
-    </message>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
         <translation type="vanished">Cutegram 使用了 Qt5、QML、libqtelegram、libappindicator、AsemanQtTools 和其他一些 KDE 工具，还包括 Faenza 图标及 Twitter 的表情图标。</translation>
@@ -99,31 +93,31 @@
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>文档</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">联系人</translation>
+        <translation>联系人</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>视频</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>音频</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>图片</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>位置</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>未知</translation>
     </message>
 </context>
 <context>
@@ -342,7 +336,7 @@ Note that android accept secret chat automatically.</source>
         <translation>删除</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>这是 Cutegram 的新闻，主要是新版本发布以及一些解决方案。
 这并不是一个 Telegram 联系人。只是一个虚拟联系人。</translation>
@@ -357,7 +351,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation>写一个消息…</translation>
     </message>
 </context>
 <context>
@@ -738,22 +732,22 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation>在旁边显示表情图标</translation>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2) - %3</translation>
     </message>
 </context>
 <context>
@@ -1099,13 +1093,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
-    <name>TelegramQml</name>
-    <message>
-        <source>Secret Chat</source>
-        <translation type="vanished">私密会话</translation>
-    </message>
-</context>
-<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1176,11 +1163,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>设置默认 DC ID 到 &lt;id&gt;</translation>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>设置默认 IP 地址到 &lt;ip&gt;</translation>
     </message>
 </context>
 </TS>

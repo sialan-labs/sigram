@@ -1,15 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ast">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
-        <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation type="vanished">Cutegram ye un veceru Telegram por Aseman. Ye llibre y ta llanzáu baxo la llicencia GPLv3.</translation>
-    </message>
-    <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation type="vanished">Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools,  delles ferramientes de KDE, iconos Faenza y Emojis de Twitter.</translation>
+        <translation type="vanished">Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools,  delles ferramientes de KDE, iconos Faenza y fustaxes de Twitter.</translation>
     </message>
     <message>
         <source>Home Page</source>
@@ -17,11 +11,11 @@
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram ye un veceru Telegram por Aseman. Ye gratuitu, llibre y ta llanzáu so la llicencia GPLv3.</translation>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools,  delles ferramientes de KDE, iconos Faenza y fustaxes de Twitter.</translation>
     </message>
 </context>
 <context>
@@ -95,35 +89,35 @@
     </message>
     <message>
         <source>Go online</source>
-        <translation type="unfinished"></translation>
+        <translation>Coneutase</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Contautu</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -158,20 +152,21 @@
     </message>
     <message>
         <source>Password Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallu de contraseña</translation>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Perdón, pero la to cuenta ta protexida por contraseña. Tamos trabayando nel amiestu d&apos;esta carauterística en Cutegram tan pronto como sía posible.
+Pero anguaño pa iguar esto, deshabilita la verificación en dos pasos, anicia sesión usando Cutegram y dempués habilítala de nueves.</translation>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 entamó a teclexar en &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 entamó a teclexar</translation>
     </message>
 </context>
 <context>
@@ -182,7 +177,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Login again</source>
-        <translation type="unfinished"></translation>
+        <translation>Aniciar sesión de nueves</translation>
     </message>
 </context>
 <context>
@@ -220,11 +215,11 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation type="vanished">Anguaño los ficheros multimedia nun tan sofitaos na charra secreta</translation>
+        <translation type="vanished">Anguaño los ficheros multimedia nun tán sofitaos nes charres secretes</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation>Nun cargar</translation>
+        <translation>Nun cargar más</translation>
     </message>
     <message>
         <source>Load Always</source>
@@ -236,7 +231,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anguaño los ficheros multimedia nun tán sofitaos nes charres secretes.</translation>
     </message>
 </context>
 <context>
@@ -285,11 +280,11 @@ Decátate qu&apos;Android aceuta les charres secretes automáticamente.</transla
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>Amestar a Personal</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Responder</translation>
     </message>
 </context>
 <context>
@@ -341,7 +336,7 @@ Decátate qu&apos;Android aceuta les charres secretes automáticamente.</transla
         <translation>Desaniciar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Cutegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
@@ -356,7 +351,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -391,7 +386,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Reunviar códigu</translation>
     </message>
 </context>
 <context>
@@ -443,12 +438,8 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
 <context>
     <name>AccountsTabList</name>
     <message>
-        <source>Add Account (experimental)</source>
-        <translation type="vanished">Amestar cuenta (experimental)</translation>
-    </message>
-    <message>
         <source>Add Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Amestar cuenta</translation>
     </message>
 </context>
 <context>
@@ -717,7 +708,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Tray icon style</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilu del iconu de la bandexa</translation>
     </message>
     <message>
         <source>Smooth Scroll</source>
@@ -733,30 +724,30 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir fustaxes ASCII en fustaxes</translation>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram reaniciaráse dempués d&apos;esta operación.</translation>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -810,7 +801,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Cutegram</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram</translation>
     </message>
 </context>
 <context>
@@ -875,7 +866,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation>Desaniciar pegadiella</translation>
+        <translation>Desaniciu de pegadiella</translation>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
@@ -1102,13 +1093,6 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
 </context>
 <context>
-    <name>TelegramQml</name>
-    <message>
-        <source>Secret Chat</source>
-        <translation type="vanished">Charra secreta</translation>
-    </message>
-</context>
-<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1152,38 +1136,38 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished">Fondu</translation>
+        <translation>Fondu</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation type="unfinished">Esbillar semeya</translation>
+        <translation>Esbillar semeya</translation>
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Testera</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

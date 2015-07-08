@@ -1,15 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
-        <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation type="vanished">Cutegram är en Telegramklient av Aseman. Den är gratis, öppen källkod och släpps med GPLv3-licensen.</translation>
-    </message>
-    <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation type="vanished">Cutegram använder Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, några KDE-verktyg, Faenza-ikoner och Twitter emojis.</translation>
+        <translation type="vanished">Cutegram använder Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, några KDE-verktyg, Faenza-ikoner och Twitters emojis.</translation>
     </message>
     <message>
         <source>Home Page</source>
@@ -17,11 +11,11 @@
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram är en Telegramklient av Aseman. Den är gratis, öppen källkod och släpps med GPLv3-licensen.</translation>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram använder Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, några KDE-verktyg, Faenza-ikoner och Twitters emojis.</translation>
     </message>
 </context>
 <context>
@@ -75,7 +69,7 @@
     </message>
     <message>
         <source>Delete History</source>
-        <translation>Radera Historik</translation>
+        <translation>Radera historik</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
@@ -83,7 +77,7 @@
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation>Öppna i Nytt Fönster</translation>
+        <translation>Öppna i nytt fönster</translation>
     </message>
     <message>
         <source>Notify when</source>
@@ -95,35 +89,35 @@
     </message>
     <message>
         <source>Go online</source>
-        <translation type="unfinished"></translation>
+        <translation>Logga in</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Kontakt</translation>
+        <translation>Kontakt</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ljud</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Foto</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Plats</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Okänd</translation>
     </message>
 </context>
 <context>
@@ -158,20 +152,21 @@
     </message>
     <message>
         <source>Password Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösenordsfel</translation>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyvärr är ditt konto lösenordsskyddat. Vi jobbar i dagsläget på att lägga till denna funktion till Cutegram så snart som möjligt.
+I nuläget kan du fixa detta genom att stänga av 2-stegs-verifiering, logga in med Cutegram och sen slå på 2-stegs-verifiering igen.</translation>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 började skriva på &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 började skriva</translation>
     </message>
 </context>
 <context>
@@ -224,19 +219,19 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation>Sluta Ladda Automatiskt</translation>
+        <translation>Sluta ladda automatiskt</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation>Ladda Alltid</translation>
+        <translation>Ladda alltid</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation>Ladda Länk</translation>
+        <translation>Ladda länk</translation>
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediafiler stöds för närvarande inte i hemliga chatter</translation>
     </message>
 </context>
 <context>
@@ -271,11 +266,11 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation>Sök på Webben</translation>
+        <translation>Sök på webben</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation>Nya Meddelanden</translation>
+        <translation>Nya meddelanden</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
@@ -289,14 +284,14 @@ Notera att Android automatiskt accepterar hemliga chatter.</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Svara</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>Klicka för att Ladda Ner</translation>
+        <translation>Klicka för att ladda ler</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
@@ -341,7 +336,7 @@ Notera att Android automatiskt accepterar hemliga chatter.</translation>
         <translation>Radera</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Detta är Cutegrams nyheter om nya uppdateringar och lösningar.
 Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
@@ -356,7 +351,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv ett meddelande...</translation>
     </message>
 </context>
 <context>
@@ -383,7 +378,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Ringförfrågan</translation>
     </message>
     <message>
         <source>Requested</source>
@@ -391,7 +386,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka kod igen</translation>
     </message>
 </context>
 <context>
@@ -421,7 +416,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>Lägg till Hemlig Chatt</translation>
+        <translation>Skapa hemlig chatt</translation>
     </message>
     <message>
         <source>Contact List</source>
@@ -433,18 +428,18 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation>Lägg till Ny Kontakt</translation>
+        <translation>Lägg till ny kontakt</translation>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation>Lägg till Kontakt</translation>
+        <translation>Lägg till kontakt</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till konto</translation>
     </message>
 </context>
 <context>
@@ -478,11 +473,11 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aseman är en icke-vinstdrivande organisation som existerar för att stödja och leda utvecklingen av program med öppen källkod för flera plattformer.</translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Asemans mål är att erbjuda fria och säkra produkter för att erbjuda människor frihet och sekretess.</translation>
     </message>
     <message>
         <source>Home Page</source>
@@ -533,11 +528,11 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -661,7 +656,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation>Cutegram Nyhetsbrev</translation>
+        <translation>Cutegrams nyhetsbrev</translation>
     </message>
     <message>
         <source>Font</source>
@@ -729,30 +724,30 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertera känsloikoner till emojis</translation>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram kommer starta om efter detta.</translation>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa Emojis vid hovering</translation>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2) - %3</translation>
     </message>
 </context>
 <context>
@@ -798,7 +793,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation>Gå ur</translation>
+        <translation>Avsluta</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -806,7 +801,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Cutegram</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram</translation>
     </message>
 </context>
 <context>
@@ -1040,7 +1035,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Hostname</source>
-        <translation type="unfinished"></translation>
+        <translation>Värdsnamn</translation>
     </message>
     <message>
         <source>Port</source>
@@ -1098,13 +1093,6 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
 </context>
 <context>
-    <name>TelegramQml</name>
-    <message>
-        <source>Secret Chat</source>
-        <translation type="vanished">Hemlig chatt</translation>
-    </message>
-</context>
-<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1148,38 +1136,38 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa brickor</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished">Bakgrund</translation>
+        <translation>Bakgrund</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation type="unfinished">Välj foto</translation>
+        <translation>Välj foto</translation>
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pratigt läge</translation>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tvinga att köra flera instanser av Cutegram</translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ställer in standard IP-adress som &lt;ip&gt;</translation>
     </message>
 </context>
 </TS>

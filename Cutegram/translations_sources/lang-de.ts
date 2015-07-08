@@ -1,15 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
-        <source>Cutegram is a telegram client by Aseman. It&apos;s free and opensource and released under GPLv3 license.</source>
-        <translation type="vanished">Cutegram ist ein Telegram-Client von Aseman. Er ist frei, quelloffen und unter den Bedingungen der GLPv3-Lizenz verfügbar.</translation>
-    </message>
-    <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation type="vanished">Cutegramm nutzt Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, einige KDE-Werkzeuge, Faenza-Symbole und Twitter-Emojies.</translation>
+        <translation type="vanished">Cutegram nutzt Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, einige KDE-Werkzeuge, Faenza-Symbole und Twitter-Emojis.</translation>
     </message>
     <message>
         <source>Home Page</source>
@@ -17,11 +11,11 @@
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram ist ein Telegram-Client von Aseman. Er ist frei, quelloffen und  steht unter den Bedingungen der GPLv3.</translation>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram nutzt Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, einige KDE-Werkzeuge, Faenza-Symbole und Twitter-Emojis.</translation>
     </message>
 </context>
 <context>
@@ -95,35 +89,35 @@
     </message>
     <message>
         <source>Go online</source>
-        <translation type="unfinished"></translation>
+        <translation>Online gehen</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Kontakt</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -158,20 +152,21 @@
     </message>
     <message>
         <source>Password Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwortfehler</translation>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entschuldigung, aber Ihr Konto wird durch ein Passwort geschützt. Wir arbeiten daran, diese Funktion so schnell wie möglich in Cutegram zu integrieren.
+Um dies aktuell zu umgehen, deaktivieren Sie die zweistufige Bestätigung, melden Sie sich mit Cutegram an und aktivieren die zweistufigen Bestätigung dann wieder.</translation>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 beginnt in &quot;%2&quot; zu schreiben</translation>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 beginnt zu schreiben</translation>
     </message>
 </context>
 <context>
@@ -236,7 +231,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediendateien werden in geheimen Chats aktuell nicht unterstützt.</translation>
     </message>
 </context>
 <context>
@@ -289,7 +284,7 @@ Beachten Sie, dass android automatisch Geheimchats akzeptiert..</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Antworten</translation>
     </message>
 </context>
 <context>
@@ -341,7 +336,7 @@ Beachten Sie, dass android automatisch Geheimchats akzeptiert..</translation>
         <translation>Löschen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Cutegram-Nachrichten über neue Veröffentlichungen und Lösungen.
 Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
@@ -356,7 +351,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -391,7 +386,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Code erneut senden</translation>
     </message>
 </context>
 <context>
@@ -444,7 +439,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -729,30 +724,30 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation type="unfinished"></translation>
+        <translation>Smilies in Emojis konvertieren</translation>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram wird nach dieser Änderung neu starten.</translation>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -806,7 +801,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Cutegram</source>
-        <translation type="unfinished"></translation>
+        <translation>Cutegram</translation>
     </message>
 </context>
 <context>
@@ -942,79 +937,79 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>JalaliCalendarObject</name>
     <message>
         <source>Farvardin</source>
-        <translation type="unfinished"></translation>
+        <translation>Farvardin</translation>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordibehesht</translation>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"></translation>
+        <translation>Khordad</translation>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"></translation>
+        <translation>Tir</translation>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"></translation>
+        <translation>Mordad</translation>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"></translation>
+        <translation>Shahrivar</translation>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehr</translation>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"></translation>
+        <translation>Abaan</translation>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"></translation>
+        <translation>Aazar</translation>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"></translation>
+        <translation>Dey</translation>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahman</translation>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"></translation>
+        <translation>Esfand</translation>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation>Shanbe</translation>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation>1Shanbe</translation>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation>2Shanbe</translation>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation>3Shanbe</translation>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation>4Shanbe</translation>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation>5Shanbe</translation>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"></translation>
+        <translation>Jome</translation>
     </message>
 </context>
 <context>
@@ -1098,13 +1093,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
 </context>
 <context>
-    <name>TelegramQml</name>
-    <message>
-        <source>Secret Chat</source>
-        <translation type="vanished">Geheimer Chat</translation>
-    </message>
-</context>
-<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1152,34 +1140,34 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished">Hintergrund</translation>
+        <translation>Hintergrund</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation type="unfinished">Bild auswählen</translation>
+        <translation>Foto wählen</translation>
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopfzeile</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführlicher Modus</translation>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführen von mehreren Cutegram-Instanzen forcieren.</translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

@@ -1,734 +1,731 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fa_IR" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="tr" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation type="vanished">این کلاینت به کمک چهارچوب Qt5، ابزار QML و کتابخانه‌های libqtelegram و AsemanQtTools ساخته شده و همین‌طور در ساخت آن از آیکن‌های Faenza و اموجی‌های توییتر استفاده شده است.</translation>
+        <translation type="vanished">Cutegram Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, bazı KDE araçları, Faenza simgeleri ve Twitter emojileri kullanır.</translation>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>صفحه‌ی خانگی</translation>
+        <translation>Ana Sayfa</translation>
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation>کیوتگرام یک کلاینت تلگرام است که توسط تیم آسمان طراحی شده. کیوتگرام کاملا آزاد و اپن‌سورس است و تحت پروانه‌ی GPLv3 منتشر شده است.</translation>
+        <translation>Cutegram Aseman tarafından tasarlanmış bir Telegram istemcisidir. Özgür, açık kaynaklı ve son sürüm GPLv3 ile lisanslıdır.</translation>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation>این کلاینت به کمک چهارچوب Qt5، ابزار QML و کتابخانه‌های libqtelegram و AsemanQtTools ساخته شده و همین‌طور در ساخت آن از آیکن‌های Faenza و اموجی‌های توییتر استفاده شده است.</translation>
+        <translation>Cutegram Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, bazı KDE araçları, Faenza simgeleri ve Twitter emojileri kullanır.</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogHeader</name>
     <message>
         <source>Online</source>
-        <translation>برخط</translation>
+        <translation>Çevrimiçi</translation>
     </message>
     <message>
         <source>%1 was online</source>
-        <translation>آخرین تاریخ دیده شده: %1</translation>
+        <translation>Son görülme %1</translation>
     </message>
     <message>
         <source>Secret chat</source>
-        <translation>گپ امن</translation>
+        <translation>Özel sohbet</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
-        <translation>%1 عضو (%2 نفر برخط)</translation>
+        <translation>%1 katılımcı (%2 çevrimiçi)</translation>
     </message>
     <message>
         <source>Recently</source>
-        <translation>اخیراً</translation>
+        <translation>Yakınlarda</translation>
     </message>
     <message>
         <source>Last Month</source>
-        <translation>ماه گذشته</translation>
+        <translation>Son Ay</translation>
     </message>
     <message>
         <source>Last Week</source>
-        <translation>هفته‌ی پیش</translation>
+        <translation>Son Hafta</translation>
     </message>
 </context>
 <context>
     <name>AccountDialogList</name>
     <message>
         <source>Typing...</source>
-        <translation>در حال نوشتن...</translation>
+        <translation>Yazıyor...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>پاک‌کردن</translation>
+        <translation>Sil</translation>
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation>حذف گپ امن</translation>
+        <translation>Özel sohbeti sil</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation>آیا از حذف این گپ امن مطمئن هستید؟</translation>
+        <translation>Bu özel sohbeti silmek istediğinize emin misiniz?</translation>
     </message>
     <message>
         <source>Delete History</source>
-        <translation>حذف تاریخچه</translation>
+        <translation>Geçmişi Sil</translation>
     </message>
     <message>
         <source>Are you sure about deleting history?</source>
-        <translation>آیا از حذف تاریخچه مطمئن هستید؟</translation>
+        <translation>Geçmişi silmek istediğinize emin misiniz?</translation>
     </message>
     <message>
         <source>Open in New Window</source>
-        <translation>گشودن در پنجره‌ی جدید</translation>
+        <translation>Yeni Pencerede Aç</translation>
     </message>
     <message>
         <source>Notify when</source>
-        <translation>اطلاع دادن هنگام</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Become online</source>
-        <translation type="vanished">برخط شد</translation>
+        <translation type="vanished">Çevrimiçi olun</translation>
     </message>
     <message>
         <source>Go online</source>
-        <translation>برخط شدن</translation>
+        <translation>Çevrimiçi olun</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"/>
+        <translation>Belge</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"/>
+        <translation>Kişi</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"/>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"/>
+        <translation>Ses</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"/>
+        <translation>Fotoğraf</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>Konum</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"/>
+        <translation>Bilinmeyen</translation>
     </message>
 </context>
 <context>
     <name>AccountFrame</name>
     <message>
         <source>Show</source>
-        <translation>نمایش</translation>
+        <translation>Gör</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>بی‌صدا</translation>
+        <translation>Sesi Kıs</translation>
     </message>
     <message>
         <source>Message!</source>
-        <translation>پیغام!</translation>
+        <translation>İleti!</translation>
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation>پیغام از &quot;%2&quot; در &quot;%1&quot;</translation>
+        <translation>İleti &quot;%2&quot; tarafından gönderildi &quot;%1&quot;</translation>
     </message>
     <message>
         <source>%1 is online</source>
-        <translation>%1 برخط است</translation>
+        <translation>%1 çevrimiçi</translation>
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="vanished">%1 در %2 در حال نوشتن است</translation>
+        <translation type="vanished">%1 yazmaya başladı &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 start typing</source>
-        <translation type="vanished">%1 در حال نوشتن است</translation>
+        <translation type="vanished">%1 yazmaya başladı</translation>
     </message>
     <message>
         <source>Password Error</source>
-        <translation>خطای گذرواژه</translation>
+        <translation>Parola Hatası</translation>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation>متأسّفیم. ولی حساب شما، یک حساب محافظت شده با گذرواژه است. ما در تلاشیم در اسرع وقت این ویژگی را به کیوتگرام بیفزایم.
-ولی هم‌اکنون برای حل این مشکل، تأیید دومرحله‌ای را غیرفعّال کرده، با استفاده از کیوتگرام وارد حساب شوید و سپس دوباره تأیید دومرحله‌ای را فعّال کنید.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation>%1 آغاز به نوشتن در «%2» کرد</translation>
+        <translation>%1 yazmaya başladı &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation>%1 نوشتن را آغاز کرد</translation>
+        <translation>%1 yazmaya başladı</translation>
     </message>
 </context>
 <context>
     <name>AccountLoading</name>
     <message>
         <source>Loading...</source>
-        <translation>در حال بارگذاری…</translation>
+        <translation>Yükleniyor...</translation>
     </message>
     <message>
         <source>Login again</source>
-        <translation>ورود دوباره</translation>
+        <translation>Yeniden oturum açın</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageAction</name>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation>%1 گروه &quot;%2&quot; را ساخت</translation>
+        <translation>%1 &quot;%2&quot; grubunu oluşturdu</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation>%1 گروه را ترک کرد</translation>
+        <translation>%1 gruptan ayrıldı</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation>%1 نام گروه را به &quot;%2&quot; تغییر داد</translation>
+        <translation>%1 grubun adını &quot;%2&quot; olarak değiştirdi</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation>%1 تصویر گروه را تغییر داد.</translation>
+        <translation>%1 grubun fotoğrafını değiştirdi.</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation>%1 تصویر گروه را حذف کرد</translation>
+        <translation>%1 grubun fotoğrafını sildi</translation>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation>%2 توسط %1 به گروه اضافه شد</translation>
+        <translation>%1 gruba %2 kişisini ekledi</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation>%2 توسط %1 به بیرون انداخته شد</translation>
+        <translation>%1 %2 kişisini çıkarttı</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation type="vanished">کیوتگرام در حال حاضر از دریافت و ارسال پرونده در گپ امن پشتیبانی نمی‌کند</translation>
+        <translation type="vanished">Ortam dosyaları özel sohbetlerde desteklenmemektedir.</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation>دیگر بار نشود</translation>
+        <translation>Otomatik Yüklemeyi Kapat</translation>
     </message>
     <message>
         <source>Load Always</source>
-        <translation>همیشه بار شود</translation>
+        <translation>Her Zaman Yükle</translation>
     </message>
     <message>
         <source>Load Link</source>
-        <translation>بار کردن پیوند</translation>
+        <translation>Bağlantıyı Yükle</translation>
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation>در حال حاضر پرونده‌های رسانه‌ای در گپ امن پشتیبانی نمی‌شوند.</translation>
+        <translation>Ortam dosyaları özel sohbetlerde desteklenmemektedir.</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageList</name>
     <message>
         <source>Welcome :)</source>
-        <translation>خوش آمدید :)</translation>
+        <translation>Hoşgeldiniz :)</translation>
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>درخواست گپ امن. لطفاً قبول یا رد کنید.</translation>
+        <translation>Özel sohbet isteği. Lütfen Onaylayın ya da Yoksayın.</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation>قبول</translation>
+        <translation>Onayla</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation>رد</translation>
+        <translation>Yoksay</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>ارسال به دیگری</translation>
+        <translation>İleri</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>کپی</translation>
+        <translation>Kopyala</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>پاک‌کردن</translation>
+        <translation>Sil</translation>
     </message>
     <message>
         <source>Search on the Web</source>
-        <translation>جست‌وجو روی وب</translation>
+        <translation>Web&apos;de Ara</translation>
     </message>
     <message>
         <source>New Messages</source>
-        <translation>پیغام‌های جدید</translation>
+        <translation>Yeni İletiler</translation>
     </message>
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation>چت امن لغو شد یا از یکی دیگر از دستگا‌های شما متصل شد.
-توجه کنید که دستگاه‌های اندرویدی خودکار چت امن را قبول می‌کنند.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add to Personal</source>
-        <translation>افزودن به شخصی</translation>
+        <translation>Kişilere Ekle</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation>پاسخ</translation>
+        <translation>Yanıtla</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>برای بارگیری کلیک کنید</translation>
+        <translation>İndirmek için Tıklatın</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
-        <translation>رسانه‌ی ناشناس</translation>
+        <translation>Desteklenmeyen Ortam</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>لغو</translation>
+        <translation>İptal</translation>
     </message>
 </context>
 <context>
     <name>AccountSearchList</name>
     <message>
         <source>Me</source>
-        <translation>من</translation>
+        <translation>Ben</translation>
     </message>
     <message>
         <source>%1 on %2</source>
-        <translation>%1 در %2</translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>%1 to %2</source>
-        <translation>%1 به %2</translation>
+        <translation>%1 %2</translation>
     </message>
 </context>
 <context>
     <name>AccountSendMessage</name>
     <message>
         <source>Send</source>
-        <translation>ارسال</translation>
+        <translation>Gönder</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>رونوشت</translation>
+        <translation>Kopyala</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>جای گذاری</translation>
+        <translation>Yapıştır</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>حذف</translation>
+        <translation>Sil</translation>
     </message>
     <message>
         <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
-        <translation>این خبرنامه‌ی کیوت‌گرام درباره‌ی آخرین ارائه‌ها و راهکارهاست.
-این یک مخاطب تلگرام نیست. تنها یک مخاطب مجازی است.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Camera</source>
-        <translation>دوربین</translation>
+        <translation>Kamera</translation>
     </message>
     <message>
         <source>Audio Recorder</source>
-        <translation>ضبط صدا</translation>
+        <translation>Ses Kaydedicisi</translation>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"/>
+        <translation>Bir ileti yaz...</translation>
     </message>
 </context>
 <context>
     <name>AccountSign</name>
     <message>
         <source>Code</source>
-        <translation>رمز</translation>
+        <translation>Kod</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>نام</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>نام خانوادگی</translation>
+        <translation>Soyad</translation>
     </message>
     <message>
         <source>Sign In</source>
-        <translation>ورود</translation>
+        <translation>Oturum Aç</translation>
     </message>
     <message>
         <source>Sign Up</source>
-        <translation>ثبت‌نام</translation>
+        <translation>Kaydol</translation>
     </message>
     <message>
         <source>Call Request</source>
-        <translation>درخواست تماس</translation>
+        <translation>Arama İsteği</translation>
     </message>
     <message>
         <source>Requested</source>
-        <translation>ارسال شد</translation>
+        <translation>İstendi</translation>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation>ارسال دوباره‌ی رمز</translation>
+        <translation>Kodu Yeniden Gönder</translation>
     </message>
 </context>
 <context>
     <name>AccountView</name>
     <message>
         <source>Search</source>
-        <translation>جست‌وجو</translation>
+        <translation>Ara</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation>گپ گروهی جدید</translation>
+        <translation>Yeni grup sohbeti</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>پیکربندی</translation>
+        <translation>Yapılandır</translation>
     </message>
     <message>
         <source>Group Topic</source>
-        <translation>موضوع گروه</translation>
+        <translation>Grubun Konusu</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation>ایجاد</translation>
+        <translation>Oluştur</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>افزودن گپ امن</translation>
+        <translation>Özel Sohbet Ekle</translation>
     </message>
     <message>
         <source>Contact List</source>
-        <translation>فهرست مخاطبین</translation>
+        <translation>Kişi Listesi</translation>
     </message>
     <message>
         <source>Just drag and drop contacts here</source>
-        <translation>مخاطبین را کشیده و اینجا رها کنید</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add New Contact</source>
-        <translation>افزودن مخاطب جدید</translation>
+        <translation>Yeni Kişi Ekle</translation>
     </message>
     <message>
         <source>Add Contact</source>
-        <translation>افزودن مخاطب</translation>
+        <translation>Kişi Ekle</translation>
     </message>
 </context>
 <context>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account</source>
-        <translation>افزودن حساب</translation>
+        <translation>Hesap Ekle</translation>
     </message>
 </context>
 <context>
     <name>AddContactDialog</name>
     <message>
         <source>Fill below form to add new contact.</source>
-        <translation>برای افزودن مخاطب جدید، فرم زیر را پر کنید.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>First Name</source>
-        <translation>نام</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>نام خانوادگی</translation>
+        <translation>Soyad</translation>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>شماره تلفن</translation>
+        <translation>Telefon Numarası</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>لغو</translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>تأیید</translation>
+        <translation>Tamam</translation>
     </message>
 </context>
 <context>
     <name>AsemanAbout</name>
     <message>
         <source>Aseman is a non-profit organization, exists to support and lead the free, open source and cross-platform projects and researches.</source>
-        <translation>آسمان یک سازمان غیرانتفاعی است که هدف آن پشتیبانی و رهبری پروژه‌ها و تحقیقات آزاد و اپن‌سورس است.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation>هدف آسمان به وجود آوردن پروژه‌های آزاد و اپن‌سورسی است که از آزادی، امنیت و حریم‌شخصی کاربران دفاع و حمایت می‌کند.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Home Page</source>
-        <translation>صفحه‌ی خانگی</translation>
+        <translation>Ana Sayfa</translation>
     </message>
 </context>
 <context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
-        <translation>۰</translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>1</source>
-        <translation>۱</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation>۲</translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation>۳</translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation>۴</translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation>۵</translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation>۶</translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation>۷</translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation>۸</translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>9</source>
-        <translation>۹</translation>
+        <translation>9</translation>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>آسمان یک موسسه‌ی غیر انتفاعی است که در دی ماه سال ۱۳۹۳ با هدف توسعه و تحقیق در مورد نرم‌افزارهای آزاد تشکیل شد. هدف اصلی آسمان توسعه‌ی نرم‌افزارهای آزاد با درجه‌ی امنیت بالا و حفظ حریم خصوصی کاربرهاست. همین‌طور در مرحله‌ی بعدی، هدف آسمان تولید نرم‌افزارهای با کیفیت و با رابط کاربری برتر می‌باشد.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>AuthenticateDialog</name>
     <message>
         <source>Authenticating</source>
-        <translation>تأیید هویت</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Phone Number</source>
-        <translation>شماره‌ی موبایل</translation>
+        <translation>Telefon Numarası</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>ورود</translation>
+        <translation>Oturum Aç</translation>
     </message>
 </context>
 <context>
     <name>CameraDialog</name>
     <message>
         <source>Send</source>
-        <translation>ارسال</translation>
+        <translation>Gönder</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>لغو</translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <source>Capture</source>
-        <translation>عکس گرفتن</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>CheckBox</name>
     <message>
         <source>On</source>
-        <translation>روشن</translation>
+        <translation>Açık</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation>خاموش</translation>
+        <translation>Kapalı</translation>
     </message>
 </context>
 <context>
     <name>Configure</name>
     <message>
         <source>Notifications</source>
-        <translation>آگهی رسانی‌ها</translation>
+        <translation>Bildirimler</translation>
     </message>
     <message>
         <source>On Start</source>
-        <translation>هنگام شروع</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Languages</source>
-        <translation>زبان‌ها</translation>
+        <translation>Diller</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>خودکار</translation>
+        <translation>Otomatik</translation>
     </message>
     <message>
         <source>Always visible</source>
-        <translation>همیشه قابل مشاهده</translation>
+        <translation>Her zaman görüntülenebilir</translation>
     </message>
     <message>
         <source>Minimize to system tray</source>
-        <translation>کمینه کردن در تابلوی سامانه</translation>
+        <translation>Sistem tepsisine küçült</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>خروج</translation>
+        <translation>Oturumu Kapat</translation>
     </message>
     <message>
         <source>Change Photo</source>
-        <translation>تغییر تصویر</translation>
+        <translation>Fotoğrafı Değiştir</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation>گزینش تصویر</translation>
+        <translation>Fotoğrafı seç</translation>
     </message>
     <message>
         <source>Detailed List</source>
-        <translation>فهرست با جزییات</translation>
+        <translation>Ayrıntılı Liste</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>پس‌زمینه</translation>
+        <translation>Arkaplan</translation>
     </message>
     <message>
         <source>Notify Sound</source>
-        <translation>صدای پیغام‌ها</translation>
+        <translation>Bildirim Sesi</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation>تغییر</translation>
+        <translation>Değiştir</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>برداشتن</translation>
+        <translation>Sil</translation>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>گزینش تصویر</translation>
+        <translation>Görsel Seç</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>هیچ کدام</translation>
+        <translation>Hiçbiri</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>پیش‌گزیده</translation>
+        <translation>Varsayılan</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>سفارشی</translation>
+        <translation>Özel</translation>
     </message>
     <message>
         <source>Select Sound</source>
-        <translation>گزینش صدا</translation>
+        <translation>Ses Seç</translation>
     </message>
     <message>
         <source>Cutegram Newsletter</source>
-        <translation>خبرنامه‌ی کیوتگرام</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Font</source>
-        <translation>قلم</translation>
+        <translation>Yazı Tipi</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation>گزینش</translation>
+        <translation>Seç</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>گزینش قلم</translation>
+        <translation>Yazı Tipi Seç</translation>
     </message>
     <message>
         <source>Auto Start</source>
-        <translation>شروع خودکار</translation>
+        <translation>Otomatik Başlat</translation>
     </message>
     <message>
         <source>Proxy Settings</source>
-        <translation>تنظیمات کارگزار</translation>
+        <translation>Vekil Sunucu Ayarları</translation>
     </message>
     <message>
         <source>About Cutegram</source>
-        <translation>درباره‌ی کیوتگرام</translation>
+        <translation>Cutegram Hakkında</translation>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>درباره‌ی آسمان</translation>
+        <translation>Aseman Hakkında</translation>
     </message>
     <message>
         <source>Minimum List</source>
-        <translation>فهرست کمینه</translation>
+        <translation>Küçük Liste</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation>تم</translation>
+        <translation>Tema</translation>
     </message>
     <message>
         <source>Search Engine</source>
-        <translation>موتور جست‌وجو</translation>
+        <translation>Arama Motoru</translation>
     </message>
     <message>
         <source>Master Color</source>
-        <translation>رنگ اصلی</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>System Color</source>
-        <translation>رنگ سامانه</translation>
+        <translation>Sistem Rengi</translation>
     </message>
     <message>
         <source>Tray icon style</source>
-        <translation>سبک شمایل سامانه</translation>
+        <translation>Tepsi simgesi görünümü</translation>
     </message>
     <message>
         <source>Smooth Scroll</source>
-        <translation>لغزش نرم</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dark</source>
-        <translation>تیره</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Light</source>
-        <translation>روشن</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation>تبدیل اسمایلی‌ها به اموجی</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation>کیوتگرام پس از این عملیات دوباره شروع می‌شود.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show Emojis on hover</source>
@@ -754,412 +751,412 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>CursorPicker</name>
     <message>
         <source>Copy</source>
-        <translation>رونوشت</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cut</source>
-        <translation>برش</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Paste</source>
-        <translation>جای‌گذاری</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete</source>
-        <translation>حذف</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Cutegram</name>
     <message>
         <source>Show</source>
-        <translation>نمایش</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Configure</source>
-        <translation>پیکربندی</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About</source>
-        <translation>درباره</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>About Aseman</source>
-        <translation>درباره‌ی آسمان</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Quit</source>
-        <translation>خروج</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Exit</source>
-        <translation>خروج</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact</source>
-        <translation>مخاطب‌ها</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cutegram</source>
-        <translation>کیوتگرام</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation>ق.ظ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>PM</source>
-        <translation>ب.ظ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Date</source>
-        <translation>تاریخ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Time</source>
-        <translation>زمان</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>DialogDropFile</name>
     <message>
         <source>&lt;&lt;&lt; Drop to dialogs list to forward</source>
-        <translation>برای ارسال در فهرست صحبت‌ها رها کنید &gt;&gt;&gt;</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to forward</source>
-        <translation>برای ارسال رها کنید</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to send as Document</source>
-        <translation>برای ارسال به‌عنوان سند رها کنید</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to send</source>
-        <translation>برای ارسال رها کنید</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to add participant</source>
-        <translation>برای افزودن اعضا رها کنید</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation>برای افزودن گپ جدید رها کنید</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>New Group</source>
-        <translation>گروه جدید</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Please enter new group name</source>
-        <translation>لطفا نام گروه جدید را وارد کنید</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Emoticons</name>
     <message>
         <source>Delete</source>
-        <translation>حذف</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete Sticker</source>
-        <translation>حذف برچسب</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Are you sure about delete this?</source>
-        <translation>مطمئنید می‌خواهید این را حذف کنید؟</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>EmoticonsModel</name>
     <message>
         <source>Recent</source>
-        <translation>اخیر</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Emojis</source>
-        <translation>اموجی‌ها</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ForwardPage</name>
     <message>
         <source>Please select a contact...</source>
-        <translation>لطفاً مخاطبی را برگزینید…</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>To</source>
-        <translation>به</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>لغو</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Forward</source>
-        <translation>ارسال</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>GetPassDialog</name>
     <message>
         <source>Paste</source>
-        <translation>جای گذاری</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Please enter the password</source>
-        <translation>لطفاً گذرواژه را وارد کنید</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>password</source>
-        <translation>گذرواژه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Done</source>
-        <translation>انجام شد</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Incorrect!</source>
-        <translation>ناصحیح!</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Header</name>
     <message>
         <source>Back</source>
-        <translation>بازگشت</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>JalaliCalendarObject</name>
     <message>
         <source>Farvardin</source>
-        <translation>فروردین</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation>اردیبهشت</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khordad</source>
-        <translation>خرداد</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tir</source>
-        <translation>تیر</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mordad</source>
-        <translation>مرداد</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation>شهریور</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mehr</source>
-        <translation>مهر</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Abaan</source>
-        <translation>آبان</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aazar</source>
-        <translation>آذر</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dey</source>
-        <translation>دی</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bahman</source>
-        <translation>بهمن</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Esfand</source>
-        <translation>اسفند</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation>شنبه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation>یک‌شنبه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation>دوشنبه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation>سه‌شنبه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation>چهارشنبه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation>پنج‌شنبه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Jome</source>
-        <translation>جمعه</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>PasteButton</name>
     <message>
         <source>Paste</source>
-        <translation>جای گذاری</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ProxySettings</name>
     <message>
         <source>Proxy Settings</source>
-        <translation>تنظیمات کارگزار</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation>این تغییرات نیاز به اجرای مجدّد برنامه دارند.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Proxy Type</source>
-        <translation>نوع کارگزار</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Hostname</source>
-        <translation>نام میزبان</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Port</source>
-        <translation>درگاه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Username</source>
-        <translation>نام‌کاربری</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Password</source>
-        <translation>گذرواژه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ex: 127.0.0.1</source>
-        <translation>مثال: 127.0.0.1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>لغو</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Ok</source>
-        <translation>تأیید</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>RecorderDialog</name>
     <message>
         <source>Send</source>
-        <translation>ارسال</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>لغو</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Error</source>
-        <translation>خطا</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Stop</source>
-        <translation>توقّف</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Record</source>
-        <translation>ضبظ</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ShareDialog</name>
     <message>
         <source>Select Application</source>
-        <translation>گزینش برنامه</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
-        <translation>شماره تلفن</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Favorite</source>
-        <translation>برگزیده</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Love</source>
-        <translation>عشق</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mute</source>
-        <translation>بی‌صدا</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Participants</source>
-        <translation>اعضا</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show List</source>
-        <translation>نمایش فهرست</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Leave</source>
-        <translation>ترک کردن</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Leave the group</source>
-        <translation>ترک گروه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Are you sure about leaving this group?</source>
-        <translation>آیا از ترک کردن این گروه مطمئنید؟</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Add Participant</source>
-        <translation>افزودن عضو</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation>نمایش نشان‌ها</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Background</source>
-        <translation>پس‌زمینه</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Select photo</source>
-        <translation>گزینش عکس</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Header</source>
-        <translation>سرایند</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation>حالت رفع اشکال</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation>اجبار به اجرای چند نمونه از کیوتگرام</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
