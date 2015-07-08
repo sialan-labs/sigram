@@ -93,31 +93,31 @@
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"/>
+        <translation>Documentu</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"/>
+        <translation>Contautu</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"/>
+        <translation>Videu</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"/>
+        <translation>Audiu</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"/>
+        <translation>Semeya</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>Allugamientu</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"/>
+        <translation>Desconocíu</translation>
     </message>
 </context>
 <context>
@@ -351,7 +351,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"/>
+        <translation>Escribi un mensaxe...</translation>
     </message>
 </context>
 <context>
@@ -1163,11 +1163,11 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Afita la ID DC por defeutu a &lt;ip&gt;</translation>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Afita la direición IP por defeutu a &lt;ip&gt;</translation>
     </message>
 </context>
 </TS>
