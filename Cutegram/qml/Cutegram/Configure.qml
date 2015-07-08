@@ -118,6 +118,18 @@ Rectangle {
                             color: Cutegram.currentTheme.sidebarPhoneColor
                             text: telegram.phoneNumber
                         }
+
+                        Text {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            anchors.margins: 20*Devices.density
+                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                            font.family: AsemanApp.globalFont.family
+                            font.pixelSize: Math.floor(12*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarPhoneColor
+                            text: "@" + user.username
+                            visible: user.username.length != 0
+                        }
                     }
                 }
 
