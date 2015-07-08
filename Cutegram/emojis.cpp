@@ -77,8 +77,8 @@ void Emojis::setCurrentTheme(const QString &theme)
         if( parts.count() < 2 )
             continue;
 
-        QString epath = parts.at(0);
-        QString ecode = parts.at(1);
+        QString epath = parts.at(0).trimmed();
+        QString ecode = parts.at(1).trimmed();
 
         p->emojis[ecode] = epath;
         p->keys << ecode;
