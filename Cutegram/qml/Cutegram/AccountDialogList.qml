@@ -21,6 +21,7 @@ Item {
     property real typeMessageMediaDocument: 0x2fda2204
     property real typeMessageMediaContact: 0x5e7d2f39
     property real typeMessageMediaVideo: 0xa2d24290
+    property real typeMessageMediaEmpty: 0x3ded6320
     property real typeMessageMediaAudio: 0xc6b68300
     property real typeMessageMediaPhoto: 0xc8c45a2a
     property real typeMessageMediaGeo: 0x56e0d474
@@ -266,22 +267,65 @@ Item {
                             return ""
                         var list = dItem.typingUsers
                         if( list.length )
-                            return qsTr("Typing...")
+                        {
+                            if(!isChat)
+                                return qsTr("Typing...")
+                            else
+                            {
+                                var result = ""
+                                for( var i=0; i<list.length; i++ ) {
+                                    var uid = list[i]
+                                    var user = telegramObject.user(list[i])
+                                    var uname = user.firstName + " " + user.lastName
+                                    result += uname.trim()
+
+                                    if( i < list.length-1 )
+                                        result += ", "
+                                }
+
+                                return result.trim() + " typing..."
+                            }
+                        }
                         else
                         {
                             var message_text = emojis.textToEmojiText(message.message,16,true)
-                            if(message_text.length == 0)
+                            if(message.media.classType != typeMessageMediaEmpty || message_text.length == 0)
                             {
                                 switch(message.media.classType)
                                 {
-                                    case typeMessageMediaDocument: return qsTr("Document")
-                                    case typeMessageMediaContact: return qsTr("Contact")
-                                    case typeMessageMediaVideo: return qsTr("Video")
-                                    case typeMessageMediaAudio: return qsTr("Audio")
-                                    case typeMessageMediaPhoto: return qsTr("Photo")
-                                    case typeMessageMediaGeo: return qsTr("Location")
-                                    default: return qsTr("Unknown")
+                                    case typeMessageMediaDocument: 
+                                        message_text = qsTr("Document") 
+                                        break;
+                                    case typeMessageMediaContact: 
+                                        message_text = qsTr("Contact") 
+                                        break;
+                                    case typeMessageMediaVideo: 
+                                        message_text = qsTr("Video") 
+                                        break;
+                                    case typeMessageMediaAudio: 
+                                        message_text = qsTr("Audio") 
+                                        break;
+                                    case typeMessageMediaPhoto: 
+                                        message_text = qsTr("Photo") 
+                                        break;
+                                    case typeMessageMediaGeo: 
+                                        message_text = qsTr("Location") 
+                                        break;
+                                    default: 
+                                        message_text = qsTr("Unknown") 
+                                        break;
                                 }
+                            }
+
+                            if(isChat)
+                            {
+                                var chat_username = ""
+                                if(message.fromId == telegramObject.me)
+                                    chat_username = qsTr("You")
+                                else
+                                    chat_username = telegramObject.user(message.fromId).firstName + " " + telegramObject.user(message.fromId).lastName
+
+                                message_text = chat_username.trim() + ": " + message_text
                             }
 
                             return message_text
