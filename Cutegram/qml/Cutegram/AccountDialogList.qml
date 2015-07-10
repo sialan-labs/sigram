@@ -298,8 +298,8 @@ Item {
                         }
                         else
                         {
-                            var message_text = emojis.textToEmojiText(message.message,16,true)
-                            if(message.action.classType == typeMessageActionEmpty && (message.media.classType != typeMessageMediaEmpty || message_text.length == 0))
+                            var message_text = ""
+                            if(message.media.classType != typeMessageMediaEmpty)
                             {
                                 switch(message.media.classType)
                                 {
@@ -326,59 +326,59 @@ Item {
                                         break;
                                 }
                             }
+                            else if(message.action.classType != typeMessageActionEmpty)
+                            {
+                                var res = ""
+                                var userName
+                                var fromUserName = telegramObject.user(message.fromId).firstName + " " + telegramObject.user(message.fromId).lastName
+                                fromUserName = fromUserName.trim()
+
+                                switch(message.action.classType) {
+                                case typeMessageActionChatCreate:
+                                    res = qsTr("%1 created the group \"%2\"").arg(fromUserName).arg(message.action.title)
+                                    break
+
+                                case typeMessageActionChatAddUser:
+                                    userName = telegramObject.user(message.action.userId).firstName + " " + telegramObject.user(message.action.userId).lastName
+                                    userName = userName.trim()
+
+                                    res = qsTr("%1 added %2 to group").arg(fromUserName).arg(userName)
+                                    break
+
+                                case typeMessageActionChatDeleteUser:
+                                    userName = telegramObject.user(message.action.userId).firstName + " " + telegramObject.user(message.action.userId).lastName
+                                    userName = userName.trim()
+
+                                    if(telegramObject.user(message.action.userId).id == telegramObject.user(message.fromId).id)
+                                        res = qsTr("%1 left the group").arg(userName)
+                                    else
+                                        res = qsTr("%1 kicked %2").arg(fromUserName).arg(userName)
+                                    break;
+
+                                case typeMessageActionChatEditTitle:
+                                    res = qsTr("%1 changed group name to \"%2\"").arg(fromUserName).arg(message.action.title)
+                                    break
+
+                                case typeMessageActionChatEditPhoto:
+                                    res = qsTr("%1 changed group photo.").arg(fromUserName)
+                                    break
+
+                                case typeMessageActionChatDeletePhoto:
+                                    res = qsTr("%1 deleted group photo").arg(fromUserName)
+                                    break
+
+                                default:
+                                    break
+                                }
+
+                                message_text = emojis.textToEmojiText(res, 16, true)
+                            }
                             else
                             {
-                                if(message.action.classType != typeMessageActionEmpty)
-                                {
-                                    var res = ""
-                                    var userName
-                                    var fromUserName = telegramObject.user(message.fromId).firstName + " " + telegramObject.user(message.fromId).lastName
-                                    fromUserName = fromUserName.trim()
-
-                                    switch(message.action.classType) {
-                                    case typeMessageActionChatCreate:
-                                        res = qsTr("%1 created the group \"%2\"").arg(fromUserName).arg(message.action.title)
-                                        break
-
-                                    case typeMessageActionChatAddUser:
-                                        userName = telegramObject.user(message.action.userId).firstName + " " + telegramObject.user(message.action.userId).lastName
-                                        userName = userName.trim()
-
-                                        res = qsTr("%1 added %2 to group").arg(fromUserName).arg(userName)
-                                        break
-
-                                    case typeMessageActionChatDeleteUser:
-                                        userName = telegramObject.user(message.action.userId).firstName + " " + telegramObject.user(message.action.userId).lastName
-                                        userName = userName.trim()
-
-                                        if(telegramObject.user(message.action.userId).id == telegramObject.user(message.fromId).id)
-                                            res = qsTr("%1 left the group").arg(userName)
-                                        else
-                                            res = qsTr("%1 kicked %2").arg(fromUserName).arg(userName)
-                                        break;
-
-                                    case typeMessageActionChatEditTitle:
-                                        res = qsTr("%1 changed group name to \"%2\"").arg(fromUserName).arg(message.action.title)
-                                        break
-
-                                    case typeMessageActionChatEditPhoto:
-                                        res = qsTr("%1 changed group photo.").arg(fromUserName)
-                                        break
-
-                                    case typeMessageActionChatDeletePhoto:
-                                        res = qsTr("%1 deleted group photo").arg(fromUserName)
-                                        break
-
-                                    case typeMessageActionEmpty:
-                                    default:
-                                        break
-                                    }
-
-                                    return emojis.textToEmojiText(res, 16, true)
-                                }
+                                message_text = emojis.textToEmojiText(message.message,16,true)
                             }
 
-                            if(isChat)
+                            if(isChat && message.action.classType == typeMessageActionEmpty)
                             {
                                 var chat_username = ""
                                 if(message.fromId == telegramObject.me)
