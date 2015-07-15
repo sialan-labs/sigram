@@ -256,7 +256,7 @@ Rectangle {
 
                         Text {
                             id: send_by_ctrl_enter_text
-                            height: hover_emojis_checkbox.height
+                            height: send_by_ctrl_enter_checkbox.height
                             verticalAlignment: Text.AlignVCenter
                             font.family: Cutegram.currentTheme.sidebarFont.family
                             font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
