@@ -344,7 +344,6 @@ Item {
             case FileHandler.TypeTargetUnknown:
             default:
                 return false
-                break;
             }
         }
 
