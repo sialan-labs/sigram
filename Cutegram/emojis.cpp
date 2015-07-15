@@ -52,8 +52,6 @@ Emojis::Emojis(QObject *parent) :
     p->maxReplacementSize = 0;
     p->minReplacementSize = 0;
     p->autoEmojis = false;
-
-    setCurrentTheme("twitter");
 }
 
 void Emojis::setCurrentTheme(const QString &theme)
