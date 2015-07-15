@@ -83,6 +83,7 @@ public:
     bool cutegramSubscribe;
     bool autoEmojis;
     bool smoothScroll;
+    bool sendByCtrlEnter;
 
     QTextDocument *doc;
 
@@ -151,6 +152,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
     p->autoEmojis = AsemanApplication::settings()->value("General/autoEmojis", true ).toBool();
     p->smoothScroll = AsemanApplication::settings()->value("General/smoothScroll", true ).toBool();
+    p->sendByCtrlEnter = AsemanApplication::settings()->value("General/sendByCtrlEnter", false ).toBool();
     p->darkSystemTray = AsemanApplication::settings()->value("General/darkSystemTray", UNITY_LIGHT ).toBool();
     p->background = AsemanApplication::settings()->value("General/background").toString();
     p->masterColor = AsemanApplication::settings()->value("General/masterColor").toString();
@@ -852,6 +854,22 @@ void Cutegram::setAutoEmojis(bool stt)
 bool Cutegram::autoEmojis() const
 {
     return p->autoEmojis;
+}
+
+void Cutegram::setSendByCtrlEnter(bool stt)
+{
+    if(p->sendByCtrlEnter == stt)
+        return;
+
+    p->sendByCtrlEnter = stt;
+    AsemanApplication::settings()->setValue("General/sendByCtrlEnter", stt);
+
+    emit sendByCtrlEnterChanged();
+}
+
+bool Cutegram::sendByCtrlEnter() const
+{
+    return p->sendByCtrlEnter;
 }
 
 void Cutegram::setStatusIconStyle(int style)

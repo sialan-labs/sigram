@@ -61,6 +61,7 @@ class Cutegram : public QObject
     Q_PROPERTY(int  statusIconStyle   READ statusIconStyle   WRITE setStatusIconStyle NOTIFY statusIconStyleChanged  )
     Q_PROPERTY(bool smoothScroll      READ smoothScroll      WRITE setSmoothScroll    NOTIFY smoothScrollChanged     )
     Q_PROPERTY(bool autoEmojis        READ autoEmojis        WRITE setAutoEmojis      NOTIFY autoEmojisChanged       )
+    Q_PROPERTY(bool sendByCtrlEnter   READ sendByCtrlEnter   WRITE setSendByCtrlEnter NOTIFY sendByCtrlEnterChanged  )
 
     Q_PROPERTY(ThemeItem* currentTheme READ currentTheme NOTIFY currentThemeChanged)
     Q_PROPERTY(QStringList themes READ themes NOTIFY themesChanged)
@@ -171,6 +172,9 @@ public:
     void setAutoEmojis(bool stt);
     bool autoEmojis() const;
 
+    void setSendByCtrlEnter(bool stt);
+    bool sendByCtrlEnter() const;
+
     void setStatusIconStyle(int style);
     int statusIconStyle();
 
@@ -230,6 +234,7 @@ signals:
     void statusIconStyleChanged();
     void smoothScrollChanged();
     void autoEmojisChanged();
+    void sendByCtrlEnterChanged();
 
     void themesChanged();
     void currentThemeChanged();

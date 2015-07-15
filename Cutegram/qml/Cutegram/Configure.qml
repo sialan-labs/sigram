@@ -255,6 +255,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: send_by_ctrl_enter_text
+                            height: hover_emojis_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Send by Ctrl+Enter")
+                        }
+
+                        Text {
                             id: theme_text
                             height: theme_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -415,6 +425,13 @@ Rectangle {
                             checked: Cutegram.emojiOnHover
                             style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: Cutegram.emojiOnHover = checked
+                        }
+
+                        Controls.Switch {
+                            id: send_by_ctrl_enter_checkbox
+                            style: Cutegram.currentTheme.switchStyle
+                            checked: Cutegram.sendByCtrlEnter
+                            onCheckedChanged: Cutegram.sendByCtrlEnter = checked
                         }
 
                         Controls.ComboBox {
