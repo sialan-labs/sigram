@@ -205,7 +205,7 @@ Rectangle {
             width: mlist.width - 2*x
             opacity: filterId == user.id || filterId == -1? 1 : 0.1
             onSelectedTextChanged: {
-                if(selectedText.length = 0)
+                if(selectedText.length == 0)
                     return
 
                 acc_msg_list.selectedText = selectedText

@@ -196,7 +196,8 @@ Item {
                                 } else {
                                     var uId = privates.suggestionItem.currentUserId()
                                     if(!uId) {
-                                        if( event.modifiers == Qt.NoModifier )
+                                        if( (Cutegram.sendByCtrlEnter == true && event.modifiers == Qt.ControlModifier ) ||
+                                            (Cutegram.sendByCtrlEnter == false && event.modifiers == Qt.NoModifier ) )
                                             smsg.send()
 
                                         typing_timer.finishTyping()
@@ -218,7 +219,8 @@ Item {
                             else
                             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter )
                             {
-                                if( event.modifiers == Qt.NoModifier )
+                                if( (Cutegram.sendByCtrlEnter == true && event.modifiers == Qt.ControlModifier ) ||
+                                    (Cutegram.sendByCtrlEnter == false && event.modifiers == Qt.NoModifier ) )
                                     smsg.send()
 
                                 typing_timer.finishTyping()
