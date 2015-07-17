@@ -95,6 +95,7 @@ public:
     QTranslator *translator;
     QString translationsPath;
     QString themesPath;
+    QString emojisThemesPath;
 
     QHash<QString,QVariant> languages;
     QHash<QString,QLocale> locales;
@@ -114,6 +115,9 @@ public:
     QString theme;
     QPointer<QQmlComponent> currentThemeComponent;
     QPointer<ThemeItem> currentTheme;
+    
+    QStringList emojisThemes;
+    QString emojisTheme;
 
     QStringList searchEngines;
     QString searchEngine;
@@ -160,6 +164,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->font = AsemanApplication::settings()->value("General/font", default_font).value<QFont>();
     p->translator = new QTranslator(this);
     p->theme = AsemanApplication::settings()->value("General/theme","Abrisham.qml").toString();
+    p->emojisTheme = AsemanApplication::settings()->value("General/emojisTheme", "twitter").toString();
     p->searchEngine = AsemanApplication::settings()->value("General/searchEngine","https://duckduckgo.com/?q=").toString();
 
     p->searchEngines = QStringList() << "https://duckduckgo.com/?q=" << "https://google.com/?q=" << "https://bing.com/?q=";
@@ -172,9 +177,12 @@ Cutegram::Cutegram(QObject *parent) :
     p->close_blocker = false;
     p->translationsPath = AsemanDevices::resourcePath() + "/files/translations/";
     p->themesPath = AsemanDevices::resourcePath() + "/themes/";
+    p->emojisThemesPath = AsemanDevices::resourcePath() + "/emojis/";
 #endif
 
     p->themes = QDir(p->themesPath).entryList( QStringList()<<"*.qml" ,QDir::Files, QDir::Name);
+
+    p->emojisThemes = QDir(p->emojisThemesPath).entryList( QStringList() ,QDir::Dirs|QDir::NoDotAndDotDot, QDir::Name);
 
     QDir().mkpath(personalStickerDirectory());
 
@@ -915,6 +923,27 @@ QString Cutegram::theme() const
 ThemeItem *Cutegram::currentTheme()
 {
     return p->currentTheme;
+}
+
+QStringList Cutegram::emojisThemes() const
+{
+    return p->emojisThemes;
+}
+
+void Cutegram::setEmojisTheme(const QString& theme)
+{
+    if (p->emojisTheme == theme)
+        return;
+    
+    p->emojisTheme = theme;
+    AsemanApplication::settings()->setValue("General/emojisTheme", p->emojisTheme);
+
+    emit emojisThemeChanged();    
+}
+
+QString Cutegram::emojisTheme() const
+{
+    return p->emojisTheme;
 }
 
 QStringList Cutegram::searchEngines() const

@@ -275,6 +275,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: emojis_theme_text
+                            height: emojis_theme_combo.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Emoji's theme")
+                        }
+
+                        Text {
                             id: background_text
                             height: background_btn.height
                             verticalAlignment: Text.AlignVCenter
@@ -454,6 +464,28 @@ Rectangle {
                             }
 
                             onCurrentIndexChanged: if(init_timer.inited) Cutegram.theme = currentText + ".qml"
+                        }
+
+                        Controls.ComboBox {
+                            id: emojis_theme_combo
+                            style: Cutegram.currentTheme.comboBoxStyle
+                            model: {
+                                var result = new Array
+                                var themes = Cutegram.emojisThemes
+                                for(var i=0; i<themes.length; i++)
+                                    result[i] = Tools.fileName(themes[i])
+                                return result
+                            }
+                            currentIndex: {
+                                var themes = Cutegram.emojisThemes
+                                for(var i=0; i<themes.length; i++)
+                                    if(themes[i] == Cutegram.emojisTheme)
+                                        return i
+
+                                return 0
+                            }
+
+                            onCurrentIndexChanged: if(init_timer.inited) Cutegram.emojisTheme = currentText
                         }
 
                         Controls.Button {
