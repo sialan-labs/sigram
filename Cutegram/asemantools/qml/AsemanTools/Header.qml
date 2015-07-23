@@ -19,75 +19,99 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 
-Item {
+Rectangle {
     id: header
     width: 100
-    height: Devices.standardTitleBarHeight
+    height: Devices.standardTitleBarHeight + (statusBar? View.statusBarHeight : 0)
+    color: "#00000000"
 
     property alias text: title_txt.text
     property alias titleFont: title_txt.font
     property bool light: false
     property bool backButton: !Devices.isAndroid && !View.fullscreen
     property real backScale: 1
+    property alias backButtonText: back_txt.text
+    property alias shadow: shadow_rct.visible
+    property bool statusBar: false
 
     signal beginBack()
 
-    Row {
-        id: back_row
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.leftMargin: 10*Devices.density
-        width: 75*Devices.density
-        visible: backButton
+    Item {
+        anchors.fill: parent
+        anchors.topMargin: statusBar? View.statusBarHeight : 0
 
-        Image {
-            anchors.verticalCenter: parent.verticalCenter
-            height: 20*Devices.density*backScale
-            source: (!back_row.press && header.light)||(back_row.press && !header.light)? (height>48? "files/back_light_64.png" : "files/back_light_32.png") : (height>48? "files/back_64.png" : "files/back_32.png")
-            fillMode: Image.PreserveAspectFit
-            smooth: true
-            opacity: 0.8
+        Rectangle {
+            id: shadow_rct
+            height: 3*Devices.density
+            width: parent.width
+            anchors.top: parent.bottom
+            visible: false
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#55000000" }
+                GradientStop { position: 1.0; color: "#00000000" }
+            }
+        }
+
+        Row {
+            id: back_row
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: 10*Devices.density
+            visible: backButton
+
+            Image {
+                anchors.verticalCenter: parent.verticalCenter
+                height: 20*Devices.density*backScale
+                source: header.light? (height>48? "files/back_light_64.png" : "files/back_light_32.png") : (height>48? "files/back_64.png" : "files/back_32.png")
+                fillMode: Image.PreserveAspectFit
+                smooth: true
+                opacity: back_row.press? 0.6 : 0.8
+            }
+
+            Text {
+                id: back_txt
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: Math.floor(12*Devices.fontDensity*backScale)
+                font.family: AsemanApp.globalFont.family
+                text: qsTr("Back")
+                color: {
+                    if(header.light) {
+                        return back_row.press? "#dddddd" : "#ffffff"
+                    } else {
+                        return back_row.press? "#555555" : "#111111"
+                    }
+                }
+            }
+
+            property bool press: false
+        }
+
+        MouseArea {
+            anchors.fill: back_row
+            anchors.margins: -10*Devices.density
+            onPressed: back_row.press = true
+            onReleased: back_row.press = false
+            visible: back_row.visible
+            onClicked: {
+                header.beginBack()
+                AsemanApp.back()
+            }
         }
 
         Text {
-            id: back_txt
-            anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: Math.floor(12*Devices.fontDensity*backScale)
+            id: title_txt
+            font.pixelSize: Math.floor(16*Devices.fontDensity)
             font.family: AsemanApp.globalFont.family
-            color: (!back_row.press && header.light)||(back_row.press && !header.light)? "#ffffff" : "#111111"
+            y: parent.height/2 - height/2
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: header.light? "#ffffff" : "#333333"
         }
-
-        property bool press: false
-    }
-
-    MouseArea {
-        anchors.fill: back_row
-        onPressed: back_row.press = true
-        onReleased: back_row.press = false
-        visible: back_row.visible
-        onClicked: {
-            header.beginBack()
-            AsemanApp.back()
-        }
-    }
-
-    Text {
-        id: title_txt
-        font.pixelSize: Math.floor(16*Devices.fontDensity)
-        font.family: AsemanApp.globalFont.family
-        y: parent.height/2 - height/2
-        anchors.horizontalCenter: parent.horizontalCenter
-        color: header.light? "#ffffff" : "#333333"
     }
 
     Connections{
         target: AsemanApp
         onLanguageUpdated: initTranslations()
-    }
-
-    Component.onCompleted: {
-        initTranslations()
     }
 
     function initTranslations(){

@@ -23,7 +23,8 @@ Build-Depends:
  libqt5webkit5-dev (>= 5.1.0),
  libappindicator-dev,
  libssl-dev,
- libqtelegram-ae-dev
+ libqtelegram-ae-dev,
+ telegramqml-dev
 Standards-Version: 3.9.5
 Homepage: http://aseman.co/cutegram
 Vcs-Git: https://github.com/Aseman-Land/Cutegram

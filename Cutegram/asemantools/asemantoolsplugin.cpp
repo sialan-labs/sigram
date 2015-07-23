@@ -16,6 +16,16 @@
 #include "aseman_macros.h"
 #include "asemancountriesmodel.h"
 #include "asemanautostartmanager.h"
+#include "asemanfilesystemmodel.h"
+#include "asemanquickobject.h"
+#include "asemannotification.h"
+#include "asemanfiledownloaderqueueitem.h"
+#include "asemanquickitemimagegrabber.h"
+#include "asemanwebpagegrabber.h"
+#include "asemantitlebarcolorgrabber.h"
+#include "asemanfiledownloaderqueue.h"
+#include "asemantaskbarbutton.h"
+#include "asemanmapdownloader.h"
 #ifdef Q_OS_ANDROID
 #include "asemanjavalayer.h"
 #endif
@@ -27,6 +37,10 @@
 #endif
 #ifdef ASEMAN_NOTIFICATION
 #include "asemannotification.h"
+#endif
+#ifdef ASEMAN_MULTIMEDIA
+#include "asemanaudiorecorder.h"
+#include "asemanaudioencodersettings.h"
 #endif
 
 #include <qqml.h>
@@ -55,23 +69,35 @@ void AsemanToolsPlugin::registerTypes(const char *uri)
 {
     qRegisterMetaType<AsemanMimeData*>("AsemanMimeData*");
 
-    qmlRegisterType<AsemanMimeData>(uri, 1, 0, "MimeData");
-    qmlRegisterType<AsemanDragObject>(uri, 1, 0, "DragObject");
-    qmlRegisterType<AsemanListObject>(uri, 1, 0, "ListObject");
-    qmlRegisterType<AsemanHashObject>(uri, 1, 0, "HashObject");
-    qmlRegisterType<AsemanDownloader>(uri, 1,0, "Downloader");
-    qmlRegisterType<AsemanImageColorAnalizor>(uri, 1,0, "ImageColorAnalizor");
-    qmlRegisterType<AsemanCountriesModel>(uri, 1,0, "CountriesModel");
-    qmlRegisterType<AsemanAutoStartManager>(uri, 1,0, "AutoStartManager");
-#ifdef DESKTOP_LINUX
-    qmlRegisterType<AsemanMimeApps>(uri, 1,0, "MimeApps");
-#endif
+    qmlRegisterType<AsemanMimeData>("AsemanTools", 1, 0, "MimeData");
+    qmlRegisterType<AsemanDragObject>("AsemanTools", 1, 0, "DragObject");
+    qmlRegisterType<AsemanHashObject>("AsemanTools", 1,0, "HashObject");
+    qmlRegisterType<AsemanListObject>("AsemanTools", 1,0, "ListObject");
+    qmlRegisterType<AsemanDownloader>("AsemanTools", 1,0, "Downloader");
+    qmlRegisterType<AsemanQuickObject>("AsemanTools", 1,0, "AsemanObject");
+    qmlRegisterType<AsemanImageColorAnalizor>("AsemanTools", 1,0, "ImageColorAnalizor");
+    qmlRegisterType<AsemanCountriesModel>("AsemanTools", 1,0, "CountriesModel");
+    qmlRegisterType<AsemanNotification>("AsemanTools", 1,0, "Notification");
+    qmlRegisterType<AsemanFileSystemModel>("AsemanTools", 1,0, "FileSystemModel");
+    qmlRegisterType<AsemanAutoStartManager>("AsemanTools", 1,0, "AutoStartManager");
+    qmlRegisterType<AsemanQuickItemImageGrabber>("AsemanTools", 1,0, "ItemImageGrabber");
+    qmlRegisterType<AsemanFileDownloaderQueueItem>("AsemanTools", 1,0, "FileDownloaderQueueItem");
+    qmlRegisterType<AsemanFileDownloaderQueue>("AsemanTools", 1,0, "FileDownloaderQueue");
+    qmlRegisterType<AsemanMimeApps>("AsemanTools", 1,0, "MimeApps");
+    qmlRegisterType<AsemanWebPageGrabber>("AsemanTools", 1,0, "WebPageGrabber");
+    qmlRegisterType<AsemanTitleBarColorGrabber>("AsemanTools", 1,0, "TitleBarColorGrabber");
+    qmlRegisterType<AsemanTaskbarButton>("AsemanTools", 1,0, "TaskbarButton");
+    qmlRegisterType<AsemanMapDownloader>("AsemanTools", 1,0, "MapDownloader");
+
 #ifdef ASEMAN_SENSORS
-    qmlRegisterType<AsemanSensors>(uri, 1,0, "AsemanSensors");
+    qmlRegisterType<AsemanSensors>("AsemanTools", 1,0, "AsemanSensors");
 #endif
-#ifdef ASEMAN_NOTIFICATION
-    qmlRegisterType<AsemanNotification>(uri, 1,0, "Notification");
+#ifdef ASEMAN_MULTIMEDIA
+    qmlRegisterType<AsemanAudioRecorder>("AsemanTools", 1,0, "AudioRecorder");
+    qmlRegisterType<AsemanAudioEncoderSettings>("AsemanTools", 1,0, "AudioEncoderSettings");
 #endif
+
+    qmlRegisterUncreatableType<AsemanDesktopTools>("AsemanTools", 1,0, "AsemanDesktopTools", "It's a singleton class");
 
     qmlRegisterSingletonType<AsemanDevices>(uri, 1, 0, "Devices", aseman_devices_singleton);
     qmlRegisterSingletonType<AsemanTools>(uri, 1, 0, "Tools", aseman_tools_singleton);

@@ -1,4 +1,4 @@
-cutegram (2.5.0-1aseman-vivid) vivid; urgency=medium
+cutegram (2.5.0-3aseman-vivid) vivid; urgency=medium
 
   * New file handler system + many improvement
   * Auto Start is also available on Mac and Windows
@@ -9,7 +9,7 @@ cutegram (2.5.0-1aseman-vivid) vivid; urgency=medium
 
  -- Aseman Team <contact@aseman.co>  Wed, 8 Jul 2015 10:30:00 +0330
  
-cutegram (2.5.0-1aseman-utopic) utopic; urgency=medium
+cutegram (2.5.0-3aseman-utopic) utopic; urgency=medium
 
   * New file handler system + many improvement
   * Auto Start is also available on Mac and Windows
@@ -20,7 +20,7 @@ cutegram (2.5.0-1aseman-utopic) utopic; urgency=medium
 
  -- Aseman Team <contact@aseman.co>  Wed, 8 Jul 2015 10:30:00 +0330
  
-cutegram (2.5.0-1aseman-trusty) trusty; urgency=medium
+cutegram (2.5.0-3aseman-trusty) trusty; urgency=medium
 
   * New file handler system + many improvement
   * Auto Start is also available on Mac and Windows

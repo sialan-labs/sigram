@@ -41,6 +41,7 @@ class AsemanDesktopTools : public QObject
     Q_PROPERTY(QStringList fontFamilies READ fontFamilies NOTIFY fakeSignal)
     Q_PROPERTY(QString menuStyle READ menuStyle WRITE setMenuStyle NOTIFY menuStyleChanged)
     Q_PROPERTY(QObject* currentMenuObject READ currentMenuObject NOTIFY currentMenuObjectChanged)
+    Q_PROPERTY(QString tooltip READ tooltip WRITE setTooltip NOTIFY tooltipChanged)
 
     Q_ENUMS(DesktopSession)
     Q_ENUMS(YesOrNoType)
@@ -79,6 +80,9 @@ public:
     void setMenuStyle(const QString &style);
     QString menuStyle() const;
 
+    void setTooltip(const QString &txt);
+    QString tooltip() const;
+
     QObject *currentMenuObject() const;
 
 public slots:
@@ -101,6 +105,7 @@ signals:
     void menuStyleChanged();
     void fakeSignal();
     void currentMenuObjectChanged();
+    void tooltipChanged();
 
 private:
     QMenu *menuOf(const QVariantList &list, QList<QAction*> *actions = 0, QMenu *parent = 0);

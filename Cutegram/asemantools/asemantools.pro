@@ -32,14 +32,12 @@ android {
             QT += widgets
 
             HEADERS += \
-                asemanmimeapps.h \
                 qtsingleapplication/qtsinglecoreapplication.h \
                 qtsingleapplication/qtsingleapplication.h \
                 qtsingleapplication/qtlockedfile.h \
                 qtsingleapplication/qtlocalpeer.h
 
             SOURCES += \
-                asemanmimeapps.cpp \
                 qtsingleapplication/qtsinglecoreapplication.cpp \
                 qtsingleapplication/qtsingleapplication.cpp \
                 qtsingleapplication/qtlockedfile.cpp \
@@ -51,6 +49,22 @@ android {
     }
 }
 
+QML_IMPORT_PATH = \
+    qml/
+
+contains(QT,macextras) {
+    SOURCES += private/asemanmactaskbarbuttonengine.cpp
+    HEADERS += private/asemanmactaskbarbuttonengine.h
+}
+contains(QT,winextras) {
+    SOURCES += private/asemanwintaskbarbuttonengine.cpp
+    HEADERS += private/asemanwintaskbarbuttonengine.h
+}
+contains(QT,sensors) {
+    DEFINES += ASEMAN_SENSORS
+    SOURCES += asemansensors.cpp
+    HEADERS += asemansensors.h
+}
 contains(QT,widgets) {
     DEFINES += NATIVE_ASEMAN_NOTIFICATION
     SOURCES +=  \
@@ -60,11 +74,28 @@ contains(QT,widgets) {
         asemannativenotification.h \
         asemannativenotificationitem.h
 }
+contains(QT,multimedia) {
+    DEFINES += ASEMAN_MULTIMEDIA
+    SOURCES +=  \
+        asemanaudiorecorder.cpp \
+        asemanaudioencodersettings.cpp
+    HEADERS +=  \
+        asemanaudiorecorder.h \
+        asemanaudioencodersettings.h
+}
+contains(QT,webkitwidgets) {
+    DEFINES += ASEMAN_WEBKIT
+}
+contains(QT,webenginewidgets) {
+    DEFINES += ASEMAN_WEBENGINE
+}
 linux|openbsd {
 contains(QT,dbus) {
     DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION
-    SOURCES += asemanlinuxnativenotification.cpp
-    HEADERS += asemanlinuxnativenotification.h
+    SOURCES += asemanlinuxnativenotification.cpp \
+        private/asemanunitytaskbarbuttonengine.cpp
+    HEADERS += asemanlinuxnativenotification.h \
+        private/asemanunitytaskbarbuttonengine.h
 }
 }
 macx {
@@ -89,14 +120,24 @@ SOURCES += \
     asemanabstractcolorfulllistmodel.cpp \
     asemanimagecoloranalizor.cpp \
     asemancountriesmodel.cpp \
-    asemantoolsplugin.cpp \
-    asemandragobject.cpp \
     asemanmimedata.cpp \
+    asemanmimeapps.cpp \
+    asemandragobject.cpp \
     asemandownloader.cpp \
     asemannotification.cpp \
     asemanautostartmanager.cpp \
+    asemanquickitemimagegrabber.cpp \
     asemanquickobject.cpp \
-    asemanfilesystemmodel.cpp
+    asemanfilesystemmodel.cpp \
+    asemandebugobjectcounter.cpp \
+    asemanfiledownloaderqueue.cpp \
+    asemanfiledownloaderqueueitem.cpp \
+    asemanwebpagegrabber.cpp \
+    asemantitlebarcolorgrabber.cpp \
+    asemantaskbarbutton.cpp \
+    private/asemanabstracttaskbarbuttonengine.cpp \
+    asemanmapdownloader.cpp \
+    asemantoolsplugin.cpp
 
 HEADERS += \
     asemandevices.h \
@@ -115,14 +156,24 @@ HEADERS += \
     asemanabstractcolorfulllistmodel.h \
     asemanimagecoloranalizor.h \
     asemancountriesmodel.h \
-    asemantoolsplugin.h \
-    asemandragobject.h \
     asemanmimedata.h \
+    asemanmimeapps.h \
+    asemandragobject.h \
     asemandownloader.h \
     asemannotification.h \
     asemanautostartmanager.h \
+    asemanquickitemimagegrabber.h \
     asemanquickobject.h \
-    asemanfilesystemmodel.h
+    asemanfilesystemmodel.h \
+    asemandebugobjectcounter.h \
+    asemanfiledownloaderqueue.h \
+    asemanfiledownloaderqueueitem.h \
+    asemanwebpagegrabber.h \
+    asemantitlebarcolorgrabber.h \
+    asemantaskbarbutton.h \
+    private/asemanabstracttaskbarbuttonengine.h \
+    asemanmapdownloader.h \
+    asemantoolsplugin.h
 
 OTHER_FILES += \
     android-build/src/land/aseman/android/AsemanActivity.java \

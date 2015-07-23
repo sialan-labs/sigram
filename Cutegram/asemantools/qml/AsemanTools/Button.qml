@@ -55,6 +55,7 @@ Rectangle {
     property color tooltipTextColor: "#ffffff"
     property font tooltipFont
     property string tooltipText
+    property int tooltipPosition: Qt.RightEdge
 
     signal clicked()
 
@@ -106,13 +107,42 @@ Rectangle {
         id: tooltip_component
 
         Rectangle {
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.right
-            anchors.margins: 2*Devices.density
             color: tooltipColor
             width: tooltip_txt.width + 14*Devices.density
             height: tooltip_txt.height + 14*Devices.density
             radius: 3*Devices.density
+            x: {
+                switch(tooltipPosition) {
+                case Qt.TopEdge:
+                case Qt.BottomEdge:
+                    return parent.width/2 - width/2
+                    break
+
+                case Qt.LeftEdge:
+                    return -width - 2*Devices.density
+                    break
+
+                case Qt.RightEdge:
+                    return parent.width + 2*Devices.density
+                    break
+                }
+            }
+            y: {
+                switch(tooltipPosition) {
+                case Qt.TopEdge:
+                    return -height - 2*Devices.density
+                    break
+
+                case Qt.BottomEdge:
+                    return parent.height + 2*Devices.density
+                    break
+
+                case Qt.LeftEdge:
+                case Qt.RightEdge:
+                    return parent.height/2 - height/2
+                    break
+                }
+            }
 
             Text {
                 id: tooltip_txt

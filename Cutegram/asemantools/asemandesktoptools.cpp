@@ -33,6 +33,7 @@
 #include <QMenu>
 #include <QAction>
 #include <QMessageBox>
+#include <QToolTip>
 #endif
 
 class AsemanDesktopToolsPrivate
@@ -40,6 +41,7 @@ class AsemanDesktopToolsPrivate
 public:
     QFontDatabase *font_db;
     QString style;
+    QString tooltip;
 #ifdef DESKTOP_DEVICE
     QList<QMenu*> currentMenuObjects;
 #endif
@@ -242,6 +244,26 @@ void AsemanDesktopTools::setMenuStyle(const QString &style)
 QString AsemanDesktopTools::menuStyle() const
 {
     return p->style;
+}
+
+void AsemanDesktopTools::setTooltip(const QString &txt)
+{
+#ifdef DESKTOP_DEVICE
+    QToolTip::hideText();
+    if(!txt.isEmpty())
+        QToolTip::showText(QCursor::pos(), txt);
+#endif
+
+    if(p->tooltip == txt)
+        return;
+
+    p->tooltip = txt;
+    emit tooltipChanged();
+}
+
+QString AsemanDesktopTools::tooltip() const
+{
+    return p->tooltip;
 }
 
 QObject *AsemanDesktopTools::currentMenuObject() const
