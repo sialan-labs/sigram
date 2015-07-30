@@ -6,7 +6,7 @@ import TelegramQml 1.0
 
 Item {
     id: up_base
-    height: main_page.height + 2*frameMargins
+    height: main_page.height + 2*frameMargins + 10
 
     property Dialog currentDialog
     property bool isChat: currentDialog.peer.chatId != 0
@@ -159,6 +159,15 @@ Item {
                 }
 
                 Text {
+                    id: username_lbl
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
+                    color: Desktop.titleBarTextColor
+                    text: qsTr("Username")
+                    visible: !isChat && user.username.length != 0
+                }
+
+                Text {
                     id: favorite_lbl
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
@@ -216,6 +225,16 @@ Item {
                     color: Desktop.titleBarTextColor
                     text: user.phone + " "
                     visible: !isChat
+                }
+
+                Text {
+                    height: username_lbl.height
+                    font.family: AsemanApp.globalFont.family
+                    font.pixelSize: Math.floor(11*Devices.fontDensity)
+                    verticalAlignment: Text.AlignVCenter
+                    color: Desktop.titleBarTextColor
+                    text: "@" + user.username
+                    visible: username_lbl.visible
                 }
 
                 Item {
