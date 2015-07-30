@@ -20,9 +20,9 @@ Item {
 
     property real typeMessageMediaDocument: 0x2fda2204
     property real typeMessageMediaContact: 0x5e7d2f39
-    property real typeMessageMediaVideo: 0xa2d24290
+    property real typeMessageMediaVideo: 0x5bcf1675
     property real typeMessageMediaAudio: 0xc6b68300
-    property real typeMessageMediaPhoto: 0xc8c45a2a
+    property real typeMessageMediaPhoto: 0x3d8ce53d
     property real typeMessageMediaGeo: 0x56e0d474
 
     signal windowRequest(variant dialog)
