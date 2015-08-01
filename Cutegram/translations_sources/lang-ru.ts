@@ -99,31 +99,31 @@
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Документ</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Контакт</translation>
+        <translation>Контакт</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Видео</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Аудио</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Фото</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Локация</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестно</translation>
     </message>
 </context>
 <context>
@@ -356,7 +356,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation>Пишет сообщение...</translation>
     </message>
 </context>
 <context>
@@ -741,7 +741,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать смайлы при наведении</translation>
     </message>
 </context>
 <context>
@@ -894,7 +894,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Emojis</source>
-        <translation type="unfinished"></translation>
+        <translation>Смайлы</translation>
     </message>
 </context>
 <context>
@@ -1183,11 +1183,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить по-умолчанию DC ID для &lt;id&gt;</translation>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить по-умолчанию IP-адрес для &lt;ip&gt;</translation>
     </message>
 </context>
 </TS>
