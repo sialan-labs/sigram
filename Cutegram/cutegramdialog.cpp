@@ -6,7 +6,7 @@
 #include "cutegramdialog.h"
 #include <telegramqml.h>
 #include <userdata.h>
-#include <types/types.h>
+#include <telegram/types/types.h>
 #include "asemantools/asemandownloader.h"
 
 #include <QTimerEvent>
