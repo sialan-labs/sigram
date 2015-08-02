@@ -61,10 +61,13 @@ class Cutegram : public QObject
     Q_PROPERTY(int  statusIconStyle   READ statusIconStyle   WRITE setStatusIconStyle NOTIFY statusIconStyleChanged  )
     Q_PROPERTY(bool smoothScroll      READ smoothScroll      WRITE setSmoothScroll    NOTIFY smoothScrollChanged     )
     Q_PROPERTY(bool autoEmojis        READ autoEmojis        WRITE setAutoEmojis      NOTIFY autoEmojisChanged       )
+    Q_PROPERTY(bool sendByCtrlEnter   READ sendByCtrlEnter   WRITE setSendByCtrlEnter NOTIFY sendByCtrlEnterChanged  )
 
     Q_PROPERTY(ThemeItem* currentTheme READ currentTheme NOTIFY currentThemeChanged)
     Q_PROPERTY(QStringList themes READ themes NOTIFY themesChanged)
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
+    Q_PROPERTY(QStringList emojisThemes READ emojisThemes NOTIFY emojisThemesChanged)
+    Q_PROPERTY(QString emojisTheme READ emojisTheme WRITE setEmojisTheme NOTIFY emojisThemeChanged)
 
     Q_PROPERTY(QStringList searchEngines READ searchEngines NOTIFY searchEnginesChanged)
     Q_PROPERTY(QString searchEngine READ searchEngine WRITE setSearchEngine NOTIFY searchEngineChanged)
@@ -171,6 +174,9 @@ public:
     void setAutoEmojis(bool stt);
     bool autoEmojis() const;
 
+    void setSendByCtrlEnter(bool stt);
+    bool sendByCtrlEnter() const;
+
     void setStatusIconStyle(int style);
     int statusIconStyle();
 
@@ -178,6 +184,10 @@ public:
     void setTheme(const QString &theme);
     QString theme() const;
     ThemeItem *currentTheme();
+
+    QStringList emojisThemes() const;
+    void setEmojisTheme(const QString& theme);
+    QString emojisTheme() const;
 
     QStringList searchEngines() const;
     void setSearchEngine(const QString &se);
@@ -230,10 +240,14 @@ signals:
     void statusIconStyleChanged();
     void smoothScrollChanged();
     void autoEmojisChanged();
+    void sendByCtrlEnterChanged();
 
     void themesChanged();
     void currentThemeChanged();
     void themeChanged();
+
+    void emojisThemesChanged();
+    void emojisThemeChanged();
 
     void searchEngineChanged();
     void searchEnginesChanged();

@@ -118,6 +118,18 @@ Rectangle {
                             color: Cutegram.currentTheme.sidebarPhoneColor
                             text: telegram.phoneNumber
                         }
+
+                        Text {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            anchors.margins: 20*Devices.density
+                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                            font.family: AsemanApp.globalFont.family
+                            font.pixelSize: Math.floor(12*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarPhoneColor
+                            text: "@" + user.username
+                            visible: user.username.length != 0
+                        }
                     }
                 }
 
@@ -243,6 +255,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: send_by_ctrl_enter_text
+                            height: send_by_ctrl_enter_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Send by Ctrl+Enter")
+                        }
+
+                        Text {
                             id: theme_text
                             height: theme_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -250,6 +272,16 @@ Rectangle {
                             font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
                             color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Theme")
+                        }
+
+                        Text {
+                            id: emojis_theme_text
+                            height: emojis_theme_combo.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Emoji's theme")
                         }
 
                         Text {
@@ -405,6 +437,13 @@ Rectangle {
                             onCheckedChanged: Cutegram.emojiOnHover = checked
                         }
 
+                        Controls.Switch {
+                            id: send_by_ctrl_enter_checkbox
+                            style: Cutegram.currentTheme.switchStyle
+                            checked: Cutegram.sendByCtrlEnter
+                            onCheckedChanged: Cutegram.sendByCtrlEnter = checked
+                        }
+
                         Controls.ComboBox {
                             id: theme_combo
                             style: Cutegram.currentTheme.comboBoxStyle
@@ -425,6 +464,28 @@ Rectangle {
                             }
 
                             onCurrentIndexChanged: if(init_timer.inited) Cutegram.theme = currentText + ".qml"
+                        }
+
+                        Controls.ComboBox {
+                            id: emojis_theme_combo
+                            style: Cutegram.currentTheme.comboBoxStyle
+                            model: {
+                                var result = new Array
+                                var themes = Cutegram.emojisThemes
+                                for(var i=0; i<themes.length; i++)
+                                    result[i] = Tools.fileName(themes[i])
+                                return result
+                            }
+                            currentIndex: {
+                                var themes = Cutegram.emojisThemes
+                                for(var i=0; i<themes.length; i++)
+                                    if(themes[i] == Cutegram.emojisTheme)
+                                        return i
+
+                                return 0
+                            }
+
+                            onCurrentIndexChanged: if(init_timer.inited) Cutegram.emojisTheme = currentText
                         }
 
                         Controls.Button {
