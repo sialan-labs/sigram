@@ -13,10 +13,12 @@ MenuButton 1.0 MenuButton.qml
 MenuIcon 1.0 MenuIcon.qml
 STextEdit 1.0 STextEdit.qml
 ColorList 1.0 ColorList.qml
+MenuController 1.0 MenuController.qml
 ModernProgressBar 1.0 ModernProgressBar.qml
 RollerDialog 1.0 RollerDialog.qml
 STextInput 1.0 STextInput.qml
 CursorPicker 1.0 CursorPicker.qml
+RoundedImage 1.0 RoundedImage.qml
 NormalWheelScroll 1.0 NormalWheelScroll.qml
 ScrollBar 1.0 ScrollBar.qml
 SubMessage 1.0 SubMessage.qml

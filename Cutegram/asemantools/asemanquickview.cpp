@@ -77,7 +77,9 @@ public:
     QPointer<QObject> root;
     QPointer<QQuickItem> focused_text;
 
+    bool tryClose;
     bool fullscreen;
+    bool backController;
     int layoutDirection;
 
 #ifdef ASEMAN_QML_PLUGIN
@@ -110,7 +112,13 @@ AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
     p->calendar = 0;
     p->back_handler = 0;
     p->fullscreen = false;
+    p->backController = false;
     p->layoutDirection = Qt::LeftToRight;
+#ifdef Q_OS_ANDROID
+    p->tryClose  = false;
+#else
+    p->tryClose  = false;
+#endif
 
 #ifndef ASEMAN_QML_PLUGIN
     engine()->rootContext()->setContextProperty( "AsemanApp", AsemanApplication::instance() );
@@ -215,12 +223,26 @@ bool AsemanQuickView::fullscreen() const
     return p->fullscreen;
 }
 
+void AsemanQuickView::setBackController(bool stt)
+{
+    if(p->backController == stt)
+        return;
+
+    p->backController = stt;
+    emit backControllerChanged();
+}
+
+bool AsemanQuickView::backController() const
+{
+    return p->backController;
+}
+
 qreal AsemanQuickView::statusBarHeight() const
 {
     if( !p->devices )
         return 0;
 
-    return p->devices->transparentStatusBar() && !fullscreen()? 22*p->devices->density() : 0;
+    return p->devices->transparentStatusBar() && !fullscreen()? 24*p->devices->density() : 0;
 }
 
 qreal AsemanQuickView::navigationBarHeight() const
@@ -302,6 +324,34 @@ qreal AsemanQuickView::flickVelocity() const
 void AsemanQuickView::discardFocusedText()
 {
     setFocusedText(0);
+}
+
+void AsemanQuickView::tryClose()
+{
+    p->tryClose = true;
+    close();
+}
+
+bool AsemanQuickView::event(QEvent *e)
+{
+    switch( static_cast<int>(e->type()) )
+    {
+    case QEvent::Close:
+        if(p->backController)
+        {
+            QCloseEvent *ce = static_cast<QCloseEvent*>(e);
+            if( p->tryClose || p->devices->isDesktop() )
+                ce->accept();
+            else
+            {
+                ce->ignore();
+                emit closeRequest();
+            }
+        }
+        break;
+    }
+
+    return INHERIT_VIEW::event(e);
 }
 
 void AsemanQuickView::init_options()

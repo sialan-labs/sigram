@@ -82,6 +82,11 @@ Rectangle {
         }
     }
 
+    StickersModel {
+        id: stickers_model
+        telegram: telegramObject
+    }
+
     Telegram {
         id: telegram
         defaultHostAddress: Cutegram.defaultHostAddress
@@ -109,6 +114,8 @@ Rectangle {
             else
             if( !authLoggedIn && view )
                 view.destroy()
+            if(authLoggedIn)
+                stickers_model.refresh()
         }
         onIncomingMessage: {
             var dId = telegram.messageDialogId(msg.id)

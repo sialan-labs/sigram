@@ -22,12 +22,13 @@
 #include <QObject>
 #include <QColor>
 #include <QHash>
+#include <QUrl>
 
 class AsemanImageColorAnalizorPrivate;
 class AsemanImageColorAnalizor : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY(QUrl source READ source WRITE setSource NOTIFY sourceChanged)
     Q_PROPERTY(QColor color READ color NOTIFY colorChanged)
     Q_PROPERTY(int method READ method WRITE setMethod NOTIFY methodChanged)
     Q_ENUMS(Method)
@@ -41,8 +42,8 @@ public:
     AsemanImageColorAnalizor(QObject *parent = 0);
     ~AsemanImageColorAnalizor();
 
-    QString source() const;
-    void setSource( const QString & source );
+    QUrl source() const;
+    void setSource( const QUrl & source );
 
     int method() const;
     void setMethod( int m );
@@ -57,6 +58,9 @@ signals:
 private slots:
     void found(int method, const QString & path );
     void start();
+
+private:
+    QString sourceString() const;
 
 private:
     AsemanImageColorAnalizorPrivate *p;

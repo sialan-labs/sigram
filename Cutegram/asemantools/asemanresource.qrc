@@ -14,6 +14,7 @@
         <file>qml/AsemanTools/LineEdit.qml</file>
         <file>qml/AsemanTools/MenuButton.qml</file>
         <file>qml/AsemanTools/ModernProgressBar.qml</file>
+        <file>qml/AsemanTools/MenuController.qml</file>
         <file>qml/AsemanTools/NormalWheelScroll.qml</file>
         <file>qml/AsemanTools/PhysicalScrollBar.qml</file>
         <file>qml/AsemanTools/Picker.qml</file>
@@ -123,5 +124,6 @@
         <file>qml/AsemanTools/Controls/Styles/qmldir</file>
         <file>qml/AsemanTools/Controls/Styles/Desktop/images/arrow-down.png</file>
         <file>qml/AsemanTools/MenuIcon.qml</file>
+        <file>qml/AsemanTools/RoundedImage.qml</file>
     </qresource>
 </RCC>
