@@ -207,7 +207,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks, bo
         pos += atag.size();
     }
 
-    QRegExp tags_rxp("\\#(\\w+)");
+    QRegExp tags_rxp("\\s\\#(\\w+)");
     pos = 0;
     while (!skipLinks && (pos = tags_rxp.indexIn(res, pos)) != -1)
     {
