@@ -68,7 +68,7 @@ public:
         Critical
     };
 
-    int desktopSession() const;
+    static int desktopSession();
 
     QColor titleBarColor() const;
     QColor titleBarTransparentColor() const;

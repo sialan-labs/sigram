@@ -19,6 +19,7 @@
 #define UNITY_LIGHT (p->desktop->desktopSession()==AsemanDesktopTools::Unity && !p->desktop->titleBarIsDark())
 #define UNITY_ICON_PATH(NUM) "/tmp/aseman-telegram-client-trayicon" + QString::number(NUM) + (lowLevelDarkSystemTray()?"-dark":"-light") + ".png"
 #define SYSTRAY_ICON (lowLevelDarkSystemTray()?":/qml/Cutegram/files/systray-dark.png":":/qml/Cutegram/files/systray.png")
+#define SYSTRAY_ICON_STATUS QString("General/statusIconStyle_%1").arg(AsemanDesktopTools::desktopSession())
 
 #include "cutegram.h"
 #include "asemantools/asemanquickview.h"
@@ -148,7 +149,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->closingState = false;
     p->highlightColor = AsemanApplication::settings()->value("General/lastHighlightColor", p->mainPalette.highlight().color().name() ).toString();
     p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
-    p->statusIconStyle = AsemanApplication::settings()->value("General/statusIconStyle", static_cast<int>(StatusIconAutomatic) ).toInt();
+    p->statusIconStyle = AsemanApplication::settings()->value(SYSTRAY_ICON_STATUS, static_cast<int>(StatusIconAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->emojiOnHover = AsemanApplication::settings()->value("General/emojiOnHover", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
@@ -886,7 +887,7 @@ void Cutegram::setStatusIconStyle(int style)
         return;
 
     p->statusIconStyle = style;
-    AsemanApplication::settings()->setValue("General/statusIconStyle", style);
+    AsemanApplication::settings()->setValue(SYSTRAY_ICON_STATUS, style);
 
     emit cutegramSubscribeChanged();
 

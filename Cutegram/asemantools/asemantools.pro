@@ -137,7 +137,8 @@ SOURCES += \
     asemantaskbarbutton.cpp \
     private/asemanabstracttaskbarbuttonengine.cpp \
     asemanmapdownloader.cpp \
-    asemantoolsplugin.cpp
+    asemantoolsplugin.cpp \
+    asemandragarea.cpp
 
 HEADERS += \
     asemandevices.h \
@@ -173,7 +174,8 @@ HEADERS += \
     asemantaskbarbutton.h \
     private/asemanabstracttaskbarbuttonengine.h \
     asemanmapdownloader.h \
-    asemantoolsplugin.h
+    asemantoolsplugin.h \
+    asemandragarea.h
 
 OTHER_FILES += \
     android-build/src/land/aseman/android/AsemanActivity.java \

@@ -54,7 +54,7 @@ AsemanDesktopTools::AsemanDesktopTools(QObject *parent) :
     p->font_db = 0;
 }
 
-int AsemanDesktopTools::desktopSession() const
+int AsemanDesktopTools::desktopSession()
 {
     static int result = -1;
     if( result != -1 )

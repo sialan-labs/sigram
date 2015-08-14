@@ -161,12 +161,12 @@ void AsemanTools::deleteItemDelay(QObject *o, int ms)
 
 qreal AsemanTools::colorHue(const QColor &clr)
 {
-    return clr.hue()/255.0;
+    return clr.hue()/359.0;
 }
 
 qreal AsemanTools::colorLightness(const QColor &clr)
 {
-    return 2*clr.lightness()/255.0 - 1;
+    return clr.lightness()/255.0;
 }
 
 qreal AsemanTools::colorSaturation(const QColor &clr)
@@ -276,6 +276,11 @@ void AsemanTools::copyDirectory(const QString &src, const QString &dst)
     const QStringList & files = QDir(src).entryList(QDir::Files);
     foreach( const QString & f, files )
         QFile::copy(src+"/"+f, dst+"/"+f);
+}
+
+void AsemanTools::deleteFile(const QString &file)
+{
+    QFile::remove(file);
 }
 
 void AsemanTools::setProperty(QObject *obj, const QString &property, const QVariant &v)

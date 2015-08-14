@@ -129,7 +129,8 @@ SOURCES += \
     asemantools/asemantitlebarcolorgrabber.cpp \
     asemantools/asemantaskbarbutton.cpp \
     asemantools/private/asemanabstracttaskbarbuttonengine.cpp \
-    asemantools/asemanmapdownloader.cpp
+    asemantools/asemanmapdownloader.cpp \
+    $$PWD/asemandragarea.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -164,7 +165,8 @@ HEADERS += \
     asemantools/asemantitlebarcolorgrabber.h \
     asemantools/asemantaskbarbutton.h \
     asemantools/private/asemanabstracttaskbarbuttonengine.h \
-    asemantools/asemanmapdownloader.h
+    asemantools/asemanmapdownloader.h \
+    $$PWD/asemandragarea.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \

@@ -135,6 +135,10 @@ QVariant AsemanCountriesModel::data(const QModelIndex &index, int role) const
     case AreaRole:
         res = p->data[key]["area"];
         break;
+
+    case KeyRole:
+        res = key;
+        break;
     }
 
     return res;
@@ -167,6 +171,7 @@ QHash<qint32, QByteArray> AsemanCountriesModel::roleNames() const
     res->insert( DemonymRole, "demonym");
     res->insert( BordersRole, "borders");
     res->insert( AreaRole, "area");
+    res->insert( KeyRole, "key");
 
     return *res;
 }
@@ -174,6 +179,11 @@ QHash<qint32, QByteArray> AsemanCountriesModel::roleNames() const
 int AsemanCountriesModel::count() const
 {
     return p->list.count();
+}
+
+int AsemanCountriesModel::indexOf(const QString &name)
+{
+    return p->list.indexOf(name);
 }
 
 void AsemanCountriesModel::init_buff()

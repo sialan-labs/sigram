@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import AsemanTools 1.0
 
 Item {
     id: menuc
@@ -8,8 +9,10 @@ Item {
     property real ratio: 0
     property variant source
     property int layoutDirection: View.layoutDirection
-    property real menuWidth: 200*Devices.density
+    property real menuWidth: Devices.isMobile? parent.width-100*Devices.density : parent.width/2 + 20*Devices.density
     property alias isVisible: marea.isVisible
+    property alias menuTopMargin: menu_frame.y
+    property Component component
 
     onSourceChanged: refreshSource()
     onLayoutDirectionChanged: refreshSource()
@@ -22,8 +25,22 @@ Item {
             BackHandler.removeHandler(menuc)
     }
 
+    onComponentChanged: {
+        if(privates.item)
+            privates.item.destroy()
+        if(!component)
+            return
+
+        privates.item = component.createObject(menu_frame)
+    }
+
     Behavior on ratio {
         NumberAnimation{easing.type: Easing.OutCubic; duration: marea.animation? 400 : 0}
+    }
+
+    QtObject {
+        id: privates
+        property variant item
     }
 
     Item {
@@ -86,6 +103,24 @@ Item {
 
                 menuc.ratio = Math.abs(size/menuWidth)
             }
+        }
+    }
+
+    Item {
+        x: layoutDirection==Qt.RightToLeft? parent.width-width : 0
+        height: parent.height
+        width: menuc.ratio*menuWidth
+        clip: true
+
+        MouseArea {
+            anchors.fill: parent
+        }
+
+        Item {
+            id: menu_frame
+            height: parent.height - y
+            width: menuWidth
+            x: layoutDirection==Qt.RightToLeft? parent.width-width : 0
         }
     }
 
