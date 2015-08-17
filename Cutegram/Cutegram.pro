@@ -88,10 +88,12 @@ SOURCES += main.cpp \
     textemojiwrapper.cpp \
     emoticonsmodel.cpp \
     contributorsmodel.cpp \
-    pasteanalizer.cpp
+    pasteanalizer.cpp \
+    authsaver.cpp
 
 RESOURCES += resource.qrc
 
+include(simpleqtcryptor/simpleqtcryptor.pri)
 include(qmake/qtcAddDeployment.pri)
 include(asemantools/asemantools.pri)
 qtcAddDeployment()
@@ -108,7 +110,8 @@ HEADERS += \
     textemojiwrapper.h \
     emoticonsmodel.h \
     contributorsmodel.h \
-    pasteanalizer.h
+    pasteanalizer.h \
+    authsaver.h
 
 OTHER_FILES += \
     objects/types.sco \

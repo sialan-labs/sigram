@@ -5,11 +5,14 @@
 #include "cutegram.h"
 #include "compabilitytools.h"
 #include "telegramqmlinitializer.h"
+#include "authsaver.h"
 
 #include <QMainWindow>
 #include <QPalette>
 #include <QNetworkProxy>
 #include <QCommandLineParser>
+
+#include <core/settings.h>
 
 int main(int argc, char *argv[])
 {
@@ -18,12 +21,16 @@ int main(int argc, char *argv[])
     AsemanApplication app(argc, argv);
     app.setApplicationName("Cutegram");
     app.setApplicationDisplayName("Cutegram");
-    app.setApplicationVersion("2.5.0");
+    app.setApplicationVersion("2.6.0");
     app.setOrganizationDomain("land.aseman");
     app.setOrganizationName("Aseman");
     app.setWindowIcon(QIcon(":/qml/Cutegram/files/icon.png"));
     app.setQuitOnLastWindowClosed(false);
 
+#ifdef KWALLET_PRESENT
+    QCommandLineOption disKWalletOption(QStringList() << "disable-kwallet",
+            QCoreApplication::translate("main", "Disable kwallet."));
+#endif
     QCommandLineOption verboseOption(QStringList() << "V" << "verbose",
             QCoreApplication::translate("main", "Verbose Mode."));
     QCommandLineOption forceOption(QStringList() << "f" << "force",
@@ -41,7 +48,10 @@ int main(int argc, char *argv[])
     parser.addOption(verboseOption);
     parser.addOption(dcIdOption);
     parser.addOption(ipAdrsOption);
-    parser.process(app);
+#ifdef KWALLET_PRESENT
+    parser.addOption(disKWalletOption);
+#endif
+    parser.process(app.arguments());
 
     if(!parser.isSet(verboseOption))
         qputenv("QT_LOGGING_RULES", "tg.*=false");
@@ -91,6 +101,14 @@ int main(int argc, char *argv[])
         cutegram.setDefaultHostDcId(parser.value(dcIdOption).toInt());
     if(parser.isSet(ipAdrsOption))
         cutegram.setDefaultHostAddress(parser.value(ipAdrsOption));
+#ifdef KWALLET_PRESENT
+    if(!parser.isSet(disKWalletOption) || cutegram.kWallet())
+        Settings::setAuthConfigMethods(CutegramAuth::cutegramReadKWalletAuth,
+                                       CutegramAuth::cutegramWriteKWalletAuth);
+    else
+#endif
+        Settings::setAuthConfigMethods(CutegramAuth::cutegramReadSerpentAuth,
+                                       CutegramAuth::cutegramWriteSerpentAuth);
 
     cutegram.start( parser.isSet(forceOption) );
 

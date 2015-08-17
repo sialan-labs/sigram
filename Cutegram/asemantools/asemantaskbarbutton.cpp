@@ -40,12 +40,17 @@ AsemanTaskbarButton::AsemanTaskbarButton(QObject *parent) :
     p->badgeNumber = 0;
     p->progress = 0;
     p->window = 0;
+    p->engine = 0;
 
 #ifdef Q_OS_WIN
+#ifdef QT_WINEXTRAS_LIB
     p->engine = new AsemanWinTaskbarButtonEngine();
+#endif
 #else
 #ifdef Q_OS_MAC
+#ifdef QT_MACEXTRAS_LIB
     p->engine = new AsemanMacTaskbarButtonEngine();
+#endif
 #else
 #if defined(Q_OS_LINUX) && defined(QT_DBUS_LIB)
     p->engine = new AsemanUnityTaskbarButtonEngine();
@@ -62,7 +67,7 @@ void AsemanTaskbarButton::setBadgeNumber(int num)
         return;
 
     p->badgeNumber = num;
-    p->engine->updateBadgeNumber(num);
+    if(p->engine) p->engine->updateBadgeNumber(num);
     emit badgeNumberChanged();
 }
 
@@ -77,7 +82,7 @@ void AsemanTaskbarButton::setProgress(qreal progress)
         return;
 
     p->progress = progress;
-    p->engine->updateProgress(progress);
+    if(p->engine) p->engine->updateProgress(progress);
     emit progressChanged();
 }
 
@@ -92,7 +97,7 @@ void AsemanTaskbarButton::setLauncher(const QString &launcher)
         return;
 
     p->launcher = launcher;
-    p->engine->updateLauncher(p->launcher);
+    if(p->engine) p->engine->updateLauncher(p->launcher);
     emit launcherChanged();
 }
 
@@ -107,7 +112,7 @@ void AsemanTaskbarButton::setWindow(QWindow *win)
         return;
 
     p->window = win;
-    p->engine->updateWindow(p->window);
+    if(p->engine) p->engine->updateWindow(p->window);
     emit windowChanged();
 }
 
@@ -118,12 +123,12 @@ QWindow *AsemanTaskbarButton::window() const
 
 void AsemanTaskbarButton::userAttention()
 {
-    p->engine->userAttention();
+    if(p->engine) p->engine->userAttention();
 }
 
 AsemanTaskbarButton::~AsemanTaskbarButton()
 {
-    delete p->engine;
+    if(p->engine) delete p->engine;
     delete p;
 }
 

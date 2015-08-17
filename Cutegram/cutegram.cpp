@@ -82,6 +82,7 @@ public:
     bool darkSystemTray;
     bool closingState;
     bool cutegramSubscribe;
+    bool kWallet;
     bool autoEmojis;
     bool smoothScroll;
     bool sendByCtrlEnter;
@@ -155,6 +156,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
+    p->kWallet = AsemanApplication::settings()->value("General/kWallet", true ).toBool();
     p->autoEmojis = AsemanApplication::settings()->value("General/autoEmojis", true ).toBool();
     p->smoothScroll = AsemanApplication::settings()->value("General/smoothScroll", true ).toBool();
     p->sendByCtrlEnter = AsemanApplication::settings()->value("General/sendByCtrlEnter", false ).toBool();
@@ -753,6 +755,22 @@ void Cutegram::setSmoothScroll(bool stt)
 bool Cutegram::smoothScroll() const
 {
     return p->smoothScroll;
+}
+
+void Cutegram::setKWallet(bool stt)
+{
+    if(p->kWallet == stt)
+        return;
+
+    p->kWallet = stt;
+    AsemanApplication::settings()->setValue("General/kWallet", stt);
+
+    emit kWalletChanged();
+}
+
+bool Cutegram::kWallet() const
+{
+    return p->kWallet;
 }
 
 void Cutegram::setBackground(const QString &background)

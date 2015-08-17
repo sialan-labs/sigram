@@ -6,6 +6,9 @@
 class AsemanMacTaskbarButtonEngine : public AsemanAbstractTaskbarButtonEngine
 {
 public:
+    AsemanMacTaskbarButtonEngine(){}
+    ~AsemanMacTaskbarButtonEngine(){}
+
     void updateBadgeNumber(int number);
     void updateProgress(qreal progress);
 };

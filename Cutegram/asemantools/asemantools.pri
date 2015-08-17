@@ -86,12 +86,16 @@ linux|openbsd {
 contains(QT,dbus) {
     DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION
     SOURCES += asemantools/asemanlinuxnativenotification.cpp \
-        asemantools/private/asemanunitytaskbarbuttonengine.cpp
+        asemantools/private/asemanunitytaskbarbuttonengine.cpp \
+        asemantools/asemankdewallet.cpp
     HEADERS += asemantools/asemanlinuxnativenotification.h \
-        asemantools/private/asemanunitytaskbarbuttonengine.h
+        asemantools/private/asemanunitytaskbarbuttonengine.h \
+        asemantools/asemankdewallet.h
 }
 }
 macx {
+    LIBS += -framework CoreServices
+    INCLUDEPATH += /System/Library/Frameworks/CoreServices.framework/Headers/
     DEFINES += MAC_NATIVE_ASEMAN_NOTIFICATION
     SOURCES += asemantools/asemanmacnativenotification.cpp
     HEADERS += asemantools/asemanmacnativenotification.h
@@ -130,7 +134,7 @@ SOURCES += \
     asemantools/asemantaskbarbutton.cpp \
     asemantools/private/asemanabstracttaskbarbuttonengine.cpp \
     asemantools/asemanmapdownloader.cpp \
-    $$PWD/asemandragarea.cpp
+    asemantools/asemandragarea.cpp
 
 HEADERS += \
     asemantools/asemandevices.h \
@@ -166,7 +170,7 @@ HEADERS += \
     asemantools/asemantaskbarbutton.h \
     asemantools/private/asemanabstracttaskbarbuttonengine.h \
     asemantools/asemanmapdownloader.h \
-    $$PWD/asemandragarea.h
+    asemantools/asemandragarea.h
 
 OTHER_FILES += \
     asemantools/android-build/src/land/aseman/android/AsemanActivity.java \

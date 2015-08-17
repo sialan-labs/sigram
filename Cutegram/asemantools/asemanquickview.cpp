@@ -54,6 +54,9 @@
 #include "asemanaudiorecorder.h"
 #include "asemanaudioencodersettings.h"
 #endif
+#if defined(Q_OS_LINUX) && defined(QT_DBUS_LIB)
+#include "asemankdewallet.h"
+#endif
 
 #include <QPointer>
 #include <QSharedPointer>
@@ -143,6 +146,9 @@ AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
     qmlRegisterType<AsemanTaskbarButton>("AsemanTools", 1,0, "TaskbarButton");
     qmlRegisterType<AsemanMapDownloader>("AsemanTools", 1,0, "MapDownloader");
     qmlRegisterType<AsemanDragArea>("AsemanTools", 1,0, "MouseDragArea");
+#if defined(Q_OS_LINUX) && defined(QT_DBUS_LIB)
+    qmlRegisterType<AsemanKdeWallet>("AsemanTools", 1,0, "KdeWallet");
+#endif
 
 #ifdef ASEMAN_SENSORS
     qmlRegisterType<AsemanSensors>("AsemanTools", 1,0, "AsemanSensors");
