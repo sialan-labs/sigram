@@ -26,6 +26,7 @@
 #include "asemanfiledownloaderqueue.h"
 #include "asemantaskbarbutton.h"
 #include "asemanmapdownloader.h"
+#include "asemandragarea.h"
 #ifdef Q_OS_ANDROID
 #include "asemanjavalayer.h"
 #endif
@@ -41,6 +42,9 @@
 #ifdef ASEMAN_MULTIMEDIA
 #include "asemanaudiorecorder.h"
 #include "asemanaudioencodersettings.h"
+#endif
+#if defined(Q_OS_LINUX) && defined(QT_DBUS_LIB)
+#include "asemankdewallet.h"
 #endif
 
 #include <qqml.h>
@@ -88,6 +92,10 @@ void AsemanToolsPlugin::registerTypes(const char *uri)
     qmlRegisterType<AsemanTitleBarColorGrabber>("AsemanTools", 1,0, "TitleBarColorGrabber");
     qmlRegisterType<AsemanTaskbarButton>("AsemanTools", 1,0, "TaskbarButton");
     qmlRegisterType<AsemanMapDownloader>("AsemanTools", 1,0, "MapDownloader");
+    qmlRegisterType<AsemanDragArea>("AsemanTools", 1,0, "MouseDragArea");
+#if defined(Q_OS_LINUX) && defined(QT_DBUS_LIB)
+    qmlRegisterType<AsemanKdeWallet>("AsemanTools", 1,0, "KdeWallet");
+#endif
 
 #ifdef ASEMAN_SENSORS
     qmlRegisterType<AsemanSensors>("AsemanTools", 1,0, "AsemanSensors");

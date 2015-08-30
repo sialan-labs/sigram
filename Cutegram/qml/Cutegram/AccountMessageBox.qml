@@ -215,14 +215,23 @@ Item {
             anchors.right: parent.right
             anchors.bottom: send_msg.top
             anchors.top: header.bottom
-            width: 300*Devices.density
+            width: 300*Devices.density + panelWidth
             onEmojiSelected: send_msg.insertText(code)
+            telegramObject: telegram
             onStickerSelected: {
                 var dId = currentDialog.peer.userId
                 if(!dId)
                     dId = currentDialog.peer.chatId
 
                 telegramObject.sendFile(dId, path)
+                point_dialog.hide()
+            }
+            onStickerDocumentSelected: {
+                var dId = currentDialog.peer.userId
+                if(!dId)
+                    dId = currentDialog.peer.chatId
+
+                telegramObject.forwardDocument(dId, document)
                 point_dialog.hide()
             }
         }
@@ -283,7 +292,7 @@ Item {
         var y = pnt.y + send_msg.emojiButtonHeight*0.2
 
         var item = emoticons_component.createObject(message_box)
-        var w = 360*Devices.density
+        var w = 410*Devices.density + item.panelWidth
         var h = 300*Devices.density
 
         var newPoint = msg_box.mapFromItem(send_msg, x, y)

@@ -333,7 +333,9 @@ void AsemanQuickView::discardFocusedText()
 void AsemanQuickView::tryClose()
 {
     p->tryClose = true;
+#ifndef ASEMAN_QML_PLUGIN
     close();
+#endif
 }
 
 bool AsemanQuickView::event(QEvent *e)

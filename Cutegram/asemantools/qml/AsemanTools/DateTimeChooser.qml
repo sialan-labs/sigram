@@ -25,6 +25,7 @@ Rectangle {
     height: 100*Devices.density
     clip: true
 
+    property color separatorColors: "#88888888"
     property color textsColor
     property bool dateVisible: true
     property bool timeVisible: true
@@ -195,7 +196,7 @@ Rectangle {
         width: timeVisible? dt_chooser.width/1.777 : dt_chooser.width
         anchors.top: date_text.bottom
         visible: dateVisible
-        color: "#88888888"
+        color: separatorColors
     }
 
     Rectangle {
@@ -205,7 +206,7 @@ Rectangle {
         width: dateVisible? dt_chooser.width/2.666 : dt_chooser.width
         anchors.top: time_text.bottom
         visible: timeVisible
-        color: "#88888888"
+        color: separatorColors
     }
 
     Text {

@@ -125,5 +125,8 @@
         <file>qml/AsemanTools/Controls/Styles/Desktop/images/arrow-down.png</file>
         <file>qml/AsemanTools/MenuIcon.qml</file>
         <file>qml/AsemanTools/RoundedImage.qml</file>
+        <file>qml/AsemanTools/MaterialDesignButton.qml</file>
+        <file>qml/AsemanTools/private/MaterialDesignButtonItem.qml</file>
+        <file>qml/AsemanTools/files/button-close.png</file>
     </qresource>
 </RCC>
