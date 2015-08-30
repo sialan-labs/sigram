@@ -2,7 +2,7 @@ import QtQuick 2.0
 import AsemanTools 1.0
 import AsemanTools.Controls 1.0 as Controls
 import AsemanTools.Controls.Styles 1.0 as Styles
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 import Cutegram 1.0
 // import CutegramTypes 1.0
 
