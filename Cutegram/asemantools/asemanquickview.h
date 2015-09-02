@@ -70,7 +70,7 @@ public:
 #ifdef ASEMAN_QML_PLUGIN
     AsemanQuickView(QQmlEngine *engine, QObject *parent = 0);
 #else
-    AsemanQuickView( int options = Devices|BackHandler, QWindow *parent = 0);
+    AsemanQuickView(QWindow *parent = 0);
 #endif
     ~AsemanQuickView();
 
@@ -121,9 +121,6 @@ signals:
 
 protected:
     bool event(QEvent *e);
-
-private slots:
-    void init_options();
 
 private:
     AsemanQuickViewPrivate *p;

@@ -2,6 +2,7 @@
 #define ABOUT_TEXT "Cutegram is a free and opensource telegram clients, released under the GPLv3 license."
 
 #include "asemantools/asemanapplication.h"
+#include "asemantools/asemanlistrecord.h"
 #include "cutegram.h"
 #include "compabilitytools.h"
 #include "telegramqmlinitializer.h"
@@ -89,7 +90,15 @@ int main(int argc, char *argv[])
 #ifdef DESKTOP_DEVICE
     if( !parser.isSet(forceOption) && app.isRunning() )
     {
-        app.sendMessage("show");
+        QStringList args = app.arguments();
+        if(args.count() <= 1)
+            args << "show";
+
+        AsemanListRecord record;
+        for(int i=1; i<args.length(); i++)
+            record << args.at(i).toUtf8();
+
+        app.sendMessage(record.toQByteArray());
         return 0;
     }
 #endif
@@ -114,7 +123,7 @@ int main(int argc, char *argv[])
 
 #ifdef DESKTOP_DEVICE
     QObject::connect( &app, SIGNAL(messageReceived(QString)), &cutegram, SLOT(incomingAppMessage(QString)) );
-    QObject::connect( &app, SIGNAL(clickedOnDock())         , &cutegram, SLOT(incomingAppMessage())        );
+    QObject::connect( &app, SIGNAL(clickedOnDock())         , &cutegram, SLOT(active())                    );
 #endif
 
     return app.exec();

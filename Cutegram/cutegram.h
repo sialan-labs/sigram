@@ -212,9 +212,10 @@ public slots:
     void aboutAseman();
     void about();
     void configure();
-    void incomingAppMessage( const QString & msg = "show" );
+    void incomingAppMessage(const QString & msg);
     void active();
     void addToPersonal(const QString &src);
+    void installSticker(const QString &shortName);
 
 signals:
     void defaultHostAddressChanged();

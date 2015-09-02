@@ -1,4 +1,6 @@
 module AsemanTools
+classname AsemanToolsPlugin
+typeinfo plugins.qmltypes
 AnimationItem 1.0 AnimationItem.qml
 Indicator 1.0 Indicator.qml
 PointingDialog 1.0 PointingDialog.qml

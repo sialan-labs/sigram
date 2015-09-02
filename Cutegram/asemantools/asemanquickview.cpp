@@ -16,6 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "asemanqttools.h"
 #include "asemanquickview.h"
 #include "asemandesktoptools.h"
 #include "asemanqtlogger.h"
@@ -68,16 +69,6 @@
 class AsemanQuickViewPrivate
 {
 public:
-    AsemanDesktopTools *desktop;
-    AsemanDevices *devices;
-    AsemanQtLogger *logger;
-    AsemanTools *tools;
-#ifdef Q_OS_ANDROID
-    AsemanJavaLayer *java_layer;
-#endif
-    AsemanCalendarConverter *calendar;
-    AsemanBackHandler *back_handler;
-
     QPointer<QObject> root;
     QPointer<QQuickItem> focused_text;
 
@@ -88,120 +79,75 @@ public:
 
 #ifdef ASEMAN_QML_PLUGIN
     QQmlEngine *engine;
-#else
-    int options;
 #endif
 };
 
 #ifdef ASEMAN_QML_PLUGIN
 AsemanQuickView::AsemanQuickView(QQmlEngine *engine, QObject *parent ) :
 #else
-AsemanQuickView::AsemanQuickView(int options, QWindow *parent) :
+AsemanQuickView::AsemanQuickView(QWindow *parent) :
 #endif
     INHERIT_VIEW(parent)
 {
     p = new AsemanQuickViewPrivate;
 #ifdef ASEMAN_QML_PLUGIN
     p->engine = engine;
-#else
-    p->options = options;
 #endif
-    p->desktop = 0;
-    p->devices = 0;
-    p->logger = 0;
-    p->tools = 0;
-#ifdef Q_OS_ANDROID
-    p->java_layer = 0;
-#endif
-    p->calendar = 0;
-    p->back_handler = 0;
     p->fullscreen = false;
     p->backController = false;
     p->layoutDirection = Qt::LeftToRight;
     p->tryClose  = false;
 
 #ifndef ASEMAN_QML_PLUGIN
-    engine()->rootContext()->setContextProperty( "AsemanApp", AsemanApplication::instance() );
-    engine()->rootContext()->setContextProperty( "View", this );
-
-    qRegisterMetaType<AsemanMimeData*>("AsemanMimeData*");
-
-    qmlRegisterType<AsemanMimeData>("AsemanTools", 1, 0, "MimeData");
-    qmlRegisterType<AsemanDragObject>("AsemanTools", 1, 0, "DragObject");
-    qmlRegisterType<AsemanHashObject>("AsemanTools", 1,0, "HashObject");
-    qmlRegisterType<AsemanListObject>("AsemanTools", 1,0, "ListObject");
-    qmlRegisterType<AsemanDownloader>("AsemanTools", 1,0, "Downloader");
-    qmlRegisterType<AsemanQuickObject>("AsemanTools", 1,0, "AsemanObject");
-    qmlRegisterType<AsemanImageColorAnalizor>("AsemanTools", 1,0, "ImageColorAnalizor");
-    qmlRegisterType<AsemanCountriesModel>("AsemanTools", 1,0, "CountriesModel");
-    qmlRegisterType<AsemanNotification>("AsemanTools", 1,0, "Notification");
-    qmlRegisterType<AsemanFileSystemModel>("AsemanTools", 1,0, "FileSystemModel");
-    qmlRegisterType<AsemanAutoStartManager>("AsemanTools", 1,0, "AutoStartManager");
-    qmlRegisterType<AsemanQuickItemImageGrabber>("AsemanTools", 1,0, "ItemImageGrabber");
-    qmlRegisterType<AsemanFileDownloaderQueueItem>("AsemanTools", 1,0, "FileDownloaderQueueItem");
-    qmlRegisterType<AsemanFileDownloaderQueue>("AsemanTools", 1,0, "FileDownloaderQueue");
-    qmlRegisterType<AsemanMimeApps>("AsemanTools", 1,0, "MimeApps");
-    qmlRegisterType<AsemanWebPageGrabber>("AsemanTools", 1,0, "WebPageGrabber");
-    qmlRegisterType<AsemanTitleBarColorGrabber>("AsemanTools", 1,0, "TitleBarColorGrabber");
-    qmlRegisterType<AsemanTaskbarButton>("AsemanTools", 1,0, "TaskbarButton");
-    qmlRegisterType<AsemanMapDownloader>("AsemanTools", 1,0, "MapDownloader");
-    qmlRegisterType<AsemanDragArea>("AsemanTools", 1,0, "MouseDragArea");
-#if defined(Q_OS_LINUX) && defined(QT_DBUS_LIB)
-    qmlRegisterType<AsemanKdeWallet>("AsemanTools", 1,0, "KdeWallet");
-#endif
-
-#ifdef ASEMAN_SENSORS
-    qmlRegisterType<AsemanSensors>("AsemanTools", 1,0, "AsemanSensors");
-#endif
-#ifdef ASEMAN_MULTIMEDIA
-    qmlRegisterType<AsemanAudioRecorder>("AsemanTools", 1,0, "AudioRecorder");
-    qmlRegisterType<AsemanAudioEncoderSettings>("AsemanTools", 1,0, "AudioEncoderSettings");
-#endif
-
-    qmlRegisterUncreatableType<AsemanDesktopTools>("AsemanTools", 1,0, "AsemanDesktopTools", "It's a singleton class");
-
+    AsemanQtTools::registerTypes("AsemanTools");
     setResizeMode(QQuickView::SizeRootObjectToView);
-    init_options();
-
     engine()->setImportPathList( QStringList()<< engine()->importPathList() << "qrc:///asemantools/qml" );
 #endif
 }
 
 AsemanDesktopTools *AsemanQuickView::desktopTools() const
 {
-    return p->desktop;
+    return AsemanQtTools::desktopTools();
 }
 
 AsemanDevices *AsemanQuickView::devices() const
 {
-    return p->devices;
+    return AsemanQtTools::devices();
 }
 
 AsemanQtLogger *AsemanQuickView::qtLogger() const
 {
-    return p->logger;
+    return AsemanQtTools::qtLogger();
 }
 
 AsemanTools *AsemanQuickView::tools() const
 {
-    return p->tools;
+    return AsemanQtTools::tools();
 }
 
 #ifdef Q_OS_ANDROID
 AsemanJavaLayer *AsemanQuickView::javaLayer() const
 {
-    return p->java_layer;
+    return AsemanQtTools::javaLayer();
 }
 #endif
 
 AsemanCalendarConverter *AsemanQuickView::calendar() const
 {
-    return p->calendar;
+#ifdef ASEMAN_QML_PLUGIN
+    return AsemanQtTools::calendar(p->engine);
+#else
+    return AsemanQtTools::calendar(engine());
+#endif
 }
 
 AsemanBackHandler *AsemanQuickView::backHandler() const
 {
-    return p->back_handler;
+#ifdef ASEMAN_QML_PLUGIN
+    return AsemanQtTools::backHandler(p->engine);
+#else
+    return AsemanQtTools::backHandler(engine());
+#endif
 }
 
 void AsemanQuickView::setFullscreen(bool stt)
@@ -243,18 +189,14 @@ bool AsemanQuickView::backController() const
 
 qreal AsemanQuickView::statusBarHeight() const
 {
-    if( !p->devices )
-        return 0;
-
-    return p->devices->transparentStatusBar() && !fullscreen()? 24*p->devices->density() : 0;
+    AsemanDevices *dv = devices();
+    return dv->transparentStatusBar() && !fullscreen()? 24*dv->density() : 0;
 }
 
 qreal AsemanQuickView::navigationBarHeight() const
 {
-    if( !p->devices )
-        return 0;
-
-    return p->devices->transparentNavigationBar() && !fullscreen()? 44*p->devices->density() : 0;
+    AsemanDevices *dv = devices();
+    return dv->transparentNavigationBar() && !fullscreen()? 44*dv->density() : 0;
 }
 
 void AsemanQuickView::setRoot(QObject *root)
@@ -285,13 +227,11 @@ void AsemanQuickView::setFocusedText(QQuickItem *item)
     if( item )
     {
         connect( item, SIGNAL(destroyed()), this, SIGNAL(focusedTextChanged()) );
-        if( p->devices )
-            p->devices->showKeyboard();
+        devices()->showKeyboard();
     }
     else
     {
-        if( p->devices )
-            p->devices->hideKeyboard();
+        devices()->hideKeyboard();
     }
 
     emit focusedTextChanged();
@@ -346,7 +286,7 @@ bool AsemanQuickView::event(QEvent *e)
         if(p->backController)
         {
             QCloseEvent *ce = static_cast<QCloseEvent*>(e);
-            if( p->tryClose || p->devices->isDesktop() )
+            if( p->tryClose || devices()->isDesktop() )
                 ce->accept();
             else
             {
@@ -358,49 +298,6 @@ bool AsemanQuickView::event(QEvent *e)
     }
 
     return INHERIT_VIEW::event(e);
-}
-
-void AsemanQuickView::init_options()
-{
-#ifndef ASEMAN_QML_PLUGIN
-    if( p->options & DesktopTools && !p->desktop )
-    {
-        p->desktop = new AsemanDesktopTools(this);
-        engine()->rootContext()->setContextProperty( "Desktop", p->desktop );
-    }
-    if( p->options & Devices && !p->devices )
-    {
-        p->devices = new AsemanDevices(this);
-        engine()->rootContext()->setContextProperty( "Devices", p->devices );
-    }
-    if( p->options & QtLogger && !p->logger )
-    {
-        p->logger = new AsemanQtLogger(AsemanApplication::logPath(),this);
-        engine()->rootContext()->setContextProperty( "Logger", p->logger );
-    }
-    if( p->options & Tools && !p->tools )
-    {
-        p->tools = new AsemanTools(this);
-        engine()->rootContext()->setContextProperty( "Tools", p->tools );
-    }
-#ifdef Q_OS_ANDROID
-    if( p->options & JavaLayer && !p->java_layer )
-    {
-        p->java_layer = AsemanJavaLayer::instance();
-        engine()->rootContext()->setContextProperty( "JavaLayer", p->java_layer );
-    }
-#endif
-    if( p->options & Calendar && !p->calendar )
-    {
-        p->calendar = new AsemanCalendarConverter(this);
-        engine()->rootContext()->setContextProperty( "CalendarConv", p->calendar );
-    }
-    if( p->options & BackHandler && !p->back_handler )
-    {
-        p->back_handler = new AsemanBackHandler(this);
-        engine()->rootContext()->setContextProperty( "BackHandler", p->back_handler );
-    }
-#endif
 }
 
 AsemanQuickView::~AsemanQuickView()

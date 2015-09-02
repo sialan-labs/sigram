@@ -31,6 +31,13 @@ public:
     int month;
     qint64 year;
     int day_of_week;
+
+    bool operator ==(const DateProperty &b) const {
+        return b.day == day &&
+               b.month == month &&
+               b.year == year &&
+               b.day_of_week == day_of_week;
+    }
 };
 
 class AsemanCalendarConverterCorePrivate;

@@ -53,6 +53,18 @@ Rectangle {
         add_anim_disabler.restart()
     }
 
+    Connections {
+        id: sticker_installer
+        target: telegramObject
+        onDocumentStickerRecieved: {
+            if(document != doc)
+                return
+
+            Cutegram.installSticker(set.shortName)
+        }
+        property Document doc
+    }
+
     ListObject {
         id: selected_list
     }
@@ -353,8 +365,13 @@ Rectangle {
                                 break;
                             }
                         } else {
-                            if(msg_item.isSticker)
-                                actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal")]
+                            if(msg_item.isSticker) {
+                                var stickerSetId = msg_item.hasMedia? telegramObject.documentStickerId(msg_item.media.document) : ""
+                                if(stickerSetId)
+                                    actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal"), qsTr("Add to Stickers")]
+                                else
+                                    actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal")]
+                            }
                             else
                             if(msg_item.selectedText.length == 0)
                                 actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
@@ -385,6 +402,11 @@ Rectangle {
                                 else
                                     Qt.openUrlExternally(Cutegram.searchEngine + msg_item.selectedText.replace(" ","+"))
                                 break;
+
+                            case 5:
+                                sticker_installer.doc = msg_item.media.document
+                                telegramObject.getStickerSet(sticker_installer.doc)
+                                break
                             }
                         }
                     }

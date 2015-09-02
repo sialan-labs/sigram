@@ -30,7 +30,7 @@ public:
 };
 
 ContributorsModel::ContributorsModel(QObject *parent) :
-    QAbstractListModel(parent)
+    AsemanAbstractListModel(parent)
 {
     p = new ContributorsModelPrivate;
 }

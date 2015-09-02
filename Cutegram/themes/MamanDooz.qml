@@ -2,6 +2,7 @@ import TelegramQmlLib 1.0
 import Cutegram 1.0
 import QtQuick 2.0
 import AsemanTools.Controls.Styles 1.0 as AsemanStyles
+import AsemanTools 1.0
 
 CutegramTheme {
     themeName: "Maman Dooz"

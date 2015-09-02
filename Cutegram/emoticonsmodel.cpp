@@ -15,6 +15,7 @@ class EmoticonsModelPrivate
 public:
     QStringList list;
     QStringList keys;
+    QList<QUrl> keysIcons;
     QHash<QString,QString> keysPath;
 
     QString currentKey;
@@ -22,10 +23,11 @@ public:
     QPointer<Emojis> emojis;
     QList<QUrl> stickerSubPaths;
     int type;
+    QUrl icon;
 };
 
 EmoticonsModel::EmoticonsModel(QObject *parent) :
-    QAbstractListModel(parent)
+    AsemanAbstractListModel(parent)
 {
     p = new EmoticonsModelPrivate;
     p->type = EmoticonEmoji;
@@ -73,6 +75,11 @@ QStringList EmoticonsModel::keys() const
 QStringList EmoticonsModel::recentKeys() const
 {
     return AsemanApplication::settings()->value("General/recentEmojis", QVariant::fromValue<QStringList>(p->emojis->keys().mid(0,20))).toStringList();
+}
+
+QList<QUrl> EmoticonsModel::keysIcons() const
+{
+    return p->keysIcons;
 }
 
 void EmoticonsModel::setCurrentKey(const QString &key)
@@ -139,6 +146,10 @@ QVariant EmoticonsModel::data(const QModelIndex &index, int role) const
         if(p->emojis)
             result = QUrl::fromLocalFile(p->emojis->pathOf(id));
         break;
+
+    case IconRole:
+        result = p->icon;
+        break;
     }
 
     return result;
@@ -154,6 +165,7 @@ QHash<qint32, QByteArray> EmoticonsModel::roleNames() const
     res->insert( KeyRole, "key");
     res->insert( TypeRole, "type");
     res->insert( PathRole, "path");
+    res->insert( IconRole, "icon");
     return *res;
 }
 
@@ -209,9 +221,13 @@ void EmoticonsModel::refreshKeys()
 {
     p->keys.clear();
     p->keysPath.clear();
+    p->keysIcons.clear();
 
     p->keys.append(tr("Recent"));
     p->keys.append(tr("Emojis"));
+
+    p->keysIcons << QUrl("qrc:/qml/Cutegram/files/emoticons-recent.png");
+    p->keysIcons << QUrl("qrc:/qml/Cutegram/files/emoticons-emoji.png");
 
     foreach(const QUrl &subPathUrl, p->stickerSubPaths)
     {
@@ -225,10 +241,15 @@ void EmoticonsModel::refreshKeys()
             const QString stickerPath = subPath + "/" + sticker;
             p->keys << sticker;
             p->keysPath[sticker] = stickerPath;
+            if(sticker.toLower() == "personal")
+                p->keysIcons << QUrl("qrc:/qml/Cutegram/files/emoticons-personal.png");
+            else
+                p->keysIcons << QUrl("qrc:/qml/Cutegram/files/emoticons-telegram.png");
         }
     }
 
     emit keysChanged();
+    emit keysIconsChanged();
 }
 
 void EmoticonsModel::changed(const QStringList &list)

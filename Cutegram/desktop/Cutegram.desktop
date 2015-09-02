@@ -7,4 +7,5 @@ Icon=cutegram
 Name=Cutegram
 StartupNotify=true
 Type=Application
+MimeType=application/x-xdg-protocol-tg;x-scheme-handler/tg;
 Version=1.0

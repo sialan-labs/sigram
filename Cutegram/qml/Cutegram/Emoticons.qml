@@ -71,8 +71,8 @@ Item {
             var result = new Array
             for(var i=0 ;i<emodel.keys.length; i++)
                 result[result.length] = emodel.keys[i]
-            for(var i=0 ;i<stickers_model.categories.length; i++)
-                result[result.length] = stickers_model.categories[i]
+            for(var i=0 ;i<stickers_model.installedStickerSets.length; i++)
+                result[result.length] = stickers_model.installedStickerSets[i]
             return result
         }
 
@@ -88,11 +88,11 @@ Item {
                     itemObject = tab_emoji_icon.createObject(titem, {"index": index})
                 else {
                     var idx = index - emodel.keys.length
-                    var sid = stickers_model.categories[idx]
-                    var doc = stickers_model.categoryThumbnailDocument(sid)
-                    var set = stickers_model.categoryItem(sid)
+                    var sid = stickers_model.installedStickerSets[idx]
+                    var doc = stickers_model.stickerSetThumbnailDocument(sid)
+                    var set = stickers_model.stickerSetItem(sid)
 
-                    itemObject = tab_sticker_icon.createObject(titem, {"index": index, "document": doc, "stickerSet": set, "category": sid})
+                    itemObject = tab_sticker_icon.createObject(titem, {"index": index, "document": doc, "stickerSet": set, "currentStickerSet": sid})
                 }
             }
         }
@@ -247,11 +247,13 @@ Item {
             normalColor: "#00000000"
             highlightColor: "#0f000000"
             cursorShape: Qt.PointingHandCursor
-            textColor: emodel.currentKeyIndex==index && stickers_model.category == 0? "#333333" : Cutegram.currentTheme.masterColor
+            textColor: emodel.currentKeyIndex==index && stickers_model.currentStickerSet == 0? "#333333" : Cutegram.currentTheme.masterColor
             text: Cutegram.normalizeText(emodel.keys[index])
+            icon: emodel.keysIcons[index]
+            iconHeight: height - 4*Devices.density
             onClicked: {
                 emodel.currentKey = emodel.keys[index]
-                stickers_model.category = 0
+                stickers_model.currentStickerSet = ""
             }
 
             property int index
@@ -272,7 +274,7 @@ Item {
             highlightColor: "#0f000000"
             cursorShape: Qt.PointingHandCursor
             iconHeight: height - 4*Devices.density
-            textColor: stickers_model.category == category? "#333333" : Cutegram.currentTheme.masterColor
+            textColor: stickers_model.currentStickerSet == currentStickerSet? "#333333" : Cutegram.currentTheme.masterColor
             text: {
                 var res = sitem.stickerSet.title
                 if(res.length <= 13)
@@ -284,10 +286,10 @@ Item {
             property Document document
             property StickerSet stickerSet
             property int index
-            property string category
+            property string currentStickerSet
 
             onClicked: {
-                stickers_model.category = category
+                stickers_model.currentStickerSet = currentStickerSet
             }
 
             FileHandler {

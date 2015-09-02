@@ -27,6 +27,7 @@
 #include "asemantools/asemandesktoptools.h"
 #include "asemantools/asemandevices.h"
 #include "asemantools/asemanapplication.h"
+#include "asemantools/asemanlistrecord.h"
 #include "emoticonsmodel.h"
 #include "contributorsmodel.h"
 #include "themeitem.h"
@@ -357,7 +358,7 @@ void Cutegram::start(bool forceVisible)
     if( p->viewer )
         return;
 
-    p->viewer = new AsemanQuickView( AsemanQuickView::AllExceptLogger );
+    p->viewer = new AsemanQuickView();
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
     init_theme();
 
@@ -446,9 +447,48 @@ void Cutegram::configure()
 
 void Cutegram::incomingAppMessage(const QString &msg)
 {
-    if( msg == "show" )
+    AsemanListRecord record(msg.toUtf8());
+    const QList<QByteArray> &list = record.toQByteArrayList();
+
+    foreach(const QByteArray &data, list)
     {
-        active();
+        QString msgPart = data;
+        if( msgPart == "show" )
+        {
+            active();
+        }
+        else
+        if(msgPart.left(5) == "tg://")
+        {
+            const QString &tgMsg = msgPart.mid(5);
+            const int index = tgMsg.indexOf("?");
+            if(index == -1)
+            {
+                const QString &cmd = tgMsg;
+                Q_UNUSED(cmd)
+                return;
+            }
+
+            const QString &cmd = tgMsg.left(index);
+            const QStringList &args = tgMsg.mid(index+1).split("?", QString::SkipEmptyParts);
+            if(cmd.toLower() == "addstickers")
+            {
+                QString set;
+                foreach(const QString &arg, args)
+                {
+                    const int index = arg.indexOf("=");
+                    if(index < 0)
+                        continue;
+
+                    const QString &argName = arg.left(index);
+                    if(argName == "set")
+                        set = arg.mid(index+1);
+                }
+
+                installSticker(set);
+            }
+
+        }
     }
 }
 
@@ -468,6 +508,13 @@ void Cutegram::addToPersonal(const QString &src)
         file = file.mid(AsemanDevices::localFilesPrePath().length());
 
     QFile::copy(file, personalStickerDirectory() + "/" + QFileInfo(src).baseName() + ".webp");
+}
+
+void Cutegram::installSticker(const QString &shortName)
+{
+    QVariant shortNameVar = shortName;
+    QMetaObject::invokeMethod(p->viewer->root(), "installSticker", Q_ARG(QVariant, shortNameVar));
+    active();
 }
 
 void Cutegram::setSysTrayCounter(int count, bool force)

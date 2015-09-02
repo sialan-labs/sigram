@@ -421,4 +421,12 @@ Rectangle {
 
         view.view.showNull()
     }
+
+    function installSticker(shortName) {
+        var view = hash.value(tab_list.currentKey)
+        if(!view || !view.view)
+            return
+
+        view.view.installSticker(shortName)
+    }
 }

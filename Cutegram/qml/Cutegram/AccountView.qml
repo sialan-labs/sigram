@@ -227,6 +227,19 @@ Rectangle {
         }
     }
 
+    Component {
+        id: sticker_install_component
+        StickerInstallDialog {
+            anchors.fill: parent
+            telegram: telegramObject
+            stickerSet: "CuttheRope"
+        }
+    }
+
+    function installSticker(shortName) {
+        sticker_install_component.createObject(acc_view, {"stickerSet": shortName})
+    }
+
     function nextDialog() {
         dialogs.next()
     }

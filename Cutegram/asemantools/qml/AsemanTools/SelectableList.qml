@@ -24,9 +24,9 @@ Rectangle {
     id: seletable_list
     width: 100
     height: 62
+    clip: true
 
     property alias currentIndex: list.currentIndex
-    property variant currentItem: list.currentItem? list.currentItem.itemName : 0
     property variant items: new Array
     property color textsColor
     property color splitersColor: "#66bbbbbb"
@@ -39,7 +39,9 @@ Rectangle {
 
     Rectangle {
         id: background
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height*2
+        anchors.centerIn: parent
         color: parent.color
 
         ListView {
@@ -100,8 +102,8 @@ Rectangle {
             source: background
             width: background.width
             height: background.height
-            anchors.top: parent.top
-            transformOrigin: Item.Top
+            y: -0.25*height
+            transformOrigin: Item.Center
             scale: 0.8
             opacity: 0.7
         }
@@ -120,8 +122,8 @@ Rectangle {
             source: background
             width: background.width
             height: background.height
-            anchors.bottom: parent.bottom
-            transformOrigin: Item.Bottom
+            y: parent.height - 0.75*height
+            transformOrigin: Item.Center
             scale: 0.8
             opacity: 0.7
         }
@@ -152,7 +154,7 @@ Rectangle {
     }
 
     function positionViewAtIndex( index ) {
-        list.positionViewAtIndex(index,ListView.Center)
+        currentIndex = index
     }
 
     function itemName( index ) {

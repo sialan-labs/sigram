@@ -269,6 +269,10 @@ AsemanMain {
         BackHandler.removeHandler(main)
     }
 
+    function installSticker(shortName) {
+        tabFrame.installSticker(shortName)
+    }
+
     Component.onCompleted: {
         if(Devices.isMacX)
             menubar_component.createObject(main)

@@ -21,12 +21,13 @@
 
 #include <QObject>
 #include <QStringList>
-#include <QAbstractListModel>
+#include "asemanabstractlistmodel.h"
 
 class AsemanCountriesModelPrivate;
-class AsemanCountriesModel : public QAbstractListModel
+class AsemanCountriesModel : public AsemanAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(ColorfullListModelRoles)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
