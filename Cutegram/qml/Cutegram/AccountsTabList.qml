@@ -22,7 +22,7 @@ Item {
         onCountChanged: listv.refresh()
     }
 
-    ListView {
+    AsemanListView {
         id: listv
         anchors.fill: parent
         model: ListModel{}

@@ -124,7 +124,7 @@ AsemanMain {
     }
 
     Connections {
-        target: View
+        target: View.window
         onActiveChanged: {
             if(Cutegram.closingState)
                 return

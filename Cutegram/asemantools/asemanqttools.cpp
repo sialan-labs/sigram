@@ -30,6 +30,7 @@
 #include "asemanmapdownloader.h"
 #include "asemandragarea.h"
 #include "asemancalendarmodel.h"
+#include "asemanquickviewwrapper.h"
 #ifdef Q_OS_ANDROID
 #include "asemanjavalayer.h"
 #endif
@@ -67,7 +68,7 @@ SINGLETON_PROVIDER(AsemanDesktopTools     , aseman_desktoptools_singleton, Asema
 SINGLETON_PROVIDER(AsemanCalendarConverter, aseman_calendarconv_singleton, AsemanQtTools::calendar(engine))
 SINGLETON_PROVIDER(AsemanBackHandler      , aseman_backhandler_singleton , AsemanQtTools::backHandler(engine))
 SINGLETON_PROVIDER(AsemanApplication      , aseman_app_singleton         , AsemanQtTools::application())
-SINGLETON_PROVIDER(AsemanQuickView        , aseman_qview_singleton       , AsemanQtTools::quickView(engine))
+SINGLETON_PROVIDER(AsemanQuickViewWrapper , aseman_qview_singleton       , AsemanQtTools::quickView(engine))
 SINGLETON_PROVIDER(AsemanQtLogger         , aseman_logger_singleton      , AsemanQtTools::qtLogger())
 
 void AsemanQtTools::registerTypes(const char *uri)
@@ -120,47 +121,52 @@ void AsemanQtTools::registerTypes(const char *uri)
     qmlRegisterSingletonType<AsemanBackHandler>(uri, 1, 0, "BackHandler", aseman_backhandler_singleton);
     qmlRegisterSingletonType<AsemanApplication>(uri, 1, 0, "AsemanApp", aseman_app_singleton);
     qmlRegisterSingletonType<AsemanQtLogger>(uri, 1, 0, "Logger", aseman_logger_singleton);
-    qmlRegisterSingletonType<AsemanQuickView>(uri, 1, 0, "View", aseman_qview_singleton);
+    qmlRegisterSingletonType<AsemanQuickViewWrapper>(uri, 1, 0, "View", aseman_qview_singleton);
 
     register_list.insert(uri);
 }
 
-AsemanQuickView *AsemanQtTools::quickView(QQmlEngine *engine)
+AsemanQuickViewWrapper *AsemanQtTools::quickView(QQmlEngine *engine)
 {
-    static QHash<QQmlEngine*, QPointer<AsemanQuickView> > views;
-    AsemanQuickView *res = views.value(engine);
+    static QHash<QQmlEngine*, QPointer<AsemanQuickViewWrapper> > views;
+    AsemanQuickViewWrapper *res = views.value(engine);
     if(res)
         return res;
 
-    res = qobject_cast<AsemanQuickView*>(engine->parent());
-    if(res)
+#ifdef ASEMAN_QML_PLUGIN
+    AsemanQuickView *view = new AsemanQuickView(engine, engine);
+#else
+    AsemanQuickView *view = qobject_cast<AsemanQuickView*>(engine->parent());
+#endif
+
+    if(view)
     {
+        res = new AsemanQuickViewWrapper(view, engine);
         views[engine] = res;
         return res;
     }
 
-#ifdef ASEMAN_QML_PLUGIN
-    res = new AsemanQuickView(engine, engine);
-    views[engine] = res;
-#endif
     return res;
 }
 
 AsemanApplication *AsemanQtTools::application()
 {
-    AsemanApplication *res = AsemanApplication::instance();
-    if(res)
-        return res;
-    if(QCoreApplication::instance() == 0)
-        return 0;
+//    AsemanApplication *res = AsemanApplication::instance();
+//    if(res)
+//        return res;
+//    if(QCoreApplication::instance() == 0)
+//        return 0;
 
-    res = new AsemanApplication();
+    static QPointer<AsemanApplication> res;
+    if(!res)
+        res = new AsemanApplication();
+
     return res;
 }
 
 AsemanDesktopTools *AsemanQtTools::desktopTools()
 {
-    static AsemanDesktopTools *res = 0;
+    static QPointer<AsemanDesktopTools> res = 0;
     if(!res)
         res = new AsemanDesktopTools();
 
@@ -169,7 +175,7 @@ AsemanDesktopTools *AsemanQtTools::desktopTools()
 
 AsemanDevices *AsemanQtTools::devices()
 {
-    static AsemanDevices *res = 0;
+    static QPointer<AsemanDevices> res = 0;
     if(!res)
         res = new AsemanDevices();
 
@@ -178,7 +184,7 @@ AsemanDevices *AsemanQtTools::devices()
 
 AsemanQtLogger *AsemanQtTools::qtLogger()
 {
-    static AsemanQtLogger *res = 0;
+    static QPointer<AsemanQtLogger> res = 0;
     if(!res)
         res = new AsemanQtLogger(AsemanApplication::logPath());
 
@@ -187,7 +193,7 @@ AsemanQtLogger *AsemanQtTools::qtLogger()
 
 AsemanTools *AsemanQtTools::tools()
 {
-    static AsemanTools *res = 0;
+    static QPointer<AsemanTools> res = 0;
     if(!res)
         res = new AsemanTools();
 
@@ -197,7 +203,7 @@ AsemanTools *AsemanQtTools::tools()
 #ifdef Q_OS_ANDROID
 AsemanJavaLayer *AsemanQtTools::javaLayer()
 {
-    static AsemanJavaLayer *res = 0;
+    static QPointer<AsemanJavaLayer> res = 0;
     if(!res)
         res = new AsemanJavaLayer();
 

@@ -34,7 +34,7 @@ Item {
         }
     }
 
-    ListView {
+    AsemanListView {
         id: listv
         anchors.fill: parent
         anchors.leftMargin: 6*Devices.density

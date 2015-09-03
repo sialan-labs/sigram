@@ -61,7 +61,7 @@ Item {
         color: "#22000000"
     }
 
-    ListView {
+    AsemanListView {
         id: tab_row
         x: 6*Devices.density
         width: panelWidth
@@ -98,7 +98,7 @@ Item {
         }
     }
 
-    GridView {
+    AsemanGridView {
         id: slist
         anchors.fill: elist
         clip: true
@@ -138,7 +138,7 @@ Item {
         }
     }
 
-    GridView {
+    AsemanGridView {
         id: elist
         anchors.left: tab_row.right
         anchors.right: parent.right

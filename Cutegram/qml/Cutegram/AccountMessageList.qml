@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 import TelegramQmlLib 1.0
-// import CutegramTypes 1.0
 import AsemanTools.Controls 1.0 as Controls
 
 Rectangle {
@@ -19,7 +18,7 @@ Rectangle {
     property real maximumMediaHeight: (height-topMargin-bottomMargin)*0.75
     property real maximumMediaWidth: width*0.75
 
-    property bool isActive: View.active && View.visible
+    property bool isActive: View.window.active && View.window.visible
     property bool messageDraging: false
 
     property string selectedText
@@ -151,7 +150,7 @@ Rectangle {
         interval: 500
     }
 
-    ListView {
+    AsemanListView {
         id: mlist
         anchors.fill: parent
         visible: enchat.classType != typeEncryptedChatDiscarded

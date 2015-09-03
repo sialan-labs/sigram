@@ -51,7 +51,7 @@ Item {
         }
     }
 
-    ListView {
+    AsemanListView {
         id: listv
         width: back_frame.width-8*Devices.density
         height: back_frame.height-4*Devices.density

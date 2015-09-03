@@ -1,6 +1,7 @@
 import QtQuick 2.1
 import QtQuick.Controls.Styles 1.0
 import QtGraphicalEffects 1.0
+import AsemanTools 1.0
 
 ComboBoxStyle {
     property color backgroundColor: masterPalette.window

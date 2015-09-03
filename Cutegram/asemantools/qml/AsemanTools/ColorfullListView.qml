@@ -59,7 +59,7 @@ Item {
 
     onCustomHeaderChanged: custom_titlebar_frame.item = customHeader.createObject(custom_titlebar_frame)
 
-    ListView {
+    AsemanListView {
         id: listv
         anchors.top: custom_titlebar_frame.bottom
         anchors.left: parent.left

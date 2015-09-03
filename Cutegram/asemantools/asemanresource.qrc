@@ -128,5 +128,10 @@
         <file>qml/AsemanTools/MaterialDesignButton.qml</file>
         <file>qml/AsemanTools/private/MaterialDesignButtonItem.qml</file>
         <file>qml/AsemanTools/files/button-close.png</file>
+        <file>qml/AsemanTools/AsemanListView.qml</file>
+        <file>qml/AsemanTools/AsemanGridView.qml</file>
+        <file>qml/AsemanTools/AsemanFlickable.qml</file>
+        <file>qml/AsemanTools/HeaderMenuButton.qml</file>
+        <file>qml/AsemanTools/TabView.qml</file>
     </qresource>
 </RCC>

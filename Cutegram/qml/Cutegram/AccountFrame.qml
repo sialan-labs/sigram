@@ -20,14 +20,14 @@ Rectangle {
         if(view && view.windowsCount!=0)
             return true
         else
-            return View.active && View.visible
+            return View.window.active && View.window.visible
     }
 
     signal activeRequest()
     signal addParticianRequest()
 
     onIsActiveChanged: {
-        var status = View.visible
+        var status = View.window.visible
         if(view && view.windowsCount!=0) {
             status = true
         }

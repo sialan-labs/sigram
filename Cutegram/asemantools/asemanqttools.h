@@ -10,7 +10,7 @@ class AsemanQtTools
 public:
     static void registerTypes(const char *uri);
 
-    static class AsemanQuickView *quickView(QQmlEngine *engine);
+    static class AsemanQuickViewWrapper *quickView(QQmlEngine *engine);
     static class AsemanApplication *application();
     static class AsemanDesktopTools *desktopTools();
     static class AsemanDevices *devices();

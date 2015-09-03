@@ -31,7 +31,6 @@ Item {
         onStickerInstalled: {
             if(shortName != stickerSet)
                 return
-
             if(ok)
                 close()
         }
@@ -57,6 +56,10 @@ Item {
             height: 400*Devices.density
             radius: 6*Devices.density
             anchors.centerIn: parent
+
+            MouseArea {
+                anchors.fill: parent
+            }
 
             Indicator {
                 id: indicator
@@ -91,7 +94,7 @@ Item {
                 onClicked: close()
             }
 
-            GridView {
+            AsemanGridView {
                 id: gridView
                 anchors.top: title.bottom
                 anchors.bottom: install_btn.top
@@ -99,15 +102,6 @@ Item {
                 width: parent.width
                 clip: true
                 model: smodel
-                maximumFlickVelocity: View.flickVelocity
-                boundsBehavior: Flickable.StopAtBounds
-                rebound: Transition {
-                    NumberAnimation {
-                        properties: "x,y"
-                        duration: 0
-                    }
-                }
-
                 cellWidth: width/splitCount
                 cellHeight: cellWidth
 

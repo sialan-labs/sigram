@@ -41,7 +41,12 @@ CradleIndicator 1.0 CradleIndicator.qml
 PasteButton 1.0 PasteButton.qml
 Slider 1.0 Slider.qml
 ColorfullListView 1.0 ColorfullListView.qml
+AsemanListView 1.0 AsemanListView.qml
+AsemanGridView 1.0 AsemanGridView.qml
 SideMenu 1.0 SideMenu.qml
 AsemanLogo 1.0 AsemanLogo.qml
 QueueList 1.0 QueueList.qml
 MaterialDesignButton 1.0 MaterialDesignButton.qml
+AsemanFlickable 1.0 AsemanFlickable.qml
+HeaderMenuButton 1.0 HeaderMenuButton.qml
+TabView 1.0 TabView.qml

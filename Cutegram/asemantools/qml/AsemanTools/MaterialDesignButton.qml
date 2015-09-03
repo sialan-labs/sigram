@@ -87,7 +87,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.margins: 10*Devices.density
 
-        ListView {
+        AsemanListView {
             id: listv
             width: md_btn.width
             x: md_btn.layoutDirection==Qt.LeftToRight? parent.width-width : 0
@@ -96,14 +96,6 @@ Item {
             opacity: opened? 1 : 0
             verticalLayoutDirection: ListView.BottomToTop
             visible: opacity != 0
-            maximumFlickVelocity: View.flickVelocity
-            boundsBehavior: Flickable.StopAtBounds
-            rebound: Transition {
-                NumberAnimation {
-                    properties: "x,y"
-                    duration: 0
-                }
-            }
 
             model: ListModel{}
             add: Transition {

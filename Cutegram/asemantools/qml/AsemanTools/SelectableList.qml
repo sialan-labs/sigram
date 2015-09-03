@@ -44,7 +44,7 @@ Rectangle {
         anchors.centerIn: parent
         color: parent.color
 
-        ListView {
+        AsemanListView {
             id: list
             anchors.fill: parent
             clip: true
@@ -55,14 +55,6 @@ Rectangle {
             highlightRangeMode: ListView.StrictlyEnforceRange
             snapMode: ListView.SnapToItem
             model: ListModel{}
-            maximumFlickVelocity: View.flickVelocity
-            boundsBehavior: Flickable.StopAtBounds
-            rebound: Transition {
-                NumberAnimation {
-                    properties: "x,y"
-                    duration: 0
-                }
-            }
 
             delegate: Item {
                 width: list.width

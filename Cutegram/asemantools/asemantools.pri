@@ -138,7 +138,8 @@ SOURCES += \
     $$PWD/asemanabstractlistmodel.cpp \
     $$PWD/asemanqttools.cpp \
     $$PWD/asemancalendarmodel.cpp \
-    $$PWD/asemanlistrecord.cpp
+    $$PWD/asemanlistrecord.cpp \
+    $$PWD/asemanquickviewwrapper.cpp
 
 HEADERS += \
     $$PWD/asemandevices.h \
@@ -178,7 +179,8 @@ HEADERS += \
     $$PWD/asemanabstractlistmodel.h \
     $$PWD/asemanqttools.h \
     $$PWD/asemancalendarmodel.h \
-    $$PWD/asemanlistrecord.h
+    $$PWD/asemanlistrecord.h \
+    $$PWD/asemanquickviewwrapper.h
 
 OTHER_FILES += \
     $$PWD/android-build/src/land/aseman/android/AsemanActivity.java \

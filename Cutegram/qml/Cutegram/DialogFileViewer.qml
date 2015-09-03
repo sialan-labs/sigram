@@ -17,7 +17,7 @@ Item {
         id: dmodel
     }
 
-    GridView {
+    AsemanGridView {
         id: grid
         anchors.fill: parent
         anchors.rightMargin: 6*Devices.density

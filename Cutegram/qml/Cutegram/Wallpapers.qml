@@ -27,7 +27,7 @@ Rectangle {
         indicatorSize: 20*Devices.density
     }
 
-    GridView {
+    AsemanGridView {
         id: grid
         anchors.fill: parent
         model: wallpapers_model

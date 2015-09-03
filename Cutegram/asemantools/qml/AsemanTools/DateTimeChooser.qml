@@ -37,8 +37,6 @@ Rectangle {
 
     CalendarModel {
         id: model
-        onDateTimeChanged: console.debug(dateTime)
-
         onCurrentYearIndexChanged: year_list.positionViewAtIndex(currentYearIndex)
         onCurrentMonthIndexChanged: month_list.positionViewAtIndex(currentMonthIndex)
         onCurrentDaysIndexChanged: day_list.positionViewAtIndex(currentDaysIndex)

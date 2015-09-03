@@ -12,7 +12,7 @@ Rectangle {
     property Telegram telegram
     property User user: telegram.user(telegram.me)
 
-    Flickable {
+    AsemanFlickable {
         id: flickable
         anchors.fill: parent
         contentWidth: column.width

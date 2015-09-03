@@ -19,7 +19,7 @@ Rectangle {
                 "about/translators"]
     }
 
-    ListView {
+    AsemanListView {
         id: cblist
         anchors.fill: parent
         clip: true

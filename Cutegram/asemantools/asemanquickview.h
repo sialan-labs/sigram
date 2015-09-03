@@ -54,18 +54,6 @@ class AsemanQuickView : public INHERIT_VIEW
     Q_PROPERTY(qreal flickVelocity READ flickVelocity NOTIFY fakeSignal)
 
 public:
-    enum OptionsFlag {
-        None = 0,
-        DesktopTools = 1,
-        Devices = 2,
-        JavaLayer = 4,
-        QtLogger = 8,
-        Tools = 16,
-        Calendar = 32,
-        BackHandler = 64,
-        AllComponents = 127,
-        AllExceptLogger = 119
-    };
 
 #ifdef ASEMAN_QML_PLUGIN
     AsemanQuickView(QQmlEngine *engine, QObject *parent = 0);

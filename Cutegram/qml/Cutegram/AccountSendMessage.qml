@@ -134,7 +134,7 @@ Item {
 
             property real logicalHeight: txt.height+8*Devices.density<34*Devices.density? 34*Devices.density : txt.height+8*Devices.density
 
-            Flickable {
+            AsemanFlickable {
                 id: flick
                 anchors.fill: parent
                 contentWidth: width

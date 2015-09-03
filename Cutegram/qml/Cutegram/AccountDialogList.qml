@@ -64,7 +64,7 @@ Item {
         indicatorSize: 20*Devices.density
     }
 
-    ListView {
+    AsemanListView {
         id: dlist
         width: Cutegram.currentTheme.dialogListWidth*Devices.density - x
         height: parent.height

@@ -15,7 +15,7 @@ Rectangle {
 
     TaskbarButton {
         id: taskbar_btn
-        window: View
+        window: View.window
         badgeNumber: {
             var result = 0
             for(var i=0; i<list.count; i++)

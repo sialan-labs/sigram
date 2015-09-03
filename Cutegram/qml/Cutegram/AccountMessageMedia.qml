@@ -46,9 +46,12 @@ Item {
         {
         case FileHandler.TypeTargetMediaVideo:
         case FileHandler.TypeTargetMediaPhoto:
-            result = file_handler.imageSize.width/file_handler.imageSize.height<maximumMediaRatio?
-                        maximumMediaHeight*file_handler.imageSize.width/file_handler.imageSize.height
-                      : maximumMediaWidth
+            if(file_handler.imageSize.height == 0 || file_handler.imageSize.width == 0)
+                result = 300*Devices.density
+            else
+                result = file_handler.imageSize.width/file_handler.imageSize.height<maximumMediaRatio?
+                            maximumMediaHeight*file_handler.imageSize.width/file_handler.imageSize.height
+                          : maximumMediaWidth
             break;
 
         case FileHandler.TypeTargetUnknown:
@@ -66,6 +69,9 @@ Item {
             break;
         }
 
+        if(result == 0)
+            result = 128*Devices.density
+
         return result
     }
 
@@ -80,9 +86,12 @@ Item {
         {
         case FileHandler.TypeTargetMediaVideo:
         case FileHandler.TypeTargetMediaPhoto:
-            result = file_handler.imageSize.width/file_handler.imageSize.height<maximumMediaRatio?
-                        maximumMediaHeight
-                      : maximumMediaWidth*file_handler.imageSize.height/file_handler.imageSize.width
+            if(file_handler.imageSize.height == 0 || file_handler.imageSize.width == 0)
+                result = 200*Devices.density
+            else
+                result = file_handler.imageSize.width/file_handler.imageSize.height<maximumMediaRatio?
+                            maximumMediaHeight
+                          : maximumMediaWidth*file_handler.imageSize.height/file_handler.imageSize.width
             break;
 
         case FileHandler.TypeTargetUnknown:

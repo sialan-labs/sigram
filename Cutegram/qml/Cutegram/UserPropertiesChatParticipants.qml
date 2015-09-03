@@ -28,7 +28,7 @@ Item {
         indicatorSize: 20*Devices.density
     }
 
-    GridView {
+    AsemanGridView {
         id: list
         anchors.fill: parent
         model: cp_model

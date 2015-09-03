@@ -33,7 +33,7 @@ Item {
         anchors.fill: parent
     }
 
-    ListView {
+    AsemanListView {
         id: clist
         anchors.fill: parent
         clip: true
