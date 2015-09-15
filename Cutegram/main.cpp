@@ -112,12 +112,18 @@ int main(int argc, char *argv[])
         cutegram.setDefaultHostAddress(parser.value(ipAdrsOption));
 #ifdef KWALLET_PRESENT
     if(!parser.isSet(disKWalletOption) || cutegram.kWallet())
+    {
         Settings::setAuthConfigMethods(CutegramAuth::cutegramReadKWalletAuth,
                                        CutegramAuth::cutegramWriteKWalletAuth);
+        cutegram.setEncrypterKey(CutegramAuth::readEncryptKeyFromKWallet());
+    }
     else
 #endif
+    {
         Settings::setAuthConfigMethods(CutegramAuth::cutegramReadSerpentAuth,
                                        CutegramAuth::cutegramWriteSerpentAuth);
+        cutegram.setEncrypterKey(CutegramAuth::readEncryptKey());
+    }
 
     cutegram.start( parser.isSet(forceOption) );
 

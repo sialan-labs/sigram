@@ -8,9 +8,11 @@ namespace CutegramAuth {
 #define KWALLET_PRESENT
 bool cutegramReadKWalletAuth(const QString &configPath, const QString &phone, QVariantMap &map);
 bool cutegramWriteKWalletAuth(const QString &configPath, const QString &phone, const QVariantMap &map);
+QString readEncryptKeyFromKWallet();
 #endif
 bool cutegramReadSerpentAuth(const QString &configPath, const QString &phone, QVariantMap &map);
 bool cutegramWriteSerpentAuth(const QString &configPath, const QString &phone, const QVariantMap &map);
+QString readEncryptKey();
 }
 
 #endif // AUTHSAVER_H

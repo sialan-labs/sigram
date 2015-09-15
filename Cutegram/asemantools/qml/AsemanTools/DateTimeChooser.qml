@@ -31,6 +31,7 @@ Rectangle {
     property bool timeVisible: true
 
     property alias calendarType: model.calendar
+    property alias date: model.dateTime
 
     property alias dateLabel: date_text.text
     property alias timeLabel: time_text.text
@@ -44,11 +45,11 @@ Rectangle {
         onCurrentMinutesIndexChanged: minute_list.positionViewAtIndex(currentMinutesIndex)
 
         Component.onCompleted: {
-            currentYearIndexChanged()
-            currentMonthIndexChanged()
-            currentDaysIndexChanged()
-            currentHoursIndexChanged()
-            currentMinutesIndexChanged()
+            year_list.positionViewAtIndex(currentYearIndex, true)
+            month_list.positionViewAtIndex(currentMonthIndex, true)
+            day_list.positionViewAtIndex(currentDaysIndex, true)
+            hour_list.positionViewAtIndex(currentHoursIndex, true)
+            minute_list.positionViewAtIndex(currentMinutesIndex, true)
         }
 
         function save() {

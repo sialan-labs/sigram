@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import AsemanTools.Controls 1.0
 import AsemanTools 1.0
+import Cutegram 1.0
 import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
@@ -260,7 +261,7 @@ Item {
                             selectionColor: masterPalette.highlight
                             selectedTextColor: masterPalette.highlightedText
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            text: emojis.bodyTextToEmojiText(messageText)
+                            text: text_html_converter.html
                             textFormat: Text.RichText
                             height: contentHeight
                             color: {
@@ -294,6 +295,13 @@ Item {
                                     return msg_media.media.caption
                                 else
                                     return message.message
+                            }
+
+                            TextToHtmlConverter {
+                                id: text_html_converter
+                                emojisItem: emojis_obj
+                                fontHandler: main.fontHandler
+                                text: msg_txt.messageText
                             }
                         }
                     }

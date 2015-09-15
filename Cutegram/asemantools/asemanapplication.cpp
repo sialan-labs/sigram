@@ -27,14 +27,25 @@
 #include <QCoreApplication>
 #include <QDebug>
 
-#ifdef QT_GUI_LIB
+#ifdef QT_WIDGETS_LIB
 #define READ_DEFINITION(FUNCTION, DEFAULT_VALUE) \
     switch(aseman_app_singleton->p->appType) { \
     case GuiApplication: \
         return static_cast<QGuiApplication*>(QCoreApplication::instance())->FUNCTION(); \
         break; \
     case WidgetApplication: \
-        return static_cast<QtSingleApplication*>(QCoreApplication::instance())->FUNCTION(); \
+        return static_cast<QApplication*>(QCoreApplication::instance())->FUNCTION(); \
+        break; \
+    default: \
+        return DEFAULT_VALUE; \
+        break; \
+    }
+#else
+#ifdef QT_GUI_LIB
+#define READ_DEFINITION(FUNCTION, DEFAULT_VALUE) \
+    switch(aseman_app_singleton->p->appType) { \
+    case GuiApplication: \
+        return static_cast<QGuiApplication*>(QCoreApplication::instance())->FUNCTION(); \
         break; \
     default: \
         return DEFAULT_VALUE; \
@@ -44,20 +55,30 @@
 #define READ_DEFINITION(FUNCTION, DEFAULT_VALUE) \
     return DEFAULT_VALUE;
 #endif
+#endif
 
-#ifdef QT_GUI_LIB
+#ifdef QT_WIDGETS_LIB
 #define SET_DIFINITION(FUNCTION, VALUE) \
     switch(aseman_app_singleton->p->appType) { \
     case GuiApplication: \
         static_cast<QGuiApplication*>(QCoreApplication::instance())->FUNCTION(VALUE); \
         break; \
     case WidgetApplication: \
-        static_cast<QtSingleApplication*>(QCoreApplication::instance())->FUNCTION(VALUE); \
+        static_cast<QApplication*>(QCoreApplication::instance())->FUNCTION(VALUE); \
+        break; \
+    }
+#else
+#ifdef QT_GUI_LIB
+#define SET_DIFINITION(FUNCTION, VALUE) \
+    switch(aseman_app_singleton->p->appType) { \
+    case GuiApplication: \
+        static_cast<QGuiApplication*>(QCoreApplication::instance())->FUNCTION(VALUE); \
         break; \
     }
 #else
 #define SET_DIFINITION(FUNCTION, VALUE)
     Q_UNUSED(VALUE)
+#endif
 #endif
 
 
@@ -93,12 +114,21 @@ AsemanApplication::AsemanApplication() :
     p->app_owner = false;
 
 #ifdef QT_WIDGETS_LIB
+#ifdef DESKTOP_LINUX
     if( qobject_cast<QtSingleApplication*>(p->app) )
     {
         p->appType = WidgetApplication;
         p->globalFont = static_cast<QtSingleApplication*>(p->app)->font();
     }
     else
+#else
+    if( qobject_cast<QApplication*>(p->app) )
+    {
+        p->appType = WidgetApplication;
+        p->globalFont = static_cast<QApplication*>(p->app)->font();
+    }
+    else
+#endif
 #endif
 #ifdef QT_GUI_LIB
     if( qobject_cast<QGuiApplication*>(p->app) )
@@ -147,12 +177,19 @@ AsemanApplication::AsemanApplication(int &argc, char **argv, ApplicationType app
         break;
 #endif
 #ifdef QT_WIDGETS_LIB
+#ifdef DESKTOP_LINUX
     case WidgetApplication:
         p->app = new QtSingleApplication(argc, argv);
         connect(p->app, SIGNAL(messageReceived(QString)), SIGNAL(messageReceived(QString)));
 
         p->globalFont = static_cast<QtSingleApplication*>(p->app)->font();
         break;
+#else
+    case WidgetApplication:
+        p->app = new QApplication(argc, argv);
+        p->globalFont = static_cast<QApplication*>(p->app)->font();
+        break;
+#endif
 #endif
     default:
         p->app = 0;
@@ -348,7 +385,7 @@ QIcon AsemanApplication::windowIcon()
 
 bool AsemanApplication::isRunning()
 {
-#ifdef QT_GUI_LIB
+#if defined(QT_GUI_LIB) && defined(DESKTOP_LINUX)
     if(aseman_app_singleton->p->appType == WidgetApplication)
         return static_cast<QtSingleApplication*>(QCoreApplication::instance())->isRunning();
 #endif
@@ -363,7 +400,7 @@ int AsemanApplication::appType()
 
 void AsemanApplication::sendMessage(const QString &msg)
 {
-#ifdef QT_GUI_LIB
+#if defined(QT_GUI_LIB) && defined(DESKTOP_LINUX)
     if(aseman_app_singleton->p->appType == WidgetApplication)
         static_cast<QtSingleApplication*>(QCoreApplication::instance())->sendMessage(msg);
 #else

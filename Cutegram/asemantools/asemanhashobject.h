@@ -45,6 +45,8 @@ public:
 
     Q_INVOKABLE QVariant containt( const QString & key );
     Q_INVOKABLE QVariant containt( const QString & key, const QVariant & value );
+    Q_INVOKABLE QVariant contains( const QString & key );
+    Q_INVOKABLE QVariant contains( const QString & key, const QVariant & value );
 
     Q_INVOKABLE void clear();
 

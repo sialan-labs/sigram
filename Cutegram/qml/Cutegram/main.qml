@@ -18,6 +18,7 @@ AsemanMain {
     property alias profiles: profile_model
     property alias webPageGrabber: web_grabber
     property alias mapDownloader: map_downloader
+    property alias fontHandler: font_handler
 
     property bool aboutMode: false
 
@@ -84,6 +85,17 @@ AsemanMain {
                 break
             }
         }
+    }
+
+    FontHandler {
+        id: font_handler
+        onFontsChanged: if(!signalBlocker) AsemanApp.setSetting("General/fonts", save())
+        Component.onCompleted: {
+            signalBlocker = true
+            load(AsemanApp.readSetting("General/fonts"))
+            signalBlocker = false
+        }
+        property bool signalBlocker: false
     }
 
     TitleBarColorGrabber {

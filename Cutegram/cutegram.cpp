@@ -31,8 +31,10 @@
 #include "emoticonsmodel.h"
 #include "contributorsmodel.h"
 #include "themeitem.h"
+#include "texttohtmlconverter.h"
 #include "cutegramdialog.h"
 #include "textemojiwrapper.h"
+#include "cutegramencrypter.h"
 #include "emojis.h"
 #include "unitysystemtray.h"
 #include "pasteanalizer.h"
@@ -124,6 +126,8 @@ public:
 
     QStringList searchEngines;
     QString searchEngine;
+
+    CutegramEncrypter encrypter;
 };
 
 Cutegram::Cutegram(QObject *parent) :
@@ -198,6 +202,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<EmoticonsModel>("Cutegram", 1, 0, "EmoticonsModel");
     qmlRegisterType<CutegramDialog>("Cutegram", 1, 0, "CutegramDialog");
     qmlRegisterType<PasteAnalizer>("Cutegram", 1, 0, "PasteAnalizer");
+    qmlRegisterType<TextToHtmlConverter>("Cutegram", 1, 0, "TextToHtmlConverter");
 
     init_languages();
 }
@@ -1037,6 +1042,16 @@ QString Cutegram::searchEngine() const
 QString Cutegram::personalStickerDirectory() const
 {
     return AsemanApplication::homePath() + "/stickers/Personal";
+}
+
+DatabaseAbstractEncryptor *Cutegram::encrypter()
+{
+    return &p->encrypter;
+}
+
+void Cutegram::setEncrypterKey(const QString &key)
+{
+    p->encrypter.setKey(key);
 }
 
 bool Cutegram::isLoggedIn(const QString &phone) const

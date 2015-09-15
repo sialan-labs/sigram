@@ -12,11 +12,15 @@ Item {
     property real menuWidth: Devices.isMobile? parent.width-100*Devices.density : parent.width/2 + 20*Devices.density
     property alias isVisible: marea.isVisible
     property alias menuTopMargin: menu_frame.y
+    property alias pressed: marea.pressed
+    property alias animating: anim_timer.running
     property Component component
 
     onSourceChanged: refreshSource()
     onLayoutDirectionChanged: refreshSource()
     onRatioChanged: refresh()
+
+    onPressedChanged: if(!pressed) anim_timer.restart()
 
     onIsVisibleChanged: {
         if(isVisible)
@@ -32,6 +36,11 @@ Item {
             return
 
         privates.item = component.createObject(menu_frame)
+    }
+
+    Timer {
+        id: anim_timer
+        interval: 400
     }
 
     Behavior on ratio {

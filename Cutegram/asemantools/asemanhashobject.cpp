@@ -86,10 +86,20 @@ QVariantList AsemanHashObject::values(const QString &key)
 
 QVariant AsemanHashObject::containt(const QString &key)
 {
-    return p->hash.contains(key);
+    return contains(key);
 }
 
 QVariant AsemanHashObject::containt(const QString &key, const QVariant &value)
+{
+    return contains(key, value);
+}
+
+QVariant AsemanHashObject::contains(const QString &key)
+{
+    return p->hash.contains(key);
+}
+
+QVariant AsemanHashObject::contains(const QString &key, const QVariant &value)
 {
     return p->hash.contains(key,value);
 }

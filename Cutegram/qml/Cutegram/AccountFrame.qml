@@ -94,6 +94,7 @@ Rectangle {
         defaultHostPort: Cutegram.defaultHostPort
         appId: Cutegram.appId
         appHash: Cutegram.appHash
+        encrypter: Cutegram.encrypter
         configPath: AsemanApp.homePath
         publicKeyFile: Devices.resourcePath + "/tg-server.pub"
         phoneNumber: accountItem.number

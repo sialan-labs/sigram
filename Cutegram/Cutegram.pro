@@ -89,11 +89,12 @@ SOURCES += main.cpp \
     emoticonsmodel.cpp \
     contributorsmodel.cpp \
     pasteanalizer.cpp \
-    authsaver.cpp
+    authsaver.cpp \
+    texttohtmlconverter.cpp \
+    cutegramencrypter.cpp
 
 RESOURCES += resource.qrc
 
-include(simpleqtcryptor/simpleqtcryptor.pri)
 include(qmake/qtcAddDeployment.pri)
 include(asemantools/asemantools.pri)
 qtcAddDeployment()
@@ -111,7 +112,9 @@ HEADERS += \
     emoticonsmodel.h \
     contributorsmodel.h \
     pasteanalizer.h \
-    authsaver.h
+    authsaver.h \
+    texttohtmlconverter.h \
+    cutegramencrypter.h
 
 OTHER_FILES += \
     objects/types.sco \

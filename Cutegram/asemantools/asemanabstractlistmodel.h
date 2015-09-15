@@ -15,6 +15,7 @@ public:
 
 public Q_SLOTS:
     QVariant get(int index, int role) const;
+    QVariant get(int index, const QString &roleName) const;
     QVariantMap get(int index) const;
 };
 

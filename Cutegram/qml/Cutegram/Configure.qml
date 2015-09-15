@@ -602,9 +602,7 @@ Rectangle {
                             id: font_btn
                             text: qsTr("Select")
                             style: Cutegram.currentTheme.buttonStyle
-                            onClicked: {
-                                Cutegram.font = Desktop.getFont(View, qsTr("Select Font"), Cutegram.font)
-                            }
+                            onClicked: fontHandler.openFontChooser()
                         }
                     }
                 }

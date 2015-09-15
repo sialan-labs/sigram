@@ -31,6 +31,12 @@ QVariant AsemanAbstractListModel::get(int row, int role) const
     return data(idx , role);
 }
 
+QVariant AsemanAbstractListModel::get(int index, const QString &roleName) const
+{
+    const int role = roleNames().key(roleName.toUtf8());
+    return get(index, role);
+}
+
 QVariantMap AsemanAbstractListModel::get(int index) const
 {
     if(index >= rowCount())

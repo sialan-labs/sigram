@@ -29,6 +29,7 @@ class AsemanBackHandler : public QObject
 
     Q_PROPERTY(QObject* topHandlerObject READ topHandlerObject NOTIFY topHandlerChanged)
     Q_PROPERTY(QJSValue topHandlerMethod READ topHandlerMethod NOTIFY topHandlerChanged)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
     AsemanBackHandler(QObject *parent = 0);
@@ -36,6 +37,8 @@ public:
 
     QObject *topHandlerObject() const;
     QJSValue topHandlerMethod() const;
+
+    int count();
 
 public slots:
     void pushHandler( QObject *obj, QJSValue jsv );
@@ -49,6 +52,7 @@ public slots:
 
 signals:
     void topHandlerChanged();
+    void countChanged();
 
 private slots:
     void object_destroyed( QObject *obj );

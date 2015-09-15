@@ -75,6 +75,7 @@ class AsemanDevices : public QObject
     Q_PROPERTY(QString picturesLocation  READ picturesLocation  NOTIFY picturesLocationChanged  )
     Q_PROPERTY(QString musicsLocation    READ musicsLocation    NOTIFY musicsLocationChanged    )
     Q_PROPERTY(QString documentsLocation READ documentsLocation NOTIFY documentsLocationChanged )
+    Q_PROPERTY(QString downloadsLocation READ downloadsLocation NOTIFY downloadsLocationChanged )
     Q_PROPERTY(QString resourcePath      READ resourcePathQml   NOTIFY resourcePathChanged      )
     Q_PROPERTY(QString libsPath          READ libsPath          NOTIFY libsPathChanged          )
 
@@ -130,6 +131,7 @@ public:
     static QString picturesLocation();
     static QString musicsLocation();
     static QString documentsLocation();
+    static QString downloadsLocation();
     static QString resourcePath();
     static QString resourcePathQml();
     static QString libsPath();
@@ -196,6 +198,7 @@ signals:
     void picturesLocationChanged();
     void musicsLocationChanged();
     void documentsLocationChanged();
+    void downloadsLocationChanged();
     void resourcePathChanged();
     void libsPathChanged();
 

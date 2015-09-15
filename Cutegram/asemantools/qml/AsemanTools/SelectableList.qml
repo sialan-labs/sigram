@@ -48,10 +48,8 @@ Rectangle {
             id: list
             anchors.fill: parent
             clip: true
-            topMargin: (height-itemsHeight)/2
-            bottomMargin: topMargin
-            preferredHighlightBegin: list.height/2 - itemsHeight/2
-            preferredHighlightEnd: list.height/2 + itemsHeight/2
+            preferredHighlightBegin: height/2 - itemsHeight/2
+            preferredHighlightEnd: height/2 + itemsHeight/2
             highlightRangeMode: ListView.StrictlyEnforceRange
             snapMode: ListView.SnapToItem
             model: ListModel{}
@@ -145,8 +143,10 @@ Rectangle {
         color: splitersColor
     }
 
-    function positionViewAtIndex( index ) {
+    function positionViewAtIndex( index, force ) {
         currentIndex = index
+        if(force)
+            list.positionViewAtIndex(index, ListView.Center)
     }
 
     function itemName( index ) {

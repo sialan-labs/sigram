@@ -25,6 +25,7 @@
 #include <QSystemTrayIcon>
 #include <QFont>
 
+class DatabaseAbstractEncryptor;
 class QMenu;
 class ThemeItem;
 class CutegramPrivate;
@@ -39,6 +40,8 @@ class Cutegram : public QObject
     Q_PROPERTY(int defaultHostDcId READ defaultHostDcId WRITE setDefaultHostDcId NOTIFY defaultHostDcIdChanged)
     Q_PROPERTY(int appId READ appId WRITE setAppId NOTIFY appIdChanged)
     Q_PROPERTY(QString appHash READ appHash WRITE setAppHash NOTIFY appHashChanged)
+
+    Q_PROPERTY(DatabaseAbstractEncryptor* encrypter READ encrypter NOTIFY encrypterChanged)
 
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
     Q_PROPERTY(QString personalStickerDirectory READ personalStickerDirectory NOTIFY fakeSignal)
@@ -199,6 +202,9 @@ public:
 
     QString personalStickerDirectory() const;
 
+    DatabaseAbstractEncryptor *encrypter();
+    void setEncrypterKey(const QString &key);
+
     Q_INVOKABLE bool isLoggedIn(const QString &phone) const;
     Q_INVOKABLE QString normalizeText(const QString &text) const;
 
@@ -223,6 +229,7 @@ signals:
     void defaultHostDcIdChanged();
     void appIdChanged();
     void appHashChanged();
+    void encrypterChanged();
 
     void backRequest();
     void sysTrayCounterChanged();

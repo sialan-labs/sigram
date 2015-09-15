@@ -147,7 +147,7 @@ Item {
                 font.pixelSize: Math.floor(Cutegram.font.pointSize*Devices.fontDensity)-1
                 font.family: Cutegram.font.family
                 horizontalAlignment: Text.AlignLeft
-                opacity: 0.8
+                opacity: 0.7
                 visible: text.length != 0
                 textFormat: Text.RichText
                 color: {
@@ -168,7 +168,7 @@ Item {
                     if(msgText.length > 100)
                         msgText = msgText.slice(0, 100) + "..."
 
-                    return emojis.textToEmojiText(msgText,16,true)
+                    return fontHandler.textToHtml(emojis.textToEmojiText(msgText,16,true))
                 }
 
                 property real htmlWidth: Cutegram.htmlWidth(text)

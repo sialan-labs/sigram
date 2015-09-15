@@ -16,10 +16,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "simpleqtcryptor.h"
+#include "asemansimpleqtcryptor.h"
 
 #ifdef WITH_SERPENT_INCLUDE_FAST_SBOX
-#include "serpent_sbox.h"
+#include "private/serpent_sbox.h"
 #endif
 
 #include <QString>
@@ -47,7 +47,7 @@
 #define ROTL64(x,y) (((x)<<(y)) | ((x)>>(64-(y))))
 #define ROTR64(x,y) (((x)>>(y)) | ((x)<<(64-(y))))
 
-namespace SimpleQtCryptor {
+namespace AsemanSimpleQtCryptor {
 
 #ifdef WITHRC5
 QByteArray header_RC5_32_32_20  = QString("RC5/32/32/20:").toLatin1();
@@ -1805,4 +1805,4 @@ void serpent_print_sbox_h() {
 #endif // WITH_SERPENT_PRINT_SBOX_H
 
 
-}; //namespace
+} //namespace

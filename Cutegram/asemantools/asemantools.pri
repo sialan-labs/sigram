@@ -139,7 +139,9 @@ SOURCES += \
     $$PWD/asemanqttools.cpp \
     $$PWD/asemancalendarmodel.cpp \
     $$PWD/asemanlistrecord.cpp \
-    $$PWD/asemanquickviewwrapper.cpp
+    $$PWD/asemanquickviewwrapper.cpp \
+    $$PWD/asemanfonthandler.cpp \
+    $$PWD/asemansimpleqtcryptor.cpp
 
 HEADERS += \
     $$PWD/asemandevices.h \
@@ -180,7 +182,10 @@ HEADERS += \
     $$PWD/asemanqttools.h \
     $$PWD/asemancalendarmodel.h \
     $$PWD/asemanlistrecord.h \
-    $$PWD/asemanquickviewwrapper.h
+    $$PWD/asemanquickviewwrapper.h \
+    $$PWD/asemanfonthandler.h \
+    $$PWD/asemansimpleqtcryptor.h \
+    $$PWD/private/serpent_sbox.h
 
 OTHER_FILES += \
     $$PWD/android-build/src/land/aseman/android/AsemanActivity.java \

@@ -28,8 +28,8 @@
 // binary (serpent only)
 #define WITH_SERPENT_INCLUDE_FAST_SBOX
 
-#ifndef SIMPLEQTCRYPTOR_H
-#define SIMPLEQTCRYPTOR_H
+#ifndef ASEMANSIMPLEQTCRYPTOR_H
+#define ASEMANSIMPLEQTCRYPTOR_H
 
 #include <QtGlobal>
 #include <QByteArray>
@@ -38,7 +38,7 @@
 
 class QString;
 
-namespace SimpleQtCryptor {
+namespace AsemanSimpleQtCryptor {
 
 class Encryptor;
 class Decryptor;
@@ -282,4 +282,4 @@ void serpent_print_sbox_h();
 } // namespace
 
 
-#endif // SIMPLEQTCRYPTOR_H
+#endif // ASEMANSIMPLEQTCRYPTOR_H

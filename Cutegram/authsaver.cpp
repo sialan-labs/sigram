@@ -1,10 +1,11 @@
 #define WALLET_FOLDER "Cutegram"
 
 #include "authsaver.h"
-#include "simpleqtcryptor/simpleqtcryptor.h"
+#include "asemantools/asemansimpleqtcryptor.h"
 
 #include <QByteArray>
 #include <QBuffer>
+#include <QUuid>
 #include <QDataStream>
 #include <QProcess>
 #include <QThread>
@@ -36,9 +37,9 @@ QString get_hostid()
 
 bool encryptData(const QByteArray &src, QByteArray &dst, const QString &phone)
 {
-    QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(SERPENT_PASSWORD(phone)));
-    SimpleQtCryptor::Encryptor enc( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB, SimpleQtCryptor::NoChecksum );
-    if(enc.encrypt( src, dst, true ) != SimpleQtCryptor::NoError)
+    QSharedPointer<AsemanSimpleQtCryptor::Key> gKey = QSharedPointer<AsemanSimpleQtCryptor::Key>(new AsemanSimpleQtCryptor::Key(SERPENT_PASSWORD(phone)));
+    AsemanSimpleQtCryptor::Encryptor enc( gKey, AsemanSimpleQtCryptor::SERPENT_32, AsemanSimpleQtCryptor::ModeCFB, AsemanSimpleQtCryptor::NoChecksum );
+    if(enc.encrypt( src, dst, true ) != AsemanSimpleQtCryptor::NoError)
         return false;
     else
         return true;
@@ -46,9 +47,9 @@ bool encryptData(const QByteArray &src, QByteArray &dst, const QString &phone)
 
 bool decryptData(const QByteArray &src, QByteArray &dst, const QString &phone)
 {
-    QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(SERPENT_PASSWORD(phone)));
-    SimpleQtCryptor::Decryptor dec( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB );
-    if(dec.decrypt( src, dst, true ) != SimpleQtCryptor::NoError)
+    QSharedPointer<AsemanSimpleQtCryptor::Key> gKey = QSharedPointer<AsemanSimpleQtCryptor::Key>(new AsemanSimpleQtCryptor::Key(SERPENT_PASSWORD(phone)));
+    AsemanSimpleQtCryptor::Decryptor dec( gKey, AsemanSimpleQtCryptor::SERPENT_32, AsemanSimpleQtCryptor::ModeCFB );
+    if(dec.decrypt( src, dst, true ) != AsemanSimpleQtCryptor::NoError)
         return false;
     else
         return true;
@@ -150,6 +151,24 @@ bool CutegramAuth::cutegramWriteKWalletAuth(const QString &configPath, const QSt
 
     return true;
 }
+
+QString CutegramAuth::readEncryptKeyFromKWallet()
+{
+    if(!init_kwallet())
+        return get_hostid();
+
+    static QByteArray data;
+
+    if(data.isEmpty())
+        data = cg_wallet->readEntry(WALLET_FOLDER, "EncryptKey");
+    if(data.isEmpty())
+    {
+        data = QUuid::createUuid().toString().toUtf8();
+        cg_wallet->writeEntry(WALLET_FOLDER, "EncryptKey", data);
+    }
+
+    return data;
+}
 #endif
 
 
@@ -199,4 +218,9 @@ bool CutegramAuth::cutegramWriteSerpentAuth(const QString &configPath, const QSt
     file.write(enc_data);
     file.close();
     return true;
+}
+
+QString CutegramAuth::readEncryptKey()
+{
+    return get_hostid();
 }

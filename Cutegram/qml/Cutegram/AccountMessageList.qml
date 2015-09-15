@@ -328,10 +328,10 @@ Rectangle {
                         return
                     if(msg_item.click())
                         return
-                    if(filterId == -1)
-                        filterId = user.id
-                    else
-                        filterId = -1
+//                    if(filterId == -1)
+//                        filterId = user.id
+//                    else
+//                        filterId = -1
                 }
 
                 onPressed: {

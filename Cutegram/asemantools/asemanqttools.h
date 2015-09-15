@@ -16,9 +16,6 @@ public:
     static class AsemanDevices *devices();
     static class AsemanQtLogger *qtLogger();
     static class AsemanTools *tools();
-#ifdef Q_OS_ANDROID
-    static class AsemanJavaLayer *javaLayer();
-#endif
     static class AsemanCalendarConverter *calendar(QQmlEngine *engine);
     static class AsemanBackHandler *backHandler(QQmlEngine *engine);
 };

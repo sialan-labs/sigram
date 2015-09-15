@@ -128,7 +128,7 @@ AsemanTools *AsemanQuickView::tools() const
 #ifdef Q_OS_ANDROID
 AsemanJavaLayer *AsemanQuickView::javaLayer() const
 {
-    return AsemanQtTools::javaLayer();
+    return AsemanJavaLayer::instance();
 }
 #endif
 

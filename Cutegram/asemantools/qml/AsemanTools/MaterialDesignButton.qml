@@ -18,10 +18,13 @@ Item {
 
     property alias color: btn_back.color
     property alias background: back_rct.color
+    property bool disable: false
 
     property Flickable flickable
 
     signal clicked()
+
+    onDisableChanged: if(disable) hide()
 
     onHideStateChanged: {
         hide_timer.stop()
@@ -38,6 +41,8 @@ Item {
         } else {
             BackHandler.removeHandler(md_btn)
             listv.clear()
+            if(disable)
+                hide()
         }
     }
 
@@ -48,6 +53,8 @@ Item {
         onAtYEndChanged: refresh()
 
         function refresh() {
+            if(disable)
+                return
             if((flickable.verticalVelocity<-4 && !flickable.atYEnd) || flickable.atYBeginning)
                 md_btn.show()
             else

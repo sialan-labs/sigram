@@ -58,6 +58,11 @@ QJSValue AsemanBackHandler::topHandlerMethod() const
     return p->stack.top().jsv;
 }
 
+int AsemanBackHandler::count()
+{
+    return p->stack.count();
+}
+
 void AsemanBackHandler::pushHandler(QObject *obj, QJSValue jsv)
 {
     AsemanHandlerItem item;
@@ -65,6 +70,7 @@ void AsemanBackHandler::pushHandler(QObject *obj, QJSValue jsv)
     item.jsv = jsv;
 
     p->stack.push( item );
+    emit countChanged();
 
     connect( obj, SIGNAL(destroyed(QObject*)), SLOT(object_destroyed(QObject*)) );
 }
@@ -76,6 +82,7 @@ void AsemanBackHandler::pushDownHandler(QObject *obj, QJSValue jsv)
     item.jsv = jsv;
 
     p->stack.prepend( item );
+    emit countChanged();
 
     connect( obj, SIGNAL(destroyed(QObject*)), SLOT(object_destroyed(QObject*)) );
 }
@@ -88,6 +95,8 @@ void AsemanBackHandler::removeHandler(QObject *obj)
             p->stack.removeAt(i);
             break;
         }
+
+    emit countChanged();
 }
 
 QObject *AsemanBackHandler::tryPopHandler()
@@ -105,6 +114,7 @@ QObject *AsemanBackHandler::tryPopHandler()
     if( p->stack.count() == count )
         p->stack.pop();
 
+    emit countChanged();
     return item.obj;
 }
 
@@ -120,6 +130,7 @@ QObject *AsemanBackHandler::forcePopHandler()
     if( p->stack.count() == count )
         p->stack.pop();
 
+    emit countChanged();
     return item.obj;
 }
 
@@ -140,6 +151,8 @@ void AsemanBackHandler::object_destroyed(QObject *obj)
             p->stack.removeAt(i);
             i--;
         }
+
+    emit countChanged();
 }
 
 AsemanBackHandler::~AsemanBackHandler()
