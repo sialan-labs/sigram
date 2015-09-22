@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 import TelegramQmlLib 1.0
+import Cutegram 1.0
 // import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
 
@@ -39,6 +40,11 @@ Item {
         id: emoji_visibler_timer
         interval: 200
         onTriggered: point_dialog.hide()
+    }
+
+    StickerFileManager {
+        id: sticker_file_manager
+        telegram: telegramObject
     }
 
     BackgroundManager {
@@ -223,7 +229,7 @@ Item {
                 if(!dId)
                     dId = currentDialog.peer.chatId
 
-                telegramObject.sendFile(dId, path)
+                sticker_file_manager.sendSticker(dId, path)
                 point_dialog.hide()
             }
             onStickerDocumentSelected: {

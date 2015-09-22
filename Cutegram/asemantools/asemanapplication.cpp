@@ -385,7 +385,7 @@ QIcon AsemanApplication::windowIcon()
 
 bool AsemanApplication::isRunning()
 {
-#if defined(QT_GUI_LIB) && defined(DESKTOP_LINUX)
+#if defined(QT_GUI_LIB) && defined(DESKTOP_LINUX) && defined(QT_WIDGETS_LIB)
     if(aseman_app_singleton->p->appType == WidgetApplication)
         return static_cast<QtSingleApplication*>(QCoreApplication::instance())->isRunning();
 #endif
@@ -400,7 +400,7 @@ int AsemanApplication::appType()
 
 void AsemanApplication::sendMessage(const QString &msg)
 {
-#if defined(QT_GUI_LIB) && defined(DESKTOP_LINUX)
+#if defined(QT_GUI_LIB) && defined(DESKTOP_LINUX) && defined(QT_WIDGETS_LIB)
     if(aseman_app_singleton->p->appType == WidgetApplication)
         static_cast<QtSingleApplication*>(QCoreApplication::instance())->sendMessage(msg);
 #else

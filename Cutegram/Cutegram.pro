@@ -18,7 +18,7 @@ linux|openbsd {
 
 TEMPLATE = app
 TARGET = cutegram
-QT += qml quick sql xml multimedia
+QT += qml quick sql xml multimedia widgets
 
 INCLUDEPATH += ../Cutegram
 
@@ -91,7 +91,8 @@ SOURCES += main.cpp \
     pasteanalizer.cpp \
     authsaver.cpp \
     texttohtmlconverter.cpp \
-    cutegramencrypter.cpp
+    cutegramencrypter.cpp \
+    stickerfilemanager.cpp
 
 RESOURCES += resource.qrc
 
@@ -114,7 +115,8 @@ HEADERS += \
     pasteanalizer.h \
     authsaver.h \
     texttohtmlconverter.h \
-    cutegramencrypter.h
+    cutegramencrypter.h \
+    stickerfilemanager.h
 
 OTHER_FILES += \
     objects/types.sco \

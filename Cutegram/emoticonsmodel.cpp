@@ -21,6 +21,7 @@ public:
     QString currentKey;
 
     QPointer<Emojis> emojis;
+
     QList<QUrl> stickerSubPaths;
     int type;
     QUrl icon;
@@ -198,7 +199,7 @@ void EmoticonsModel::refresh()
     {
         const QString key = currentKey();
         const QString &path = p->keysPath.value(key);
-        newList = QDir(path).entryList(QStringList()<<"*.webp",QDir::Files);
+        newList = QDir(path).entryList(QStringList()<<"*.webp",QDir::Files,QDir::Time|QDir::Reversed);
 
         p->type = EmoticonSticker;
     }

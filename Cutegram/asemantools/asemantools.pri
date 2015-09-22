@@ -22,7 +22,7 @@ android {
         contains(BUILD_MODE,ubuntutouch) {
             DEFINES += Q_OS_UBUNTUTOUCH
         } else {
-            QT += widgets
+        contains(QT,widgets) {
 
             HEADERS += \
                 $$PWD/qtsingleapplication/qtsinglecoreapplication.h \
@@ -38,6 +38,7 @@ android {
 
             win32: SOURCES += $$PWD/qtsingleapplication/qtlockedfile_win.cpp
             unix:  SOURCES += $$PWD/qtsingleapplication/qtlockedfile_unix.cpp
+        }
         }
     }
 }

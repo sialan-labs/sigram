@@ -35,6 +35,7 @@
 #include "cutegramdialog.h"
 #include "textemojiwrapper.h"
 #include "cutegramencrypter.h"
+#include "stickerfilemanager.h"
 #include "emojis.h"
 #include "unitysystemtray.h"
 #include "pasteanalizer.h"
@@ -74,7 +75,6 @@ public:
     QString appHash;
 
     QPointer<AsemanQuickView> viewer;
-    bool close_blocker;
     int sysTrayCounter;
     int startupOption;
     int statusIconStyle;
@@ -178,11 +178,9 @@ Cutegram::Cutegram(QObject *parent) :
     p->searchEngines = QStringList() << "https://duckduckgo.com/?q=" << "https://google.com/?q=" << "https://bing.com/?q=";
 
 #ifdef Q_OS_ANDROID
-    p->close_blocker = true;
     p->translationsPath = "assets:/files/translations";
     p->themesPath = "assets:/themes";
 #else
-    p->close_blocker = false;
     p->translationsPath = AsemanDevices::resourcePath() + "/files/translations/";
     p->themesPath = AsemanDevices::resourcePath() + "/themes/";
     p->emojisThemesPath = AsemanDevices::resourcePath() + "/emojis/";
@@ -194,6 +192,7 @@ Cutegram::Cutegram(QObject *parent) :
 
     QDir().mkpath(personalStickerDirectory());
 
+    qmlRegisterType<StickerFileManager>("Cutegram", 1, 0, "StickerFileManager");
     qmlRegisterType<ContributorsModel>("Cutegram", 1, 0, "ContributorsModel");
     qmlRegisterType<CutegramEnums>("Cutegram", 1, 0, "CutegramEnums");
     qmlRegisterType<ThemeItem>("Cutegram", 1, 0, "CutegramTheme");
@@ -367,8 +366,12 @@ void Cutegram::start(bool forceVisible)
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
     init_theme();
 
-
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Cutegram/main.qml")));
+
+    QPoint point = AsemanApplication::settings()->value("General/position").toPoint();
+    if(!point.isNull())
+        p->viewer->setPosition(point);
+
 #ifdef Q_OS_WIN
     QtWin::extendFrameIntoClientArea(p->viewer,-1,-1,-1,-1);
 #endif
@@ -391,6 +394,7 @@ void Cutegram::start(bool forceVisible)
     if(forceVisible)
         p->viewer->show();
 
+    p->viewer->installEventFilter(this);
     init_systray();
 }
 
@@ -415,7 +419,6 @@ void Cutegram::logout(const QString &phone)
 
 void Cutegram::close()
 {
-    p->close_blocker = false;
     p->viewer->close();
 }
 
@@ -557,18 +560,11 @@ bool Cutegram::eventFilter(QObject *o, QEvent *e)
     {
         switch( static_cast<int>(e->type()) )
         {
-        case QEvent::Close:
-            if( p->close_blocker )
-            {
-                static_cast<QCloseEvent*>(e)->ignore();
-                emit backRequest();
-            }
-            else
-            {
-                static_cast<QCloseEvent*>(e)->accept();
-            }
-
-            return false;
+        case QEvent::Move:
+        {
+            QMoveEvent *me = static_cast<QMoveEvent*>(e);
+            AsemanApplication::settings()->setValue("General/position", me->pos());
+        }
             break;
         }
     }

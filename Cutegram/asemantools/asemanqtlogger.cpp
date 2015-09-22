@@ -68,7 +68,7 @@ void AsemanQtLogger::logMsg(QtMsgType type, const QMessageLogContext &context, c
     QByteArray localMsg = msg.toLocal8Bit();
     QString text = QString(": (%2:%3, %4) %5 : %1\n").arg(localMsg.constData()).arg(context.file).arg(context.line).arg(context.function).arg(QTime::currentTime().toString());
 
-    switch (type) {
+    switch (static_cast<int>(type)) {
     case QtDebugMsg:
         text = "Debug" + text;
         p->file_mutex.lock();
