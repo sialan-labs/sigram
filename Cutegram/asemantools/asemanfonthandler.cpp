@@ -248,6 +248,7 @@ void AsemanFontHandler::openFontChooser()
     QFontDialog *fontDlg = new QFontDialog();
     fontDlg->setWindowFlags(Qt::Widget);
     fontDlg->setWindowTitle(tr("Select font"));
+    fontDlg->setOption(QFontDialog::DontUseNativeDialog);
 
     p->combo_hash[comboBox] = fontDlg;
     p->combo_cache[comboBox] = p->fonts;

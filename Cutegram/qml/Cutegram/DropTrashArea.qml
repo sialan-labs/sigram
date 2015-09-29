@@ -25,6 +25,19 @@ Item {
         }
     }
 
+    Timer {
+        id: delete_msg_timer
+        interval: 300
+        onTriggered: telegramObject.deleteMessages([msgId])
+
+        property real msgId
+
+        function start(mid) {
+            msgId = mid
+            restart()
+        }
+    }
+
     DropArea {
         id: drop_area
         anchors.fill: parent
@@ -35,9 +48,8 @@ Item {
 
             var dId = isChat? dialogItem.peer.chatId : dialogItem.peer.userId
             if( drop.formats.indexOf("land.aseman.cutegram/messageId") != -1 ) {
-
                 var msgId = drop.getDataAsString("land.aseman.cutegram/messageId")
-                telegramObject.deleteMessages([msgId])
+                delete_msg_timer.start(msgId)
             }
         }
     }

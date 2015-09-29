@@ -364,6 +364,13 @@ void Cutegram::start(bool forceVisible)
 
     p->viewer = new AsemanQuickView();
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
+    p->viewer->setFlags(Qt::Window|
+                        Qt::WindowTitleHint|
+                        Qt::WindowSystemMenuHint|
+                        Qt::WindowMinMaxButtonsHint|
+                        Qt::WindowCloseButtonHint|
+                        Qt::WindowFullscreenButtonHint);
+
     init_theme();
 
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Cutegram/main.qml")));
@@ -411,8 +418,8 @@ void Cutegram::logout(const QString &phone)
     QFile::remove(ppath + "/auth");
     QFile::remove(ppath + "/config");
     QFile::remove(ppath + "/secret");
-//    QFile::remove(ppath + "/database.db");
-//    QFile::remove(ppath + "/database.db-journal");
+    QFile::remove(ppath + "/database.db");
+    QFile::remove(ppath + "/database.db-journal");
 
     restart();
 }

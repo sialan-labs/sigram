@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     AsemanApplication app(argc, argv);
     app.setApplicationName("Cutegram");
     app.setApplicationDisplayName("Cutegram");
-    app.setApplicationVersion("2.6.0");
+    app.setApplicationVersion("2.7.0");
     app.setOrganizationDomain("land.aseman");
     app.setOrganizationName("Aseman");
     app.setWindowIcon(QIcon(":/qml/Cutegram/files/icon.png"));
@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
             QCoreApplication::translate("main", "Verbose Mode."));
     QCommandLineOption forceOption(QStringList() << "f" << "force",
             QCoreApplication::translate("main", "Force to run multiple instance of Cutegram."));
+    QCommandLineOption forceVisibleOption(QStringList() << "visible",
+            QCoreApplication::translate("main", "Force visible at start"));
     QCommandLineOption dcIdOption(QStringList() << "dc-id",
             QCoreApplication::translate("main", "Sets default DC ID to <id>"), "id");
     QCommandLineOption ipAdrsOption(QStringList() << "ip-address",
@@ -46,6 +48,7 @@ int main(int argc, char *argv[])
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addOption(forceOption);
+    parser.addOption(forceVisibleOption);
     parser.addOption(verboseOption);
     parser.addOption(dcIdOption);
     parser.addOption(ipAdrsOption);
@@ -125,7 +128,7 @@ int main(int argc, char *argv[])
         cutegram.setEncrypterKey(CutegramAuth::readEncryptKey());
     }
 
-    cutegram.start( parser.isSet(forceOption) );
+    cutegram.start( parser.isSet(forceOption) || parser.isSet(forceVisibleOption) );
 
 #ifdef DESKTOP_DEVICE
     QObject::connect( &app, SIGNAL(messageReceived(QString)), &cutegram, SLOT(incomingAppMessage(QString)) );

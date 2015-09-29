@@ -513,7 +513,7 @@ Item {
 
             Timer {
                 id: switch_dialog_timer
-                interval: 100
+                interval: 400
                 onTriggered: {
                     currentDialog = list_item.dItem
                     dlist.currentIndex = index

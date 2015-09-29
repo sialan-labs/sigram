@@ -178,7 +178,7 @@ signals:
     void messageReceived(const QString &msg);
 
 protected:
-    bool event(QEvent *e);
+    bool eventFilter(QObject *o, QEvent *e);
 
 private:
     AsemanApplicationPrivate *p;

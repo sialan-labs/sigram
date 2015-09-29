@@ -114,7 +114,7 @@ AsemanApplication::AsemanApplication() :
     p->app_owner = false;
 
 #ifdef QT_WIDGETS_LIB
-#ifdef DESKTOP_LINUX
+#ifdef DESKTOP_DEVICE
     if( qobject_cast<QtSingleApplication*>(p->app) )
     {
         p->appType = WidgetApplication;
@@ -145,6 +145,8 @@ AsemanApplication::AsemanApplication() :
 
     if(!aseman_app_singleton)
         aseman_app_singleton = this;
+
+    p->app->installEventFilter(this);
 }
 
 AsemanApplication::AsemanApplication(int &argc, char **argv, ApplicationType appType) :
@@ -177,7 +179,7 @@ AsemanApplication::AsemanApplication(int &argc, char **argv, ApplicationType app
         break;
 #endif
 #ifdef QT_WIDGETS_LIB
-#ifdef DESKTOP_LINUX
+#ifdef DESKTOP_DEVICE
     case WidgetApplication:
         p->app = new QtSingleApplication(argc, argv);
         connect(p->app, SIGNAL(messageReceived(QString)), SIGNAL(messageReceived(QString)));
@@ -195,6 +197,9 @@ AsemanApplication::AsemanApplication(int &argc, char **argv, ApplicationType app
         p->app = 0;
         break;
     }
+
+    if(p->app)
+        p->app->installEventFilter(this);
 }
 
 QString AsemanApplication::homePath()
@@ -385,7 +390,7 @@ QIcon AsemanApplication::windowIcon()
 
 bool AsemanApplication::isRunning()
 {
-#if defined(QT_GUI_LIB) && defined(DESKTOP_LINUX) && defined(QT_WIDGETS_LIB)
+#if defined(QT_GUI_LIB) && defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     if(aseman_app_singleton->p->appType == WidgetApplication)
         return static_cast<QtSingleApplication*>(QCoreApplication::instance())->isRunning();
 #endif
@@ -400,7 +405,7 @@ int AsemanApplication::appType()
 
 void AsemanApplication::sendMessage(const QString &msg)
 {
-#if defined(QT_GUI_LIB) && defined(DESKTOP_LINUX) && defined(QT_WIDGETS_LIB)
+#if defined(QT_GUI_LIB) && defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     if(aseman_app_singleton->p->appType == WidgetApplication)
         static_cast<QtSingleApplication*>(QCoreApplication::instance())->sendMessage(msg);
 #else
@@ -500,21 +505,23 @@ QVariant AsemanApplication::readSetting(const QString &key, const QVariant &defa
     return settings()->value(key, defaultValue);
 }
 
-bool AsemanApplication::event(QEvent *e)
+bool AsemanApplication::eventFilter(QObject *o, QEvent *e)
 {
-#ifdef Q_OS_MAC
-    switch(e->type())
+    if(o == p->app)
     {
-    case QEvent::ApplicationActivate:
-        clickedOnDock();
-        break;
+#ifdef Q_OS_MAC
+        switch(e->type()) {
+        case QEvent::ApplicationActivate:
+            emit clickedOnDock();
+            break;
 
-    default:
-        break;
-    }
+        default:
+            break;
+        }
 #endif
+    }
 
-    return QObject::event(e);
+    return QObject::eventFilter(o,e);
 }
 
 AsemanApplication::~AsemanApplication()

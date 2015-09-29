@@ -1,6 +1,6 @@
 #include "asemanautostartmanager.h"
 
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_MAC) && defined(OSX_CORE_SERVICES_AVAILABLE)
 #include <CoreServices/CoreServices.h>
 #endif
 
@@ -124,7 +124,7 @@ bool AsemanAutoStartManager::active() const
     return p->active;
 }
 
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_MAC) && defined(OSX_CORE_SERVICES_AVAILABLE)
 CFURLRef prepareURL(const QString& path)
 {
     QByteArray app_path_byte_array = path.toLatin1();
@@ -209,7 +209,7 @@ void AsemanAutoStartManager::refresh()
     p->active = autoStartSettings.contains(p->source);
 
     emit activeChanged();
-#elif defined(Q_OS_MAC)
+#elif defined(Q_OS_MAC) && defined(OSX_CORE_SERVICES_AVAILABLE)
     p->active = hasLoginItem(p->name);
 
     emit activeChanged();
@@ -252,7 +252,7 @@ void AsemanAutoStartManager::save()
     {
         autoStartSettings.remove(p->source);
     }
-#elif defined(Q_OS_MAC)
+#elif defined(Q_OS_MAC) && defined(OSX_CORE_SERVICES_AVAILABLE)
     CFURLRef url = prepareURL(p->command);
     if (!url)
     {
