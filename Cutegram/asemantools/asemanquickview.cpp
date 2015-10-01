@@ -76,6 +76,7 @@ public:
     bool fullscreen;
     bool backController;
     int layoutDirection;
+    bool reverseScroll;
 
 #ifdef ASEMAN_QML_PLUGIN
     QQmlEngine *engine;
@@ -97,6 +98,7 @@ AsemanQuickView::AsemanQuickView(QWindow *parent) :
     p->backController = false;
     p->layoutDirection = Qt::LeftToRight;
     p->tryClose  = false;
+    p->reverseScroll = false;
 
 #ifndef ASEMAN_QML_PLUGIN
     AsemanQtTools::registerTypes("AsemanTools");
@@ -185,6 +187,20 @@ void AsemanQuickView::setBackController(bool stt)
 bool AsemanQuickView::backController() const
 {
     return p->backController;
+}
+
+void AsemanQuickView::setReverseScroll(bool stt)
+{
+    if(p->reverseScroll == stt)
+        return;
+
+    p->reverseScroll = stt;
+    emit reverseScrollChanged();
+}
+
+bool AsemanQuickView::reverseScroll() const
+{
+    return p->reverseScroll;
 }
 
 qreal AsemanQuickView::statusBarHeight() const

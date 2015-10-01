@@ -225,6 +225,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: reverse_scroll_text
+                            height: reverse_scroll_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Reverse Scroll")
+                        }
+
+                        Text {
                             id: last_msg_text
                             height: last_msg_checkbox.height
                             verticalAlignment: Text.AlignVCenter
@@ -414,6 +424,16 @@ Rectangle {
                             checked: Cutegram.smoothScroll
                             style: Cutegram.currentTheme.switchStyle
                             onCheckedChanged: Cutegram.smoothScroll = checked
+                        }
+
+                        Controls.Switch {
+                            id: reverse_scroll_checkbox
+                            checked: View.reverseScroll
+                            style: Cutegram.currentTheme.switchStyle
+                            onCheckedChanged: {
+                                View.reverseScroll = checked
+                                AsemanApp.setSetting("General/reverseScroll", View.reverseScroll)
+                            }
                         }
 
                         Controls.Switch {

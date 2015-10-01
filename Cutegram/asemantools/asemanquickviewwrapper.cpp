@@ -11,6 +11,7 @@ AsemanQuickViewWrapper::AsemanQuickViewWrapper(AsemanQuickView *view, QObject *p
     connect(mView, SIGNAL(focusedTextChanged()), SIGNAL(focusedTextChanged()));
     connect(mView, SIGNAL(layoutDirectionChanged()), SIGNAL(layoutDirectionChanged()));
     connect(mView, SIGNAL(backControllerChanged()), SIGNAL(backControllerChanged()));
+    connect(mView, SIGNAL(reverseScrollChanged()), SIGNAL(reverseScrollChanged()));
     connect(mView, SIGNAL(fakeSignal()), SIGNAL(fakeSignal()));
     connect(mView, SIGNAL(closeRequest()), SIGNAL(closeRequest()));
     connect(mView, SIGNAL(destroyed(QObject*)), SLOT(viewDestroyed()));
@@ -38,6 +39,16 @@ void AsemanQuickViewWrapper::setBackController(bool stt)
 bool AsemanQuickViewWrapper::backController() const
 {
     return mView->backController();
+}
+
+void AsemanQuickViewWrapper::setReverseScroll(bool stt)
+{
+    mView->setReverseScroll(stt);
+}
+
+bool AsemanQuickViewWrapper::reverseScroll() const
+{
+    return mView->reverseScroll();
 }
 
 qreal AsemanQuickViewWrapper::statusBarHeight() const
