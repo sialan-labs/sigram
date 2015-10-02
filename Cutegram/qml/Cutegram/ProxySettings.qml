@@ -12,8 +12,8 @@ Window {
     height: column.height + 20*Devices.density
     flags: Qt.Dialog
     modality: Qt.ApplicationModal
-    x: View.x + View.width/2 - width/2
-    y: View.y + View.height/2 - height/2
+    x: View.window.x + View.window.width/2 - width/2
+    y: View.window.y + View.window.height/2 - height/2
     title: qsTr("Proxy Settings")
 
     Rectangle {
@@ -196,8 +196,8 @@ Window {
     Component.onCompleted: {
         width = column.width + 40*Devices.density
         height = column.height + 40*Devices.density
-        x = View.x + View.width/2 - width/2
-        y = View.y + View.height/2 - height/2
+        x = View.window.x + View.window.width/2 - width/2
+        y = View.window.y + View.window.height/2 - height/2
     }
 }
 

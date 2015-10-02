@@ -181,8 +181,8 @@ Rectangle {
             id: msg_window
             width: 800*Devices.density
             height: 500*Devices.density
-            x: View.x + View.width/2 - width/2
-            y: View.y + View.height/2 - height/2
+            x: View.window.x + View.window.width/2 - width/2
+            y: View.window.y + View.window.height/2 - height/2
             visible: true
             onVisibleChanged: {
                 if(visible)
@@ -219,8 +219,8 @@ Rectangle {
 
             Component.onCompleted: {
                 windoweds_hash.insert(dId, msg_window )
-                x = View.x + View.width/2 - width/2
-                y = View.y + View.height/2 - height/2
+                x = View.window.x + View.window.width/2 - width/2
+                y = View.window.y + View.window.height/2 - height/2
                 width = 800*Devices.density
                 height = 500*Devices.density
             }

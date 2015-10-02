@@ -9,8 +9,8 @@ Window {
     height: 200*Devices.density
     flags: Qt.Dialog
     modality: Qt.ApplicationModal
-    x: View.x + View.width/2 - width/2
-    y: View.y + View.height/2 - height/2
+    x: View.window.x + View.window.width/2 - width/2
+    y: View.window.y + View.window.height/2 - height/2
 
     property alias currentPath: converter.destination
 
@@ -191,8 +191,8 @@ Window {
     }
 
     Component.onCompleted: {
-        x = View.x + View.width/2 - width/2
-        y = View.y + View.height/2 - height/2
+        x = View.window.x + View.window.width/2 - width/2
+        y = View.window.y + View.window.height/2 - height/2
     }
 }
 
