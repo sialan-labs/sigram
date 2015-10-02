@@ -302,6 +302,6 @@ AsemanMain {
         }
 
         Desktop.menuStyle = Cutegram.currentTheme.menuStyleSheet
-        View.reverseScroll = AsemanApp.readSetting("General/reverseScroll", 0)
+        View.reverseScroll = (AsemanApp.readSetting("General/reverseScroll", 0) == "true")
     }
 }
