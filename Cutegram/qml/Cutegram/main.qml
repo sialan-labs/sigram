@@ -21,6 +21,7 @@ AsemanMain {
     property alias fontHandler: font_handler
 
     property bool aboutMode: false
+    property bool dragging: false
 
     property color backColor0: "#eeeeee"
     property color backColor1: "#cccccc"
@@ -177,6 +178,11 @@ AsemanMain {
 
         function back() {
             aboutMode = false
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            visible: !aboutMode
         }
     }
 

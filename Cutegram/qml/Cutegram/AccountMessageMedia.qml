@@ -48,10 +48,14 @@ Item {
         case FileHandler.TypeTargetMediaPhoto:
             if(file_handler.imageSize.height == 0 || file_handler.imageSize.width == 0)
                 result = 300*Devices.density
-            else
+            else {
                 result = file_handler.imageSize.width/file_handler.imageSize.height<maximumMediaRatio?
                             maximumMediaHeight*file_handler.imageSize.width/file_handler.imageSize.height
                           : maximumMediaWidth
+                if(result > file_handler.imageSize.width)
+                    result = file_handler.imageSize.width
+            }
+
             break;
 
         case FileHandler.TypeTargetUnknown:
@@ -88,10 +92,13 @@ Item {
         case FileHandler.TypeTargetMediaPhoto:
             if(file_handler.imageSize.height == 0 || file_handler.imageSize.width == 0)
                 result = 200*Devices.density
-            else
+            else {
                 result = file_handler.imageSize.width/file_handler.imageSize.height<maximumMediaRatio?
                             maximumMediaHeight
                           : maximumMediaWidth*file_handler.imageSize.height/file_handler.imageSize.width
+                if(result > file_handler.imageSize.height)
+                    result = file_handler.imageSize.height
+            }
             break;
 
         case FileHandler.TypeTargetUnknown:

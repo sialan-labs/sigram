@@ -42,6 +42,8 @@ int main(int argc, char *argv[])
             QCoreApplication::translate("main", "Sets default DC ID to <id>"), "id");
     QCommandLineOption ipAdrsOption(QStringList() << "ip-address",
             QCoreApplication::translate("main", "Sets default IP Address to <ip>"), "ip");
+    QCommandLineOption portableOption(QStringList() << "portable",
+            QCoreApplication::translate("main", "Start in the portable mode."));
 
     QCommandLineParser parser;
     parser.setApplicationDescription(ABOUT_TEXT);
@@ -52,10 +54,14 @@ int main(int argc, char *argv[])
     parser.addOption(verboseOption);
     parser.addOption(dcIdOption);
     parser.addOption(ipAdrsOption);
+    parser.addOption(portableOption);
 #ifdef KWALLET_PRESENT
     parser.addOption(disKWalletOption);
 #endif
     parser.process(app.arguments());
+
+    if(parser.isSet(portableOption))
+        AsemanApplication::setHomePath(AsemanApplication::applicationDirPath() + "/data");
 
     if(!parser.isSet(verboseOption))
         qputenv("QT_LOGGING_RULES", "tg.*=false");
@@ -114,7 +120,7 @@ int main(int argc, char *argv[])
     if(parser.isSet(ipAdrsOption))
         cutegram.setDefaultHostAddress(parser.value(ipAdrsOption));
 #ifdef KWALLET_PRESENT
-    if(!parser.isSet(disKWalletOption) || cutegram.kWallet())
+    if(!parser.isSet(portableOption) && (!parser.isSet(disKWalletOption) || cutegram.kWallet()))
     {
         Settings::setAuthConfigMethods(CutegramAuth::cutegramReadKWalletAuth,
                                        CutegramAuth::cutegramWriteKWalletAuth);

@@ -95,6 +95,7 @@
 
 static QSettings *app_global_settings = 0;
 static AsemanApplication *aseman_app_singleton = 0;
+static QString *aseman_app_home_path = 0;
 
 class AsemanApplicationPrivate
 {
@@ -204,23 +205,40 @@ AsemanApplication::AsemanApplication(int &argc, char **argv, ApplicationType app
 
 QString AsemanApplication::homePath()
 {
-    QString result;
+    if(aseman_app_home_path)
+        return *aseman_app_home_path;
+
+    aseman_app_home_path = new QString();
 
 #ifdef Q_OS_ANDROID
-    result = QDir::homePath();
+    *aseman_app_home_path = QDir::homePath();
 #else
 #ifdef Q_OS_IOS
-    result = QDir::homePath();
+    *aseman_app_home_path = QDir::homePath();
 #else
 #ifdef Q_OS_WIN
-    result = QDir::homePath() + "/AppData/Local/" + QCoreApplication::applicationName();
+    *aseman_app_home_path = QDir::homePath() + "/AppData/Local/" + QCoreApplication::applicationName();
 #else
-    result = QDir::homePath() + "/.config/" + QCoreApplication::applicationName();
+    *aseman_app_home_path = QDir::homePath() + "/.config/" + QCoreApplication::applicationName();
 #endif
 #endif
 #endif
 
-    return result;
+    return *aseman_app_home_path;
+}
+
+void AsemanApplication::setHomePath(const QString &path)
+{
+    homePath();
+    *aseman_app_home_path = path;
+
+    if(aseman_app_singleton)
+    {
+        emit aseman_app_singleton->homePathChanged();
+        emit aseman_app_singleton->logPathChanged();
+        emit aseman_app_singleton->confsPathChanged();
+        emit aseman_app_singleton->backupsPathChanged();
+    }
 }
 
 QString AsemanApplication::appPath()

@@ -48,6 +48,7 @@ Item {
 
     DialogsModel {
         id: dialogs_model
+        stopUpdating: main.dragging
         onInitializingChanged: {
             if( initializing )
                 indicator.start()

@@ -28,6 +28,8 @@ Rectangle {
         currentTheme: Cutegram.emojisTheme
         userData: telegramObject.userData
         autoEmojis: Cutegram.autoEmojis
+        linkColor: Cutegram.currentTheme.messageLinkColor
+        linkVisitedColor: Cutegram.currentTheme.messageLinkVisitedColor
         replacements: {":)"   : "😀",
                        ":|"   : "😐",
                        ":("   : "😟",

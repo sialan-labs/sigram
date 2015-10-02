@@ -49,13 +49,13 @@ class AsemanApplication : public QObject
     Q_OBJECT
     Q_ENUMS(ApplicationType)
 
-    Q_PROPERTY(QString homePath     READ homePath     NOTIFY fakeSignal)
+    Q_PROPERTY(QString homePath     READ homePath     NOTIFY homePathChanged)
     Q_PROPERTY(QString appPath      READ appPath      NOTIFY fakeSignal)
     Q_PROPERTY(QString appFilePath  READ appFilePath  NOTIFY fakeSignal)
-    Q_PROPERTY(QString logPath      READ logPath      NOTIFY fakeSignal)
-    Q_PROPERTY(QString confsPath    READ confsPath    NOTIFY fakeSignal)
+    Q_PROPERTY(QString logPath      READ logPath      NOTIFY logPathChanged)
+    Q_PROPERTY(QString confsPath    READ confsPath    NOTIFY confsPathChanged)
     Q_PROPERTY(QString tempPath     READ tempPath     NOTIFY fakeSignal)
-    Q_PROPERTY(QString backupsPath  READ backupsPath  NOTIFY fakeSignal)
+    Q_PROPERTY(QString backupsPath  READ backupsPath  NOTIFY backupsPathChanged)
     Q_PROPERTY(QString cameraPath   READ cameraPath   NOTIFY fakeSignal)
 
     Q_PROPERTY(int appType READ appType NOTIFY fakeSignal)
@@ -90,6 +90,8 @@ public:
     ~AsemanApplication();
 
     static QString homePath();
+    static void setHomePath(const QString &path);
+
     static QString appPath();
     static QString appFilePath();
     static QString logPath();
@@ -168,6 +170,11 @@ signals:
     void languageUpdated();
     void backRequest();
     void clickedOnDock();
+
+    void homePathChanged();
+    void logPathChanged();
+    void confsPathChanged();
+    void backupsPathChanged();
 
     void organizationNameChanged();
     void organizationDomainChanged();

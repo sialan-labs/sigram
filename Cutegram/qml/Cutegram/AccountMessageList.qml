@@ -266,7 +266,10 @@ Rectangle {
                 image: "files/message.png"
                 hotSpot: Qt.point(12,12)
                 dropAction: Qt.CopyAction
-                onDraggingChanged: anim_enabler_timer.restart()
+                onDraggingChanged: {
+                    main.dragging = dragging
+                    anim_enabler_timer.restart()
+                }
             }
 
             ItemImageGrabber {

@@ -101,6 +101,8 @@ CutegramTheme {
     messageShadowSize: 2
     messageShadowColor: "#66000000"
     messagePointerHeight: 15
+    messageLinkColor: "#0000ff"
+    messageLinkVisitedColor: Qt.darker(messageLinkColor)
 
     headerColor: "#f0f0f0"
     headerTitleColor: "#111111"
