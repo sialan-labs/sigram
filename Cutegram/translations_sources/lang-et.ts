@@ -129,6 +129,38 @@
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation type="unfinished">%1 rajas grupi &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation type="unfinished">%1 lahkus grupist</translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation type="unfinished">%1 muutis grupi nime &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation type="unfinished">%1 muutis grupi pildi.</translation>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation type="unfinished">%1 kustutas grupi pildi</translation>
+    </message>
+    <message>
+        <source>You</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -288,6 +320,10 @@ Note that android accept secret chat automatically.</source>
     </message>
     <message>
         <source>Reply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to Stickers</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -503,6 +539,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
@@ -689,10 +732,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation type="unfinished"></translation>
     </message>
@@ -750,6 +789,18 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Show Emojis on hover</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -826,11 +877,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation>AM</translation>
+        <translation type="vanished">AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation type="vanished">PM</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1203,6 +1254,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TelegramQml</name>
     <message>
         <source>Secret Chat</source>
@@ -1267,6 +1325,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Header</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -1284,6 +1346,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force visible at start</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -72,7 +72,7 @@ Rectangle {
                         text: qsTr("Change Photo")
                         style: Cutegram.currentTheme.buttonStyle
                         onClicked: {
-                            var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
+                            var newImg = Desktop.getOpenFileName(View.window, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                             if(newImg.length == 0)
                                 return
 
@@ -514,7 +514,7 @@ Rectangle {
                             text: Cutegram.background.length==0? qsTr("Change") : qsTr("Remove")
                             onClicked: {
                                 if(Cutegram.background.length==0) {
-                                    var path = Desktop.getOpenFileName(View, qsTr("Select Image"), "*.png *.jpg *.jpeg")
+                                    var path = Desktop.getOpenFileName(View.window, qsTr("Select Image"), "*.png *.jpg *.jpeg")
                                     if(path.length == 0)
                                         return
 
@@ -587,7 +587,7 @@ Rectangle {
                                 id: select_sound_timer
                                 interval: 300
                                 onTriggered: {
-                                    var file = Desktop.getOpenFileName(View, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
+                                    var file = Desktop.getOpenFileName(View.window, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
                                     if(file.length != 0)
                                         Cutegram.messageAudio = Devices.localFilesPrePath + file
                                     else

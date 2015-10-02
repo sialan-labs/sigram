@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ast">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -118,6 +120,38 @@
     <message>
         <source>Unknown</source>
         <translation>Desconocíu</translation>
+    </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation type="unfinished">%1 creó&apos;l grupu &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished">%1 amestó a %2 al grupu</translation>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation type="unfinished">%1 dexó&apos;l grupu</translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished">%1 espulsó a %2</translation>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation type="unfinished">%1 cambió&apos;l nome del grupu a &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation type="unfinished">%1 cambió la semeya del grupu.</translation>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation type="unfinished">%1 desanició la semeya del grupu</translation>
+    </message>
+    <message>
+        <source>You</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -286,6 +320,10 @@ Decátate qu&apos;Android aceuta les charres secretes automáticamente.</transla
         <source>Reply</source>
         <translation>Responder</translation>
     </message>
+    <message>
+        <source>Add to Stickers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -336,7 +374,7 @@ Decátate qu&apos;Android aceuta les charres secretes automáticamente.</transla
         <translation>Desaniciar</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Cutegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
@@ -482,6 +520,13 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Home Page</source>
         <translation>Páxina d&apos;aniciu</translation>
+    </message>
+</context>
+<context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -668,7 +713,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Esbillar fonte</translation>
+        <translation type="vanished">Esbillar fonte</translation>
     </message>
     <message>
         <source>Auto Start</source>
@@ -732,22 +777,34 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -808,11 +865,11 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation>AM</translation>
+        <translation type="vanished">AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation type="vanished">PM</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1093,6 +1150,13 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1136,7 +1200,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Background</source>
@@ -1150,16 +1214,20 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <source>Header</source>
         <translation>Testera</translation>
     </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished">Nome d&apos;usuariu</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
@@ -1168,6 +1236,14 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
         <translation>Afita la direición IP por defeutu a &lt;ip&gt;</translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force visible at start</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

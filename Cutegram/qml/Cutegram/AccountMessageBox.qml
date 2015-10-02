@@ -191,7 +191,8 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            color: "#ffffff"
+            anchors.topMargin: header.height
+            color: "#000000"
             opacity: header.properties && header.properties.inited? 0.5 : 0
             visible: header.properties? true : false
 
@@ -250,7 +251,6 @@ Item {
             anchors.top: parent.top
             anchors.right: parent.right
             currentDialog: messages.currentDialog
-            color: Desktop.titleBarColor
             onAddParticianRequest: {
                 acc_view.addParticianRequest()
             }

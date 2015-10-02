@@ -389,7 +389,7 @@ Item {
                 onClicked: {
                     if( currentDialog == telegramObject.nullDialog )
                         return
-                    var file = Desktop.getOpenFileName(View)
+                    var file = Desktop.getOpenFileName(View.window)
                     if( file.length == 0 )
                         return
 

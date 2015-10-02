@@ -39,7 +39,7 @@ CutegramTheme {
     dialogPointerHeight: 16
     dialogListFontColor: "#222222"
     dialogListShadowColor: "#aa000000"
-    dialogListShadowWidth: 3
+    dialogListShadowWidth: 2
     dialogListMessageColor: "#444444"
     dialogListMessageFont.pointSize: 9
     dialogListHighlightDateColor: "#777777"
@@ -120,7 +120,7 @@ CutegramTheme {
     panelLightIcon: true
     panelPointerHeight: 12
     panelShadowColor: "#44111111"
-    panelShadowWidth: 3
+    panelShadowWidth: 1
     panelTooltipBackground: "#cc000000"
     panelTooltipTextColor: "#ffffff"
 

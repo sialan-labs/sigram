@@ -8,6 +8,9 @@ Item {
     height: 400*Devices.density
 
     property alias currentDialog: cp_model.dialog
+    property bool encrypted: currentDialog.encrypted
+
+    property color textColors: encrypted? Cutegram.currentTheme.headerSecretTitleColor : Cutegram.currentTheme.headerTitleColor
 
     ChatParticipantsModel {
         id: cp_model
@@ -72,7 +75,7 @@ Item {
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAnywhere
                 maximumLineCount: 1
-                color: Desktop.titleBarTextColor
+                color: textColors
                 text: user.firstName + " " + user.lastName
             }
         }

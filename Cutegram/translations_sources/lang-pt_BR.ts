@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="pt_BR">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -118,6 +120,38 @@
     <message>
         <source>Unknown</source>
         <translation>Desconhecido</translation>
+    </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation type="unfinished">%1 criou o grupo &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished">%1 adicionou %2 ao grupo</translation>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation type="unfinished">%1 deixou o grupo</translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished">%1 removeu %2</translation>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation type="unfinished">%1 alterou o nome do grupo para &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation type="unfinished">%1 alterou a foto do grupo.</translation>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation type="unfinished">%1 removeu a foto do grupo</translation>
+    </message>
+    <message>
+        <source>You</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -286,6 +320,10 @@ Note que o Android aceita o chat secreto automaticamente.</translation>
         <source>Reply</source>
         <translation>Responder</translation>
     </message>
+    <message>
+        <source>Add to Stickers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -336,7 +374,7 @@ Note que o Android aceita o chat secreto automaticamente.</translation>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>São as novidades do Cutegram, lançamentos e soluções.
 Não é o contato do Telegram, somente um contato virtual.</translation>
@@ -482,6 +520,13 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <message>
         <source>Home Page</source>
         <translation>Início</translation>
+    </message>
+</context>
+<context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -668,7 +713,7 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>Selecionar Fonte</translation>
+        <translation type="vanished">Selecionar Fonte</translation>
     </message>
     <message>
         <source>Auto Start</source>
@@ -733,6 +778,18 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <message>
         <source>Show Emojis on hover</source>
         <translation>Exibir Emojir em foco</translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -808,11 +865,11 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation>AM</translation>
+        <translation type="vanished">AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation type="vanished">PM</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1093,6 +1150,13 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1150,6 +1214,10 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
         <source>Header</source>
         <translation>Cabeçalho</translation>
     </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished">Nome de usuário</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -1168,6 +1236,14 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
         <translation>Definir endereço IP padrão para &lt;ip&gt;</translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force visible at start</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

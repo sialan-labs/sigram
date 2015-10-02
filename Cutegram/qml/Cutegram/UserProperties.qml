@@ -7,8 +7,11 @@ Rectangle {
     id: up_dlg
     height: base.height
     clip: true
+    color: encrypted? Cutegram.currentTheme.headerSecretColor : Cutegram.currentTheme.headerColor
 
     property Dialog currentDialog
+    property bool encrypted: currentDialog.encrypted
+
     property bool inited: false
 
     signal addParticianRequest()

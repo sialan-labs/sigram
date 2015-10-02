@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -118,6 +120,38 @@
     <message>
         <source>Unknown</source>
         <translation>未知</translation>
+    </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation type="unfinished">%1 创建群组 &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished">%1 已将 %2 加到群</translation>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation type="unfinished">%1 离开了群</translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished">%1 已将 %2 踢出群</translation>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation type="unfinished">%1 更改群名称为 &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation type="unfinished">%1 更改了群图片</translation>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation type="unfinished">%1 删除了群图片</translation>
+    </message>
+    <message>
+        <source>You</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -286,6 +320,10 @@ Note that android accept secret chat automatically.</source>
         <source>Reply</source>
         <translation>回复</translation>
     </message>
+    <message>
+        <source>Add to Stickers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -336,7 +374,7 @@ Note that android accept secret chat automatically.</source>
         <translation>删除</translation>
     </message>
     <message>
-        <source>It's Cutegram news about new releases and solutions.
+        <source>It&apos;s Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>这是 Cutegram 的新闻，主要是新版本发布以及一些解决方案。
 这并不是一个 Telegram 联系人。只是一个虚拟联系人。</translation>
@@ -482,6 +520,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Home Page</source>
         <translation>主页</translation>
+    </message>
+</context>
+<context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -668,7 +713,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Select Font</source>
-        <translation>选择字体</translation>
+        <translation type="vanished">选择字体</translation>
     </message>
     <message>
         <source>Auto Start</source>
@@ -733,6 +778,18 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Show Emojis on hover</source>
         <translation>在旁边显示表情图标</translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -808,11 +865,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>DateTimeChooser</name>
     <message>
         <source>AM</source>
-        <translation>上午</translation>
+        <translation type="vanished">上午</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>下午</translation>
+        <translation type="vanished">下午</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1093,6 +1150,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1150,6 +1214,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Header</source>
         <translation>顶部</translation>
     </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished">用户名</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -1168,6 +1236,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
         <translation>设置默认 IP 地址到 &lt;ip&gt;</translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force visible at start</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
