@@ -133,5 +133,8 @@
         <file>qml/AsemanTools/AsemanFlickable.qml</file>
         <file>qml/AsemanTools/HeaderMenuButton.qml</file>
         <file>qml/AsemanTools/TabView.qml</file>
+        <file>qml/AsemanTools/OSXTitleButtons.qml</file>
+        <file>qml/AsemanTools/WindowDragArea.qml</file>
+        <file>qml/AsemanTools/WindowResizeGrip.qml</file>
     </qresource>
 </RCC>

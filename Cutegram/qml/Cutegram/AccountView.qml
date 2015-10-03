@@ -75,6 +75,14 @@ Rectangle {
         }
     }
 
+    WindowDragArea {
+        anchors.left: dialogs.left
+        anchors.top: parent.top
+        anchors.right: dialogs.right
+        height: titleBarHeight
+        visible: nativeTitleBar
+    }
+
     TextField {
         id: search_frame
         style: Cutegram.currentTheme.searchTextFieldStyle
@@ -82,6 +90,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: dialogs.right
         anchors.margins: 10*Devices.density
+        anchors.topMargin: 10*Devices.density+titleBarHeight/2
         placeholderText: qsTr("Search")
         textColor: Cutegram.currentTheme.searchBarTextColor
         font.family: Cutegram.currentTheme.searchBarFont.family

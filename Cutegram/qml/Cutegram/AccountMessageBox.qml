@@ -125,11 +125,21 @@ Item {
             }
         }
 
+        Rectangle {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.right: parent.right
+            color: header.color
+            height: titleBarHeight/2
+            visible: nativeTitleBar
+        }
+
         AccountDialogHeader {
             id: header
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.right: parent.right
+            anchors.topMargin: titleBarHeight/2
             currentDialog: msg_box.currentDialog
             refreshing: messages.refreshing
             color: {
@@ -147,6 +157,12 @@ Item {
             }
 
             property UserProperties properties
+        }
+
+        WindowDragArea {
+            width: parent.width
+            height: 20*Devices.density
+            visible: nativeTitleBar
         }
 
         AccountSendMessage {

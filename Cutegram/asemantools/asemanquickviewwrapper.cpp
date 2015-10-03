@@ -105,6 +105,11 @@ QWindow *AsemanQuickViewWrapper::window() const
 #endif
 }
 
+QSize AsemanQuickViewWrapper::screenSize() const
+{
+    return mView->screenSize();
+}
+
 void AsemanQuickViewWrapper::discardFocusedText()
 {
     mView->discardFocusedText();
@@ -113,6 +118,21 @@ void AsemanQuickViewWrapper::discardFocusedText()
 void AsemanQuickViewWrapper::tryClose()
 {
     mView->tryClose();
+}
+
+void AsemanQuickViewWrapper::setMask(qreal x, qreal y, qreal width, qreal height)
+{
+    mView->setMask(x, y, width, height);
+}
+
+void AsemanQuickViewWrapper::move(qreal x, qreal y)
+{
+    mView->move(x, y);
+}
+
+void AsemanQuickViewWrapper::resize(qreal w, qreal h)
+{
+    mView->resize(w, h);
 }
 
 void AsemanQuickViewWrapper::viewDestroyed()

@@ -50,3 +50,6 @@ MaterialDesignButton 1.0 MaterialDesignButton.qml
 AsemanFlickable 1.0 AsemanFlickable.qml
 HeaderMenuButton 1.0 HeaderMenuButton.qml
 TabView 1.0 TabView.qml
+OSXTitleButtons 1.0 OSXTitleButtons.qml
+WindowDragArea 1.0 WindowDragArea.qml
+WindowResizeGrip 1.0 WindowResizeGrip.qml

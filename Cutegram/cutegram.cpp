@@ -86,6 +86,7 @@ public:
     bool closingState;
     bool cutegramSubscribe;
     bool kWallet;
+    bool nativeTitleBar;
     bool autoEmojis;
     bool smoothScroll;
     bool sendByCtrlEnter;
@@ -133,9 +134,11 @@ public:
 Cutegram::Cutegram(QObject *parent) :
     QObject(parent)
 {
+    bool nativeTitleBarDefault = false;
     QFont default_font;
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACX
     default_font.setPointSize(9);
+    nativeTitleBarDefault = true;
 #endif
 #ifdef Q_OS_WIN
     default_font.setPointSize(10);
@@ -162,6 +165,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
     p->kWallet = AsemanApplication::settings()->value("General/kWallet", true ).toBool();
+    p->nativeTitleBar = false;//AsemanApplication::settings()->value("General/nativeTitleBar", nativeTitleBarDefault ).toBool();
     p->autoEmojis = AsemanApplication::settings()->value("General/autoEmojis", true ).toBool();
     p->smoothScroll = AsemanApplication::settings()->value("General/smoothScroll", true ).toBool();
     p->sendByCtrlEnter = AsemanApplication::settings()->value("General/sendByCtrlEnter", false ).toBool();
@@ -364,7 +368,9 @@ void Cutegram::start(bool forceVisible)
 
     p->viewer = new AsemanQuickView();
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
+    p->viewer->setColor(QColor(0,0,0,0));
     p->viewer->setFlags(Qt::Window|
+                        (nativeTitleBar()?Qt::FramelessWindowHint:Qt::Widget)|
                         Qt::WindowTitleHint|
                         Qt::WindowSystemMenuHint|
                         Qt::WindowMinMaxButtonsHint|
@@ -826,6 +832,22 @@ void Cutegram::setKWallet(bool stt)
 bool Cutegram::kWallet() const
 {
     return p->kWallet;
+}
+
+void Cutegram::setNativeTitleBar(bool stt)
+{
+    if(p->nativeTitleBar == stt)
+        return;
+
+    p->nativeTitleBar = stt;
+    AsemanApplication::settings()->setValue("General/nativeTitleBar", stt);
+
+    emit nativeTitleBarChanged();
+}
+
+bool Cutegram::nativeTitleBar() const
+{
+    return p->nativeTitleBar;
 }
 
 void Cutegram::setBackground(const QString &background)

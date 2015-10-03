@@ -4,7 +4,12 @@ import AsemanTools 1.0
 Rectangle {
     width: 100
     height: 62
-    color: Desktop.titleBarColor
+    color: "#eeeeee"
+
+    WindowDragArea {
+        anchors.fill: parent
+        visible: nativeTitleBar
+    }
 
     Column {
         anchors.verticalCenter: parent.verticalCenter
@@ -26,7 +31,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: AsemanApp.globalFont.family
             font.pixelSize: Math.floor(30*Devices.fontDensity)
-            color: Desktop.titleBarTextColor
+            color: "#333333"
             text: "Cutegram"
         }
 
@@ -39,7 +44,7 @@ Rectangle {
             font.pixelSize: Math.floor(9*Devices.fontDensity)
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            color: Desktop.titleBarTextColor
+            color: "#333333"
             text: qsTr("Cutegram is a Telegram client by Aseman. It's free, open source and released under the GPLv3 license.")
         }
 
@@ -52,7 +57,7 @@ Rectangle {
             font.pixelSize: Math.floor(9*Devices.fontDensity)
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            color: Desktop.titleBarTextColor
+            color: "#333333"
             text: qsTr("Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.")
         }
 
@@ -96,7 +101,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: 8*Devices.density
         height: 30*Devices.density
-        dark: !Desktop.titleBarIsDark
+        dark: true
 
         MouseArea {
             anchors.fill: parent
@@ -110,7 +115,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: 8*Devices.density
         font: AsemanApp.globalFont
-        color: Desktop.titleBarTextColor
+        color: "#333333"
         text: AsemanApp.applicationVersion
     }
 
@@ -118,7 +123,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        light: Desktop.titleBarIsDark
+        light: false
     }
 }
 

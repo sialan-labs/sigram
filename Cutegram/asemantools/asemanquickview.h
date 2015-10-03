@@ -95,10 +95,14 @@ public:
     void setLayoutDirection( int l );
 
     qreal flickVelocity() const;
+    Q_INVOKABLE QSize screenSize() const;
 
 public slots:
     void discardFocusedText();
     void tryClose();
+    void setMask(qreal x, qreal y, qreal width, qreal height);
+    void move(qreal x, qreal y);
+    void resize(qreal w, qreal h);
 
 signals:
     void fullscreenChanged();
