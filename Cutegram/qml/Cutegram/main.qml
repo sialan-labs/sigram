@@ -220,8 +220,8 @@ AsemanMain {
         Item {
             id: main_scene
             anchors.fill: parent
-            anchors.topMargin: shadowSize*0.6 - drop_shadow.verticalOffset
-            anchors.margins: shadowSize*0.6
+            anchors.topMargin: nativeTitleBar? shadowSize*0.6 - drop_shadow.verticalOffset : 0
+            anchors.margins: nativeTitleBar? shadowSize*0.6 : 0
             opacity: 0
 
             AboutCutegram {

@@ -16,7 +16,7 @@ Item {
     property alias maxId: messages.maxId
     property alias backgroundManager: background_manager
     property alias headerManager: header_manager
-    property bool signleBox: true
+    property bool singleBox: true
 
     property bool visibleEmojiPanel: point_dialog.containsMouse || send_msg.emojiButtonHover
 
@@ -132,7 +132,7 @@ Item {
             anchors.right: parent.right
             color: header.color
             height: titleBarHeight/2
-            visible: nativeTitleBar && signleBox
+            visible: nativeTitleBar && singleBox
         }
 
         AccountDialogHeader {
@@ -140,7 +140,7 @@ Item {
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.right: parent.right
-            anchors.topMargin: signleBox?titleBarHeight/2:0
+            anchors.topMargin: singleBox?titleBarHeight/2:0
             currentDialog: msg_box.currentDialog
             refreshing: messages.refreshing
             color: {
@@ -163,7 +163,7 @@ Item {
         WindowDragArea {
             width: parent.width
             height: 20*Devices.density
-            visible: nativeTitleBar && signleBox
+            visible: nativeTitleBar && singleBox
         }
 
         AccountSendMessage {
