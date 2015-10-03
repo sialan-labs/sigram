@@ -126,21 +126,11 @@ Item {
             }
         }
 
-        Rectangle {
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.right: parent.right
-            color: header.color
-            height: titleBarHeight/2
-            visible: nativeTitleBar && singleBox
-        }
-
         AccountDialogHeader {
             id: header
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.right: parent.right
-            anchors.topMargin: singleBox?titleBarHeight/2:0
             currentDialog: msg_box.currentDialog
             refreshing: messages.refreshing
             color: {

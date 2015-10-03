@@ -224,43 +224,66 @@ AsemanMain {
             anchors.margins: nativeTitleBar? shadowSize*0.6 : 0
             opacity: 0
 
-            AboutCutegram {
-                id: about
+            Item {
                 anchors.fill: parent
+                anchors.topMargin: titleBarHeight
 
-                function back() {
-                    aboutMode = false
+                AboutCutegram {
+                    id: about
+                    anchors.fill: parent
+
+                    function back() {
+                        aboutMode = false
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        visible: !aboutMode
+                    }
                 }
 
-                MouseArea {
-                    anchors.fill: parent
-                    visible: !aboutMode
+                Item {
+                    id: main_frame
+                    width: parent.width
+                    height: parent.height
+                    y: aboutMode? height : 0
+
+                    Behavior on y {
+                        NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+                    }
+
+                    QueueList {
+                        id: qlist
+                        anchors.fill: parent
+                        components: [aseman_about_component, splash_component, accounts_frame, auth_dlg_component]
+                        currentIndex: 1
+                        onCurrentIndexChanged: {
+                            prevIndex = tmpIndex
+                            tmpIndex = currentIndex
+                        }
+
+                        property int tmpIndex: 0
+                        property int prevIndex: 0
+                    }
                 }
             }
 
-            Item {
-                id: main_frame
+            Rectangle {
                 width: parent.width
-                height: parent.height
-                y: aboutMode? height : 0
+                height: titleBarHeight
+                visible: nativeTitleBar
+                color: Cutegram.currentTheme.dialogListBackground
 
-                Behavior on y {
-                    NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
-                }
-
-                QueueList {
-                    id: qlist
+                WindowDragArea {
                     anchors.fill: parent
-                    components: [aseman_about_component, splash_component, accounts_frame, auth_dlg_component]
-                    currentIndex: 1
-                    onCurrentIndexChanged: {
-                        prevIndex = tmpIndex
-                        tmpIndex = currentIndex
-                    }
-
-                    property int tmpIndex: 0
-                    property int prevIndex: 0
                 }
+            }
+
+            OSXTitleButtons {
+                height: titleBarHeight
+                width: 70*Devices.density
+                visible: nativeTitleBar
+                fullscreenButton: false
             }
 
             WindowResizeGrip {

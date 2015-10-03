@@ -36,22 +36,20 @@ Item {
 
             Rectangle {
                 anchors.fill: parent
-                anchors.rightMargin: -radius
-                radius: nativeTitleBar? 5*Devices.density : 0
                 color: "#44ffffff"
                 visible: selected
                 clip: true
-            }
 
-            Rectangle {
-                x: parent.width - width/2
-                anchors.verticalCenter: parent.verticalCenter
-                transformOrigin: Item.Center
-                rotation: 45
-                width: Cutegram.currentTheme.panelPointerHeight*Devices.density
-                height: width
-                color: selectColor
-                visible: selected
+                Rectangle {
+                    x: parent.width - width/2
+                    anchors.verticalCenter: parent.verticalCenter
+                    transformOrigin: Item.Center
+                    rotation: 45
+                    width: Cutegram.currentTheme.panelPointerHeight*Devices.density
+                    height: width
+                    color: selectColor
+                    visible: selected
+                }
             }
 
             Button {

@@ -41,7 +41,9 @@ Item {
             height: parent.height
             width: height
             radius: height/2
-            color: closeButton && View.window.active? "#ff3333" : "#aa888888"
+            color: closeButton && View.window.active? "#FF6058" : "#aa888888"
+            border.width: 1*Devices.density
+            border.color: Qt.darker(color, 1.1)
             visible: closeButton
 
             Item {
@@ -82,7 +84,9 @@ Item {
             height: parent.height
             width: height
             radius: height/2
-            color: minimizeButton && View.window.active? "#ffcc00" : "#aa888888"
+            color: minimizeButton && View.window.active? "#FFBD2E" : "#aa888888"
+            border.width: 1*Devices.density
+            border.color: Qt.darker(color, 1.1)
             visible: minimizeButton
 
             Rectangle {
@@ -107,7 +111,9 @@ Item {
             height: parent.height
             width: height
             radius: height/2
-            color: fullscreenButton && View.window.active? "#33cc00" : "#aa888888"
+            color: fullscreenButton && View.window.active? "#28CB41" : "#aa888888"
+            border.width: 1*Devices.density
+            border.color: Qt.darker(color, 1.1)
 
             MouseArea {
                 id: fscreen_marea

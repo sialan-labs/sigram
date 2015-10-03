@@ -105,7 +105,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: nativeTitleBar? close_buttons.width : panel_logical_frame.width
+        width: nativeTitleBar? 48*Devices.density : panel_logical_frame.width
         color: nativeTitleBar && !View.window.active? "#aaaaaa" :Cutegram.currentTheme.panelColor
 
         WindowDragArea {
@@ -137,7 +137,6 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
-                anchors.topMargin: nativeTitleBar? titleBarHeight+8*Devices.density : 0
                 height: count*width
                 selectColor: slide_menu.active? Cutegram.currentTheme.sidebarColor : Cutegram.currentTheme.dialogListBackground
                 z: 10
@@ -158,7 +157,6 @@ Rectangle {
                 anchors.left: parent.left
                 width: parent.width
                 height: width
-                radius: nativeTitleBar? 5*Devices.density : 0
                 normalColor: "#00000000"
                 highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
                 cursorShape: Qt.PointingHandCursor
@@ -181,7 +179,6 @@ Rectangle {
                 anchors.left: parent.left
                 width: parent.width
                 height: width
-                radius: nativeTitleBar? 5*Devices.density : 0
                 normalColor: "#00000000"
                 highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
                 cursorShape: Qt.PointingHandCursor
@@ -204,7 +201,6 @@ Rectangle {
                 anchors.left: parent.left
                 width: parent.width
                 height: width
-                radius: nativeTitleBar? 5*Devices.density : 0
                 normalColor: "#00000000"
                 highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
                 cursorShape: Qt.PointingHandCursor
@@ -227,7 +223,6 @@ Rectangle {
                 anchors.left: parent.left
                 width: parent.width
                 height: width
-                radius: nativeTitleBar? 5*Devices.density : 0
                 normalColor: "#00000000"
                 highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
                 cursorShape: Qt.PointingHandCursor
@@ -242,18 +237,6 @@ Rectangle {
                     slide_menu.text = ""
                     slide_menu.show(configure_component)
                 }
-            }
-        }
-
-        OSXTitleButtons {
-            id: close_buttons
-            height: titleBarHeight
-            width: 48*Devices.density
-            visible: nativeTitleBar && !fullscreened
-            fullscreenButton: false
-            clip: true
-            onFullscreenedChanged: {
-                nativeTitleBar = !fullscreened
             }
         }
     }
