@@ -196,6 +196,7 @@ AsemanMain {
         verticalOffset: 10*Devices.density
         radius: shadowSize
         samples: 32
+        visible: nativeTitleBar
         color: "#80000000"
     }
 
@@ -207,6 +208,7 @@ AsemanMain {
             anchors.fill: main_scene
             source: main_scene
             maskSource: main_scene_mask
+            visible: nativeTitleBar
         }
 
         Rectangle {
@@ -222,7 +224,7 @@ AsemanMain {
             anchors.fill: parent
             anchors.topMargin: nativeTitleBar? shadowSize*0.6 - drop_shadow.verticalOffset : 0
             anchors.margins: nativeTitleBar? shadowSize*0.6 : 0
-            opacity: 0
+            opacity: nativeTitleBar? 0 : 1
 
             Item {
                 anchors.fill: parent
