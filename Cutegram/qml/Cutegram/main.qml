@@ -18,9 +18,9 @@ AsemanMain {
     property variant tabFrame
 
     property bool nativeTitleBar: false
-    property real shadowSize: nativeTitleBar && !Devices.isMacX? 20*Devices.density : 0
+    property real shadowSize: nativeTitleBar && !Devices.isMacX? 32*Devices.density : 0
     property real windowRadius: nativeTitleBar? 7*Devices.density : 0
-    property real titleBarHeight: 20*Devices.density
+    property real titleBarHeight: nativeTitleBar? 20*Devices.density : 0
 
     property alias profiles: profile_model
     property alias webPageGrabber: web_grabber
@@ -192,10 +192,10 @@ AsemanMain {
         anchors.fill: shadow_scene
         source: shadow_scene
         horizontalOffset: 0
-        verticalOffset: 8*Devices.density
+        verticalOffset: 10*Devices.density
         radius: shadowSize
         samples: 32
-        color: "#40000000"
+        color: "#80000000"
     }
 
     Item {
@@ -349,8 +349,6 @@ AsemanMain {
     }
 
     function refreshMask() {
-        if(shadowSize == 0)
-            return
         View.setMask(main_scene.x, main_scene.y, main_scene.width, main_scene.height)
     }
 

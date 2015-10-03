@@ -370,7 +370,8 @@ void Cutegram::start(bool forceVisible)
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
     p->viewer->setColor(QColor(0,0,0,0));
     p->viewer->setFlags(Qt::Window|
-                        (nativeTitleBar()?Qt::FramelessWindowHint:Qt::Widget)|
+                        (nativeTitleBar()?Qt::FramelessWindowHint|Qt::NoDropShadowWindowHint:
+                                          Qt::Widget)|
                         Qt::WindowTitleHint|
                         Qt::WindowSystemMenuHint|
                         Qt::WindowMinMaxButtonsHint|

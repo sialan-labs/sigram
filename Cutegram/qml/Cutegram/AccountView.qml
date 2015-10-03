@@ -160,6 +160,7 @@ Rectangle {
         anchors.right: parent.right
         currentDialog: dialogs.currentDialog
         telegramObject: dialogs.telegramObject
+        signleBox: true
         onTagSearchRequest: search_frame.text = "#" + tag
     }
 
@@ -221,6 +222,7 @@ Rectangle {
                 id: wmbox
                 anchors.fill: parent
                 telegramObject: dialogs.telegramObject
+                signleBox: false
                 onTagSearchRequest: {
                     search_frame.text = "#" + tag
                     View.show()
