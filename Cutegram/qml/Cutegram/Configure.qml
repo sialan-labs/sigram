@@ -282,7 +282,7 @@ Rectangle {
                             font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
                             color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Native decorate (experimental)")
-                            visible: Devices.isMacX
+                            visible: Cutegram.allowNativeTitleBar
                         }
 
                         Text {
@@ -479,7 +479,7 @@ Rectangle {
                             id: native_titlebar_checkbox
                             style: Cutegram.currentTheme.switchStyle
                             checked: Cutegram.nativeTitleBar
-                            visible: Devices.isMacX
+                            visible: Cutegram.allowNativeTitleBar
                             onCheckedChanged: {
                                 if(!init_timer.inited)
                                     return

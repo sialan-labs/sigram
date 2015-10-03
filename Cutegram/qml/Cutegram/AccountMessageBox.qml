@@ -208,7 +208,7 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            anchors.topMargin: header.height
+            anchors.topMargin: header.height + header.y
             color: "#000000"
             opacity: header.properties && header.properties.inited? 0.5 : 0
             visible: header.properties? true : false

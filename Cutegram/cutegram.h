@@ -46,6 +46,7 @@ class Cutegram : public QObject
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
     Q_PROPERTY(QString personalStickerDirectory READ personalStickerDirectory NOTIFY fakeSignal)
     Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setHighlightColor NOTIFY highlightColorChanged)
+    Q_PROPERTY(bool allowNativeTitleBar READ allowNativeTitleBar NOTIFY fakeSignal)
 
     Q_PROPERTY(QString language     READ language     WRITE setLanguage     NOTIFY languageChanged    )
     Q_PROPERTY(QString messageAudio READ messageAudio WRITE setMessageAudio NOTIFY messageAudioChanged)
@@ -160,6 +161,7 @@ public:
 
     void setNativeTitleBar(bool stt);
     bool nativeTitleBar() const;
+    bool allowNativeTitleBar() const;
 
     void setBackground(const QString &background);
     QString background() const;

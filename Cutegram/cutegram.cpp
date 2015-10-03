@@ -134,11 +134,9 @@ public:
 Cutegram::Cutegram(QObject *parent) :
     QObject(parent)
 {
-    bool nativeTitleBarDefault = false;
     QFont default_font;
 #ifdef Q_OS_MACX
     default_font.setPointSize(9);
-    nativeTitleBarDefault = false;
 #endif
 #ifdef Q_OS_WIN
     default_font.setPointSize(10);
@@ -165,7 +163,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
     p->kWallet = AsemanApplication::settings()->value("General/kWallet", true ).toBool();
-    p->nativeTitleBar = AsemanApplication::settings()->value("General/nativeTitleBar", nativeTitleBarDefault ).toBool();
+    p->nativeTitleBar = AsemanApplication::settings()->value("General/nativeTitleBar", allowNativeTitleBar() ).toBool();
     p->autoEmojis = AsemanApplication::settings()->value("General/autoEmojis", true ).toBool();
     p->smoothScroll = AsemanApplication::settings()->value("General/smoothScroll", true ).toBool();
     p->sendByCtrlEnter = AsemanApplication::settings()->value("General/sendByCtrlEnter", false ).toBool();
@@ -849,6 +847,20 @@ void Cutegram::setNativeTitleBar(bool stt)
 bool Cutegram::nativeTitleBar() const
 {
     return p->nativeTitleBar;
+}
+
+bool Cutegram::allowNativeTitleBar() const
+{
+#ifdef Q_OS_MACX
+    switch(static_cast<int>(QSysInfo::macVersion()))
+    {
+    case QSysInfo::MV_YOSEMITE:
+    case QSysInfo::MV_ELCAPITAN:
+        return true;
+        break;
+    }
+#endif
+    return false;
 }
 
 void Cutegram::setBackground(const QString &background)

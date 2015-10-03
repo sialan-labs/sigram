@@ -248,7 +248,7 @@ Rectangle {
         OSXTitleButtons {
             id: close_buttons
             height: titleBarHeight
-            width: 70*Devices.density
+            width: 48*Devices.density
             visible: nativeTitleBar && !fullscreened
             fullscreenButton: false
             clip: true
