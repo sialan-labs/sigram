@@ -275,6 +275,17 @@ Rectangle {
                         }
 
                         Text {
+                            id: native_title_text
+                            height: send_by_ctrl_enter_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Native decorate (experimental)")
+                            visible: Devices.isMacX
+                        }
+
+                        Text {
                             id: theme_text
                             height: theme_combo.height
                             verticalAlignment: Text.AlignVCenter
@@ -462,6 +473,20 @@ Rectangle {
                             style: Cutegram.currentTheme.switchStyle
                             checked: Cutegram.sendByCtrlEnter
                             onCheckedChanged: Cutegram.sendByCtrlEnter = checked
+                        }
+
+                        Controls.Switch {
+                            id: native_titlebar_checkbox
+                            style: Cutegram.currentTheme.switchStyle
+                            checked: Cutegram.nativeTitleBar
+                            visible: Devices.isMacX
+                            onCheckedChanged: {
+                                if(!init_timer.inited)
+                                    return
+
+                                Cutegram.nativeTitleBar = checked
+                                Desktop.showMessage(View.window, qsTr("Reset Needed"), qsTr("This change needs application reset."));
+                            }
                         }
 
                         Controls.ComboBox {

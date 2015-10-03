@@ -138,7 +138,7 @@ Cutegram::Cutegram(QObject *parent) :
     QFont default_font;
 #ifdef Q_OS_MACX
     default_font.setPointSize(9);
-    nativeTitleBarDefault = true;
+    nativeTitleBarDefault = false;
 #endif
 #ifdef Q_OS_WIN
     default_font.setPointSize(10);
@@ -165,7 +165,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
     p->kWallet = AsemanApplication::settings()->value("General/kWallet", true ).toBool();
-    p->nativeTitleBar = false;//AsemanApplication::settings()->value("General/nativeTitleBar", nativeTitleBarDefault ).toBool();
+    p->nativeTitleBar = AsemanApplication::settings()->value("General/nativeTitleBar", nativeTitleBarDefault ).toBool();
     p->autoEmojis = AsemanApplication::settings()->value("General/autoEmojis", true ).toBool();
     p->smoothScroll = AsemanApplication::settings()->value("General/smoothScroll", true ).toBool();
     p->sendByCtrlEnter = AsemanApplication::settings()->value("General/sendByCtrlEnter", false ).toBool();

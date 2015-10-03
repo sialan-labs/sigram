@@ -106,7 +106,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: nativeTitleBar? close_buttons.width : panel_logical_frame.width
-        color: Cutegram.currentTheme.panelColor
+        color: nativeTitleBar && !View.window.active? "#aaaaaa" :Cutegram.currentTheme.panelColor
 
         WindowDragArea {
             anchors.fill: parent
@@ -250,7 +250,11 @@ Rectangle {
             height: titleBarHeight
             width: 70*Devices.density
             visible: nativeTitleBar && !fullscreened
-            onFullscreenButtonChanged: nativeTitleBar = !fullscreened
+            fullscreenButton: false
+            clip: true
+            onFullscreenedChanged: {
+                nativeTitleBar = !fullscreened
+            }
         }
     }
 

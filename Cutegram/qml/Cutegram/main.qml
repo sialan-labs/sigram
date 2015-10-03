@@ -18,9 +18,9 @@ AsemanMain {
     property variant tabFrame
 
     property bool nativeTitleBar: false
-    property real shadowSize: nativeTitleBar && !Devices.isMacX? 32*Devices.density : 0
+    property real shadowSize: nativeTitleBar? 32*Devices.density : 0
     property real windowRadius: nativeTitleBar? 7*Devices.density : 0
-    property real titleBarHeight: nativeTitleBar? 20*Devices.density : 0
+    property real titleBarHeight: nativeTitleBar? 24*Devices.density : 0
 
     property alias profiles: profile_model
     property alias webPageGrabber: web_grabber
@@ -189,6 +189,7 @@ AsemanMain {
     }
 
     DropShadow {
+        id: drop_shadow
         anchors.fill: shadow_scene
         source: shadow_scene
         horizontalOffset: 0
@@ -219,7 +220,8 @@ AsemanMain {
         Item {
             id: main_scene
             anchors.fill: parent
-            anchors.margins: shadowSize
+            anchors.topMargin: shadowSize*0.6 - drop_shadow.verticalOffset
+            anchors.margins: shadowSize*0.6
             opacity: 0
 
             AboutCutegram {
