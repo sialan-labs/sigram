@@ -289,6 +289,7 @@ AsemanMain {
             WindowResizeGrip {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
+                visible: nativeTitleBar
             }
 
             MouseArea {
@@ -374,7 +375,7 @@ AsemanMain {
     }
 
     function refreshMask() {
-        View.setMask(main_scene.x, main_scene.y, main_scene.width, main_scene.height)
+//        View.setMask(main_scene.x, main_scene.y, main_scene.width, main_scene.height)
     }
 
     Component.onCompleted: {
