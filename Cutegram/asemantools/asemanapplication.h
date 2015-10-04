@@ -188,6 +188,9 @@ protected:
     bool eventFilter(QObject *o, QEvent *e);
 
 private:
+    void init();
+
+private:
     AsemanApplicationPrivate *p;
 };
 

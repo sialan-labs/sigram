@@ -39,8 +39,8 @@
 #include "emojis.h"
 #include "unitysystemtray.h"
 #include "pasteanalizer.h"
-#include <userdata.h>
 #include "cutegramenums.h"
+#include "authsaver.h"
 
 #include <QPointer>
 #include <QQmlContext>
@@ -60,6 +60,8 @@
 #include <QMimeDatabase>
 
 #include <telegramqml.h>
+#include <core/settings.h>
+#include <userdata.h>
 
 #ifdef Q_OS_WIN
 #include <QtWin>
@@ -135,7 +137,9 @@ Cutegram::Cutegram(QObject *parent) :
     QObject(parent)
 {
     QFont default_font;
+    int startupOption = StartupAutomatic;
 #ifdef Q_OS_MACX
+    startupOption = StartupVisible;
     default_font.setPointSize(9);
 #endif
 #ifdef Q_OS_WIN
@@ -155,7 +159,7 @@ Cutegram::Cutegram(QObject *parent) :
     p->sysTrayCounter = 0;
     p->closingState = false;
     p->highlightColor = AsemanApplication::settings()->value("General/lastHighlightColor", p->mainPalette.highlight().color().name() ).toString();
-    p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
+    p->startupOption = AsemanApplication::settings()->value("General/startupOption", startupOption).toInt();
     p->statusIconStyle = AsemanApplication::settings()->value(SYSTRAY_ICON_STATUS, static_cast<int>(StatusIconAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->emojiOnHover = AsemanApplication::settings()->value("General/emojiOnHover", true ).toBool();
@@ -420,11 +424,12 @@ void Cutegram::logout(const QString &phone)
 {
     const QString &home = AsemanApplication::homePath();
     const QString &ppath = home + "/" + phone;
-    QFile::remove(ppath + "/auth");
     QFile::remove(ppath + "/config");
     QFile::remove(ppath + "/secret");
     QFile::remove(ppath + "/database.db");
     QFile::remove(ppath + "/database.db-journal");
+
+    Settings::clearAuth(home, phone);
 
     restart();
 }

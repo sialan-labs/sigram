@@ -26,6 +26,7 @@
 #include <QThread>
 #include <QCoreApplication>
 #include <QDebug>
+#include <QTimer>
 
 #ifdef QT_WIDGETS_LIB
 #define READ_DEFINITION(FUNCTION, DEFAULT_VALUE) \
@@ -100,6 +101,7 @@ static QString *aseman_app_home_path = 0;
 class AsemanApplicationPrivate
 {
 public:
+    QTimer *clickOnDock_timer;
     QFont globalFont;
     int appType;
     QCoreApplication *app;
@@ -148,6 +150,7 @@ AsemanApplication::AsemanApplication() :
         aseman_app_singleton = this;
 
     p->app->installEventFilter(this);
+    init();
 }
 
 AsemanApplication::AsemanApplication(int &argc, char **argv, ApplicationType appType) :
@@ -201,6 +204,14 @@ AsemanApplication::AsemanApplication(int &argc, char **argv, ApplicationType app
 
     if(p->app)
         p->app->installEventFilter(this);
+    init();
+}
+
+void AsemanApplication::init()
+{
+    p->clickOnDock_timer = new QTimer(this);
+    p->clickOnDock_timer->setSingleShot(true);
+    p->clickOnDock_timer->setInterval(500);
 }
 
 QString AsemanApplication::homePath()
@@ -500,6 +511,9 @@ void AsemanApplication::back()
 
 int AsemanApplication::exec()
 {
+    p->clickOnDock_timer->stop();
+    p->clickOnDock_timer->start();
+
     return p->app->exec();
 }
 
@@ -530,7 +544,13 @@ bool AsemanApplication::eventFilter(QObject *o, QEvent *e)
 #ifdef Q_OS_MAC
         switch(e->type()) {
         case QEvent::ApplicationActivate:
-            emit clickedOnDock();
+            if(p->clickOnDock_timer->isActive())
+            {
+                p->clickOnDock_timer->stop();
+                p->clickOnDock_timer->start();
+            }
+            else
+                emit clickedOnDock();
             break;
 
         default:
