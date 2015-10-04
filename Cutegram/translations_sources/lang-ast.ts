@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ast">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ast" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
         <source>Cutegram using Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojies.</source>
-        <translation type="vanished">Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools,  delles ferramientes de KDE, iconos Faenza y fustaxes de Twitter.</translation>
+        <translation type="vanished">Cutegram usa Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, delles ferramientes de KDE, iconos Faenza y fustaxes de Twitter.</translation>
     </message>
     <message>
         <source>Home Page</source>
@@ -123,35 +121,35 @@
     </message>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation type="unfinished">%1 creó&apos;l grupu &quot;%2&quot;</translation>
+        <translation>%1 creó&apos;l grupu «%2»</translation>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished">%1 amestó a %2 al grupu</translation>
+        <translation>%1 amestó a %2 al grupu</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation type="unfinished">%1 dexó&apos;l grupu</translation>
+        <translation>%1 dexó&apos;l grupu</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished">%1 espulsó a %2</translation>
+        <translation>%1 espulsó a %2</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation type="unfinished">%1 cambió&apos;l nome del grupu a &quot;%2&quot;</translation>
+        <translation>%1 camudó&apos;l nome del grupu a «%2»</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation type="unfinished">%1 cambió la semeya del grupu.</translation>
+        <translation>%1 camudó la semeya del grupu</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation type="unfinished">%1 desanició la semeya del grupu</translation>
+        <translation>%1 desanició la semeya del grupu</translation>
     </message>
     <message>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu</translation>
     </message>
 </context>
 <context>
@@ -170,7 +168,7 @@
     </message>
     <message>
         <source>Message on &quot;%1&quot; by &quot;%2&quot;</source>
-        <translation>Mensaxe en &quot;%1&quot; por &quot;%2&quot;</translation>
+        <translation>Mensaxe en «%1» por «%2»</translation>
     </message>
     <message>
         <source>%1 is online</source>
@@ -178,7 +176,7 @@
     </message>
     <message>
         <source>%1 start typing on &quot;%2&quot;</source>
-        <translation type="vanished">%1 entamó a teclexar en &quot;%2&quot;</translation>
+        <translation type="vanished">%1 entamó a teclexar en «%2»</translation>
     </message>
     <message>
         <source>%1 start typing</source>
@@ -196,7 +194,7 @@ Pero anguaño pa iguar esto, deshabilita la verificación en dos pasos, anicia s
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation>%1 entamó a teclexar en &quot;%2&quot;</translation>
+        <translation>%1 entamó a teclexar en «%2»</translation>
     </message>
     <message>
         <source>%1 started typing</source>
@@ -218,7 +216,7 @@ Pero anguaño pa iguar esto, deshabilita la verificación en dos pasos, anicia s
     <name>AccountMessageAction</name>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation>%1 creó&apos;l grupu &quot;%2&quot;</translation>
+        <translation>%1 creó&apos;l grupu «%2»</translation>
     </message>
     <message>
         <source>%1 left the group</source>
@@ -226,7 +224,7 @@ Pero anguaño pa iguar esto, deshabilita la verificación en dos pasos, anicia s
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation>%1 cambió&apos;l nome del grupu a &quot;%2&quot;</translation>
+        <translation>%1 cambió&apos;l nome del grupu a «%2»</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
@@ -253,7 +251,7 @@ Pero anguaño pa iguar esto, deshabilita la verificación en dos pasos, anicia s
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
-        <translation>Nun cargar más</translation>
+        <translation>Parar carga automática</translation>
     </message>
     <message>
         <source>Load Always</source>
@@ -322,7 +320,7 @@ Decátate qu&apos;Android aceuta les charres secretes automáticamente.</transla
     </message>
     <message>
         <source>Add to Stickers</source>
-        <translation type="unfinished"></translation>
+        <translation>Amestar a Pegadielles</translation>
     </message>
 </context>
 <context>
@@ -374,7 +372,7 @@ Decátate qu&apos;Android aceuta les charres secretes automáticamente.</transla
         <translation>Desaniciar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Son les anuncies de Cutegram tocante a los llanzamientos y soluciones nuevos.
 Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
@@ -515,7 +513,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>The Goal of the Aseman is to provide free and secure products to keep people’s freedom and their privacy.</source>
-        <translation>La meta d&apos;Aseman ye apurrir productos llibres y seguros pa caltener la llibertá de la xente y la so privacidá.</translation>
+        <translation>La meta d&apos;Aseman ye fornir productos llibres y seguros pa caltener la llibertá de la xente y la so privacidá.</translation>
     </message>
     <message>
         <source>Home Page</source>
@@ -526,7 +524,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <name>AsemanFontHandler</name>
     <message>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>Esbillar fonte</translation>
     </message>
 </context>
 <context>
@@ -712,10 +710,6 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
         <translation>Esbillar</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation type="vanished">Esbillar fonte</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Aniciu automáticu</translation>
     </message>
@@ -777,34 +771,34 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation>Amosar Fustaxes pasando&apos;l mur</translation>
     </message>
     <message>
         <source>Reverse Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Invertir desplazamientu</translation>
     </message>
     <message>
         <source>Send by Ctrl+Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Unviar pente Ctrl+Enter</translation>
     </message>
     <message>
         <source>Emoji&apos;s theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema de fustaxes</translation>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2) - %3</translation>
     </message>
 </context>
 <context>
@@ -863,14 +857,6 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation type="vanished">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="vanished">PM</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>Data</translation>
@@ -1084,7 +1070,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>This changes needs to restart application.</source>
-        <translation>Estos cambeos necesiten reaniciar l&apos;aplicación.</translation>
+        <translation>Necesites reaniciar l&apos;aplicación p&apos;aplicar les camudancies.</translation>
     </message>
     <message>
         <source>Proxy Type</source>
@@ -1153,7 +1139,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     <name>StickerInstallDialog</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar</translation>
     </message>
 </context>
 <context>
@@ -1200,7 +1186,7 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Show Badges</source>
-        <translation type="unfinished"></translation>
+        <translation>Amosar nᵁ d&apos;ensin lleer</translation>
     </message>
     <message>
         <source>Background</source>
@@ -1216,18 +1202,18 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Nome d&apos;usuariu</translation>
+        <translation>Nome d&apos;usuariu</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mou detalláu</translation>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar la execución d&apos;instancies múltiples de Cutegram.</translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
@@ -1239,11 +1225,11 @@ Nun ye un contautu de Telegram, namái ye unu virtual.</translation>
     </message>
     <message>
         <source>Disable kwallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitar kwallet</translation>
     </message>
     <message>
         <source>Force visible at start</source>
-        <translation type="unfinished"></translation>
+        <translation>Forciar visibilidá nel aniciu</translation>
     </message>
 </context>
 </TS>

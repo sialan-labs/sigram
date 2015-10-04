@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -95,63 +93,63 @@
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Kontakt</translation>
+        <translation>Kontakt</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Foto</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Standort</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation type="unfinished">%1 hat die Gruppe &quot;%2&quot; erstellt</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished">%1 hat %2 in die Gruppe eingeladen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation type="unfinished">%1 hat die Gruppe verlassen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished">%1 entfernt %2</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation type="unfinished">%1 hat den Namen der Gruppe in &quot;%2&quot; geändert</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation type="unfinished">%1 hat das Gruppenbild geändert.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation type="unfinished">%1 hat das Gruppenbild gelöscht</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -322,7 +320,7 @@ Beachten Sie, dass android automatisch Geheimchats akzeptiert..</translation>
     </message>
     <message>
         <source>Add to Stickers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -374,7 +372,7 @@ Beachten Sie, dass android automatisch Geheimchats akzeptiert..</translation>
         <translation>Löschen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Cutegram-Nachrichten über neue Veröffentlichungen und Lösungen.
 Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
@@ -389,7 +387,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreiben Sie eine Nachricht...</translation>
     </message>
 </context>
 <context>
@@ -526,7 +524,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>AsemanFontHandler</name>
     <message>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -633,7 +631,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Languages</source>
-        <translation>Sprachen</translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <source>Automatic</source>
@@ -712,10 +710,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
         <translation>Auswählen</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation type="vanished">Wähle Schriftart</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Automatisch starten</translation>
     </message>
@@ -777,34 +771,34 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation>Emojis beim darüber halten anzeigen</translation>
     </message>
     <message>
         <source>Reverse Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Send by Ctrl+Enter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Emoji&apos;s theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2) - %3</translation>
     </message>
 </context>
 <context>
@@ -863,14 +857,6 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation type="vanished">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="vanished">PM</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>Datum</translation>
@@ -1153,7 +1139,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     <name>StickerInstallDialog</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1216,7 +1202,7 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Benutzername</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1231,19 +1217,19 @@ Dies ist kein Telegram- sondern ein virtueller Kontakt.</translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Setzt die Standard-DC-ID auf &lt;id&gt;</translation>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Setzt die Standard-IP-Adresse auf &lt;ip&gt;</translation>
     </message>
     <message>
         <source>Disable kwallet.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Force visible at start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

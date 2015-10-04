@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fa_IR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fa_IR" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -95,63 +93,63 @@
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">مخاطب‌ها</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation type="unfinished">%1 گروه &quot;%2&quot; را ساخت</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished">%2 توسط %1 به گروه اضافه شد</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation type="unfinished">%1 گروه را ترک کرد</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished">%2 توسط %1 به بیرون انداخته شد</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation type="unfinished">%1 نام گروه را به &quot;%2&quot; تغییر داد</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation type="unfinished">%1 تصویر گروه را تغییر داد.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation type="unfinished">%1 تصویر گروه را حذف کرد</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -322,7 +320,7 @@ Note that android accept secret chat automatically.</source>
     </message>
     <message>
         <source>Add to Stickers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -374,7 +372,7 @@ Note that android accept secret chat automatically.</source>
         <translation>حذف</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>این خبرنامه‌ی کیوت‌گرام درباره‌ی آخرین ارائه‌ها و راهکارهاست.
 این یک مخاطب تلگرام نیست. تنها یک مخاطب مجازی است.</translation>
@@ -389,7 +387,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -526,7 +524,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>AsemanFontHandler</name>
     <message>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -712,10 +710,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>گزینش</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation type="vanished">گزینش قلم</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>شروع خودکار</translation>
     </message>
@@ -777,34 +771,34 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Reverse Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Send by Ctrl+Enter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Emoji&apos;s theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -863,14 +857,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation type="vanished">ق.ظ</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="vanished">ب.ظ</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>تاریخ</translation>
@@ -1153,7 +1139,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>StickerInstallDialog</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1216,7 +1202,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">نام‌کاربری</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1231,19 +1217,19 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Disable kwallet.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Force visible at start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
