@@ -857,6 +857,7 @@ bool Cutegram::nativeTitleBar() const
 bool Cutegram::allowNativeTitleBar() const
 {
 #ifdef Q_OS_MACX
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
     switch(static_cast<int>(QSysInfo::macVersion()))
     {
     case QSysInfo::MV_YOSEMITE:
@@ -864,6 +865,7 @@ bool Cutegram::allowNativeTitleBar() const
         return true;
         break;
     }
+#endif
 #endif
     return false;
 }
