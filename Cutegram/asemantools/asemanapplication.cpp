@@ -21,52 +21,268 @@
 
 #include <QDir>
 #include <QFont>
+#include <QPalette>
 #include <QSettings>
 #include <QThread>
 #include <QCoreApplication>
 #include <QDebug>
+#include <QTimer>
+
+#ifdef QT_WIDGETS_LIB
+#define READ_DEFINITION(FUNCTION, DEFAULT_VALUE) \
+    switch(aseman_app_singleton->p->appType) { \
+    case GuiApplication: \
+        return static_cast<QGuiApplication*>(QCoreApplication::instance())->FUNCTION(); \
+        break; \
+    case WidgetApplication: \
+        return static_cast<QApplication*>(QCoreApplication::instance())->FUNCTION(); \
+        break; \
+    default: \
+        return DEFAULT_VALUE; \
+        break; \
+    }
+#else
+#ifdef QT_GUI_LIB
+#define READ_DEFINITION(FUNCTION, DEFAULT_VALUE) \
+    switch(aseman_app_singleton->p->appType) { \
+    case GuiApplication: \
+        return static_cast<QGuiApplication*>(QCoreApplication::instance())->FUNCTION(); \
+        break; \
+    default: \
+        return DEFAULT_VALUE; \
+        break; \
+    }
+#else
+#define READ_DEFINITION(FUNCTION, DEFAULT_VALUE) \
+    return DEFAULT_VALUE;
+#endif
+#endif
+
+#ifdef QT_WIDGETS_LIB
+#define SET_DIFINITION(FUNCTION, VALUE) \
+    switch(aseman_app_singleton->p->appType) { \
+    case GuiApplication: \
+        static_cast<QGuiApplication*>(QCoreApplication::instance())->FUNCTION(VALUE); \
+        break; \
+    case WidgetApplication: \
+        static_cast<QApplication*>(QCoreApplication::instance())->FUNCTION(VALUE); \
+        break; \
+    }
+#else
+#ifdef QT_GUI_LIB
+#define SET_DIFINITION(FUNCTION, VALUE) \
+    switch(aseman_app_singleton->p->appType) { \
+    case GuiApplication: \
+        static_cast<QGuiApplication*>(QCoreApplication::instance())->FUNCTION(VALUE); \
+        break; \
+    }
+#else
+#define SET_DIFINITION(FUNCTION, VALUE)
+    Q_UNUSED(VALUE)
+#endif
+#endif
+
+
+#ifdef QT_GUI_LIB
+#include <QGuiApplication>
+#endif
+#ifdef QT_CORE_LIB
+#include <QCoreApplication>
+#endif
+#ifdef QT_WIDGETS_LIB
+#include <QApplication>
+#include "qtsingleapplication/qtsingleapplication.h"
+#endif
 
 static QSettings *app_global_settings = 0;
 static AsemanApplication *aseman_app_singleton = 0;
+static QString *aseman_app_home_path = 0;
+
+#if defined(Q_OS_MAC) && defined(Q_PROCESSOR_X86_32)
+#include <objc/objc.h>
+#include <objc/message.h>
+
+bool dockClickHandler(id self,SEL _cmd,...)
+{
+    Q_UNUSED(self)
+    Q_UNUSED(_cmd)
+    if(aseman_app_singleton) aseman_app_singleton->clickedOnDock();
+    return true;
+}
+#endif
 
 class AsemanApplicationPrivate
 {
 public:
+    QTimer *clickOnDock_timer;
     QFont globalFont;
+    int appType;
+    QCoreApplication *app;
+    bool app_owner;
 };
 
-#ifdef ASEMAN_QML_PLUGIN
 AsemanApplication::AsemanApplication() :
-    INHERIT_QAPP ()
-  #else
-AsemanApplication::AsemanApplication(int &argc, char **argv) :
-    INHERIT_QAPP (argc,argv)
-  #endif
+    QObject()
 {
     p = new AsemanApplicationPrivate;
+    p->app = QCoreApplication::instance();
+    p->appType = NoneApplication;
+    p->app_owner = false;
+
+#ifdef QT_WIDGETS_LIB
+#ifdef DESKTOP_DEVICE
+    if( qobject_cast<QtSingleApplication*>(p->app) )
+    {
+        p->appType = WidgetApplication;
+        p->globalFont = static_cast<QtSingleApplication*>(p->app)->font();
+    }
+    else
+#else
+    if( qobject_cast<QApplication*>(p->app) )
+    {
+        p->appType = WidgetApplication;
+        p->globalFont = static_cast<QApplication*>(p->app)->font();
+    }
+    else
+#endif
+#endif
+#ifdef QT_GUI_LIB
+    if( qobject_cast<QGuiApplication*>(p->app) )
+    {
+        p->appType = GuiApplication;
+        p->globalFont = static_cast<QGuiApplication*>(p->app)->font();
+    }
+    else
+#endif
+#ifdef QT_CORE_LIB
+    if( qobject_cast<QCoreApplication*>(p->app) )
+        p->appType = CoreApplication;
+#endif
+
     if(!aseman_app_singleton)
         aseman_app_singleton = this;
+
+    p->app->installEventFilter(this);
+    init();
+}
+
+AsemanApplication::AsemanApplication(int &argc, char **argv, ApplicationType appType) :
+    QObject()
+{
+    if(!aseman_app_singleton)
+        aseman_app_singleton = this;
+
+    p = new AsemanApplicationPrivate;
+    p->appType = appType;
+    p->app_owner = true;
+
+    switch(p->appType)
+    {
+#ifdef QT_CORE_LIB
+    case CoreApplication:
+        p->app = new QCoreApplication(argc, argv);
+        connect(p->app, SIGNAL(organizationNameChanged())  , SIGNAL(organizationNameChanged()));
+        connect(p->app, SIGNAL(organizationDomainChanged()), SIGNAL(organizationDomainChanged()));
+        connect(p->app, SIGNAL(applicationNameChanged())   , SIGNAL(applicationNameChanged()));
+        connect(p->app, SIGNAL(applicationVersionChanged()), SIGNAL(applicationVersionChanged()));
+        break;
+#endif
+#ifdef QT_GUI_LIB
+    case GuiApplication:
+        p->app = new QGuiApplication(argc, argv);
+        connect(p->app, SIGNAL(lastWindowClosed()), SIGNAL(lastWindowClosed()));
+
+        p->globalFont = static_cast<QGuiApplication*>(p->app)->font();
+        break;
+#endif
+#ifdef QT_WIDGETS_LIB
+#ifdef DESKTOP_DEVICE
+    case WidgetApplication:
+        p->app = new QtSingleApplication(argc, argv);
+        connect(p->app, SIGNAL(messageReceived(QString)), SIGNAL(messageReceived(QString)));
+
+        p->globalFont = static_cast<QtSingleApplication*>(p->app)->font();
+        break;
+#else
+    case WidgetApplication:
+        p->app = new QApplication(argc, argv);
+        p->globalFont = static_cast<QApplication*>(p->app)->font();
+        break;
+#endif
+#endif
+    default:
+        p->app = 0;
+        break;
+    }
+
+    if(p->app)
+        p->app->installEventFilter(this);
+    init();
+}
+
+void AsemanApplication::init()
+{
+    p->clickOnDock_timer = new QTimer(this);
+    p->clickOnDock_timer->setSingleShot(true);
+    p->clickOnDock_timer->setInterval(500);
+
+#if defined(Q_OS_MAC) && defined(Q_PROCESSOR_X86_32)
+    objc_object* cls = objc_getClass("NSApplication");
+    SEL sharedApplication = sel_registerName("sharedApplication");
+    objc_object* appInst = objc_msgSend(cls,sharedApplication);
+
+    if(appInst != NULL)
+    {
+        objc_object* delegate = objc_msgSend(appInst, sel_registerName("delegate"));
+        objc_object* delClass = objc_msgSend(delegate,  sel_registerName("class"));
+        const char* tst = class_getName(delClass->isa);
+        bool test = class_addMethod((objc_class*)delClass, sel_registerName("applicationShouldHandleReopen:hasVisibleWindows:"), (IMP)dockClickHandler,"B@:");
+
+        Q_UNUSED(tst)
+        if (!test)
+        {
+            // failed to register handler...
+        }
+    }
+#endif
 }
 
 QString AsemanApplication::homePath()
 {
-    QString result;
+    if(aseman_app_home_path)
+        return *aseman_app_home_path;
+
+    aseman_app_home_path = new QString();
 
 #ifdef Q_OS_ANDROID
-    result = QDir::homePath();
+    *aseman_app_home_path = QDir::homePath();
 #else
 #ifdef Q_OS_IOS
-    result = QDir::homePath();
+    *aseman_app_home_path = QDir::homePath();
 #else
 #ifdef Q_OS_WIN
-    result = QDir::homePath() + "/AppData/Local/" + QCoreApplication::applicationName();
+    *aseman_app_home_path = QDir::homePath() + "/AppData/Local/" + QCoreApplication::applicationName();
 #else
-    result = QDir::homePath() + "/.config/" + QCoreApplication::applicationName();
+    *aseman_app_home_path = QDir::homePath() + "/.config/" + QCoreApplication::applicationName();
 #endif
 #endif
 #endif
 
-    return result;
+    return *aseman_app_home_path;
+}
+
+void AsemanApplication::setHomePath(const QString &path)
+{
+    homePath();
+    *aseman_app_home_path = path;
+
+    if(aseman_app_singleton)
+    {
+        emit aseman_app_singleton->homePathChanged();
+        emit aseman_app_singleton->logPathChanged();
+        emit aseman_app_singleton->confsPathChanged();
+        emit aseman_app_singleton->backupsPathChanged();
+    }
 }
 
 QString AsemanApplication::appPath()
@@ -132,9 +348,141 @@ QString AsemanApplication::cameraPath()
 #endif
 }
 
+QString AsemanApplication::applicationDirPath()
+{
+    return QCoreApplication::applicationDirPath();
+}
+
+QString AsemanApplication::applicationFilePath()
+{
+    return QCoreApplication::applicationFilePath();
+}
+
+qint64 AsemanApplication::applicationPid()
+{
+    return QCoreApplication::applicationPid();
+}
+
+void AsemanApplication::setOrganizationDomain(const QString &orgDomain)
+{
+    QCoreApplication::setOrganizationDomain(orgDomain);
+}
+
+QString AsemanApplication::organizationDomain()
+{
+    return QCoreApplication::organizationDomain();
+}
+
+void AsemanApplication::setOrganizationName(const QString &orgName)
+{
+    QCoreApplication::setOrganizationName(orgName);
+}
+
+QString AsemanApplication::organizationName()
+{
+    return QCoreApplication::organizationName();
+}
+
+void AsemanApplication::setApplicationName(const QString &application)
+{
+    QCoreApplication::setApplicationName(application);
+}
+
+QString AsemanApplication::applicationName()
+{
+    return QCoreApplication::applicationName();
+}
+
+void AsemanApplication::setApplicationVersion(const QString &version)
+{
+    QCoreApplication::setApplicationVersion(version);
+}
+
+QString AsemanApplication::applicationVersion()
+{
+    return QCoreApplication::applicationVersion();
+}
+
+void AsemanApplication::setApplicationDisplayName(const QString &name)
+{
+    SET_DIFINITION(setApplicationDisplayName, name)
+}
+
+QString AsemanApplication::applicationDisplayName()
+{
+    READ_DEFINITION(applicationDisplayName, QString())
+}
+
+QString AsemanApplication::platformName()
+{
+    READ_DEFINITION(platformName, QString())
+}
+
+QStringList AsemanApplication::arguments()
+{
+    return QCoreApplication::arguments();
+}
+
+void AsemanApplication::setQuitOnLastWindowClosed(bool quit)
+{
+    SET_DIFINITION(setQuitOnLastWindowClosed, quit)
+}
+
+bool AsemanApplication::quitOnLastWindowClosed()
+{
+    READ_DEFINITION(quitOnLastWindowClosed, false)
+}
+
+QClipboard *AsemanApplication::clipboard()
+{
+    READ_DEFINITION(clipboard, 0)
+}
+
+#ifdef QT_GUI_LIB
+void AsemanApplication::setWindowIcon(const QIcon &icon)
+{
+    SET_DIFINITION(setWindowIcon, icon)
+}
+
+QIcon AsemanApplication::windowIcon()
+{
+    READ_DEFINITION(windowIcon, QIcon())
+}
+#endif
+
+bool AsemanApplication::isRunning()
+{
+#if defined(QT_GUI_LIB) && defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
+    if(aseman_app_singleton->p->appType == WidgetApplication)
+        return static_cast<QtSingleApplication*>(QCoreApplication::instance())->isRunning();
+#endif
+
+    return false;
+}
+
+int AsemanApplication::appType()
+{
+    return aseman_app_singleton->p->appType;
+}
+
+void AsemanApplication::sendMessage(const QString &msg)
+{
+#if defined(QT_GUI_LIB) && defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
+    if(aseman_app_singleton->p->appType == WidgetApplication)
+        static_cast<QtSingleApplication*>(QCoreApplication::instance())->sendMessage(msg);
+#else
+    Q_UNUSED(msg)
+#endif
+}
+
 AsemanApplication *AsemanApplication::instance()
 {
     return aseman_app_singleton;
+}
+
+QCoreApplication *AsemanApplication::qapp()
+{
+    return QCoreApplication::instance();
 }
 
 void AsemanApplication::setGlobalFont(const QFont &font)
@@ -150,6 +498,28 @@ QFont AsemanApplication::globalFont() const
 {
     return p->globalFont;
 }
+
+QFont AsemanApplication::font()
+{
+    READ_DEFINITION(font, QFont())
+}
+
+void AsemanApplication::setFont(const QFont &f)
+{
+    SET_DIFINITION(setFont, f);
+}
+
+#ifdef QT_GUI_LIB
+QPalette AsemanApplication::palette()
+{
+    READ_DEFINITION(palette, QPalette())
+}
+
+void AsemanApplication::setPalette(const QPalette &pal)
+{
+    SET_DIFINITION(setPalette, pal);
+}
+#endif
 
 QSettings *AsemanApplication::settings()
 {
@@ -172,6 +542,19 @@ void AsemanApplication::back()
     emit backRequest();
 }
 
+int AsemanApplication::exec()
+{
+    p->clickOnDock_timer->stop();
+    p->clickOnDock_timer->start();
+
+    return p->app->exec();
+}
+
+void AsemanApplication::exit(int retcode)
+{
+    aseman_app_singleton->p->app->exit(retcode);
+}
+
 void AsemanApplication::sleep(quint64 ms)
 {
     QThread::msleep(ms);
@@ -187,27 +570,38 @@ QVariant AsemanApplication::readSetting(const QString &key, const QVariant &defa
     return settings()->value(key, defaultValue);
 }
 
-bool AsemanApplication::event(QEvent *e)
+bool AsemanApplication::eventFilter(QObject *o, QEvent *e)
 {
-#ifdef Q_OS_MAC
-    switch(e->type())
+    if(o == p->app)
     {
-    case QEvent::ApplicationActivate:
-        clickedOnDock();
-        break;
+#ifdef Q_OS_MAC
+        switch(e->type()) {
+        case QEvent::ApplicationActivate:
+            if(p->clickOnDock_timer->isActive())
+            {
+                p->clickOnDock_timer->stop();
+                p->clickOnDock_timer->start();
+            }
+            else
+                emit clickedOnDock();
+            break;
 
-    default:
-        break;
-    }
+        default:
+            break;
+        }
 #endif
+    }
 
-    return INHERIT_QAPP::event(e);
+    return QObject::eventFilter(o,e);
 }
 
 AsemanApplication::~AsemanApplication()
 {
     if(aseman_app_singleton == this)
         aseman_app_singleton = 0;
+
+    if(p->app && p->app_owner)
+        delete p->app;
 
     delete p;
 }

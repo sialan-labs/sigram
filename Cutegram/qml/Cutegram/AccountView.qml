@@ -3,7 +3,7 @@ import AsemanTools 1.0
 import AsemanTools.Controls 1.0
 import AsemanTools.Controls.Styles 1.0
 import Cutegram 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 import QtQuick.Window 2.0
 
@@ -28,6 +28,8 @@ Rectangle {
         currentTheme: Cutegram.emojisTheme
         userData: telegramObject.userData
         autoEmojis: Cutegram.autoEmojis
+        linkColor: Cutegram.currentTheme.messageLinkColor
+        linkVisitedColor: Cutegram.currentTheme.messageLinkVisitedColor
         replacements: {":)"   : "😀",
                        ":|"   : "😐",
                        ":("   : "😟",
@@ -80,6 +82,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: dialogs.right
         anchors.margins: 10*Devices.density
+        anchors.topMargin: 10*Devices.density
         placeholderText: qsTr("Search")
         textColor: Cutegram.currentTheme.searchBarTextColor
         font.family: Cutegram.currentTheme.searchBarFont.family
@@ -149,6 +152,7 @@ Rectangle {
         anchors.right: parent.right
         currentDialog: dialogs.currentDialog
         telegramObject: dialogs.telegramObject
+        singleBox: true
         onTagSearchRequest: search_frame.text = "#" + tag
     }
 
@@ -181,8 +185,8 @@ Rectangle {
             id: msg_window
             width: 800*Devices.density
             height: 500*Devices.density
-            x: View.x + View.width/2 - width/2
-            y: View.y + View.height/2 - height/2
+            x: View.window.x + View.window.width/2 - width/2
+            y: View.window.y + View.window.height/2 - height/2
             visible: true
             onVisibleChanged: {
                 if(visible)
@@ -210,6 +214,7 @@ Rectangle {
                 id: wmbox
                 anchors.fill: parent
                 telegramObject: dialogs.telegramObject
+                singleBox: false
                 onTagSearchRequest: {
                     search_frame.text = "#" + tag
                     View.show()
@@ -219,12 +224,25 @@ Rectangle {
 
             Component.onCompleted: {
                 windoweds_hash.insert(dId, msg_window )
-                x = View.x + View.width/2 - width/2
-                y = View.y + View.height/2 - height/2
+                x = View.window.x + View.window.width/2 - width/2
+                y = View.window.y + View.window.height/2 - height/2
                 width = 800*Devices.density
                 height = 500*Devices.density
             }
         }
+    }
+
+    Component {
+        id: sticker_install_component
+        StickerInstallDialog {
+            anchors.fill: parent
+            telegram: telegramObject
+            stickerSet: "CuttheRope"
+        }
+    }
+
+    function installSticker(shortName) {
+        sticker_install_component.createObject(acc_view, {"stickerSet": shortName})
     }
 
     function nextDialog() {

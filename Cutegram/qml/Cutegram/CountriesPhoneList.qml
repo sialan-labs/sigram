@@ -13,7 +13,7 @@ Item {
             countries_list.currentIndex = -1
     }
 
-    ListView {
+    AsemanListView {
         id: countries_list
         anchors.fill: parent
         currentIndex: -1

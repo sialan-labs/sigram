@@ -19,6 +19,7 @@
 #define UNITY_LIGHT (p->desktop->desktopSession()==AsemanDesktopTools::Unity && !p->desktop->titleBarIsDark())
 #define UNITY_ICON_PATH(NUM) "/tmp/aseman-telegram-client-trayicon" + QString::number(NUM) + (lowLevelDarkSystemTray()?"-dark":"-light") + ".png"
 #define SYSTRAY_ICON (lowLevelDarkSystemTray()?":/qml/Cutegram/files/systray-dark.png":":/qml/Cutegram/files/systray.png")
+#define SYSTRAY_ICON_STATUS QString("General/statusIconStyle_%1").arg(AsemanDesktopTools::desktopSession())
 
 #include "cutegram.h"
 #include "asemantools/asemanquickview.h"
@@ -26,16 +27,20 @@
 #include "asemantools/asemandesktoptools.h"
 #include "asemantools/asemandevices.h"
 #include "asemantools/asemanapplication.h"
+#include "asemantools/asemanlistrecord.h"
 #include "emoticonsmodel.h"
 #include "contributorsmodel.h"
 #include "themeitem.h"
+#include "texttohtmlconverter.h"
 #include "cutegramdialog.h"
 #include "textemojiwrapper.h"
+#include "cutegramencrypter.h"
+#include "stickerfilemanager.h"
 #include "emojis.h"
 #include "unitysystemtray.h"
 #include "pasteanalizer.h"
-#include <userdata.h>
 #include "cutegramenums.h"
+#include "authsaver.h"
 
 #include <QPointer>
 #include <QQmlContext>
@@ -55,6 +60,8 @@
 #include <QMimeDatabase>
 
 #include <telegramqml.h>
+#include <core/settings.h>
+#include <userdata.h>
 
 #ifdef Q_OS_WIN
 #include <QtWin>
@@ -70,7 +77,6 @@ public:
     QString appHash;
 
     QPointer<AsemanQuickView> viewer;
-    bool close_blocker;
     int sysTrayCounter;
     int startupOption;
     int statusIconStyle;
@@ -81,6 +87,8 @@ public:
     bool darkSystemTray;
     bool closingState;
     bool cutegramSubscribe;
+    bool kWallet;
+    bool nativeTitleBar;
     bool autoEmojis;
     bool smoothScroll;
     bool sendByCtrlEnter;
@@ -121,13 +129,17 @@ public:
 
     QStringList searchEngines;
     QString searchEngine;
+
+    CutegramEncrypter encrypter;
 };
 
 Cutegram::Cutegram(QObject *parent) :
     QObject(parent)
 {
     QFont default_font;
-#ifdef Q_OS_MAC
+    int startupOption = StartupAutomatic;
+#ifdef Q_OS_MACX
+    startupOption = StartupVisible;
     default_font.setPointSize(9);
 #endif
 #ifdef Q_OS_WIN
@@ -147,13 +159,15 @@ Cutegram::Cutegram(QObject *parent) :
     p->sysTrayCounter = 0;
     p->closingState = false;
     p->highlightColor = AsemanApplication::settings()->value("General/lastHighlightColor", p->mainPalette.highlight().color().name() ).toString();
-    p->startupOption = AsemanApplication::settings()->value("General/startupOption", static_cast<int>(StartupAutomatic) ).toInt();
-    p->statusIconStyle = AsemanApplication::settings()->value("General/statusIconStyle", static_cast<int>(StatusIconAutomatic) ).toInt();
+    p->startupOption = AsemanApplication::settings()->value("General/startupOption", startupOption).toInt();
+    p->statusIconStyle = AsemanApplication::settings()->value(SYSTRAY_ICON_STATUS, static_cast<int>(StatusIconAutomatic) ).toInt();
     p->notification = AsemanApplication::settings()->value("General/notification", true ).toBool();
     p->emojiOnHover = AsemanApplication::settings()->value("General/emojiOnHover", true ).toBool();
     p->minimumDialogs = AsemanApplication::settings()->value("General/minimumDialogs", false ).toBool();
     p->showLastMessage = AsemanApplication::settings()->value("General/showLastMessage", false ).toBool();
     p->cutegramSubscribe = AsemanApplication::settings()->value("General/cutegramSubscribe", true ).toBool();
+    p->kWallet = AsemanApplication::settings()->value("General/kWallet", true ).toBool();
+    p->nativeTitleBar = AsemanApplication::settings()->value("General/nativeTitleBar", allowNativeTitleBar() ).toBool();
     p->autoEmojis = AsemanApplication::settings()->value("General/autoEmojis", true ).toBool();
     p->smoothScroll = AsemanApplication::settings()->value("General/smoothScroll", true ).toBool();
     p->sendByCtrlEnter = AsemanApplication::settings()->value("General/sendByCtrlEnter", false ).toBool();
@@ -170,11 +184,9 @@ Cutegram::Cutegram(QObject *parent) :
     p->searchEngines = QStringList() << "https://duckduckgo.com/?q=" << "https://google.com/?q=" << "https://bing.com/?q=";
 
 #ifdef Q_OS_ANDROID
-    p->close_blocker = true;
     p->translationsPath = "assets:/files/translations";
     p->themesPath = "assets:/themes";
 #else
-    p->close_blocker = false;
     p->translationsPath = AsemanDevices::resourcePath() + "/files/translations/";
     p->themesPath = AsemanDevices::resourcePath() + "/themes/";
     p->emojisThemesPath = AsemanDevices::resourcePath() + "/emojis/";
@@ -186,6 +198,7 @@ Cutegram::Cutegram(QObject *parent) :
 
     QDir().mkpath(personalStickerDirectory());
 
+    qmlRegisterType<StickerFileManager>("Cutegram", 1, 0, "StickerFileManager");
     qmlRegisterType<ContributorsModel>("Cutegram", 1, 0, "ContributorsModel");
     qmlRegisterType<CutegramEnums>("Cutegram", 1, 0, "CutegramEnums");
     qmlRegisterType<ThemeItem>("Cutegram", 1, 0, "CutegramTheme");
@@ -194,6 +207,7 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<EmoticonsModel>("Cutegram", 1, 0, "EmoticonsModel");
     qmlRegisterType<CutegramDialog>("Cutegram", 1, 0, "CutegramDialog");
     qmlRegisterType<PasteAnalizer>("Cutegram", 1, 0, "PasteAnalizer");
+    qmlRegisterType<TextToHtmlConverter>("Cutegram", 1, 0, "TextToHtmlConverter");
 
     init_languages();
 }
@@ -354,12 +368,26 @@ void Cutegram::start(bool forceVisible)
     if( p->viewer )
         return;
 
-    p->viewer = new AsemanQuickView( AsemanQuickView::AllExceptLogger );
+    p->viewer = new AsemanQuickView();
     p->viewer->engine()->rootContext()->setContextProperty( "Cutegram", this );
+    p->viewer->setColor(QColor(0,0,0,0));
+    p->viewer->setFlags(Qt::Window|
+                        (nativeTitleBar()?Qt::FramelessWindowHint|Qt::NoDropShadowWindowHint:
+                                          Qt::Widget)|
+                        Qt::WindowTitleHint|
+                        Qt::WindowSystemMenuHint|
+                        Qt::WindowMinMaxButtonsHint|
+                        Qt::WindowCloseButtonHint|
+                        Qt::WindowFullscreenButtonHint);
+
     init_theme();
 
-
     p->viewer->setSource(QUrl(QStringLiteral("qrc:/qml/Cutegram/main.qml")));
+
+    QPoint point = AsemanApplication::settings()->value("General/position").toPoint();
+    if(!point.isNull())
+        p->viewer->setPosition(point);
+
 #ifdef Q_OS_WIN
     QtWin::extendFrameIntoClientArea(p->viewer,-1,-1,-1,-1);
 #endif
@@ -382,6 +410,7 @@ void Cutegram::start(bool forceVisible)
     if(forceVisible)
         p->viewer->show();
 
+    p->viewer->installEventFilter(this);
     init_systray();
 }
 
@@ -395,18 +424,18 @@ void Cutegram::logout(const QString &phone)
 {
     const QString &home = AsemanApplication::homePath();
     const QString &ppath = home + "/" + phone;
-    QFile::remove(ppath + "/auth");
     QFile::remove(ppath + "/config");
     QFile::remove(ppath + "/secret");
-//    QFile::remove(ppath + "/database.db");
-//    QFile::remove(ppath + "/database.db-journal");
+    QFile::remove(ppath + "/database.db");
+    QFile::remove(ppath + "/database.db-journal");
+
+    Settings::clearAuth(home, phone);
 
     restart();
 }
 
 void Cutegram::close()
 {
-    p->close_blocker = false;
     p->viewer->close();
 }
 
@@ -443,9 +472,48 @@ void Cutegram::configure()
 
 void Cutegram::incomingAppMessage(const QString &msg)
 {
-    if( msg == "show" )
+    AsemanListRecord record(msg.toUtf8());
+    const QList<QByteArray> &list = record.toQByteArrayList();
+
+    foreach(const QByteArray &data, list)
     {
-        active();
+        QString msgPart = data;
+        if( msgPart == "show" )
+        {
+            active();
+        }
+        else
+        if(msgPart.left(5) == "tg://")
+        {
+            const QString &tgMsg = msgPart.mid(5);
+            const int index = tgMsg.indexOf("?");
+            if(index == -1)
+            {
+                const QString &cmd = tgMsg;
+                Q_UNUSED(cmd)
+                return;
+            }
+
+            const QString &cmd = tgMsg.left(index);
+            const QStringList &args = tgMsg.mid(index+1).split("?", QString::SkipEmptyParts);
+            if(cmd.toLower() == "addstickers")
+            {
+                QString set;
+                foreach(const QString &arg, args)
+                {
+                    const int index = arg.indexOf("=");
+                    if(index < 0)
+                        continue;
+
+                    const QString &argName = arg.left(index);
+                    if(argName == "set")
+                        set = arg.mid(index+1);
+                }
+
+                installSticker(set);
+            }
+
+        }
     }
 }
 
@@ -465,6 +533,13 @@ void Cutegram::addToPersonal(const QString &src)
         file = file.mid(AsemanDevices::localFilesPrePath().length());
 
     QFile::copy(file, personalStickerDirectory() + "/" + QFileInfo(src).baseName() + ".webp");
+}
+
+void Cutegram::installSticker(const QString &shortName)
+{
+    QVariant shortNameVar = shortName;
+    QMetaObject::invokeMethod(p->viewer->root(), "installSticker", Q_ARG(QVariant, shortNameVar));
+    active();
 }
 
 void Cutegram::setSysTrayCounter(int count, bool force)
@@ -502,18 +577,11 @@ bool Cutegram::eventFilter(QObject *o, QEvent *e)
     {
         switch( static_cast<int>(e->type()) )
         {
-        case QEvent::Close:
-            if( p->close_blocker )
-            {
-                static_cast<QCloseEvent*>(e)->ignore();
-                emit backRequest();
-            }
-            else
-            {
-                static_cast<QCloseEvent*>(e)->accept();
-            }
-
-            return false;
+        case QEvent::Move:
+        {
+            QMoveEvent *me = static_cast<QMoveEvent*>(e);
+            AsemanApplication::settings()->setValue("General/position", me->pos());
+        }
             break;
         }
     }
@@ -754,6 +822,54 @@ bool Cutegram::smoothScroll() const
     return p->smoothScroll;
 }
 
+void Cutegram::setKWallet(bool stt)
+{
+    if(p->kWallet == stt)
+        return;
+
+    p->kWallet = stt;
+    AsemanApplication::settings()->setValue("General/kWallet", stt);
+
+    emit kWalletChanged();
+}
+
+bool Cutegram::kWallet() const
+{
+    return p->kWallet;
+}
+
+void Cutegram::setNativeTitleBar(bool stt)
+{
+    if(p->nativeTitleBar == stt)
+        return;
+
+    p->nativeTitleBar = stt;
+    AsemanApplication::settings()->setValue("General/nativeTitleBar", stt);
+
+    emit nativeTitleBarChanged();
+}
+
+bool Cutegram::nativeTitleBar() const
+{
+    return p->nativeTitleBar;
+}
+
+bool Cutegram::allowNativeTitleBar() const
+{
+#ifdef Q_OS_MACX
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
+    switch(static_cast<int>(QSysInfo::macVersion()))
+    {
+    case QSysInfo::MV_YOSEMITE:
+    case QSysInfo::MV_ELCAPITAN:
+        return true;
+        break;
+    }
+#endif
+#endif
+    return false;
+}
+
 void Cutegram::setBackground(const QString &background)
 {
     if(p->background == background)
@@ -886,7 +1002,7 @@ void Cutegram::setStatusIconStyle(int style)
         return;
 
     p->statusIconStyle = style;
-    AsemanApplication::settings()->setValue("General/statusIconStyle", style);
+    AsemanApplication::settings()->setValue(SYSTRAY_ICON_STATUS, style);
 
     emit cutegramSubscribeChanged();
 
@@ -971,6 +1087,16 @@ QString Cutegram::searchEngine() const
 QString Cutegram::personalStickerDirectory() const
 {
     return AsemanApplication::homePath() + "/stickers/Personal";
+}
+
+DatabaseAbstractEncryptor *Cutegram::encrypter()
+{
+    return &p->encrypter;
+}
+
+void Cutegram::setEncrypterKey(const QString &key)
+{
+    p->encrypter.setKey(key);
 }
 
 bool Cutegram::isLoggedIn(const QString &phone) const

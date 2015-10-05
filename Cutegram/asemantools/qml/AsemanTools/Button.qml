@@ -47,6 +47,7 @@ Rectangle {
     property string hoverColor: normalColor
 
     property alias textColor: txt.color
+    property alias rowWidth: row.width
 
     property alias cursorShape: marea.cursorShape
     property real textMargin: 0

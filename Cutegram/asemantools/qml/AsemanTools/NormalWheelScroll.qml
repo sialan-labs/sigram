@@ -25,7 +25,7 @@ MouseArea {
     property Flickable flick
     property bool animated: true
     property bool reverse: false
-    property bool naturalScroll: false
+    property bool naturalScroll: View.reverseScroll
 
     property real endContentY
 

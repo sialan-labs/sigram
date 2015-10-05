@@ -9,12 +9,12 @@ android {
 
     QT += androidextras
     SOURCES += \
-        asemantools/asemanjavalayer.cpp \
-        asemantools/asemanandroidservice.cpp
+        $$PWD/asemanjavalayer.cpp \
+        $$PWD/asemanandroidservice.cpp
 
     HEADERS += \
-        asemantools/asemanjavalayer.h \
-        asemantools/asemanandroidservice.h
+        $$PWD/asemanjavalayer.h \
+        $$PWD/asemanandroidservice.h
 } else {
     ios {
 
@@ -22,59 +22,60 @@ android {
         contains(BUILD_MODE,ubuntutouch) {
             DEFINES += Q_OS_UBUNTUTOUCH
         } else {
-            QT += widgets
+        contains(QT,widgets) {
 
             HEADERS += \
-                asemantools/qtsingleapplication/qtsinglecoreapplication.h \
-                asemantools/qtsingleapplication/qtsingleapplication.h \
-                asemantools/qtsingleapplication/qtlockedfile.h \
-                asemantools/qtsingleapplication/qtlocalpeer.h
+                $$PWD/qtsingleapplication/qtsinglecoreapplication.h \
+                $$PWD/qtsingleapplication/qtsingleapplication.h \
+                $$PWD/qtsingleapplication/qtlockedfile.h \
+                $$PWD/qtsingleapplication/qtlocalpeer.h
 
             SOURCES += \
-                asemantools/qtsingleapplication/qtsinglecoreapplication.cpp \
-                asemantools/qtsingleapplication/qtsingleapplication.cpp \
-                asemantools/qtsingleapplication/qtlockedfile.cpp \
-                asemantools/qtsingleapplication/qtlocalpeer.cpp
+                $$PWD/qtsingleapplication/qtsinglecoreapplication.cpp \
+                $$PWD/qtsingleapplication/qtsingleapplication.cpp \
+                $$PWD/qtsingleapplication/qtlockedfile.cpp \
+                $$PWD/qtsingleapplication/qtlocalpeer.cpp
 
-            win32: SOURCES += asemantools/qtsingleapplication/qtlockedfile_win.cpp
-            unix:  SOURCES += asemantools/qtsingleapplication/qtlockedfile_unix.cpp
+            win32: SOURCES += $$PWD/qtsingleapplication/qtlockedfile_win.cpp
+            unix:  SOURCES += $$PWD/qtsingleapplication/qtlockedfile_unix.cpp
+        }
         }
     }
 }
 
 QML_IMPORT_PATH = \
-    asemantools/qml/
+    $$PWD/qml/
 
 contains(QT,macextras) {
-    SOURCES += asemantools/private/asemanmactaskbarbuttonengine.cpp
-    HEADERS += asemantools/private/asemanmactaskbarbuttonengine.h
+    SOURCES += $$PWD/private/asemanmactaskbarbuttonengine.cpp
+    HEADERS += $$PWD/private/asemanmactaskbarbuttonengine.h
 }
 contains(QT,winextras) {
-    SOURCES += asemantools/private/asemanwintaskbarbuttonengine.cpp
-    HEADERS += asemantools/private/asemanwintaskbarbuttonengine.h
+    SOURCES += $$PWD/private/asemanwintaskbarbuttonengine.cpp
+    HEADERS += $$PWD/private/asemanwintaskbarbuttonengine.h
 }
 contains(QT,sensors) {
     DEFINES += ASEMAN_SENSORS
-    SOURCES += asemantools/asemansensors.cpp
-    HEADERS += asemantools/asemansensors.h
+    SOURCES += $$PWD/asemansensors.cpp
+    HEADERS += $$PWD/asemansensors.h
 }
 contains(QT,widgets) {
     DEFINES += NATIVE_ASEMAN_NOTIFICATION
     SOURCES +=  \
-        asemantools/asemannativenotification.cpp \
-        asemantools/asemannativenotificationitem.cpp
+        $$PWD/asemannativenotification.cpp \
+        $$PWD/asemannativenotificationitem.cpp
     HEADERS +=  \
-        asemantools/asemannativenotification.h \
-        asemantools/asemannativenotificationitem.h
+        $$PWD/asemannativenotification.h \
+        $$PWD/asemannativenotificationitem.h
 }
 contains(QT,multimedia) {
     DEFINES += ASEMAN_MULTIMEDIA
     SOURCES +=  \
-        asemantools/asemanaudiorecorder.cpp \
-        asemantools/asemanaudioencodersettings.cpp
+        $$PWD/asemanaudiorecorder.cpp \
+        $$PWD/asemanaudioencodersettings.cpp
     HEADERS +=  \
-        asemantools/asemanaudiorecorder.h \
-        asemantools/asemanaudioencodersettings.h
+        $$PWD/asemanaudiorecorder.h \
+        $$PWD/asemanaudioencodersettings.h
 }
 contains(QT,webkitwidgets) {
     DEFINES += ASEMAN_WEBKIT
@@ -85,94 +86,122 @@ contains(QT,webenginewidgets) {
 linux|openbsd {
 contains(QT,dbus) {
     DEFINES += LINUX_NATIVE_ASEMAN_NOTIFICATION
-    SOURCES += asemantools/asemanlinuxnativenotification.cpp \
-        asemantools/private/asemanunitytaskbarbuttonengine.cpp
-    HEADERS += asemantools/asemanlinuxnativenotification.h \
-        asemantools/private/asemanunitytaskbarbuttonengine.h
+    SOURCES += $$PWD/asemanlinuxnativenotification.cpp \
+        $$PWD/private/asemanunitytaskbarbuttonengine.cpp \
+        $$PWD/asemankdewallet.cpp
+    HEADERS += $$PWD/asemanlinuxnativenotification.h \
+        $$PWD/private/asemanunitytaskbarbuttonengine.h \
+        $$PWD/asemankdewallet.h
 }
 }
 macx {
+    !contains(DEFINES, DISABLE_CORE_SERVICES) {
+        LIBS += -framework CoreServices
+        INCLUDEPATH += /System/Library/Frameworks/CoreServices.framework/Headers/
+        DEFINES += OSX_CORE_SERVICES_AVAILABLE
+    }
+    !contains(QMAKE_HOST.arch, x86_64) {
+        LIBS +=  -framework CoreFoundation -framework Carbon -lobjc
+    }
+
     DEFINES += MAC_NATIVE_ASEMAN_NOTIFICATION
-    SOURCES += asemantools/asemanmacnativenotification.cpp
-    HEADERS += asemantools/asemanmacnativenotification.h
+    SOURCES += $$PWD/asemanmacnativenotification.cpp
+    HEADERS += $$PWD/asemanmacnativenotification.h
 }
 
 SOURCES += \
-    asemantools/asemandevices.cpp \
-    asemantools/asemanqtlogger.cpp \
-    asemantools/asemantools.cpp \
-    asemantools/asemandesktoptools.cpp \
-    asemantools/asemanlistobject.cpp \
-    asemantools/asemanhashobject.cpp \
-    asemantools/asemanquickview.cpp \
-    asemantools/asemanapplication.cpp \
-    asemantools/asemancalendarconvertercore.cpp \
-    asemantools/asemancalendarconverter.cpp \
-    asemantools/asemanbackhandler.cpp \
-    asemantools/asemansysteminfo.cpp \
-    asemantools/asemanabstractcolorfulllistmodel.cpp \
-    asemantools/asemanimagecoloranalizor.cpp \
-    asemantools/asemancountriesmodel.cpp \
-    asemantools/asemanmimedata.cpp \
-    asemantools/asemanmimeapps.cpp \
-    asemantools/asemandragobject.cpp \
-    asemantools/asemandownloader.cpp \
-    asemantools/asemannotification.cpp \
-    asemantools/asemanautostartmanager.cpp \
-    asemantools/asemanquickitemimagegrabber.cpp \
-    asemantools/asemanquickobject.cpp \
-    asemantools/asemanfilesystemmodel.cpp \
-    asemantools/asemandebugobjectcounter.cpp \
-    asemantools/asemanfiledownloaderqueue.cpp \
-    asemantools/asemanfiledownloaderqueueitem.cpp \
-    asemantools/asemanwebpagegrabber.cpp \
-    asemantools/asemantitlebarcolorgrabber.cpp \
-    asemantools/asemantaskbarbutton.cpp \
-    asemantools/private/asemanabstracttaskbarbuttonengine.cpp \
-    asemantools/asemanmapdownloader.cpp
+    $$PWD/asemandevices.cpp \
+    $$PWD/asemanqtlogger.cpp \
+    $$PWD/asemantools.cpp \
+    $$PWD/asemandesktoptools.cpp \
+    $$PWD/asemanlistobject.cpp \
+    $$PWD/asemanhashobject.cpp \
+    $$PWD/asemanquickview.cpp \
+    $$PWD/asemanapplication.cpp \
+    $$PWD/asemancalendarconvertercore.cpp \
+    $$PWD/asemancalendarconverter.cpp \
+    $$PWD/asemanbackhandler.cpp \
+    $$PWD/asemansysteminfo.cpp \
+    $$PWD/asemanabstractcolorfulllistmodel.cpp \
+    $$PWD/asemanimagecoloranalizor.cpp \
+    $$PWD/asemancountriesmodel.cpp \
+    $$PWD/asemanmimedata.cpp \
+    $$PWD/asemanmimeapps.cpp \
+    $$PWD/asemandragobject.cpp \
+    $$PWD/asemandownloader.cpp \
+    $$PWD/asemannotification.cpp \
+    $$PWD/asemanautostartmanager.cpp \
+    $$PWD/asemanquickitemimagegrabber.cpp \
+    $$PWD/asemanquickobject.cpp \
+    $$PWD/asemanfilesystemmodel.cpp \
+    $$PWD/asemandebugobjectcounter.cpp \
+    $$PWD/asemanfiledownloaderqueue.cpp \
+    $$PWD/asemanfiledownloaderqueueitem.cpp \
+    $$PWD/asemanwebpagegrabber.cpp \
+    $$PWD/asemantitlebarcolorgrabber.cpp \
+    $$PWD/asemantaskbarbutton.cpp \
+    $$PWD/private/asemanabstracttaskbarbuttonengine.cpp \
+    $$PWD/asemanmapdownloader.cpp \
+    $$PWD/asemandragarea.cpp \
+    $$PWD/asemanabstractlistmodel.cpp \
+    $$PWD/asemanqttools.cpp \
+    $$PWD/asemancalendarmodel.cpp \
+    $$PWD/asemanlistrecord.cpp \
+    $$PWD/asemanquickviewwrapper.cpp \
+    $$PWD/asemanfonthandler.cpp \
+    $$PWD/asemansimpleqtcryptor.cpp
 
 HEADERS += \
-    asemantools/asemandevices.h \
-    asemantools/asemanqtlogger.h \
-    asemantools/asemantools.h \
-    asemantools/asemandesktoptools.h \
-    asemantools/asemanlistobject.h \
-    asemantools/asemanhashobject.h \
-    asemantools/asemanquickview.h \
-    asemantools/asemanapplication.h \
-    asemantools/aseman_macros.h \
-    asemantools/asemancalendarconvertercore.h \
-    asemantools/asemancalendarconverter.h \
-    asemantools/asemanbackhandler.h \
-    asemantools/asemansysteminfo.h \
-    asemantools/asemanabstractcolorfulllistmodel.h \
-    asemantools/asemanimagecoloranalizor.h \
-    asemantools/asemancountriesmodel.h \
-    asemantools/asemanmimedata.h \
-    asemantools/asemanmimeapps.h \
-    asemantools/asemandragobject.h \
-    asemantools/asemandownloader.h \
-    asemantools/asemannotification.h \
-    asemantools/asemanautostartmanager.h \
-    asemantools/asemanquickitemimagegrabber.h \
-    asemantools/asemanquickobject.h \
-    asemantools/asemanfilesystemmodel.h \
-    asemantools/asemandebugobjectcounter.h \
-    asemantools/asemanfiledownloaderqueue.h \
-    asemantools/asemanfiledownloaderqueueitem.h \
-    asemantools/asemanwebpagegrabber.h \
-    asemantools/asemantitlebarcolorgrabber.h \
-    asemantools/asemantaskbarbutton.h \
-    asemantools/private/asemanabstracttaskbarbuttonengine.h \
-    asemantools/asemanmapdownloader.h
+    $$PWD/asemandevices.h \
+    $$PWD/asemanqtlogger.h \
+    $$PWD/asemantools.h \
+    $$PWD/asemandesktoptools.h \
+    $$PWD/asemanlistobject.h \
+    $$PWD/asemanhashobject.h \
+    $$PWD/asemanquickview.h \
+    $$PWD/asemanapplication.h \
+    $$PWD/aseman_macros.h \
+    $$PWD/asemancalendarconvertercore.h \
+    $$PWD/asemancalendarconverter.h \
+    $$PWD/asemanbackhandler.h \
+    $$PWD/asemansysteminfo.h \
+    $$PWD/asemanabstractcolorfulllistmodel.h \
+    $$PWD/asemanimagecoloranalizor.h \
+    $$PWD/asemancountriesmodel.h \
+    $$PWD/asemanmimedata.h \
+    $$PWD/asemanmimeapps.h \
+    $$PWD/asemandragobject.h \
+    $$PWD/asemandownloader.h \
+    $$PWD/asemannotification.h \
+    $$PWD/asemanautostartmanager.h \
+    $$PWD/asemanquickitemimagegrabber.h \
+    $$PWD/asemanquickobject.h \
+    $$PWD/asemanfilesystemmodel.h \
+    $$PWD/asemandebugobjectcounter.h \
+    $$PWD/asemanfiledownloaderqueue.h \
+    $$PWD/asemanfiledownloaderqueueitem.h \
+    $$PWD/asemanwebpagegrabber.h \
+    $$PWD/asemantitlebarcolorgrabber.h \
+    $$PWD/asemantaskbarbutton.h \
+    $$PWD/private/asemanabstracttaskbarbuttonengine.h \
+    $$PWD/asemanmapdownloader.h \
+    $$PWD/asemandragarea.h \
+    $$PWD/asemanabstractlistmodel.h \
+    $$PWD/asemanqttools.h \
+    $$PWD/asemancalendarmodel.h \
+    $$PWD/asemanlistrecord.h \
+    $$PWD/asemanquickviewwrapper.h \
+    $$PWD/asemanfonthandler.h \
+    $$PWD/asemansimpleqtcryptor.h \
+    $$PWD/private/serpent_sbox.h
 
 OTHER_FILES += \
-    asemantools/android-build/src/land/aseman/android/AsemanActivity.java \
-    asemantools/android-build/src/land/aseman/android/AsemanApplication.java \
-    asemantools/android-build/src/land/aseman/android/AsemanJavaLayer.java \
-    asemantools/android-build/src/land/aseman/android/AsemanService.java \
-    asemantools/android-build/src/land/aseman/android/AsemanBootBroadcast.java \
-    asemantools/android-build/src/land/aseman/android/AsemanServiceDelegate.java
+    $$PWD/android-build/src/land/aseman/android/AsemanActivity.java \
+    $$PWD/android-build/src/land/aseman/android/AsemanApplication.java \
+    $$PWD/android-build/src/land/aseman/android/AsemanJavaLayer.java \
+    $$PWD/android-build/src/land/aseman/android/AsemanService.java \
+    $$PWD/android-build/src/land/aseman/android/AsemanBootBroadcast.java \
+    $$PWD/android-build/src/land/aseman/android/AsemanServiceDelegate.java
 
 RESOURCES += \
-    asemantools/asemanresource.qrc
+    $$PWD/asemanresource.qrc

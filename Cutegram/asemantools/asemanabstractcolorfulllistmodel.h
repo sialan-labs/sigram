@@ -19,12 +19,14 @@
 #ifndef ASEMANABSTRACTCOLORFULLLISTMODEL_H
 #define ASEMANABSTRACTCOLORFULLLISTMODEL_H
 
-#include <QAbstractListModel>
+#include "asemanabstractlistmodel.h"
 #include <QColor>
 
-class AsemanAbstractColorfullListModel : public QAbstractListModel
+class AsemanAbstractColorfullListModel : public AsemanAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(ColorfullListModelRoles)
+
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:

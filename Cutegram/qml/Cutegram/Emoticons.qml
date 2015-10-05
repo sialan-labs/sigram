@@ -18,7 +18,7 @@
 
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 import Cutegram 1.0
 
 Item {
@@ -29,9 +29,13 @@ Item {
 
     property bool recent: true
     property variant accountEmojis: emojis
+    property alias telegramObject: stickers_model.telegram
+
+    property real panelWidth: 125*Devices.density
 
     signal emojiSelected( string code )
     signal stickerSelected( string path )
+    signal stickerDocumentSelected(variant document)
 
     MouseArea {
         anchors.fill: parent
@@ -40,48 +44,116 @@ Item {
         onWheel: wheel.accepted = true
     }
 
+    StickersModel {
+        id: stickers_model
+    }
+
     EmoticonsModel {
         id: emodel
         emojis: accountEmojis
         stickerSubPaths: [Devices.localFilesPrePath + AsemanApp.homePath + "/stickers", Devices.resourcePath + "/stickers"]
     }
 
-    ListView {
+    Rectangle {
+        height: parent.height
+        width: 1*Devices.density
+        anchors.left: tab_row.right
+        color: "#22000000"
+    }
+
+    AsemanListView {
         id: tab_row
-        width: parent.width
-        height: 30*Devices.density
-        anchors.top: parent.top
-        orientation: ListView.Horizontal
-        model: emodel.keys
-        delegate: Button {
-            width: tab_row.width/tab_row.count
-            height: tab_row.height
-            textFont.family: AsemanApp.globalFont.family
-            textFont.pixelSize: Math.floor(9*Devices.fontDensity)
-            normalColor: "#00000000"
-            highlightColor: "#0f000000"
-            cursorShape: Qt.PointingHandCursor
-            textColor: emodel.currentKeyIndex==index? "#333333" : Cutegram.currentTheme.masterColor
-            text: Cutegram.normalizeText(emodel.keys[index])
-            onClicked: emodel.currentKey = emodel.keys[index]
+        x: 6*Devices.density
+        width: panelWidth
+        height: parent.height
+        orientation: ListView.Vertical
+        model: {
+            var result = new Array
+            for(var i=0 ;i<emodel.keys.length; i++)
+                result[result.length] = emodel.keys[i]
+            for(var i=0 ;i<stickers_model.installedStickerSets.length; i++)
+                result[result.length] = stickers_model.installedStickerSets[i]
+            return result
+        }
+
+        delegate: Item {
+            id: titem
+            height: 30*Devices.density
+            width: tab_row.width
+
+            property variant itemObject
+
+            Component.onCompleted: {
+                if(index < emodel.keys.length)
+                    itemObject = tab_emoji_icon.createObject(titem, {"index": index})
+                else {
+                    var idx = index - emodel.keys.length
+                    var sid = stickers_model.installedStickerSets[idx]
+                    var doc = stickers_model.stickerSetThumbnailDocument(sid)
+                    var set = stickers_model.stickerSetItem(sid)
+
+                    itemObject = tab_sticker_icon.createObject(titem, {"index": index, "document": doc, "stickerSet": set, "currentStickerSet": sid})
+                }
+            }
         }
     }
 
-    GridView {
+    AsemanGridView {
         id: slist
-        anchors.left: parent.left
+        anchors.fill: elist
+        clip: true
+        model: stickers_model
+        visible: count != 0
+        cellWidth: 90*Devices.density
+        cellHeight: cellWidth
+        delegate: Rectangle {
+            width: slist.cellWidth
+            height: slist.cellHeight
+            color: marea.pressed? "#66ffffff" : "#00000000"
+
+            Image {
+                anchors.fill: parent
+                anchors.margins: 5*Devices.density
+                sourceSize: Qt.size(width, height)
+                source: sticker_handler.filePath
+                smooth: true
+                fillMode: Image.PreserveAspectFit
+                asynchronous: true
+            }
+
+            FileHandler {
+                id: sticker_handler
+                target: model.document
+                telegram: telegramObject
+                Component.onCompleted: download()
+            }
+
+            MouseArea {
+                id: marea
+                anchors.fill: parent
+                onClicked: {
+                    smilies.stickerDocumentSelected(model.document)
+                }
+            }
+        }
+    }
+
+    AsemanGridView {
+        id: elist
+        anchors.left: tab_row.right
         anchors.right: parent.right
-        anchors.top: tab_row.bottom
+        anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.margins: 4*Devices.density
         clip: true
         model: emodel
-        cellWidth: emodel.currentKeyIndex>1? 100*Devices.density : 32*Devices.density
+        visible: !slist.visible
+        cellWidth: emodel.currentKeyIndex>1? 90*Devices.density : 32*Devices.density
         cellHeight: cellWidth
         delegate: Rectangle {
             id: item
-            width: slist.cellWidth
-            height: slist.cellHeight
+            width: elist.cellWidth
+            height: elist.cellHeight
             color: marea.pressed? "#66ffffff" : "#00000000"
 
             Image {
@@ -131,12 +203,101 @@ Item {
     }
 
     NormalWheelScroll {
-        flick: slist
+        flick: elist
+        visible: elist.visible
         animated: Cutegram.smoothScroll
+    }
+
+    NormalWheelScroll {
+        flick: slist
+        visible: slist.visible
+        animated: Cutegram.smoothScroll
+    }
+
+    PhysicalScrollBar {
+        scrollArea: elist; width: 6*Devices.density; anchors.right: parent.right; anchors.top: elist.top;
+        anchors.bottom: elist.bottom; color: "#333333"
+        visible: elist.visible
     }
 
     PhysicalScrollBar {
         scrollArea: slist; width: 6*Devices.density; anchors.right: parent.right; anchors.top: slist.top;
         anchors.bottom: slist.bottom; color: "#333333"
+        visible: slist.visible
+    }
+
+    NormalWheelScroll {
+        flick: tab_row
+        animated: Cutegram.smoothScroll
+    }
+
+    PhysicalScrollBar {
+        scrollArea: tab_row; width: 6*Devices.density; anchors.left: parent.left; anchors.top: tab_row.top;
+        anchors.bottom: tab_row.bottom; color: "#333333"
+    }
+
+    Component {
+        id: tab_emoji_icon
+        Button {
+            anchors.fill: parent
+            rowWidth: panelWidth - 8*Devices.density
+            clip: true
+            textFont.family: AsemanApp.globalFont.family
+            textFont.pixelSize: Math.floor(9*Devices.fontDensity)
+            normalColor: "#00000000"
+            highlightColor: "#0f000000"
+            cursorShape: Qt.PointingHandCursor
+            textColor: emodel.currentKeyIndex==index && stickers_model.currentStickerSet == 0? "#333333" : Cutegram.currentTheme.masterColor
+            text: Cutegram.normalizeText(emodel.keys[index])
+            icon: emodel.keysIcons[index]
+            iconHeight: height - 4*Devices.density
+            onClicked: {
+                emodel.currentKey = emodel.keys[index]
+                stickers_model.currentStickerSet = ""
+            }
+
+            property int index
+        }
+    }
+
+    Component {
+        id: tab_sticker_icon
+        Button {
+            id: sitem
+            anchors.fill: parent
+            rowWidth: panelWidth - 8*Devices.density
+            clip: true
+            icon: handler.filePath
+            textFont.family: AsemanApp.globalFont.family
+            textFont.pixelSize: Math.floor(9*Devices.fontDensity)
+            normalColor: "#00000000"
+            highlightColor: "#0f000000"
+            cursorShape: Qt.PointingHandCursor
+            iconHeight: height - 4*Devices.density
+            textColor: stickers_model.currentStickerSet == currentStickerSet? "#333333" : Cutegram.currentTheme.masterColor
+            text: {
+                var res = sitem.stickerSet.title
+                if(res.length <= 13)
+                    return res
+                else
+                    return res.slice(0, 12) + "..."
+            }
+
+            property Document document
+            property StickerSet stickerSet
+            property int index
+            property string currentStickerSet
+
+            onClicked: {
+                stickers_model.currentStickerSet = currentStickerSet
+            }
+
+            FileHandler {
+                id: handler
+                target: sitem.document
+                telegram: telegramObject
+                Component.onCompleted: download()
+            }
+        }
     }
 }

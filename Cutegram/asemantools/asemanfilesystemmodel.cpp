@@ -113,7 +113,7 @@ bool fileListSort(const QFileInfo &f1, const QFileInfo &f2)
 
 
 AsemanFileSystemModel::AsemanFileSystemModel(QObject *parent) :
-    QAbstractListModel(parent)
+    AsemanAbstractListModel(parent)
 {
     p = new AsemanFileSystemModelPrivate;
     p->showDirs = true;

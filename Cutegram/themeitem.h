@@ -77,6 +77,8 @@ class ThemeItem : public AsemanQuickObject
     Q_PROPERTY(qreal messageShadowSize READ messageShadowSize WRITE setMessageShadowSize NOTIFY messageShadowSizeChanged)
     Q_PROPERTY(QColor messageShadowColor READ messageShadowColor WRITE setMessageShadowColor NOTIFY messageShadowColorChanged)
     Q_PROPERTY(qreal messagePointerHeight READ messagePointerHeight WRITE setMessagePointerHeight NOTIFY messagePointerHeightChanged)
+    Q_PROPERTY(QColor messageLinkColor READ messageLinkColor WRITE setMessageLinkColor NOTIFY messageLinkColorChanged)
+    Q_PROPERTY(QColor messageLinkVisitedColor READ messageLinkVisitedColor WRITE setMessageLinkVisitedColor NOTIFY messageLinkVisitedColorChanged)
     Q_PROPERTY(QColor headerColor READ headerColor WRITE setHeaderColor NOTIFY headerColorChanged)
     Q_PROPERTY(QColor headerTitleColor READ headerTitleColor WRITE setHeaderTitleColor NOTIFY headerTitleColorChanged)
     Q_PROPERTY(QFont headerTitleFont READ headerTitleFont WRITE setHeaderTitleFont NOTIFY headerTitleFontChanged)
@@ -883,6 +885,31 @@ public:
         emit changed();
     }
 
+    QColor messageLinkColor() const {
+        return _messageLinkColor;
+    }
+
+    void setMessageLinkColor(const QColor &value) {
+        if( value == _messageLinkColor )
+            return;
+        _messageLinkColor = value;
+        emit messageLinkColorChanged();
+        emit changed();
+    }
+
+    QColor messageLinkVisitedColor() const {
+        return _messageLinkVisitedColor;
+    }
+
+    void setMessageLinkVisitedColor(const QColor &value) {
+        if( value == _messageLinkVisitedColor )
+            return;
+        _messageLinkVisitedColor = value;
+        emit messageLinkVisitedColorChanged();
+        emit changed();
+    }
+
+
     QColor headerColor() const {
         return _headerColor;
     }
@@ -1456,6 +1483,8 @@ signals:
     void messageShadowSizeChanged();
     void messageShadowColorChanged();
     void messagePointerHeightChanged();
+    void messageLinkColorChanged();
+    void messageLinkVisitedColorChanged();
     void headerColorChanged();
     void headerTitleColorChanged();
     void headerTitleFontChanged();
@@ -1553,6 +1582,8 @@ private:
     qreal _messageShadowSize;
     QColor _messageShadowColor;
     qreal _messagePointerHeight;
+    QColor _messageLinkColor;
+    QColor _messageLinkVisitedColor;
     QColor _headerColor;
     QColor _headerTitleColor;
     QFont _headerTitleFont;

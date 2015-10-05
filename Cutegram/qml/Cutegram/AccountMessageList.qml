@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
-// import CutegramTypes 1.0
+import TelegramQmlLib 1.0
 import AsemanTools.Controls 1.0 as Controls
 
 Rectangle {
@@ -19,7 +18,7 @@ Rectangle {
     property real maximumMediaHeight: (height-topMargin-bottomMargin)*0.75
     property real maximumMediaWidth: width*0.75
 
-    property bool isActive: View.active && View.visible
+    property bool isActive: View.window.active && View.window.visible
     property bool messageDraging: false
 
     property string selectedText
@@ -51,6 +50,18 @@ Rectangle {
     onCurrentDialogChanged: {
         selected_list.clear()
         add_anim_disabler.restart()
+    }
+
+    Connections {
+        id: sticker_installer
+        target: telegramObject
+        onDocumentStickerRecieved: {
+            if(document != doc)
+                return
+
+            Cutegram.installSticker(set.shortName)
+        }
+        property Document doc
     }
 
     ListObject {
@@ -139,7 +150,7 @@ Rectangle {
         interval: 500
     }
 
-    ListView {
+    AsemanListView {
         id: mlist
         anchors.fill: parent
         visible: enchat.classType != typeEncryptedChatDiscarded
@@ -255,7 +266,10 @@ Rectangle {
                 image: "files/message.png"
                 hotSpot: Qt.point(12,12)
                 dropAction: Qt.CopyAction
-                onDraggingChanged: anim_enabler_timer.restart()
+                onDraggingChanged: {
+                    main.dragging = dragging
+                    anim_enabler_timer.restart()
+                }
             }
 
             ItemImageGrabber {
@@ -317,10 +331,10 @@ Rectangle {
                         return
                     if(msg_item.click())
                         return
-                    if(filterId == -1)
-                        filterId = user.id
-                    else
-                        filterId = -1
+//                    if(filterId == -1)
+//                        filterId = user.id
+//                    else
+//                        filterId = -1
                 }
 
                 onPressed: {
@@ -353,8 +367,13 @@ Rectangle {
                                 break;
                             }
                         } else {
-                            if(msg_item.isSticker)
-                                actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal")]
+                            if(msg_item.isSticker) {
+                                var stickerSetId = msg_item.hasMedia? telegramObject.documentStickerId(msg_item.media.document) : ""
+                                if(stickerSetId)
+                                    actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal"), qsTr("Add to Stickers")]
+                                else
+                                    actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete"), qsTr("Add to Personal")]
+                            }
                             else
                             if(msg_item.selectedText.length == 0)
                                 actions = [qsTr("Reply"), qsTr("Forward"),qsTr("Copy"),qsTr("Delete")]
@@ -385,6 +404,11 @@ Rectangle {
                                 else
                                     Qt.openUrlExternally(Cutegram.searchEngine + msg_item.selectedText.replace(" ","+"))
                                 break;
+
+                            case 5:
+                                sticker_installer.doc = msg_item.media.document
+                                telegramObject.getStickerSet(sticker_installer.doc)
+                                break
                             }
                         }
                     }

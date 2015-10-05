@@ -1,25 +1,34 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 import QtQuick.Controls 1.1
+import QtGraphicalEffects 1.0
 
 AsemanMain {
     id: main
     width: AsemanApp.readSetting("General/width", 1024)
     height: AsemanApp.readSetting("General/height", 600)
-    color: "#333333"
+    color: "#00000000"
     mainFrame: main_frame
     focus: true
     masterPalette.colorGroup: SystemPalette.Active
+    onVisibleChanged: refreshMask()
 
     property variant authDialog
     property variant tabFrame
 
+    property bool nativeTitleBar: false
+    property real shadowSize: nativeTitleBar? 32*Devices.density : 0
+    property real windowRadius: nativeTitleBar? 7*Devices.density : 0
+    property real titleBarHeight: nativeTitleBar? 24*Devices.density : 0
+
     property alias profiles: profile_model
     property alias webPageGrabber: web_grabber
     property alias mapDownloader: map_downloader
+    property alias fontHandler: font_handler
 
     property bool aboutMode: false
+    property bool dragging: false
 
     property color backColor0: "#eeeeee"
     property color backColor1: "#cccccc"
@@ -42,8 +51,17 @@ AsemanMain {
     }
     onMasterColorChanged: if(Devices.isWindows8) Cutegram.highlightColor = masterColor
 
-    onWidthChanged: size_save_timer.restart()
-    onHeightChanged: size_save_timer.restart()
+    onWidthChanged: {
+        refreshMask()
+        size_save_timer.restart()
+    }
+    onHeightChanged: {
+        refreshMask()
+        size_save_timer.restart()
+    }
+    onShadowSizeChanged: {
+        refreshMask()
+    }
 
     onAboutModeChanged: {
         if(aboutMode)
@@ -86,6 +104,17 @@ AsemanMain {
         }
     }
 
+    FontHandler {
+        id: font_handler
+        onFontsChanged: if(!signalBlocker) AsemanApp.setSetting("General/fonts", save())
+        Component.onCompleted: {
+            signalBlocker = true
+            load(AsemanApp.readSetting("General/fonts"))
+            signalBlocker = false
+        }
+        property bool signalBlocker: false
+    }
+
     TitleBarColorGrabber {
         id: tbar_cgrabber
         autoRefresh: Devices.isWindows8
@@ -124,7 +153,7 @@ AsemanMain {
     }
 
     Connections {
-        target: View
+        target: View.window
         onActiveChanged: {
             if(Cutegram.closingState)
                 return
@@ -159,45 +188,119 @@ AsemanMain {
         }
     }
 
-    AboutCutegram {
-        id: about
-        anchors.fill: parent
-
-        function back() {
-            aboutMode = false
-        }
+    DropShadow {
+        id: drop_shadow
+        anchors.fill: shadow_scene
+        source: shadow_scene
+        horizontalOffset: 0
+        verticalOffset: 10*Devices.density
+        radius: shadowSize
+        samples: 32
+        visible: nativeTitleBar
+        color: "#80000000"
     }
 
     Item {
-        id: main_frame
-        width: parent.width
-        height: parent.height
-        y: aboutMode? height : 0
+        id: shadow_scene
+        anchors.fill: parent
 
-        Behavior on y {
-            NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+        OpacityMask {
+            anchors.fill: main_scene
+            source: main_scene
+            maskSource: main_scene_mask
+            visible: nativeTitleBar
         }
 
-        QueueList {
-            id: qlist
+        Rectangle {
+            id: main_scene_mask
             anchors.fill: parent
-            components: [aseman_about_component, splash_component, accounts_frame, auth_dlg_component]
-            currentIndex: 1
-            onCurrentIndexChanged: {
-                prevIndex = tmpIndex
-                tmpIndex = currentIndex
+            color: "#ffffff"
+            radius: windowRadius
+            visible: false
+        }
+
+        Item {
+            id: main_scene
+            anchors.fill: parent
+            anchors.topMargin: nativeTitleBar? shadowSize*0.6 - drop_shadow.verticalOffset : 0
+            anchors.margins: nativeTitleBar? shadowSize*0.6 : 0
+            opacity: nativeTitleBar? 0 : 1
+
+            Item {
+                anchors.fill: parent
+                anchors.topMargin: titleBarHeight
+
+                AboutCutegram {
+                    id: about
+                    anchors.fill: parent
+
+                    function back() {
+                        aboutMode = false
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        visible: !aboutMode
+                    }
+                }
+
+                Item {
+                    id: main_frame
+                    width: parent.width
+                    height: parent.height
+                    y: aboutMode? height : 0
+
+                    Behavior on y {
+                        NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+                    }
+
+                    QueueList {
+                        id: qlist
+                        anchors.fill: parent
+                        components: [aseman_about_component, splash_component, accounts_frame, auth_dlg_component]
+                        currentIndex: 1
+                        onCurrentIndexChanged: {
+                            prevIndex = tmpIndex
+                            tmpIndex = currentIndex
+                        }
+
+                        property int tmpIndex: 0
+                        property int prevIndex: 0
+                    }
+                }
             }
 
-            property int tmpIndex: 0
-            property int prevIndex: 0
-        }
-    }
+            Rectangle {
+                width: parent.width
+                height: titleBarHeight
+                visible: nativeTitleBar
+                color: Cutegram.currentTheme.dialogListBackground
 
-    MouseArea {
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
-        anchors.fill: parent
-        visible: Devices.isMacX && Desktop.currentMenuObject
-        onClicked: if(Desktop.currentMenuObject) Desktop.currentMenuObject.hide()
+                WindowDragArea {
+                    anchors.fill: parent
+                }
+            }
+
+            OSXTitleButtons {
+                height: titleBarHeight
+                width: 70*Devices.density
+                visible: nativeTitleBar
+                fullscreenButton: false
+            }
+
+            WindowResizeGrip {
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                visible: nativeTitleBar
+            }
+
+            MouseArea {
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                anchors.fill: parent
+                visible: Devices.isMacX && Desktop.currentMenuObject
+                onClicked: if(Desktop.currentMenuObject) Desktop.currentMenuObject.hide()
+            }
+        }
     }
 
     Component {
@@ -269,6 +372,14 @@ AsemanMain {
         BackHandler.removeHandler(main)
     }
 
+    function installSticker(shortName) {
+        tabFrame.installSticker(shortName)
+    }
+
+    function refreshMask() {
+//        View.setMask(main_scene.x, main_scene.y, main_scene.width, main_scene.height)
+    }
+
     Component.onCompleted: {
         if(Devices.isMacX)
             menubar_component.createObject(main)
@@ -280,5 +391,8 @@ AsemanMain {
         }
 
         Desktop.menuStyle = Cutegram.currentTheme.menuStyleSheet
+        View.reverseScroll = (AsemanApp.readSetting("General/reverseScroll", 0) == "true")
+        nativeTitleBar = Cutegram.nativeTitleBar
+        refreshMask()
     }
 }

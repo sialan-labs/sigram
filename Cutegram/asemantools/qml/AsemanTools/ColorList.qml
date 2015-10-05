@@ -25,7 +25,7 @@ Item {
 
     property color currentColor: "dodgerblue"
 
-    GridView {
+    AsemanGridView {
         id: color_grid
         anchors.fill: parent
         cellWidth: width/(cellCount<3? 3 : cellCount)

@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 
 Rectangle {
@@ -15,7 +15,7 @@ Rectangle {
 
     TaskbarButton {
         id: taskbar_btn
-        window: View
+        window: View.window
         badgeNumber: {
             var result = 0
             for(var i=0; i<list.count; i++)
@@ -105,114 +105,12 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: 48*Devices.density
-        color: Cutegram.currentTheme.panelColor
+        width: nativeTitleBar? 48*Devices.density : panel_logical_frame.width
+        color: nativeTitleBar && !View.window.active? "#aaaaaa" :Cutegram.currentTheme.panelColor
 
-        AccountsTabList {
-            id: tab_list
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: add_secret_chat_btn.top
-            selectColor: slide_menu.active? Cutegram.currentTheme.sidebarColor : Cutegram.currentTheme.dialogListBackground
-            z: 10
-            onCurrentKeyChanged: {
-                if(lastKey.length != 0)
-                    hash.value(lastKey).visible = false
-
-                hash.value(currentKey).visible = true
-                lastKey = currentKey
-            }
-
-            property string lastKey
-        }
-
-        Button {
-            id: add_secret_chat_btn
-            anchors.bottom: add_chat_btn.top
-            anchors.left: parent.left
-            width: parent.width
-            height: width
-            normalColor: "#00000000"
-            highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
-            cursorShape: Qt.PointingHandCursor
-            icon: Cutegram.currentTheme.panelLightIcon? "files/lock.png" : "files/lock-dark.png"
-            iconHeight: 18*Devices.density
-            tooltipText: qsTr("Add Secret Chat")
-            tooltipFont.family: AsemanApp.globalFont.family
-            tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
-            tooltipColor: Cutegram.currentTheme.panelTooltipBackground
-            tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
-            onClicked: {
-                slide_menu.text = ""
-                slide_menu.show(add_secret_chat_component)
-            }
-        }
-
-        Button {
-            id: add_chat_btn
-            anchors.bottom: add_user_btn.top
-            anchors.left: parent.left
-            width: parent.width
-            height: width
-            normalColor: "#00000000"
-            highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
-            cursorShape: Qt.PointingHandCursor
-            icon: Cutegram.currentTheme.panelLightIcon? "files/add_chat.png" : "files/add_chat-dark.png"
-            iconHeight: 26*Devices.density
-            tooltipText: qsTr("New group chat")
-            tooltipFont.family: AsemanApp.globalFont.family
-            tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
-            tooltipColor: Cutegram.currentTheme.panelTooltipBackground
-            tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
-            onClicked: {
-                slide_menu.text = ""
-                slide_menu.show(add_groupchat_component)
-            }
-        }
-
-        Button {
-            id: add_user_btn
-            anchors.bottom: conf_btn.top
-            anchors.left: parent.left
-            width: parent.width
-            height: width
-            normalColor: "#00000000"
-            highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
-            cursorShape: Qt.PointingHandCursor
-            icon: Cutegram.currentTheme.panelLightIcon? "files/add_user.png" : "files/add_user-dark.png"
-            iconHeight: 22*Devices.density
-            tooltipText: qsTr("Contact List")
-            tooltipFont.family: AsemanApp.globalFont.family
-            tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
-            tooltipColor: Cutegram.currentTheme.panelTooltipBackground
-            tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
-            onClicked: {
-                slide_menu.text = ""
-                showContactList()
-            }
-        }
-
-        Button {
-            id: conf_btn
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            width: parent.width
-            height: width
-            normalColor: "#00000000"
-            highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
-            cursorShape: Qt.PointingHandCursor
-            icon: Cutegram.currentTheme.panelLightIcon? "files/configure.png" : "files/configure-dark.png"
-            iconHeight: 22*Devices.density
-            tooltipText: qsTr("Configure")
-            tooltipFont.family: AsemanApp.globalFont.family
-            tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
-            tooltipColor: Cutegram.currentTheme.panelTooltipBackground
-            tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
-            onClicked: {
-                slide_menu.text = ""
-                slide_menu.show(configure_component)
-            }
+        WindowDragArea {
+            anchors.fill: parent
+            visible: nativeTitleBar
         }
 
         Rectangle {
@@ -225,6 +123,120 @@ Rectangle {
             gradient: Gradient {
                 GradientStop { position: 0.0; color: "#00000000" }
                 GradientStop { position: 1.0; color: Cutegram.currentTheme.panelShadowColor }
+            }
+        }
+
+        Item {
+            id: panel_logical_frame
+            width: 48*Devices.density
+            height: parent.height
+            anchors.right: parent.right
+
+            AccountsTabList {
+                id: tab_list
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                height: count*width
+                selectColor: slide_menu.active? Cutegram.currentTheme.sidebarColor : Cutegram.currentTheme.dialogListBackground
+                z: 10
+                onCurrentKeyChanged: {
+                    if(lastKey.length != 0)
+                        hash.value(lastKey).visible = false
+
+                    hash.value(currentKey).visible = true
+                    lastKey = currentKey
+                }
+
+                property string lastKey
+            }
+
+            Button {
+                id: add_secret_chat_btn
+                anchors.bottom: add_chat_btn.top
+                anchors.left: parent.left
+                width: parent.width
+                height: width
+                normalColor: "#00000000"
+                highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
+                cursorShape: Qt.PointingHandCursor
+                icon: Cutegram.currentTheme.panelLightIcon? "files/lock.png" : "files/lock-dark.png"
+                iconHeight: 18*Devices.density
+                tooltipText: qsTr("Add Secret Chat")
+                tooltipFont.family: AsemanApp.globalFont.family
+                tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
+                tooltipColor: Cutegram.currentTheme.panelTooltipBackground
+                tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
+                onClicked: {
+                    slide_menu.text = ""
+                    slide_menu.show(add_secret_chat_component)
+                }
+            }
+
+            Button {
+                id: add_chat_btn
+                anchors.bottom: add_user_btn.top
+                anchors.left: parent.left
+                width: parent.width
+                height: width
+                normalColor: "#00000000"
+                highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
+                cursorShape: Qt.PointingHandCursor
+                icon: Cutegram.currentTheme.panelLightIcon? "files/add_chat.png" : "files/add_chat-dark.png"
+                iconHeight: 26*Devices.density
+                tooltipText: qsTr("New group chat")
+                tooltipFont.family: AsemanApp.globalFont.family
+                tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
+                tooltipColor: Cutegram.currentTheme.panelTooltipBackground
+                tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
+                onClicked: {
+                    slide_menu.text = ""
+                    slide_menu.show(add_groupchat_component)
+                }
+            }
+
+            Button {
+                id: add_user_btn
+                anchors.bottom: conf_btn.top
+                anchors.left: parent.left
+                width: parent.width
+                height: width
+                normalColor: "#00000000"
+                highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
+                cursorShape: Qt.PointingHandCursor
+                icon: Cutegram.currentTheme.panelLightIcon? "files/add_user.png" : "files/add_user-dark.png"
+                iconHeight: 22*Devices.density
+                tooltipText: qsTr("Contact List")
+                tooltipFont.family: AsemanApp.globalFont.family
+                tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
+                tooltipColor: Cutegram.currentTheme.panelTooltipBackground
+                tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
+                onClicked: {
+                    slide_menu.text = ""
+                    showContactList()
+                }
+            }
+
+            Button {
+                id: conf_btn
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                width: parent.width
+                height: width
+                normalColor: "#00000000"
+                highlightColor: Qt.darker(Cutegram.currentTheme.masterColor, 1.2)
+                cursorShape: Qt.PointingHandCursor
+                icon: Cutegram.currentTheme.panelLightIcon? "files/configure.png" : "files/configure-dark.png"
+                iconHeight: 22*Devices.density
+                tooltipText: qsTr("Configure")
+                tooltipFont.family: AsemanApp.globalFont.family
+                tooltipFont.pixelSize: Math.floor(9*Devices.fontDensity)
+                tooltipColor: Cutegram.currentTheme.panelTooltipBackground
+                tooltipTextColor: Cutegram.currentTheme.panelTooltipTextColor
+                onClicked: {
+                    slide_menu.text = ""
+                    slide_menu.show(configure_component)
+                }
             }
         }
     }
@@ -420,5 +432,13 @@ Rectangle {
             return
 
         view.view.showNull()
+    }
+
+    function installSticker(shortName) {
+        var view = hash.value(tab_list.currentKey)
+        if(!view || !view.view)
+            return
+
+        view.view.installSticker(shortName)
     }
 }

@@ -93,31 +93,63 @@
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"/>
+        <translation>文件</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"/>
+        <translation>聯絡人</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"/>
+        <translation>影片</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"/>
+        <translation>音訊</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"/>
+        <translation>照片</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>位置</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"/>
+        <translation>未知</translation>
+    </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation>%1 建立了「%2」群組</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation>%1 將 %2 加入到群組</translation>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation>%1 離開了群組</translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation>%1 踢出了 %2</translation>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation>%1 將群組名稱變更為「%2」</translation>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation>%1 變更群組照片。</translation>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation>%1 刪除群組照片</translation>
+    </message>
+    <message>
+        <source>You</source>
+        <translation>您</translation>
     </message>
 </context>
 <context>
@@ -286,6 +318,10 @@ Note that android accept secret chat automatically.</source>
         <source>Reply</source>
         <translation>回覆</translation>
     </message>
+    <message>
+        <source>Add to Stickers</source>
+        <translation>加入到貼圖</translation>
+    </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
@@ -351,7 +387,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"/>
+        <translation>撰寫一則訊息...</translation>
     </message>
 </context>
 <context>
@@ -482,6 +518,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Home Page</source>
         <translation>首頁</translation>
+    </message>
+</context>
+<context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation>選擇字型</translation>
     </message>
 </context>
 <context>
@@ -667,10 +710,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>選擇</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation>選擇字型</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>自動啟動</translation>
     </message>
@@ -732,22 +771,34 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Show Emojis on hover</source>
-        <translation type="unfinished"/>
+        <translation>滑鼠懸停時顯示表情符號</translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation>反向捲動</translation>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation>以 Ctrl+Enter 送出</translation>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
+        <translation>表情符號的主題</translation>
     </message>
 </context>
 <context>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"/>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"/>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"/>
+        <translation>%1 (%2) - %3</translation>
     </message>
 </context>
 <context>
@@ -806,14 +857,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation>早上</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation>下午</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>日期</translation>
@@ -1093,6 +1136,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation>安裝</translation>
+    </message>
+</context>
+<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1150,6 +1200,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Header</source>
         <translation>頂端</translation>
     </message>
+    <message>
+        <source>Username</source>
+        <translation>使用者名稱</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -1163,11 +1217,19 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"/>
+        <translation>設定預設 DC ID 為 &lt;id&gt;</translation>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
-        <translation type="unfinished"/>
+        <translation>設定預設 IP 位址為 &lt;ip&gt;</translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation>停用 kwallet。</translation>
+    </message>
+    <message>
+        <source>Force visible at start</source>
+        <translation>強制在啟動時可見</translation>
     </message>
 </context>
 </TS>

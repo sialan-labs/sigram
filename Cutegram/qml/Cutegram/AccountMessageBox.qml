@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
+import Cutegram 1.0
 // import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
 
@@ -15,6 +16,7 @@ Item {
     property alias maxId: messages.maxId
     property alias backgroundManager: background_manager
     property alias headerManager: header_manager
+    property bool singleBox: true
 
     property bool visibleEmojiPanel: point_dialog.containsMouse || send_msg.emojiButtonHover
 
@@ -39,6 +41,11 @@ Item {
         id: emoji_visibler_timer
         interval: 200
         onTriggered: point_dialog.hide()
+    }
+
+    StickerFileManager {
+        id: sticker_file_manager
+        telegram: telegramObject
     }
 
     BackgroundManager {
@@ -143,6 +150,12 @@ Item {
             property UserProperties properties
         }
 
+        WindowDragArea {
+            width: parent.width
+            height: 20*Devices.density
+            visible: nativeTitleBar && singleBox
+        }
+
         AccountSendMessage {
             id: send_msg
             anchors.left: parent.left
@@ -185,7 +198,8 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            color: "#ffffff"
+            anchors.topMargin: header.height + header.y
+            color: "#000000"
             opacity: header.properties && header.properties.inited? 0.5 : 0
             visible: header.properties? true : false
 
@@ -215,14 +229,23 @@ Item {
             anchors.right: parent.right
             anchors.bottom: send_msg.top
             anchors.top: header.bottom
-            width: 300*Devices.density
+            width: 300*Devices.density + panelWidth
             onEmojiSelected: send_msg.insertText(code)
+            telegramObject: telegram
             onStickerSelected: {
                 var dId = currentDialog.peer.userId
                 if(!dId)
                     dId = currentDialog.peer.chatId
 
-                telegramObject.sendFile(dId, path)
+                sticker_file_manager.sendSticker(dId, path)
+                point_dialog.hide()
+            }
+            onStickerDocumentSelected: {
+                var dId = currentDialog.peer.userId
+                if(!dId)
+                    dId = currentDialog.peer.chatId
+
+                telegramObject.forwardDocument(dId, document)
                 point_dialog.hide()
             }
         }
@@ -235,7 +258,6 @@ Item {
             anchors.top: parent.top
             anchors.right: parent.right
             currentDialog: messages.currentDialog
-            color: Desktop.titleBarColor
             onAddParticianRequest: {
                 acc_view.addParticianRequest()
             }
@@ -283,7 +305,7 @@ Item {
         var y = pnt.y + send_msg.emojiButtonHeight*0.2
 
         var item = emoticons_component.createObject(message_box)
-        var w = 360*Devices.density
+        var w = 410*Devices.density + item.panelWidth
         var h = 300*Devices.density
 
         var newPoint = msg_box.mapFromItem(send_msg, x, y)

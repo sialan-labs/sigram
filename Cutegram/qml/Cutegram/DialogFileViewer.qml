@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 
 Item {
@@ -17,7 +17,7 @@ Item {
         id: dmodel
     }
 
-    GridView {
+    AsemanGridView {
         id: grid
         anchors.fill: parent
         anchors.rightMargin: 6*Devices.density

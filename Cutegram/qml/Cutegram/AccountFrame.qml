@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 import Cutegram 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 import QtMultimedia 5.0
 
 Rectangle {
@@ -20,14 +20,14 @@ Rectangle {
         if(view && view.windowsCount!=0)
             return true
         else
-            return View.active && View.visible
+            return View.window.active && View.window.visible
     }
 
     signal activeRequest()
     signal addParticianRequest()
 
     onIsActiveChanged: {
-        var status = View.visible
+        var status = View.window.visible
         if(view && view.windowsCount!=0) {
             status = true
         }
@@ -82,6 +82,11 @@ Rectangle {
         }
     }
 
+    StickersModel {
+        id: stickers_model
+        telegram: telegramObject
+    }
+
     Telegram {
         id: telegram
         defaultHostAddress: Cutegram.defaultHostAddress
@@ -89,6 +94,7 @@ Rectangle {
         defaultHostPort: Cutegram.defaultHostPort
         appId: Cutegram.appId
         appHash: Cutegram.appHash
+        encrypter: Cutegram.encrypter
         configPath: AsemanApp.homePath
         publicKeyFile: Devices.resourcePath + "/tg-server.pub"
         phoneNumber: accountItem.number
@@ -109,6 +115,8 @@ Rectangle {
             else
             if( !authLoggedIn && view )
                 view.destroy()
+            if(authLoggedIn)
+                stickers_model.refresh()
         }
         onIncomingMessage: {
             var dId = telegram.messageDialogId(msg.id)

@@ -491,6 +491,25 @@ QString AsemanDevices::documentsLocation()
     return probs.last();
 }
 
+QString AsemanDevices::downloadsLocation()
+{
+    QStringList probs;
+    probs = QStandardPaths::standardLocations( QStandardPaths::DownloadLocation );
+
+#ifdef Q_OS_ANDROID
+    probs << "/sdcard/downloads";
+    probs << "/sdcard/Downloads";
+#else
+    probs << QDir::homePath() + "/Downloads";
+#endif
+
+    foreach( const QString & prob, probs )
+        if( QFile::exists(prob) )
+            return prob;
+
+    return probs.last();
+}
+
 QString AsemanDevices::resourcePath()
 {
 #ifdef Q_OS_ANDROID

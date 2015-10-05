@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QList>
 #include <QVariantMap>
+#include <QColor>
 
 class UserData;
 class EmojisPrivate;
@@ -31,6 +32,8 @@ class Emojis : public QObject
     Q_PROPERTY( UserData* userData READ userData WRITE setUserData NOTIFY userDataChanged)
     Q_PROPERTY( QVariantMap replacements READ replacements WRITE setReplacements NOTIFY replacementsChanged)
     Q_PROPERTY( bool autoEmojis READ autoEmojis WRITE setAutoEmojis NOTIFY autoEmojisChanged)
+    Q_PROPERTY(QColor linkColor READ linkColor WRITE setLinkColor NOTIFY linkColorChanged)
+    Q_PROPERTY(QColor linkVisitedColor READ linkVisitedColor WRITE setLinkVisitedColor NOTIFY linkVisitedColorChanged)
 
     Q_OBJECT
 public:
@@ -45,6 +48,12 @@ public:
 
     void setReplacements(const QVariantMap &map);
     QVariantMap replacements() const;
+
+    void setLinkColor(const QColor &color);
+    QColor linkColor() const;
+
+    void setLinkVisitedColor(const QColor &color);
+    QColor linkVisitedColor() const;
 
     bool autoEmojis() const;
     void setAutoEmojis(bool stt);
@@ -66,6 +75,8 @@ signals:
     void userDataChanged();
     void replacementsChanged();
     void autoEmojisChanged();
+    void linkColorChanged();
+    void linkVisitedColorChanged();
 
 private:
     EmojisPrivate *p;

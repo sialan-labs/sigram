@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 
 Item {
@@ -107,6 +107,7 @@ Item {
                     drop_text.text = qsTr("<<< Drop to dialogs list to forward")
                 else
                     drop_text.text = qsTr("Drop to forward")
+                drag.accepted = true
             }
             else
             if( drag.formats.indexOf("land.aseman.cutegram/contactId") != -1 )
@@ -118,11 +119,13 @@ Item {
                     forwardDrop = typeAddChat
                     drop_text.text = qsTr("Drop to add new chat")
                 }
+                drag.accepted = true
             }
             else
             {
                 forwardDrop = typeFileSendDrop
                 drop_text.text = qsTr("Drop to send")
+                drag.accepted = true
             }
         }
 
@@ -138,6 +141,7 @@ Item {
                 var msgId = drop.getDataAsString("land.aseman.cutegram/messageId")
                 telegramObject.forwardMessages([msgId], dId)
                 am_dropfile.dropped()
+                drop.accepted = true
             }
             else
             if( drop.formats.indexOf("land.aseman.cutegram/contactId") != -1 ) {
@@ -158,6 +162,7 @@ Item {
                     }
 
                 }
+                drop.accepted = true
             }
             else
             if( drop.hasUrls ) {
@@ -171,6 +176,7 @@ Item {
                 }
 
                 am_dropfile.dropped()
+                drop.accepted = true
             }
             else
             if( drop.hasText ) {
@@ -180,6 +186,7 @@ Item {
                     telegramObject.sendMessageAsDocument(dId, drop.text)
 
                 am_dropfile.dropped()
+                drop.accepted = true
             }
         }
     }

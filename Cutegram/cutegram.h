@@ -25,6 +25,7 @@
 #include <QSystemTrayIcon>
 #include <QFont>
 
+class DatabaseAbstractEncryptor;
 class QMenu;
 class ThemeItem;
 class CutegramPrivate;
@@ -40,9 +41,12 @@ class Cutegram : public QObject
     Q_PROPERTY(int appId READ appId WRITE setAppId NOTIFY appIdChanged)
     Q_PROPERTY(QString appHash READ appHash WRITE setAppHash NOTIFY appHashChanged)
 
+    Q_PROPERTY(DatabaseAbstractEncryptor* encrypter READ encrypter NOTIFY encrypterChanged)
+
     Q_PROPERTY(QStringList languages READ languages NOTIFY fakeSignal)
     Q_PROPERTY(QString personalStickerDirectory READ personalStickerDirectory NOTIFY fakeSignal)
     Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setHighlightColor NOTIFY highlightColorChanged)
+    Q_PROPERTY(bool allowNativeTitleBar READ allowNativeTitleBar NOTIFY fakeSignal)
 
     Q_PROPERTY(QString language     READ language     WRITE setLanguage     NOTIFY languageChanged    )
     Q_PROPERTY(QString messageAudio READ messageAudio WRITE setMessageAudio NOTIFY messageAudioChanged)
@@ -62,6 +66,8 @@ class Cutegram : public QObject
     Q_PROPERTY(bool smoothScroll      READ smoothScroll      WRITE setSmoothScroll    NOTIFY smoothScrollChanged     )
     Q_PROPERTY(bool autoEmojis        READ autoEmojis        WRITE setAutoEmojis      NOTIFY autoEmojisChanged       )
     Q_PROPERTY(bool sendByCtrlEnter   READ sendByCtrlEnter   WRITE setSendByCtrlEnter NOTIFY sendByCtrlEnterChanged  )
+    Q_PROPERTY(bool kWallet           READ kWallet           WRITE setKWallet         NOTIFY kWalletChanged          )
+    Q_PROPERTY(bool nativeTitleBar    READ nativeTitleBar    WRITE setNativeTitleBar  NOTIFY nativeTitleBarChanged   )
 
     Q_PROPERTY(ThemeItem* currentTheme READ currentTheme NOTIFY currentThemeChanged)
     Q_PROPERTY(QStringList themes READ themes NOTIFY themesChanged)
@@ -150,6 +156,13 @@ public:
     void setSmoothScroll(bool stt);
     bool smoothScroll() const;
 
+    void setKWallet(bool stt);
+    bool kWallet() const;
+
+    void setNativeTitleBar(bool stt);
+    bool nativeTitleBar() const;
+    bool allowNativeTitleBar() const;
+
     void setBackground(const QString &background);
     QString background() const;
 
@@ -195,6 +208,9 @@ public:
 
     QString personalStickerDirectory() const;
 
+    DatabaseAbstractEncryptor *encrypter();
+    void setEncrypterKey(const QString &key);
+
     Q_INVOKABLE bool isLoggedIn(const QString &phone) const;
     Q_INVOKABLE QString normalizeText(const QString &text) const;
 
@@ -208,9 +224,10 @@ public slots:
     void aboutAseman();
     void about();
     void configure();
-    void incomingAppMessage( const QString & msg = "show" );
+    void incomingAppMessage(const QString & msg);
     void active();
     void addToPersonal(const QString &src);
+    void installSticker(const QString &shortName);
 
 signals:
     void defaultHostAddressChanged();
@@ -218,6 +235,7 @@ signals:
     void defaultHostDcIdChanged();
     void appIdChanged();
     void appHashChanged();
+    void encrypterChanged();
 
     void backRequest();
     void sysTrayCounterChanged();
@@ -228,6 +246,7 @@ signals:
     void startupOptionChanged();
     void notificationChanged();
     void minimumDialogsChanged();
+    void nativeTitleBarChanged();
     void showLastMessageChanged();
     void backgroundChanged();
     void messageAudioChanged();
@@ -241,6 +260,7 @@ signals:
     void smoothScrollChanged();
     void autoEmojisChanged();
     void sendByCtrlEnterChanged();
+    void kWalletChanged();
 
     void themesChanged();
     void currentThemeChanged();

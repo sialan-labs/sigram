@@ -25,7 +25,7 @@
 #include <QFontDatabase>
 #include <QDebug>
 
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
 #include <QInputDialog>
 #include <QColorDialog>
 #include <QFileDialog>
@@ -54,7 +54,7 @@ AsemanDesktopTools::AsemanDesktopTools(QObject *parent) :
     p->font_db = 0;
 }
 
-int AsemanDesktopTools::desktopSession() const
+int AsemanDesktopTools::desktopSession()
 {
     static int result = -1;
     if( result != -1 )
@@ -248,7 +248,7 @@ QString AsemanDesktopTools::menuStyle() const
 
 void AsemanDesktopTools::setTooltip(const QString &txt)
 {
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     QToolTip::hideText();
     if(!txt.isEmpty())
         QToolTip::showText(QCursor::pos(), txt);
@@ -268,7 +268,7 @@ QString AsemanDesktopTools::tooltip() const
 
 QObject *AsemanDesktopTools::currentMenuObject() const
 {
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     if(p->currentMenuObjects.isEmpty())
         return 0;
 
@@ -280,7 +280,7 @@ QObject *AsemanDesktopTools::currentMenuObject() const
 
 QString AsemanDesktopTools::getOpenFileName(QWindow *window, const QString & title, const QString &filter, const QString &startPath)
 {
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     const int dsession = desktopSession();
     switch( dsession )
     {
@@ -352,7 +352,7 @@ QString AsemanDesktopTools::getOpenFileName(QWindow *window, const QString & tit
 
 QString AsemanDesktopTools::getSaveFileName(QWindow *window, const QString &title, const QString &filter, const QString &startPath)
 {
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     const int dsession = desktopSession();
     switch( dsession )
     {
@@ -426,7 +426,7 @@ QString AsemanDesktopTools::getSaveFileName(QWindow *window, const QString &titl
 
 QString AsemanDesktopTools::getExistingDirectory(QWindow *window, const QString &title, const QString &startPath)
 {
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     const int dsession = desktopSession();
     switch( dsession )
     {
@@ -497,7 +497,7 @@ QString AsemanDesktopTools::getExistingDirectory(QWindow *window, const QString 
 
 QFont AsemanDesktopTools::getFont(QWindow *window, const QString &title, const QFont &font)
 {
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     Q_UNUSED(window)
     bool ok = false;
     return QFontDialog::getFont(&ok, font, 0, title);
@@ -511,7 +511,7 @@ QFont AsemanDesktopTools::getFont(QWindow *window, const QString &title, const Q
 
 QColor AsemanDesktopTools::getColor(const QColor &color) const
 {
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     return QColorDialog::getColor(color);
 #else
     return color;
@@ -525,7 +525,7 @@ QString AsemanDesktopTools::getText(QWindow *window, const QString &title, const
     Q_UNUSED(text)
     Q_UNUSED(defaultText)
 
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     bool ok = false;
     const QString &result = QInputDialog::getText(0, title, text, QLineEdit::Normal, defaultText, &ok);
     if(!ok)
@@ -539,7 +539,7 @@ QString AsemanDesktopTools::getText(QWindow *window, const QString &title, const
 
 int AsemanDesktopTools::showMenu(const QVariantList &actions, QPoint point)
 {
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     if( point.isNull() )
         point = QCursor::pos();
 
@@ -567,7 +567,7 @@ int AsemanDesktopTools::showMenu(const QVariantList &actions, QPoint point)
 
 QMenu *AsemanDesktopTools::menuOf(const QVariantList &list, QList<QAction *> *actions, QMenu *parent)
 {
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     QMenu *result = new QMenu(parent);
     foreach(const QVariant &var, list)
     {
@@ -624,7 +624,7 @@ QMenu *AsemanDesktopTools::menuOf(const QVariantList &list, QList<QAction *> *ac
 bool AsemanDesktopTools::yesOrNo(QWindow *window, const QString &title, const QString &text, int type)
 {
     Q_UNUSED(window)
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     switch(type)
     {
     case Warning:
@@ -656,7 +656,7 @@ bool AsemanDesktopTools::yesOrNo(QWindow *window, const QString &title, const QS
 void AsemanDesktopTools::showMessage(QWindow *window, const QString &title, const QString &text, int type)
 {
     Q_UNUSED(window)
-#ifdef DESKTOP_DEVICE
+#if defined(DESKTOP_DEVICE) && defined(QT_WIDGETS_LIB)
     switch(type)
     {
     case Warning:

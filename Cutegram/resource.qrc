@@ -124,5 +124,11 @@
         <file>qml/Cutegram/ContributorsList.qml</file>
         <file>qml/Cutegram/about/telegramQml</file>
         <file>qml/Cutegram/about/libqtelegram-aseman-edition</file>
+        <file>qml/Cutegram/files/emoticons-emoji.png</file>
+        <file>qml/Cutegram/files/emoticons-personal.png</file>
+        <file>qml/Cutegram/files/emoticons-recent.png</file>
+        <file>qml/Cutegram/files/emoticons-telegram.png</file>
+        <file>qml/Cutegram/StickerInstallDialog.qml</file>
+        <file>qml/Cutegram/files/close-dark.png</file>
     </qresource>
 </RCC>

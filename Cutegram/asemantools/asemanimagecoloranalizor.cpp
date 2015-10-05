@@ -36,7 +36,7 @@ AsemanImageColorAnalizorThread *colorizor_thread = 0;
 class AsemanImageColorAnalizorPrivate
 {
 public:
-    QString source;
+    QUrl source;
     QColor color;
     int method;
 };
@@ -53,12 +53,12 @@ AsemanImageColorAnalizor::AsemanImageColorAnalizor(QObject *parent) :
     connect( colorizor_thread, SIGNAL(found(int,QString)), SLOT(found(int,QString)) );
 }
 
-QString AsemanImageColorAnalizor::source() const
+QUrl AsemanImageColorAnalizor::source() const
 {
     return p->source;
 }
 
-void AsemanImageColorAnalizor::setSource(const QString &source)
+void AsemanImageColorAnalizor::setSource(const QUrl &source)
 {
     if( p->source == source )
         return;
@@ -67,6 +67,16 @@ void AsemanImageColorAnalizor::setSource(const QString &source)
     emit sourceChanged();
 
     start();
+}
+
+QString AsemanImageColorAnalizor::sourceString() const
+{
+    QString res = p->source.toString();
+    QString pre = p->source.toString(QUrl::RemovePath);
+    if(res.left(pre.length()) == pre)
+        res = (pre=="qrc:"?":":"") + res.mid(pre.length());
+
+    return res;
 }
 
 int AsemanImageColorAnalizor::method() const
@@ -94,14 +104,14 @@ void AsemanImageColorAnalizor::found(int method, const QString &path)
 {
     if( method != p->method )
         return;
-    if( path != p->source )
+    if( path != sourceString() )
         return;
 
     const QHash<int, QHash<QString,QColor> > & results = colorizor_thread->results();
-    if( !results.contains(p->method) || !results.value(p->method).contains(p->source) )
+    if( !results.contains(p->method) || !results.value(p->method).contains(sourceString()) )
         return;
 
-    p->color = results[p->method][p->source];
+    p->color = results[p->method][sourceString()];
     emit colorChanged();
 }
 
@@ -110,8 +120,8 @@ void AsemanImageColorAnalizor::start()
     if( p->source.isEmpty() )
         return;
 
-    colorizor_thread->analize(p->method, p->source);
-    found(p->method,p->source);
+    colorizor_thread->analize(p->method, sourceString());
+    found(p->method,sourceString());
 }
 
 AsemanImageColorAnalizor::~AsemanImageColorAnalizor()

@@ -2,46 +2,66 @@
 #define ABOUT_TEXT "Cutegram is a free and opensource telegram clients, released under the GPLv3 license."
 
 #include "asemantools/asemanapplication.h"
+#include "asemantools/asemanlistrecord.h"
 #include "cutegram.h"
 #include "compabilitytools.h"
 #include "telegramqmlinitializer.h"
+#include "authsaver.h"
 
 #include <QMainWindow>
 #include <QPalette>
 #include <QNetworkProxy>
 #include <QCommandLineParser>
 
+#include <core/settings.h>
+
 int main(int argc, char *argv[])
 {
-    TelegramQmlInitializer::init("TelegramQml");
+    TelegramQmlInitializer::init("TelegramQmlLib");
 
     AsemanApplication app(argc, argv);
     app.setApplicationName("Cutegram");
     app.setApplicationDisplayName("Cutegram");
-    app.setApplicationVersion("2.5.0");
+    app.setApplicationVersion("2.7.0");
     app.setOrganizationDomain("land.aseman");
     app.setOrganizationName("Aseman");
     app.setWindowIcon(QIcon(":/qml/Cutegram/files/icon.png"));
     app.setQuitOnLastWindowClosed(false);
 
+#ifdef KWALLET_PRESENT
+    QCommandLineOption disKWalletOption(QStringList() << "disable-kwallet",
+            QCoreApplication::translate("main", "Disable kwallet."));
+#endif
     QCommandLineOption verboseOption(QStringList() << "V" << "verbose",
             QCoreApplication::translate("main", "Verbose Mode."));
     QCommandLineOption forceOption(QStringList() << "f" << "force",
             QCoreApplication::translate("main", "Force to run multiple instance of Cutegram."));
+    QCommandLineOption forceVisibleOption(QStringList() << "visible",
+            QCoreApplication::translate("main", "Force visible at start"));
     QCommandLineOption dcIdOption(QStringList() << "dc-id",
             QCoreApplication::translate("main", "Sets default DC ID to <id>"), "id");
     QCommandLineOption ipAdrsOption(QStringList() << "ip-address",
             QCoreApplication::translate("main", "Sets default IP Address to <ip>"), "ip");
+    QCommandLineOption portableOption(QStringList() << "portable",
+            QCoreApplication::translate("main", "Start in the portable mode."));
 
     QCommandLineParser parser;
     parser.setApplicationDescription(ABOUT_TEXT);
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addOption(forceOption);
+    parser.addOption(forceVisibleOption);
     parser.addOption(verboseOption);
     parser.addOption(dcIdOption);
     parser.addOption(ipAdrsOption);
-    parser.process(app);
+    parser.addOption(portableOption);
+#ifdef KWALLET_PRESENT
+    parser.addOption(disKWalletOption);
+#endif
+    parser.process(app.arguments());
+
+    if(parser.isSet(portableOption))
+        AsemanApplication::setHomePath(AsemanApplication::applicationDirPath() + "/data");
 
     if(!parser.isSet(verboseOption))
         qputenv("QT_LOGGING_RULES", "tg.*=false");
@@ -79,7 +99,15 @@ int main(int argc, char *argv[])
 #ifdef DESKTOP_DEVICE
     if( !parser.isSet(forceOption) && app.isRunning() )
     {
-        app.sendMessage("show");
+        QStringList args = app.arguments();
+        if(args.count() <= 1)
+            args << "show";
+
+        AsemanListRecord record;
+        for(int i=1; i<args.length(); i++)
+            record << args.at(i).toUtf8();
+
+        app.sendMessage(record.toQByteArray());
         return 0;
     }
 #endif
@@ -91,12 +119,26 @@ int main(int argc, char *argv[])
         cutegram.setDefaultHostDcId(parser.value(dcIdOption).toInt());
     if(parser.isSet(ipAdrsOption))
         cutegram.setDefaultHostAddress(parser.value(ipAdrsOption));
+#ifdef KWALLET_PRESENT
+    if(!parser.isSet(portableOption) && (!parser.isSet(disKWalletOption) || cutegram.kWallet()))
+    {
+        Settings::setAuthConfigMethods(CutegramAuth::cutegramReadKWalletAuth,
+                                       CutegramAuth::cutegramWriteKWalletAuth);
+        cutegram.setEncrypterKey(CutegramAuth::readEncryptKeyFromKWallet());
+    }
+    else
+#endif
+    {
+        Settings::setAuthConfigMethods(CutegramAuth::cutegramReadSerpentAuth,
+                                       CutegramAuth::cutegramWriteSerpentAuth);
+        cutegram.setEncrypterKey(CutegramAuth::readEncryptKey());
+    }
 
-    cutegram.start( parser.isSet(forceOption) );
+    cutegram.start( parser.isSet(forceOption) || parser.isSet(forceVisibleOption) );
 
 #ifdef DESKTOP_DEVICE
     QObject::connect( &app, SIGNAL(messageReceived(QString)), &cutegram, SLOT(incomingAppMessage(QString)) );
-    QObject::connect( &app, SIGNAL(clickedOnDock())         , &cutegram, SLOT(incomingAppMessage())        );
+    QObject::connect( &app, SIGNAL(clickedOnDock())         , &cutegram, SLOT(active())                    );
 #endif
 
     return app.exec();

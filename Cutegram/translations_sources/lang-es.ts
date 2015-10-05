@@ -119,6 +119,38 @@
         <source>Unknown</source>
         <translation>Desconocido</translation>
     </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>You</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -285,6 +317,10 @@ Notar que android acepta chat secretos automáticamente.</translation>
     <message>
         <source>Reply</source>
         <translation>Responder</translation>
+    </message>
+    <message>
+        <source>Add to Stickers</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -485,6 +521,13 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     </message>
 </context>
 <context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
@@ -667,10 +710,6 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
         <translation>Seleccionar</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation>Seleccionar Tipo de Letra</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Inicio Automático</translation>
     </message>
@@ -733,6 +772,18 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     <message>
         <source>Show Emojis on hover</source>
         <translation>Mostrar Emojis flotantes</translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -806,14 +857,6 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation>AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation>PM</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>Fecha</translation>
@@ -1093,6 +1136,13 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1150,6 +1200,10 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
         <source>Header</source>
         <translation>Encabezado</translation>
     </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -1168,6 +1222,14 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
         <translation>Establecer Dirección IP por defecto a &lt;ip&gt;</translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Force visible at start</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

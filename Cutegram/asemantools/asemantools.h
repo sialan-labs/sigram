@@ -74,6 +74,8 @@ public slots:
     static QString htmlToPlaintText(const QString &html);
 
     static void copyDirectory( const QString & src, const QString & dst );
+    static void deleteFile(const QString &file);
+    static void clearDirectory(const QString &dir);
 
     static void setProperty( QObject *obj, const QString & property, const QVariant & v );
     static QVariant property( QObject *obj, const QString & property );

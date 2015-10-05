@@ -21,6 +21,7 @@ import AsemanTools 1.0
 
 AsemanMainQt {
     id: smain
+    focus: true
 
     property bool portrait: width<height
 
@@ -39,6 +40,34 @@ AsemanMainQt {
     property SubMessage subMessage
 
     property real panelWidth: width
+
+    Keys.onEscapePressed: if(View.backController) AsemanApp.back()
+
+    Connections {
+        target: View
+        onCloseRequest: AsemanApp.back()
+    }
+
+    Connections {
+        target: AsemanApp
+        onBackRequest: {
+            if(!View.backController)
+                return
+            if(timer_delayer.running)
+                return
+
+            timer_delayer.start()
+            var res = BackHandler.back()
+            if( !res && !Devices.isDesktop )
+                View.tryClose()
+        }
+    }
+
+    Timer {
+        id: timer_delayer
+        interval: 300
+        repeat: false
+    }
 
     SystemPalette {
         id: palette

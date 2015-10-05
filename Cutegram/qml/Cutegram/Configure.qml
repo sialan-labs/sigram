@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import AsemanTools 1.0
 import AsemanTools.Controls 1.0 as Controls
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 
 Rectangle {
@@ -12,7 +12,7 @@ Rectangle {
     property Telegram telegram
     property User user: telegram.user(telegram.me)
 
-    Flickable {
+    AsemanFlickable {
         id: flickable
         anchors.fill: parent
         contentWidth: column.width
@@ -72,7 +72,7 @@ Rectangle {
                         text: qsTr("Change Photo")
                         style: Cutegram.currentTheme.buttonStyle
                         onClicked: {
-                            var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
+                            var newImg = Desktop.getOpenFileName(View.window, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                             if(newImg.length == 0)
                                 return
 
@@ -225,6 +225,16 @@ Rectangle {
                         }
 
                         Text {
+                            id: reverse_scroll_text
+                            height: reverse_scroll_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Reverse Scroll")
+                        }
+
+                        Text {
                             id: last_msg_text
                             height: last_msg_checkbox.height
                             verticalAlignment: Text.AlignVCenter
@@ -262,6 +272,17 @@ Rectangle {
                             font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
                             color: Cutegram.currentTheme.sidebarFontColor
                             text: qsTr("Send by Ctrl+Enter")
+                        }
+
+                        Text {
+                            id: native_title_text
+                            height: send_by_ctrl_enter_checkbox.height
+                            verticalAlignment: Text.AlignVCenter
+                            font.family: Cutegram.currentTheme.sidebarFont.family
+                            font.pixelSize: Math.floor(Cutegram.currentTheme.sidebarFont.pointSize*Devices.fontDensity)
+                            color: Cutegram.currentTheme.sidebarFontColor
+                            text: qsTr("Native decorate (experimental)")
+                            visible: Cutegram.allowNativeTitleBar
                         }
 
                         Text {
@@ -417,6 +438,16 @@ Rectangle {
                         }
 
                         Controls.Switch {
+                            id: reverse_scroll_checkbox
+                            checked: View.reverseScroll
+                            style: Cutegram.currentTheme.switchStyle
+                            onCheckedChanged: {
+                                View.reverseScroll = checked
+                                AsemanApp.setSetting("General/reverseScroll", View.reverseScroll)
+                            }
+                        }
+
+                        Controls.Switch {
                             id: last_msg_checkbox
                             checked: Cutegram.showLastMessage
                             style: Cutegram.currentTheme.switchStyle
@@ -442,6 +473,20 @@ Rectangle {
                             style: Cutegram.currentTheme.switchStyle
                             checked: Cutegram.sendByCtrlEnter
                             onCheckedChanged: Cutegram.sendByCtrlEnter = checked
+                        }
+
+                        Controls.Switch {
+                            id: native_titlebar_checkbox
+                            style: Cutegram.currentTheme.switchStyle
+                            checked: Cutegram.nativeTitleBar
+                            visible: Cutegram.allowNativeTitleBar
+                            onCheckedChanged: {
+                                if(!init_timer.inited)
+                                    return
+
+                                Cutegram.nativeTitleBar = checked
+                                Desktop.showMessage(View.window, qsTr("Reset Needed"), qsTr("This change needs application reset."));
+                            }
                         }
 
                         Controls.ComboBox {
@@ -494,7 +539,7 @@ Rectangle {
                             text: Cutegram.background.length==0? qsTr("Change") : qsTr("Remove")
                             onClicked: {
                                 if(Cutegram.background.length==0) {
-                                    var path = Desktop.getOpenFileName(View, qsTr("Select Image"), "*.png *.jpg *.jpeg")
+                                    var path = Desktop.getOpenFileName(View.window, qsTr("Select Image"), "*.png *.jpg *.jpeg")
                                     if(path.length == 0)
                                         return
 
@@ -567,7 +612,7 @@ Rectangle {
                                 id: select_sound_timer
                                 interval: 300
                                 onTriggered: {
-                                    var file = Desktop.getOpenFileName(View, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
+                                    var file = Desktop.getOpenFileName(View.window, qsTr("Select Sound"), "*.ogg *.mp3 *.wav")
                                     if(file.length != 0)
                                         Cutegram.messageAudio = Devices.localFilesPrePath + file
                                     else
@@ -602,9 +647,7 @@ Rectangle {
                             id: font_btn
                             text: qsTr("Select")
                             style: Cutegram.currentTheme.buttonStyle
-                            onClicked: {
-                                Cutegram.font = Desktop.getFont(View, qsTr("Select Font"), Cutegram.font)
-                            }
+                            onClicked: fontHandler.openFontChooser()
                         }
                     }
                 }

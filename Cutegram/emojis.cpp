@@ -39,6 +39,9 @@ public:
     QPointer<UserData> userData;
     QVariantMap replacements;
 
+    QColor linkColor;
+    QColor linkVisitedColor;
+
     int minReplacementSize;
     int maxReplacementSize;
 
@@ -140,6 +143,34 @@ QVariantMap Emojis::replacements() const
     return p->replacements;
 }
 
+void Emojis::setLinkColor(const QColor &color)
+{
+    if(p->linkColor == color)
+        return;
+
+    p->linkColor = color;
+    emit linkColorChanged();
+}
+
+QColor Emojis::linkColor() const
+{
+    return p->linkColor;
+}
+
+void Emojis::setLinkVisitedColor(const QColor &color)
+{
+    if(p->linkVisitedColor == color)
+        return;
+
+    p->linkVisitedColor = color;
+    emit linkVisitedColorChanged();
+}
+
+QColor Emojis::linkVisitedColor() const
+{
+    return p->linkVisitedColor;
+}
+
 bool Emojis::autoEmojis() const
 {
     return p->autoEmojis;
@@ -193,7 +224,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks, bo
     QString size_folder = QString::number(size);
     size_folder = size_folder + "x" + size_folder;
 
-    QRegExp links_rxp("((?:(?:\\w\\S*\\/\\S*|\\/\\S+|\\:\\/)(?:\\/\\S*\\w|\\w|\\/))|(?:\\w+\\.(?:com|org|co|net)))");
+    QRegExp links_rxp("((?:(?:\\w\\S*\\/\\S*)(?:\\/\\S*\\w|\\w|\\/))|(?:\\w+\\.(?:com|org|co|net)))");
     int pos = 0;
     while (!skipLinks && (pos = links_rxp.indexIn(res, pos)) != -1)
     {
@@ -202,7 +233,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks, bo
         if(href.indexOf(QRegExp("\\w+\\:\\/\\/")) == -1)
             href = "http://" + href;
 
-        QString atag = QString("<a href=\"%1\">%2</a>").arg(href,link);
+        QString atag = QString("<a href=\"%2\"><span style=\"color:%1;\">%3</span></a>").arg(p->linkColor.name(), href, link);
         res.replace( pos, link.length(), atag );
         pos += atag.size();
     }
@@ -215,7 +246,7 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks, bo
         if(p->userData)
             p->userData->addTag(tag);
 
-        QString atag = QString("<a href='tag://%1'>%2</a>").arg(tag,"#"+tag);
+        QString atag = QString("<a href='tag://%2'><span style=\"color:%1;\">%3</span></a>").arg(p->linkColor.name(), tag,"#"+tag);
         res.replace( pos, tag.length()+1, atag );
         pos += atag.size();
     }

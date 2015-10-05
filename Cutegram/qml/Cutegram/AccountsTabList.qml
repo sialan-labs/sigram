@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 
 Item {
@@ -12,6 +12,7 @@ Item {
     property string currentKey
 
     property color selectColor: "#333333"
+    property alias count: listv.count
 
     HashObject {
         id: hashObject
@@ -22,7 +23,7 @@ Item {
         onCountChanged: listv.refresh()
     }
 
-    ListView {
+    AsemanListView {
         id: listv
         anchors.fill: parent
         model: ListModel{}
@@ -47,6 +48,7 @@ Item {
                     width: Cutegram.currentTheme.panelPointerHeight*Devices.density
                     height: width
                     color: selectColor
+                    visible: selected
                 }
             }
 

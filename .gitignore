@@ -27,3 +27,4 @@ Makefile*
 
 *.autosave
 *.xml.backup
+*.DS_Store

@@ -1,7 +1,8 @@
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 import Cutegram 1.0
 import QtQuick 2.0
 import AsemanTools.Controls.Styles 1.0 as AsemanStyles
+import AsemanTools 1.0
 
 CutegramTheme {
     themeName: "Maman Dooz"
@@ -38,7 +39,7 @@ CutegramTheme {
     dialogPointerHeight: 16
     dialogListFontColor: "#eeeeee"
     dialogListShadowColor: "#77000000"
-    dialogListShadowWidth: 3
+    dialogListShadowWidth: 2
     dialogListMessageColor: "#cccccc"
     dialogListMessageFont.pointSize: 9
     dialogListHighlightDateColor: "#999999"
@@ -100,6 +101,8 @@ CutegramTheme {
     messageShadowSize: 2
     messageShadowColor: "#66000000"
     messagePointerHeight: 15
+    messageLinkColor: "#0000ff"
+    messageLinkVisitedColor: Qt.darker(messageLinkColor)
 
     headerColor: "#f0f0f0"
     headerTitleColor: "#111111"
@@ -119,7 +122,7 @@ CutegramTheme {
     panelLightIcon: true
     panelPointerHeight: 12
     panelShadowColor: "#44111111"
-    panelShadowWidth: 3
+    panelShadowWidth: 2
     panelTooltipBackground: "#cc000000"
     panelTooltipTextColor: "#ffffff"
 

@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import AsemanTools.Controls 1.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
 
@@ -20,10 +20,10 @@ Item {
 
     property real typeMessageMediaDocument: 0x2fda2204
     property real typeMessageMediaContact: 0x5e7d2f39
-    property real typeMessageMediaVideo: 0xa2d24290
+    property real typeMessageMediaVideo: 0x5bcf1675
     property real typeMessageMediaEmpty: 0x3ded6320
     property real typeMessageMediaAudio: 0xc6b68300
-    property real typeMessageMediaPhoto: 0xc8c45a2a
+    property real typeMessageMediaPhoto: 0x3d8ce53d
     property real typeMessageMediaGeo: 0x56e0d474
 
     property real typeMessageActionEmpty: 0xb6aef7b0
@@ -48,6 +48,7 @@ Item {
 
     DialogsModel {
         id: dialogs_model
+        stopUpdating: main.dragging
         onInitializingChanged: {
             if( initializing )
                 indicator.start()
@@ -64,7 +65,7 @@ Item {
         indicatorSize: 20*Devices.density
     }
 
-    ListView {
+    AsemanListView {
         id: dlist
         width: Cutegram.currentTheme.dialogListWidth*Devices.density - x
         height: parent.height
@@ -513,7 +514,7 @@ Item {
 
             Timer {
                 id: switch_dialog_timer
-                interval: 100
+                interval: 400
                 onTriggered: {
                     currentDialog = list_item.dItem
                     dlist.currentIndex = index

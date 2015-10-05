@@ -2,7 +2,7 @@ import QtQuick 2.0
 import AsemanTools 1.0
 import AsemanTools.Controls 1.0 as Controls
 import AsemanTools.Controls.Styles 1.0 as Styles
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 import Cutegram 1.0
 // import CutegramTypes 1.0
 
@@ -134,7 +134,7 @@ Item {
 
             property real logicalHeight: txt.height+8*Devices.density<34*Devices.density? 34*Devices.density : txt.height+8*Devices.density
 
-            Flickable {
+            AsemanFlickable {
                 id: flick
                 anchors.fill: parent
                 contentWidth: width
@@ -389,7 +389,7 @@ Item {
                 onClicked: {
                     if( currentDialog == telegramObject.nullDialog )
                         return
-                    var file = Desktop.getOpenFileName(View)
+                    var file = Desktop.getOpenFileName(View.window)
                     if( file.length == 0 )
                         return
 

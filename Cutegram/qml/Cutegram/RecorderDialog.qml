@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 
 Window {
     id: recorder_item
@@ -9,8 +9,8 @@ Window {
     height: 200*Devices.density
     flags: Qt.Dialog
     modality: Qt.ApplicationModal
-    x: View.x + View.width/2 - width/2
-    y: View.y + View.height/2 - height/2
+    x: View.window.x + View.window.width/2 - width/2
+    y: View.window.y + View.window.height/2 - height/2
 
     property alias currentPath: converter.destination
 
@@ -191,8 +191,8 @@ Window {
     }
 
     Component.onCompleted: {
-        x = View.x + View.width/2 - width/2
-        y = View.y + View.height/2 - height/2
+        x = View.window.x + View.window.width/2 - width/2
+        y = View.window.y + View.window.height/2 - height/2
     }
 }
 

@@ -41,6 +41,8 @@ class AsemanQuickView : public INHERIT_VIEW
     Q_OBJECT
 
     Q_PROPERTY(bool fullscreen READ fullscreen WRITE setFullscreen NOTIFY fullscreenChanged)
+    Q_PROPERTY(bool backController READ backController WRITE setBackController NOTIFY backControllerChanged)
+    Q_PROPERTY(bool reverseScroll READ reverseScroll WRITE setReverseScroll NOTIFY reverseScrollChanged)
 
     Q_PROPERTY(qreal statusBarHeight READ statusBarHeight NOTIFY statusBarHeightChanged)
     Q_PROPERTY(qreal navigationBarHeight READ navigationBarHeight NOTIFY navigationBarHeightChanged)
@@ -53,23 +55,11 @@ class AsemanQuickView : public INHERIT_VIEW
     Q_PROPERTY(qreal flickVelocity READ flickVelocity NOTIFY fakeSignal)
 
 public:
-    enum OptionsFlag {
-        None = 0,
-        DesktopTools = 1,
-        Devices = 2,
-        JavaLayer = 4,
-        QtLogger = 8,
-        Tools = 16,
-        Calendar = 32,
-        BackHandler = 64,
-        AllComponents = 127,
-        AllExceptLogger = 119
-    };
 
 #ifdef ASEMAN_QML_PLUGIN
     AsemanQuickView(QQmlEngine *engine, QObject *parent = 0);
 #else
-    AsemanQuickView( int options = Devices|BackHandler, QWindow *parent = 0);
+    AsemanQuickView(QWindow *parent = 0);
 #endif
     ~AsemanQuickView();
 
@@ -86,6 +76,12 @@ public:
     void setFullscreen( bool stt );
     bool fullscreen() const;
 
+    void setBackController(bool stt);
+    bool backController() const;
+
+    void setReverseScroll(bool stt);
+    bool reverseScroll() const;
+
     qreal statusBarHeight() const;
     qreal navigationBarHeight() const;
 
@@ -99,9 +95,14 @@ public:
     void setLayoutDirection( int l );
 
     qreal flickVelocity() const;
+    Q_INVOKABLE QSize screenSize() const;
 
 public slots:
     void discardFocusedText();
+    void tryClose();
+    void setMask(qreal x, qreal y, qreal width, qreal height);
+    void move(qreal x, qreal y);
+    void resize(qreal w, qreal h);
 
 signals:
     void fullscreenChanged();
@@ -110,10 +111,13 @@ signals:
     void rootChanged();
     void focusedTextChanged();
     void layoutDirectionChanged();
+    void backControllerChanged();
+    void reverseScrollChanged();
     void fakeSignal();
+    void closeRequest();
 
-private slots:
-    void init_options();
+protected:
+    bool event(QEvent *e);
 
 private:
     AsemanQuickViewPrivate *p;

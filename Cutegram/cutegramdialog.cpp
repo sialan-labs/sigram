@@ -6,7 +6,7 @@
 #include "cutegramdialog.h"
 #include <telegramqml.h>
 #include <userdata.h>
-#include <types/types.h>
+#include <telegram/types/types.h>
 #include "asemantools/asemandownloader.h"
 
 #include <QTimerEvent>
@@ -202,8 +202,7 @@ void CutegramDialog::initMessage(const QString &txt, qint32 msgId)
     message.setToId(peer);
     message.setClassType(Message::typeMessage);
     message.setDate(QDateTime::currentDateTime().toTime_t());
-    message.setOut(false);
-    message.setUnread(false);
+    message.setFlags(0);
     message.setMessage(txt);
 
     Dialog dlg = dialog();

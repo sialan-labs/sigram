@@ -119,6 +119,38 @@
         <source>Unknown</source>
         <translation>Desconhecido</translation>
     </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation>%1 criou o grupo &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation>%1 adicionou %2 ao grupo</translation>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation>%1 deixou o grupo</translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation>%1 removeu %2</translation>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation>%1 alterou o nome do grupo para &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation>%1 alterou a foto do grupo.</translation>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation>%1 removeu a foto do grupo</translation>
+    </message>
+    <message>
+        <source>You</source>
+        <translation>Você</translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -285,6 +317,10 @@ Note que o Android aceita o chat secreto automaticamente.</translation>
     <message>
         <source>Reply</source>
         <translation>Responder</translation>
+    </message>
+    <message>
+        <source>Add to Stickers</source>
+        <translation>Adicionar aos Stickers</translation>
     </message>
 </context>
 <context>
@@ -485,6 +521,13 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
 </context>
 <context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation>Selecionar fonte</translation>
+    </message>
+</context>
+<context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
@@ -667,10 +710,6 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
         <translation>Selecionar</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation>Selecionar Fonte</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Auto Iniciar</translation>
     </message>
@@ -733,6 +772,18 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <message>
         <source>Show Emojis on hover</source>
         <translation>Exibir Emojir em foco</translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation>Rolagem Reversa</translation>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation>Enviar com Ctrl+Enter</translation>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
+        <translation>Temas de Emoji</translation>
     </message>
 </context>
 <context>
@@ -806,14 +857,6 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation>AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation>PM</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>Data</translation>
@@ -1093,6 +1136,13 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation>Instalar</translation>
+    </message>
+</context>
+<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1150,6 +1200,10 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
         <source>Header</source>
         <translation>Cabeçalho</translation>
     </message>
+    <message>
+        <source>Username</source>
+        <translation>Nome de Usuário</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -1168,6 +1222,14 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
         <translation>Definir endereço IP padrão para &lt;ip&gt;</translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation>Desabilitar kwallet</translation>
+    </message>
+    <message>
+        <source>Force visible at start</source>
+        <translation>Forçar visível no início</translation>
     </message>
 </context>
 </TS>

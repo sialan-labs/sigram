@@ -1,15 +1,17 @@
 #ifndef CONTRIBUTORSMODEL_H
 #define CONTRIBUTORSMODEL_H
 
-#include <QAbstractListModel>
+#include "asemantools/asemanabstractlistmodel.h"
 #include <QList>
 #include <QUrl>
 
 class ContributorsModelItem;
 class ContributorsModelPrivate;
-class ContributorsModel : public QAbstractListModel
+class ContributorsModel : public AsemanAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(ItemRoles)
+
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QList<QUrl> files READ files WRITE setFiles NOTIFY filesChanged)
 

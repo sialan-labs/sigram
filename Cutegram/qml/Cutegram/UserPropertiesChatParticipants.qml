@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 
 Item {
@@ -8,6 +8,9 @@ Item {
     height: 400*Devices.density
 
     property alias currentDialog: cp_model.dialog
+    property bool encrypted: currentDialog.encrypted
+
+    property color textColors: encrypted? Cutegram.currentTheme.headerSecretTitleColor : Cutegram.currentTheme.headerTitleColor
 
     ChatParticipantsModel {
         id: cp_model
@@ -28,7 +31,7 @@ Item {
         indicatorSize: 20*Devices.density
     }
 
-    GridView {
+    AsemanGridView {
         id: list
         anchors.fill: parent
         model: cp_model
@@ -72,7 +75,7 @@ Item {
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAnywhere
                 maximumLineCount: 1
-                color: Desktop.titleBarTextColor
+                color: textColors
                 text: user.firstName + " " + user.lastName
             }
         }

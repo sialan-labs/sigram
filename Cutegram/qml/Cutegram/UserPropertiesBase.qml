@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import AsemanTools.Controls 1.0 as Controls
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 
 Item {
@@ -9,6 +9,10 @@ Item {
     height: main_page.height + 2*frameMargins + 10
 
     property Dialog currentDialog
+    property bool encrypted: currentDialog.encrypted
+
+    property color textColors: encrypted? Cutegram.currentTheme.headerSecretTitleColor : Cutegram.currentTheme.headerTitleColor
+
     property bool isChat: currentDialog.peer.chatId != 0
     property User user: telegramObject.user(currentDialog.peer.userId)
     property Chat chat: telegramObject.chat(currentDialog.peer.chatId)
@@ -153,7 +157,7 @@ Item {
                     id: phone_lbl
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
-                    color: Desktop.titleBarTextColor
+                    color: textColors
                     text: qsTr("Phone Number")
                     visible: !isChat
                 }
@@ -162,7 +166,7 @@ Item {
                     id: username_lbl
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
-                    color: Desktop.titleBarTextColor
+                    color: textColors
                     text: qsTr("Username")
                     visible: !isChat && user.username.length != 0
                 }
@@ -171,7 +175,7 @@ Item {
                     id: favorite_lbl
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
-                    color: Desktop.titleBarTextColor
+                    color: textColors
                     text: qsTr("Favorite")
                 }
 
@@ -179,7 +183,7 @@ Item {
                     id: love_lbl
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
-                    color: Desktop.titleBarTextColor
+                    color: textColors
                     text: qsTr("Love")
                 }
 
@@ -187,7 +191,7 @@ Item {
                     id: mute_lbl
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
-                    color: Desktop.titleBarTextColor
+                    color: textColors
                     text: qsTr("Mute")
                 }
 
@@ -195,7 +199,7 @@ Item {
                     id: badge_lbl
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
-                    color: Desktop.titleBarTextColor
+                    color: textColors
                     text: qsTr("Show Badges")
                 }
 
@@ -205,7 +209,7 @@ Item {
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
                     verticalAlignment: Text.AlignVCenter
                     height: 40*Devices.density
-                    color: Desktop.titleBarTextColor
+                    color: textColors
                     text: qsTr("Participants")
                     visible: isChat
                 }
@@ -222,7 +226,7 @@ Item {
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
                     verticalAlignment: Text.AlignVCenter
-                    color: Desktop.titleBarTextColor
+                    color: textColors
                     text: user.phone + " "
                     visible: !isChat
                 }
@@ -232,7 +236,7 @@ Item {
                     font.family: AsemanApp.globalFont.family
                     font.pixelSize: Math.floor(11*Devices.fontDensity)
                     verticalAlignment: Text.AlignVCenter
-                    color: Desktop.titleBarTextColor
+                    color: textColors
                     text: "@" + user.username
                     visible: username_lbl.visible
                 }
@@ -379,7 +383,7 @@ Item {
                     text: qsTr("Background")
                     style: Cutegram.currentTheme.buttonStyle
                     onClicked: {
-                        var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
+                        var newImg = Desktop.getOpenFileName(View.window, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                         if(newImg.length == 0)
                             return
 
@@ -408,7 +412,7 @@ Item {
                     text: qsTr("Header")
                     style: Cutegram.currentTheme.buttonStyle
                     onClicked: {
-                        var newImg = Desktop.getOpenFileName(View, qsTr("Select photo"), "*.jpg *.png *.jpeg")
+                        var newImg = Desktop.getOpenFileName(View.window, qsTr("Select photo"), "*.jpg *.png *.jpeg")
                         if(newImg.length == 0)
                             return
 

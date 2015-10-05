@@ -22,15 +22,52 @@ import AsemanTools 1.0
 Rectangle {
     id: dt_chooser
     width: 400*Devices.density
-    height: 100*Devices.density
+    height: 150*Devices.density
     clip: true
 
+    property color separatorColors: "#88888888"
     property color textsColor
     property bool dateVisible: true
     property bool timeVisible: true
 
+    property alias calendarType: model.calendar
+    property alias date: model.dateTime
+
     property alias dateLabel: date_text.text
     property alias timeLabel: time_text.text
+
+    CalendarModel {
+        id: model
+        onCurrentYearIndexChanged: year_list.positionViewAtIndex(currentYearIndex)
+        onCurrentMonthIndexChanged: month_list.positionViewAtIndex(currentMonthIndex)
+        onCurrentDaysIndexChanged: day_list.positionViewAtIndex(currentDaysIndex)
+        onCurrentHoursIndexChanged: hour_list.positionViewAtIndex(currentHoursIndex)
+        onCurrentMinutesIndexChanged: minute_list.positionViewAtIndex(currentMinutesIndex)
+
+        Component.onCompleted: {
+            year_list.positionViewAtIndex(currentYearIndex, true)
+            month_list.positionViewAtIndex(currentMonthIndex, true)
+            day_list.positionViewAtIndex(currentDaysIndex, true)
+            hour_list.positionViewAtIndex(currentHoursIndex, true)
+            minute_list.positionViewAtIndex(currentMinutesIndex, true)
+        }
+
+        function save() {
+            save_timer.restart()
+        }
+    }
+
+    Timer {
+        id: save_timer
+        interval: 100
+        onTriggered: {
+            model.setConvertDate(year_list.currentIndex,
+                                 month_list.currentIndex,
+                                 day_list.currentIndex,
+                                 hour_list.currentIndex,
+                                 minute_list.currentIndex)
+        }
+    }
 
     Row {
         id: row
@@ -42,141 +79,68 @@ Rectangle {
         SelectableList {
             id: year_list
             height: parent.height
-            width: timeVisible? dt_chooser.width/5.333 : dt_chooser.width*(75*Devices.density)/(225*Devices.density)
+            width: timeVisible? dt_chooser.width*3/14 : dt_chooser.width*75/225
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
             visible: dateVisible
-
-            Component.onCompleted: {
-                var objs = new Array
-                var year = CalendarConv.currentYear
-                for( var i = 0; i<200; i++ )
-                    objs[i] = i+year-100
-
-                items = objs
-                positionViewAtIndex(100)
-            }
+            items: model.years
+            onCurrentIndexChanged: model.save()
         }
 
         SelectableList {
             id: month_list
             height: parent.height
-            width: timeVisible? dt_chooser.width/4 : dt_chooser.width*(100*Devices.density)/(225*Devices.density)
+            width: timeVisible? dt_chooser.width*4/14 : dt_chooser.width*100/225
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
             visible: dateVisible
-            nameMethodObject: CalendarConv
+            nameMethodObject: model
             nameMethodFunction: "monthName"
-
-            Component.onCompleted: {
-                var objs = new Array
-                var month = CalendarConv.currentMonth
-                for( var i = 0; i<12; i++ )
-                    objs[i] = i+1
-
-                items = objs
-                positionViewAtIndex(month-1)
-            }
+            items: model.months
+            onCurrentIndexChanged: model.save()
         }
 
         SelectableList {
             id: day_list
             height: parent.height
-            width: timeVisible? dt_chooser.width/8 : dt_chooser.width*(50*Devices.density)/(225*Devices.density)
+            width: timeVisible? dt_chooser.width*2/14 : dt_chooser.width*50/225
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
             visible: dateVisible
-
-            property int daysCount: CalendarConv.daysOfMonth(year_list.currentItem,month_list.currentItem)
-            property int currentDay: CalendarConv.currentDay
-
-            onDaysCountChanged: {
-                var objs = new Array
-                if( currentDay > daysCount )
-                    currentDay = daysCount
-
-                for( var i = 0; i<daysCount; i++ )
-                    objs[i] = i+1
-
-                items = objs
-                positionViewAtIndex(currentDay-1)
-            }
+            items: model.days
+            onCurrentIndexChanged: model.save()
         }
 
         Item {
             height: parent.height
-            width: dt_chooser.width/16
+            width: dt_chooser.width*1/14
             visible: dateVisible && timeVisible
         }
 
         SelectableList {
             id: hour_list
             height: parent.height
-            width: dateVisible? dt_chooser.width/8 : dt_chooser.width*(50*Devices.density)/(150*Devices.density)
+            width: dateVisible? dt_chooser.width*2/14 : dt_chooser.width*0.5
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
             visible: timeVisible
             nameMethodObject: row
             nameMethodFunction: "rightJustify"
-
-            Component.onCompleted: {
-                var objs = new Array
-                var data = new Date()
-                var hour = data.getHours()%12
-                for( var i = 0; i<12; i++ )
-                    objs[i] = i
-
-                items = objs
-                positionViewAtIndex(hour)
-            }
+            items: model.hours
+            onCurrentIndexChanged: model.save()
         }
 
         SelectableList {
             id: minute_list
             height: parent.height
-            width: dateVisible? dt_chooser.width/8 : dt_chooser.width*(50*Devices.density)/(150*Devices.density)
+            width: dateVisible? dt_chooser.width*2/14 : dt_chooser.width*0.5
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
             visible: timeVisible
             nameMethodObject: row
             nameMethodFunction: "rightJustify"
-
-            Component.onCompleted: {
-                var objs = new Array
-                var data = new Date()
-                var minute = data.getMinutes()
-                for( var i = 0; i<60; i++ )
-                    objs[i] = i
-
-                items = objs
-                positionViewAtIndex(minute)
-            }
-        }
-
-        SelectableList {
-            id: clock_list
-            height: parent.height
-            width: dateVisible? dt_chooser.width/8 : dt_chooser.width*(50*Devices.density)/(150*Devices.density)
-            textsColor: dt_chooser.textsColor
-            color: dt_chooser.color
-            visible: timeVisible
-            nameMethodObject: clock_list
-            nameMethodFunction: "clockType"
-
-            Component.onCompleted: {
-                var objs = new Array
-                var data = new Date()
-                var clock = Math.floor(data.getHours()/12)
-                for( var i = 0; i<2; i++ )
-                    objs[i] = i
-
-                items = objs
-                positionViewAtIndex(clock)
-            }
-
-            function clockType(index) {
-                return index==0? qsTr("AM") : qsTr("PM")
-            }
+            items: model.minutes
+            onCurrentIndexChanged: model.save()
         }
 
         function rightJustify( str ) {
@@ -192,20 +156,20 @@ Rectangle {
         id: date_line
         x: 0
         height: 2*Devices.density
-        width: timeVisible? dt_chooser.width/1.777 : dt_chooser.width
+        width: year_list.width + month_list.width + day_list.width
         anchors.top: date_text.bottom
         visible: dateVisible
-        color: "#88888888"
+        color: separatorColors
     }
 
     Rectangle {
         id: time_line
         x: parent.width-width
         height: 2*Devices.density
-        width: dateVisible? dt_chooser.width/2.666 : dt_chooser.width
+        width: hour_list.width + minute_list.width
         anchors.top: time_text.bottom
         visible: timeVisible
-        color: "#88888888"
+        color: separatorColors
     }
 
     Text {
@@ -231,9 +195,6 @@ Rectangle {
     }
 
     function getDate() {
-        var date = CalendarConv.convertDateToGragorian(year_list.currentItem,month_list.currentItem,day_list.currentItem)
-        date.setHours( clock_list.currentItem*12 + hour_list.currentItem )
-        date.setMinutes( minute_list.currentItem )
-        return date
+        return model.dateTime
     }
 }

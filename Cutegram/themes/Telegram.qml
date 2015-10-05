@@ -1,7 +1,8 @@
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 import QtQuick 2.0
 import Cutegram 1.0
 import AsemanTools.Controls.Styles 1.0 as AsemanStyles
+import AsemanTools 1.0
 
 CutegramTheme {
     themeName: "Telegram"
@@ -97,6 +98,8 @@ CutegramTheme {
     messageShadowSize: 2
     messageShadowColor: "#66000000"
     messagePointerHeight: 15
+    messageLinkColor: "#0000ff"
+    messageLinkVisitedColor: Qt.darker(messageLinkColor)
 
     headerColor: "#ffffff"
     headerTitleColor: "#111111"

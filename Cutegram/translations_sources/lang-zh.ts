@@ -119,6 +119,38 @@
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>You</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -285,6 +317,10 @@ Note that android accept secret chat automatically.</source>
     <message>
         <source>Reply</source>
         <translation>回复</translation>
+    </message>
+    <message>
+        <source>Add to Stickers</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -485,6 +521,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
@@ -667,10 +710,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>选择</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation>选择字体</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>自动启动</translation>
     </message>
@@ -733,6 +772,18 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Show Emojis on hover</source>
         <translation>在旁边显示表情图标</translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -806,14 +857,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation>上午</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation>下午</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>日期</translation>
@@ -1093,6 +1136,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1150,6 +1200,10 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <source>Header</source>
         <translation>顶部</translation>
     </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -1168,6 +1222,14 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
         <translation>设置默认 IP 地址到 &lt;ip&gt;</translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Force visible at start</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

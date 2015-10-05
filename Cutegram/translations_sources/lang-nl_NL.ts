@@ -119,6 +119,38 @@
         <source>Unknown</source>
         <translation>Onbekend</translation>
     </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation>%1 heeft de groep &quot;%2&quot; gecreëerd</translation>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation>%1 heeft %2 toegevoegd aan de groep</translation>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation>%1 heeft de groep verlaten</translation>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation>%1 heeft %2 verbannen</translation>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation>%1 heeft de groepsnaam gewijzigd in &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation>%1 heeft de groepsfoto gewijzigd.</translation>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation>%1 heeft de groepsfoto verwijderd</translation>
+    </message>
+    <message>
+        <source>You</source>
+        <translation>U</translation>
+    </message>
 </context>
 <context>
     <name>AccountFrame</name>
@@ -285,6 +317,10 @@ Android accepteerd geheime chats automatisch.</translation>
     <message>
         <source>Reply</source>
         <translation>Beantwoorden</translation>
+    </message>
+    <message>
+        <source>Add to Stickers</source>
+        <translation>Toevoegen aan stickers</translation>
     </message>
 </context>
 <context>
@@ -485,6 +521,13 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
 </context>
 <context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation>Lettertype selecteren</translation>
+    </message>
+</context>
+<context>
     <name>AsemanTools</name>
     <message>
         <source>0</source>
@@ -667,10 +710,6 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
         <translation>Selecteren</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation>Selecteer lettertype</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Automatisch opstarten</translation>
     </message>
@@ -733,6 +772,18 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     <message>
         <source>Show Emojis on hover</source>
         <translation>Emoji&apos;s weergeven wanneer de muis eroverheen zweeft</translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation>Scrollrichting omkeren</translation>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation>Versturen met CTRL+Enter</translation>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
+        <translation>Emoticonthema</translation>
     </message>
 </context>
 <context>
@@ -806,14 +857,6 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation>AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation>PM</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>Datu</translation>
@@ -1093,6 +1136,13 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation>Installeren</translation>
+    </message>
+</context>
+<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1150,6 +1200,10 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
         <source>Header</source>
         <translation>Omslag</translation>
     </message>
+    <message>
+        <source>Username</source>
+        <translation>Gebruikersnaam</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -1168,6 +1222,14 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
         <translation>Stelt het standaard IP-adres in op &lt;ip&gt;</translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation>KWallet uitschakelen</translation>
+    </message>
+    <message>
+        <source>Force visible at start</source>
+        <translation>Zichtbaarheid forceren bij opstarten</translation>
     </message>
 </context>
 </TS>

@@ -59,7 +59,7 @@ Item {
         color: "#333333"
     }
 
-    ListView {
+    AsemanListView {
         id: apps_list
         anchors.left: title.left
         anchors.right: parent.right

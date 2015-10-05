@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Cutegram is a Telegram client by Aseman. It&apos;s free, open source and released under the GPLv3 license.</source>
-        <translation type="unfinished"/>
+        <translation>Cutegram је Телеграм клијент аутора Асемана. Он је бесплатан и отвореног кода и издат је под ГПЛв3 лиценцом.</translation>
     </message>
     <message>
         <source>Cutegram uses Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, some KDE tools, Faenza icons and Twitter emojis.</source>
-        <translation type="unfinished"/>
+        <translation>Cutegram користи Qt5, QML, libqtelegram, libappindicator, AsemanQtTools, неке КДЕ алате, Faenza иконе и Twitter emoji.</translation>
     </message>
 </context>
 <context>
@@ -89,34 +89,66 @@
     </message>
     <message>
         <source>Go online</source>
-        <translation type="unfinished"/>
+        <translation>Буди на вези</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation type="unfinished"/>
+        <translation>Документ</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"/>
+        <translation>Контакт</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"/>
+        <translation>Видео</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"/>
+        <translation>Аудио</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"/>
+        <translation>Фото</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>Локација</translation>
     </message>
     <message>
         <source>Unknown</source>
+        <translation>Непознат</translation>
+    </message>
+    <message>
+        <source>%1 created the group &quot;%2&quot;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 added %2 to group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 left the group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 kicked %2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 changed group name to &quot;%2&quot;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 changed group photo.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 deleted group photo</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>You</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -152,20 +184,21 @@
     </message>
     <message>
         <source>Password Error</source>
-        <translation type="unfinished"/>
+        <translation>Грешка лозинке</translation>
     </message>
     <message>
         <source>Sorry. But Your account is an password protected account. We are working to add this feature to Cutegram as soon as possible.
 But currently to fix this, disable 2 step verification, login using Cutegram and then enable 2 step verification again.</source>
-        <translation type="unfinished"/>
+        <translation>Жао нам је. Ваш налог је заштићен лозинком. Радимо на томе да додамо ову опцију у Cutegram што је пре могуће.
+Тренутно, да би сте решили ово, онемогућите 2-степену верификацију, приступите преко Cutegram-а и поново омогућите 2-степену верификацију.</translation>
     </message>
     <message>
         <source>%1 started typing on &quot;%2&quot;</source>
-        <translation type="unfinished"/>
+        <translation>%1 почиње да куца &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 started typing</source>
-        <translation type="unfinished"/>
+        <translation>%1 почиње да куца</translation>
     </message>
 </context>
 <context>
@@ -230,7 +263,7 @@ But currently to fix this, disable 2 step verification, login using Cutegram and
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation type="unfinished"/>
+        <translation>Тренутно документа медија нису подржана у тајном ћаскању.</translation>
     </message>
 </context>
 <context>
@@ -283,6 +316,10 @@ Note that android accept secret chat automatically.</source>
     </message>
     <message>
         <source>Reply</source>
+        <translation>Одговори</translation>
+    </message>
+    <message>
+        <source>Add to Stickers</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -350,7 +387,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Write a message...</source>
-        <translation type="unfinished"/>
+        <translation>Напиши поруку...</translation>
     </message>
 </context>
 <context>
@@ -385,7 +422,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Resend Code</source>
-        <translation type="unfinished"/>
+        <translation>Поново пошаљи код</translation>
     </message>
 </context>
 <context>
@@ -438,7 +475,7 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>AccountsTabList</name>
     <message>
         <source>Add Account</source>
-        <translation type="unfinished"/>
+        <translation>Додај налог</translation>
     </message>
 </context>
 <context>
@@ -481,6 +518,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <message>
         <source>Home Page</source>
         <translation>Матична страница</translation>
+    </message>
+</context>
+<context>
+    <name>AsemanFontHandler</name>
+    <message>
+        <source>Select font</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -666,10 +710,6 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Одабери</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation>Одабери фонт</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Аутоматско покретање</translation>
     </message>
@@ -723,14 +763,26 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Convert smilies to emojis</source>
-        <translation type="unfinished"/>
+        <translation>Конвертуј смајлије у емоџи</translation>
     </message>
     <message>
         <source>Cutegram will restart after this operation.</source>
-        <translation type="unfinished"/>
+        <translation>Cutegram ће се поново покренути након ове операције.</translation>
     </message>
     <message>
         <source>Show Emojis on hover</source>
+        <translation>Прикажи емоџи на облачићу</translation>
+    </message>
+    <message>
+        <source>Reverse Scroll</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Send by Ctrl+Enter</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Emoji&apos;s theme</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -738,15 +790,15 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>ContributorsModel</name>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"/>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"/>
+        <translation>%1 (%2)</translation>
     </message>
     <message>
         <source>%1 (%2) - %3</source>
-        <translation type="unfinished"/>
+        <translation>%1 (%2) - %3</translation>
     </message>
 </context>
 <context>
@@ -800,19 +852,11 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Cutegram</source>
-        <translation type="unfinished"/>
+        <translation>Cutegram</translation>
     </message>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation>АМ</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation>ПМ</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>Датум</translation>
@@ -1092,6 +1136,13 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
 </context>
 <context>
+    <name>StickerInstallDialog</name>
+    <message>
+        <source>Install</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>UserPropertiesBase</name>
     <message>
         <source>Phone Number</source>
@@ -1139,14 +1190,18 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"/>
+        <translation>Позадина</translation>
     </message>
     <message>
         <source>Select photo</source>
-        <translation type="unfinished"/>
+        <translation>Одабери слику</translation>
     </message>
     <message>
         <source>Header</source>
+        <translation>Заглавље</translation>
+    </message>
+    <message>
+        <source>Username</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1154,18 +1209,26 @@ It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
     <name>main</name>
     <message>
         <source>Verbose Mode.</source>
-        <translation type="unfinished"/>
+        <translation>Омширни режим.</translation>
     </message>
     <message>
         <source>Force to run multiple instance of Cutegram.</source>
-        <translation type="unfinished"/>
+        <translation>Форсирај покретање више инстанци Cutegram-а.</translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"/>
+        <translation>Подеси подразумевани ДЦ ИД на &lt;id&gt;</translation>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
+        <translation>Подеси подразумевану ИП адресу на &lt;ip&gt;</translation>
+    </message>
+    <message>
+        <source>Disable kwallet.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Force visible at start</source>
         <translation type="unfinished"/>
     </message>
 </context>

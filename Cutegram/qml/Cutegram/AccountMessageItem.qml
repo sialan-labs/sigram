@@ -1,7 +1,8 @@
 import QtQuick 2.0
 import AsemanTools.Controls 1.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import Cutegram 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 import QtGraphicalEffects 1.0
 
@@ -40,6 +41,7 @@ Item {
     property alias hasMedia: msg_media.hasMedia
     property bool encryptMedia: message.message.length==0 && message.encrypted
     property alias mediaLocation: msg_media.location
+    property alias media: msg_media.media
 
     property alias selectedText: msg_txt.selectedText
     property alias messageRect: back_rect
@@ -244,7 +246,7 @@ Item {
                         id: msg_txt_frame
                         width: msg_txt.width + 8*Devices.density
                         height: msg_txt.height + 8*Devices.density
-                        visible: !msg_media.hasMedia && !uploading
+                        visible: (!msg_media.hasMedia || msg_media.media.caption.length != 0) && !uploading
 
                         TextEdit {
                             id: msg_txt
@@ -259,7 +261,7 @@ Item {
                             selectionColor: masterPalette.highlight
                             selectedTextColor: masterPalette.highlightedText
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            text: emojis.bodyTextToEmojiText(messageText)
+                            text: text_html_converter.html
                             textFormat: Text.RichText
                             height: contentHeight
                             color: {
@@ -285,7 +287,22 @@ Item {
                             }
 
                             property real htmlWidth: Cutegram.htmlWidth(text)
-                            property string messageText: encryptMedia? qsTr("Media files are not currently supported on secret chats.") : message.message
+                            property string messageText: {
+                                if(encryptMedia)
+                                    return qsTr("Media files are not currently supported on secret chats.")
+                                else
+                                if(msg_media.media.caption.length != 0)
+                                    return msg_media.media.caption
+                                else
+                                    return message.message
+                            }
+
+                            TextToHtmlConverter {
+                                id: text_html_converter
+                                emojisItem: emojis_obj
+                                fontHandler: main.fontHandler
+                                text: msg_txt.messageText
+                            }
                         }
                     }
 

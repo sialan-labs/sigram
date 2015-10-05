@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 import AsemanTools 1.0
 
@@ -16,10 +16,10 @@ Item {
     property real typeMessageMediaDocument: 0x2fda2204
     property real typeMessageMediaContact: 0x5e7d2f39
     property real typeMessageMediaEmpty: 0x3ded6320
-    property real typeMessageMediaVideo: 0xa2d24290
+    property real typeMessageMediaVideo: 0x5bcf1675
     property real typeMessageMediaUnsupported: 0x9f84f49e
     property real typeMessageMediaAudio: 0xc6b68300
-    property real typeMessageMediaPhoto: 0xc8c45a2a
+    property real typeMessageMediaPhoto: 0x3d8ce53d
     property real typeMessageMediaGeo: 0x56e0d474
 
     signal messageFocusRequest(int msgId)
@@ -147,7 +147,7 @@ Item {
                 font.pixelSize: Math.floor(Cutegram.font.pointSize*Devices.fontDensity)-1
                 font.family: Cutegram.font.family
                 horizontalAlignment: Text.AlignLeft
-                opacity: 0.8
+                opacity: 0.7
                 visible: text.length != 0
                 textFormat: Text.RichText
                 color: {
@@ -168,7 +168,7 @@ Item {
                     if(msgText.length > 100)
                         msgText = msgText.slice(0, 100) + "..."
 
-                    return emojis.textToEmojiText(msgText,16,true)
+                    return fontHandler.textToHtml(emojis.textToEmojiText(msgText,16,true))
                 }
 
                 property real htmlWidth: Cutegram.htmlWidth(text)

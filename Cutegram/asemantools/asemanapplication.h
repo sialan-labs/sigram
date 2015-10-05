@@ -23,58 +23,75 @@
 
 #include <QFont>
 #include <QVariant>
+#include <QCoreApplication>
+#include <QClipboard>
 
-#ifdef ASEMAN_QML_PLUGIN
-#include <QObject>
-class INHERIT_QAPP : public QObject
-{
-public:
-    INHERIT_QAPP(QObject *parent = 0): QObject(parent){}
-};
+#ifdef QT_GUI_LIB
+#include <QIcon>
+#endif
+
+#if defined(QT_WIDGETS_LIB) && defined(DESKTOP_DEVICE)
+#define DEFAULT_AAPP_TYPE AsemanApplication::WidgetApplication
 #else
-#ifdef DESKTOP_DEVICE
-#include "qtsingleapplication/qtsingleapplication.h"
-class INHERIT_QAPP : public QtSingleApplication
-{
-public:
-    INHERIT_QAPP(int &argc, char **argv): QtSingleApplication(argc, argv){}
-};
+#if defined(QT_GUI_LIB)
+#define DEFAULT_AAPP_TYPE AsemanApplication::GuiApplication
 #else
-#include <QGuiApplication>
-class INHERIT_QAPP : public QGuiApplication
-{
-public:
-    INHERIT_QAPP(int &argc, char **argv): QGuiApplication(argc, argv){}
-};
+#if defined(QT_CORE_LIB)
+#define DEFAULT_AAPP_TYPE AsemanApplication::CoreApplication
+#endif
 #endif
 #endif
 
 class QSettings;
 class AsemanApplicationPrivate;
-class AsemanApplication : public INHERIT_QAPP
+class AsemanApplication : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(ApplicationType)
 
-    Q_PROPERTY(QString homePath     READ homePath     NOTIFY fakeSignal)
+    Q_PROPERTY(QString homePath     READ homePath     NOTIFY homePathChanged)
     Q_PROPERTY(QString appPath      READ appPath      NOTIFY fakeSignal)
     Q_PROPERTY(QString appFilePath  READ appFilePath  NOTIFY fakeSignal)
-    Q_PROPERTY(QString logPath      READ logPath      NOTIFY fakeSignal)
-    Q_PROPERTY(QString confsPath    READ confsPath    NOTIFY fakeSignal)
+    Q_PROPERTY(QString logPath      READ logPath      NOTIFY logPathChanged)
+    Q_PROPERTY(QString confsPath    READ confsPath    NOTIFY confsPathChanged)
     Q_PROPERTY(QString tempPath     READ tempPath     NOTIFY fakeSignal)
-    Q_PROPERTY(QString backupsPath  READ backupsPath  NOTIFY fakeSignal)
+    Q_PROPERTY(QString backupsPath  READ backupsPath  NOTIFY backupsPathChanged)
     Q_PROPERTY(QString cameraPath   READ cameraPath   NOTIFY fakeSignal)
+
+    Q_PROPERTY(int appType READ appType NOTIFY fakeSignal)
 
     Q_PROPERTY(QFont globalFont READ globalFont WRITE setGlobalFont NOTIFY globalFontChanged)
 
+    Q_PROPERTY(QString applicationName READ applicationName WRITE setApplicationName NOTIFY applicationNameChanged)
+    Q_PROPERTY(QString applicationVersion READ applicationVersion WRITE setApplicationVersion NOTIFY applicationVersionChanged)
+    Q_PROPERTY(QString organizationName READ organizationName WRITE setOrganizationName NOTIFY organizationNameChanged)
+    Q_PROPERTY(QString organizationDomain READ organizationDomain WRITE setOrganizationDomain NOTIFY organizationDomainChanged)
+
+    Q_PROPERTY(QString applicationDisplayName READ applicationDisplayName WRITE setApplicationDisplayName)
+    Q_PROPERTY(QString platformName READ platformName STORED false)
+    Q_PROPERTY(bool quitOnLastWindowClosed  READ quitOnLastWindowClosed WRITE setQuitOnLastWindowClosed)
+
 public:
-#ifdef ASEMAN_QML_PLUGIN
-    AsemanApplication();
-#else
-    AsemanApplication(int &argc, char **argv);
+    enum ApplicationType {
+        NoneApplication,
+#ifdef QT_GUI_LIB
+        GuiApplication,
 #endif
+#ifdef QT_CORE_LIB
+        CoreApplication,
+#endif
+#ifdef QT_WIDGETS_LIB
+        WidgetApplication
+#endif
+    };
+
+    AsemanApplication();
+    AsemanApplication(int &argc, char **argv, ApplicationType appType = DEFAULT_AAPP_TYPE);
     ~AsemanApplication();
 
     static QString homePath();
+    static void setHomePath(const QString &path);
+
     static QString appPath();
     static QString appFilePath();
     static QString logPath();
@@ -83,18 +100,64 @@ public:
     static QString backupsPath();
     static QString cameraPath();
 
+    static QString applicationDirPath();
+    static QString applicationFilePath();
+    static qint64 applicationPid();
+
+    static void setOrganizationDomain(const QString &orgDomain);
+    static QString organizationDomain();
+    static void setOrganizationName(const QString &orgName);
+    static QString organizationName();
+    static void setApplicationName(const QString &application);
+    static QString applicationName();
+    static void setApplicationVersion(const QString &version);
+    static QString applicationVersion();
+    static void setApplicationDisplayName(const QString &name);
+    static QString applicationDisplayName();
+
+    static QString platformName();
+
+    static QStringList arguments();
+
+    static void setQuitOnLastWindowClosed(bool quit);
+    static bool quitOnLastWindowClosed();
+
+    static QClipboard *clipboard();
+
+#ifdef QT_GUI_LIB
+    static void setWindowIcon(const QIcon &icon);
+    static QIcon windowIcon();
+#endif
+
+    static bool isRunning();
+    static int appType();
+
     static AsemanApplication *instance();
+    static QCoreApplication *qapp();
 
     void setGlobalFont(const QFont &font);
     QFont globalFont() const;
 
+    static QFont font();
+    static void setFont(const QFont &f);
+
+#ifdef QT_GUI_LIB
+    static QPalette palette();
+    static void setPalette(const QPalette &pal);
+#endif
+
     static QSettings *settings();
+
+    inline operator QCoreApplication*() const { return qapp(); }
 
 public slots:
     void refreshTranslations();
     void back();
+    int exec();
+    static void exit(int retcode = 0);
 
     void sleep(quint64 ms);
+    void sendMessage(const QString &msg);
 
     void setSetting( const QString & key, const QVariant & value );
     QVariant readSetting( const QString & key, const QVariant & defaultValue = QVariant() );
@@ -108,8 +171,24 @@ signals:
     void backRequest();
     void clickedOnDock();
 
+    void homePathChanged();
+    void logPathChanged();
+    void confsPathChanged();
+    void backupsPathChanged();
+
+    void organizationNameChanged();
+    void organizationDomainChanged();
+    void applicationNameChanged();
+    void applicationVersionChanged();
+
+    void lastWindowClosed();
+    void messageReceived(const QString &msg);
+
 protected:
-    bool event(QEvent *e);
+    bool eventFilter(QObject *o, QEvent *e);
+
+private:
+    void init();
 
 private:
     AsemanApplicationPrivate *p;

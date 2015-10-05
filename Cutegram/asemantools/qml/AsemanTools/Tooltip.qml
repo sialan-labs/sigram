@@ -32,14 +32,16 @@ Rectangle {
     property int interval: 1500
     property real padding: 8*Devices.density
 
+    property alias textFont: txt.font
+    property alias textColor: txt.color
+
     Behavior on opacity {
         NumberAnimation { id: anim_item; easing.type: Easing.OutCubic; duration: 250 }
     }
 
     Text{
         id: txt
-        x: tooltip.padding
-        y: tooltip.padding*0.75
+        anchors.centerIn: parent
         font.pixelSize: Math.floor(10*Devices.fontDensity)
         font.family: AsemanApp.globalFont.family
         color: "#ffffff"

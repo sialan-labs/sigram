@@ -1,11 +1,11 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 
 Rectangle {
     width: 100
     height: 62
-    color: Desktop.titleBarColor
+    color: "#eeeeee"
 
     Image {
         id: logo_img
@@ -26,7 +26,7 @@ Rectangle {
             font.family: AsemanApp.globalFont.family
             font.pixelSize: Math.floor(30*Devices.fontDensity)
             text: "Cutegram"
-            color: Desktop.titleBarTextColor
+            color: "#333333"
         }
 
         Indicator {
@@ -34,7 +34,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             indicatorSize: 22*Devices.density
             modern: true
-            light: Desktop.titleBarIsDark
+            light: false
             Component.onCompleted: start()
         }
     }
@@ -44,7 +44,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: 8*Devices.density
         height: 30*Devices.density
-        dark: !Desktop.titleBarIsDark
+        dark: true
     }
 
     Text {
@@ -52,7 +52,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: 8*Devices.density
         font: AsemanApp.globalFont
-        color: Desktop.titleBarTextColor
+        color: "#333333"
         text: AsemanApp.applicationVersion
     }
 }

@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import AsemanTools 1.0
-import TelegramQml 1.0
+import TelegramQmlLib 1.0
 // import CutegramTypes 1.0
 
 Rectangle {
@@ -27,7 +27,7 @@ Rectangle {
         indicatorSize: 20*Devices.density
     }
 
-    GridView {
+    AsemanGridView {
         id: grid
         anchors.fill: parent
         model: wallpapers_model

@@ -19,7 +19,7 @@
 #include "asemanabstractcolorfulllistmodel.h"
 
 AsemanAbstractColorfullListModel::AsemanAbstractColorfullListModel(QObject *parent) :
-    QAbstractListModel(parent)
+    AsemanAbstractListModel(parent)
 {
     qRegisterMetaType<AsemanColorfullListItem*>("AsemanColorfullListItem*");
 }
