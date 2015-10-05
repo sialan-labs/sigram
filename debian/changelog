@@ -1,3 +1,47 @@
+cutegram (2.7.0-3aseman-vivid) vivid; urgency=medium
+
+  * Add Sticker-Set support
+  * All messages stored encrypted on the database now
+  * Encrypted authentication file
+  * KWallet support (under kde)
+  * Add supports for different font for different languages
+  * Add apple-emojis (twitter emojis is default)
+  * Add an option to send messages using Ctrl+Enter
+  * Many improvement on UserInterface
+  * Show username in the user info panel.
+  * Media caption message support
+  * Many improvement on OSX version
+  * Native titlebar on the OSX Yosemite and El-capitan (experimental)
+  * Add OSX fullscreen support (Normal titlebar only)
+  * Update Cutegram icon
+  * Update translations
+  * Add new demos on TelegramQml repository for developers
+  * Many other improvements and bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Mon, 5 Oct 2015 10:30:00 +0330
+ 
+cutegram (2.7.0-3aseman-trusty) trusty; urgency=medium
+
+  * Add Sticker-Set support
+  * All messages stored encrypted on the database now
+  * Encrypted authentication file
+  * KWallet support (under kde)
+  * Add supports for different font for different languages
+  * Add apple-emojis (twitter emojis is default)
+  * Add an option to send messages using Ctrl+Enter
+  * Many improvement on UserInterface
+  * Show username in the user info panel.
+  * Media caption message support
+  * Many improvement on OSX version
+  * Native titlebar on the OSX Yosemite and El-capitan (experimental)
+  * Add OSX fullscreen support (Normal titlebar only)
+  * Update Cutegram icon
+  * Update translations
+  * Add new demos on TelegramQml repository for developers
+  * Many other improvements and bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Mon, 5 Oct 2015 10:30:00 +0330
+ 
 cutegram (2.5.0-3aseman-vivid) vivid; urgency=medium
 
   * New file handler system + many improvement

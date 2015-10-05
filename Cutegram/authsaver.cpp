@@ -102,7 +102,7 @@ bool init_kwallet()
     cg_wallet_custom_process = new QProcess();
     cg_wallet_custom_process->start("kwalletd");
     cg_wallet_custom_process->waitForStarted();
-    if(cg_wallet_custom_process->processId())
+    if(cg_wallet_custom_process->state() != QProcess::NotRunning)
     {
         cg_wallet_custom_process->waitForReadyRead();
         QThread::msleep(3000);

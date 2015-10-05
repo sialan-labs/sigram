@@ -441,12 +441,20 @@ QClipboard *AsemanApplication::clipboard()
 #ifdef QT_GUI_LIB
 void AsemanApplication::setWindowIcon(const QIcon &icon)
 {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
     SET_DIFINITION(setWindowIcon, icon)
+#else
+    Q_UNUSED(icon)
+#endif
 }
 
 QIcon AsemanApplication::windowIcon()
 {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
     READ_DEFINITION(windowIcon, QIcon())
+#else
+    return QIcon();
+#endif
 }
 #endif
 
