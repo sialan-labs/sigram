@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -32,7 +30,7 @@
     </message>
     <message>
         <source>Secret chat</source>
-        <translation>Hemlig chatt</translation>
+        <translation>Hemlig konversation</translation>
     </message>
     <message>
         <source>%1 participants (%2 online)</source>
@@ -63,11 +61,11 @@
     </message>
     <message>
         <source>Delete secret chat</source>
-        <translation>Radera hemlig chatt</translation>
+        <translation>Radera hemlig konversation</translation>
     </message>
     <message>
         <source>Are you sure about deleting this secret chat?</source>
-        <translation>Är du säker på att du vill radera denna hemliga chatt?</translation>
+        <translation>Är du säker på att du vill radera denna hemliga konversation?</translation>
     </message>
     <message>
         <source>Delete History</source>
@@ -123,35 +121,35 @@
     </message>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation type="unfinished">%1 skapade gruppen &quot;%2&quot;</translation>
+        <translation>%1 skapade gruppen &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished">%1 lade till %2 till gruppen</translation>
+        <translation>%1 lade till %2 till gruppen</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation type="unfinished">%1 lämnade gruppen</translation>
+        <translation>%1 lämnade gruppen</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished">%1 sparkade ut %2</translation>
+        <translation>%1 sparkade ut %2</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation type="unfinished">%1 bytte gruppnamn till &quot;%2&quot;</translation>
+        <translation>%1 bytte gruppnamn till &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation type="unfinished">%1 bytte gruppfoto</translation>
+        <translation>%1 bytte gruppfoto</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation type="unfinished">%1 radera gruppfotot</translation>
+        <translation>%1 radera gruppfotot</translation>
     </message>
     <message>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation>Du</translation>
     </message>
 </context>
 <context>
@@ -249,7 +247,7 @@ I nuläget kan du fixa detta genom att stänga av 2-stegs-verifiering, logga in 
     <name>AccountMessageItem</name>
     <message>
         <source>Media files is not supported on secret chat currently</source>
-        <translation type="vanished">Mediafiler stöds för närvarande inte i hemliga chatter</translation>
+        <translation type="vanished">Mediafiler stöds för närvarande inte i hemliga konversationer.</translation>
     </message>
     <message>
         <source>Don&apos;t Load Anymore</source>
@@ -265,7 +263,7 @@ I nuläget kan du fixa detta genom att stänga av 2-stegs-verifiering, logga in 
     </message>
     <message>
         <source>Media files are not currently supported on secret chats.</source>
-        <translation>Mediafiler stöds för närvarande inte i hemliga chatter</translation>
+        <translation>Mediafiler stöds för närvarande inte i hemliga konversationer.</translation>
     </message>
 </context>
 <context>
@@ -276,7 +274,7 @@ I nuläget kan du fixa detta genom att stänga av 2-stegs-verifiering, logga in 
     </message>
     <message>
         <source>Secret chat request. Please Accept or Reject.</source>
-        <translation>Hemlig chatt-inbjudan. Vänligen Godkänn eller Neka.</translation>
+        <translation>Hemlig konversationsinbjudan. Vänligen Godkänn eller Neka.</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -309,8 +307,8 @@ I nuläget kan du fixa detta genom att stänga av 2-stegs-verifiering, logga in 
     <message>
         <source>Secret chat rejected. Or accepted from another device.
 Note that android accept secret chat automatically.</source>
-        <translation>Hemlig chatt nekades. Eller accepterades av en annan apparat.
-Notera att Android automatiskt accepterar hemliga chatter.</translation>
+        <translation>Hemlig konversation nekades. Eller accepterades av en annan apparat.
+Notera att Android automatiskt accepterar hemliga konversationer.</translation>
     </message>
     <message>
         <source>Add to Personal</source>
@@ -322,14 +320,14 @@ Notera att Android automatiskt accepterar hemliga chatter.</translation>
     </message>
     <message>
         <source>Add to Stickers</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till som Personlig känsloikon</translation>
     </message>
 </context>
 <context>
     <name>AccountMessageMedia</name>
     <message>
         <source>Click to Download</source>
-        <translation>Klicka för att ladda ler</translation>
+        <translation>Klicka för att ladda ner</translation>
     </message>
     <message>
         <source>Unsupported Media</source>
@@ -374,7 +372,7 @@ Notera att Android automatiskt accepterar hemliga chatter.</translation>
         <translation>Radera</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Detta är Cutegrams nyheter om nya uppdateringar och lösningar.
 Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
@@ -438,7 +436,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     <name>AccountsTabFrame</name>
     <message>
         <source>New group chat</source>
-        <translation>Ny gruppchatt</translation>
+        <translation>Ny gruppkonversation</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -454,7 +452,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Add Secret Chat</source>
-        <translation>Skapa hemlig chatt</translation>
+        <translation>Skapa hemlig konversation</translation>
     </message>
     <message>
         <source>Contact List</source>
@@ -526,7 +524,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     <name>AsemanFontHandler</name>
     <message>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj teckensnitt</translation>
     </message>
 </context>
 <context>
@@ -573,11 +571,11 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -712,10 +710,6 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
         <translation>Välj</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation type="vanished">Välj teckensnitt</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Autostarta</translation>
     </message>
@@ -781,15 +775,15 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Reverse Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Motsatt scroll</translation>
     </message>
     <message>
         <source>Send by Ctrl+Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka med Ctrl+Enter</translation>
     </message>
     <message>
         <source>Emoji&apos;s theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Emojitema</translation>
     </message>
 </context>
 <context>
@@ -864,14 +858,6 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
 <context>
     <name>DateTimeChooser</name>
     <message>
-        <source>AM</source>
-        <translation type="vanished">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="vanished">PM</translation>
-    </message>
-    <message>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
@@ -904,7 +890,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Drop to add new chat</source>
-        <translation>Släpp för att lägga till ny chatt</translation>
+        <translation>Släpp för att lägga till ny konversation</translation>
     </message>
     <message>
         <source>New Group</source>
@@ -1153,7 +1139,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     <name>StickerInstallDialog</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installera</translation>
     </message>
 </context>
 <context>
@@ -1212,11 +1198,11 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Header</source>
-        <translation type="unfinished"></translation>
+        <translation>Header</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Användarnamn</translation>
+        <translation>Användarnamn</translation>
     </message>
 </context>
 <context>
@@ -1231,7 +1217,7 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Sets default DC ID to &lt;id&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Sets default IP Address to &lt;ip&gt;</source>
@@ -1239,11 +1225,11 @@ Det är inte en Telegramkontakt. Det är en virtuell kontakt.</translation>
     </message>
     <message>
         <source>Disable kwallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Avaktivera kwallet.</translation>
     </message>
     <message>
         <source>Force visible at start</source>
-        <translation type="unfinished"></translation>
+        <translation>Tvinga synlig vid uppstart</translation>
     </message>
 </context>
 </TS>

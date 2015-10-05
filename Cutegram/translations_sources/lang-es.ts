@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -123,35 +121,35 @@
     </message>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation type="unfinished">%1 creó el grupo &quot;%2&quot;</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished">%1 añadió a %2 al grupo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation type="unfinished">%1 dejó el grupo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished">%1 hechó a %2</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation type="unfinished">%1 cambió nombre del grupo a &quot;%2&quot;</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation type="unfinished">%1 cambió foto del grupo.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation type="unfinished">%1 eliminó foto del grupo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -322,7 +320,7 @@ Notar que android acepta chat secretos automáticamente.</translation>
     </message>
     <message>
         <source>Add to Stickers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -374,7 +372,7 @@ Notar que android acepta chat secretos automáticamente.</translation>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Este es un boletín de Cutegram sobre nuevos lanzamientos y soluciones.
 No es un contacto de telegram. Es solo un contacto virtual.</translation>
@@ -526,7 +524,7 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     <name>AsemanFontHandler</name>
     <message>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -712,10 +710,6 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
         <translation>Seleccionar</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation type="vanished">Seleccionar Tipo de Letra</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Inicio Automático</translation>
     </message>
@@ -781,15 +775,15 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     </message>
     <message>
         <source>Reverse Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Send by Ctrl+Enter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Emoji&apos;s theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -863,14 +857,6 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation type="vanished">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="vanished">PM</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>Fecha</translation>
@@ -1153,7 +1139,7 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     <name>StickerInstallDialog</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1216,7 +1202,7 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Nombre de usuario</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1239,11 +1225,11 @@ No es un contacto de telegram. Es solo un contacto virtual.</translation>
     </message>
     <message>
         <source>Disable kwallet.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Force visible at start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

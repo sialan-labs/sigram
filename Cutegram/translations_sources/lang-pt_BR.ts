@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -123,35 +121,35 @@
     </message>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation type="unfinished">%1 criou o grupo &quot;%2&quot;</translation>
+        <translation>%1 criou o grupo &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished">%1 adicionou %2 ao grupo</translation>
+        <translation>%1 adicionou %2 ao grupo</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation type="unfinished">%1 deixou o grupo</translation>
+        <translation>%1 deixou o grupo</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished">%1 removeu %2</translation>
+        <translation>%1 removeu %2</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation type="unfinished">%1 alterou o nome do grupo para &quot;%2&quot;</translation>
+        <translation>%1 alterou o nome do grupo para &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation type="unfinished">%1 alterou a foto do grupo.</translation>
+        <translation>%1 alterou a foto do grupo.</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation type="unfinished">%1 removeu a foto do grupo</translation>
+        <translation>%1 removeu a foto do grupo</translation>
     </message>
     <message>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation>Você</translation>
     </message>
 </context>
 <context>
@@ -322,7 +320,7 @@ Note que o Android aceita o chat secreto automaticamente.</translation>
     </message>
     <message>
         <source>Add to Stickers</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar aos Stickers</translation>
     </message>
 </context>
 <context>
@@ -374,7 +372,7 @@ Note que o Android aceita o chat secreto automaticamente.</translation>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>São as novidades do Cutegram, lançamentos e soluções.
 Não é o contato do Telegram, somente um contato virtual.</translation>
@@ -526,7 +524,7 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <name>AsemanFontHandler</name>
     <message>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar fonte</translation>
     </message>
 </context>
 <context>
@@ -712,10 +710,6 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
         <translation>Selecionar</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation type="vanished">Selecionar Fonte</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Auto Iniciar</translation>
     </message>
@@ -781,15 +775,15 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Reverse Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolagem Reversa</translation>
     </message>
     <message>
         <source>Send by Ctrl+Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar com Ctrl+Enter</translation>
     </message>
     <message>
         <source>Emoji&apos;s theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Temas de Emoji</translation>
     </message>
 </context>
 <context>
@@ -863,14 +857,6 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation type="vanished">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="vanished">PM</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>Data</translation>
@@ -1153,7 +1139,7 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     <name>StickerInstallDialog</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar</translation>
     </message>
 </context>
 <context>
@@ -1216,7 +1202,7 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Nome de usuário</translation>
+        <translation>Nome de Usuário</translation>
     </message>
 </context>
 <context>
@@ -1239,11 +1225,11 @@ Não é o contato do Telegram, somente um contato virtual.</translation>
     </message>
     <message>
         <source>Disable kwallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Desabilitar kwallet</translation>
     </message>
     <message>
         <source>Force visible at start</source>
-        <translation type="unfinished"></translation>
+        <translation>Forçar visível no início</translation>
     </message>
 </context>
 </TS>

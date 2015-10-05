@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
 <context>
     <name>AboutCutegram</name>
     <message>
@@ -123,35 +121,35 @@
     </message>
     <message>
         <source>%1 created the group &quot;%2&quot;</source>
-        <translation type="unfinished">%1 heeft de groep &quot;%2&quot; gecreëerd</translation>
+        <translation>%1 heeft de groep &quot;%2&quot; gecreëerd</translation>
     </message>
     <message>
         <source>%1 added %2 to group</source>
-        <translation type="unfinished">%1 heeft %2 toegevoegd aan de groep</translation>
+        <translation>%1 heeft %2 toegevoegd aan de groep</translation>
     </message>
     <message>
         <source>%1 left the group</source>
-        <translation type="unfinished">%1 heeft de groep verlaten</translation>
+        <translation>%1 heeft de groep verlaten</translation>
     </message>
     <message>
         <source>%1 kicked %2</source>
-        <translation type="unfinished">%1 heeft %2 verbannen</translation>
+        <translation>%1 heeft %2 verbannen</translation>
     </message>
     <message>
         <source>%1 changed group name to &quot;%2&quot;</source>
-        <translation type="unfinished">%1 heeft de groepsnaam gewijzigd in &quot;%2&quot;</translation>
+        <translation>%1 heeft de groepsnaam gewijzigd in &quot;%2&quot;</translation>
     </message>
     <message>
         <source>%1 changed group photo.</source>
-        <translation type="unfinished">%1 heeft de groepsfoto gewijzigd.</translation>
+        <translation>%1 heeft de groepsfoto gewijzigd.</translation>
     </message>
     <message>
         <source>%1 deleted group photo</source>
-        <translation type="unfinished">%1 heeft de groepsfoto verwijderd</translation>
+        <translation>%1 heeft de groepsfoto verwijderd</translation>
     </message>
     <message>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
 </context>
 <context>
@@ -322,7 +320,7 @@ Android accepteerd geheime chats automatisch.</translation>
     </message>
     <message>
         <source>Add to Stickers</source>
-        <translation type="unfinished"></translation>
+        <translation>Toevoegen aan stickers</translation>
     </message>
 </context>
 <context>
@@ -374,7 +372,7 @@ Android accepteerd geheime chats automatisch.</translation>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <source>It&apos;s Cutegram news about new releases and solutions.
+        <source>It's Cutegram news about new releases and solutions.
 It&apos;s not a telegram contact. It&apos;s just a virtual contact. </source>
         <translation>Het bevat Curegram-nieuws met informatie over nieuwe versies en oplossingen.
 Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
@@ -526,7 +524,7 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     <name>AsemanFontHandler</name>
     <message>
         <source>Select font</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype selecteren</translation>
     </message>
 </context>
 <context>
@@ -712,10 +710,6 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
         <translation>Selecteren</translation>
     </message>
     <message>
-        <source>Select Font</source>
-        <translation type="vanished">Selecteer lettertype</translation>
-    </message>
-    <message>
         <source>Auto Start</source>
         <translation>Automatisch opstarten</translation>
     </message>
@@ -781,15 +775,15 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Reverse Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrollrichting omkeren</translation>
     </message>
     <message>
         <source>Send by Ctrl+Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Versturen met CTRL+Enter</translation>
     </message>
     <message>
         <source>Emoji&apos;s theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Emoticonthema</translation>
     </message>
 </context>
 <context>
@@ -863,14 +857,6 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
 </context>
 <context>
     <name>DateTimeChooser</name>
-    <message>
-        <source>AM</source>
-        <translation type="vanished">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="vanished">PM</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>Datu</translation>
@@ -998,75 +984,75 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Ordibehesht</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Khordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Tir</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mordad</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shahrivar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Mehr</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Abaan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Aazar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Dey</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Bahman</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Esfand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>1Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>2Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>3Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>4Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>5Shanbe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Jome</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1153,7 +1139,7 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     <name>StickerInstallDialog</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeren</translation>
     </message>
 </context>
 <context>
@@ -1216,7 +1202,7 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Gebruikersnaam</translation>
+        <translation>Gebruikersnaam</translation>
     </message>
 </context>
 <context>
@@ -1239,11 +1225,11 @@ Het is geen Telegram-contact; het is gewoon virtueel contact.</translation>
     </message>
     <message>
         <source>Disable kwallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>KWallet uitschakelen</translation>
     </message>
     <message>
         <source>Force visible at start</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaarheid forceren bij opstarten</translation>
     </message>
 </context>
 </TS>
