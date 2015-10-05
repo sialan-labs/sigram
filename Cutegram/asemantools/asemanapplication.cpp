@@ -98,7 +98,7 @@ static QSettings *app_global_settings = 0;
 static AsemanApplication *aseman_app_singleton = 0;
 static QString *aseman_app_home_path = 0;
 
-#ifdef Q_OS_MAC
+#if defined(Q_OS_MAC) && defined(Q_PROCESSOR_X86_32)
 #include <objc/objc.h>
 #include <objc/message.h>
 
@@ -226,8 +226,7 @@ void AsemanApplication::init()
     p->clickOnDock_timer->setSingleShot(true);
     p->clickOnDock_timer->setInterval(500);
 
-#ifdef Q_OS_MAC
-
+#if defined(Q_OS_MAC) && defined(Q_PROCESSOR_X86_32)
     objc_object* cls = objc_getClass("NSApplication");
     SEL sharedApplication = sel_registerName("sharedApplication");
     objc_object* appInst = objc_msgSend(cls,sharedApplication);
@@ -239,12 +238,12 @@ void AsemanApplication::init()
         const char* tst = class_getName(delClass->isa);
         bool test = class_addMethod((objc_class*)delClass, sel_registerName("applicationShouldHandleReopen:hasVisibleWindows:"), (IMP)dockClickHandler,"B@:");
 
+        Q_UNUSED(tst)
         if (!test)
         {
             // failed to register handler...
         }
     }
-
 #endif
 }
 
