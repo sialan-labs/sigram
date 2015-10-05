@@ -98,6 +98,19 @@ static QSettings *app_global_settings = 0;
 static AsemanApplication *aseman_app_singleton = 0;
 static QString *aseman_app_home_path = 0;
 
+#if defined(Q_OS_MAC) && defined(Q_PROCESSOR_X86_32)
+#include <objc/objc.h>
+#include <objc/message.h>
+
+bool dockClickHandler(id self,SEL _cmd,...)
+{
+    Q_UNUSED(self)
+    Q_UNUSED(_cmd)
+    if(aseman_app_singleton) aseman_app_singleton->clickedOnDock();
+    return true;
+}
+#endif
+
 class AsemanApplicationPrivate
 {
 public:
@@ -212,6 +225,26 @@ void AsemanApplication::init()
     p->clickOnDock_timer = new QTimer(this);
     p->clickOnDock_timer->setSingleShot(true);
     p->clickOnDock_timer->setInterval(500);
+
+#if defined(Q_OS_MAC) && defined(Q_PROCESSOR_X86_32)
+    objc_object* cls = objc_getClass("NSApplication");
+    SEL sharedApplication = sel_registerName("sharedApplication");
+    objc_object* appInst = objc_msgSend(cls,sharedApplication);
+
+    if(appInst != NULL)
+    {
+        objc_object* delegate = objc_msgSend(appInst, sel_registerName("delegate"));
+        objc_object* delClass = objc_msgSend(delegate,  sel_registerName("class"));
+        const char* tst = class_getName(delClass->isa);
+        bool test = class_addMethod((objc_class*)delClass, sel_registerName("applicationShouldHandleReopen:hasVisibleWindows:"), (IMP)dockClickHandler,"B@:");
+
+        Q_UNUSED(tst)
+        if (!test)
+        {
+            // failed to register handler...
+        }
+    }
+#endif
 }
 
 QString AsemanApplication::homePath()
