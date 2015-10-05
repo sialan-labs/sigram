@@ -101,3 +101,9 @@ You can use command below after building to clean build directory on the each st
     mkdir build && cd build
     /bin/qmake-qt5 -o Makefile ..
     make
+    
+##### OSX
+
+It's same as linux. Just you should disable CoreServices because of a bug on the Yosemite and El-Capitan
+
+    qmake -r DEFINES+=DISABLE_CORE_SERVICES
