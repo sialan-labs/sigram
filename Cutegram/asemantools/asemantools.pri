@@ -100,6 +100,7 @@ macx {
         INCLUDEPATH += /System/Library/Frameworks/CoreServices.framework/Headers/
         DEFINES += OSX_CORE_SERVICES_AVAILABLE
     }
+    LIBS +=  -framework CoreFoundation -framework Carbon -lobjc
     DEFINES += MAC_NATIVE_ASEMAN_NOTIFICATION
     SOURCES += $$PWD/asemanmacnativenotification.cpp
     HEADERS += $$PWD/asemanmacnativenotification.h
