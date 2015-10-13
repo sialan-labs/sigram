@@ -71,7 +71,7 @@ AsemanMainQt {
 
     SystemPalette {
         id: palette
-        colorGroup: View.active? SystemPalette.Active : SystemPalette.Inactive
+        colorGroup: View.window.active? SystemPalette.Active : SystemPalette.Inactive
     }
 
     PointingDialog{
