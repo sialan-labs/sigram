@@ -1,6 +1,10 @@
 #include "asemanandroidservice.h"
+#include "asemantools/asemanjavalayer.h"
 
 #include <QtGlobal>
+#include <QAndroidJniObject>
+#include <QStringList>
+#include <QCoreApplication>
 
 #include <dlfcn.h>
 #include <pthread.h>
@@ -38,6 +42,15 @@ static void *startMainMethod(void *ar)
 static jboolean startQtApplication(JNIEnv *env, jobject object, jstring paramsString, jstring environmentString)
 {
     Q_UNUSED(object)
+
+    QString packageName = AsemanJavaLayer::instance()->packageName();
+    qputenv("HOME", QString("/data/data/%1/files/").arg(packageName).toUtf8());
+    QStringList libraryPath;
+    libraryPath << QString("/data/app/%1-1/lib/arm").arg(packageName)
+                << QString("/data/data/%1/qt-reserved-files/plugins").arg(packageName);
+
+    QCoreApplication::setLibraryPaths(libraryPath);
+
     const char *nativeEnvironmentString = (env)->GetStringUTFChars(environmentString, NULL); // C++
     const char *nativeParamsString = (env)->GetStringUTFChars(paramsString, NULL); // C++
 

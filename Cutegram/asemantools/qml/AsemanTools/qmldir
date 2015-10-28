@@ -53,3 +53,5 @@ TabView 1.0 TabView.qml
 OSXTitleButtons 1.0 OSXTitleButtons.qml
 WindowDragArea 1.0 WindowDragArea.qml
 WindowResizeGrip 1.0 WindowResizeGrip.qml
+FileSystemView 1.0 FileSystemView.qml
+SlidePageManager 1.0 SlidePageManager.qml

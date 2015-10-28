@@ -51,6 +51,7 @@ public slots:
     static QStringList stringLinks(const QString &str);
 
     static QUrl stringToUrl(const QString &path);
+    static QString urlToLocalPath(const QUrl &url);
 
     static QString qtVersion();
     static QString aboutAseman();

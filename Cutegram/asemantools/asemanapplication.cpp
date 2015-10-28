@@ -97,6 +97,7 @@
 static QSettings *app_global_settings = 0;
 static AsemanApplication *aseman_app_singleton = 0;
 static QString *aseman_app_home_path = 0;
+static QString *aseman_app_log_path = 0;
 
 #if defined(Q_OS_MAC) && defined(Q_PROCESSOR_X86_32)
 #include <objc/objc.h>
@@ -297,11 +298,27 @@ QString AsemanApplication::appFilePath()
 
 QString AsemanApplication::logPath()
 {
+    if(!aseman_app_log_path)
+    {
+        aseman_app_log_path = new QString();
 #ifdef Q_OS_ANDROID
-    return "/sdcard/" + QCoreApplication::organizationDomain() + "/" + QCoreApplication::applicationName() + "/log";
+        *aseman_app_log_path = "/sdcard/" + QCoreApplication::organizationDomain() + "/" + QCoreApplication::applicationName() + "/log";
 #else
-    return homePath()+"/log";
+        *aseman_app_log_path = homePath()+"/log";
 #endif
+    }
+
+    return *aseman_app_log_path;
+}
+
+void AsemanApplication::setLogPath(const QString &path)
+{
+    if( logPath() == path )
+        return;
+
+    *aseman_app_log_path = path;
+    if(aseman_app_singleton)
+        emit aseman_app_singleton->logPathChanged();
 }
 
 QString AsemanApplication::confsPath()
@@ -471,6 +488,15 @@ bool AsemanApplication::isRunning()
 int AsemanApplication::appType()
 {
     return aseman_app_singleton->p->appType;
+}
+
+bool AsemanApplication::isDebug()
+{
+#ifdef QT_DEBUG
+    return true;
+#else
+    return false;
+#endif
 }
 
 void AsemanApplication::sendMessage(const QString &msg)

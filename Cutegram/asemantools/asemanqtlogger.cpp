@@ -48,19 +48,12 @@ AsemanQtLogger::AsemanQtLogger(const QString &path, QObject *parent) :
     p = new AsemanQtLoggerPrivate;
     p->path = path;
 
-#ifndef Q_OS_UBUNTUTOUCH
-    if( QFile::exists(p->path) )
-        QFile::copy( p->path, QFileInfo(p->path).dir().path() + "/crash_" + QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch()) );
-#endif
-
     p->file = new QFile(path);
     p->file->open(QFile::WriteOnly);
 
     aseman_qt_logger_objs.insert(this);
     if( aseman_qt_logger_objs.count() == 1 )
         qInstallMessageHandler(asemanQtLoggerFnc);
-
-    connect( QCoreApplication::instance(), SIGNAL(aboutToQuit()), SLOT(app_closed()) );
 }
 
 void AsemanQtLogger::logMsg(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -107,9 +100,6 @@ void AsemanQtLogger::debug(const QVariant &var)
 
 void AsemanQtLogger::app_closed()
 {
-#ifndef Q_OS_UBUNTUTOUCH
-    QFile::remove(p->path);
-#endif
 }
 
 AsemanQtLogger::~AsemanQtLogger()

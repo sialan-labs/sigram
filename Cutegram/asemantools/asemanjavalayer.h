@@ -46,6 +46,8 @@ public:
     bool isTablet();
     qreal density();
 
+    QString packageName();
+
     QRect keyboardRect();
 
 public slots:

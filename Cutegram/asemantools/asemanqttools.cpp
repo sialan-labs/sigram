@@ -155,12 +155,6 @@ AsemanQuickViewWrapper *AsemanQtTools::quickView(QQmlEngine *engine)
 
 AsemanApplication *AsemanQtTools::application()
 {
-//    AsemanApplication *res = AsemanApplication::instance();
-//    if(res)
-//        return res;
-//    if(QCoreApplication::instance() == 0)
-//        return 0;
-
     static QPointer<AsemanApplication> res;
     if(!res)
         res = new AsemanApplication();
@@ -190,7 +184,13 @@ AsemanQtLogger *AsemanQtTools::qtLogger()
 {
     static QPointer<AsemanQtLogger> res = 0;
     if(!res)
-        res = new AsemanQtLogger(AsemanApplication::logPath());
+    {
+        QString path = QString::fromUtf8(qgetenv("ASEMAN_LOG_PATH"));
+        if(path.isEmpty())
+            path = AsemanApplication::logPath();
+
+        res = new AsemanQtLogger(path);
+    }
 
     return res;
 }

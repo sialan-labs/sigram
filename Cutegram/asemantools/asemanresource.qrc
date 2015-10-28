@@ -136,5 +136,9 @@
         <file>qml/AsemanTools/OSXTitleButtons.qml</file>
         <file>qml/AsemanTools/WindowDragArea.qml</file>
         <file>qml/AsemanTools/WindowResizeGrip.qml</file>
+        <file>qml/AsemanTools/FileSystemView.qml</file>
+        <file>qml/AsemanTools/files/folder.png</file>
+        <file>qml/AsemanTools/files/unknown.png</file>
+        <file>qml/AsemanTools/SlidePageManager.qml</file>
     </qresource>
 </RCC>

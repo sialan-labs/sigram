@@ -88,7 +88,7 @@ public class AsemanServiceDelegate
         if (loaderParams.containsKey(NECESSITAS_API_LEVEL_KEY))
             necessitasApiLevel = loaderParams.getInt(NECESSITAS_API_LEVEL_KEY);
 
-        m_environmentVariables ="";
+        m_environmentVariables = "";
 
         if (loaderParams.containsKey(APPLICATION_PARAMETERS_KEY))
             m_applicationParameters = loaderParams.getString(APPLICATION_PARAMETERS_KEY);

@@ -32,6 +32,7 @@ public:
 
     enum DataRole {
         FilePath = Qt::UserRole,
+        FileUrl,
         FileName,
         FileMime,
         FileSize,
@@ -81,7 +82,6 @@ public:
 
 public slots:
     void refresh();
-    QVariant get(int idx, const QString &roleName);
 
 signals:
     void countChanged();

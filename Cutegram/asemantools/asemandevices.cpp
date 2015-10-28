@@ -308,7 +308,16 @@ bool AsemanDevices::transparentNavigationBar() const
 
 qreal AsemanDevices::standardTitleBarHeight() const
 {
-    return 50*density();
+    static qreal res = 0;
+    if(res)
+        return res;
+
+    if(isDesktop() || lcdPhysicalSize()<5)
+        res = 50*density()*1.2;
+    else
+        res = 50*density();
+
+    return res;
 }
 
 int AsemanDevices::densityDpi() const

@@ -52,13 +52,14 @@ class AsemanApplication : public QObject
     Q_PROPERTY(QString homePath     READ homePath     NOTIFY homePathChanged)
     Q_PROPERTY(QString appPath      READ appPath      NOTIFY fakeSignal)
     Q_PROPERTY(QString appFilePath  READ appFilePath  NOTIFY fakeSignal)
-    Q_PROPERTY(QString logPath      READ logPath      NOTIFY logPathChanged)
+    Q_PROPERTY(QString logPath      READ logPath      WRITE setLogPath NOTIFY logPathChanged)
     Q_PROPERTY(QString confsPath    READ confsPath    NOTIFY confsPathChanged)
     Q_PROPERTY(QString tempPath     READ tempPath     NOTIFY fakeSignal)
     Q_PROPERTY(QString backupsPath  READ backupsPath  NOTIFY backupsPathChanged)
     Q_PROPERTY(QString cameraPath   READ cameraPath   NOTIFY fakeSignal)
 
     Q_PROPERTY(int appType READ appType NOTIFY fakeSignal)
+    Q_PROPERTY(bool isDebug READ isDebug NOTIFY fakeSignal)
 
     Q_PROPERTY(QFont globalFont READ globalFont WRITE setGlobalFont NOTIFY globalFontChanged)
 
@@ -94,7 +95,6 @@ public:
 
     static QString appPath();
     static QString appFilePath();
-    static QString logPath();
     static QString confsPath();
     static QString tempPath();
     static QString backupsPath();
@@ -103,6 +103,9 @@ public:
     static QString applicationDirPath();
     static QString applicationFilePath();
     static qint64 applicationPid();
+
+    static QString logPath();
+    static void setLogPath(const QString &path);
 
     static void setOrganizationDomain(const QString &orgDomain);
     static QString organizationDomain();
@@ -131,6 +134,7 @@ public:
 
     static bool isRunning();
     static int appType();
+    static bool isDebug();
 
     static AsemanApplication *instance();
     static QCoreApplication *qapp();

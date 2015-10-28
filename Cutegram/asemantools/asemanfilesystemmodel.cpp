@@ -10,6 +10,7 @@
 #include <QTimerEvent>
 #include <QTimer>
 #include <QDebug>
+#include <QUrl>
 
 
 class AsemanFileSystemModelPrivate
@@ -295,6 +296,10 @@ QVariant AsemanFileSystemModel::data(const QModelIndex &index, int role) const
         result = info.filePath();
         break;
 
+    case FileUrl:
+        result = QUrl::fromLocalFile(info.filePath());
+        break;
+
     case FileName:
         result = info.fileName();
         break;
@@ -339,6 +344,7 @@ QHash<qint32, QByteArray> AsemanFileSystemModel::roleNames() const
 
     res = new QHash<qint32, QByteArray>();
     res->insert( FilePath, "filePath");
+    res->insert( FileUrl , "fileUrl");
     res->insert( FileName, "fileName");
     res->insert( FileMime, "fileMime");
     res->insert( FileSize, "fileSize");
@@ -360,12 +366,6 @@ void AsemanFileSystemModel::refresh()
 {
     p->refresh_timer->stop();
     p->refresh_timer->start();
-}
-
-QVariant AsemanFileSystemModel::get(int idx, const QString &roleName)
-{
-    qint32 role = roleNames().key(roleName.toUtf8());
-    return data(index(idx), role);
 }
 
 void AsemanFileSystemModel::reinit_buffer()

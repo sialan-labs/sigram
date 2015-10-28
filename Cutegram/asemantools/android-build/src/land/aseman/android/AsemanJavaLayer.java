@@ -124,6 +124,14 @@ public class AsemanJavaLayer
         _selectImageResult(path);
     }
 
+    public String packageName()
+    {
+        Context oContext;
+        oContext = AsemanApplication.getAppContext();
+        Log.d("asdd", oContext.getPackageName());
+        return oContext.getPackageName();
+    }
+
     boolean startService()
     {
         AsemanActivity activity = AsemanActivity.getActivityInstance();

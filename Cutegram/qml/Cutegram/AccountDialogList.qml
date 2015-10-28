@@ -433,7 +433,7 @@ Item {
                                 break;
                             case 1:
                                 if( Desktop.yesOrNo(View, qsTr("Delete secret chat"), qsTr("Are you sure about deleting this secret chat?")) )
-                                    telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId)
+                                    telegramObject.messagesDiscardEncryptedChat(dItem.peer.userId, true)
                                 break;
                             }
                         } else if(user.id == telegramObject.cutegramId) {

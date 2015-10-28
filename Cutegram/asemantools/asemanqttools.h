@@ -2,6 +2,7 @@
 #define ASEMANQTTOOLS_H
 
 #include <QtGlobal>
+#include <QString>
 
 class QQmlEngine;
 class QJSEngine;
