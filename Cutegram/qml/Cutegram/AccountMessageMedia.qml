@@ -150,7 +150,8 @@ Item {
         fillMode: isSticker? Image.PreserveAspectFit : Image.PreserveAspectCrop
         asynchronous: true
         smooth: true
-        visible: file_handler.targetType == FileHandler.TypeTargetMediaDocument || fileLocation.length != 0
+        visible: file_handler.targetType == FileHandler.TypeTargetMediaDocument || fileLocation.length != 0 ||
+                 file_handler.targetType == FileHandler.TypeTargetMediaGeoPoint
 
         property size imageSize: Cutegram.imageSize(source)
         property string customImage
@@ -297,12 +298,12 @@ Item {
     Image {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.verticalCenter
-        source: file_handler.targetType == FileHandler.TypeTargetMediaOther? "files/map-pin.png" : ""
+        source: file_handler.targetType == FileHandler.TypeTargetMediaGeoPoint? "files/map-pin.png" : ""
         sourceSize: Qt.size(width,height)
         fillMode: Image.PreserveAspectFit
         width: 92*Devices.density
         height: 92*Devices.density
-        visible: file_handler.targetType == FileHandler.TypeTargetMediaOther
+        visible: file_handler.targetType == FileHandler.TypeTargetMediaGeoPoint
         asynchronous: true
         smooth: true
     }
