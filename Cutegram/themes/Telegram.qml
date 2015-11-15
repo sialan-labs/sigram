@@ -14,6 +14,7 @@ CutegramTheme {
         colorGroup: SystemPalette.Active
     }
 
+    background: ""
     masterColor: Cutegram.highlightColor
     visualEffects: false
 

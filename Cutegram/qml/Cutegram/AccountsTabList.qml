@@ -91,7 +91,7 @@ Item {
                 border.width: 1*Devices.density
                 visible: count != 0
 
-                property int count: key.length!=0 && listObject.count>1? hash.value(key).telegramObject.unreadCount : 0
+                property int count: key && key.length!=0 && listObject.count>1? hash.value(key).telegramObject.unreadCount : 0
 
                 Text {
                     anchors.centerIn: parent

@@ -288,9 +288,9 @@ Item {
                             if( signalBlocker )
                                 return
                             if( checked )
-                                telegramObject.userData.addMute(dId)
+                                telegramObject.mute(dId)
                             else
-                                telegramObject.userData.removeMute(dId)
+                                telegramObject.unmute(dId)
                         }
                     }
                 }

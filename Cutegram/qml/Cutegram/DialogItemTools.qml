@@ -47,9 +47,9 @@ Item {
             hoverEnabled: false
             onClicked: {
                 if( cl_tools.mute )
-                    telegramObject.userData.removeMute(dId)
+                    telegramObject.unmute(dId)
                 else
-                    telegramObject.userData.addMute(dId)
+                    telegramObject.mute(dId)
             }
         }
     }

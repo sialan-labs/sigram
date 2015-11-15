@@ -64,7 +64,7 @@ Rectangle {
                     return
 
                 var dId = notifyData.id? telegram.messageDialogId(notifyData.id) : notifyData
-                telegram.userData.addMute(dId)
+                telegram.mute(dId)
             }
         }
 
@@ -99,6 +99,7 @@ Rectangle {
         publicKeyFile: Devices.resourcePath + "/tg-server.pub"
         phoneNumber: accountItem.number
         autoCleanUpMessages: true
+        globalMute: false
         onAuthCallRequested: acc_sign.callButton = false
         onAuthCodeRequested: {
             acc_sign.timeOut = sendCallTimeout

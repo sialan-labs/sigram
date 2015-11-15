@@ -9,6 +9,7 @@
 #include <QString>
 #include <QColor>
 #include <QFont>
+#include <QUrl>
 #include <QQmlComponent>
 #include <QPointer>
 
@@ -19,6 +20,7 @@ class ThemeItem : public AsemanQuickObject
     Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY authorChanged)
     Q_PROPERTY(QString copyright READ copyright WRITE setCopyright NOTIFY copyrightChanged)
     Q_PROPERTY(QString homePage READ homePage WRITE setHomePage NOTIFY homePageChanged)
+    Q_PROPERTY(QUrl background READ background WRITE setBackground NOTIFY backgroundChanged)
     Q_PROPERTY(QColor masterColor READ masterColor WRITE setMasterColor NOTIFY masterColorChanged)
     Q_PROPERTY(bool visualEffects READ visualEffects WRITE setVisualEffects NOTIFY visualEffectsChanged)
     Q_PROPERTY(QColor dialogListBackground READ dialogListBackground WRITE setDialogListBackground NOTIFY dialogListBackgroundChanged)
@@ -186,6 +188,18 @@ public:
             return;
         _homePage = value;
         emit homePageChanged();
+        emit changed();
+    }
+
+    QUrl background() const {
+        return _background;
+    }
+
+    void setBackground(QUrl value) {
+        if( value == _background )
+            return;
+        _background = value;
+        emit backgroundChanged();
         emit changed();
     }
 
@@ -1325,6 +1339,7 @@ public:
         _author = another->author();
         _copyright = another->copyright();
         _homePage = another->homePage();
+        _background = another->background();
         _masterColor = another->masterColor();
         _visualEffects = another->visualEffects();
         _dialogListBackground = another->dialogListBackground();
@@ -1425,6 +1440,7 @@ signals:
     void authorChanged();
     void copyrightChanged();
     void homePageChanged();
+    void backgroundChanged();
     void masterColorChanged();
     void visualEffectsChanged();
     void dialogListBackgroundChanged();
@@ -1525,6 +1541,7 @@ private:
     QString _author;
     QString _copyright;
     QString _homePage;
+    QUrl _background;
     QColor _masterColor;
     bool _visualEffects;
     QColor _dialogListBackground;
