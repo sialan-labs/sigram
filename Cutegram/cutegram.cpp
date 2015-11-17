@@ -552,6 +552,7 @@ void Cutegram::installSticker(const QString &shortName)
 
 void Cutegram::savePosition(bool force)
 {
+    p->save_timer->stop();
     if(!force)
         p->save_timer->start();
     else
