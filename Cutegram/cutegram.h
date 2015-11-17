@@ -228,6 +228,7 @@ public slots:
     void active();
     void addToPersonal(const QString &src);
     void installSticker(const QString &shortName);
+    void savePosition(bool force = true);
 
 signals:
     void defaultHostAddressChanged();

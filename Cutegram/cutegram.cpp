@@ -58,6 +58,7 @@
 #include <QPainterPath>
 #include <QDesktopServices>
 #include <QMimeDatabase>
+#include <QTimer>
 
 #include <telegramqml.h>
 #include <core/settings.h>
@@ -131,6 +132,7 @@ public:
     QString searchEngine;
 
     CutegramEncrypter encrypter;
+    QTimer *save_timer;
 };
 
 Cutegram::Cutegram(QObject *parent) :
@@ -192,6 +194,10 @@ Cutegram::Cutegram(QObject *parent) :
     p->emojisThemesPath = AsemanDevices::resourcePath() + "/emojis/";
 #endif
 
+    p->save_timer = new QTimer(this);
+    p->save_timer->setSingleShot(true);
+    p->save_timer->setInterval(1000);
+
     p->themes = QDir(p->themesPath).entryList( QStringList()<<"*.qml" ,QDir::Files, QDir::Name);
 
     p->emojisThemes = QDir(p->emojisThemesPath).entryList( QStringList() ,QDir::Dirs|QDir::NoDotAndDotDot, QDir::Name);
@@ -210,6 +216,8 @@ Cutegram::Cutegram(QObject *parent) :
     qmlRegisterType<TextToHtmlConverter>("Cutegram", 1, 0, "TextToHtmlConverter");
 
     init_languages();
+
+    connect(p->save_timer, SIGNAL(timeout()), SLOT(savePosition()));
 }
 
 QSize Cutegram::imageSize(const QString &pt)
@@ -542,6 +550,16 @@ void Cutegram::installSticker(const QString &shortName)
     active();
 }
 
+void Cutegram::savePosition(bool force)
+{
+    if(!force)
+        p->save_timer->start();
+    else
+    if(p->viewer)
+        AsemanApplication::settings()->setValue("General/position", p->viewer->position());
+
+}
+
 void Cutegram::setSysTrayCounter(int count, bool force)
 {
     if( count == p->sysTrayCounter && !force )
@@ -578,10 +596,7 @@ bool Cutegram::eventFilter(QObject *o, QEvent *e)
         switch( static_cast<int>(e->type()) )
         {
         case QEvent::Move:
-        {
-            QMoveEvent *me = static_cast<QMoveEvent*>(e);
-            AsemanApplication::settings()->setValue("General/position", me->pos());
-        }
+            savePosition(false);
             break;
         }
     }
