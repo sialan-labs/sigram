@@ -238,16 +238,16 @@ QString Emojis::textToEmojiText(const QString &txt, int size, bool skipLinks, bo
         pos += atag.size();
     }
 
-    QRegExp tags_rxp("\\s\\#(\\w+)");
+    QRegExp tags_rxp("(\\s|^)\\#(\\w+)");
     pos = 0;
     while (!skipLinks && (pos = tags_rxp.indexIn(res, pos)) != -1)
     {
-        QString tag = tags_rxp.cap(1);
+        QString tag = tags_rxp.cap(2);
         if(p->userData)
             p->userData->addTag(tag);
 
         QString atag = QString("<a href='tag://%2'><span style=\"color:%1;\">%3</span></a>").arg(p->linkColor.name(), tag,"#"+tag);
-        res.replace( pos, tag.length()+1, atag );
+        res.replace( pos + tags_rxp.cap(1).length(), tag.length()+1, atag );
         pos += atag.size();
     }
 
