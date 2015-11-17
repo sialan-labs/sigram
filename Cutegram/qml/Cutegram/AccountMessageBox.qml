@@ -109,6 +109,15 @@ Item {
                 source: messages
                 radius: Cutegram.currentTheme.visualEffects?64:0
             }
+
+            Rectangle {
+                anchors.fill: parent
+                opacity: header.properties? message_box.y/header.properties.height : 0
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: Qt.rgba(header.color.r, header.color.g, header.color.b, 1) }
+                    GradientStop { position: 1.0; color: "#00000000" }
+                }
+            }
         }
 
         Item {

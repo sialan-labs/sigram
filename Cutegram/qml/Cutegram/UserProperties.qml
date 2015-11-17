@@ -7,7 +7,10 @@ Rectangle {
     id: up_dlg
     height: base.height
     clip: true
-    color: encrypted? Cutegram.currentTheme.headerSecretColor : Cutegram.currentTheme.headerColor
+    color: {
+        var result = encrypted? Cutegram.currentTheme.headerSecretColor : Cutegram.currentTheme.headerColor
+        return Qt.rgba(result.r, result.g, result.b, 1)
+    }
 
     property Dialog currentDialog
     property bool encrypted: currentDialog.encrypted
