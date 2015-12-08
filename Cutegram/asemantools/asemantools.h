@@ -27,6 +27,10 @@
 #include <QStringList>
 #include <QUrl>
 
+#ifdef QT_QML_LIB
+#include <QJSValue>
+#endif
+
 class AsemanToolsPrivate;
 class AsemanTools : public QObject
 {
@@ -93,6 +97,13 @@ public slots:
                                                                 const QVariant & v7 = QVariant(),
                                                                 const QVariant & v8 = QVariant(),
                                                                 const QVariant & v9 = QVariant() );
+
+#ifdef QT_QML_LIB
+    void jsDelayCall(int ms, const QJSValue &value);
+#endif
+
+protected:
+    void timerEvent(QTimerEvent *e);
 
 private:
     AsemanToolsPrivate *p;

@@ -87,6 +87,28 @@ Rectangle {
         telegram: telegramObject
     }
 
+    Connections {
+        target: main
+        onConnectionAvailableChanged: {
+            if(connectionAvailable) {
+                wake_update_timer.restart()
+                telegram.wake()
+                console.debug("Waked Up")
+            } else {
+                telegram.sleep()
+                wake_update_timer.stop()
+                console.debug("Slept")
+            }
+        }
+    }
+
+    Timer {
+        id: wake_update_timer
+        interval: 2000
+        repeat: false
+        onTriggered: telegram.updatesGetState()
+    }
+
     Telegram {
         id: telegram
         defaultHostAddress: Cutegram.defaultHostAddress

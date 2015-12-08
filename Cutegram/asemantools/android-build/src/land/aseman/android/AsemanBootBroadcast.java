@@ -27,12 +27,14 @@ import land.aseman.android.AsemanService;
 public class AsemanBootBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context ctx, Intent intent) {
-        Intent i = new Intent(ctx, AsemanService.class);
-        i.putExtra("name", "SurvivingwithAndroid");
-        try {
-            ctx.startService(i);
-        } catch(Exception e) {
-            return;
+        if(intent.getAction().equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
+            Intent i = new Intent(ctx, AsemanService.class);
+            i.putExtra("name", "SurvivingwithAndroid");
+            try {
+                ctx.startService(i);
+            } catch(Exception e) {
+                return;
+            }
         }
     }
 }

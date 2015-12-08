@@ -294,6 +294,9 @@ Item {
                                 if(msg_media.media.caption.length != 0)
                                     return msg_media.media.caption
                                 else
+                                if(msg_media.media.phoneNumber.length != 0)
+                                    return qsTr("Shared contact:\n%1").arg(msg_media.media.phoneNumber)
+                                else
                                     return message.message
                             }
 

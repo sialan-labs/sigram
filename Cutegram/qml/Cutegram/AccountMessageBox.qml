@@ -247,7 +247,7 @@ Item {
                     dId = currentDialog.peer.chatId
 
                 sticker_file_manager.sendSticker(dId, path)
-                point_dialog.hide()
+//                point_dialog.hide()
             }
             onStickerDocumentSelected: {
                 var dId = currentDialog.peer.userId
@@ -255,7 +255,7 @@ Item {
                     dId = currentDialog.peer.chatId
 
                 telegramObject.forwardDocument(dId, document)
-                point_dialog.hide()
+//                point_dialog.hide()
             }
         }
     }

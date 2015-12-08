@@ -32,6 +32,7 @@
 #include <QStringList>
 #include <QTextDocument>
 #include <QProcess>
+#include <QTimerEvent>
 #include <QUuid>
 
 QString aseman_tools_numtranslate_0 = "0";
@@ -49,6 +50,9 @@ QString aseman_tools_numtranslate_9 = "9";
 class AsemanToolsPrivate
 {
 public:
+#ifdef QT_QML_LIB
+    QHash<int, QJSValue> js_delay_call_timers;
+#endif
 };
 
 AsemanTools::AsemanTools(QObject *parent) :
@@ -487,6 +491,25 @@ QVariant AsemanTools::call(QObject *obj, const QString &member, Qt::ConnectionTy
         return result.value<QVariant>();
     else
         return result;
+}
+
+#ifdef QT_QML_LIB
+void AsemanTools::jsDelayCall(int ms, const QJSValue &value)
+{
+    p->js_delay_call_timers[ startTimer(ms) ] = value;
+}
+#endif
+
+void AsemanTools::timerEvent(QTimerEvent *e)
+{
+#ifdef QT_QML_LIB
+    if(p->js_delay_call_timers.contains(e->timerId()))
+    {
+        p->js_delay_call_timers.take(e->timerId()).call();
+    }
+    else
+#endif
+        QObject::timerEvent(e);
 }
 
 AsemanTools::~AsemanTools()

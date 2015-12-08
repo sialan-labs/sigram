@@ -48,6 +48,7 @@ class AsemanApplication : public QObject
 {
     Q_OBJECT
     Q_ENUMS(ApplicationType)
+    Q_ENUMS(ApplicationState)
 
     Q_PROPERTY(QString homePath     READ homePath     NOTIFY homePathChanged)
     Q_PROPERTY(QString appPath      READ appPath      NOTIFY fakeSignal)
@@ -67,8 +68,11 @@ class AsemanApplication : public QObject
     Q_PROPERTY(QString applicationVersion READ applicationVersion WRITE setApplicationVersion NOTIFY applicationVersionChanged)
     Q_PROPERTY(QString organizationName READ organizationName WRITE setOrganizationName NOTIFY organizationNameChanged)
     Q_PROPERTY(QString organizationDomain READ organizationDomain WRITE setOrganizationDomain NOTIFY organizationDomainChanged)
+    Q_PROPERTY(QString applicationAbout READ applicationAbout WRITE setApplicationAbout NOTIFY applicationAboutChanged)
 
-    Q_PROPERTY(QString applicationDisplayName READ applicationDisplayName WRITE setApplicationDisplayName)
+    Q_PROPERTY(int applicationState READ applicationState NOTIFY applicationStateChanged)
+
+    Q_PROPERTY(QString applicationDisplayName READ applicationDisplayName WRITE setApplicationDisplayName NOTIFY fakeSignal)
     Q_PROPERTY(QString platformName READ platformName STORED false)
     Q_PROPERTY(bool quitOnLastWindowClosed  READ quitOnLastWindowClosed WRITE setQuitOnLastWindowClosed)
 
@@ -84,6 +88,13 @@ public:
 #ifdef QT_WIDGETS_LIB
         WidgetApplication
 #endif
+    };
+
+    enum ApplicationState {
+        ApplicationSuspended    = Qt::ApplicationSuspended,
+        ApplicationHidden       = Qt::ApplicationHidden,
+        ApplicationInactive     = Qt::ApplicationInactive,
+        ApplicationActive       = Qt::ApplicationActive
     };
 
     AsemanApplication();
@@ -117,6 +128,8 @@ public:
     static QString applicationVersion();
     static void setApplicationDisplayName(const QString &name);
     static QString applicationDisplayName();
+    static void setApplicationAbout(const QString &desc);
+    static QString applicationAbout();
 
     static QString platformName();
 
@@ -148,6 +161,8 @@ public:
 #ifdef QT_GUI_LIB
     static QPalette palette();
     static void setPalette(const QPalette &pal);
+
+    static int applicationState();
 #endif
 
     static QSettings *settings();
@@ -184,6 +199,8 @@ signals:
     void organizationDomainChanged();
     void applicationNameChanged();
     void applicationVersionChanged();
+    void applicationStateChanged();
+    void applicationAboutChanged();
 
     void lastWindowClosed();
     void messageReceived(const QString &msg);

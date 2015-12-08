@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls.Styles 1.1
 import QtGraphicalEffects 1.0
+import AsemanTools 1.0
 
 CheckBoxStyle {
 
@@ -11,8 +12,8 @@ CheckBoxStyle {
     }
 
     indicator: Item {
-        implicitWidth: 24
-        implicitHeight: 24
+        implicitWidth: 24*Devices.density
+        implicitHeight: 24*Devices.density
 
         Item {
             id: frame

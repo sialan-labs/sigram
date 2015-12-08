@@ -20,6 +20,10 @@
 #include "asemancountriesmodel.h"
 #include "asemanautostartmanager.h"
 #include "asemanfilesystemmodel.h"
+#include "asemanhostchecker.h"
+#include "asemannetworkmanager.h"
+#include "asemannetworkmanageritem.h"
+#include "asemannetworksleepmanager.h"
 #include "asemanquickobject.h"
 #include "asemannotification.h"
 #include "asemanfiledownloaderqueueitem.h"
@@ -31,6 +35,7 @@
 #include "asemanmapdownloader.h"
 #include "asemandragarea.h"
 #include "asemancalendarmodel.h"
+#include "asemanmixedlistmodel.h"
 #include "asemanquickviewwrapper.h"
 #ifdef Q_OS_ANDROID
 #include "asemanjavalayer.h"
@@ -78,7 +83,7 @@ void AsemanQtTools::registerTypes(const char *uri)
     if(register_list.contains(uri))
         return;
 
-    qRegisterMetaType<AsemanMimeData*>("AsemanMimeData*");
+     qRegisterMetaType<AsemanMimeData*>("AsemanMimeData*");
 
     qmlRegisterType<AsemanMimeData>(uri, 1, 0, "MimeData");
     qmlRegisterType<AsemanDragObject>(uri, 1, 0, "DragObject");
@@ -99,11 +104,15 @@ void AsemanQtTools::registerTypes(const char *uri)
     qmlRegisterType<AsemanMimeApps>(uri, 1,0, "MimeApps");
 #endif
     qmlRegisterType<AsemanWebPageGrabber>(uri, 1,0, "WebPageGrabber");
+    qmlRegisterType<AsemanHostChecker>(uri, 1,0, "HostChecker");
+    qmlRegisterType<AsemanNetworkManager>(uri, 1,0, "NetworkManager");
+    qmlRegisterType<AsemanNetworkSleepManager>(uri, 1,0, "NetworkSleepManager");
     qmlRegisterType<AsemanTitleBarColorGrabber>(uri, 1,0, "TitleBarColorGrabber");
     qmlRegisterType<AsemanTaskbarButton>(uri, 1,0, "TaskbarButton");
     qmlRegisterType<AsemanMapDownloader>(uri, 1,0, "MapDownloader");
     qmlRegisterType<AsemanDragArea>(uri, 1,0, "MouseDragArea");
     qmlRegisterType<AsemanCalendarModel>(uri, 1,0, "CalendarModel");
+    qmlRegisterType<AsemanMixedListModel>(uri, 1,0, "MixedListModel");
 #if defined(Q_OS_LINUX) && defined(QT_DBUS_LIB)
     qmlRegisterType<AsemanKdeWallet>(uri, 1,0, "KdeWallet");
 #endif
@@ -117,6 +126,7 @@ void AsemanQtTools::registerTypes(const char *uri)
 #endif
 
     qmlRegisterUncreatableType<AsemanDesktopTools>(uri, 1,0, "AsemanDesktopTools", "It's a singleton class");
+    qmlRegisterUncreatableType<AsemanNetworkManagerItem>(uri, 1,0, "NetworkManagerItem", "It must create using NetworkManager component.");
 
     qmlRegisterSingletonType<AsemanDevices>(uri, 1, 0, "Devices", aseman_devices_singleton);
     qmlRegisterSingletonType<AsemanTools>(uri, 1, 0, "Tools", aseman_tools_singleton);

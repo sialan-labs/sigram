@@ -29,6 +29,7 @@ AsemanMain {
 
     property bool aboutMode: false
     property bool dragging: false
+    property bool connectionAvailable: network.available
 
     property color backColor0: "#eeeeee"
     property color backColor1: "#cccccc"
@@ -131,6 +132,13 @@ AsemanMain {
 
     WebPageGrabberQueue {
         id: web_grabber
+    }
+
+    NetworkSleepManager {
+        id: network
+        host: Cutegram.defaultHostAddress
+        port: Cutegram.defaultHostPort
+        interval: 3000
     }
 
     Connections {
