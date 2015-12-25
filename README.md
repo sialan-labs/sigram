@@ -71,7 +71,7 @@ And then start building:
 
 Get cutegram codes using this command:
 
-    git clone https://github.com/Aseman-Land/Cutegram.git
+    git clone --recursive https://github.com/Aseman-Land/Cutegram.git
 
 #### Start building
 
