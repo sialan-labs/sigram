@@ -79,6 +79,12 @@ Switch to source directory
 
     cd cutegram
 
+##### Arch
+
+    there is currently a package availibe within the AUR for Cutegram.
+
+    you can find the stable build [here](https://aur.archlinux.org/packages/cutegram/), and the build from git package [here](https://aur.archlinux.org/packages/cutegram-git/)
+
 ##### Ubuntu
 
     mkdir build && cd build
