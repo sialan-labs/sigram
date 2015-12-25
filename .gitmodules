@@ -1,0 +1,3 @@
+[submodule "Cutegram/asemantools"]
+	path = Cutegram/asemantools
+	url = git@github.com:Aseman-Land/aseman-qt-tools.git
