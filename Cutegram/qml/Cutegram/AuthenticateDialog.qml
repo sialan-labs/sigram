@@ -78,7 +78,7 @@ Rectangle {
                 textColor: textColor0
                 placeholderColor: "#888888"
                 color: backColor0
-                validator: RegExpValidator{regExp: /(?!0)\d*/}
+                validator: RegExpValidator{regExp: /\d*/}
                 pickerEnable: Devices.isTouchDevice
                 onAccepted: auth_dialog.accepted( country_code.text + text )
             }

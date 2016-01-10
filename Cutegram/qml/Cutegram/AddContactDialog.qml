@@ -57,7 +57,7 @@ Window {
             style: Cutegram.currentTheme.textFieldStyle
             width: parent.width
             placeholderText: qsTr("Phone Number")
-            validator: RegExpValidator{regExp: /(?!0)\d*/}
+            validator: RegExpValidator{regExp: /\d*/}
         }
     }
 
