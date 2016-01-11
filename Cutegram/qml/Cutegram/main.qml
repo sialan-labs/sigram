@@ -201,11 +201,13 @@ AsemanMain {
         anchors.fill: shadow_scene
         source: shadow_scene
         horizontalOffset: 0
-        verticalOffset: 10*Devices.density
-        radius: shadowSize
-        samples: 32
+        verticalOffset: View.window.active? hoveredOffset : 5*Devices.density
+        radius: View.window.active? shadowSize : shadowSize*0.4
+        samples: View.window.active? 32 : 16
         visible: nativeTitleBar
         color: "#80000000"
+
+        property real hoveredOffset: 10*Devices.density
     }
 
     Item {
@@ -230,7 +232,7 @@ AsemanMain {
         Item {
             id: main_scene
             anchors.fill: parent
-            anchors.topMargin: nativeTitleBar? shadowSize*0.6 - drop_shadow.verticalOffset : 0
+            anchors.topMargin: nativeTitleBar? shadowSize*0.6 - drop_shadow.hoveredOffset : 0
             anchors.margins: nativeTitleBar? shadowSize*0.6 : 0
             opacity: nativeTitleBar? 0 : 1
 
@@ -283,6 +285,16 @@ AsemanMain {
                 height: titleBarHeight
                 visible: nativeTitleBar
                 color: Cutegram.currentTheme.dialogListBackground
+                border.width: 1*Devices.density
+                border.color: Qt.darker(color, 1.2)
+
+                Rectangle {
+                    width: parent.width-2*Devices.density
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    color: parent.color
+                    height: 1*Devices.density
+                }
 
                 WindowDragArea {
                     anchors.fill: parent
