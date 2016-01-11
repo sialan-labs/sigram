@@ -233,6 +233,7 @@ AsemanMain {
             id: main_scene
             anchors.fill: parent
             anchors.topMargin: nativeTitleBar? shadowSize*0.6 - drop_shadow.hoveredOffset : 0
+            anchors.bottomMargin: shadowSize
             anchors.margins: nativeTitleBar? shadowSize*0.6 : 0
             opacity: nativeTitleBar? 0 : 1
 
@@ -284,7 +285,7 @@ AsemanMain {
                 width: parent.width
                 height: titleBarHeight
                 visible: nativeTitleBar
-                color: Cutegram.currentTheme.dialogListBackground
+                color: View.window.active? Cutegram.currentTheme.dialogListBackground : Qt.lighter(Cutegram.currentTheme.dialogListBackground, 1.2)
                 border.width: 1*Devices.density
                 border.color: Qt.darker(color, 1.2)
 
