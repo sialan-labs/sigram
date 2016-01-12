@@ -1,3 +1,29 @@
+cutegram (2.7.1-2aseman-wily) wily; urgency=medium
+
+  * Fix the map bugs, rendered blurry
+  * Add emojione to the emojis
+  * Improve window border on the OSX
+  * Fix mute/unmute problem
+  * Fix link and tag highlighter problems
+  * Many improve on the libqtelegram-ae and TelegramQML libraries
+  * Many other improvements and Bugfixes
+  * It's the last release of the Cutegram 2.x. We're working on the Cutegram 3.x series with many new features and improvements.
+
+ -- Aseman Team <contact@aseman.co>  Tue, 12 Jan 2016 12:00:00 +0330
+ 
+cutegram (2.7.1-2aseman-trusty) trusty; urgency=medium
+
+  * Fix the map bugs, rendered blurry
+  * Add emojione to the emojis
+  * Improve window border on the OSX
+  * Fix mute/unmute problem
+  * Fix link and tag highlighter problems
+  * Many improve on the libqtelegram-ae and TelegramQML libraries
+  * Many other improvements and Bugfixes
+  * It's the last release of the Cutegram 2.x. We're working on the Cutegram 3.x series with many new features and improvements.
+
+ -- Aseman Team <contact@aseman.co>  Tue, 12 Jan 2016 12:00:00 +0330
+ 
 cutegram (2.7.0-3aseman-vivid) vivid; urgency=medium
 
   * Add Sticker-Set support
