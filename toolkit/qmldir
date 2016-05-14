@@ -1,0 +1,12 @@
+CutegramMain 1.0 CutegramMain.qml
+ComboBox 1.0 ComboBox.qml
+CutegramSystemTray 1.0 CutegramSystemTray.qml
+DialogDetails 1.0 DialogDetails.qml
+DialogHeader 1.0 DialogHeader.qml
+DialogList 1.0 DialogList.qml
+MainToolBar 1.0 MainToolBar.qml
+MessageImage 1.0 MessageImage.qml
+ProfileImage 1.0 ProfileImage.qml
+ProfilesComboBox 1.0 ProfilesComboBox.qml
+ProfilesList 1.0 ProfilesList.qml
+TgRectangle 1.0 TgRectangle.qml
