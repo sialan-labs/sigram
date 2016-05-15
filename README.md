@@ -43,7 +43,7 @@ And:
 
     cd libqtelegram-aseman-edition
     mkdir build && cd build
-    qmake -r PREFIX=/usr  ..
+    qmake -r CONFIG+=typeobjects  ..
     
 And then start building:
 
@@ -52,7 +52,7 @@ And then start building:
 
 #### Get TelegramQml
 
-In the next step, You should download and build TelegramQml in the library mode using below commands:
+In the next step, You should download and build TelegramQml in the qml-plugin mode using below commands:
 
     git clone https://github.com/Aseman-Land/TelegramQML.git
     
@@ -60,7 +60,7 @@ And:
 
     cd TelegramQML
     mkdir build && cd build
-    qmake -r .. PREFIX=/usr BUILD_MODE+=lib
+    qmake -r ..
     
 And then start building:
 
@@ -85,31 +85,8 @@ Switch to source directory
 
     you can find the stable build [here](https://aur.archlinux.org/packages/cutegram/), and the build from git package [here](https://aur.archlinux.org/packages/cutegram-git/)
 
-##### Ubuntu
+##### Ubuntu and Fedora
 
-    mkdir build && cd build
-    qmake -r .. PREFIX=/usr
-    make
-    make install
+Cutegram 3.x completely written using QML. So there is no need to build and compile it anymore. Just run in using below command.
 
-If you want to build UnitySystemTray plugin run this command:
-
-    qmake -r .. EXTENSIONS+=unity PREFIX=/usr DEFINES+=DISABLE_ASEMAN_WEBGRABBER
-    make
-    make install
-
-You can use command below after building to clean build directory on the each step.
-
-    make clean
-
-##### Fedora
-
-    mkdir build && cd build
-    /bin/qmake-qt5 -o Makefile ..
-    make
-    
-##### OSX
-
-It's same as linux. Just you should disable CoreServices because of a bug on the Yosemite and El-Capitan
-
-    qmake -r DEFINES+=DISABLE_CORE_SERVICES
+    qmlscene main.qml
