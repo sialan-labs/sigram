@@ -15,6 +15,7 @@ Rectangle {
     property bool detailMode
 
     signal detailRequest()
+    signal searchRequest(variant peer)
 
     Telegram.PeerDetails {
         id: details
@@ -84,6 +85,17 @@ Rectangle {
             highlightColor: header.currentPeer? "#66e6e6e6" : "#00000000"
             textColor: header.currentPeer? CutegramGlobals.titleBarTextsColor : "#aaaaaa"
             text: Awesome.fa_folder_open_o
+        }
+
+        Button {
+            width: height
+            height: parent.height
+            textFont.family: Awesome.family
+            textFont.pixelSize: 13*Devices.fontDensity
+            highlightColor: header.currentPeer? "#66e6e6e6" : "#00000000"
+            textColor: header.currentPeer? CutegramGlobals.titleBarTextsColor : "#aaaaaa"
+            text: Awesome.fa_search
+            onClicked: searchRequest(details.peer)
         }
 
         Button {

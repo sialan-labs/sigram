@@ -56,5 +56,9 @@ Rectangle {
     function forwardRequest(inputPeer, msgIds) {
         msgList.forwardMessages(inputPeer, msgIds)
     }
+
+    function loadFrom(message) {
+        msgList.loadFrom(message)
+    }
 }
 

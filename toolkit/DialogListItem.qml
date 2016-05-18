@@ -11,6 +11,9 @@ Item {
     id: item
     height: CutegramSettings.minimalMode? 56*Devices.density : 64*Devices.density
 
+    property alias engine: img.engine
+    property alias showButtons: buttons.visible
+
     signal active()
     signal forwardRequest(variant inputPeer, int msgId)
 
@@ -88,7 +91,7 @@ Item {
 
         Rectangle {
             id: avatar
-            height: CutegramSettings.minimalMode? 40*Devices.density : 48*Devices.density
+            height: item.height - 16*Devices.density
             width: height
             anchors.verticalCenter: parent.verticalCenter
             color: "#00000000"
@@ -97,16 +100,16 @@ Item {
             border.color: model.isOnline? "#75CB46" : "#00000000"
 
             ToolKit.ProfileImage {
+                id: img
                 anchors.fill: parent
                 anchors.margins: 3*Devices.density
-                engine:dlist.engine
                 source: model.user? model.user : model.chat
                 anchors.verticalCenter: parent.verticalCenter
             }
         }
 
         Item {
-            width: row.width - avatar.width - buttons.width - row.spacing*2
+            width: row.width - avatar.width - row.spacing - (buttons.visible? buttons.width + row.spacing : 0)
             height: 24*Devices.density
             anchors.verticalCenter: parent.verticalCenter
 

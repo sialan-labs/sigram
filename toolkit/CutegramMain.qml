@@ -31,6 +31,10 @@ ToolKit.TgRectangle {
             case Qt.Key_Q:
                 AsemanApp.exit(0)
                 break;
+            case Qt.Key_K:
+            case Qt.Key_F:
+                if(listv.currentItem) listv.currentItem.focusOnSearch()
+                break;
             }
         }
     }
@@ -66,6 +70,7 @@ ToolKit.TgRectangle {
         profileManager: profilesModel
         detailMode: listv.currentItem? listv.currentItem.detailMode : false
         onDetailRequest: if(listv.currentItem) listv.currentItem.toggleDetails()
+        onSearchRequest: if(listv.currentItem) listv.currentItem.searchRequest(peer)
 
         Behavior on y {
             NumberAnimation {easing.type: Easing.OutCubic; duration: 300}

@@ -99,6 +99,7 @@ ToolKit.TgRectangle {
         }
         delegate: DialogListItem {
             width: listv.width
+            engine: dlist.engine
             onActive: {
                 listv.currentIndex = index
                 currentPeer = model.peer

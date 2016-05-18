@@ -35,9 +35,22 @@ Item {
         onCountChanged: if(count) markAsRead()
         onCurrentPeerChanged: {
             selectedsHash.clear()
-            Tools.jsDelayCall(500, listv.positionViewAtBeginning)
+            listv.positionViewAtBeginning()
         }
         onErrorChanged: errorItem.showError(errorCode, errorText)
+        onRefreshingChanged: {
+            if(focusAfterLoaded && !refreshing) {
+                Tools.jsDelayCall(100, function(){
+                    var idx = mlmodel.indexOf(Telegram.MessageListModel.RoleMessageItem, focusAfterLoaded)
+                    if(idx) listv.positionViewAtIndex(idx, ListView.Center)
+                    Tools.jsDelayCall(1000, function(){
+                        focusAfterLoaded = null
+                    })
+                })
+            }
+        }
+
+        property variant focusAfterLoaded
     }
 
     QtObject {
@@ -69,6 +82,8 @@ Item {
         model: mlmodel
         displayMarginBeginning: 100*Devices.density
         displayMarginEnd: 100*Devices.density
+        highlightMoveDuration: 300
+        highlightMoveVelocity: -1
         move: Transition {
             NumberAnimation { properties: "y"; easing.type: Easing.OutCubic; duration: 300 }
         }
@@ -101,6 +116,20 @@ Item {
             Connections {
                 target: selectedsHash
                 onCountChanged: if(messageItem) selected = selectedsHash.contains(messageItem.id)
+            }
+
+            Rectangle {
+                anchors.fill: parent
+                z: -1
+                color: "#ff0000"
+                opacity: mlmodel.focusAfterLoaded == messageItem && enable? 0.2 : 0
+
+                Behavior on opacity {
+                    NumberAnimation{easing.type: Easing.OutCubic; duration: 1000}
+                }
+
+                property bool enable: false
+                Component.onCompleted: enable = true
             }
 
             onSelectedChanged: {
@@ -261,6 +290,11 @@ Item {
 
     function sendPhoto(path) {
         return mlmodel.sendFile(Telegram.Enums.SendFileTypePhoto, path)
+    }
+
+    function loadFrom(message) {
+        mlmodel.loadFrom(message.id)
+        mlmodel.focusAfterLoaded = message
     }
 }
 

@@ -54,5 +54,13 @@ Rectangle {
     function toggleDetails() {
         home.toggleDetails()
     }
+
+    function searchRequest(peer) {
+        home.searchRequest(peer)
+    }
+
+    function focusOnSearch() {
+        home.focusOnSearch()
+    }
 }
 

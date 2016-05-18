@@ -65,6 +65,16 @@ ToolKit.TgRectangle {
             accountView.toggleDetails()
     }
 
+    function searchRequest(peer) {
+        if(accountView)
+            accountView.searchRequest(peer)
+    }
+
+    function focusOnSearch() {
+        if(accountView)
+            accountView.focusOnSearch()
+    }
+
     Component.onCompleted: checkAuth(true)
 }
 

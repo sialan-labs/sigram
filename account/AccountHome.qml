@@ -22,6 +22,7 @@ ToolKit.AccountPageItem {
         height: parent.height
         width: CutegramSettings.sideBarWidth
         z: 10
+        onLoadMessageRequest: messagesFrame.loadFrom(message)
         onCurrentPeerChanged: {
             if(currentPeer) {
                 BackHandler.removeHandler(sidebar)
@@ -84,6 +85,14 @@ ToolKit.AccountPageItem {
         if(!currentPeer)
             return
         details.opened = !details.opened
+    }
+
+    function searchRequest(peer) {
+        sidebar.searchRequest(peer)
+    }
+
+    function focusOnSearch() {
+        sidebar.focusOnSearch()
     }
 }
 

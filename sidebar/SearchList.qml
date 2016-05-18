@@ -7,53 +7,147 @@ import "../toolkit" as ToolKit
 import "../globals"
 
 Item {
+    id: searchList
 
     property alias engine: searchModel.engine
     property alias currentPeer: searchModel.currentPeer
-    property alias keyword: searchModel.keyword
+    property string keyword
     property alias count: listv.count
+
+    onKeywordChanged: {
+        refreshTimer.stop()
+        if(keyword.length)
+            refreshTimer.start()
+        else
+            searchModel.keyword = ""
+
+        listv.currentIndex = -1
+    }
+
+    signal loadRequest(variant peer, variant message)
+
+    Timer {
+        id: refreshTimer
+        interval: 500
+        repeat: false
+        onTriggered: searchModel.keyword = keyword
+    }
+
+    Telegram.PeerDetails {
+        id: details
+        engine: searchModel.engine
+        username: searchModel.keyword
+        onDisplayNameChanged: {
+            lookupModel.clear()
+            if(displayName.length) {
+                lookupModel.append({"details": details})
+            }
+        }
+    }
 
     Telegram.MessageSearchModel {
         id: searchModel
+        objectName: "Messages"
+    }
+
+    Telegram.DialogListModel {
+        id: dialogModel
+        objectName: "Dialogs"
+        engine: searchModel.keyword.length? searchModel.engine : null
+        filter: searchModel.keyword
+    }
+
+    ListModel {
+        id: lookupModel
+        objectName: "Users"
+    }
+
+    MixedListModel {
+        id: mixModel
+        models: currentPeer? [searchModel] : [lookupModel, dialogModel, searchModel]
     }
 
     AsemanListView {
         id: listv
         anchors.fill: parent
         clip: true
-        model: searchModel
+        currentIndex: -1
+        highlightMoveDuration: 0
+        highlightMoveVelocity: -1
+        model: mixModel
         delegate: Item {
             id: item
-            height: 64*Devices.density
             width: listv.width
+            height: searchItem? searchItem.height : 64*Devices.density
 
-            Row {
-                width: parent.width - 20*Devices.density
-                anchors.centerIn: parent
+            property Item searchItem
 
-                ToolKit.ProfileImage {
-                    height: 42*Devices.density
-                    width: height
-                    anchors.verticalCenter: parent.verticalCenter
+            Component {
+                id: lookup_item_component
+                SearchListLookupItem {
+                    width: listv.width
+                    onLoadRequest: {
+                        searchList.loadRequest(peer, null)
+                        listv.currentIndex = model.index
+                    }
+                }
+            }
+
+            Component {
+                id: message_item_component
+                SearchListMessageItem {
+                    width: listv.width
                     engine: searchModel.engine
-                    source: model.fromUserItem
-                }
-
-                Column {
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    Text {
-                        font.pixelSize: 10*Devices.fontDensity
-                        color: "#333333"
-                        text: (model.fromUserItem.firstName + " " + model.fromUserItem.lastName).trim()
-                    }
-
-                    Text {
-                        font.pixelSize: 10*Devices.fontDensity
-                        color: "#666666"
-                        text: model.message
+                    onLoadRequest: {
+                        searchList.loadRequest(peer, message)
+                        listv.currentIndex = model.index
                     }
                 }
+            }
+
+            Component {
+                id: dialogs_item_component
+                ToolKit.DialogListItem {
+                    width: listv.width
+                    height: 64*Devices.density
+                    engine: searchModel.engine
+                    showButtons: false
+                    onActive: {
+                        searchList.loadRequest(model.peer, null)
+                        listv.currentIndex = model.index
+                    }
+                }
+            }
+
+            Component.onCompleted: {
+                if(model.modelObject == searchModel)
+                    searchItem = message_item_component.createObject(item)
+                else
+                if(model.modelObject == lookupModel)
+                    searchItem = lookup_item_component.createObject(item)
+                else
+                if(model.modelObject == dialogModel)
+                    searchItem = dialogs_item_component.createObject(item)
+            }
+        }
+
+        highlight: Rectangle {
+            width: listv.width
+            height: 64*Devices.density
+            color: "#e6e6e6"
+        }
+
+        section.property: "modelName"
+        section.delegate: Rectangle {
+            width: listv.width
+            height: 30*Devices.density
+
+            Text {
+                text: section
+                font.pixelSize: 10*Devices.fontDensity
+                color: CutegramGlobals.baseColor
+                x: y
+                anchors.verticalCenter: parent.verticalCenter
             }
         }
     }
@@ -72,7 +166,7 @@ Item {
 
     Indicator {
         id: indicator
-        running: keyword.length && count==0
+        running: keyword.length && searchModel.refreshing
         anchors.centerIn: parent
         modern: true
         light: false

@@ -16,8 +16,8 @@ Rectangle {
     property alias categoriesSettings: categories_settings
     property bool signalBlocker: false
 
-
     signal forwardRequest(variant inputPeer, int msgId)
+    signal loadMessageRequest(variant message)
 
     Settings {
         id: categories_settings
@@ -55,7 +55,7 @@ Rectangle {
         id: searchbar
         anchors.top: parent.top
         width: parent.width
-        onSearchRequest: searchList.keyword = keyword
+        engine: sidebar.engine
     }
 
     Rectangle {
@@ -64,6 +64,7 @@ Rectangle {
         width: parent.width
         height: 33*Devices.density
         color: "#e6e6e6"
+        visible: !searchList.visible
         z: 10
 
         ToolKit.ComboBox {
@@ -171,9 +172,26 @@ Rectangle {
 
     SearchList {
         id: searchList
-        anchors.fill: dlist
+        width: parent.width
+        anchors.top: comboLists.top
+        anchors.bottom: dlist.bottom
         engine: sidebar.engine
+        keyword: searchbar.keyword
+        currentPeer: searchbar.currentPeer
         visible: keyword.length
+        onLoadRequest: {
+            sidebar.currentPeer = peer
+            if(message)
+                loadMessageRequest(message)
+        }
+    }
+
+    function searchRequest(peer) {
+        searchbar.currentPeer = peer
+    }
+
+    function focusOnSearch() {
+        searchbar.focusOnSearch()
     }
 }
 
