@@ -43,6 +43,22 @@ Rectangle {
             }
         }
 
+        ToolKit.AddNewPage {
+            engine: accMain.engine
+            type: CutegramEnums.pageTypeAdd
+            currentType: panel.currentPage
+        }
+
+        ToolKit.ContactsPage {
+            engine: accMain.engine
+            type: CutegramEnums.pageTypeContacts
+            currentType: panel.currentPage
+            onContactActivated: {
+                home.currentPeer = peer
+                panel.currentPage = CutegramEnums.pageTypeHome
+            }
+        }
+
         Configure.ConfigurePage {
             id: configure
             engine: accMain.engine

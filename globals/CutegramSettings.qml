@@ -40,7 +40,7 @@ AsemanObject {
         property bool notifications: true
         property url notifySound: "../sounds/new_msg.ogg"
 
-        property bool lastWindowState: false
+        property bool lastWindowState: true
         property int windowStateOnStart: 0
 
         property string defaultEmoji: "twemoji"

@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import TelegramQml 2.0 as Telegram
 import "messageitems" as MessageItems
 
 MessageItems.AutoMessageItem {

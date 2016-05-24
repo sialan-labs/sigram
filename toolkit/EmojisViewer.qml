@@ -93,7 +93,7 @@ Item {
         anchors.right: gview.right
         height: gview.height
         width: 6*Devices.density
-        color: "#888888"
+        color: CutegramGlobals.baseColor
         scrollArea: gview
     }
 }

@@ -88,7 +88,7 @@ Rectangle {
         Button {
             id: love_btn
             height: width
-            highlightColor: "#e6e6e6"
+            highlightColor: CutegramGlobals.foregroundColor
             hoverColor: "#f0f0f0"
             radius: 3*Devices.density
             textColor: "#db2424"
@@ -115,7 +115,7 @@ Rectangle {
         Button {
             id: fav_btn
             height: width
-            highlightColor: "#e6e6e6"
+            highlightColor: CutegramGlobals.foregroundColor
             hoverColor: "#f0f0f0"
             radius: 3*Devices.density
             textColor: "#e3cf2a"
@@ -142,7 +142,7 @@ Rectangle {
         Button {
             id: mute_btn
             height: width
-            highlightColor: "#e6e6e6"
+            highlightColor: CutegramGlobals.foregroundColor
             hoverColor: "#f0f0f0"
             radius: 3*Devices.density
             textColor: "#333333"
@@ -156,7 +156,7 @@ Rectangle {
         Button {
             id: block_btn
             height: width
-            highlightColor: "#e6e6e6"
+            highlightColor: CutegramGlobals.foregroundColor
             hoverColor: "#f0f0f0"
             radius: 3*Devices.density
             textColor: "#333333"

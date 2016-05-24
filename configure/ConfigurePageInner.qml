@@ -86,7 +86,7 @@ Item {
         Rectangle {
             width: parent.width
             height: 1*Devices.density
-            color: "#e6e6e6"
+            color: CutegramGlobals.foregroundColor
         }
 
         Column {
@@ -148,7 +148,7 @@ Item {
         Rectangle {
             width: parent.width
             height: 1*Devices.density
-            color: "#e6e6e6"
+            color: CutegramGlobals.foregroundColor
         }
 
         Column {

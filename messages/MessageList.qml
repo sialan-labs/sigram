@@ -33,10 +33,11 @@ Item {
             return hours + ":" + minutes
         }
         onCountChanged: if(count) markAsRead()
-        onCurrentPeerChanged: {
-            selectedsHash.clear()
+        onIsEmptyChanged: {
             listv.positionViewAtBeginning()
+            Tools.jsDelayCall(1000, listv.positionViewAtBeginning)
         }
+        onCurrentPeerChanged: selectedsHash.clear()
         onErrorChanged: errorItem.showError(errorCode, errorText)
         onRefreshingChanged: {
             if(focusAfterLoaded && !refreshing) {
@@ -247,7 +248,7 @@ Item {
         anchors.right: listv.right
         height: listv.height
         width: 6*Devices.density
-        color: "#888888"
+        color: CutegramGlobals.baseColor
         scrollArea: listv
     }
 
@@ -280,7 +281,7 @@ Item {
             type = Telegram.Enums.SendFileTypeVideo
         else
         if(mime.indexOf("audio")>=0)
-            type = Telegram.Enums.SendFileTypeAudio
+            type = Telegram.Enums.SendFileTypeDocument
         else
         if(mime.indexOf("webp")>=0)
             type = Telegram.Enums.SendFileTypeSticker

@@ -32,6 +32,7 @@ Rectangle {
     Telegram.Authenticate {
         id: auth
         onStateChanged: {
+            console.debug(state)
             if(state == Telegram.Authenticate.AuthUnknown) {
                 BackHandler.removeHandler(auth)
             } else
@@ -53,7 +54,7 @@ Rectangle {
         anchors.top: header.bottom
         anchors.bottom: footer.top
         components: [phone_component, wait_checking_component, signup_component,
-            wait_signin_code_component, signin_component, wait_signin_component]
+            wait_signin_code_component, signin_component, password_component, wait_signin_component]
         Keys.onEscapePressed: { engine.phoneNumber = "" }
         index: {
             var res = 0
@@ -78,14 +79,17 @@ Rectangle {
             case Telegram.Authenticate.AuthLoggingInError:
                 console.debug(getItem(4))
                 getItem(4).error = "Error %1: %2".arg(auth.errorCode).arg(auth.errorText)
-            case Telegram.Authenticate.AuthCodeRquested:
+            case Telegram.Authenticate.AuthCodeRequested:
                 res = 4
                 break
-            case Telegram.Authenticate.AuthLoggingIn:
+            case Telegram.Authenticate.AuthPasswordRequested:
                 res = 5
                 break
-            case Telegram.Authenticate.AuthLoggedIn:
+            case Telegram.Authenticate.AuthLoggingIn:
                 res = 6
+                break
+            case Telegram.Authenticate.AuthLoggedIn:
+                res = 7
                 break
             }
             return res
@@ -163,6 +167,13 @@ Rectangle {
         SignInPage {
             remainingTime: auth.remainingTime
             onCodeAccepted: auth.signIn(code)
+        }
+    }
+
+    Component {
+        id: password_component
+        AuthPassword {
+            onPasswordAccepted: auth.checkPassword(password)
         }
     }
 

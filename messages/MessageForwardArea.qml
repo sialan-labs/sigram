@@ -200,7 +200,7 @@ ToolKit.TgRectangle {
                 anchors.leftMargin: 20*Devices.density
                 height: listv.height
                 width: 6*Devices.density
-                color: "#888888"
+                color: CutegramGlobals.baseColor
                 scrollArea: listv
             }
         }

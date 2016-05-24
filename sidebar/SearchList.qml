@@ -134,7 +134,7 @@ Item {
         highlight: Rectangle {
             width: listv.width
             height: 64*Devices.density
-            color: "#e6e6e6"
+            color: CutegramGlobals.foregroundColor
         }
 
         section.property: "modelName"
@@ -160,7 +160,7 @@ Item {
         anchors.right: listv.right
         height: listv.height
         width: 6*Devices.density
-        color: "#888888"
+        color: CutegramGlobals.baseColor
         scrollArea: listv
     }
 

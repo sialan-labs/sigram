@@ -63,7 +63,7 @@ Rectangle {
         anchors.top: searchbar.bottom
         width: parent.width
         height: 33*Devices.density
-        color: "#e6e6e6"
+        color: CutegramGlobals.foregroundColor
         visible: !searchList.visible
         z: 10
 
@@ -76,6 +76,7 @@ Rectangle {
             modelArray: [
                 {"name":qsTr("All")          , "icon": Awesome.fa_user},
                 {"name":qsTr("Users")        , "icon": Awesome.fa_user},
+                {"name":qsTr("Contacts")     , "icon": Awesome.fa_user},
                 {"name":qsTr("Conversations"), "icon": Awesome.fa_user},
                 {"name":qsTr("Onlines")      , "icon": Awesome.fa_user},
                 {"name":qsTr("Groups")       , "icon": Awesome.fa_user},
@@ -154,16 +155,18 @@ Rectangle {
             case 1:
                 return Telegram.DialogListModel.VisibilityUsers
             case 2:
-                return Telegram.DialogListModel.VisibilityUsers | Telegram.DialogListModel.VisibilityChats
+                return Telegram.DialogListModel.VisibilityContacts | Telegram.DialogListModel.VisibilityEmptyDialogs
             case 3:
-                return Telegram.DialogListModel.VisibilityOnlineUsersOnly | Telegram.DialogListModel.VisibilityUsers
+                return Telegram.DialogListModel.VisibilityUsers | Telegram.DialogListModel.VisibilityChats
             case 4:
-                return Telegram.DialogListModel.VisibilityChats
+                return Telegram.DialogListModel.VisibilityOnlineUsersOnly | Telegram.DialogListModel.VisibilityUsers
             case 5:
-                return Telegram.DialogListModel.VisibilityChannels
+                return Telegram.DialogListModel.VisibilityChats
             case 6:
-                return Telegram.DialogListModel.VisibilityBots
+                return Telegram.DialogListModel.VisibilityChannels
             case 7:
+                return Telegram.DialogListModel.VisibilityBots
+            case 8:
                 return Telegram.DialogListModel.VisibilitySecretChats
             }
             return Telegram.DialogListModel.VisibilityAll

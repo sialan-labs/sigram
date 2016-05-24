@@ -17,6 +17,7 @@ AsemanApplication {
 
     ToolKit.CutegramSystemTray {
         window: mainWindow
+        badgeCount: profiles_model.unreadCount
     }
 
     Notification {
@@ -30,6 +31,14 @@ AsemanApplication {
             window: mainWindow
             notificationManager: notification
         }
+
+        readonly property int unreadCount: {
+            var res = 0
+            for(var i=0; i<count; i++)
+                res += get(i, Telegram.ProfileManagerModel.DataEngine).unreadCount
+            return res
+        }
+
         Component.onCompleted: if(count == 0) addNew()
     }
 

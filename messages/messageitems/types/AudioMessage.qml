@@ -172,7 +172,7 @@ AbstractMessage {
                 anchors.verticalCenter: parent.verticalCenter
                 width: img.width
                 height: width
-                highlightColor: "#e6e6e6"
+                highlightColor: CutegramGlobals.foregroundColor
                 hoverColor: "#f0f0f0"
                 radius: 3*Devices.density
                 textColor: img.downloading? "#db2424" : "#888888"

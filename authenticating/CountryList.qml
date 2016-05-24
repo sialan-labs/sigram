@@ -53,7 +53,7 @@ Item {
             font.family: Awesome.family
             font.pixelSize: 10*Devices.fontDensity
             text: Awesome.fa_search
-            color: "#888888"
+            color: CutegramGlobals.baseColor
         }
     }
 

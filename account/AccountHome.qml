@@ -39,7 +39,7 @@ ToolKit.AccountPageItem {
         anchors.left: sidebar.right
         width: 1*Devices.density
         height: parent.height
-        color: "#e6e6e6"
+        color: CutegramGlobals.foregroundColor
         z: 5
     }
 

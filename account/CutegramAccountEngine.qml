@@ -10,6 +10,9 @@ AccountEngine {
     property ApplicationWindow window
     property Notification notificationManager
 
+    property alias typing: status.typing
+    property alias unreadCount: notifyHandler.unreadCount
+
     signal peerActivated(string peerKey)
 
     HashObject {
@@ -27,10 +30,21 @@ AccountEngine {
                 window.requestActivate()
                 tgEngine.peerActivated(peerKey)
             }
+            else
+            if(action == "1") {
+
+            }
         }
     }
 
+    Telegram.Status {
+        id: status
+        engine: tgEngine
+        online: window && (window.active || window.visible)
+    }
+
     Telegram.NotificationHandler {
+        id: notifyHandler
         engine: tgEngine
         onNewMessage: {
             if(window && window.active && window.visible)

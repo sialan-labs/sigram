@@ -1,6 +1,11 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 
+#include <QVariantMap>
+#include <QDataStream>
+#include <QDebug>
+#include <QByteArray>
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);

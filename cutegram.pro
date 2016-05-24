@@ -6,4 +6,7 @@ OTHER_FILES += $$files(*, true)
 
 DISTFILES += \
     sidebar/SearchListMessageItem.qml \
-    sidebar/SearchListLookupItem.qml
+    sidebar/SearchListLookupItem.qml \
+    toolkit/ContactsPage.qml \
+    toolkit/AddNewPage.qml \
+    authenticating/AuthPassword.qml

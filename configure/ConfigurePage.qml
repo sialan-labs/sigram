@@ -35,7 +35,7 @@ ToolKit.AccountPageItem {
             anchors.right: flick.right
             height: flick.height
             width: 6*Devices.density
-            color: "#888888"
+            color: CutegramGlobals.baseColor
             scrollArea: flick
         }
     }

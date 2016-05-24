@@ -18,6 +18,7 @@ AsemanObject {
             return "#ffffff"
     }
 
+    property color foregroundColor: "#e6e6e6"
     property color baseColor: defaultBaseColor
     readonly property color defaultBaseColor: {
         if(systemPalette.highlight == "#f07746" && Desktop.desktopSession == Desktop.Unity)

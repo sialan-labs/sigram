@@ -143,7 +143,7 @@ Item {
                 width: parent.width
                 height: 1*Devices.density
                 y: combo.height
-                color: "#e6e6e6"
+                color: CutegramGlobals.foregroundColor
                 visible: menuVisible
             }
 
@@ -169,7 +169,7 @@ Item {
             delegate: Rectangle {
                 width: listv.width
                 height: 32*Devices.density
-                color: marea.pressed? "#e6e6e6" : "#00000000"
+                color: marea.pressed? CutegramGlobals.foregroundColor : "#00000000"
 
                 Text {
                     anchors.left: parent.left

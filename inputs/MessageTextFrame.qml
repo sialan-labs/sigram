@@ -19,11 +19,19 @@ Item {
     property alias text: txt.text
     property alias split: splitCheck.checked
 
+    onTextChanged: {
+        if(text.length != 0)
+            engine.typing.peer = currentPeer
+        else
+            engine.typing.peer = null
+    }
+
     onCurrentPeerChanged: {
         if(cache.lastPeer)
             cache.insert(cache.lastPeer, txt.text)
 
         txt.text = ""
+        engine.typing.peer = null
         if(cache.contains(currentPeer)) {
             txt.text = cache.value(currentPeer)
             txt.cursorPosition = txt.length

@@ -7,7 +7,7 @@ import "../toolkit" as ToolKit
 import "../globals"
 
 Rectangle {
-    color: "#e6e6e6"
+    color: CutegramGlobals.foregroundColor
     height: column.height
 
     property alias keyword: txt.text
@@ -122,7 +122,7 @@ Rectangle {
                 width: parent.width
                 height: 1*Devices.density
                 anchors.bottom: parent.bottom
-                color: "#e6e6e6"
+                color: CutegramGlobals.foregroundColor
             }
         }
     }
