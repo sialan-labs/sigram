@@ -13,5 +13,7 @@ Telegram.Engine {
     host.hostDcId: 2
     host.hostAddress: "149.154.167.50"
     host.hostPort: 443
+
+    cache.path: CutegramGlobals.profilePath + "/" + phoneNumber + "/cache"
 }
 

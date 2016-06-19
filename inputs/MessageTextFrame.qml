@@ -40,7 +40,7 @@ Item {
         cache.lastPeer = currentPeer
     }
 
-    signal sendMessage(string text)
+    signal sendMessage()
 
     HashObject {
         id: cache
@@ -111,8 +111,7 @@ Item {
                         switch(event.key) {
                         case Qt.Key_Enter:
                         case Qt.Key_Return:
-                            sendMessage(txt.text.trim())
-                            txt.text = ""
+                            sendMessage()
                             event.accepted = true
                             break;
                         }

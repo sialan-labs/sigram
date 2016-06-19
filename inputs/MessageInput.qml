@@ -32,6 +32,28 @@ ToolKit.TgRectangle {
         highlightColor: "#eeeeee"
         textFont.family: Awesome.family
         textFont.pixelSize: 14*Devices.fontDensity
+        onClicked: {
+            var path = Desktop.getOpenFileName(CutegramGlobals.mainWindow, qsTr("Select files to send"))
+            if(path.length == 0)
+                return
+
+            path = Devices.localFilesPrePath + path
+            var mime = Tools.fileMime(path)
+            var type = Telegram.Enums.SendFileTypeDocument
+            if(mime.indexOf("video")>=0)
+                type = Telegram.Enums.SendFileTypeVideo
+            else
+            if(mime.indexOf("audio")>=0)
+                type = Telegram.Enums.SendFileTypeDocument
+            else
+            if(mime.indexOf("webp")>=0)
+                type = Telegram.Enums.SendFileTypeSticker
+            else
+            if(mime.indexOf("image")>=0)
+                type = Telegram.Enums.SendFileTypePhoto
+
+            return messagesModel.sendFile(type, path)
+        }
     }
 
     Rectangle {
@@ -87,15 +109,16 @@ ToolKit.TgRectangle {
         engine: msgInput.engine
         currentPeer: msgInput.currentPeer
         onSendMessage: {
-            queue = [text]
+            queue = [text.trim()]
             if(split)
-                queue = text.split("\n\n")
+                queue = text.trim().split("\n\n")
 
             queueIdx = 0
             queueSendNext()
             replyInput.messageId = 0
             replyInput.currentPeer = null
             split = false
+            text = ""
         }
 
         property variant queue
@@ -115,7 +138,7 @@ ToolKit.TgRectangle {
         anchors.top: textFrame.top
         anchors.bottom: parent.bottom
         width: textFrame.minimumHeight
-        anchors.right: right_splitter.left
+        anchors.right: sticker_btn.left
         text: Awesome.fa_smile_o
         textColor: "#959595"
         highlightColor: "#eeeeee"
@@ -124,9 +147,21 @@ ToolKit.TgRectangle {
         onContainsMouseChanged: checkPanels()
     }
 
+    Button {
+        id: sticker_btn
+        anchors.top: textFrame.top
+        anchors.bottom: parent.bottom
+        anchors.right: right_splitter.left
+        width: textFrame.minimumHeight
+        highlightColor: "#eeeeee"
+        icon: "images/Salvador.png"
+        iconHeight: 20*Devices.density
+        onContainsMouseChanged: checkPanels()
+    }
+
     Rectangle {
         id: right_splitter
-        anchors.right: sticker_btn.left
+        anchors.right: send_btn.left
         anchors.top: textFrame.top
         anchors.bottom: parent.bottom
         width: 1*Devices.density
@@ -138,15 +173,17 @@ ToolKit.TgRectangle {
     }
 
     Button {
-        id: sticker_btn
+        id: send_btn
         anchors.top: textFrame.top
         anchors.bottom: parent.bottom
         width: textFrame.minimumHeight
         anchors.right: parent.right
+        text: Awesome.fa_send
+        textColor: "#666666"
         highlightColor: "#eeeeee"
-        icon: "images/Salvador.png"
-        iconHeight: 20*Devices.density
-        onContainsMouseChanged: checkPanels()
+        textFont.family: Awesome.family
+        textFont.pixelSize: 14*Devices.fontDensity
+        onClicked: textFrame.sendMessage()
     }
 
     ToolKit.MenuPanel {
