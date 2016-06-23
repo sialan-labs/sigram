@@ -9,4 +9,6 @@ DISTFILES += \
     sidebar/SearchListLookupItem.qml \
     toolkit/ContactsPage.qml \
     toolkit/AddNewPage.qml \
-    authenticating/AuthPassword.qml
+    authenticating/AuthPassword.qml \
+    toolkit/DialogDetailsHeader.qml \
+    toolkit/UserList.qml

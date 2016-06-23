@@ -18,7 +18,7 @@ ToolKit.TgRectangle {
 
     signal forwardRequest(variant inputPeer, int msgId)
 
-    onCurrentPeerChanged: if(!currentPeer) currentIndex = -1
+    onCurrentPeerChanged: dlist.currentIndex = dmodel.indexOf(currentPeer)
 
     Telegram.DialogListModel {
         id: dmodel

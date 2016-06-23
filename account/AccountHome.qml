@@ -62,6 +62,11 @@ ToolKit.AccountPageItem {
         engine: accHome.engine
         currentPeer: visible? accHome.currentPeer : null
         categoriesSettings: sidebar.categoriesSettings
+        onPeerSelected: {
+            accHome.currentPeer = peer
+            BackHandler.removeHandler(details)
+            BackHandler.pushHandler(details, function(){details.opened = false})
+        }
 
         property bool opened: false
 
