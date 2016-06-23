@@ -24,11 +24,6 @@ AsemanApplication {
         id: notification
     }
 
-    Telegram.DocumentExporter {
-        destination: "/home/bardia/docs"
-        Component.onCompleted: exportDocuments()
-    }
-
     Telegram.ProfileManagerModel {
         id: profiles_model
         source: CutegramGlobals.profilePath + "/profiles.sqlite"
