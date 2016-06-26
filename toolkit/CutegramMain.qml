@@ -70,6 +70,7 @@ ToolKit.TgRectangle {
         profileManager: profilesModel
         detailMode: listv.currentItem? listv.currentItem.detailMode : false
         onDetailRequest: if(listv.currentItem) listv.currentItem.toggleDetails()
+        onMediaRequest: if(listv.currentItem) listv.currentItem.toggleMedias()
         onSearchRequest: if(listv.currentItem) listv.currentItem.searchRequest(peer)
 
         Behavior on y {

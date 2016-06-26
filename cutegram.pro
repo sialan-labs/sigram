@@ -11,4 +11,7 @@ DISTFILES += \
     toolkit/AddNewPage.qml \
     authenticating/AuthPassword.qml \
     toolkit/DialogDetailsHeader.qml \
-    toolkit/UserList.qml
+    toolkit/UserList.qml \
+    toolkit/AccountHomeItem.qml \
+    medias/MediaList.qml \
+    medias/PeerMedias.qml

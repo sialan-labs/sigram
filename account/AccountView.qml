@@ -18,7 +18,7 @@ Rectangle {
     property alias categoriesSettings: home.categoriesSettings
     property alias detailMode: home.detailMode
 
-    onCurrentPeerChanged: if(!currentPeer) home.closeDetails()
+    onCurrentPeerChanged: if(!currentPeer) home.backToMessages()
 
     PanelBar {
         id: panel
@@ -69,6 +69,10 @@ Rectangle {
 
     function toggleDetails() {
         home.toggleDetails()
+    }
+
+    function toggleMedias() {
+        home.toggleMedias()
     }
 
     function searchRequest(peer) {

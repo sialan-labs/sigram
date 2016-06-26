@@ -7,6 +7,7 @@ import "../toolkit" as ToolKit
 import "../sidebar" as Sidebar
 import "../messages" as Messages
 import "../globals"
+import "../medias" as Medias
 
 ToolKit.AccountPageItem {
     id: accHome
@@ -15,7 +16,16 @@ ToolKit.AccountPageItem {
     property alias currentPeer: sidebar.currentPeer
     property alias categoriesSettings: sidebar.categoriesSettings
 
-    readonly property bool detailMode: details.opened
+    property alias currentPage: messagesFrame.currentType
+
+    readonly property bool detailMode: currentPage != CutegramEnums.homeTypeMessages
+
+    onCurrentPageChanged: {
+        if(currentPage != CutegramEnums.homeTypeMessages)
+            BackHandler.pushHandler(accHome, function(){ backToMessages() })
+        else
+            BackHandler.removeHandler(accHome)
+    }
 
     Sidebar.Sidebar {
         id: sidebar
@@ -27,6 +37,10 @@ ToolKit.AccountPageItem {
             if(currentPeer) {
                 BackHandler.removeHandler(sidebar)
                 BackHandler.pushHandler(sidebar, function(){sidebar.currentPeer = null})
+                if(currentPage != CutegramEnums.homeTypeMessages) {
+                    BackHandler.removeHandler(accHome)
+                    BackHandler.pushHandler(accHome, function(){ backToMessages() })
+                }
             } else {
                 BackHandler.removeHandler(sidebar)
             }
@@ -43,53 +57,80 @@ ToolKit.AccountPageItem {
         z: 5
     }
 
-    Messages.MessagesFrame {
-        id: messagesFrame
-        x: splitter.x + splitter.width - details.opacity*50*Devices.density
-        width: parent.width - (splitter.x + splitter.width)
+    Item {
+        id: homeScene
+        anchors.left: splitter.right
+        anchors.right: parent.right
         height: parent.height
-        engine: accHome.engine
-        currentPeer: accHome.currentPeer
-    }
+        clip: true
 
-    ToolKit.DialogDetails {
-        id: details
-        height: messagesFrame.height
-        width: messagesFrame.width
-        x: splitter.x + splitter.width + (1-opacity)*100*Devices.density
-        opacity: opened? 1 : 0
-        visible: opacity != 0
-        engine: accHome.engine
-        currentPeer: visible? accHome.currentPeer : null
-        categoriesSettings: sidebar.categoriesSettings
-        onPeerSelected: {
-            accHome.currentPeer = peer
-            BackHandler.removeHandler(details)
-            BackHandler.pushHandler(details, function(){details.opened = false})
+        Messages.MessagesFrame {
+            id: messagesFrame
+            width: parent.width
+            height: parent.height
+            engine: accHome.engine
+            currentPeer: accHome.currentPeer
+            type: CutegramEnums.homeTypeMessages
         }
 
-        property bool opened: false
-
-        onOpenedChanged: {
-            if(opened)
-                BackHandler.pushHandler(details, function(){details.opened = false})
-            else
+        ToolKit.DialogDetails {
+            id: details
+            height: messagesFrame.height
+            width: messagesFrame.width
+            engine: accHome.engine
+            currentPeer: visible? accHome.currentPeer : null
+            categoriesSettings: sidebar.categoriesSettings
+            type: CutegramEnums.homeTypeDetails
+            currentType: currentPage
+            onPeerSelected: {
+                accHome.currentPeer = peer
                 BackHandler.removeHandler(details)
+                BackHandler.pushHandler(details, backToMessages)
+            }
         }
 
-        Behavior on opacity {
-            NumberAnimation{easing.type: Easing.OutCubic; duration: 250}
+        Medias.PeerMedias {
+            type: CutegramEnums.homeTypeMedias
+            currentType: currentPage
+            engine: accHome.engine
+            currentPeer: visible? accHome.currentPeer : null
         }
     }
 
-    function closeDetails() {
-        details.opened = false
+    function backToMessages() {
+        currentPage = CutegramEnums.homeTypeMessages
     }
 
     function toggleDetails() {
         if(!currentPeer)
             return
-        details.opened = !details.opened
+
+        switch(currentPage)
+        {
+        case CutegramEnums.homeTypeDetails:
+            currentPage = CutegramEnums.homeTypeMessages
+            break
+        case CutegramEnums.homeTypeMessages:
+        case CutegramEnums.homeTypeMedias:
+            currentPage = CutegramEnums.homeTypeDetails
+            break
+        }
+    }
+
+    function toggleMedias() {
+        if(!currentPeer)
+            return
+
+        switch(currentPage)
+        {
+        case CutegramEnums.homeTypeMedias:
+            currentPage = CutegramEnums.homeTypeMessages
+            break
+        case CutegramEnums.homeTypeMessages:
+        case CutegramEnums.homeTypeDetails:
+            currentPage = CutegramEnums.homeTypeMedias
+            break
+        }
     }
 
     function searchRequest(peer) {

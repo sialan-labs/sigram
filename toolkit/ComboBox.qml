@@ -9,7 +9,7 @@ import "../globals"
 Item {
     id: combo
     height: 32*Devices.density
-    z: menuVisible? 10 : 0
+    z: menu_back.extraHeight? 10 : 0
 
     property bool menuVisible: false
     property int currentIndex: 0
@@ -25,6 +25,8 @@ Item {
 
     property alias textColor: nameTxt.color
     property alias textFont: nameTxt.font
+
+    property color color: "#fefefe"
 
     onMenuVisibleChanged: {
         if(menuVisible) {
@@ -89,7 +91,7 @@ Item {
 
         Rectangle {
             id: menu
-            color: "#fefefe"
+            color: menuVisible? "#fefefe" : combo.color
             anchors.fill: parent
             anchors.margins: 8*Devices.density
             radius: menuVisible? 2*Devices.density : 0
@@ -97,6 +99,9 @@ Item {
 
             Behavior on radius {
                 NumberAnimation{easing.type: Easing.OutCubic; duration: 300}
+            }
+            Behavior on color {
+                ColorAnimation{easing.type: Easing.OutCubic; duration: 300}
             }
 
             NullMouseArea {

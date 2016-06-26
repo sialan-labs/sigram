@@ -16,6 +16,7 @@ Rectangle {
     property alias currentProfileIndex: profiles_combo.currentIndex
 
     signal detailRequest()
+    signal mediaRequest()
     signal searchRequest(variant peer)
 
     Item {
@@ -67,6 +68,7 @@ Rectangle {
             anchors.margins: 10*Devices.density
             height: parent.height
             onDetailRequest: toolbar.detailRequest()
+            onMediaRequest: toolbar.mediaRequest()
             onSearchRequest: toolbar.searchRequest(peer)
         }
     }

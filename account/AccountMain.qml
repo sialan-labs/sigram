@@ -65,6 +65,11 @@ ToolKit.TgRectangle {
             accountView.toggleDetails()
     }
 
+    function toggleMedias() {
+        if(accountView)
+            accountView.toggleMedias()
+    }
+
     function searchRequest(peer) {
         if(accountView)
             accountView.searchRequest(peer)

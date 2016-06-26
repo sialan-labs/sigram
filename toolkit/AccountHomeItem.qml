@@ -2,19 +2,19 @@ import QtQuick 2.4
 import AsemanTools 1.0
 
 Rectangle {
-    id: accPageItem
+    id: accHomeItem
     width: parent.width
     height: parent.height
     opacity: opened? 1 : 0
     visible: opacity != 0
-    y: {
+    x: {
         if(type < currentType)
-            return -100*Devices.density
+            return -50*Devices.density
         else
         if(type == currentType)
             return 0
         else
-            return 100*Devices.density
+            return 50*Devices.density
     }
 
     signal init()
@@ -22,7 +22,7 @@ Rectangle {
     Behavior on opacity {
         NumberAnimation{easing.type: Easing.OutCubic; duration: 250}
     }
-    Behavior on y {
+    Behavior on x {
         NumberAnimation{easing.type: Easing.OutCubic; duration: 250}
     }
 
@@ -34,8 +34,9 @@ Rectangle {
     property Component delegate
     property Item item
 
-    onOpenedChanged: {
-        if(opened && !item && delegate) item = delegate.createObject(accPageItem)
+    onVisibleChanged: {
+        if(visible && !item && delegate) item = delegate.createObject(accHomeItem)
+        if(!visible && item) item.destroy()
     }
 }
 

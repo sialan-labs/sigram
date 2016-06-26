@@ -18,6 +18,11 @@ Item {
 
     signal replyRequest(variant peer, variant message)
 
+    Connections {
+        target: CutegramGlobals.mainWindow
+        onActiveChanged: if(CutegramGlobals.mainWindow.active && mlmodel.currentPeer) mlmodel.markAsRead()
+    }
+
     Telegram.MessageListModel {
         id: mlmodel
         limit: 50
@@ -32,7 +37,7 @@ Item {
 
             return hours + ":" + minutes
         }
-        onCountChanged: if(count) markAsRead()
+        onCountChanged: if(count && CutegramGlobals.mainWindow.active) markAsRead()
         onIsEmptyChanged: {
             listv.positionViewAtBeginning()
             Tools.jsDelayCall(1000, listv.positionViewAtBeginning)

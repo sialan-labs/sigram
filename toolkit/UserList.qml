@@ -40,11 +40,14 @@ AsemanListView {
                         switch(model.type)
                         {
                         case Telegram.MembersListModel.TypeAdmin:
-                        case Telegram.MembersListModel.TypeModerator:
                         case Telegram.MembersListModel.TypeCreator:
                             return Awesome.fa_key
+                        case Telegram.MembersListModel.TypeModerator:
+                            return Awesome.fa_black_tie
                         case Telegram.MembersListModel.TypeEditor:
+                            return Awesome.fa_pencil
                         case Telegram.MembersListModel.TypeKicked:
+                            return Awesome.fa_ban
                         case Telegram.MembersListModel.TypeNormal:
                         case Telegram.MembersListModel.TypeSelf:
                         case Telegram.MembersListModel.TypeUnknown:
@@ -97,11 +100,11 @@ AsemanListView {
                     anchors.verticalCenter: parent.bottom
                     font.pixelSize: 9*Devices.fontDensity
                     color: "#666666"
-                    text: "Last seen"
                     horizontalAlignment: Text.AlignLeft
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     elide: Text.ElideRight
                     maximumLineCount: 1
+                    text: model.status
                 }
             }
         }

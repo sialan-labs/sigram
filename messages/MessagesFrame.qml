@@ -7,7 +7,7 @@ import "../toolkit" as ToolKit
 import "../inputs" as Inputs
 import "../globals"
 
-Rectangle {
+ToolKit.AccountHomeItem {
     id: msgFrame
 
     property alias engine: msgList.engine
@@ -25,7 +25,8 @@ Rectangle {
         id: msgList
         width: parent.width
         anchors.top: parent.top
-        anchors.bottom: messageInput.top
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: msgList.model.editable? messageInput.height : 0
         onReplyRequest: messageInput.reply(peer, message)
     }
 

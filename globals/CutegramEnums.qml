@@ -25,6 +25,11 @@ QtObject {
     readonly property int pageTypeConfigure: 3
 
 
+    readonly property int homeTypeMessages: 0
+    readonly property int homeTypeDetails: 1
+    readonly property int homeTypeMedias: 2
+
+
     readonly property int windowStateAuto: 0
     readonly property int windowStateVisible: 1
     readonly property int windowStateHidden: 2
