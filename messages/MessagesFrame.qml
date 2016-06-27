@@ -58,6 +58,10 @@ ToolKit.AccountHomeItem {
         msgList.forwardMessages(inputPeer, msgIds)
     }
 
+    function forwardDialog(msgIds) {
+        msgList.forwardDialog(msgIds)
+    }
+
     function loadFrom(message) {
         msgList.loadFrom(message)
     }

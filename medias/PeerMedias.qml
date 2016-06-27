@@ -15,6 +15,7 @@ ToolKit.AccountHomeItem {
     property InputPeer currentPeer
 
     signal peerSelected(variant peer)
+    signal forwardRequest(variant inputPeer, variant msgIds)
 
     delegate: Item {
         anchors.fill: parent
@@ -60,6 +61,7 @@ ToolKit.AccountHomeItem {
                     clip: true
                     engine: dialog.engine
                     currentPeer: dialog.currentPeer
+                    onForwardRequest: dialog.forwardRequest(inputPeer, msgIds)
                     filter: {
                         switch(typeCombo.currentIndex) {
                         case 0:

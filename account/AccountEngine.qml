@@ -1,5 +1,6 @@
 import QtQuick 2.4
 import TelegramQml 2.0 as Telegram
+import AsemanTools 1.0 as Aseman
 import "../globals"
 
 Telegram.Engine {
@@ -15,5 +16,12 @@ Telegram.Engine {
     host.hostPort: 443
 
     cache.path: CutegramGlobals.profilePath + "/" + phoneNumber + "/cache"
+    cache.encryptMethod: encr.encrypt
+    cache.decryptMethod: encr.decrypt
+
+    Aseman.Encrypter {
+        id: encr
+        key: "26fedd95-ae1d-4d98-867c-f6ac11d857c7"
+    }
 }
 

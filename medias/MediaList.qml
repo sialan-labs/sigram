@@ -23,6 +23,7 @@ AsemanGridView {
 
     onProximateBeginChanged: if(proximateBegin && mlmodel.count && mlmodel.count%mlmodel.limit == 0) mlmodel.loadBack()
 
+    signal forwardRequest(variant inputPeer, variant msgIds)
 
     Telegram.MediaListModel {
         id: mlmodel
@@ -46,12 +47,33 @@ AsemanGridView {
         MouseArea {
             id: marea
             hoverEnabled: true
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
             anchors.fill: parent
             onClicked: {
-                if(img.downloaded) Qt.openUrlExternally(img.destination)
-                else
-                if(img.downloading) img.stop()
-                else img.download()
+                switch(mouse.button)
+                {
+                case Qt.RightButton:
+                    var act = Desktop.showMenu([qsTr("Copy"), qsTr("Forward"), qsTr("Delete")])
+                    switch(act) {
+                    case 0:
+                        Devices.clipboardUrl = [img.destination]
+                        break
+                    case 1:
+                        forwardRequest(model.toPeerItem, [model.item.id])
+                        break
+                    case 2:
+                        if(Desktop.yesOrNo(CutegramGlobals.mainWindow, qsTr("Delete Messages?"), qsTr("Are you sure about deleting these messages?")))
+                            mlmodel.deleteMessages([model.item.id])
+                        break
+                    }
+                    break
+                case Qt.LeftButton:
+                    if(img.downloaded) Qt.openUrlExternally(img.destination)
+                    else
+                    if(img.downloading) img.stop()
+                    else img.download()
+                    break
+                }
             }
         }
 
@@ -180,7 +202,7 @@ AsemanGridView {
                 maximumLineCount: 1
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAnywhere
-                text: model.fileTitle
+                text: model.fileTitle.length != 0? model.fileTitle : model.fileName
                 color: "#333333"
             }
         }

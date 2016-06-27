@@ -94,6 +94,10 @@ ToolKit.AccountPageItem {
             currentType: currentPage
             engine: accHome.engine
             currentPeer: visible? accHome.currentPeer : null
+            onForwardRequest: {
+                backToMessages()
+                messagesFrame.forwardDialog(msgIds)
+            }
         }
     }
 

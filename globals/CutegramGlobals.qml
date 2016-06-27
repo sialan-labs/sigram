@@ -4,7 +4,6 @@ import AsemanTools 1.0
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 
-
 AsemanObject {
     property Window mainWindow
     property alias systemPalette: palette

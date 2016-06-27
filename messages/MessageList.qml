@@ -302,5 +302,14 @@ Item {
         mlmodel.loadFrom(message.id)
         mlmodel.focusAfterLoaded = message
     }
+
+    function forwardDialog(msgIds) {
+        selectedsHash.clear()
+
+        for(var i=0; i<msgIds.length; i++)
+            selectedsHash.insert(msgIds[i], null)
+
+        optionBar.forwardRequest()
+    }
 }
 
