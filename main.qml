@@ -6,7 +6,6 @@ import TelegramQml 2.0 as Telegram
 import "toolkit" as ToolKit
 import "account" as Account
 import "globals"
-import "."
 
 AsemanApplication {
     applicationName: "Cutegram"

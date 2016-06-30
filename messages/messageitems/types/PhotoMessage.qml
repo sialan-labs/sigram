@@ -31,6 +31,8 @@ AbstractMessage {
             Devices.clipboardUrl = [img.destination]
     }
 
+    onUploadingChanged: if(!uploading) img.download()
+
     Column {
         id: column
         anchors.centerIn: parent

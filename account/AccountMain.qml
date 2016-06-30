@@ -18,7 +18,12 @@ ToolKit.TgRectangle {
     property Item authPage
     property AccountView accountView
     readonly property bool detailMode: accountView? accountView.detailMode : false
-    readonly property bool refreshing: accountView? accountView.refreshing : false
+    readonly property bool refreshing: {
+        if(!accountView)
+            return false
+        else
+            return accountView.refreshing || (engine.state != Telegram.Engine.AuthLoggedIn)
+    }
 
     signal signedIn()
 

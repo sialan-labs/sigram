@@ -111,6 +111,7 @@ ToolKit.TgRectangle {
                 currentPeer = model.peer
                 dlist.forwardRequest(inputPeer, msgId)
             }
+            onClearHistoryRequest: dmodel.clearHistory(inputPeer, true)
         }
 
         highlight: Rectangle {

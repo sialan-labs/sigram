@@ -16,6 +16,7 @@ Item {
 
     signal active()
     signal forwardRequest(variant inputPeer, int msgId)
+    signal clearHistoryRequest(variant inputPeer)
 
     Row {
         id: row
@@ -250,7 +251,8 @@ Item {
                 var favorited = (model.category == CutegramEnums.dialogsCategoryFavorite)
                 var act = Desktop.showMenu([qsTr("Mark as read"),
                                             loved?qsTr("Unlove"):qsTr("Love"),
-                                            favorited?qsTr("Unfavorite"):qsTr("Favorite")])
+                                            favorited?qsTr("Unfavorite"):qsTr("Favorite"), "",
+                                            qsTr("Clear History")])
                 switch(act) {
                 case 0:
                     model.unreadCount = 0
@@ -260,6 +262,10 @@ Item {
                     break
                 case 2:
                     model.category = favorited? CutegramEnums.dialogsCategoryEmpty : CutegramEnums.dialogsCategoryFavorite
+                    break
+                case 4:
+                    if(Desktop.yesOrNo(CutegramGlobals.mainWindow, qsTr("Clear History?"), qsTr("Are you sure about clear history?")))
+                        clearHistoryRequest(model.peer)
                     break
                 }
             } else {
