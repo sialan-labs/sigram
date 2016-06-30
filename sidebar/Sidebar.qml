@@ -76,15 +76,15 @@ Rectangle {
             currentIndex: account_settings.dialogsFilter
             onCurrentIndexChanged: account_settings.dialogsFilter = currentIndex
             modelArray: [
-                {"name":qsTr("All")          , "icon": Awesome.fa_user},
-                {"name":qsTr("Users")        , "icon": Awesome.fa_user},
-                {"name":qsTr("Contacts")     , "icon": Awesome.fa_user},
-                {"name":qsTr("Conversations"), "icon": Awesome.fa_user},
-                {"name":qsTr("Onlines")      , "icon": Awesome.fa_user},
-                {"name":qsTr("Groups")       , "icon": Awesome.fa_user},
-                {"name":qsTr("Channels")     , "icon": Awesome.fa_user},
-                {"name":qsTr("Bots")         , "icon": Awesome.fa_user},
-                {"name":qsTr("Secret Chats") , "icon": Awesome.fa_user}
+                {"name":qsTr("All")          , "icon": Awesome.fa_filter},
+                {"name":qsTr("Users")        , "icon": Awesome.fa_filter},
+                {"name":qsTr("Contacts")     , "icon": Awesome.fa_filter},
+                {"name":qsTr("Conversations"), "icon": Awesome.fa_filter},
+                {"name":qsTr("Onlines")      , "icon": Awesome.fa_filter},
+                {"name":qsTr("Groups")       , "icon": Awesome.fa_filter},
+                {"name":qsTr("Channels")     , "icon": Awesome.fa_filter},
+                {"name":qsTr("Bots")         , "icon": Awesome.fa_filter},
+                {"name":qsTr("Secret Chats") , "icon": Awesome.fa_filter}
             ]
         }
 
@@ -95,11 +95,11 @@ Rectangle {
             currentIndex: account_settings.dialogsSort
             onCurrentIndexChanged: account_settings.dialogsSort = currentIndex
             modelArray: [
-                {"name":qsTr("Last Message"), "icon": Awesome.fa_filter},
-                {"name":qsTr("Last Online") , "icon": Awesome.fa_filter},
-                {"name":qsTr("Name")        , "icon": Awesome.fa_filter},
-                {"name":qsTr("Unreads")     , "icon": Awesome.fa_filter},
-                {"name":qsTr("Type")        , "icon": Awesome.fa_filter}
+                {"name":qsTr("Last Message"), "icon": Awesome.fa_sort_amount_desc},
+                {"name":qsTr("Last Online") , "icon": Awesome.fa_sort_amount_desc},
+                {"name":qsTr("Name")        , "icon": Awesome.fa_sort_amount_desc},
+                {"name":qsTr("Unreads")     , "icon": Awesome.fa_sort_amount_desc},
+                {"name":qsTr("Type")        , "icon": Awesome.fa_sort_amount_desc}
             ]
         }
     }

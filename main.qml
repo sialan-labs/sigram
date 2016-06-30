@@ -10,7 +10,7 @@ import "globals"
 AsemanApplication {
     applicationName: "Cutegram"
     applicationDisplayName: "Cutegram"
-    applicationVersion: "3.0.0"
+    applicationVersion: "2.9.5"
     organizationName: "Aseman"
     organizationDomain: "land.aseman"
 

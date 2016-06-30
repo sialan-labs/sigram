@@ -140,9 +140,11 @@ AccountPageItem {
 
             property real proximateCellWidth: 240*Devices.density
 
-            delegate: Item {
+            delegate: Rectangle {
                 width: gview.cellWidth
                 height: gview.cellHeight
+                color: marea.pressed? "#11000000" : "#00000000"
+                radius: 5*Devices.density
 
                 Row {
                     id: row
@@ -173,6 +175,7 @@ AccountPageItem {
                 }
 
                 MouseArea {
+                    id: marea
                     anchors.fill: parent
                     onClicked: contactsPage.contactActivated(model.peer)
                 }

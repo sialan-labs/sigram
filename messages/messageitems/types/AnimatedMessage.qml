@@ -52,6 +52,7 @@ AbstractMessage {
                 id: video
                 anchors.fill: parent
                 source: img.destination
+                onStopped: play()
             }
 
             Rectangle {
