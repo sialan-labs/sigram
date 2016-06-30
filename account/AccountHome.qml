@@ -19,6 +19,7 @@ ToolKit.AccountPageItem {
     property alias currentPage: messagesFrame.currentType
 
     readonly property bool detailMode: currentPage != CutegramEnums.homeTypeMessages
+    readonly property bool refreshing: sidebar.refreshing || messagesFrame.refreshing || details.refreshing || medias.refreshing
 
     onCurrentPageChanged: {
         if(currentPage != CutegramEnums.homeTypeMessages)
@@ -90,6 +91,7 @@ ToolKit.AccountPageItem {
         }
 
         Medias.PeerMedias {
+            id: medias
             type: CutegramEnums.homeTypeMedias
             currentType: currentPage
             engine: accHome.engine

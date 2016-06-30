@@ -13,6 +13,8 @@ ToolKit.AccountHomeItem {
     property alias engine: msgList.engine
     property alias currentPeer: msgList.currentPeer
 
+    property alias refreshing: msgList.refreshing
+
     Image {
         width: parent.width + 100*Devices.density
         height: parent.height

@@ -148,9 +148,43 @@ Item {
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.IBeamCursor
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+
         onPressed: {
-            txt.forceActiveFocus()
-            mouse.accepted = false
+            switch(mouse.button)
+            {
+            case Qt.LeftButton:
+                txt.forceActiveFocus()
+                mouse.accepted = false
+                break
+            }
+        }
+        onClicked: {
+            switch(mouse.button)
+            {
+            case Qt.RightButton:
+                var act = Desktop.showMenu([qsTr("Copy"), qsTr("Cut"), qsTr("Paste"), "", qsTr("Select all"), "", qsTr("Delete")])
+                switch(act)
+                {
+                case 0:
+                    txt.copy()
+                    break;
+                case 1:
+                    txt.cut()
+                    break;
+                case 2:
+                    txt.paste()
+                    break;
+                case 4:
+                    txt.selectAll()
+                    break;
+                case 6:
+                    txt.remove(txt.selectionStart, txt.selectionEnd)
+                    break;
+                }
+
+                break
+            }
         }
     }
 

@@ -19,9 +19,26 @@ Telegram.Engine {
     cache.encryptMethod: encr.encrypt
     cache.decryptMethod: encr.decrypt
 
+    authStore.writeMethod: function(data) { return keychain.writeData(authKey, data) }
+    authStore.readMethod: function() { return keychain.readData(authKey) }
+
+    readonly property string authKey: "auth/" + phoneNumber
+
     Aseman.Encrypter {
         id: encr
-        key: "26fedd95-ae1d-4d98-867c-f6ac11d857c7"
+    }
+
+    Aseman.Keychain {
+        id: keychain
+        service: "Cutegram"
+        Component.onCompleted: {
+            var key = read("encryptKey")
+            if(key.length == 0) {
+                key = Aseman.Tools.createUuid()
+                write("encryptKey", key)
+            }
+            encr.key = key
+        }
     }
 }
 

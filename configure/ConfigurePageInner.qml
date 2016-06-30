@@ -12,6 +12,8 @@ Item {
     property real splitterWidth: 26*Devices.density
     property real panelsWidth: 328*Devices.density
 
+    property alias refreshing: cgram_channel.refreshing
+
     Telegram.PeerDetails {
         id: cgram_channel
         engine: confPage.engine

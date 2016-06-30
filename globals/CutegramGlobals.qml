@@ -9,13 +9,8 @@ AsemanObject {
     property alias systemPalette: palette
 
     property color titleBarColor
-    readonly property color titleBarTextsColor: {
-        var mid = (titleBarColor.r + titleBarColor.g + titleBarColor.b)/3
-        if(mid > 0.5)
-            return "#333333"
-        else
-            return "#ffffff"
-    }
+    readonly property bool titleBarIsDarkColor: (titleBarColor.r + titleBarColor.g + titleBarColor.b)/3 < 0.5
+    readonly property color titleBarTextsColor: titleBarIsDarkColor? "#ffffff" : "#333333"
 
     property color foregroundColor: "#e6e6e6"
     property color baseColor: defaultBaseColor

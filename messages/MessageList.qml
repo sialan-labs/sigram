@@ -14,6 +14,8 @@ Item {
     property alias currentPeer: mlmodel.currentPeer
     property alias model: mlmodel
 
+    property alias refreshing: mlmodel.refreshing
+
     readonly property bool forwarding: fwdArea.messages.length != 0
 
     signal replyRequest(variant peer, variant message)

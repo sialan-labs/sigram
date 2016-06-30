@@ -17,6 +17,7 @@ Rectangle {
     property alias currentPeer: home.currentPeer
     property alias categoriesSettings: home.categoriesSettings
     property alias detailMode: home.detailMode
+    readonly property bool refreshing: home.refreshing || addPage.refreshing || contactPage.refreshing || configure.refreshing
 
     onCurrentPeerChanged: if(!currentPeer) home.backToMessages()
 
@@ -44,12 +45,14 @@ Rectangle {
         }
 
         ToolKit.AddNewPage {
+            id: addPage
             engine: accMain.engine
             type: CutegramEnums.pageTypeAdd
             currentType: panel.currentPage
         }
 
         ToolKit.ContactsPage {
+            id: contactPage
             engine: accMain.engine
             type: CutegramEnums.pageTypeContacts
             currentType: panel.currentPage

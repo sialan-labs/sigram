@@ -13,6 +13,8 @@ Item {
     property alias currentPeer: details.peer
     property Settings categoriesSettings
 
+    property alias refreshing: details.refreshing
+
     onCurrentPeerChanged: refresh()
 
     Connections {

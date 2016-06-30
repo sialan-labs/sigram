@@ -14,6 +14,8 @@ Item {
     property string keyword
     property alias count: listv.count
 
+    readonly property bool refreshing: searchModel.refreshing || dialogModel.refreshing || details.refreshing
+
     onKeywordChanged: {
         refreshTimer.stop()
         if(keyword.length)

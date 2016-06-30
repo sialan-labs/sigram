@@ -14,12 +14,16 @@ AccountHomeItem {
     property InputPeer currentPeer
     property Settings categoriesSettings
 
+    readonly property bool refreshing: item? item.refreshing : false
+
     signal peerSelected(variant peer)
 
     delegate: Item {
         anchors.fill: parent
 
         NullMouseArea { anchors.fill: parent }
+
+        readonly property bool refreshing: mlmodel.refreshing || (mbrlist.headerItem? mbrlist.headerItem.refreshing : false)
 
         Telegram.MembersListModel {
             id: mlmodel

@@ -10,9 +10,12 @@ ToolKit.AccountPageItem {
     id: confPage
 
     property variant engine
+    readonly property bool refreshing: item? item.refreshing : false
 
     delegate: Item {
         anchors.fill: parent
+
+        property alias refreshing: inner.refreshing
 
         Flickable {
             id: flick

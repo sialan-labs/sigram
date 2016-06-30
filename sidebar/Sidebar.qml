@@ -16,6 +16,8 @@ Rectangle {
     property alias categoriesSettings: categories_settings
     property bool signalBlocker: false
 
+    readonly property bool refreshing: dlist.refreshing || searchList.refreshing
+
     signal forwardRequest(variant inputPeer, int msgId)
     signal loadMessageRequest(variant message)
 

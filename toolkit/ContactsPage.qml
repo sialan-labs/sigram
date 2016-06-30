@@ -9,11 +9,14 @@ AccountPageItem {
     id: contactsPage
 
     property variant engine
+    readonly property bool refreshing: item? item.refreshing : false
 
     signal contactActivated(variant peer)
 
     delegate: Item {
         anchors.fill: parent
+
+        property alias refreshing: dmodel.refreshing
 
         Telegram.DialogListModel {
             id: dmodel

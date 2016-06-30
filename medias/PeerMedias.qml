@@ -14,6 +14,8 @@ ToolKit.AccountHomeItem {
     property Engine engine
     property InputPeer currentPeer
 
+    readonly property bool refreshing: item? item.refreshing : false
+
     signal peerSelected(variant peer)
     signal forwardRequest(variant inputPeer, variant msgIds)
 
@@ -21,6 +23,8 @@ ToolKit.AccountHomeItem {
         anchors.fill: parent
 
         NullMouseArea { anchors.fill: parent }
+
+        property alias refreshing: mdlist.refreshing
 
         Column {
             anchors.fill: parent

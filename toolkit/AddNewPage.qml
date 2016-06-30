@@ -9,6 +9,7 @@ AccountPageItem {
     id: addNewPage
 
     property variant engine
+    readonly property bool refreshing: item? item.refreshing : false
 
     delegate: Item {
         anchors.fill: parent

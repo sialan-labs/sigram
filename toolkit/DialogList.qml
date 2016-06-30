@@ -16,6 +16,8 @@ ToolKit.TgRectangle {
     property alias visibility: dmodel.visibility
     property alias sortFlag: dmodel.sortFlag
 
+    property alias refreshing: dmodel.refreshing
+
     signal forwardRequest(variant inputPeer, int msgId)
 
     onCurrentPeerChanged: dlist.currentIndex = dmodel.indexOf(currentPeer)

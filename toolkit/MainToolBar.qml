@@ -15,14 +15,30 @@ Rectangle {
     property alias profileManager: profiles_combo.profileManager
     property alias currentProfileIndex: profiles_combo.currentIndex
 
+    property alias refreshing: indicator.running
+
     signal detailRequest()
     signal mediaRequest()
     signal searchRequest(variant peer)
 
     Item {
-        anchors.left: parent.left
+        id: indicatorArea
+        height: parent.height
+        width: CutegramGlobals.panelWidth
+
+        Indicator {
+            id: indicator
+            anchors.centerIn: parent
+            indicatorSize: 16*Devices.density
+            light: CutegramGlobals.titleBarIsDarkColor
+            opacity: 0.7
+            modern: true
+        }
+    }
+
+    Item {
+        anchors.left: indicatorArea.right
         anchors.right: parent.right
-        anchors.leftMargin: CutegramGlobals.panelWidth
         anchors.top: parent.top
         anchors.bottom: toolbar_separator.top
 

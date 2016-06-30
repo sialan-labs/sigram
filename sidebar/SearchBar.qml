@@ -83,8 +83,43 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: txt
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
                 cursorShape: Qt.IBeamCursor
-                onPressed: mouse.accepted = false
+                onPressed: {
+                    switch(mouse.button)
+                    {
+                    case Qt.LeftButton:
+                        mouse.accepted = false
+                        break
+                    }
+                }
+                onClicked: {
+                    switch(mouse.button)
+                    {
+                    case Qt.RightButton:
+                        var act = Desktop.showMenu([qsTr("Copy"), qsTr("Cut"), qsTr("Paste"), "", qsTr("Select all"), "", qsTr("Delete")])
+                        switch(act)
+                        {
+                        case 0:
+                            txt.copy()
+                            break;
+                        case 1:
+                            txt.cut()
+                            break;
+                        case 2:
+                            txt.paste()
+                            break;
+                        case 4:
+                            txt.selectAll()
+                            break;
+                        case 6:
+                            txt.remove(txt.selectionStart, txt.selectionEnd)
+                            break;
+                        }
+
+                        break
+                    }
+                }
             }
         }
 

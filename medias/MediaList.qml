@@ -14,6 +14,8 @@ AsemanGridView {
     property alias filter: mlmodel.messageFilter
     property alias currentPeer: mlmodel.currentPeer
 
+    property alias refreshing: mlmodel.refreshing
+
     cellWidth: width/Math.floor(width/(128*Devices.density))
     cellHeight: cellWidth
 
