@@ -7,10 +7,14 @@ import "../toolkit" as ToolKit
 import "../globals"
 
 Item {
-    height: typing_text.height + 32*Devices.density
-    width: typing_text.width + 32*Devices.density
+    height: typing_text.text.length==0? 0 : typing_text.height + 50*Devices.density
+    width: typing_text.width + 50*Devices.density
 
     property variant typingUsers
+
+    Behavior on height {
+        NumberAnimation{easing.type: Easing.OutCubic; duration: 250}
+    }
 
     DropShadow {
         source: typing_frame

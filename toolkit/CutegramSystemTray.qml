@@ -35,9 +35,10 @@ SystemTray {
         }
     }
     visible: true
-    menu: ["Show", "Quit"]
+    menu: [qsTr("Show"), qsTr("About"), "", qsTr("Quit")]
 
     property ApplicationWindow window
+    signal aboutRequest()
 
     onMenuTriggered: {
         switch(index) {
@@ -46,6 +47,9 @@ SystemTray {
             window.requestActivate()
             break
         case 1:
+            aboutRequest()
+            break
+        case 3:
             AsemanApp.exit(0)
             break
         }

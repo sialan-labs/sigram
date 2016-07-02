@@ -41,8 +41,12 @@ Item {
         }
         onCountChanged: if(count && CutegramGlobals.mainWindow.active) markAsRead()
         onIsEmptyChanged: {
+            if(focusAfterLoaded || isEmpty) return
             listv.positionViewAtBeginning()
-            Tools.jsDelayCall(1000, listv.positionViewAtBeginning)
+            Tools.jsDelayCall(1000, function(){
+                if(focusAfterLoaded) return
+                listv.positionViewAtBeginning()
+            })
         }
         onCurrentPeerChanged: selectedsHash.clear()
         onErrorChanged: errorItem.showError(errorCode, errorText)
@@ -194,6 +198,10 @@ Item {
                 }
             }
         }
+
+        header: TypingUsersArea {
+            typingUsers: mlmodel.typingUsers
+        }
     }
 
     Rectangle {
@@ -238,13 +246,6 @@ Item {
         visible: !loadHandler.proximateBegin && listv.contentHeight>listv.height
         text: Awesome.fa_arrow_down
         onClicked: listv.positionViewAtBeginning()
-    }
-
-    TypingUsersArea {
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        anchors.margins: 10*Devices.density
-        typingUsers: mlmodel.typingUsers
     }
 
     NormalWheelScroll {
@@ -301,8 +302,8 @@ Item {
     }
 
     function loadFrom(message) {
-        mlmodel.loadFrom(message.id)
         mlmodel.focusAfterLoaded = message
+        mlmodel.loadFrom(message.id)
     }
 
     function forwardDialog(msgIds) {

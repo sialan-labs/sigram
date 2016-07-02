@@ -20,7 +20,7 @@ Rectangle {
     ListModel {
         id: listModel
         ListElement {
-            documentItems: 0
+            fakeDocumentItems: 0
         }
     }
 
@@ -62,7 +62,7 @@ Rectangle {
             width: height
             height: clistv.height
 
-            property variant docs: model.documentItems
+            property variant docs: model.modelObject==scmodel? model.documentItems : model.fakeDocumentItems
             onDocsChanged: if(clistv.currentIndex == index && docs) viewer.documents = docs
 
             Telegram.Image {

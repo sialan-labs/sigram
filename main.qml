@@ -6,6 +6,7 @@ import TelegramQml 2.0 as Telegram
 import "toolkit" as ToolKit
 import "account" as Account
 import "globals"
+import "about" as About
 
 AsemanApplication {
     applicationName: "Cutegram"
@@ -17,6 +18,7 @@ AsemanApplication {
     ToolKit.CutegramSystemTray {
         window: mainWindow
         badgeCount: profiles_model.unreadCount
+        onAboutRequest: about_component.createObject(mainWindow)
     }
 
     Notification {
@@ -93,6 +95,15 @@ AsemanApplication {
 
     FontLoader {
         source: "awesome/fontawesome-webfont.ttf"
+    }
+
+    Component {
+        id: about_component
+        About.AboutCutegram {
+            id: about
+            anchors.fill: parent
+            Component.onCompleted: BackHandler.pushHandler(about, about.destroy)
+        }
     }
 
     Component.onCompleted: CutegramEmojiDatabase.initDatabase()
