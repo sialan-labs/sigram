@@ -7,38 +7,26 @@ Build-Depends:
  g++ (>= 4:4.7),
  gcc (>= 4:4.7),
  qtbase5-dev (>= 5.2.0),
- libqt5sql5-sqlite (>= 5.2.0),
- libqt5multimediaquick-p5 (>= 5.2.0),
- libqt5multimedia5-plugins (>= 5.2.0),
- libqt5multimedia5 (>= 5.2.0),
  qtchooser,
  qt5-qmake,
- qt5-default,
- libqt5qml5 (>= 5.2.0),
- libqt5qml-graphicaleffects (>= 5.2.0) | qml-module-qtgraphicaleffects,
- qtdeclarative5-controls-plugin (>= 5.2.0) | qml-module-qtquick-controls,
- qtdeclarative5-dev (>= 5.2.0),
- libqt5quick5 (>= 5.2.0),
- qtmultimedia5-dev (>= 5.2.0),
- libqt5webkit5-dev (>= 5.1.0),
- libappindicator-dev,
- libssl-dev,
- libqtelegram-ae-dev,
- telegramqml-dev
+ qt5-default
 Standards-Version: 3.9.5
 Homepage: http://aseman.co/cutegram
 Vcs-Git: https://github.com/Aseman-Land/Cutegram
 
-Package: cutegram-data
+Package: cutegram-emojis-twemoji
 Architecture: all
-Description: Cutegram telegram client data pack
- Better telegram client from Aseman Team.
+Description: Cutegram Twemoji pack
+ Twemoji pack for the cutegram client
+
+Package: cutegram-emojis-emojione
+Architecture: all
+Description: Cutegram Emojione pack
+ Emojione pack for the cutegram client
 
 Package: cutegram
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, 
-  cutegram-data (>= ${binary:Version}),
-  qtdeclarative5-controls-plugin (>= 5.2.0) | qml-module-qtquick-controls,
+Architecture: all
+Depends: qtdeclarative5-controls-plugin (>= 5.2.0) | qml-module-qtquick-controls,
   qtdeclarative5-dialogs-plugin (>= 5.2.0) | qml-module-qtquick-dialogs, 
   qtdeclarative5-qtquick2-plugin (>= 5.2.0) |  qml-module-qtquick2, 
   qtdeclarative5-window-plugin (>= 5.2.0) | qml-module-qtquick-window2, 
@@ -48,11 +36,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
   libqt5multimedia5 (>= 5.2.0),
   libqt5multimedia5-plugins (>= 5.2.0), 
   libqt5multimediaquick-p5 (>= 5.2.0), 
-  libqt5sql5-sqlite (>= 5.2.0), 
-  qt5-image-formats-plugins,
-  dconf-tools, 
-  libav-tools, 
-  gstreamer0.10-plugins-bad, 
-  gstreamer0.10-plugins-ugly
+  asemantools (>= 1.0.0),
+  telegramqml (>= 2.0.0),
+  qtchooser,
+  qmlscene,
+  cutegram-emojis-emojione,
+  cutegram-emojis-twemoji
 Description: Cutegram telegram client
  Better telegram client from Aseman Team.
