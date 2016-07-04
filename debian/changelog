@@ -1,3 +1,9 @@
+cutegram (2.9.5-1aseman-xenial) xenial; urgency=medium
+
+  * Completely rewritten using new libqtelegram-ae and telegram-qml
+
+ -- Aseman Team <contact@aseman.co>  Tue, 3 Jul 2016 12:00:00 +0330
+ 
 cutegram (2.7.1-2aseman-wily) wily; urgency=medium
 
   * Fix the map bugs, rendered blurry

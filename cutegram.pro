@@ -1,17 +1,33 @@
-TEMPLATE = app
-QT += qml quick widgets
-DEFINES += PROJECT_PATH='"\\\"$$PWD\\\""'
-SOURCES += main.cpp
+TEMPLATE = aux
 OTHER_FILES += $$files(*, true)
+VERSION = 3.0
 
-DISTFILES += \
-    sidebar/SearchListMessageItem.qml \
-    sidebar/SearchListLookupItem.qml \
-    toolkit/ContactsPage.qml \
-    toolkit/AddNewPage.qml \
-    authenticating/AuthPassword.qml \
-    toolkit/DialogDetailsHeader.qml \
-    toolkit/UserList.qml \
-    toolkit/AccountHomeItem.qml \
-    medias/MediaList.qml \
-    medias/PeerMedias.qml
+shortcut.path = $$PREFIX/share/applications/
+shortcut.files = share/Cutegram.desktop
+icons.path = $$PREFIX/share/icons
+icons.files = share/hicolor
+pixmaps.path = $$PREFIX/share/pixmaps
+pixmaps.files = share/cutegram.png
+qmlFiles.path = $$PREFIX/share/cutegram/$$VERSION/
+qmlFiles.files = \
+    about \
+    account \
+    authenticating \
+    awesome \
+    configure \
+    emojis \
+    globals \
+    images \
+    inputs \
+    medias \
+    messages \
+    sidebar \
+    sounds \
+    thirdparty \
+    toolkit \
+    tools \
+    main.qml \
+    GPL.txt \
+    LICENSE
+
+INSTALLS += qmlFiles shortcut icons pixmaps

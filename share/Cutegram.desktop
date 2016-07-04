@@ -1,0 +1,11 @@
+[Desktop Entry]
+Categories=Network;Application;
+Comment=A telegram client by Aseman
+Exec=qmlscene /usr/share/cutegram/3.0/main.qml
+GenericName=Telegram client
+Icon=cutegram
+Name=Cutegram
+StartupNotify=true
+Type=Application
+MimeType=application/x-xdg-protocol-tg;x-scheme-handler/tg;
+Version=1.0
