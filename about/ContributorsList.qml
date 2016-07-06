@@ -8,13 +8,13 @@ Rectangle {
 
     ContributorsModel {
         id: cbmodel
-        files: ["about/cutegram",
-                "about/telegramQml",
-                "about/libqtelegram",
-                "about/libqtelegram-aseman-edition",
-                "about/github-contributors",
-                "about/sigram",
-                "about/translators"]
+        files: ["about/cutegram.txt",
+                "about/telegramQml.txt",
+                "about/libqtelegram.txt",
+                "about/libqtelegram-aseman-edition.txt",
+                "about/github-contributors.txt",
+                "about/sigram.txt",
+                "about/translators.txt"]
     }
 
     AsemanListView {

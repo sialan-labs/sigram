@@ -1,8 +1,9 @@
+StartPage 1.0 StartPage.qml
+PhoneSection 1.0 PhoneSection.qml
+AuthPassword 1.0 AuthPassword.qml
 AuthPage 1.0 AuthPage.qml
+SignUpPage 1.0 SignUpPage.qml
+WaitPage 1.0 WaitPage.qml
 CountryList 1.0 CountryList.qml
 PageManager 1.0 PageManager.qml
-PhoneSection 1.0 PhoneSection.qml
 SignInPage 1.0 SignInPage.qml
-SignUpPage 1.0 SignUpPage.qml
-StartPage 1.0 StartPage.qml
-WaitPage 1.0 WaitPage.qml

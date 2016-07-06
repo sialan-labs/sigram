@@ -1,0 +1,14 @@
+AbstractMessage 1.0 AbstractMessage.qml
+PhotoMessage 1.0 PhotoMessage.qml
+AudioMessage 1.0 AudioMessage.qml
+UnsupportedMessage 1.0 UnsupportedMessage.qml
+StickerMessage 1.0 StickerMessage.qml
+WebpageMessage 1.0 WebpageMessage.qml
+DocumentMessage 1.0 DocumentMessage.qml
+ContactMessage 1.0 ContactMessage.qml
+GeoMessage 1.0 GeoMessage.qml
+AnimatedMessage 1.0 AnimatedMessage.qml
+ActionMessage 1.0 ActionMessage.qml
+TextMessage 1.0 TextMessage.qml
+VideoMessage 1.0 VideoMessage.qml
+AutoMessage 1.0 AutoMessage.qml

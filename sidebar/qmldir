@@ -1,2 +1,5 @@
-SearchBar 1.0 SearchBar.qml
 Sidebar 1.0 Sidebar.qml
+SearchBar 1.0 SearchBar.qml
+SearchList 1.0 SearchList.qml
+SearchListMessageItem 1.0 SearchListMessageItem.qml
+SearchListLookupItem 1.0 SearchListLookupItem.qml

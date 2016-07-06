@@ -1,4 +1,15 @@
-TEMPLATE = aux
+contains(CONFIG, binaryMode) {
+    TARGET = cutegram
+    QT += qml quick gui widgets core
+    TEMPLATE = app
+    SOURCES += main.cpp
+    RESOURCES += \
+        resource.qrc \
+        emojis/emojis.qrc
+} else {
+    TEMPLATE = aux
+}
+
 OTHER_FILES += $$files(*, true)
 VERSION = 3.0
 

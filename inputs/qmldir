@@ -1,2 +1,3 @@
 MessageInput 1.0 MessageInput.qml
+MessageInputReply 1.0 MessageInputReply.qml
 MessageTextFrame 1.0 MessageTextFrame.qml

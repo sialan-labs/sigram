@@ -1,4 +1,6 @@
-MessageItem 1.0 MessageItem.qml
-MessageList 1.0 MessageList.qml
+MessageForwardArea 1.0 MessageForwardArea.qml
 MessagesFrame 1.0 MessagesFrame.qml
 TypingUsersArea 1.0 TypingUsersArea.qml
+MessagesOptionBar 1.0 MessagesOptionBar.qml
+MessageList 1.0 MessageList.qml
+MessageListDelegate 1.0 MessageListDelegate.qml
