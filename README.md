@@ -90,3 +90,5 @@ Switch to source directory
 Cutegram 3.x completely written using QML. So there is no need to build and compile it anymore. Just run in using below command.
 
     qmlscene main.qml
+    
+But you can still build cutegram. Just pass `CONFIG+=binaryMode` to the qmake and done build it.
