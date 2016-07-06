@@ -2,6 +2,8 @@
     <qresource prefix="/">
         <file>inputs/images/Salvador.png</file>
         <file>messages/files/default_background.png</file>
+        <file>toolkit/files/systray-dark.png</file>
+        <file>toolkit/files/systray.png</file>
         <file>./about/ContributorsList.qml</file>
         <file>./about/about/github-contributors.txt</file>
         <file>./about/about/sigram.txt</file>

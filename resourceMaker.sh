@@ -17,7 +17,9 @@ FILES=`find . -name "*.qml" -o -name "*.js" -o -name "*.ttf" -o -name "*.jpg" -o
 echo  "<RCC>
     <qresource prefix=\"/\">
         <file>inputs/images/Salvador.png</file>
-        <file>messages/files/default_background.png</file>" > resource.qrc
+        <file>messages/files/default_background.png</file>
+        <file>toolkit/files/systray-dark.png</file>
+        <file>toolkit/files/systray.png</file>" > resource.qrc
 
 for FILE in $FILES
 do
