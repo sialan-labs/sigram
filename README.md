@@ -81,9 +81,11 @@ Switch to source directory
 
 ##### Arch
 
-    there is currently a package availibe within the AUR for Cutegram.
+You can install stable version of Cutegram directly from the `[community]` repository.
 
-    you can find the stable build [here](https://aur.archlinux.org/packages/cutegram/), and the build from git package [here](https://aur.archlinux.org/packages/cutegram-git/)
+    pacman -S cutegram
+
+There is a [PKGBUILD](https://aur.archlinux.org/packages/cutegram-git/) for the git package in AUR.
 
 ##### Ubuntu and Fedora
 
