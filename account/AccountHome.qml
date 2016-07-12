@@ -31,7 +31,7 @@ ToolKit.AccountPageItem {
     Sidebar.Sidebar {
         id: sidebar
         height: parent.height
-        width: CutegramSettings.sideBarWidth
+        width: CutegramSettings.sideBarWidth * Devices.density
         z: 10
         onLoadMessageRequest: messagesFrame.loadFrom(message)
         onCurrentPeerChanged: {
