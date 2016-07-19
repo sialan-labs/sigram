@@ -43,7 +43,7 @@ Item {
         onIsEmptyChanged: {
             if(focusAfterLoaded || isEmpty) return
             listv.positionViewAtBeginning()
-            Tools.jsDelayCall(1000, function(){
+            Tools.jsDelayCall(100, function(){
                 if(focusAfterLoaded) return
                 listv.positionViewAtBeginning()
             })
@@ -145,10 +145,12 @@ Item {
             }
 
             onSelectedChanged: {
-                if(selected)
-                    selectedsHash.insert(messageItem.id, null)
-                else
+                if(selected) {
+                    if(!selectedsHash.contains(messageItem.id))
+                        selectedsHash.insert(messageItem.id, null)
+                } else {
                     selectedsHash.remove(messageItem.id)
+                }
             }
             onForwardRequest: {
                 selectedsHash.clear()

@@ -1,4 +1,5 @@
 contains(CONFIG, binaryMode) {
+    CONFIG += c++11
     TARGET = cutegram
     QT += qml quick gui widgets core
     TEMPLATE = app
