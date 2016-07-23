@@ -2,8 +2,6 @@ contains(CONFIG, binaryMode) {
     CONFIG += c++11
     TARGET = cutegram
     QT += qml quick gui widgets core
-    target.path = $$PREFIX/bin
-    INSTALLS += target
     TEMPLATE = app
     SOURCES += main.cpp
     RESOURCES += \
@@ -49,4 +47,10 @@ qmlFiles.files = \
     LICENSE
 
 QMAKE_SUBSTITUTES += shortcut
-INSTALLS += qmlFiles shortcut icons pixmaps
+contains(CONFIG, binaryMode) {
+    target.path = $$PREFIX/bin
+    INSTALLS += target
+} else {
+    INSTALLS += qmlFiles
+}
+INSTALLS += shortcut icons pixmaps
