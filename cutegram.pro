@@ -2,6 +2,8 @@ contains(CONFIG, binaryMode) {
     CONFIG += c++11
     TARGET = cutegram
     QT += qml quick gui widgets core
+    target.path = $$PREFIX/bin
+    INSTALLS += target
     TEMPLATE = app
     SOURCES += main.cpp
     RESOURCES += \
