@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Network;Application;
 Comment=A telegram client by Aseman
-Exec=qmlscene /usr/share/cutegram/3.0/main.qml
+Exec=$$SHORTCUT
 GenericName=Telegram client
 Icon=cutegram
 Name=Cutegram
