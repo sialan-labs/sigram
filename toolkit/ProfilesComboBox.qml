@@ -28,10 +28,11 @@ Item {
             if(!profileManager) return null
             if(currentIndex >= profileManager.count) return null
             var engine = profileManager.get(currentIndex, ProfileManagerModel.DataEngine)
-            return engine
+            return engine? engine : null
         }
 
         property User user: {
+            if(!engine) return null
             var userFull = engine.our
             if(!userFull) return null
             return userFull.user

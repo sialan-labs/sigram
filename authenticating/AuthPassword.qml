@@ -53,6 +53,7 @@ Item {
                 Keys.onTabPressed: signin_btn.forceActiveFocus()
                 Keys.onEscapePressed: BackHandler.back()
                 onAccepted: signin_btn.clicked()
+                clip: true
 
                 Text {
                     anchors.fill: parent
