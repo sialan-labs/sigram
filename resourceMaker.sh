@@ -19,7 +19,8 @@ echo  "<RCC>
         <file>inputs/images/Salvador.png</file>
         <file>messages/files/default_background.png</file>
         <file>toolkit/files/systray-dark.png</file>
-        <file>toolkit/files/systray.png</file>" > resource.qrc
+        <file>toolkit/files/systray.png</file>
+        <file>images/icon.png</file>" > resource.qrc
 
 for FILE in $FILES
 do
