@@ -47,6 +47,7 @@ Rectangle {
         height: parent.height - clistv.height
         engine: scmodel.engine
         onStickerSelected: stckList.stickerSelected(document)
+        onEngineChanged: showRecents()
     }
 
     AsemanListView {
@@ -63,7 +64,10 @@ Rectangle {
             height: clistv.height
 
             property variant docs: model.modelObject==scmodel? model.documentItems : model.fakeDocumentItems
-            onDocsChanged: if(clistv.currentIndex == index && docs) viewer.documents = docs
+            onDocsChanged: {
+                if(clistv.currentIndex == index && docs)
+                    viewer.documents = docs
+            }
 
             Telegram.Image {
                 engine: scmodel.engine
@@ -88,6 +92,8 @@ Rectangle {
                     clistv.currentIndex = index
                     if(docs)
                         viewer.documents = docs
+                    if(index == 0)
+                        viewer.showRecents()
                 }
             }
         }

@@ -45,7 +45,10 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: stickerSelected(model.document)
+                onClicked: {
+                    stickerSelected(model.document)
+                    lmodel.addToRecents(model.document)
+                }
             }
         }
     }
@@ -60,6 +63,11 @@ Item {
         width: 6*Devices.density
         color: CutegramGlobals.baseColor
         scrollArea: gview
+    }
+
+    function showRecents() {
+        lmodel.stickerSet = null
+        lmodel.showRecents()
     }
 }
 
