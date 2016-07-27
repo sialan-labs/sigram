@@ -51,5 +51,6 @@ Item {
 
     signal forwardRequest()
     signal replyRequest()
+    signal focusRequest(variant message)
 }
 

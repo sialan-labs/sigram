@@ -19,6 +19,8 @@ Rectangle {
     property real maximumWidth: 150*Devices.density
     property real margins: 8*Devices.density
 
+    signal focusRequest(variant message)
+
     readonly property string text: {
         if(!message) return ""
 
@@ -113,6 +115,11 @@ Rectangle {
                 return text
             }
         }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: focusRequest(message)
     }
 }
 

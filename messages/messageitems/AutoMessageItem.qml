@@ -88,6 +88,7 @@ AbstractMessageItem {
 
             onForwardRequest: item.forwardRequest()
             onReplyRequest: item.replyRequest()
+            onFocusRequest: item.focusRequest(message)
         }
     }
     Component {
@@ -134,6 +135,7 @@ AbstractMessageItem {
 
             onForwardRequest: item.forwardRequest()
             onReplyRequest: item.replyRequest()
+            onFocusRequest: item.focusRequest(message)
         }
     }
     Component {
@@ -181,6 +183,7 @@ AbstractMessageItem {
 
             onForwardRequest: item.forwardRequest()
             onReplyRequest: item.replyRequest()
+            onFocusRequest: item.focusRequest(message)
         }
     }
 }

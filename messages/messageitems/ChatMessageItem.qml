@@ -39,6 +39,7 @@ AbstractMessageItem {
             user: item.replyPeer && item.replyPeer.firstName? item.replyPeer : null
             fontsColor: "#ffffff"
             visible: replyMsgId && !isAction
+            onFocusRequest: item.focusRequest(message)
 
             Rectangle {
                 anchors.top: parent.bottom

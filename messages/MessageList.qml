@@ -54,7 +54,7 @@ Item {
             if(focusAfterLoaded && !refreshing) {
                 Tools.jsDelayCall(100, function(){
                     var idx = mlmodel.indexOf(Telegram.MessageListModel.RoleMessageItem, focusAfterLoaded)
-                    if(idx) listv.positionViewAtIndex(idx, ListView.Center)
+                    if(idx != -1) listv.positionViewAtIndex(idx, ListView.Center)
                     Tools.jsDelayCall(1000, function(){
                         focusAfterLoaded = null
                     })
@@ -62,7 +62,11 @@ Item {
             }
         }
 
-        property variant focusAfterLoaded
+        property alias focusAfterLoaded: focusAfterLoaded_pointer.object
+
+        Telegram.SharedPointer {
+            id: focusAfterLoaded_pointer
+        }
     }
 
     QtObject {
@@ -158,6 +162,7 @@ Item {
                 optionBar.forwardRequest()
             }
             onReplyRequest: msgList.replyRequest(currentPeer, messageItem)
+            onFocusRequest: focusOnItem(message)
 
             Component.onCompleted: selected = selectedsHash.contains(messageItem.id)
         }
@@ -315,6 +320,17 @@ Item {
             selectedsHash.insert(msgIds[i], null)
 
         optionBar.forwardRequest()
+    }
+
+    function focusOnItem(message) {
+        var idx = mlmodel.indexOf(Telegram.MessageListModel.RoleMessageItem, message)
+        if(idx != -1) {
+            listv.positionViewAtIndex(idx, ListView.Center)
+            mlmodel.focusAfterLoaded = message
+            Tools.jsDelayCall(1000, function(){ mlmodel.focusAfterLoaded = null })
+        } else {
+            loadFrom(message)
+        }
     }
 }
 
