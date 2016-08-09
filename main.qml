@@ -1,111 +1,29 @@
 import QtQuick 2.3
-import QtQuick.Controls 1.3
-import QtQuick.Window 2.2
 import AsemanTools 1.0
-import TelegramQml 2.0 as Telegram
-import "toolkit" as ToolKit
-import "account" as Account
-import "globals"
-import "about" as About
+import "app" as App
 
 AsemanApplication {
+    id: app
     applicationName: "Cutegram"
     applicationDisplayName: "Cutegram"
     applicationVersion: "2.9.5"
+    applicationId: "a584f4cd-5f3b-4030-8486-cb9441563da8"
     organizationName: "Aseman"
     organizationDomain: "land.aseman"
 
-    ToolKit.CutegramSystemTray {
-        window: mainWindow
-        badgeCount: profiles_model.unreadCount
-        onAboutRequest: about_component.createObject(mainWindow)
-    }
+    property variant appMain
 
-    Notification {
-        id: notification
-    }
-
-    Telegram.ProfileManagerModel {
-        id: profiles_model
-        source: CutegramGlobals.profilePath + "/profiles.sqlite"
-        engineDelegate: Account.CutegramAccountEngine {
-            window: mainWindow
-            notificationManager: notification
-        }
-
-        readonly property int unreadCount: {
-            var res = 0
-            for(var i=0; i<count; i++)
-                res += get(i, Telegram.ProfileManagerModel.DataEngine).unreadCount
-            return res
-        }
-
-        Component.onCompleted: if(count == 0) addNew()
-    }
-
-    TitleBarColorGrabber {
-        id: tgrabber
-        window: mainWindow
-        defaultColor: Desktop.titleBarColor
-        autoRefresh: true
-        onColorChanged: CutegramGlobals.titleBarColor = color
-    }
-
-    Timer {
-        id: refreshTimer
-        interval: 300
-        repeat: false
-        onTriggered: tgrabber.refresh()
-    }
-
-    ApplicationWindow {
-        id: mainWindow
-        width: CutegramSettings.windowWidth*Devices.density
-        height: CutegramSettings.windowHeight*Devices.density
-        onXChanged: refreshTimer.restart()
-        onYChanged: refreshTimer.restart()
-        onActiveChanged: refreshTimer.restart()
-        onVisibleChanged: refreshTimer.restart()
-
-        onWidthChanged: CutegramSettings.windowWidth = width/Devices.density
-        onHeightChanged: CutegramSettings.windowHeight = height/Devices.density
-
-        ToolKit.CutegramMain {
-            anchors.fill: parent
-            profilesModel: profiles_model
-        }
-
-        Component.onCompleted: {
-            CutegramGlobals.mainWindow = mainWindow
-            switch(CutegramSettings.windowStateOnStart)
-            {
-            case CutegramEnums.windowStateAuto:
-                visible = CutegramSettings.lastWindowState
-                break
-            case CutegramEnums.windowStateHidden:
-                visible = false
-                break
-            case CutegramEnums.windowStateVisible:
-                visible = true
-                break
-            }
-        }
-        Component.onDestruction: CutegramSettings.lastWindowState = visible
-    }
-
-    FontLoader {
-        source: "awesome/fontawesome-webfont.ttf"
-    }
-
-    Component {
-        id: about_component
-        About.AboutCutegram {
-            id: about
-            anchors.fill: parent
-            Component.onCompleted: BackHandler.pushHandler(about, about.destroy)
+    Component.onCompleted: {
+        if(app.isRunning) {
+            console.debug("Another instance is running. Trying to make that visible...")
+            Tools.jsDelayCall(1, function(){
+                app.sendMessage("show")
+                app.exit(0)
+            })
+        } else {
+            var component = Qt.createComponent("app/AppMain.qml");
+            appMain - component.createObject(app)
         }
     }
-
-    Component.onCompleted: CutegramEmojiDatabase.initDatabase()
 }
 

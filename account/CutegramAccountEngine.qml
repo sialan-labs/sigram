@@ -57,5 +57,11 @@ AccountEngine {
             notificationsHash.insert(nid, peerKey)
         }
     }
+
+    function openFile(path) {
+        var newPath = tempPath + "/" + Tools.fileName(path) + "." + Tools.fileSuffix(path)
+        Tools.copy(path, newPath)
+        Qt.openUrlExternally(Devices.localFilesPrePath + newPath)
+    }
 }
 

@@ -24,7 +24,7 @@ AbstractMessage {
             return ""
     }
 
-    onClickRequest: if(img.downloaded) Qt.openUrlExternally(img.destination)
+    onClickRequest: if(img.downloaded) engine.openFile(img.destination)
 
     onCopyRequest: {
         if(message_txt.selectedText.length)

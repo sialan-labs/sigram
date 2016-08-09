@@ -168,6 +168,37 @@ Item {
                 onClicked: details.blocked = !details.blocked
             }
         }
+
+        Column {
+            spacing: 2*Devices.density
+
+            Button {
+                text: qsTr("Clear History")
+                textColor: "#666666"
+                highlightColor: CutegramGlobals.foregroundColor
+                hoverColor: "#f0f0f0"
+                textFont.pixelSize: 9*Devices.fontDensity
+                textFont.bold: false
+            }
+
+            Button {
+                text: qsTr("Delete Conversation")
+                textColor: "#666666"
+                highlightColor: CutegramGlobals.foregroundColor
+                hoverColor: "#f0f0f0"
+                textFont.pixelSize: 9*Devices.fontDensity
+                textFont.bold: false
+            }
+
+            Button {
+                text: qsTr("Report")
+                textColor: "#B01818"
+                highlightColor: CutegramGlobals.foregroundColor
+                hoverColor: "#f0f0f0"
+                textFont.pixelSize: 9*Devices.fontDensity
+                textFont.bold: false
+            }
+        }
     }
 
     function refresh() {

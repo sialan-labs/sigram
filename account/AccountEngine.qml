@@ -7,6 +7,7 @@ Telegram.Engine {
     id: tgEngine
     logLevel: Telegram.Engine.LogLevelClean
     configDirectory: CutegramGlobals.profilePath
+    tempPath: configDirectory + "/" + phoneNumber + "/temp"
 
     app.appId: 13682
     app.appHash: "de37bcf00f4688de900510f4f87384bb"
@@ -15,7 +16,7 @@ Telegram.Engine {
     host.hostAddress: "149.154.167.50"
     host.hostPort: 443
 
-    cache.path: CutegramGlobals.profilePath + "/" + phoneNumber + "/cache"
+    cache.path: configDirectory + "/" + phoneNumber + "/cache"
     cache.encryptMethod: encr.encrypt
     cache.decryptMethod: encr.decrypt
 

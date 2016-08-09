@@ -100,20 +100,20 @@ Item {
         displayMarginEnd: 100*Devices.density
         highlightMoveDuration: 300
         highlightMoveVelocity: -1
-        move: Transition {
-            NumberAnimation { properties: "y"; easing.type: Easing.OutCubic; duration: 300 }
-        }
-        displaced: Transition {
-            NumberAnimation { properties: "y"; easing.type: Easing.OutCubic; duration: 300 }
-        }
-        add: Transition {
-            NumberAnimation { properties: "y"; easing.type: Easing.OutCubic; duration: 300 }
-            NumberAnimation { properties: "scale"; from: 1.2; to: 1; easing.type: Easing.OutCubic; duration: 300 }
-        }
-        remove: Transition {
-            NumberAnimation { properties: "scale"; from: 1; to: 0.5; easing.type: Easing.OutCubic; duration: 300 }
-            NumberAnimation { properties: "opacity"; from: 1; to: 0; easing.type: Easing.OutCubic; duration: 300 }
-        }
+//        move: Transition {
+//            NumberAnimation { properties: "y"; easing.type: Easing.OutCubic; duration: 300 }
+//        }
+//        displaced: Transition {
+//            NumberAnimation { properties: "y"; easing.type: Easing.OutCubic; duration: 300 }
+//        }
+//        add: Transition {
+//            NumberAnimation { properties: "y"; easing.type: Easing.OutCubic; duration: 300 }
+//            NumberAnimation { properties: "scale"; from: 1.2; to: 1; easing.type: Easing.OutCubic; duration: 300 }
+//        }
+//        remove: Transition {
+//            NumberAnimation { properties: "scale"; from: 1; to: 0.5; easing.type: Easing.OutCubic; duration: 300 }
+//            NumberAnimation { properties: "opacity"; from: 1; to: 0; easing.type: Easing.OutCubic; duration: 300 }
+//        }
         maximumFlickVelocity: View.flickVelocity
         boundsBehavior: Flickable.StopAtBounds
         rebound: Transition {

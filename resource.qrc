@@ -128,5 +128,7 @@
         <file>authenticating/PageManager.qml</file>
         <file>authenticating/SignInPage.qml</file>
         <file>images/icon.png</file>
+        <file>app/AppMain.qml</file>
+        <file>app/qmldir</file>
     </qresource>
 </RCC>
