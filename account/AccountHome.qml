@@ -88,6 +88,8 @@ ToolKit.AccountPageItem {
                 BackHandler.removeHandler(details)
                 BackHandler.pushHandler(details, backToMessages)
             }
+            onClearHistoryRequest: sidebar.clearHistory(inputPeer, true)
+            onDeleteDialogRequest: sidebar.clearHistory(inputPeer, false)
         }
 
         Medias.PeerMedias {

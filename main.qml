@@ -21,8 +21,13 @@ AsemanApplication {
                 app.exit(0)
             })
         } else {
-            var component = Qt.createComponent("app/AppMain.qml");
-            appMain - component.createObject(app)
+            var component = Qt.createComponent("app/AppMain.qml", Component.Asynchronous);
+            var callback = function(){
+                if(component.status == Component.Ready)
+                    appMain = component.createObject(app)
+            }
+            component.statusChanged.connect(callback)
+            callback()
         }
     }
 }

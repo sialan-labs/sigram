@@ -111,7 +111,7 @@ ToolKit.TgRectangle {
                 currentPeer = model.peer
                 dlist.forwardRequest(inputPeer, msgId)
             }
-            onClearHistoryRequest: dmodel.clearHistory(inputPeer, true)
+            onClearHistoryRequest: clearHistory(inputPeer, true)
         }
 
         highlight: Rectangle {
@@ -131,6 +131,10 @@ ToolKit.TgRectangle {
         width: 6*Devices.density
         color: CutegramGlobals.baseColor
         scrollArea: listv
+    }
+
+    function clearHistory(inputPeer, justClear) {
+        dmodel.clearHistory(inputPeer, justClear)
     }
 }
 

@@ -17,6 +17,8 @@ AccountHomeItem {
     readonly property bool refreshing: item? item.refreshing : false
 
     signal peerSelected(variant peer)
+    signal clearHistoryRequest(variant inputPeer)
+    signal deleteDialogRequest(variant inputPeer)
 
     delegate: Item {
         anchors.fill: parent
@@ -46,6 +48,8 @@ AccountHomeItem {
                 engine: dialog.engine
                 currentPeer: dialog.currentPeer
                 categoriesSettings: dialog.categoriesSettings
+                onClearHistoryRequest: dialog.clearHistoryRequest(inputPeer)
+                onDeleteDialogRequest: dialog.deleteDialogRequest(inputPeer)
             }
         }
 

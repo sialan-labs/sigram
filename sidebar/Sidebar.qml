@@ -198,5 +198,9 @@ Rectangle {
     function focusOnSearch() {
         searchbar.focusOnSearch()
     }
+
+    function clearHistory(inputPeer, justClear) {
+        dlist.clearHistory(inputPeer, justClear)
+    }
 }
 

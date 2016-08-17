@@ -9,6 +9,9 @@ Item {
     property alias engine: avatar_img.engine
     property alias color: back.color
     property alias error: avatar_img.errorText
+    property alias downloaded: avatar_img.downloaded
+    property alias downloading: avatar_img.downloading
+    property alias destination: avatar_img.destination
 
     Rectangle {
         id: avatar_mask
@@ -29,12 +32,12 @@ Item {
         Rectangle {
             id: back
             anchors.fill: parent
-            color: avatar_img.thumbnailDownloaded? "#00000000" : CutegramGlobals.baseColor
+            color: avatar_img.thumbnailDownloaded || avatar_img.downloaded? "#00000000" : CutegramGlobals.baseColor
 
             Text {
                 anchors.centerIn: parent
                 font.pixelSize: back.height/2
-                color: avatar_img.thumbnailDownloaded? "#00000000" : "#ffffff"
+                color: avatar_img.thumbnailDownloaded || avatar_img.downloaded? "#00000000" : "#ffffff"
                 font.family: Awesome.family
                 text: Awesome.fa_user
             }
@@ -45,6 +48,10 @@ Item {
         anchors.fill: parent
         source: avatar_img
         maskSource: avatar_mask
+    }
+
+    function download() {
+        avatar_img.download()
     }
 }
 

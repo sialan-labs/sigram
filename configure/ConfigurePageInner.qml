@@ -7,16 +7,17 @@ import "../toolkit" as ToolKit
 import "../globals"
 
 Item {
+    id: confInner
     height: column.height
 
     property real splitterWidth: 26*Devices.density
     property real panelsWidth: 328*Devices.density
 
     property alias refreshing: cgram_channel.refreshing
+    property alias engine: cgram_channel.engine
 
     Telegram.PeerDetails {
         id: cgram_channel
-        engine: confPage.engine
         username: "cgram"
     }
 
@@ -38,7 +39,26 @@ Item {
                 height: 120*Devices.density
                 anchors.verticalCenter: parent.verticalCenter
                 source: engine.our? engine.our.user : null
-                engine: confPage.engine
+                engine: confInner.engine
+
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if(profile_img.downloaded)
+                            profile_img.open()
+                        else
+                        if(!profile_img.downloading) {
+                            profile_img.download()
+                            profile_img.downloadedChanged.connect(profile_img.open)
+                        }
+                    }
+                }
+
+                function open() {
+                    engine.openFile(destination)
+                    profile_img.downloadedChanged.disconnect(profile_img.open)
+                }
             }
 
             Column {

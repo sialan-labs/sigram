@@ -15,6 +15,9 @@ Item {
 
     property alias refreshing: details.refreshing
 
+    signal clearHistoryRequest(variant inputPeer)
+    signal deleteDialogRequest(variant inputPeer)
+
     onCurrentPeerChanged: refresh()
 
     Connections {
@@ -38,11 +41,30 @@ Item {
             spacing: mainColumn.spacing
 
             ToolKit.ProfileImage {
+                id: img
                 anchors.verticalCenter: parent.verticalCenter
                 width: 120*Devices.density
                 height: width
                 engine: details.engine
                 source: details.peer
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if(img.downloaded)
+                            img.open()
+                        else
+                        if(!img.downloading) {
+                            img.download()
+                            img.downloadedChanged.connect(img.open)
+                        }
+                    }
+                }
+
+                function open() {
+                    engine.openFile(destination)
+                    img.downloadedChanged.disconnect(img.open)
+                }
             }
 
             Column {
@@ -161,11 +183,11 @@ Item {
                 textColor: "#333333"
                 textFont.family: Awesome.family
                 textFont.pixelSize: 20*Devices.fontDensity
-                tooltipText: qsTr("Block")
+                tooltipText: qsTr("Badge")
                 tooltipPosition: Qt.BottomEdge
-                visible: currentPeer && currentPeer.userId
+//                visible: currentPeer && currentPeer.userId
+                visible: false
                 text: details.blocked? Awesome.fa_ban : Awesome.fa_circle_o
-                onClicked: details.blocked = !details.blocked
             }
         }
 
@@ -179,6 +201,10 @@ Item {
                 hoverColor: "#f0f0f0"
                 textFont.pixelSize: 9*Devices.fontDensity
                 textFont.bold: false
+                onClicked: {
+                    if(Desktop.yesOrNo(CutegramGlobals.mainWindow, qsTr("Clear History?"), qsTr("Are you sure about clear history?")))
+                        clearHistoryRequest(currentPeer)
+                }
             }
 
             Button {
@@ -188,15 +214,20 @@ Item {
                 hoverColor: "#f0f0f0"
                 textFont.pixelSize: 9*Devices.fontDensity
                 textFont.bold: false
+                onClicked: {
+                    if(Desktop.yesOrNo(CutegramGlobals.mainWindow, qsTr("Delete Conversation?"), qsTr("Are you sure about delete conversation?")))
+                        deleteDialogRequest(currentPeer)
+                }
             }
 
             Button {
-                text: qsTr("Report")
+                text: details.blocked? qsTr("Unblock") : qsTr("Block")
                 textColor: "#B01818"
                 highlightColor: CutegramGlobals.foregroundColor
                 hoverColor: "#f0f0f0"
                 textFont.pixelSize: 9*Devices.fontDensity
                 textFont.bold: false
+                onClicked: details.blocked = !details.blocked
             }
         }
     }

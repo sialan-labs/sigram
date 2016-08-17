@@ -27,6 +27,7 @@ ToolKit.AccountPageItem {
             ConfigurePageInner {
                 id: inner
                 width: flick.width
+                engine: confPage.engine
             }
         }
 
