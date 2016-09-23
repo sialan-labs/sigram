@@ -1,4 +1,5 @@
 import QtQuick 2.3
+import QtQuick.Dialogs 1.1
 import AsemanTools 1.0
 import "app" as App
 
@@ -25,10 +26,21 @@ AsemanApplication {
             var callback = function(){
                 if(component.status == Component.Ready)
                     appMain = component.createObject(app)
+                else if(component.status == Component.Error) {
+                    console.error(component.errorString())
+                    errorDialog.informativeText = component.errorString()
+                    errorDialog.setVisible(true)
+                }
             }
             component.statusChanged.connect(callback)
             callback()
         }
     }
-}
 
+    MessageDialog {
+        id: errorDialog
+        title: "Fatal Error"
+        text: "Cutegram could not be started. Additional information:"
+        onAccepted: app.exit(1)
+    }
+}
