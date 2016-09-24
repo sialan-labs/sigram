@@ -7,15 +7,19 @@ contains(CONFIG, binaryMode) {
     RESOURCES += \
         resource.qrc \
         emojis/emojis.qrc
+    SHORTCUT = cutegram
 } else {
     TEMPLATE = aux
+    SHORTCUT = qmlscene /usr/share/cutegram/3.0/main.qml
 }
 
 OTHER_FILES += $$files(*, true)
 VERSION = 3.0
 
+shortcut.input = share/Cutegram.desktop.in
+shortcut.output = share/Cutegram.desktop
 shortcut.path = $$PREFIX/share/applications/
-shortcut.files = share/Cutegram.desktop
+shortcut.files = $$shortcut.output
 icons.path = $$PREFIX/share/icons
 icons.files = share/hicolor
 pixmaps.path = $$PREFIX/share/pixmaps
@@ -42,4 +46,11 @@ qmlFiles.files = \
     GPL.txt \
     LICENSE
 
-INSTALLS += qmlFiles shortcut icons pixmaps
+QMAKE_SUBSTITUTES += shortcut
+contains(CONFIG, binaryMode) {
+    target.path = $$PREFIX/bin
+    INSTALLS += target
+} else {
+    INSTALLS += qmlFiles
+}
+INSTALLS += shortcut icons pixmaps
