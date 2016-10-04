@@ -70,7 +70,7 @@ AsemanGridView {
                     }
                     break
                 case Qt.LeftButton:
-                    if(img.downloaded) Qt.openUrlExternally(img.destination)
+                    if(img.downloaded) engine.openFile(img.destination)
                     else
                     if(img.downloading) img.stop()
                     else img.download()
