@@ -7,7 +7,7 @@ import "../globals"
 AccountEngine {
     id: tgEngine
 
-    property ApplicationWindow window
+    property AsemanWindow window
     property Notification notificationManager
 
     property alias typing: status.typing

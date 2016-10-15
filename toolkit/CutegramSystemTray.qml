@@ -37,7 +37,7 @@ SystemTray {
     visible: true
     menu: [qsTr("Show"), qsTr("About"), "", qsTr("Quit")]
 
-    property ApplicationWindow window
+    property AsemanWindow window
     signal aboutRequest()
 
     onMenuTriggered: {

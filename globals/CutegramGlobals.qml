@@ -5,7 +5,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 
 AsemanObject {
-    property Window mainWindow
+    property AsemanWindow mainWindow
     property alias systemPalette: palette
 
     property color titleBarColor

@@ -64,7 +64,7 @@ AsemanObject {
         onTriggered: tgrabber.refresh()
     }
 
-    ApplicationWindow {
+    AsemanWindow {
         id: mainWindow
         width: CutegramSettings.windowWidth*Devices.density
         height: CutegramSettings.windowHeight*Devices.density
