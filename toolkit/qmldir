@@ -30,3 +30,6 @@ DialogDetailsHeader 1.0 DialogDetailsHeader.qml
 CutegramMain 1.0 CutegramMain.qml
 ProfilesList 1.0 ProfilesList.qml
 AddContactPage 1.0 AddContactPage.qml
+AddButton 1.0 AddButton.qml
+ContactList 1.0 ContactList.qml
+ContactGrid 1.0 ContactGrid.qml

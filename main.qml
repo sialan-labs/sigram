@@ -1,7 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Dialogs 1.1
 import AsemanTools 1.0
-import "app" as App
 
 AsemanApplication {
     id: app

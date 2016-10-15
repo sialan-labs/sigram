@@ -99,6 +99,7 @@ AsemanObject {
                 break
             }
         }
+
         Component.onDestruction: CutegramSettings.lastWindowState = visible
     }
 

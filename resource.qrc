@@ -130,5 +130,9 @@
         <file>images/icon.png</file>
         <file>app/AppMain.qml</file>
         <file>app/qmldir</file>
+        <file>toolkit/AddContactPage.qml</file>
+        <file>toolkit/AddButton.qml</file>
+        <file>toolkit/ContactList.qml</file>
+        <file>toolkit/ContactGrid.qml</file>
     </qresource>
 </RCC>

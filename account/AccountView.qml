@@ -56,6 +56,7 @@ Rectangle {
             engine: accMain.engine
             type: CutegramEnums.pageTypeContacts
             currentType: panel.currentPage
+            addButton: true
             onContactActivated: {
                 home.currentPeer = peer
                 panel.currentPage = CutegramEnums.pageTypeHome
