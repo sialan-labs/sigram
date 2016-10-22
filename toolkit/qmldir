@@ -11,7 +11,6 @@ AccountHomeItem 1.0 AccountHomeItem.qml
 ComboBoxItem 1.0 ComboBoxItem.qml
 DialogList 1.0 DialogList.qml
 MessageMouseArea 1.0 MessageMouseArea.qml
-AddNewPage 1.0 AddNewPage.qml
 ErrorItem 1.0 ErrorItem.qml
 CheckBox 1.0 CheckBox.qml
 MessageImage 1.0 MessageImage.qml
@@ -24,12 +23,8 @@ ProfilesComboBox 1.0 ProfilesComboBox.qml
 UserList 1.0 UserList.qml
 AccountPageItem 1.0 AccountPageItem.qml
 MainToolBar 1.0 MainToolBar.qml
-ContactsPage 1.0 ContactsPage.qml
 MenuPanel 1.0 MenuPanel.qml
 DialogDetailsHeader 1.0 DialogDetailsHeader.qml
 CutegramMain 1.0 CutegramMain.qml
 ProfilesList 1.0 ProfilesList.qml
-AddContactPage 1.0 AddContactPage.qml
 AddButton 1.0 AddButton.qml
-ContactList 1.0 ContactList.qml
-ContactGrid 1.0 ContactGrid.qml

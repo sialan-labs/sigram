@@ -4,6 +4,7 @@ import TelegramQml 2.0 as Telegram
 import QtGraphicalEffects 1.0
 import "../awesome"
 import "../globals"
+import "../toolkit"
 
 AccountPageItem {
     id: addNewPage
@@ -15,17 +16,9 @@ AccountPageItem {
         anchors.fill: parent
 
         property bool refreshing: false
-        property bool selectContact: false
-
-        onSelectContactChanged: {
-            if(selectContact)
-                BackHandler.pushHandler(contactFrame, function(){selectContact = false})
-            else
-                BackHandler.removeHandler(contactFrame)
-        }
 
         Row {
-            anchors.horizontalCenter: parent.horizontalCenter
+            x: parent.width/2 - width/2 + addFrame.x/2 - 50*Devices.density
             anchors.bottom: parent.verticalCenter
             spacing: 80*Devices.density
 
@@ -37,7 +30,7 @@ AccountPageItem {
             AddButton {
                 text: qsTr("New Group")
                 icon: Awesome.fa_users
-                onClicked: selectContact = true
+                onClicked: addFrame.item = add_group_component.createObject(addFrame)
             }
             AddButton {
                 text: qsTr("New Channel")
@@ -46,25 +39,33 @@ AccountPageItem {
             }
         }
 
-        Rectangle {
-            id: contactFrame
+        Item {
+            id: addFrame
             width: parent.width
             height: parent.height
-            opacity: selectContact? 1 : 0
-            x: selectContact? 0 : 100*Devices.density
+            x: (1-opacity)*100*Devices.density
+            opacity: item? 1 : 0
             visible: opacity != 0
 
-            Behavior on x {
-                NumberAnimation {easing.type: Easing.OutCubic; duration: 250}
-            }
             Behavior on opacity {
-                NumberAnimation {easing.type: Easing.OutCubic; duration: 250}
+                NumberAnimation{easing.type: Easing.OutCubic; duration: 250}
             }
 
-            ContactGrid {
-                anchors.fill: parent
-                engine: addNewPage.engine
+            property variant item
+
+            onItemChanged: {
+                if(item)
+                    BackHandler.pushHandler(addFrame, function(){Tools.deleteItemDelay(addFrame.item,250); addFrame.item = null})
+                else
+                    BackHandler.removeHandler(addFrame)
             }
+        }
+    }
+
+    Component {
+        id: add_group_component
+        AddGroup {
+            anchors.fill: parent
         }
     }
 }

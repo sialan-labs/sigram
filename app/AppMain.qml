@@ -72,6 +72,7 @@ AsemanObject {
         onYChanged: refreshTimer.restart()
         onActiveChanged: refreshTimer.restart()
         onVisibleChanged: refreshTimer.restart()
+        backController: false
 
         onWidthChanged: CutegramSettings.windowWidth = width/Devices.density
         onHeightChanged: CutegramSettings.windowHeight = height/Devices.density

@@ -4,6 +4,7 @@ import TelegramQml 2.0 as Telegram
 import QtGraphicalEffects 1.0
 import "../awesome"
 import "../globals"
+import "../toolkit"
 
 Item {
     id: clist

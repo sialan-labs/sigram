@@ -53,7 +53,6 @@
         <file>toolkit/ComboBoxItem.qml</file>
         <file>toolkit/DialogList.qml</file>
         <file>toolkit/MessageMouseArea.qml</file>
-        <file>toolkit/AddNewPage.qml</file>
         <file>toolkit/ErrorItem.qml</file>
         <file>toolkit/CheckBox.qml</file>
         <file>toolkit/MessageImage.qml</file>
@@ -66,7 +65,6 @@
         <file>toolkit/UserList.qml</file>
         <file>toolkit/AccountPageItem.qml</file>
         <file>toolkit/MainToolBar.qml</file>
-        <file>toolkit/ContactsPage.qml</file>
         <file>toolkit/MenuPanel.qml</file>
         <file>toolkit/DialogDetailsHeader.qml</file>
         <file>toolkit/CutegramMain.qml</file>
@@ -130,9 +128,14 @@
         <file>images/icon.png</file>
         <file>app/AppMain.qml</file>
         <file>app/qmldir</file>
-        <file>toolkit/AddContactPage.qml</file>
+        <file>contacts/AddContactPage.qml</file>
         <file>toolkit/AddButton.qml</file>
-        <file>toolkit/ContactList.qml</file>
-        <file>toolkit/ContactGrid.qml</file>
+        <file>contacts/ContactList.qml</file>
+        <file>contacts/ContactGrid.qml</file>
+        <file>contacts/ContactsPage.qml</file>
+        <file>contacts/qmldir</file>
+        <file>add/AddGroup.qml</file>
+        <file>add/qmldir</file>
+        <file>add/AddNewPage.qml</file>
     </qresource>
 </RCC>

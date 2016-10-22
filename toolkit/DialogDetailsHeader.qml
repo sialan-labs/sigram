@@ -27,6 +27,7 @@ Item {
 
     Telegram.PeerDetails {
         id: details
+        onEditableChanged: nameTxt.readOnly = true
     }
 
     Column {
@@ -71,10 +72,65 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 spacing: 8*Devices.density
 
-                Text {
+                TextInput {
+                    id: nameTxt
                     font.pixelSize: 20*Devices.fontDensity
                     color: "#555555"
+                    selectByMouse: true
+                    readOnly: true
+                    selectionColor: CutegramGlobals.baseColor
                     text: details.displayName
+
+                    onReadOnlyChanged: {
+                        if(readOnly)
+                            BackHandler.removeHandler(nameTxt)
+                        else
+                            BackHandler.pushHandler(nameTxt, function(){nameTxt.readOnly = true})
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 2*Devices.density
+                        anchors.top: parent.bottom
+                        color: CutegramGlobals.baseColor
+                        visible: !nameTxt.readOnly
+                    }
+
+                    Text {
+                        anchors.left: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 10*Devices.density
+                        font.family: Awesome.family
+                        font.pixelSize: 16*Devices.density
+                        text: nameTxt.readOnly? Awesome.fa_edit : Awesome.fa_check
+                        color: nameTxt.readOnly? "#666666" : CutegramGlobals.baseColor
+                        visible: details.editable
+
+                        MouseArea {
+                            anchors.fill: parent
+                            anchors.margins: -10*Devices.density
+                            onClicked: {
+                                if(nameTxt.readOnly) {
+                                    nameTxt.readOnly = false
+                                    return
+                                }
+
+                                var callback = function(res){
+                                    if(res) nameTxt.readOnly = !nameTxt.readOnly
+                                }
+
+                                if(details.isUser) {
+                                    var name = nameTxt.text
+                                    var idx = name.indexOf(" ")
+                                    var firstName = (idx!=-1? name.slice(0,idx) : name)
+                                    var lastName = (idx!=-1? name.slice(idx+1) : "")
+                                    details.renameUser(firstName, lastName, callback)
+                                } else {
+                                    details.renameChat(nameTxt.text, callback)
+                                }
+                            }
+                        }
+                    }
                 }
 
                 Text {
@@ -235,5 +291,6 @@ Item {
     function refresh() {
         love_btn.refresh()
         fav_btn.refresh()
+        nameTxt.readOnly = true
     }
 }

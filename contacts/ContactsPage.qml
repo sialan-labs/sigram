@@ -4,6 +4,8 @@ import TelegramQml 2.0 as Telegram
 import QtGraphicalEffects 1.0
 import "../awesome"
 import "../globals"
+import "../contacts" as Contacts
+import "../toolkit"
 
 AccountPageItem {
     id: contactsPage
@@ -132,7 +134,7 @@ AccountPageItem {
             }
         }
 
-        ContactGrid {
+        Contacts.ContactGrid {
             id: gview
             clip: true
             engine: contactsPage.engine

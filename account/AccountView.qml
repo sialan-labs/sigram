@@ -7,6 +7,8 @@ import "../toolkit" as ToolKit
 import "../sidebar" as Sidebar
 import "../messages" as Messages
 import "../configure" as Configure
+import "../contacts" as Contacts
+import "../add" as Add
 import "../globals"
 
 Rectangle {
@@ -44,14 +46,14 @@ Rectangle {
             }
         }
 
-        ToolKit.AddNewPage {
+        Add.AddNewPage {
             id: addPage
             engine: accMain.engine
             type: CutegramEnums.pageTypeAdd
             currentType: panel.currentPage
         }
 
-        ToolKit.ContactsPage {
+        Contacts.ContactsPage {
             id: contactPage
             engine: accMain.engine
             type: CutegramEnums.pageTypeContacts

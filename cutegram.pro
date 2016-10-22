@@ -55,3 +55,6 @@ contains(CONFIG, binaryMode) {
     INSTALLS += qmlFiles
 }
 INSTALLS += shortcut icons pixmaps
+
+DISTFILES += \
+    AddWidgets/AddGroup.qml
