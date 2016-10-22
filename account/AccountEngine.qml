@@ -5,7 +5,7 @@ import "../globals"
 
 Telegram.Engine {
     id: tgEngine
-    logLevel: Telegram.Engine.LogLevelFull
+    logLevel: Telegram.Engine.LogLevelClean
     configDirectory: CutegramGlobals.profilePath
     tempPath: configDirectory + "/" + phoneNumber + "/temp"
 
