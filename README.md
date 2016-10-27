@@ -42,6 +42,7 @@ First, you should build and install libqtelegram.
 And:
 
     cd libqtelegram-aseman-edition
+    ./init
     mkdir build && cd build
     qmake -r CONFIG+=typeobjects  ..
     
