@@ -27,6 +27,7 @@ pixmaps.files = share/cutegram.png
 qmlFiles.path = $$PREFIX/share/cutegram/$$VERSION/
 qmlFiles.files = \
     about \
+    add \
     app \
     account \
     authenticating \
