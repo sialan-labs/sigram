@@ -32,6 +32,7 @@ qmlFiles.files = \
     authenticating \
     awesome \
     configure \
+    contacts \
     emojis \
     globals \
     images \
