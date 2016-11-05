@@ -1,5 +1,5 @@
 [Desktop Entry]
-Categories=Network;Application;
+Categories=Network;InstantMessaging;Chat;
 Comment=A telegram client by Aseman
 Exec=$$SHORTCUT
 GenericName=Telegram client
