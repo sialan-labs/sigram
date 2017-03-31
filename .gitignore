@@ -9,6 +9,9 @@
 *.so
 *.dll
 *.dylib
+*.qmlc
+*.jsc
+*.stash
 
 # Qt-es
 
