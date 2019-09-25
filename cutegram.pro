@@ -1,17 +1,14 @@
-contains(CONFIG, binaryMode) {
-    CONFIG += c++11
-    TARGET = cutegram
-    QT += qml quick gui widgets core
-    TEMPLATE = app
-    SOURCES += main.cpp
-    RESOURCES += \
-        resource.qrc \
-        emojis/emojis.qrc
-    SHORTCUT = cutegram
-} else {
-    TEMPLATE = aux
-    SHORTCUT = qmlscene /usr/share/cutegram/3.0/main.qml
-}
+
+CONFIG += c++11
+TARGET = cutegram
+QT += qml quick gui widgets core asemancore asemangui asemanqml sql
+LIBS += -lqt5keychain
+TEMPLATE = app
+SOURCES += main.cpp
+RESOURCES += \
+    resource.qrc \
+    emojis/emojis.qrc
+SHORTCUT = cutegram
 
 OTHER_FILES += $$files(*, true)
 VERSION = 3.0
@@ -60,3 +57,11 @@ INSTALLS += shortcut icons pixmaps
 
 DISTFILES += \
     AddWidgets/AddGroup.qml
+
+HEADERS += \
+    core/asemancontributorsmodel.h \
+    core/asemankeychain.h
+
+SOURCES += \
+    core/asemancontributorsmodel.cpp \
+    core/asemankeychain.cpp

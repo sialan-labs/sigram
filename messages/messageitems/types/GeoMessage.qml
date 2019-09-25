@@ -1,5 +1,6 @@
 import QtQuick 2.4
-import AsemanTools 1.0
+import AsemanQml.Controls 2.0
+import AsemanQml.Base 2.0
 import TelegramQml 2.0 as Telegram
 import QtGraphicalEffects 1.0
 import QtPositioning 5.2
@@ -23,7 +24,7 @@ AbstractMessage {
             return ""
     }
 
-    onClickRequest: if(img.downloaded) Qt.openUrlExternally( mapDownloader.webLinkOf(mapDownloader.point) )
+//    onClickRequest: if(img.downloaded) Qt.openUrlExternally( mapDownloader.webLinkOf(mapDownloader.point) )
 
     onCopyRequest: {
         if(message_txt.selectedText.length)
@@ -32,20 +33,20 @@ AbstractMessage {
             Devices.clipboardUrl = [img.source]
     }
 
-    MapDownloader {
-        id: mapDownloader
-        destination: engine.configDirectory + "/downloads"
-        size: Qt.size(img.width, img.height)
+//    MapDownloader {
+//        id: mapDownloader
+//        destination: engine.configDirectory + "/downloads"
+//        size: Qt.size(img.width, img.height)
 
-        property point point: {
-            if(!message) return Qt.point(0, 0)
-            var latitude = message.media.geo.lat
-            var longitude = message.media.geo.longValue
-            return Qt.point(latitude, longitude)
-        }
+//        property point point: {
+//            if(!message) return Qt.point(0, 0)
+//            var latitude = message.media.geo.lat
+//            var longitude = message.media.geo.longValue
+//            return Qt.point(latitude, longitude)
+//        }
 
-        onPointChanged: mapDownloader.download(point)
-    }
+//        onPointChanged: mapDownloader.download(point)
+//    }
 
     Column {
         id: column
@@ -57,7 +58,7 @@ AbstractMessage {
             anchors.horizontalCenter: parent.horizontalCenter
             width: 300*Devices.density
             height: 220*Devices.density
-            source: mapDownloader.image
+//            source: mapDownloader.image
 
             Image {
                 width: 64*Devices.density

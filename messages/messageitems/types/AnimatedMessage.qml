@@ -1,6 +1,7 @@
 import QtQuick 2.4
 import QtMultimedia 5.5
-import AsemanTools 1.0
+import AsemanQml.Controls 2.0
+import AsemanQml.Base 2.0
 import TelegramQml 2.0 as Telegram
 import QtGraphicalEffects 1.0
 import "../../../thirdparty"

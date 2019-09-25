@@ -1,10 +1,12 @@
 import QtQuick 2.4
-import AsemanTools 1.0
+import AsemanQml.Controls 2.0
+import AsemanQml.Base 2.0
 import TelegramQml 2.0 as Telegram
 import QtGraphicalEffects 1.0
 import "../awesome"
 import "../toolkit" as ToolKit
 import "../globals"
+import "." as Here
 
 Rectangle {
     id: sidebar
@@ -53,7 +55,7 @@ Rectangle {
         property int dialogsSort: 0
     }
 
-    SearchBar {
+    Here.SearchBar {
         id: searchbar
         anchors.top: parent.top
         width: parent.width

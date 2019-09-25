@@ -1,5 +1,6 @@
 import QtQuick 2.3
-import AsemanTools 1.0
+import AsemanQml.Controls 2.0
+import AsemanQml.Base 2.0
 import QtQuick.Dialogs 1.1
 
 AsemanApplication {
@@ -12,6 +13,12 @@ AsemanApplication {
     organizationDomain: "land.aseman"
 
     property variant appMain
+    
+    proxy: NetworkProxy {
+        type: NetworkProxy.Socks5Proxy
+        hostName: "127.0.0.1"
+        port: 1235
+    }
 
     Component.onCompleted: {
         if(app.isRunning) {

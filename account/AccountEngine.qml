@@ -1,6 +1,8 @@
 import QtQuick 2.4
 import TelegramQml 2.0 as Telegram
-import AsemanTools 1.0 as Aseman
+import AsemanQml.Controls 2.0
+import AsemanQml.Base 2.0 as Aseman
+import Cutegram 3.0
 import "../globals"
 
 Telegram.Engine {
@@ -17,29 +19,29 @@ Telegram.Engine {
     host.hostPort: 443
 
     cache.path: configDirectory + "/" + phoneNumber + "/cache"
-    cache.encryptMethod: encr.encrypt
-    cache.decryptMethod: encr.decrypt
+//    cache.encryptMethod: encr.encrypt
+//    cache.decryptMethod: encr.decrypt
 
-    authStore.writeMethod: function(data) { return keychain.writeData(authKey, data) }
-    authStore.readMethod: function() { return keychain.readData(authKey) }
+//    authStore.writeMethod: function(data) { return keychain.writeData(authKey, data) }
+//    authStore.readMethod: function() { return keychain.readData(authKey) }
 
     readonly property string authKey: "auth/" + phoneNumber
 
-    Aseman.Encrypter {
-        id: encr
-    }
+//    Aseman.Encrypter {
+//        id: encr
+//    }
 
-    Aseman.Keychain {
-        id: keychain
-        service: "Cutegram"
-        Component.onCompleted: {
-            var key = read("encryptKey")
-            if(key.length == 0) {
-                key = Aseman.Tools.createUuid()
-                write("encryptKey", key)
-            }
-            encr.key = key
-        }
-    }
+//    Keychain {
+//        id: keychain
+//        service: "Cutegram"
+//        Component.onCompleted: {
+//            var key = read("encryptKey")
+//            if(key.length == 0) {
+//                key = Aseman.Tools.createUuid()
+//                write("encryptKey", key)
+//            }
+//            encr.key = key
+//        }
+//    }
 }
 

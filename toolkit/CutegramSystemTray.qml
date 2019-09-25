@@ -1,5 +1,6 @@
 import QtQuick 2.4
-import AsemanTools 1.0
+import AsemanQml.Controls 2.0
+import AsemanQml.Base 2.0
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import "../globals"
