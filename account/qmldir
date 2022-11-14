@@ -1,0 +1,6 @@
+AccountHome 1.0 AccountHome.qml
+PanelBar 1.0 PanelBar.qml
+AccountView 1.0 AccountView.qml
+AccountEngine 1.0 AccountEngine.qml
+AccountMain 1.0 AccountMain.qml
+CutegramAccountEngine 1.0 CutegramAccountEngine.qml

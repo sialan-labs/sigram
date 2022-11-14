@@ -1,34 +1,46 @@
-Source: sigram
+Source: cutegram
 Section: text
 Priority: optional
-Maintainer: Sialan Labs <contact@sialan.org>
+Maintainer: Aseman Team <contact@aseman.co>
 Build-Depends:
  debhelper (>= 8.0.0),
  g++ (>= 4:4.7),
  gcc (>= 4:4.7),
  qtbase5-dev (>= 5.2.0),
- libqt5sql5-sqlite (>= 5.2.0),
- libqt5multimediaquick-p5 (>= 5.2.0),
- libqt5multimedia5-plugins (>= 5.2.0),
- libqt5multimedia5 (>= 5.2.0),
  qtchooser,
  qt5-qmake,
- qt5-default,
- libqt5qml5 (>= 5.2.0),
- libqt5qml-graphicaleffects (>= 5.2.0),
- libqt5qml-quickcontrols (>= 5.2.0),
- qtdeclarative5-dev (>= 5.2.0),
- libqt5quick5 (>= 5.2.0),
- qtmultimedia5-dev (>= 5.2.0),
- libappindicator-dev,
- libssl-dev
+ qt5-default
 Standards-Version: 3.9.5
-Homepage: http://labs.sialan.org/projects/sigram
-Vcs-Git: git://git@github.com:sialan-labs/sigram.git
-Vcs-Browser: https://github.com/sialan-labs/sigram/
+Homepage: http://aseman.co/cutegram
+Vcs-Git: https://github.com/Aseman-Land/Cutegram
 
-Package: sigram
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5qml-quickcontrols (>= 5.2.0), libqt5qml-graphicaleffects (>= 5.2.0), libqt5multimedia5 (>= 5.2.0), libqt5multimedia5-plugins (>= 5.2.0), libqt5multimediaquick-p5 (>= 5.2.0), libqt5sql5-sqlite (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), qtdeclarative5-qtsensors-plugin (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), dconf-tools
-Description: Sialan Telegram client
- A different telegram client from Sialan.Labs.
+Package: cutegram-emojis-twemoji
+Architecture: all
+Description: Cutegram Twemoji pack
+ Twemoji pack for the cutegram client
+
+Package: cutegram-emojis-emojione
+Architecture: all
+Description: Cutegram Emojione pack
+ Emojione pack for the cutegram client
+
+Package: cutegram
+Architecture: all
+Depends: qtdeclarative5-controls-plugin (>= 5.2.0) | qml-module-qtquick-controls,
+  qtdeclarative5-dialogs-plugin (>= 5.2.0) | qml-module-qtquick-dialogs, 
+  qtdeclarative5-qtquick2-plugin (>= 5.2.0) |  qml-module-qtquick2, 
+  qtdeclarative5-window-plugin (>= 5.2.0) | qml-module-qtquick-window2, 
+  qtdeclarative5-qtmultimedia-plugin (>= 5.2.0) | qml-module-qtmultimedia, 
+  qtdeclarative5-qtsensors-plugin (>= 5.2.0) | qml-module-qtsensors,
+  libqt5qml-graphicaleffects (>= 5.2.0) | qml-module-qtgraphicaleffects, 
+  libqt5multimedia5 (>= 5.2.0),
+  libqt5multimedia5-plugins (>= 5.2.0), 
+  libqt5multimediaquick-p5 (>= 5.2.0), 
+  asemantools (>= 1.0.0),
+  telegramqml (>= 2.0.0),
+  qtchooser,
+  qmlscene,
+  cutegram-emojis-emojione,
+  cutegram-emojis-twemoji
+Description: Cutegram telegram client
+ Better telegram client from Aseman Team.

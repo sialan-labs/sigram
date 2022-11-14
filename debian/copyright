@@ -1,13 +1,13 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: sigram
-Source: labs.sialan.org/projects/sigram
+Upstream-Name: cutegram
+Source: aseman.co/cutegram
 
 Files: *
-Copyright: 2014 Sialan Labs
+Copyright: 2015 Aseman Team
 License: GPL-3.0+
 
 Files: debian/*
-Copyright: 2014 Sialan Labs <contact@sialan.org>
+Copyright: 2015 Aseman Team <contact@aseman.co>
 License: GPL-3.0+
 
 License: GPL-3.0+

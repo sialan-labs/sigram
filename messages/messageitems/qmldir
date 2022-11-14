@@ -1,0 +1,5 @@
+AbstractMessageItem 1.0 AbstractMessageItem.qml
+ConversationMessageItem 1.0 ConversationMessageItem.qml
+ChatMessageItem 1.0 ChatMessageItem.qml
+ChannelMessageItem 1.0 ChannelMessageItem.qml
+AutoMessageItem 1.0 AutoMessageItem.qml

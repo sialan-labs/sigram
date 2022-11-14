@@ -9,6 +9,9 @@
 *.so
 *.dll
 *.dylib
+*.qmlc
+*.jsc
+*.stash
 
 # Qt-es
 
@@ -26,3 +29,5 @@ Makefile*
 # QtCreator
 
 *.autosave
+*.xml.backup
+*.DS_Store

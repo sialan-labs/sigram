@@ -1,29 +1,670 @@
-sigram (0.7.1ubuntu1) trusty; urgency=medium
+cutegram (2.9.5-1aseman-xenial) xenial; urgency=medium
 
-  * Improve on file send speed.
-  * Port to sialan tools to improve compability on different systems.
-  * Show emojis on dialogs/chat list. (thanks Sollex)
-  * Improve on user info panel. (thanks Sollex)
-  * Send files to chats using drag and drops.
-  * Many other improvments and Bugfixs
-  * Update Translations
+  * Completely rewritten using new libqtelegram-ae and telegram-qml
 
- -- Sialan Labs <contact@sialan.org>  Wed, 07 Oct 2014 00:00:00 +0330
+ -- Aseman Team <contact@aseman.co>  Tue, 3 Jul 2016 12:00:00 +0330
+ 
+cutegram (2.7.1-2aseman-wily) wily; urgency=medium
 
-sigram (0.7.0ubuntu3) trusty; urgency=medium
+  * Fix the map bugs, rendered blurry
+  * Add emojione to the emojis
+  * Improve window border on the OSX
+  * Fix mute/unmute problem
+  * Fix link and tag highlighter problems
+  * Many improve on the libqtelegram-ae and TelegramQML libraries
+  * Many other improvements and Bugfixes
+  * It's the last release of the Cutegram 2.x. We're working on the Cutegram 3.x series with many new features and improvements.
 
-  * Fix missed emojis icons
+ -- Aseman Team <contact@aseman.co>  Tue, 12 Jan 2016 12:00:00 +0330
+ 
+cutegram (2.7.1-2aseman-trusty) trusty; urgency=medium
 
- -- Sialan Labs <contact@sialan.org>  Mon, 06 Oct 2014 11:43:10 +0330
+  * Fix the map bugs, rendered blurry
+  * Add emojione to the emojis
+  * Improve window border on the OSX
+  * Fix mute/unmute problem
+  * Fix link and tag highlighter problems
+  * Many improve on the libqtelegram-ae and TelegramQML libraries
+  * Many other improvements and Bugfixes
+  * It's the last release of the Cutegram 2.x. We're working on the Cutegram 3.x series with many new features and improvements.
 
-sigram (0.7.0ubuntu2) trusty; urgency=medium
+ -- Aseman Team <contact@aseman.co>  Tue, 12 Jan 2016 12:00:00 +0330
+ 
+cutegram (2.7.0-3aseman-vivid) vivid; urgency=medium
 
-  * Fix missed libssl package for build.
+  * Add Sticker-Set support
+  * All messages stored encrypted on the database now
+  * Encrypted authentication file
+  * KWallet support (under kde)
+  * Add supports for different font for different languages
+  * Add apple-emojis (twitter emojis is default)
+  * Add an option to send messages using Ctrl+Enter
+  * Many improvement on UserInterface
+  * Show username in the user info panel.
+  * Media caption message support
+  * Many improvement on OSX version
+  * Native titlebar on the OSX Yosemite and El-capitan (experimental)
+  * Add OSX fullscreen support (Normal titlebar only)
+  * Update Cutegram icon
+  * Update translations
+  * Add new demos on TelegramQml repository for developers
+  * Many other improvements and bugfixes
 
- -- Sialan Labs <contact@sialan.org>  Mon, 06 Oct 2014 09:57:18 +0330
+ -- Aseman Team <contact@aseman.co>  Mon, 5 Oct 2015 10:30:00 +0330
+ 
+cutegram (2.7.0-3aseman-trusty) trusty; urgency=medium
 
-sigram (0.7.0ubuntu1) trusty; urgency=medium
+  * Add Sticker-Set support
+  * All messages stored encrypted on the database now
+  * Encrypted authentication file
+  * KWallet support (under kde)
+  * Add supports for different font for different languages
+  * Add apple-emojis (twitter emojis is default)
+  * Add an option to send messages using Ctrl+Enter
+  * Many improvement on UserInterface
+  * Show username in the user info panel.
+  * Media caption message support
+  * Many improvement on OSX version
+  * Native titlebar on the OSX Yosemite and El-capitan (experimental)
+  * Add OSX fullscreen support (Normal titlebar only)
+  * Update Cutegram icon
+  * Update translations
+  * Add new demos on TelegramQml repository for developers
+  * Many other improvements and bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Mon, 5 Oct 2015 10:30:00 +0330
+ 
+cutegram (2.5.0-3aseman-vivid) vivid; urgency=medium
+
+  * New file handler system + many improvement
+  * Auto Start is also available on Mac and Windows
+  * Emoji support on Dialog list and Chat headers
+  * Show Emoji-panel on mouse hover
+  * For Developers: Split cutegram to Cutegram and TelegramQML library.
+  * Many other improvements and Bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Wed, 8 Jul 2015 10:30:00 +0330
+ 
+cutegram (2.5.0-3aseman-utopic) utopic; urgency=medium
+
+  * New file handler system + many improvement
+  * Auto Start is also available on Mac and Windows
+  * Emoji support on Dialog list and Chat headers
+  * Show Emoji-panel on mouse hover
+  * For Developers: Split cutegram to Cutegram and TelegramQML library.
+  * Many other improvements and Bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Wed, 8 Jul 2015 10:30:00 +0330
+ 
+cutegram (2.5.0-3aseman-trusty) trusty; urgency=medium
+
+  * New file handler system + many improvement
+  * Auto Start is also available on Mac and Windows
+  * Emoji support on Dialog list and Chat headers
+  * Show Emoji-panel on mouse hover
+  * For Developers: Split cutegram to Cutegram and TelegramQML library.
+  * Many other improvements and Bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Wed, 8 Jul 2015 10:30:00 +0330
+ 
+cutegram (2.4.0-2aseman-vivid) vivid; urgency=medium
+
+  * Add custom dcId and IP address from command line
+  * Update translations
+
+ -- Aseman Team <contact@aseman.co>  Mon, 8 Jun 2015 11:00:00 +0330
+ 
+cutegram (2.4.0-2aseman-utopic) utopic; urgency=medium
+
+  * Add custom dcId and IP address from command line
+  * Update translations
+
+ -- Aseman Team <contact@aseman.co>  Mon, 8 Jun 2015 11:00:00 +0330
+ 
+cutegram (2.4.0-2aseman-trusty) trusty; urgency=medium
+
+  * Add custom dcId and IP address from command line
+  * Update translations
+
+ -- Aseman Team <contact@aseman.co>  Mon, 8 Jun 2015 11:00:00 +0330
+ 
+cutegram (2.4.0-1aseman-vivid) vivid; urgency=medium
+
+  * Improvement on Stickers
+  * Reply Support
+  * Special Background and Header back for chats
+  * Many improvement on Windows and Mac
+  * Animated Dialog and Messages list
+  * Multi Account support
+  * Auto convert smiley keys to Emojis
+  * Better smooth scroll
+  * Taskbar progress bar and Unread badge counter on Linux and Windows
+  * Update translations
+  * Many other improvement and Bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Sun, 7 Jun 2015 11:00:00 +0330
+ 
+cutegram (2.4.0-1aseman-utopic) utopic; urgency=medium
+
+  * Improvement on Stickers
+  * Reply Support
+  * Special Background and Header back for chats
+  * Many improvement on Windows and Mac
+  * Animated Dialog and Messages list
+  * Multi Account support
+  * Auto convert smiley keys to Emojis
+  * Better smooth scroll
+  * Taskbar progress bar and Unread badge counter on Linux and Windows
+  * Update translations
+  * Many other improvement and Bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Sun, 7 Jun 2015 11:00:00 +0330
+ 
+cutegram (2.4.0-1aseman-trusty) trusty; urgency=medium
+
+  * Improvement on Stickers
+  * Reply Support
+  * Special Background and Header back for chats
+  * Many improvement on Windows and Mac
+  * Animated Dialog and Messages list
+  * Multi Account support
+  * Auto convert smiley keys to Emojis
+  * Better smooth scroll
+  * Taskbar progress bar and Unread badge counter on Linux and Windows
+  * Update translations
+  * Many other improvement and Bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Sun, 7 Jun 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-6aseman-vivid) vivid; urgency=medium
+
+  * Unity task item counter and progressbar for unreaded messages and upload progress.
+  * Improvements
+
+ -- Aseman Team <contact@aseman.co>  Sat, 30 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-6aseman-utopic) utopic; urgency=medium
+
+  * Unity task item counter and progressbar for unreaded messages and upload progress.
+  * Improvements
+
+ -- Aseman Team <contact@aseman.co>  Sat, 30 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-6aseman-trusty) trusty; urgency=medium
+
+  * Unity task item counter and progressbar for unreaded messages and upload progress.
+  * Improvements
+
+ -- Aseman Team <contact@aseman.co>  Sat, 30 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-5aseman-vivid) vivid; urgency=medium
+
+  * Add command line options
+  * Improvements
+
+ -- Aseman Team <contact@aseman.co>  Fri, 29 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-5aseman-utopic) utopic; urgency=medium
+
+  * Add command line options
+  * Improvements
+
+ -- Aseman Team <contact@aseman.co>  Fri, 29 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-5aseman-trusty) trusty; urgency=medium
+
+  * Add command line options
+  * Improvements
+
+ -- Aseman Team <contact@aseman.co>  Fri, 29 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-4aseman-vivid) vivid; urgency=medium
+
+  * Add qt5-image-formats-plugins to dependencies
+
+ -- Aseman Team <contact@aseman.co>  Mon, 25 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-4aseman-utopic) utopic; urgency=medium
+
+  * Add qt5-image-formats-plugins to dependencies
+
+ -- Aseman Team <contact@aseman.co>  Mon, 25 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-4aseman-trusty) trusty; urgency=medium
+
+  * Add qt5-image-formats-plugins to dependencies
+
+ -- Aseman Team <contact@aseman.co>  Mon, 25 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-3aseman-vivid) vivid; urgency=medium
+
+  * Typing status bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sun, 24 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-3aseman-utopic) utopic; urgency=medium
+
+  * Typing status bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sun, 24 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-3aseman-trusty) trusty; urgency=medium
+
+  * Typing status bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sun, 24 May 2015 11:00:00 +0330
+ 
+cutegram (2.3.0-2aseman-vivid) vivid; urgency=medium
+
+  * Stickers bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 23:00:00 +0330
+ 
+cutegram (2.3.0-2aseman-utopic) utopic; urgency=medium
+
+  * Stickers bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 23:00:00 +0330
+ 
+cutegram (2.3.0-2aseman-trusty) trusty; urgency=medium
+
+  * Stickers bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 23:00:00 +0330
+ 
+cutegram (2.3.0-1aseman-vivid) vivid; urgency=medium
+
+  * Improvement and Bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 00:00:00 +0330
+ 
+cutegram (2.3.0-1aseman-utopic) utopic; urgency=medium
+
+  * Improvement and Bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 00:00:00 +0330
+ 
+cutegram (2.3.0-1aseman-trusty) trusty; urgency=medium
+
+  * Improvement and Bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 23 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.9-1aseman-vivid) vivid; urgency=medium
+
+  * Sticker send and recieve support
+  * Improve on emoji menu
+  * Bugfix and Improvments
+  * Better Smooth scroll
+
+ -- Aseman Team <contact@aseman.co>  Thu, 21 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.9-1aseman-utopic) utopic; urgency=medium
+
+  * Sticker send and recieve support
+  * Improve on emoji menu
+  * Bugfix and Improvments
+  * Better Smooth scroll
+
+ -- Aseman Team <contact@aseman.co>  Thu, 21 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.9-1aseman-trusty) trusty; urgency=medium
+
+  * Sticker send and recieve support
+  * Improve on emoji menu
+  * Bugfix and Improvments
+  * Better Smooth scroll
+
+ -- Aseman Team <contact@aseman.co>  Thu, 21 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.1-2aseman-vivid) vivid; urgency=medium
+
+  * Bugfix and Improvments
+  * Smooth scroll
+
+ -- Aseman Team <contact@aseman.co>  Sat, 16 May 2015 19:00:00 +0330
+ 
+cutegram (2.2.1-2aseman-utopic) utopic; urgency=medium
+
+  * Bugfix and Improvments
+  * Smooth scroll
+
+ -- Aseman Team <contact@aseman.co>  Sat, 16 May 2015 19:00:00 +0330
+ 
+cutegram (2.2.1-2aseman-trusty) trusty; urgency=medium
+
+  * Bugfix and Improvments
+  * Smooth scroll
+
+ -- Aseman Team <contact@aseman.co>  Sat, 16 May 2015 19:00:00 +0330
+ 
+cutegram (2.2.1-1aseman-vivid) vivid; urgency=medium
+
+  * Bugfix and Improvments
+  * Add option to change system tray icon style
+
+ -- Aseman Team <contact@aseman.co>  Sat, 16 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.1-1aseman-utopic) utopic; urgency=medium
+
+  * Bugfix and Improvments
+  * Add option to change system tray icon style
+
+ -- Aseman Team <contact@aseman.co>  Sat, 16 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.1-1aseman-trusty) trusty; urgency=medium
+
+  * Bugfix and Improvments
+  * Add option to change system tray icon style
+
+ -- Aseman Team <contact@aseman.co>  Sat, 16 May 2015 00:00:00 +0330
+ 
+cutegram (2.2.0-5aseman-vivid) vivid; urgency=medium
+
+  * Fix density problem on hires monitors.
+  * Add cutegram webengine to build flag for building.
+
+ -- Aseman Team <contact@aseman.co>  Sun, 10 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-5aseman-utopic) utopic; urgency=medium
+
+  * Fix density problem on hires monitors.
+  * Add cutegram webengine to build flag for building.
+
+ -- Aseman Team <contact@aseman.co>  Sun, 10 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-5aseman-trusty) trusty; urgency=medium
+
+  * Fix density problem on hires monitors.
+  * Add cutegram webengine to build flag for building.
+
+ -- Aseman Team <contact@aseman.co>  Sun, 10 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-4aseman-vivid) vivid; urgency=medium
+
+  * Fix missed gstreamer bad and ugly plugins dependencies.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 8 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-4aseman-utopic) utopic; urgency=medium
+
+  * Fix missed gstreamer bad and ugly plugins dependencies.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 8 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-4aseman-trusty) trusty; urgency=medium
+
+  * Fix missed gstreamer bad and ugly plugins dependencies.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 8 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-3aseman-vivid) vivid; urgency=medium
+
+  * Cutegram newsletter bugfix.
+  * New messages focus bugfix.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 7 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-3aseman-utopic) utopic; urgency=medium
+
+  * Cutegram newsletter bugfix.
+  * New messages focus bugfix.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 7 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-3aseman-trusty) trusty; urgency=medium
+
+  * Cutegram newsletter bugfix.
+  * New messages focus bugfix.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 7 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-2aseman-vivid) vivid; urgency=medium
+
+  * Disable web-grabber because of default ubuntu libraries bug.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 6 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-2aseman-utopic) utopic; urgency=medium
+
+  * Disable web-grabber because of default ubuntu libraries bug.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 6 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-2aseman-trusty) trusty; urgency=medium
+
+  * Disable web-grabber because of default ubuntu libraries bug.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 6 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-1aseman-vivid) vivid; urgency=medium
+
+  * Link preview (disabled on trusty, because of some problems)
+  * Audio Recorder
+  * Audio Player
+  * Focus on User messages using click on their messages
+  * New messages separator
+  * Mention and Hashtag support
+  * Add new contact dialog on contact list
+  * Better scroll bars
+  * An option to disable badges
+  * Update and Add new translations
+  * Improvement on Secret chat
+  * Non-contact chat bugfix
+  * Many other improvements and bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Sat, 6 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-1aseman-utopic) utopic; urgency=medium
+
+  * Link preview (disabled on trusty, because of some problems)
+  * Audio Recorder
+  * Audio Player
+  * Focus on User messages using click on their messages
+  * New messages separator
+  * Mention and Hashtag support
+  * Add new contact dialog on contact list
+  * Better scroll bars
+  * An option to disable badges
+  * Update and Add new translations
+  * Improvement on Secret chat
+  * Non-contact chat bugfix
+  * Many other improvements and bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Sat, 6 May 2015 11:00:00 +0330
+ 
+cutegram (2.2.0-1aseman-trusty) trusty; urgency=medium
+
+  * Link preview (disabled on trusty, because of some problems)
+  * Audio Recorder
+  * Audio Player
+  * Focus on User messages using click on their messages
+  * New messages separator
+  * Mention and Hashtag support
+  * Add new contact dialog on contact list
+  * Better scroll bars
+  * An option to disable badges
+  * Update and Add new translations
+  * Improvement on Secret chat
+  * Non-contact chat bugfix
+  * Many other improvements and bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Sat, 6 May 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman5-utopic) utopic; urgency=medium
+
+  * Fix Dependencies problem
+
+ -- Aseman Team <contact@aseman.co>  Sat, 30 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman5-trusty) trusty; urgency=medium
+
+  * Fix Dependencies problem
+
+ -- Aseman Team <contact@aseman.co>  Sat, 30 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman4-utopic) utopic; urgency=medium
+
+  * Fix Dependencies problem
+
+ -- Aseman Team <contact@aseman.co>  Sat, 30 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman4-trusty) trusty; urgency=medium
+
+  * Fix Dependencies problem
+
+ -- Aseman Team <contact@aseman.co>  Sat, 30 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman3-utopic) utopic; urgency=medium
+
+  * Rebuild using new libqtelegram to support Layer18.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 29 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman3-trusty) trusty; urgency=medium
+
+  * Rebuild using new libqtelegram to support Layer18.
+
+ -- Aseman Team <contact@aseman.co>  Sat, 29 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.1aseman1-trusty) trusty; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 29 March 2015 10:00:00 +0330
+ 
+cutegram (2.1.1aseman1-utopic) utopic; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 29 March 2015 10:00:00 +0330
+ 
+cutegram (2.1.0aseman3-utopic) utopic; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 21:00:00 +0330
+ 
+cutegram (2.1.0aseman3-trusty) trusty; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 21:00:00 +0330
+ 
+cutegram (2.1.0aseman2-utopic) utopic; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 12:00:00 +0330
+ 
+cutegram (2.1.0aseman2-trusty) trusty; urgency=medium
+
+  * Compability with Qt5.2 and Qt5.3
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 12:00:00 +0330
+ 
+cutegram (2.1.0aseman1-utopic) utopic; urgency=medium
+
+  * Theme Support (Master Color feature temporary disabled)
+  * Many improvements on user interface
+  * Update translations and add French, UK English, Italian, Netherland dutch, Brazil  Portuguese and Serbian.
+  * Many improvements and Bug fixes
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 11:00:00 +0330
+ 
+cutegram (2.1.0aseman1-trusty) trusty; urgency=medium
+
+  * Theme Support (Master Color feature temporary disabled)
+  * Many improvements on user interface
+  * Update translations and add French, UK English, Italian, Netherland dutch, Brazil  Portuguese and Serbian.
+  * Many improvements and Bug fixes
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 March 2015 11:00:00 +0330
+ 
+cutegram (2.0.0aseman4-trusty) trusty; urgency=medium
+
+  * Search
+  * Secret Chat
+  * Online status icon on contact avatars
+  * Send messages as document
+  * Proxy Support
+  * Offline mode
+  * Camera Button
+  * Autostart option on Configure menu
+  * Multi Account login (experimental)
+  * Windowed Mode
+  * ProgressBar for file sending
+  * Cancel button for file downloading
+  * Shared Medias location
+  * Many improvements on UserInterface
+  * Better drag and drop and Copy/Paste actions
+  * Leave and Add person to chats
+  * Delete History action
+  * Chat with non-contact users
+  * Contact us menu to send suggestions to us
+  * Linux, Windows and Mac support
+  * Many other improvement and Bugfixes
+
+ -- Aseman Team <contact@aseman.co>  Sat, 11 Feb 2015 15:30:00 +0330
+ 
+cutegram (1.0.2aseman3-utopic) utopic; urgency=medium
+
+  * Build bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 19 Jan 2015 22:50:00 +0330
+ 
+cutegram (1.0.2aseman2-utopic) utopic; urgency=medium
+
+  * Dependencies bugfix
+
+ -- Aseman Team <contact@aseman.co>  Sat, 19 Jan 2015 22:34:00 +0330
+ 
+cutegram (1.0.2aseman1-utopic) utopic; urgency=medium
+
+  * Close using Ctrl+Q
+  * Add Cutegram newsletter to notify updates
+  * Links click bugfix
+  * Copy action bugfix
+  * Add contact form to contact with Cutegram Team
+
+ -- Aseman Team <contact@aseman.co>  Sat, 17 Jan 2015 20:34:00 +0330
+ 
+cutegram (1.0.2aseman1-trusty) trusty; urgency=medium
+
+  * Close using Ctrl+Q
+  * Add Cutegram newsletter to notify updates
+  * Links click bugfix
+  * Copy action bugfix
+  * Add contact form to contact with Cutegram Team
+
+ -- Aseman Team <contact@aseman.co>  Sat, 17 Jan 2015 20:30:00 +0330
+ 
+cutegram (1.0.1utopic-aseman1) utopic; urgency=medium
+
+  * Utopic build
+
+ -- Aseman Team <contact@aseman.co>  Thu, 15 Jan 2015 18:03:45 +0330
+ 
+cutegram (1.0.1aseman3) trusty; urgency=medium
+
+  * Split package to data and binary package.
+
+ -- Aseman Team <contact@aseman.co>  Thu, 15 Jan 2015 18:03:45 +0330
+ 
+cutegram (1.0.1aseman2) trusty; urgency=medium
+
+  * Split package to data and binary package.
+
+ -- Aseman Team <contact@aseman.co>  Thu, 15 Jan 2015 18:03:45 +0330
+ 
+cutegram (1.0.1aseman1) trusty; urgency=medium
 
   * Initial Release.
 
- -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 14:16:45 +0330
+ -- Aseman Team <contact@aseman.co>  Thu, 15 Jan 2015 17:22:45 +0330
+ 
+cutegram (1.0.0aseman1) trusty; urgency=medium
+
+  * Initial Release.
+
+ -- Aseman Team <contact@aseman.co>  Thu, 15 Jan 2015 14:16:45 +0330
